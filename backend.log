@@ -1,0 +1,5792 @@
+
+> kindergarten-server@1.0.0 dev:fast
+> cross-env NODE_ENV=development PORT=3000 ts-node src/app.ts
+
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 开始初始化数据库连接 ===
+数据库连接信息: dbconn.sealoshzh.site:43906/kargerdensales
+=== 数据库连接初始化完成 ===
+=== 开始初始化核心模型 ===
+初始化 User 模型...
+初始化 Role 模型...
+初始化 Permission 模型...
+初始化 UserRole 模型...
+初始化 RolePermission 模型...
+初始化 UserProfile 模型...
+初始化 ParentProfile 模型...
+=== 开始初始化第一批扩展模型 ===
+初始化 Kindergarten 模型...
+初始化 Parent 模型...
+初始化 Student 模型...
+初始化 ParentStudentRelation 模型...
+初始化 Class 模型...
+初始化 ClassTeacher 模型...
+初始化 ClassTeacher 模型...
+=== 扩展模型初始化完成 ===
+=== 开始初始化第二批扩展模型 ===
+初始化 EnrollmentPlan 模型...
+初始化 Activity 模型...
+初始化 ActivityTemplate 模型...
+初始化 EnrollmentApplication 模型...
+初始化 AdmissionResult 模型...
+初始化 AdmissionNotification 模型...
+初始化 ActivityRegistration 模型...
+初始化 ActivityParticipant 模型...
+=== 第二批扩展模型初始化完成 ===
+=== 开始初始化第三批扩展模型 ===
+初始化 Teacher 模型...
+初始化 ActivityEvaluation 模型...
+初始化 EnrollmentConsultation 模型...
+初始化 EnrollmentConsultationFollowup 模型...
+初始化 EnrollmentTask 模型...
+=== 第三批扩展模型初始化完成 ===
+=== 开始初始化第四批扩展模型 ===
+初始化 MarketingCampaign 模型...
+初始化 Advertisement 模型...
+初始化 PosterTemplate 模型...
+初始化 PosterElement 模型...
+初始化 PosterGeneration 模型...
+初始化 MessageTemplate 模型...
+=== 第四批扩展模型初始化完成 ===
+=== 开始初始化第五批扩展模型 ===
+初始化 AIModelConfig 模型...
+初始化 AIModelUsage 模型...
+初始化 AIConversation 模型...
+初始化 AIMessage 模型...
+初始化 AIMemory 模型...
+✅ AIMemory 模型已被六维记忆系统替代
+初始化六维记忆系统模型...
+✅ 六维记忆系统模型初始化完成
+初始化 AIFeedback 模型...
+初始化 AIUserPermission 模型...
+初始化 ExpertConsultation 模型...
+=== 第五批扩展模型初始化完成 ===
+=== 开始初始化第六批扩展模型 ===
+初始化 Notification 模型...
+初始化 SystemLog 模型...
+初始化 SystemConfig 模型...
+初始化 Schedule 模型...
+初始化 Todo 模型...
+初始化 FileStorage 模型...
+初始化 OperationLog 模型...
+初始化 PerformanceRule 模型...
+=== 开始初始化绩效中心模型 ===
+初始化 RewardType 模型...
+初始化 PerformanceProject 模型...
+初始化 PerformanceDistributionRule 模型...
+初始化 PerformanceRecord 模型...
+初始化 PerformanceDistribution 模型...
+初始化 PerformanceApplication 模型...
+✅ 绩效中心模型初始化完成
+=== 绩效中心模型初始化完成 ===
+初始化 ScriptCategory 模型...
+初始化 Script 模型...
+初始化 ScriptUsage 模型...
+初始化 PageGuide 模型...
+初始化 SecurityThreat 模型...
+初始化 SecurityVulnerability 模型...
+初始化 SecurityConfig 模型...
+初始化 SecurityScanLog 模型...
+=== 第六批扩展模型初始化完成 ===
+=== 开始初始化财务模型 ===
+🏦 开始初始化财务模型...
+🏦 开始初始化财务模型...
+初始化 FeeItem 模型...
+✅ 财务模型初始化完成
+🔗 设置财务模型关联...
+✅ 财务模型关联设置完成
+✅ 财务模型初始化完成
+=== 财务模型初始化完成 ===
+=== 开始初始化视频制作模型 ===
+🎬 初始化 VideoProject 模型...
+✅ VideoProject 模型初始化成功
+=== 视频制作模型初始化完成 ===
+=== 开始初始化检查中心模型 ===
+📋 初始化检查中心模型...
+🔧 开始初始化检查中心模型...
+  - 初始化 InspectionType 模型...
+  - 初始化 InspectionPlan 模型...
+  - 初始化 DocumentTemplate 模型...
+  - 初始化 DocumentInstance 模型...
+  - 初始化 InspectionTask 模型...
+✅ 检查中心模型初始化完成
+✅ 检查中心模型初始化完成
+=== 检查中心模型初始化完成 ===
+=== 开始初始化游戏系统模型 ===
+🎮 初始化游戏模型...
+  - 初始化 GameConfig 模型...
+  - 初始化 GameLevel 模型...
+  - 初始化 GameRecord 模型...
+  - 初始化 GameAchievement 模型...
+  - 初始化 UserAchievement 模型...
+  - 初始化 GameUserSettings 模型...
+  - 初始化 GameTrainingRecord 模型...
+  - 初始化 GameAiAnalysis 模型...
+  - 初始化 Feedback 模型...
+  - 初始化 FeedbackReply 模型...
+  - 初始化相册库模型...
+    - Photo 模型...
+    - PhotoStudent 模型...
+    - StudentFaceLibrary 模型...
+    - PhotoAlbum 模型...
+    - PhotoAlbumItem 模型...
+    - PhotoVideo 模型...
+  - 建立相册库关联关系...
+✅ 游戏系统模型初始化完成
+=== 游戏系统模型初始化完成 ===
+=== 开始初始化测评中心模型 ===
+📊 初始化测评模型...
+  - 初始化 AssessmentConfig 模型...
+  - 初始化 AssessmentRecord 模型...
+  - 初始化 AssessmentQuestion 模型...
+  - 初始化 AssessmentAnswer 模型...
+  - 初始化 AssessmentReport 模型...
+  - 初始化 AssessmentGrowthTracking 模型...
+  - 设置测评模型关联...
+✅ 测评中心模型初始化完成
+=== 测评中心模型初始化完成 ===
+=== 开始设置模型关联 ===
+设置 UserRole 关联...
+设置 RolePermission 关联...
+设置 User 关联...
+设置 Parent 关联...
+设置 ExpertConsultation 关联...
+设置 PerformanceRule 关联...
+设置绩效中心模型关联...
+设置 EnrollmentConsultation 关联...
+设置 EnrollmentConsultationFollowup 关联...
+设置 PageGuide 关联...
+设置 Script 关联...
+设置 VideoProject 关联...
+设置检查中心模型关联...
+✅ 检查中心模型关联设置完成
+=== 模型关联设置完成 ===
+=== 初始化脚本执行完毕 ===
+✅ init.ts 导入完成，开始启动服务器...
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+=== 数据库配置调试信息 ===
+✅ 强制使用远程MySQL数据库
+NODE_ENV: development
+DB_HOST: dbconn.sealoshzh.site
+DB_PORT: 43906
+DB_NAME: kargerdensales
+DB_TYPE: undefined
+USE_REMOTE_DB: undefined
+DISABLE_SQLITE: undefined
+========================
+✅ MySQL数据库配置验证通过
+✅ 阿里云人脸识别服务已初始化
+[INFO] 数据库监控已启动，收集间隔: 60秒
+🔧 [AI配置] 网络配置: { timeout: 60000, proxy: false, maxRetries: 3 }
+🤖 [AI配置] 模型参数: {
+  temperature: 0.7,
+  maxTokens: 2000,
+  topP: 0.9,
+  frequencyPenalty: 0,
+  presencePenalty: 0
+}
+🌐 [AI配置] 代理配置: { enabled: false }
+⚠️ [API映射] Swagger文档文件不存在，使用默认配置
+⚠️ [API映射] Swagger文档为空，使用手动配置
+[INFO] ✅ [意图识别] 意图识别服务初始化完成
+[INFO] ✅ [消息意图分析] 服务初始化完成
+[INFO] 六维记忆系统初始化完成
+🧠 [UnifiedIntelligence] 六维记忆系统已初始化
+🎯 [UnifiedIntelligence] 智能模型路由器已初始化
+[路由] system-ai-models.routes.ts 已加载
+[INFO] [AI查询路由] 加载基础查询字典: 43 个规则
+[INFO] [AI查询路由] 加载活动管理字典: 40 个规则
+[INFO] [AI查询路由] 加载查询模板字典: 26 个规则
+[INFO] [AI查询路由] 成功加载外部字典，共 182 个直接匹配规则 (新增 109 个)
+[INFO] 🔍 [语义检索] 实体向量索引初始化完成
+[INFO] 🔧 [向量索引] 开始初始化索引
+[INFO] 🔨 [向量索引] 开始构建完整索引
+[INFO] 🧠 [复杂度评估] 查询模式初始化完成
+[INFO] 📝 [动态上下文] 上下文模板初始化完成
+[INFO] [快捷查询分组] 初始化完成，共 6 个分组，60 个查询
+✅ OSS服务已初始化: faceshanghaikarden (oss-cn-shanghai)
+已启用API调试日志中间件
+加载环境变量，当前目录: /home/zhgue/kyyupgame/k.yyup.com/server/src
+环境变量文件路径: /home/zhgue/kyyupgame/k.yyup.com/server/.env
+环境变量JWT_SECRET: 已设置
+🚀 [性能优化] 清除代理环境变量，确保AI调用直连...
+✅ [性能优化] 代理环境变量已清除，AI调用将直连提升速度
+静态文件服务已配置，指向目录: /home/zhgue/kyyupgame/k.yyup.com/uploads
+📚 Swagger UI 已启用
+📖 API 文档地址: http://localhost:3000/api-docs
+📄 API JSON 规范: http://localhost:3000/api-docs.json
+🌐 生产环境 API 文档: https://shlxlyzagqnc.sealoshzh.site/api-docs
+🚀 准备调用 startServer() 函数...
+======== 服务器启动流程开始 ========
+正在连接数据库...
+数据库连接初始化完成
+模型关联初始化完成
+🤖 初始化AI模型缓存...
+🤖 正在初始化AI模型缓存...
+环境变量配置:
+NODE_ENV: development
+JWT_SECRET: 已设置
+(node:12419) [SEQUELIZE0002] DeprecationWarning: The logging-option should be either a function or false. Default: console.log
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Executing (default): SELECT
+          id, name, display_name, provider, model_type, endpoint_url,
+          api_key, model_parameters, status, is_default
+        FROM ai_model_config
+        WHERE status = 'active'
+        ORDER BY is_default DESC, created_at ASC
+Executing (default): SELECT
+          id, name, display_name, provider, model_type, endpoint_url,
+          api_key, model_parameters, status, is_default
+        FROM ai_model_config
+        WHERE status = 'active'
+        ORDER BY is_default DESC, created_at ASC
+Executing (default): SELECT `id`, `name`, `student_no` AS `studentNo`, `kindergarten_id` AS `kindergartenId`, `class_id` AS `classId`, `gender`, `birth_date` AS `birthDate`, `id_card_no` AS `idCardNo`, `household_address` AS `householdAddress`, `current_address` AS `currentAddress`, `blood_type` AS `bloodType`, `nationality`, `enrollment_date` AS `enrollmentDate`, `graduation_date` AS `graduationDate`, `health_condition` AS `healthCondition`, `allergy_history` AS `allergyHistory`, `special_needs` AS `specialNeeds`, `photo_url` AS `photoUrl`, `interests`, `tags`, `status`, `remark`, `creator_id` AS `creatorId`, `updater_id` AS `updaterId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `students` AS `Student` WHERE (`Student`.`deleted_at` IS NULL AND `Student`.`status` = 'active') LIMIT 1000;
+📊 从数据库加载了 13 个活跃模型
+📋 已缓存的模型类型:
+   - 数据库查询模型: ✅
+   - 意图分析模型: ✅
+   - 问答模型(128k): ✅
+   - 默认模型: ✅
+[INFO] 豆包文生图模型初始化成功
+📊 从数据库加载了 13 个活跃模型
+📋 已缓存的模型类型:
+   - 数据库查询模型: ✅
+   - 意图分析模型: ✅
+   - 问答模型(128k): ✅
+   - 默认模型: ✅
+✅ AI模型缓存初始化完成，共加载 17 个模型
+✅ AI模型缓存初始化完成
+📖 初始化页面说明文档数据...
+🌱 开始初始化页面说明文档数据...
+Executing (default): SELECT count(*) AS `count` FROM `page_guides` AS `PageGuide`;
+[INFO] 📚 [向量索引] 学生索引构建完成
+Executing (default): SELECT `id`, `user_id` AS `userId`, `kindergarten_id` AS `kindergartenId`, `group_id` AS `groupId`, `teacher_no` AS `teacherNo`, `position`, `hire_date` AS `hireDate`, `education`, `school`, `major`, `teaching_age` AS `teachingAge`, `professional_skills` AS `professionalSkills`, `certifications`, `emergency_contact` AS `emergencyContact`, `emergency_phone` AS `emergencyPhone`, `status`, `remark`, `creator_id` AS `creatorId`, `updater_id` AS `updaterId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt`, `user_id` FROM `teachers` AS `Teacher` WHERE (`Teacher`.`deleted_at` IS NULL AND `Teacher`.`status` = 'active') LIMIT 500;
+✅ 页面说明文档数据已存在，跳过初始化
+✅ 页面说明文档数据初始化完成
+数据库和模型初始化完成
+⚠️ 系统设置初始化已禁用（调试模式）
+⚠️ AI模型配置服务初始化已暂时禁用（用于相册功能测试）
+🔄 开始初始化路由缓存服务...
+🔄 正在初始化路由缓存系统...
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page', 'button'))) ORDER BY `parentId` ASC, `Permission`.`sort` ASC, `Permission`.`id` ASC;
+[INFO] 👩‍🏫 [向量索引] 教师索引构建完成
+Executing (default): SELECT `id`, `kindergarten_id` AS `kindergartenId`, `plan_id` AS `planId`, `title`, `activity_type` AS `activityType`, `cover_image` AS `coverImage`, `start_time` AS `startTime`, `end_time` AS `endTime`, `location`, `capacity`, `registered_count` AS `registeredCount`, `checked_in_count` AS `checkedInCount`, `fee`, `description`, `agenda`, `registration_start_time` AS `registrationStartTime`, `registration_end_time` AS `registrationEndTime`, `needs_approval` AS `needsApproval`, `status`, `remark`, `creator_id` AS `creatorId`, `updater_id` AS `updaterId`, `poster_id` AS `posterId`, `poster_url` AS `posterUrl`, `share_poster_url` AS `sharePosterUrl`, `marketing_config` AS `marketingConfig`, `publish_status` AS `publishStatus`, `share_count` AS `shareCount`, `view_count` AS `viewCount`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `activities` AS `Activity` WHERE (`Activity`.`deleted_at` IS NULL AND `Activity`.`status` = 'active') LIMIT 1000;
+🔍 从数据库查询到 154 条路由记录
+🔍 示例路由数据: [
+  { name: '我的信息_菜单', chineseName: null, chinese_name: null },
+  {
+    name: 'Personnel Center',
+    chineseName: '人事中心',
+    chinese_name: '人事中心'
+  }
+]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `permission`.`id` AS `permission.id`, `permission`.`code` AS `permission.code`, `permission`.`path` AS `permission.path` FROM `role_permissions` AS `RolePermission` LEFT OUTER JOIN `roles` AS `role` ON `RolePermission`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL) LEFT OUTER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL);
+[INFO] 🎯 [向量索引] 活动索引构建完成
+[INFO] ✅ [向量索引] 完整索引构建完成
+[INFO] ⏰ [向量索引] 自动更新已启动
+[INFO] ✅ [向量索引] 索引初始化完成
+🔑 加载了 4 个角色的权限映射
+📦 路由数据已缓存到内存
+✅ 路由缓存初始化完成
+📊 缓存统计:
+   - 路由总数: 154
+   - 角色分组: 5
+   - 加载耗时: 131ms
+   - 缓存状态: 健康
+✅ 路由缓存服务初始化完成
+注意：已禁用自动数据库同步功能，请使用迁移脚本管理数据库结构
+如需手动同步数据库，请使用以下命令：
+npm run migration:run
+✅ 使用HTTP API模式，无需WebSocket
+
+======== 已注册的API路由 ========
+[INFO] ======== 已注册的API路由 ========
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] /customers/?(?=/|$)
+路由: [GET] /customers/?(?=/|$)
+[INFO] 路由: [GET] /customers/?(?=/|$)
+路由: [GET] /customers/?(?=/|$)
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] /auth/?(?=/|$)
+路由: [POST] /auth/?(?=/|$)
+[INFO] 路由: [GET] /auth/?(?=/|$)
+路由: [GET] /auth/?(?=/|$)
+[INFO] 路由: [GET] /user/?(?=/|$)
+路由: [GET] /user/?(?=/|$)
+[INFO] 路由: [POST] /user/?(?=/|$)
+路由: [POST] /user/?(?=/|$)
+[INFO] 路由: [GET] /user/?(?=/|$)
+路由: [GET] /user/?(?=/|$)
+[INFO] 路由: [PUT] /user/?(?=/|$)
+路由: [PUT] /user/?(?=/|$)
+[INFO] 路由: [GET] /conversations/?(?=/|$)
+路由: [GET] /conversations/?(?=/|$)
+[INFO] 路由: [POST] /conversations/?(?=/|$)
+路由: [POST] /conversations/?(?=/|$)
+[INFO] 路由: [GET] /conversations/?(?=/|$)
+路由: [GET] /conversations/?(?=/|$)
+[INFO] 路由: [PATCH] /conversations/?(?=/|$)
+路由: [PATCH] /conversations/?(?=/|$)
+[INFO] 路由: [DELETE] /conversations/?(?=/|$)
+路由: [DELETE] /conversations/?(?=/|$)
+[INFO] 路由: [GET] /conversations/?(?=/|$)
+路由: [GET] /conversations/?(?=/|$)
+[INFO] 路由: [POST] /conversations/?(?=/|$)
+路由: [POST] /conversations/?(?=/|$)
+[INFO] 路由: [PATCH] /conversations/?(?=/|$)
+路由: [PATCH] /conversations/?(?=/|$)
+[INFO] 路由: [DELETE] /conversations/?(?=/|$)
+路由: [DELETE] /conversations/?(?=/|$)
+[INFO] 路由: [GET] /models/?(?=/|$)
+路由: [GET] /models/?(?=/|$)
+[INFO] 路由: [GET] /models/?(?=/|$)
+路由: [GET] /models/?(?=/|$)
+[INFO] 路由: [POST] /models/?(?=/|$)
+路由: [POST] /models/?(?=/|$)
+[INFO] 路由: [GET] /models/?(?=/|$)
+路由: [GET] /models/?(?=/|$)
+[INFO] 路由: [POST] /feedback/?(?=/|$)
+路由: [POST] /feedback/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [POST] /analytics/?(?=/|$)
+路由: [POST] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /analytics/?(?=/|$)
+路由: [GET] /analytics/?(?=/|$)
+[INFO] 路由: [POST] /analytics/?(?=/|$)
+路由: [POST] /analytics/?(?=/|$)
+[INFO] 路由: [POST] /analytics/?(?=/|$)
+路由: [POST] /analytics/?(?=/|$)
+[INFO] 路由: [GET] /quota/?(?=/|$)
+路由: [GET] /quota/?(?=/|$)
+[INFO] 路由: [GET] /quota/?(?=/|$)
+路由: [GET] /quota/?(?=/|$)
+[INFO] 路由: [GET] /smart-expert/?(?=/|$)
+路由: [GET] /smart-expert/?(?=/|$)
+[INFO] 路由: [POST] /smart-expert/?(?=/|$)
+路由: [POST] /smart-expert/?(?=/|$)
+[INFO] 路由: [POST] /smart-expert/?(?=/|$)
+路由: [POST] /smart-expert/?(?=/|$)
+[INFO] 路由: [POST] /smart-expert/?(?=/|$)
+路由: [POST] /smart-expert/?(?=/|$)
+[INFO] 路由: [GET] /smart-expert/?(?=/|$)
+路由: [GET] /smart-expert/?(?=/|$)
+[INFO] 路由: [POST] /smart-expert/?(?=/|$)
+路由: [POST] /smart-expert/?(?=/|$)
+[INFO] 路由: [GET] /smart-expert/?(?=/|$)
+路由: [GET] /smart-expert/?(?=/|$)
+[INFO] 路由: [POST] /smart-expert/?(?=/|$)
+路由: [POST] /smart-expert/?(?=/|$)
+[INFO] 路由: [GET] /expert/?(?=/|$)
+路由: [GET] /expert/?(?=/|$)
+[INFO] 路由: [POST] /expert/?(?=/|$)
+路由: [POST] /expert/?(?=/|$)
+[INFO] 路由: [POST] /expert/?(?=/|$)
+路由: [POST] /expert/?(?=/|$)
+[INFO] 路由: [POST] /expert/?(?=/|$)
+路由: [POST] /expert/?(?=/|$)
+[INFO] 路由: [GET] /expert/?(?=/|$)
+路由: [GET] /expert/?(?=/|$)
+[INFO] 路由: [POST] /expert/?(?=/|$)
+路由: [POST] /expert/?(?=/|$)
+[INFO] 路由: [GET] /expert/?(?=/|$)
+路由: [GET] /expert/?(?=/|$)
+[INFO] 路由: [POST] /expert/?(?=/|$)
+路由: [POST] /expert/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [GET] /function-tools/?(?=/|$)
+路由: [GET] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] /function-tools/?(?=/|$)
+路由: [POST] /function-tools/?(?=/|$)
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] /unified/?(?=/|$)
+路由: [GET] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [GET] /unified/?(?=/|$)
+路由: [GET] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [GET] /unified/?(?=/|$)
+路由: [GET] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [GET] /unified/?(?=/|$)
+路由: [GET] /unified/?(?=/|$)
+[INFO] 路由: [POST] /unified/?(?=/|$)
+路由: [POST] /unified/?(?=/|$)
+[INFO] 路由: [POST] /video/?(?=/|$)
+路由: [POST] /video/?(?=/|$)
+[INFO] 路由: [POST] /video/?(?=/|$)
+路由: [POST] /video/?(?=/|$)
+[INFO] 路由: [GET] /video/?(?=/|$)
+路由: [GET] /video/?(?=/|$)
+[INFO] 路由: [POST] /text-to-speech/?(?=/|$)
+路由: [POST] /text-to-speech/?(?=/|$)
+[INFO] 路由: [GET] /text-to-speech/?(?=/|$)
+路由: [GET] /text-to-speech/?(?=/|$)
+[INFO] 路由: [GET] /text-to-speech/?(?=/|$)
+路由: [GET] /text-to-speech/?(?=/|$)
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PATCH] 
+路由: [PATCH] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] /activity/?(?=/|$)
+路由: [GET] /activity/?(?=/|$)
+[INFO] 路由: [GET] /activity/?(?=/|$)
+路由: [GET] /activity/?(?=/|$)
+[INFO] 路由: [GET] /activity/?(?=/|$)
+路由: [GET] /activity/?(?=/|$)
+[INFO] 路由: [POST] /activity/?(?=/|$)
+路由: [POST] /activity/?(?=/|$)
+[INFO] 路由: [GET] /customer-pool/?(?=/|$)
+路由: [GET] /customer-pool/?(?=/|$)
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [GET] 
+路由: [GET] 
+[INFO] 路由: [PUT] 
+路由: [PUT] 
+[INFO] 路由: [DELETE] 
+路由: [DELETE] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+[INFO] 路由: [POST] 
+路由: [POST] 
+======== API路由列表结束 ========
+
+[INFO] ======== API路由列表结束 ========
+======== 服务器启动完成 ========
+🌐 HTTP服务器运行在 http://0.0.0.0:3000
+🌐 HTTP服务器运行在 http://localhost:3000
+📡 AI查询使用HTTP API模式，直接调用AIBridge服务
+[INFO] [API] GET /api/health - 200 - 8ms - 127.0.0.1 - curl/8.11.0
+[INFO] [API] GET /api/health - 200 - 2ms - 127.0.0.1 - curl/8.11.0
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/auth/login',
+  url: '/auth/login',
+  originalUrl: '/api/auth/login',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:11.279Z'
+}
+[API调试] 2025-11-05T13:15:11.280Z - POST /auth/login
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**不存在**"}
+登录请求: { username: 'test_teacher', password: 'admin123' }
+使用用户名查询: test_teacher
+执行查询: SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = :username
+查询参数: { username: 'test_teacher' }
+Executing (default): SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = 'test_teacher'
+原始查询结果: [
+  {
+    id: 792,
+    username: 'test_teacher',
+    password: '$2b$10$E3hzO0aHvmvrLaDVl/iowe/wBbb/Boe3st4pbKPvVawWwjEyCouIa',
+    email: 'test_teacher@test.com',
+    realName: '',
+    phone: '',
+    status: 'active'
+  }
+]
+处理后的结果: [
+  {
+    id: 792,
+    username: 'test_teacher',
+    password: '$2b$10$E3hzO0aHvmvrLaDVl/iowe/wBbb/Boe3st4pbKPvVawWwjEyCouIa',
+    email: 'test_teacher@test.com',
+    realName: '',
+    phone: '',
+    status: 'active'
+  }
+]
+结果长度: 1
+找到用户: 792 test_teacher test_teacher@test.com
+验证密码, 输入: admin123 存储哈希: $2b$10$E3hzO0aHvmvrLaDVl/iowe/wBbb/Boe3st4pbKPvVawWwjEyCouIa
+===== 密码验证开始 =====
+输入的明文密码: admin123
+数据库中的哈希密码: $2b$10$E3hzO0aHvmvrLaDVl/iowe/wBbb/Boe3st4pbKPvVawWwjEyCouIa
+尝试使用bcrypt验证
+bcrypt验证结果: false
+===== 密码验证结束 =====
+密码验证结果: false
+密码不正确: test_teacher
+[INFO] [API] POST /api/auth/login - 401 - 771ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/auth/login',
+  url: '/auth/login',
+  originalUrl: '/api/auth/login',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:30.293Z'
+}
+[API调试] 2025-11-05T13:15:30.293Z - POST /auth/login
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**不存在**"}
+登录请求: { username: 'test_parent', password: 'admin123' }
+使用用户名查询: test_parent
+执行查询: SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = :username
+查询参数: { username: 'test_parent' }
+Executing (default): SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = 'test_parent'
+原始查询结果: [
+  {
+    id: 8,
+    username: 'test_parent',
+    password: '$2b$10$uxzKyKnALFkOsmrlQu/1nueG5MHLTKI13.Hi/Uw331gxELUY4Z76G',
+    email: 'ik8220@gmail.com',
+    realName: '刘蕾',
+    phone: '13800000003',
+    status: 'active'
+  }
+]
+处理后的结果: [
+  {
+    id: 8,
+    username: 'test_parent',
+    password: '$2b$10$uxzKyKnALFkOsmrlQu/1nueG5MHLTKI13.Hi/Uw331gxELUY4Z76G',
+    email: 'ik8220@gmail.com',
+    realName: '刘蕾',
+    phone: '13800000003',
+    status: 'active'
+  }
+]
+结果长度: 1
+找到用户: 8 test_parent ik8220@gmail.com
+验证密码, 输入: admin123 存储哈希: $2b$10$uxzKyKnALFkOsmrlQu/1nueG5MHLTKI13.Hi/Uw331gxELUY4Z76G
+===== 密码验证开始 =====
+输入的明文密码: admin123
+数据库中的哈希密码: $2b$10$uxzKyKnALFkOsmrlQu/1nueG5MHLTKI13.Hi/Uw331gxELUY4Z76G
+尝试使用bcrypt验证
+bcrypt验证结果: true
+===== 密码验证结束 =====
+密码验证结果: true
+用户状态检查通过: test_parent active
+Executing (default): SELECT r.code as role_code, r.name as role_name
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = 8
+      ORDER BY 
+        CASE 
+          WHEN r.code = 'super_admin' THEN 1
+          WHEN r.code = 'admin' THEN 2
+          ELSE 3
+        END
+      LIMIT 1
+🔍 检查用户角色: parent
+❌ 用户不是管理员，不分配kindergartenId
+Executing (default): SELECT `id`, `group_key` AS `groupKey`, `config_key` AS `configKey`, `config_value` AS `configValue`, `value_type` AS `valueType`, `description`, `is_system` AS `isSystem`, `is_readonly` AS `isReadonly`, `sort_order` AS `sortOrder`, `creator_id` AS `creatorId`, `updater_id` AS `updaterId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `system_configs` AS `SystemConfig` WHERE (`SystemConfig`.`deleted_at` IS NULL AND (`SystemConfig`.`group_key` = 'security' AND `SystemConfig`.`config_key` = 'sessionTimeout')) LIMIT 1;
+🕐 使用数据库中的会话超时设置: 1440 分钟 (24 小时)
+🔑 生成动态JWT token，过期时间: 24h
+🔑 生成动态JWT token，过期时间: 30d
+🔌 正在连接Redis... {
+  mode: 'standalone',
+  host: 'localhost',
+  port: 6379,
+  hasPassword: true
+}
+🔑 Redis配置: { password: '***已设置***', db: 0 }
+✅ Redis连接成功
+🎯 Redis准备就绪
+🎉 Redis服务初始化完成
+✅ 用户会话已创建: 用户8, Token=eyJhbGciOiJIUzI1NiIs..., SSO=false
+🔄 开始缓存用户权限: 用户8
+登录成功: test_parent , SSO: false
+[INFO] [API] POST /api/auth/login - 200 - 412ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🔍 从数据库查询用户权限: 用户8
+Ignoring invalid configuration option passed to Connection: collation. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348530720',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348530720',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:30.732Z'
+}
+[API调试] 2025-11-05T13:15:30.732Z - GET /auth-permissions/menu?_t=1762348530720
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348530720',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348530720',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:30.739Z'
+}
+[API调试] 2025-11-05T13:15:30.740Z - GET /auth-permissions/roles?_t=1762348530720
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348530721',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348530721',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:30.746Z'
+}
+[API调试] 2025-11-05T13:15:30.746Z - GET /auth-permissions/permissions?_t=1762348530721
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348530720 - 200 - 231ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+Ignoring invalid configuration option passed to Connection: collation. This is currently a warning, but in future versions of MySQL2, an error will be thrown if you pass an invalid configuration option to a Connection
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 111 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 113ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348530720 - 200 - 275ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348530721 - 200 - 271ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:31.032Z'
+}
+[API调试] 2025-11-05T13:15:31.033Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/check-permission'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /check-permission 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT COUNT(*) as count
+      FROM permissions p
+      INNER JOIN role_permissions rp ON p.id = rp.permission_id
+      INNER JOIN roles r ON rp.role_id = r.id
+      INNER JOIN user_roles ur ON r.id = ur.role_id
+      WHERE ur.user_id = 8 AND p.status = 1 AND r.status = 1 AND p.path = '/parent-center/dashboard'
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 200 - 116ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+Executing (default): SELECT DISTINCT r.code
+        FROM roles r
+        INNER JOIN user_roles ur ON r.id = ur.role_id
+        WHERE ur.user_id = 8 AND r.status = 1
+Executing (default): SELECT DISTINCT p.code
+          FROM permissions p
+          INNER JOIN role_permissions rp ON p.id = rp.permission_id
+          INNER JOIN roles r ON rp.role_id = r.id
+          INNER JOIN user_roles ur ON r.id = ur.role_id
+          WHERE ur.user_id = 8
+            AND p.status = 1
+            AND r.status = 1
+            AND p.code IS NOT NULL
+            AND p.code != ''
+          ORDER BY p.sort, p.id
+📊 数据库查询完成: 用户8, 35个权限, 耗时515ms
+💾 权限已缓存: 用户8, TTL=1800秒
+✅ 用户权限已缓存: 用户8
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348531500',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348531500',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:31.511Z'
+}
+[API调试] 2025-11-05T13:15:31.511Z - GET /auth-permissions/menu?_t=1762348531500
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348531500',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348531500',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:31.517Z'
+}
+[API调试] 2025-11-05T13:15:31.517Z - GET /auth-permissions/roles?_t=1762348531500
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348531501',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348531501',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:15:31.523Z'
+}
+[API调试] 2025-11-05T13:15:31.524Z - GET /auth-permissions/permissions?_t=1762348531501
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348531500 - 200 - 147ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348531501 - 200 - 182ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 110 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 111ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348531500 - 200 - 198ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348569258',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348569258',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.267Z'
+}
+[API调试] 2025-11-05T13:16:09.268Z - GET /auth-permissions/menu?_t=1762348569258
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348569258',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348569258',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.271Z'
+}
+[API调试] 2025-11-05T13:16:09.272Z - GET /auth-permissions/roles?_t=1762348569258
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348569259',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348569259',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.276Z'
+}
+[API调试] 2025-11-05T13:16:09.276Z - GET /auth-permissions/permissions?_t=1762348569259
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348569258 - 200 - 148ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348569259 - 200 - 177ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 108 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 110ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348569258 - 200 - 198ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.473Z'
+}
+[API调试] 2025-11-05T13:16:09.474Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/check-permission'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /check-permission 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT COUNT(*) as count
+      FROM permissions p
+      INNER JOIN role_permissions rp ON p.id = rp.permission_id
+      INNER JOIN roles r ON rp.role_id = r.id
+      INNER JOIN user_roles ur ON r.id = ur.role_id
+      WHERE ur.user_id = 8 AND p.status = 1 AND r.status = 1 AND p.path = '/parent-center/dashboard'
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 200 - 110ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348569666',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348569666',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.675Z'
+}
+[API调试] 2025-11-05T13:16:09.676Z - GET /auth-permissions/menu?_t=1762348569666
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348569667',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348569667',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.679Z'
+}
+[API调试] 2025-11-05T13:16:09.679Z - GET /auth-permissions/roles?_t=1762348569667
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348569667',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348569667',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:09.683Z'
+}
+[API调试] 2025-11-05T13:16:09.683Z - GET /auth-permissions/permissions?_t=1762348569667
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348569667 - 200 - 141ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348569667 - 200 - 177ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 108 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 109ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348569666 - 200 - 192ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348614629',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348614629',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:54.640Z'
+}
+[API调试] 2025-11-05T13:16:54.640Z - GET /auth-permissions/menu?_t=1762348614629
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348614629',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348614629',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:54.643Z'
+}
+[API调试] 2025-11-05T13:16:54.643Z - GET /auth-permissions/roles?_t=1762348614629
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348614630',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348614630',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:54.646Z'
+}
+[API调试] 2025-11-05T13:16:54.647Z - GET /auth-permissions/permissions?_t=1762348614630
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348614629 - 200 - 149ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348614630 - 200 - 174ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 106 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 107ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348614629 - 200 - 187ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:54.836Z'
+}
+[API调试] 2025-11-05T13:16:54.836Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/check-permission'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /check-permission 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT COUNT(*) as count
+      FROM permissions p
+      INNER JOIN role_permissions rp ON p.id = rp.permission_id
+      INNER JOIN roles r ON rp.role_id = r.id
+      INNER JOIN user_roles ur ON r.id = ur.role_id
+      WHERE ur.user_id = 8 AND p.status = 1 AND r.status = 1 AND p.path = '/parent-center/photo-album'
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 200 - 106ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348615196',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348615196',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:55.204Z'
+}
+[API调试] 2025-11-05T13:16:55.208Z - GET /auth-permissions/menu?_t=1762348615196
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348615196',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348615196',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:55.210Z'
+}
+[API调试] 2025-11-05T13:16:55.211Z - GET /auth-permissions/roles?_t=1762348615196
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348615196',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348615196',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:55.215Z'
+}
+[API调试] 2025-11-05T13:16:55.216Z - GET /auth-permissions/permissions?_t=1762348615196
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/photos/child/2067/timeline',
+  url: '/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348615197',
+  originalUrl: '/api/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348615197',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:16:55.218Z'
+}
+[API调试] 2025-11-05T13:16:55.218Z - GET /photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348615197
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/child/2067/timeline'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /child/2067/timeline 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT count(`Photo`.`id`) AS `count` FROM `photos` AS `Photo` INNER JOIN `photo_students` AS `photoStudents` ON `Photo`.`id` = `photoStudents`.`photo_id` AND `photoStudents`.`student_id` = 2067 WHERE (`Photo`.`deleted_at` IS NULL AND `Photo`.`deleted_at` IS NULL);
+Executing (default): SELECT `Photo`.*, `photoStudents`.`id` AS `photoStudents.id`, `photoStudents`.`photo_id` AS `photoStudents.photoId`, `photoStudents`.`student_id` AS `photoStudents.studentId`, `photoStudents`.`confidence` AS `photoStudents.confidence`, `photoStudents`.`face_box` AS `photoStudents.faceBox`, `photoStudents`.`face_token` AS `photoStudents.faceToken`, `photoStudents`.`confirmed_by` AS `photoStudents.confirmedBy`, `photoStudents`.`confirmed_at` AS `photoStudents.confirmedAt`, `photoStudents`.`is_auto_tagged` AS `photoStudents.isAutoTagged`, `photoStudents`.`is_primary` AS `photoStudents.isPrimary`, `photoStudents`.`is_favorited` AS `photoStudents.isFavorited`, `photoStudents`.`parent_note` AS `photoStudents.parentNote`, `photoStudents`.`created_at` AS `photoStudents.createdAt`, `photoStudents`.`updated_at` AS `photoStudents.updatedAt`, `photoStudents`.`created_at` AS `photoStudents.created_at`, `photoStudents`.`updated_at` AS `photoStudents.updated_at` FROM (SELECT `Photo`.`id`, `Photo`.`file_url` AS `fileUrl`, `Photo`.`thumbnail_url` AS `thumbnailUrl`, `Photo`.`original_name` AS `originalName`, `Photo`.`file_size` AS `fileSize`, `Photo`.`width`, `Photo`.`height`, `Photo`.`upload_user_id` AS `uploadUserId`, `Photo`.`upload_time` AS `uploadTime`, `Photo`.`kindergarten_id` AS `kindergartenId`, `Photo`.`class_id` AS `classId`, `Photo`.`activity_type` AS `activityType`, `Photo`.`activity_name` AS `activityName`, `Photo`.`shoot_date` AS `shootDate`, `Photo`.`description`, `Photo`.`face_count` AS `faceCount`, `Photo`.`ai_processed` AS `aiProcessed`, `Photo`.`quality_score` AS `qualityScore`, `Photo`.`visibility`, `Photo`.`status`, `Photo`.`is_recommended` AS `isRecommended`, `Photo`.`recommended_by` AS `recommendedBy`, `Photo`.`recommended_at` AS `recommendedAt`, `Photo`.`view_count` AS `viewCount`, `Photo`.`download_count` AS `downloadCount`, `Photo`.`like_count` AS `likeCount`, `Photo`.`created_at` AS `createdAt`, `Photo`.`updated_at` AS `updatedAt`, `Photo`.`deleted_at` AS `deletedAt`, `Photo`.`created_at`, `Photo`.`updated_at`, `Photo`.`deleted_at` FROM `photos` AS `Photo` WHERE (`Photo`.`deleted_at` IS NULL AND `Photo`.`deleted_at` IS NULL) AND ( SELECT `photo_id` FROM `photo_students` AS `photoStudents` WHERE (`photoStudents`.`student_id` = 2067 AND `photoStudents`.`photo_id` = `Photo`.`id`) LIMIT 1 ) IS NOT NULL ORDER BY `Photo`.`shoot_date` DESC, `Photo`.`created_at` DESC LIMIT 0, 20) AS `Photo` INNER JOIN `photo_students` AS `photoStudents` ON `Photo`.`id` = `photoStudents`.`photo_id` AND `photoStudents`.`student_id` = 2067 ORDER BY `shootDate` DESC, `createdAt` DESC;
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+[INFO] [API] GET /api/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348615197 - 200 - 179ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348615196 - 200 - 188ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 145 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 146ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348615196 - 200 - 239ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348615196 - 200 - 244ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348643149',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348643149',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.159Z'
+}
+[API调试] 2025-11-05T13:17:23.160Z - GET /auth-permissions/menu?_t=1762348643149
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348643149',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348643149',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.163Z'
+}
+[API调试] 2025-11-05T13:17:23.163Z - GET /auth-permissions/roles?_t=1762348643149
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348643150',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348643150',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.167Z'
+}
+[API调试] 2025-11-05T13:17:23.167Z - GET /auth-permissions/permissions?_t=1762348643150
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348643149 - 200 - 155ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348643150 - 200 - 190ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 112 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 113ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348643149 - 200 - 202ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.373Z'
+}
+[API调试] 2025-11-05T13:17:23.374Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/check-permission'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /check-permission 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT COUNT(*) as count
+      FROM permissions p
+      INNER JOIN role_permissions rp ON p.id = rp.permission_id
+      INNER JOIN roles r ON rp.role_id = r.id
+      INNER JOIN user_roles ur ON r.id = ur.role_id
+      WHERE ur.user_id = 8 AND p.status = 1 AND r.status = 1 AND p.path = '/parent-center/photo-album'
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 200 - 117ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348643624',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348643624',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.634Z'
+}
+[API调试] 2025-11-05T13:17:23.635Z - GET /auth-permissions/menu?_t=1762348643624
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348643624',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348643624',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.639Z'
+}
+[API调试] 2025-11-05T13:17:23.639Z - GET /auth-permissions/roles?_t=1762348643624
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348643624',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348643624',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.644Z'
+}
+[API调试] 2025-11-05T13:17:23.644Z - GET /auth-permissions/permissions?_t=1762348643624
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/photos/child/2067/timeline',
+  url: '/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348643625',
+  originalUrl: '/api/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348643625',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:17:23.649Z'
+}
+[API调试] 2025-11-05T13:17:23.649Z - GET /photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348643625
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/child/2067/timeline'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /child/2067/timeline 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT count(`Photo`.`id`) AS `count` FROM `photos` AS `Photo` INNER JOIN `photo_students` AS `photoStudents` ON `Photo`.`id` = `photoStudents`.`photo_id` AND `photoStudents`.`student_id` = 2067 WHERE (`Photo`.`deleted_at` IS NULL AND `Photo`.`deleted_at` IS NULL);
+Executing (default): SELECT `Photo`.*, `photoStudents`.`id` AS `photoStudents.id`, `photoStudents`.`photo_id` AS `photoStudents.photoId`, `photoStudents`.`student_id` AS `photoStudents.studentId`, `photoStudents`.`confidence` AS `photoStudents.confidence`, `photoStudents`.`face_box` AS `photoStudents.faceBox`, `photoStudents`.`face_token` AS `photoStudents.faceToken`, `photoStudents`.`confirmed_by` AS `photoStudents.confirmedBy`, `photoStudents`.`confirmed_at` AS `photoStudents.confirmedAt`, `photoStudents`.`is_auto_tagged` AS `photoStudents.isAutoTagged`, `photoStudents`.`is_primary` AS `photoStudents.isPrimary`, `photoStudents`.`is_favorited` AS `photoStudents.isFavorited`, `photoStudents`.`parent_note` AS `photoStudents.parentNote`, `photoStudents`.`created_at` AS `photoStudents.createdAt`, `photoStudents`.`updated_at` AS `photoStudents.updatedAt`, `photoStudents`.`created_at` AS `photoStudents.created_at`, `photoStudents`.`updated_at` AS `photoStudents.updated_at` FROM (SELECT `Photo`.`id`, `Photo`.`file_url` AS `fileUrl`, `Photo`.`thumbnail_url` AS `thumbnailUrl`, `Photo`.`original_name` AS `originalName`, `Photo`.`file_size` AS `fileSize`, `Photo`.`width`, `Photo`.`height`, `Photo`.`upload_user_id` AS `uploadUserId`, `Photo`.`upload_time` AS `uploadTime`, `Photo`.`kindergarten_id` AS `kindergartenId`, `Photo`.`class_id` AS `classId`, `Photo`.`activity_type` AS `activityType`, `Photo`.`activity_name` AS `activityName`, `Photo`.`shoot_date` AS `shootDate`, `Photo`.`description`, `Photo`.`face_count` AS `faceCount`, `Photo`.`ai_processed` AS `aiProcessed`, `Photo`.`quality_score` AS `qualityScore`, `Photo`.`visibility`, `Photo`.`status`, `Photo`.`is_recommended` AS `isRecommended`, `Photo`.`recommended_by` AS `recommendedBy`, `Photo`.`recommended_at` AS `recommendedAt`, `Photo`.`view_count` AS `viewCount`, `Photo`.`download_count` AS `downloadCount`, `Photo`.`like_count` AS `likeCount`, `Photo`.`created_at` AS `createdAt`, `Photo`.`updated_at` AS `updatedAt`, `Photo`.`deleted_at` AS `deletedAt`, `Photo`.`created_at`, `Photo`.`updated_at`, `Photo`.`deleted_at` FROM `photos` AS `Photo` WHERE (`Photo`.`deleted_at` IS NULL AND `Photo`.`deleted_at` IS NULL) AND ( SELECT `photo_id` FROM `photo_students` AS `photoStudents` WHERE (`photoStudents`.`student_id` = 2067 AND `photoStudents`.`photo_id` = `Photo`.`id`) LIMIT 1 ) IS NOT NULL ORDER BY `Photo`.`shoot_date` DESC, `Photo`.`created_at` DESC LIMIT 0, 20) AS `Photo` INNER JOIN `photo_students` AS `photoStudents` ON `Photo`.`id` = `photoStudents`.`photo_id` AND `photoStudents`.`student_id` = 2067 ORDER BY `shootDate` DESC, `createdAt` DESC;
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+[INFO] [API] GET /api/photos/child/2067/timeline?params[page]=1&params[pageSize]=20&params[activityType]=&params[onlyFavorite]=false&_t=1762348643625 - 200 - 124ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348643624 - 200 - 158ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348643624 - 200 - 207ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 120 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 122ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348643624 - 200 - 223ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/peach.png - 200 - 84ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/fruit-demo-start.mp3 - 206 - 197ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/watermelon.png - 200 - 290ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/apple.png - 200 - 580ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/fruit-memory-bgm.mp3 - 206 - 930ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 3ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/your-turn.mp3 - 206 - 24ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/menu',
+  url: '/auth-permissions/menu?_t=1762348697886',
+  originalUrl: '/api/auth-permissions/menu?_t=1762348697886',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:18:17.894Z'
+}
+[API调试] 2025-11-05T13:18:17.895Z - GET /auth-permissions/menu?_t=1762348697886
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/menu'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/roles',
+  url: '/auth-permissions/roles?_t=1762348697886',
+  originalUrl: '/api/auth-permissions/roles?_t=1762348697886',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:18:17.898Z'
+}
+[API调试] 2025-11-05T13:18:17.898Z - GET /auth-permissions/roles?_t=1762348697886
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/roles'
+}
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/auth-permissions/permissions',
+  url: '/auth-permissions/permissions?_t=1762348697886',
+  originalUrl: '/api/auth-permissions/permissions?_t=1762348697886',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:18:17.902Z'
+}
+[API调试] 2025-11-05T13:18:17.902Z - GET /auth-permissions/permissions?_t=1762348697886
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/permissions'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+[认证中间件] Redis会话验证通过，会话存在且有效
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /roles 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+👤 获取用户角色: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /permissions 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🔐 获取用户权限: 8
+Executing (default): SELECT `id`, `user_id` AS `userId`, `role_id` AS `roleId`, `is_primary` AS `isPrimary`, `start_time` AS `startTime`, `end_time` AS `endTime`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `user_roles` AS `UserRole` WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+[认证中间件] 路径: /menu 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+🍽️ 获取用户菜单 (纯数据库版): 8
+Executing (default): SELECT `UserRole`.`id`, `UserRole`.`user_id` AS `userId`, `UserRole`.`role_id` AS `roleId`, `UserRole`.`is_primary` AS `isPrimary`, `UserRole`.`start_time` AS `startTime`, `UserRole`.`end_time` AS `endTime`, `UserRole`.`grantor_id` AS `grantorId`, `UserRole`.`created_at` AS `createdAt`, `UserRole`.`updated_at` AS `updatedAt`, `UserRole`.`deleted_at` AS `deletedAt`, `role`.`id` AS `role.id`, `role`.`name` AS `role.name`, `role`.`code` AS `role.code`, `role`.`description` AS `role.description`, `role`.`status` AS `role.status`, `role`.`created_at` AS `role.createdAt`, `role`.`updated_at` AS `role.updatedAt`, `role`.`deleted_at` AS `role.deletedAt` FROM `user_roles` AS `UserRole` INNER JOIN `roles` AS `role` ON `UserRole`.`role_id` = `role`.`id` AND (`role`.`deleted_at` IS NULL AND `role`.`status` = 1) WHERE (`UserRole`.`deleted_at` IS NULL AND `UserRole`.`user_id` = 8);
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+Executing (default): SELECT `id`, `name`, `code`, `description`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `roles` AS `Role` WHERE (`Role`.`deleted_at` IS NULL AND (`Role`.`id` IN (4) AND `Role`.`status` = 1));
+👤 用户角色ID: [ 4 ]
+Executing (default): SELECT `id`, `role_id` AS `roleId`, `permission_id` AS `permissionId`, `grantor_id` AS `grantorId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `role_permissions` AS `RolePermission` WHERE `RolePermission`.`role_id` IN (4);
+✅ 用户角色: [ '家长' ]
+[INFO] [API] GET /api/auth-permissions/roles?_t=1762348697886 - 200 - 150ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+👥 用户激活角色ID: [ 4 ]
+Executing (default): SELECT `RolePermission`.`id`, `RolePermission`.`role_id` AS `roleId`, `RolePermission`.`permission_id` AS `permissionId`, `RolePermission`.`grantor_id` AS `grantorId`, `RolePermission`.`created_at` AS `createdAt`, `RolePermission`.`updated_at` AS `updatedAt`, `permission`.`id` AS `permission.id`, `permission`.`name` AS `permission.name`, `permission`.`chinese_name` AS `permission.chineseName`, `permission`.`code` AS `permission.code`, `permission`.`type` AS `permission.type`, `permission`.`parent_id` AS `permission.parentId`, `permission`.`path` AS `permission.path`, `permission`.`component` AS `permission.component`, `permission`.`permission` AS `permission.permission`, `permission`.`icon` AS `permission.icon`, `permission`.`sort` AS `permission.sort`, `permission`.`status` AS `permission.status`, `permission`.`created_at` AS `permission.createdAt`, `permission`.`updated_at` AS `permission.updatedAt`, `permission`.`deleted_at` AS `permission.deletedAt` FROM `role_permissions` AS `RolePermission` INNER JOIN `permissions` AS `permission` ON `RolePermission`.`permission_id` = `permission`.`id` AND (`permission`.`deleted_at` IS NULL AND `permission`.`status` = 1) WHERE `RolePermission`.`role_id` IN (4);
+🔑 角色拥有的权限ID数量: 36
+👤 用户角色code: parent
+🔐 家长角色：只返回PARENT_开头的菜单
+Executing (default): SELECT `id`, `name`, `chinese_name` AS `chineseName`, `code`, `type`, `parent_id` AS `parentId`, `path`, `component`, `permission`, `icon`, `sort`, `status`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `permissions` AS `Permission` WHERE (`Permission`.`deleted_at` IS NULL AND (`Permission`.`id` IN (5761, 5762, 5763, 5764, 5765, 5766, 5767, 5768, 5769, 5770, 5771, 5772, 5773, 5774, 5775, 5776, 5777, 5778, 5779, 5780, 5781, 5782, 5783, 5784, 5785, 5786, 5789, 5790, 5791, 5792, 5793, 5823, 5824, 5825, 5826, 5862) AND `Permission`.`status` = 1 AND `Permission`.`type` IN ('category', 'menu', 'page') AND `Permission`.`code` LIKE 'PARENT_%')) ORDER BY `Permission`.`sort` ASC;
+✅ 用户权限数量: 30
+[INFO] [API] GET /api/auth-permissions/permissions?_t=1762348697886 - 200 - 187ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+📊 从数据库获取并过滤菜单权限: 21 条，耗时: 111 ms
+🔍 前5个菜单权限: [
+  {
+    id: 5862,
+    name: '成长相册',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: null
+  },
+  {
+    id: 5762,
+    name: '我的首页',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5789,
+    name: '成长报告',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5763,
+    name: '我的信息',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5761
+  },
+  {
+    id: 5765,
+    name: '我的孩子',
+    chineseName: undefined,
+    type: 'menu',
+    parentId: 5764
+  }
+]
+🔍 ParentId分布:
+  5761: 3 项
+  5764: 3 项
+  5768: 4 项
+  5773: 4 项
+  5778: 3 项
+  5782: 3 项
+  NULL: 1 项
+    根级项目: 成长相册(menu)
+📁 菜单树结构: 1 个根项目
+🔍 菜单详情: [
+  {
+    "name": "成长相册",
+    "path": "/parent-center/photo-album",
+    "type": "menu",
+    "children": 0
+  }
+]
+⚡ 菜单权限获取完成，总耗时: 112ms
+[INFO] [API] GET /api/auth-permissions/menu?_t=1762348697886 - 200 - 199ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:18:18.104Z'
+}
+[API调试] 2025-11-05T13:18:18.104Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":8,"username":"test_parent","type":"access","exp":"2025-11-06T13:15:30.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/check-permission'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 8 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 8
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+[认证中间件] 路径: /check-permission 设置用户信息: {
+  id: 8,
+  username: 'test_parent',
+  role: 'parent',
+  email: 'ik8220@gmail.com',
+  realName: '刘蕾',
+  phone: '13800000003',
+  status: 'active',
+  isAdmin: false,
+  kindergartenId: null
+}
+Executing (default): SELECT COUNT(*) as count
+      FROM permissions p
+      INNER JOIN role_permissions rp ON p.id = rp.permission_id
+      INNER JOIN roles r ON rp.role_id = r.id
+      INNER JOIN user_roles ur ON r.id = ur.role_id
+      WHERE ur.user_id = 8 AND p.status = 1 AND r.status = 1 AND p.path = '/teacher-center/photo-album'
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 200 - 110ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/dynamic-permissions/check-permission',
+  url: '/dynamic-permissions/check-permission',
+  originalUrl: '/api/dynamic-permissions/check-permission',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:18:26.796Z'
+}
+[API调试] 2025-11-05T13:18:26.796Z - POST /dynamic-permissions/check-permission
+[API调试] 请求头: {"content-type":"application/json; charset=UTF-8","authorization":"**不存在**"}
+[INFO] [API] POST /api/dynamic-permissions/check-permission - 401 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/watermelon.png - 304 - 3ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/mango.png - 200 - 8ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/items/fruits/cherry.png - 200 - 7ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/fruit-demo-start.mp3 - 206 - 7ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/fruit-memory-bgm.mp3 - 206 - 22ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 1ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/sfx/fruit-highlight.mp3 - 404 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/your-turn.mp3 - 206 - 2ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/color-sorting/game-start.mp3 - 206 - 58ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/color-sorting-bgm.mp3 - 206 - 320ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/space-treasure/game-start.mp3 - 206 - 23ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/images/scenes/space-treasure/space-station-1.png - 200 - 114ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/space-treasure-bgm.mp3 - 206 - 714ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/dollhouse/game-start.mp3 - 206 - 75ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/dollhouse-bgm.mp3 - 206 - 1088ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/voices/robot-factory/chef-start.mp3 - 206 - 3ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+[INFO] [API] GET /uploads/games/audio/bgm/robot-factory-bgm.mp3 - 206 - 27ms - 127.0.0.1 - Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'POST',
+  path: '/auth/login',
+  url: '/auth/login',
+  originalUrl: '/api/auth/login',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:19:42.805Z'
+}
+[API调试] 2025-11-05T13:19:42.806Z - POST /auth/login
+[API调试] 请求头: {"content-type":"application/json","authorization":"**不存在**"}
+登录请求: { username: 'admin', password: 'admin123' }
+使用用户名查询: admin
+执行查询: SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = :username
+查询参数: { username: 'admin' }
+Executing (default): SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = 'admin'
+原始查询结果: [
+  {
+    id: 121,
+    username: 'admin',
+    password: '$2b$10$x5BkjHS.EWLSXSHBCvQJrOLAaKB28tJQsniP8VmqlpdbDHmLLpgca',
+    email: 'admin@test.com',
+    realName: '沈燕',
+    phone: '18611141131',
+    status: 'active'
+  }
+]
+处理后的结果: [
+  {
+    id: 121,
+    username: 'admin',
+    password: '$2b$10$x5BkjHS.EWLSXSHBCvQJrOLAaKB28tJQsniP8VmqlpdbDHmLLpgca',
+    email: 'admin@test.com',
+    realName: '沈燕',
+    phone: '18611141131',
+    status: 'active'
+  }
+]
+结果长度: 1
+找到用户: 121 admin admin@test.com
+验证密码, 输入: admin123 存储哈希: $2b$10$x5BkjHS.EWLSXSHBCvQJrOLAaKB28tJQsniP8VmqlpdbDHmLLpgca
+===== 密码验证开始 =====
+输入的明文密码: admin123
+数据库中的哈希密码: $2b$10$x5BkjHS.EWLSXSHBCvQJrOLAaKB28tJQsniP8VmqlpdbDHmLLpgca
+尝试使用bcrypt验证
+bcrypt验证结果: true
+===== 密码验证结束 =====
+密码验证结果: true
+用户状态检查通过: admin active
+Executing (default): SELECT r.code as role_code, r.name as role_name
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = 121
+      ORDER BY 
+        CASE 
+          WHEN r.code = 'super_admin' THEN 1
+          WHEN r.code = 'admin' THEN 2
+          ELSE 3
+        END
+      LIMIT 1
+🔍 检查用户角色: admin
+✅ 用户是管理员，查询幼儿园ID...
+Executing (default): SELECT id FROM kindergartens ORDER BY id LIMIT 1
+🏢 查询到的幼儿园: [ { id: 1 } ]
+✅ 分配kindergartenId: 1
+Executing (default): SELECT `id`, `group_key` AS `groupKey`, `config_key` AS `configKey`, `config_value` AS `configValue`, `value_type` AS `valueType`, `description`, `is_system` AS `isSystem`, `is_readonly` AS `isReadonly`, `sort_order` AS `sortOrder`, `creator_id` AS `creatorId`, `updater_id` AS `updaterId`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt`, `deleted_at` AS `deletedAt` FROM `system_configs` AS `SystemConfig` WHERE (`SystemConfig`.`deleted_at` IS NULL AND (`SystemConfig`.`group_key` = 'security' AND `SystemConfig`.`config_key` = 'sessionTimeout')) LIMIT 1;
+🕐 使用数据库中的会话超时设置: 1440 分钟 (24 小时)
+🔑 生成动态JWT token，过期时间: 24h
+🔑 生成动态JWT token，过期时间: 30d
+✅ 用户会话已创建: 用户121, Token=eyJhbGciOiJIUzI1NiIs..., SSO=false
+🔄 开始缓存用户权限: 用户121
+登录成功: admin , SSO: false
+[INFO] [API] POST /api/auth/login - 200 - 235ms - 127.0.0.1 - curl/8.11.0
+🔍 从数据库查询用户权限: 用户121
+Executing (default): SELECT DISTINCT r.code
+        FROM roles r
+        INNER JOIN user_roles ur ON r.id = ur.role_id
+        WHERE ur.user_id = 121 AND r.status = 1
+🌐🌐🌐 [全局路由调试] API请求被接收！ {
+  method: 'GET',
+  path: '/photos/teacher/my-uploads',
+  url: '/photos/teacher/my-uploads?page=1&pageSize=5',
+  originalUrl: '/api/photos/teacher/my-uploads?page=1&pageSize=5',
+  baseUrl: '/api',
+  timestamp: '2025-11-05T13:19:43.060Z'
+}
+[API调试] 2025-11-05T13:19:43.060Z - GET /photos/teacher/my-uploads?page=1&pageSize=5
+[API调试] 请求头: {"authorization":"**存在**"}
+[API调试] 令牌负载: {"userId":121,"username":"admin","type":"access","exp":"2025-11-06T13:19:43.000Z"}
+[API调试] 令牌验证: 有效
+[认证中间件] 调试信息: {
+  NODE_ENV: 'development',
+  host: 'localhost:3000',
+  token: 'OTHER_TOKEN',
+  path: '/teacher/my-uploads'
+}
+[认证中间件] Redis会话验证通过，会话存在且有效
+Executing (default): SELECT u.id, u.username, u.email, u.real_name, u.phone, u.status
+          FROM users u
+          WHERE u.id = 121 AND (u.status = 'active' OR u.username = 'admin')
+          LIMIT 1
+Executing (default): SELECT DISTINCT code
+          FROM permissions
+          WHERE status = 1 AND code IS NOT NULL AND code != ''
+          ORDER BY sort, id
+Executing (default): SELECT r.code as role_code, r.name as role_name
+          FROM user_roles ur
+          INNER JOIN roles r ON ur.role_id = r.id
+          WHERE ur.user_id = 121
+          ORDER BY 
+            CASE 
+              WHEN r.code = 'super_admin' THEN 1
+              WHEN r.code = 'admin' THEN 2
+              ELSE 3
+            END
+          LIMIT 1
+📊 数据库查询完成: 用户121, 185个权限, 耗时71ms
+💾 权限已缓存: 用户121, TTL=1800秒
+✅ 用户权限已缓存: 用户121
+Executing (default): SELECT id FROM kindergartens ORDER BY id LIMIT 1
+[认证中间件] 路径: /teacher/my-uploads 设置用户信息: {
+  id: 121,
+  username: 'admin',
+  role: 'admin',
+  email: 'admin@test.com',
+  realName: '沈燕',
+  phone: '18611141131',
+  status: 'active',
+  isAdmin: true,
+  kindergartenId: 1
+}
+获取教师照片列表失败: EagerLoadingError [SequelizeEagerLoadingError]: Student is not associated to PhotoStudent!
+    at Function._getIncludedAssociation (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:742:13)
+    at Function._validateIncludedElement (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:646:53)
+    at /home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:542:37
+    at Array.map (<anonymous>)
+    at Function._validateIncludedElements (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:537:39)
+    at Function._validateIncludedElement (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:732:38)
+    at /home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:542:37
+    at Array.map (<anonymous>)
+    at Function._validateIncludedElements (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:537:39)
+    at Function.aggregate (/home/zhgue/kyyupgame/k.yyup.com/server/node_modules/sequelize/src/model.js:2030:12)
+[INFO] [API] GET /api/photos/teacher/my-uploads?page=1&pageSize=5 - 500 - 168ms - 127.0.0.1 - curl/8.11.0
