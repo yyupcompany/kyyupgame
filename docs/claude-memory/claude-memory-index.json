@@ -1,0 +1,212 @@
+{
+  "keywords": {
+    "10": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "18": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "80": [
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "5084": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284"
+    ],
+    "7416": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284"
+    ],
+    "node": [
+      "88e2007c-9ec9-4d85-90f9-81c8b87edc18",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "js": [
+      "88e2007c-9ec9-4d85-90f9-81c8b87edc18",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "heapdump": [
+      "88e2007c-9ec9-4d85-90f9-81c8b87edc18"
+    ],
+    "--inspect": [
+      "88e2007c-9ec9-4d85-90f9-81c8b87edc18"
+    ],
+    "git": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "1.": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "9faed204-540a-4a5f-9d18-847f95a61efa",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b",
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "status": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11"
+    ],
+    "2.": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b",
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "3.": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b",
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "add": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11"
+    ],
+    "4.": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "commit": [
+      "ab0c5aba-7237-462c-8618-f99d73316a11"
+    ],
+    "docker": [
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "compose": [
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "services": [
+      "7c4891c5-5c7a-4131-beff-40339ebc758e"
+    ],
+    "hostname": [
+      "7c4891c5-5c7a-4131-beff-40339ebc758e"
+    ],
+    "docker docker-compose": [
+      "7c4891c5-5c7a-4131-beff-40339ebc758e"
+    ],
+    "redis": [
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "javascript": [
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b"
+    ],
+    "java": [
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b"
+    ],
+    "json": [
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b"
+    ],
+    "claude": [
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "code": [
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b"
+    ],
+    "nginx": [
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "mysql": [
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "sql": [
+      "9faed204-540a-4a5f-9d18-847f95a61efa"
+    ],
+    "memory.sh": [
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "start": [
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "search": [
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "add--question--solution": [
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "5.": [
+      "09fbcb41-13f5-405e-843a-ec61d180c11b"
+    ],
+    "k.yyup.com": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "md": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284"
+    ],
+    "unified-tenant-system": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284"
+    ],
+    "ai": [
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "vue": [
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2"
+    ],
+    "api": [
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2",
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "ts": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "typescript": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "n1.": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "server": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "generatevideo": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ],
+    "aiconversation": [
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ]
+  },
+  "dates": {
+    "2025-11-27": [
+      "88e2007c-9ec9-4d85-90f9-81c8b87edc18",
+      "ab0c5aba-7237-462c-8618-f99d73316a11",
+      "7c4891c5-5c7a-4131-beff-40339ebc758e",
+      "ec44b564-aaa1-42be-87b8-805d556b34d9",
+      "3c083f73-9e12-4a81-97ba-a140ae226b6b",
+      "9faed204-540a-4a5f-9d18-847f95a61efa",
+      "09fbcb41-13f5-405e-843a-ec61d180c11b",
+      "40e1ecdb-f447-44a6-a3f6-35d64685e284",
+      "9e3cd910-52b8-495a-acf1-1ea40fe533e2",
+      "602b9a78-4ce3-4acf-8c44-a650a5f7fc10"
+    ]
+  },
+  "hashes": [
+    "595cdd9903a3867da705d27582df365b",
+    "d19bdf8fc3bfe1c113678029aada0cca",
+    "b8d0878f80497701495b679579889859",
+    "3c44334582bc19a527904281b50cd440",
+    "ca6068c797a24d3d10df0a84d5895a06",
+    "e7fccc3a3bf4657970ac91deecc4c1a1",
+    "b38ed3073a20d4afa5f32d263a10a3a4",
+    "418e5143e3fa6736a434495a473552da",
+    "f918804b21b50b7707c907075049a3ed",
+    "c4383c90b44525290a4cc0e7d1300010"
+  ]
+}
