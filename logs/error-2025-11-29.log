@@ -1,0 +1,116 @@
+[2025-11-29 13:48:45] [ERROR] ❌ [向量索引] 学生索引构建失败
+{"error":"Table 'admin_tenant_management.students' doesn't exist"}
+[2025-11-29 13:48:45] [ERROR] ❌ [向量索引] 教师索引构建失败
+{"error":"Table 'admin_tenant_management.teachers' doesn't exist"}
+[2025-11-29 13:48:45] [ERROR] ❌ [向量索引] 活动索引构建失败
+{"error":"Table 'admin_tenant_management.activities' doesn't exist"}
+[2025-11-29 13:49:13] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:13] [ERROR] 保存初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:14] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:14] [ERROR] 保存步骤进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:15] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:15] [ERROR] 保存步骤进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:15] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:15] [ERROR] 保存步骤进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:18] [ERROR] 表创建失败: data_backup_records
+{"error":"Failed to open the referenced table 'tenant_cleanup_logs'"}
+[2025-11-29 13:49:18] [ERROR] 数据库结构复制失败: test_timeline_1764395352670
+{"error":"Failed to open the referenced table 'tenant_cleanup_logs'"}
+[2025-11-29 13:49:19] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:19] [ERROR] 保存步骤进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:19] [ERROR] 步骤失败: 复制数据库结构
+{"tenantCode":"test_timeline_1764395352670","error":"Failed to open the referenced table 'tenant_cleanup_logs'","stack":"Error: Failed to open the referenced table 'tenant_cleanup_logs'\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:207:44)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 13:49:19] [ERROR] 租户数据库初始化失败: test_timeline_1764395352670
+{"error":"Failed to open the referenced table 'tenant_cleanup_logs'","stack":"Error: Failed to open the referenced table 'tenant_cleanup_logs'\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:207:44)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 13:49:19] [ERROR] 保存租户初始化进度失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'"}
+[2025-11-29 13:49:19] [ERROR] 租户初始化失败: test_timeline_1764395352670
+{"error":"Unknown column 'duration' in 'field list'","stack":"Error: Unknown column 'duration' in 'field list'\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantProgressPersistenceService.saveProgress (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-progress-persistence.service.js:138:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:319:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:00:39] [ERROR] ❌ [向量索引] 学生索引构建失败
+{"error":"Table 'admin_tenant_management.students' doesn't exist"}
+[2025-11-29 14:00:39] [ERROR] ❌ [向量索引] 教师索引构建失败
+{"error":"Table 'admin_tenant_management.teachers' doesn't exist"}
+[2025-11-29 14:00:39] [ERROR] ❌ [向量索引] 活动索引构建失败
+{"error":"Table 'admin_tenant_management.activities' doesn't exist"}
+[2025-11-29 14:01:13] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:13] [ERROR] 保存初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:14] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:14] [ERROR] 保存步骤进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:15] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:15] [ERROR] 保存步骤进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:15] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:15] [ERROR] 保存步骤进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:37] [ERROR] 获取外键约束失败
+{"error":"Column 'TABLE_NAME' in field list is ambiguous"}
+[2025-11-29 14:01:37] [ERROR] 数据库结构复制失败: test_timeline_1764396072627
+{"error":"Column 'TABLE_NAME' in field list is ambiguous"}
+[2025-11-29 14:01:37] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:37] [ERROR] 保存步骤进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:37] [ERROR] 步骤失败: 复制数据库结构
+{"tenantCode":"test_timeline_1764396072627","error":"Column 'TABLE_NAME' in field list is ambiguous","stack":"Error: Column 'TABLE_NAME' in field list is ambiguous\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.getAllForeignKeys (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:146:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:231:33)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:01:37] [ERROR] 租户数据库初始化失败: test_timeline_1764396072627
+{"error":"Column 'TABLE_NAME' in field list is ambiguous","stack":"Error: Column 'TABLE_NAME' in field list is ambiguous\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.getAllForeignKeys (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:146:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:231:33)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:01:37] [ERROR] 保存租户初始化进度失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'"}
+[2025-11-29 14:01:37] [ERROR] 租户初始化失败: test_timeline_1764396072627
+{"error":"Unknown column 'tenant_code' in 'field list'","stack":"Error: Unknown column 'tenant_code' in 'field list'\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantProgressPersistenceService.saveProgress (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-progress-persistence.service.js:138:34)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:319:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:06:17] [ERROR] ❌ [向量索引] 学生索引构建失败
+{"error":"Table 'admin_tenant_management.students' doesn't exist"}
+[2025-11-29 14:06:17] [ERROR] ❌ [向量索引] 教师索引构建失败
+{"error":"Table 'admin_tenant_management.teachers' doesn't exist"}
+[2025-11-29 14:06:17] [ERROR] ❌ [向量索引] 活动索引构建失败
+{"error":"Table 'admin_tenant_management.activities' doesn't exist"}
+[2025-11-29 14:07:21] [ERROR] 复制文档模板失败: test_tl_1764396411248
+{"error":"Unknown column 'sort_order' in 'field list'"}
+[2025-11-29 14:07:21] [ERROR] 督检中心文档数据初始化失败: test_tl_1764396411248
+{"error":"Unknown column 'sort_order' in 'field list'"}
+[2025-11-29 14:07:23] [ERROR] 创建管理员账户失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist"}
+[2025-11-29 14:07:23] [ERROR] 步骤失败: 创建管理员账户
+{"tenantCode":"test_tl_1764396411248","error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:07:23] [ERROR] 租户数据库初始化失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:07:24] [ERROR] 租户初始化失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:09:16] [ERROR] 请求路径: POST /api/tenant/retry/test_tl_1764396411248
+Error: 无效的JSON格式
+Stack: Error: 无效的JSON格式
+    at verify (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/index.js:136:19)
+    at /home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/body-parser/lib/read.js:111:9
+    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)
+    at invokeCallback (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:238:16)
+    at done (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:227:7)
+    at IncomingMessage.onEnd (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:287:7)
+    at IncomingMessage.emit (node:events:519:28)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+[2025-11-29 14:09:16] [ERROR] 未处理的错误: Error
+{"message":"无效的JSON格式","stack":"Error: 无效的JSON格式\n    at verify (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/index.js:136:19)\n    at /home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/body-parser/lib/read.js:111:9\n    at AsyncResource.runInAsyncScope (node:async_hooks:214:14)\n    at invokeCallback (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:238:16)\n    at done (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:227:7)\n    at IncomingMessage.onEnd (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/raw-body/index.js:287:7)\n    at IncomingMessage.emit (node:events:519:28)\n    at endReadableNT (node:internal/streams/readable:1698:12)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)","path":"/api/tenant/retry/test_tl_1764396411248","method":"POST"}
+[2025-11-29 14:09:42] [ERROR] 创建管理员账户失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist"}
+[2025-11-29 14:09:42] [ERROR] 步骤失败: 创建管理员账户
+{"tenantCode":"test_tl_1764396411248","error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:284:17)"}
+[2025-11-29 14:09:42] [ERROR] 租户数据库初始化失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:284:17)"}
+[2025-11-29 14:09:43] [ERROR] 租户初始化失败: test_tl_1764396411248
+{"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist","stack":"Error: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:284:17)"}

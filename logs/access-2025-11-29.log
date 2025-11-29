@@ -1,0 +1,785 @@
+[2025-11-29 13:48:44] [INFO] 数据库监控已启动，收集间隔: 60秒
+[2025-11-29 13:48:45] [WARN] 阿里云DNS凭证未配置，将无法直接管理DNS记录
+[2025-11-29 13:48:45] [INFO] 六维记忆系统初始化完成
+[2025-11-29 13:48:45] [INFO] 🔍 [语义检索] 实体向量索引初始化完成 {"entityCount":12}
+[2025-11-29 13:48:45] [INFO] 🔧 [向量索引] 开始初始化索引
+[2025-11-29 13:48:45] [INFO] 🔨 [向量索引] 开始构建完整索引
+[2025-11-29 13:48:45] [INFO] 🧠 [复杂度评估] 查询模式初始化完成 {"patternCount":11}
+[2025-11-29 13:48:45] [INFO] 📝 [动态上下文] 上下文模板初始化完成 {"templateCount":4}
+[2025-11-29 13:48:45] [INFO] 豆包文生图模型初始化成功 {"modelId":5,"modelName":"doubao-seedream-3-0-t2i-250415"}
+[2025-11-29 13:48:45] [INFO] ✅ [向量索引] 完整索引构建完成 {"indexSize":0,"buildTime":"635ms"}
+[2025-11-29 13:48:45] [INFO] ⏰ [向量索引] 自动更新已启动 {"interval":"3600秒"}
+[2025-11-29 13:48:45] [INFO] ✅ [向量索引] 索引初始化完成 {"indexSize":0,"autoUpdate":true}
+[2025-11-29 13:49:13] [INFO] 租户初始化进度表创建成功
+[2025-11-29 13:49:13] [INFO] 开始初始化租户数据库: test_timeline_1764395352670
+[2025-11-29 13:49:13] [INFO] 开始监控租户初始化: test_timeline_1764395352670
+[2025-11-29 13:49:13] [INFO] 租户初始化状态检查: test_timeline_1764395352670 {"databaseExists":false,"schemaInitialized":false,"baseDataInitialized":false,"adminExists":false}
+[2025-11-29 13:49:14] [INFO] 更新初始化步骤: test_timeline_1764395352670 - 创建租户数据库 {"status":"running","progress":50}
+[2025-11-29 13:49:14] [INFO] 执行初始化步骤: 创建租户数据库 {"tenantCode":"test_timeline_1764395352670"}
+[2025-11-29 13:49:14] [INFO] 租户数据库创建成功: tenant_test_timeline_1764395352670
+[2025-11-29 13:49:15] [INFO] 更新初始化步骤: test_timeline_1764395352670 - 创建租户数据库 {"status":"completed","progress":100}
+[2025-11-29 13:49:15] [INFO] 步骤完成: 创建租户数据库 {"tenantCode":"test_timeline_1764395352670","耗时":"660ms"}
+[2025-11-29 13:49:15] [INFO] 更新初始化步骤: test_timeline_1764395352670 - 复制数据库结构 {"status":"running","progress":50}
+[2025-11-29 13:49:15] [INFO] 执行初始化步骤: 复制数据库结构 {"tenantCode":"test_timeline_1764395352670"}
+[2025-11-29 13:49:15] [INFO] 开始复制数据库结构到租户: test_timeline_1764395352670
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: admin_users
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: ai_model_config
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: audit_logs
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: billing_records
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: billing_rules
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: data_access_logs
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: data_backup_records
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: global_user_tenant_relations
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: global_users
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: invitation_links
+[2025-11-29 13:49:16] [INFO] 获取表结构成功: login_history
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: notification_logs
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: permission_changes
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: scheduled_tasks
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: security_events
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: sms_config
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: system_config
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: system_logs
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_accounts
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_billing_rules
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_cleanup_logs
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_init_progress
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_init_steps
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_resource_cleanup
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenant_sub_accounts
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: tenants
+[2025-11-29 13:49:17] [INFO] 获取表结构成功: unified_auth_logs
+[2025-11-29 13:49:18] [INFO] 获取表结构成功: user_registrations
+[2025-11-29 13:49:18] [INFO] 成功获取 28 个表的结构
+[2025-11-29 13:49:18] [INFO] 表创建成功: admin_users
+[2025-11-29 13:49:18] [INFO] 表创建成功: ai_model_config
+[2025-11-29 13:49:18] [INFO] 表创建成功: audit_logs
+[2025-11-29 13:49:18] [INFO] 表创建成功: billing_records
+[2025-11-29 13:49:18] [INFO] 表创建成功: billing_rules
+[2025-11-29 13:49:18] [INFO] 表创建成功: data_access_logs
+[2025-11-29 13:49:19] [INFO] 更新初始化步骤: test_timeline_1764395352670 - 复制数据库结构 {"status":"failed","progress":0,"error":"Failed to open the referenced table 'tenant_cleanup_logs'\nError: Failed to open the referenced table 'tenant_cleanup_logs'\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:207:44)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:00:37] [INFO] 数据库监控已启动，收集间隔: 60秒
+[2025-11-29 14:00:38] [WARN] 阿里云DNS凭证未配置，将无法直接管理DNS记录
+[2025-11-29 14:00:38] [INFO] 六维记忆系统初始化完成
+[2025-11-29 14:00:38] [INFO] 🔍 [语义检索] 实体向量索引初始化完成 {"entityCount":12}
+[2025-11-29 14:00:38] [INFO] 🔧 [向量索引] 开始初始化索引
+[2025-11-29 14:00:38] [INFO] 🔨 [向量索引] 开始构建完整索引
+[2025-11-29 14:00:38] [INFO] 🧠 [复杂度评估] 查询模式初始化完成 {"patternCount":11}
+[2025-11-29 14:00:38] [INFO] 📝 [动态上下文] 上下文模板初始化完成 {"templateCount":4}
+[2025-11-29 14:00:39] [INFO] 豆包文生图模型初始化成功 {"modelId":5,"modelName":"doubao-seedream-3-0-t2i-250415"}
+[2025-11-29 14:00:39] [INFO] ⏰ [向量索引] 自动更新已启动 {"interval":"3600秒"}
+[2025-11-29 14:00:39] [INFO] ✅ [向量索引] 完整索引构建完成 {"indexSize":0,"buildTime":"622ms"}
+[2025-11-29 14:00:39] [INFO] ✅ [向量索引] 索引初始化完成 {"indexSize":0,"autoUpdate":true}
+[2025-11-29 14:01:13] [INFO] 租户初始化进度表创建成功
+[2025-11-29 14:01:13] [INFO] 开始初始化租户数据库: test_timeline_1764396072627
+[2025-11-29 14:01:13] [INFO] 开始监控租户初始化: test_timeline_1764396072627
+[2025-11-29 14:01:13] [INFO] 租户初始化状态检查: test_timeline_1764396072627 {"databaseExists":false,"schemaInitialized":false,"baseDataInitialized":false,"adminExists":false}
+[2025-11-29 14:01:14] [INFO] 更新初始化步骤: test_timeline_1764396072627 - 创建租户数据库 {"status":"running","progress":50}
+[2025-11-29 14:01:14] [INFO] 执行初始化步骤: 创建租户数据库 {"tenantCode":"test_timeline_1764396072627"}
+[2025-11-29 14:01:14] [INFO] 租户数据库创建成功: tenant_test_timeline_1764396072627
+[2025-11-29 14:01:15] [INFO] 更新初始化步骤: test_timeline_1764396072627 - 创建租户数据库 {"status":"completed","progress":100}
+[2025-11-29 14:01:15] [INFO] 步骤完成: 创建租户数据库 {"tenantCode":"test_timeline_1764396072627","耗时":"674ms"}
+[2025-11-29 14:01:15] [INFO] 更新初始化步骤: test_timeline_1764396072627 - 复制数据库结构 {"status":"running","progress":50}
+[2025-11-29 14:01:15] [INFO] 执行初始化步骤: 复制数据库结构 {"tenantCode":"test_timeline_1764396072627"}
+[2025-11-29 14:01:15] [INFO] 开始复制数据库结构到租户: test_timeline_1764396072627
+[2025-11-29 14:01:16] [INFO] 已禁用外键检查
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: admin_users
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: ai_model_config
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: audit_logs
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: billing_records
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: billing_rules
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: data_access_logs
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: data_backup_records
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: global_user_tenant_relations
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: global_users
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: invitation_links
+[2025-11-29 14:01:16] [INFO] 获取表结构成功: login_history
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: notification_logs
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: permission_changes
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: scheduled_tasks
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: security_events
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: sms_config
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: system_config
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: system_logs
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_accounts
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_billing_rules
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_cleanup_logs
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_init_progress
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_init_steps
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_resource_cleanup
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenant_sub_accounts
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: tenants
+[2025-11-29 14:01:17] [INFO] 获取表结构成功: unified_auth_logs
+[2025-11-29 14:01:18] [INFO] 获取表结构成功: user_registrations
+[2025-11-29 14:01:18] [INFO] 成功获取 28 个表的结构
+[2025-11-29 14:01:18] [INFO] 表创建成功: admin_users
+[2025-11-29 14:01:18] [INFO] 表创建成功: ai_model_config
+[2025-11-29 14:01:18] [INFO] 表创建成功: audit_logs
+[2025-11-29 14:01:18] [INFO] 表创建成功: billing_records
+[2025-11-29 14:01:18] [INFO] 表创建成功: billing_rules
+[2025-11-29 14:01:18] [INFO] 表创建成功: data_access_logs
+[2025-11-29 14:01:18] [INFO] 表创建成功: data_backup_records
+[2025-11-29 14:01:19] [INFO] 表创建成功: global_user_tenant_relations
+[2025-11-29 14:01:19] [INFO] 表创建成功: global_users
+[2025-11-29 14:01:19] [INFO] 表创建成功: invitation_links
+[2025-11-29 14:01:19] [INFO] 表创建成功: login_history
+[2025-11-29 14:01:19] [INFO] 表创建成功: notification_logs
+[2025-11-29 14:01:19] [INFO] 表创建成功: permission_changes
+[2025-11-29 14:01:19] [INFO] 表创建成功: scheduled_tasks
+[2025-11-29 14:01:19] [INFO] 表创建成功: security_events
+[2025-11-29 14:01:20] [INFO] 表创建成功: sms_config
+[2025-11-29 14:01:20] [INFO] 表创建成功: system_config
+[2025-11-29 14:01:20] [INFO] 表创建成功: system_logs
+[2025-11-29 14:01:20] [INFO] 表创建成功: tenant_accounts
+[2025-11-29 14:01:20] [INFO] 表创建成功: tenant_billing_rules
+[2025-11-29 14:01:20] [INFO] 表创建成功: tenant_cleanup_logs
+[2025-11-29 14:01:20] [INFO] 表创建成功: tenant_init_progress
+[2025-11-29 14:01:21] [INFO] 表创建成功: tenant_init_steps
+[2025-11-29 14:01:21] [INFO] 表创建成功: tenant_resource_cleanup
+[2025-11-29 14:01:21] [INFO] 表创建成功: tenant_sub_accounts
+[2025-11-29 14:01:21] [INFO] 表创建成功: tenants
+[2025-11-29 14:01:21] [INFO] 表创建成功: unified_auth_logs
+[2025-11-29 14:01:22] [INFO] 表创建成功: user_registrations
+[2025-11-29 14:01:22] [INFO] 成功获取 225 个索引
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.admin_users_email {"error":"Duplicate key name 'admin_users_email'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.admin_users_role {"error":"Duplicate key name 'admin_users_role'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.admin_users_status {"error":"Duplicate key name 'admin_users_status'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.admin_users_username {"error":"Duplicate key name 'admin_users_username'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email {"error":"Duplicate key name 'email'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_10 {"error":"Duplicate key name 'email_10'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_11 {"error":"Duplicate key name 'email_11'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_12 {"error":"Duplicate key name 'email_12'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_13 {"error":"Duplicate key name 'email_13'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_14 {"error":"Duplicate key name 'email_14'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_15 {"error":"Duplicate key name 'email_15'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_16 {"error":"Duplicate key name 'email_16'"}
+[2025-11-29 14:01:22] [WARN] 索引创建失败: admin_users.email_17 {"error":"Duplicate key name 'email_17'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_18 {"error":"Duplicate key name 'email_18'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_2 {"error":"Duplicate key name 'email_2'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_3 {"error":"Duplicate key name 'email_3'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_4 {"error":"Duplicate key name 'email_4'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_5 {"error":"Duplicate key name 'email_5'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_6 {"error":"Duplicate key name 'email_6'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_7 {"error":"Duplicate key name 'email_7'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_8 {"error":"Duplicate key name 'email_8'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.email_9 {"error":"Duplicate key name 'email_9'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.idx_email {"error":"Duplicate key name 'idx_email'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.idx_role {"error":"Duplicate key name 'idx_role'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.idx_username {"error":"Duplicate key name 'idx_username'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.username {"error":"Duplicate key name 'username'"}
+[2025-11-29 14:01:23] [WARN] 索引创建失败: admin_users.username_10 {"error":"Duplicate key name 'username_10'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_11 {"error":"Duplicate key name 'username_11'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_12 {"error":"Duplicate key name 'username_12'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_13 {"error":"Duplicate key name 'username_13'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_14 {"error":"Duplicate key name 'username_14'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_15 {"error":"Duplicate key name 'username_15'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_16 {"error":"Duplicate key name 'username_16'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_17 {"error":"Duplicate key name 'username_17'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_18 {"error":"Duplicate key name 'username_18'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_2 {"error":"Duplicate key name 'username_2'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_3 {"error":"Duplicate key name 'username_3'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_4 {"error":"Duplicate key name 'username_4'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_5 {"error":"Duplicate key name 'username_5'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_6 {"error":"Duplicate key name 'username_6'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_7 {"error":"Duplicate key name 'username_7'"}
+[2025-11-29 14:01:24] [WARN] 索引创建失败: admin_users.username_8 {"error":"Duplicate key name 'username_8'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: admin_users.username_9 {"error":"Duplicate key name 'username_9'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.ai_model_config_model_type {"error":"Duplicate key name 'ai_model_config_model_type'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.ai_model_config_name_provider {"error":"Duplicate key name 'ai_model_config_name_provider'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.ai_model_config_status {"error":"Duplicate key name 'ai_model_config_status'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.idx_model_type {"error":"Duplicate key name 'idx_model_type'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: ai_model_config.unique_name_provider {"error":"Duplicate key name 'unique_name_provider'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: audit_logs.idx_action {"error":"Duplicate key name 'idx_action'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: audit_logs.idx_resource {"error":"Duplicate key name 'idx_resource'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: audit_logs.idx_success {"error":"Duplicate key name 'idx_success'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: audit_logs.idx_timestamp {"error":"Duplicate key name 'idx_timestamp'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: audit_logs.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: billing_records.idx_billing_records_charged_at {"error":"Duplicate key name 'idx_billing_records_charged_at'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: billing_records.idx_billing_records_created_at {"error":"Duplicate key name 'idx_billing_records_created_at'"}
+[2025-11-29 14:01:25] [WARN] 索引创建失败: billing_records.idx_billing_records_status_type {"error":"Duplicate key name 'idx_billing_records_status_type'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: billing_records.idx_billing_records_tenant_period {"error":"Duplicate key name 'idx_billing_records_tenant_period'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: billing_rules.idx_billing_rules_default_type {"error":"Duplicate key name 'idx_billing_rules_default_type'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: billing_rules.idx_billing_rules_effective_date {"error":"Duplicate key name 'idx_billing_rules_effective_date'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: billing_rules.idx_billing_rules_rule_type_active {"error":"Duplicate key name 'idx_billing_rules_rule_type_active'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_access_logs.idx_access_type {"error":"Duplicate key name 'idx_access_type'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_access_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_access_logs.idx_table_name {"error":"Duplicate key name 'idx_table_name'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_access_logs.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.backup_id {"error":"Duplicate key name 'backup_id'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_backup_id {"error":"Duplicate key name 'idx_backup_id'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_backup_status {"error":"Duplicate key name 'idx_backup_status'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_backup_type {"error":"Duplicate key name 'idx_backup_type'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_cleanup_log_id {"error":"Duplicate key name 'idx_cleanup_log_id'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_expires_at {"error":"Duplicate key name 'idx_expires_at'"}
+[2025-11-29 14:01:26] [WARN] 索引创建失败: data_backup_records.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_invitation_id {"error":"Duplicate key name 'idx_invitation_id'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_invited_by {"error":"Duplicate key name 'idx_invited_by'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_role_in_tenant {"error":"Duplicate key name 'idx_role_in_tenant'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_user_tenant_relations.uk_user_tenant {"error":"Duplicate key name 'uk_user_tenant'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_users.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_users.idx_last_login_at {"error":"Duplicate key name 'idx_last_login_at'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_users.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: global_users.uk_phone {"error":"Duplicate key name 'uk_phone'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: invitation_links.idx_expires_at {"error":"Duplicate key name 'idx_expires_at'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: invitation_links.idx_invite_code {"error":"Duplicate key name 'idx_invite_code'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: invitation_links.idx_invited_by {"error":"Duplicate key name 'idx_invited_by'"}
+[2025-11-29 14:01:27] [WARN] 索引创建失败: invitation_links.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: invitation_links.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: invitation_links.invite_code {"error":"Duplicate key name 'invite_code'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: login_history.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: login_history.idx_ip_address {"error":"Duplicate key name 'idx_ip_address'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: login_history.idx_success {"error":"Duplicate key name 'idx_success'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: login_history.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_days_until_deletion {"error":"Duplicate key name 'idx_days_until_deletion'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_notification_method {"error":"Duplicate key name 'idx_notification_method'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_notification_type {"error":"Duplicate key name 'idx_notification_type'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_send_status {"error":"Duplicate key name 'idx_send_status'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_sent_at {"error":"Duplicate key name 'idx_sent_at'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: notification_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: permission_changes.idx_change_type {"error":"Duplicate key name 'idx_change_type'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: permission_changes.idx_changed_by {"error":"Duplicate key name 'idx_changed_by'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: permission_changes.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:28] [WARN] 索引创建失败: permission_changes.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: scheduled_tasks.idx_enabled {"error":"Duplicate key name 'idx_enabled'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: scheduled_tasks.idx_last_run_at {"error":"Duplicate key name 'idx_last_run_at'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: scheduled_tasks.idx_next_run_at {"error":"Duplicate key name 'idx_next_run_at'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: scheduled_tasks.idx_task_type {"error":"Duplicate key name 'idx_task_type'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: security_events.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: security_events.idx_event_type {"error":"Duplicate key name 'idx_event_type'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: security_events.idx_severity {"error":"Duplicate key name 'idx_severity'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: security_events.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: security_events.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: system_config.config_key {"error":"Duplicate key name 'config_key'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: system_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: system_logs.idx_log_level {"error":"Duplicate key name 'idx_log_level'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: system_logs.idx_log_type {"error":"Duplicate key name 'idx_log_type'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: tenant_accounts.idx_account_type {"error":"Duplicate key name 'idx_account_type'"}
+[2025-11-29 14:01:29] [WARN] 索引创建失败: tenant_accounts.idx_next_billing_date {"error":"Duplicate key name 'idx_next_billing_date'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.idx_tenant_id {"error":"Duplicate key name 'idx_tenant_id'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_account_type {"error":"Duplicate key name 'tenant_accounts_account_type'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_next_billing_date {"error":"Duplicate key name 'tenant_accounts_next_billing_date'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_status {"error":"Duplicate key name 'tenant_accounts_status'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_tenant_id {"error":"Duplicate key name 'tenant_accounts_tenant_id'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_billing_rules.idx_tenant_billing_rules_rule {"error":"Duplicate key name 'idx_tenant_billing_rules_rule'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_billing_rules.idx_tenant_billing_rules_tenant_active {"error":"Duplicate key name 'idx_tenant_billing_rules_tenant_active'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_billing_rules.uk_tenant_billing_rules {"error":"Duplicate key name 'uk_tenant_billing_rules'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_cleanup_logs.idx_backup_id {"error":"Duplicate key name 'idx_backup_id'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_cleanup_logs.idx_cleanup_started_at {"error":"Duplicate key name 'idx_cleanup_started_at'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_cleanup_logs.idx_cleanup_status {"error":"Duplicate key name 'idx_cleanup_status'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_cleanup_logs.idx_scheduled_deletion_at {"error":"Duplicate key name 'idx_scheduled_deletion_at'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_cleanup_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:30] [WARN] 索引创建失败: tenant_init_progress.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_progress.idx_overall_status {"error":"Duplicate key name 'idx_overall_status'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_progress.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_progress.tenant_code {"error":"Duplicate key name 'tenant_code'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_steps.idx_progress_id {"error":"Duplicate key name 'idx_progress_id'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_steps.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_init_steps.uk_progress_step {"error":"Duplicate key name 'uk_progress_step'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_resource_cleanup.idx_resource_type {"error":"Duplicate key name 'idx_resource_type'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_resource_cleanup.idx_scheduled_deletion {"error":"Duplicate key name 'idx_scheduled_deletion'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_resource_cleanup.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_resource_cleanup.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_resource_cleanup.idx_unique_resource {"error":"Duplicate key name 'idx_unique_resource'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_status {"error":"Duplicate key name 'idx_tenant_sub_accounts_status'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_tenant_id {"error":"Duplicate key name 'idx_tenant_sub_accounts_tenant_id'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_user_phone {"error":"Duplicate key name 'idx_tenant_sub_accounts_user_phone'"}
+[2025-11-29 14:01:31] [WARN] 索引创建失败: tenant_sub_accounts.uk_tenant_user_phone {"error":"Duplicate key name 'uk_tenant_user_phone'"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:32] [WARN] 索引创建失败: tenants.database_name_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.database_name_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.database_name_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.database_name_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:33] [WARN] 索引创建失败: tenants.domain_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.domain_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.idx_deleted_at {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.idx_domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.idx_status {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.idx_tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.tenant_id_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.tenant_id_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.tenant_id_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:34] [WARN] 索引创建失败: tenants.tenant_id_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_19 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenant_id_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:35] [WARN] 索引创建失败: tenants.tenants_deleted_at {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: tenants.tenants_domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: tenants.tenants_status {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: tenants.tenants_tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_action {"error":"Duplicate key name 'idx_action'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_phone {"error":"Duplicate key name 'idx_phone'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_phone_created_at {"error":"Duplicate key name 'idx_phone_created_at'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_result {"error":"Duplicate key name 'idx_result'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: unified_auth_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: user_registrations.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: user_registrations.idx_invitation_id {"error":"Duplicate key name 'idx_invitation_id'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: user_registrations.idx_phone {"error":"Duplicate key name 'idx_phone'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: user_registrations.idx_registered_at {"error":"Duplicate key name 'idx_registered_at'"}
+[2025-11-29 14:01:36] [WARN] 索引创建失败: user_registrations.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:01:37] [WARN] 索引创建失败: user_registrations.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:01:37] [INFO] 更新初始化步骤: test_timeline_1764396072627 - 复制数据库结构 {"status":"failed","progress":0,"error":"Column 'TABLE_NAME' in field list is ambiguous\nError: Column 'TABLE_NAME' in field list is ambiguous\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantDatabaseSchemaService.getAllForeignKeys (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:146:47)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantDatabaseSchemaService.copyDatabaseStructure (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-schema.service.js:231:33)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:240:25\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:237:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:06:16] [INFO] 数据库监控已启动，收集间隔: 60秒
+[2025-11-29 14:06:17] [WARN] 阿里云DNS凭证未配置，将无法直接管理DNS记录
+[2025-11-29 14:06:17] [INFO] 六维记忆系统初始化完成
+[2025-11-29 14:06:17] [INFO] 🔍 [语义检索] 实体向量索引初始化完成 {"entityCount":12}
+[2025-11-29 14:06:17] [INFO] 🔧 [向量索引] 开始初始化索引
+[2025-11-29 14:06:17] [INFO] 🔨 [向量索引] 开始构建完整索引
+[2025-11-29 14:06:17] [INFO] 🧠 [复杂度评估] 查询模式初始化完成 {"patternCount":11}
+[2025-11-29 14:06:17] [INFO] 📝 [动态上下文] 上下文模板初始化完成 {"templateCount":4}
+[2025-11-29 14:06:17] [INFO] 豆包文生图模型初始化成功 {"modelId":5,"modelName":"doubao-seedream-3-0-t2i-250415"}
+[2025-11-29 14:06:17] [INFO] ✅ [向量索引] 完整索引构建完成 {"indexSize":0,"buildTime":"606ms"}
+[2025-11-29 14:06:17] [INFO] ⏰ [向量索引] 自动更新已启动 {"interval":"3600秒"}
+[2025-11-29 14:06:17] [INFO] ✅ [向量索引] 索引初始化完成 {"indexSize":0,"autoUpdate":true}
+[2025-11-29 14:06:51] [INFO] 租户初始化进度表创建成功
+[2025-11-29 14:06:51] [INFO] 开始初始化租户数据库: test_tl_1764396411248
+[2025-11-29 14:06:52] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:06:52] [INFO] 开始监控租户初始化: test_tl_1764396411248
+[2025-11-29 14:06:52] [INFO] 租户初始化状态检查: test_tl_1764396411248 {"databaseExists":false,"schemaInitialized":false,"baseDataInitialized":false,"adminExists":false}
+[2025-11-29 14:06:53] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:06:53] [INFO] 执行初始化步骤: 创建租户数据库 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:06:53] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建租户数据库 {"status":"running","progress":50}
+[2025-11-29 14:06:53] [INFO] 租户数据库创建成功: tenant_test_tl_1764396411248
+[2025-11-29 14:06:54] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:06:54] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建租户数据库 {"status":"completed","progress":100}
+[2025-11-29 14:06:54] [INFO] 步骤完成: 创建租户数据库 {"tenantCode":"test_tl_1764396411248","耗时":"869ms"}
+[2025-11-29 14:06:54] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:06:54] [INFO] 更新初始化步骤: test_tl_1764396411248 - 复制数据库结构 {"status":"running","progress":50}
+[2025-11-29 14:06:54] [INFO] 执行初始化步骤: 复制数据库结构 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:06:55] [INFO] 开始复制数据库结构到租户: test_tl_1764396411248
+[2025-11-29 14:06:55] [INFO] 已禁用外键检查
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: admin_users
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: ai_model_config
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: audit_logs
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: billing_records
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: billing_rules
+[2025-11-29 14:06:55] [INFO] 获取表结构成功: data_access_logs
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: data_backup_records
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: global_user_tenant_relations
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: global_users
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: invitation_links
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: login_history
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: notification_logs
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: permission_changes
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: scheduled_tasks
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: security_events
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: sms_config
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: system_config
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: system_logs
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: tenant_accounts
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: tenant_billing_rules
+[2025-11-29 14:06:56] [INFO] 获取表结构成功: tenant_cleanup_logs
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: tenant_init_progress
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: tenant_init_steps
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: tenant_resource_cleanup
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: tenant_sub_accounts
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: tenants
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: unified_auth_logs
+[2025-11-29 14:06:57] [INFO] 获取表结构成功: user_registrations
+[2025-11-29 14:06:57] [INFO] 成功获取 28 个表的结构
+[2025-11-29 14:06:57] [INFO] 表创建成功: admin_users
+[2025-11-29 14:06:57] [INFO] 表创建成功: ai_model_config
+[2025-11-29 14:06:57] [INFO] 表创建成功: audit_logs
+[2025-11-29 14:06:57] [INFO] 表创建成功: billing_records
+[2025-11-29 14:06:58] [INFO] 表创建成功: billing_rules
+[2025-11-29 14:06:58] [INFO] 表创建成功: data_access_logs
+[2025-11-29 14:06:58] [INFO] 表创建成功: data_backup_records
+[2025-11-29 14:06:58] [INFO] 表创建成功: global_user_tenant_relations
+[2025-11-29 14:06:58] [INFO] 表创建成功: global_users
+[2025-11-29 14:06:58] [INFO] 表创建成功: invitation_links
+[2025-11-29 14:06:58] [INFO] 表创建成功: login_history
+[2025-11-29 14:06:58] [INFO] 表创建成功: notification_logs
+[2025-11-29 14:06:58] [INFO] 表创建成功: permission_changes
+[2025-11-29 14:06:58] [INFO] 表创建成功: scheduled_tasks
+[2025-11-29 14:06:59] [INFO] 表创建成功: security_events
+[2025-11-29 14:06:59] [INFO] 表创建成功: sms_config
+[2025-11-29 14:06:59] [INFO] 表创建成功: system_config
+[2025-11-29 14:06:59] [INFO] 表创建成功: system_logs
+[2025-11-29 14:06:59] [INFO] 表创建成功: tenant_accounts
+[2025-11-29 14:06:59] [INFO] 表创建成功: tenant_billing_rules
+[2025-11-29 14:06:59] [INFO] 表创建成功: tenant_cleanup_logs
+[2025-11-29 14:06:59] [INFO] 表创建成功: tenant_init_progress
+[2025-11-29 14:06:59] [INFO] 表创建成功: tenant_init_steps
+[2025-11-29 14:07:00] [INFO] 表创建成功: tenant_resource_cleanup
+[2025-11-29 14:07:00] [INFO] 表创建成功: tenant_sub_accounts
+[2025-11-29 14:07:00] [INFO] 表创建成功: tenants
+[2025-11-29 14:07:00] [INFO] 表创建成功: unified_auth_logs
+[2025-11-29 14:07:00] [INFO] 表创建成功: user_registrations
+[2025-11-29 14:07:00] [INFO] 成功获取 225 个索引
+[2025-11-29 14:07:00] [WARN] 索引创建失败: admin_users.admin_users_email {"error":"Duplicate key name 'admin_users_email'"}
+[2025-11-29 14:07:00] [WARN] 索引创建失败: admin_users.admin_users_role {"error":"Duplicate key name 'admin_users_role'"}
+[2025-11-29 14:07:00] [WARN] 索引创建失败: admin_users.admin_users_status {"error":"Duplicate key name 'admin_users_status'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.admin_users_username {"error":"Duplicate key name 'admin_users_username'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email {"error":"Duplicate key name 'email'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_10 {"error":"Duplicate key name 'email_10'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_11 {"error":"Duplicate key name 'email_11'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_12 {"error":"Duplicate key name 'email_12'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_13 {"error":"Duplicate key name 'email_13'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_14 {"error":"Duplicate key name 'email_14'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_15 {"error":"Duplicate key name 'email_15'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_16 {"error":"Duplicate key name 'email_16'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_17 {"error":"Duplicate key name 'email_17'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_18 {"error":"Duplicate key name 'email_18'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_2 {"error":"Duplicate key name 'email_2'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_3 {"error":"Duplicate key name 'email_3'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_4 {"error":"Duplicate key name 'email_4'"}
+[2025-11-29 14:07:01] [WARN] 索引创建失败: admin_users.email_5 {"error":"Duplicate key name 'email_5'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.email_6 {"error":"Duplicate key name 'email_6'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.email_7 {"error":"Duplicate key name 'email_7'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.email_8 {"error":"Duplicate key name 'email_8'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.email_9 {"error":"Duplicate key name 'email_9'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.idx_email {"error":"Duplicate key name 'idx_email'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.idx_role {"error":"Duplicate key name 'idx_role'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.idx_username {"error":"Duplicate key name 'idx_username'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username {"error":"Duplicate key name 'username'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_10 {"error":"Duplicate key name 'username_10'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_11 {"error":"Duplicate key name 'username_11'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_12 {"error":"Duplicate key name 'username_12'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_13 {"error":"Duplicate key name 'username_13'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_14 {"error":"Duplicate key name 'username_14'"}
+[2025-11-29 14:07:02] [WARN] 索引创建失败: admin_users.username_15 {"error":"Duplicate key name 'username_15'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_16 {"error":"Duplicate key name 'username_16'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_17 {"error":"Duplicate key name 'username_17'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_18 {"error":"Duplicate key name 'username_18'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_2 {"error":"Duplicate key name 'username_2'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_3 {"error":"Duplicate key name 'username_3'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_4 {"error":"Duplicate key name 'username_4'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_5 {"error":"Duplicate key name 'username_5'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_6 {"error":"Duplicate key name 'username_6'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_7 {"error":"Duplicate key name 'username_7'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_8 {"error":"Duplicate key name 'username_8'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: admin_users.username_9 {"error":"Duplicate key name 'username_9'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: ai_model_config.ai_model_config_model_type {"error":"Duplicate key name 'ai_model_config_model_type'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: ai_model_config.ai_model_config_name_provider {"error":"Duplicate key name 'ai_model_config_name_provider'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: ai_model_config.ai_model_config_status {"error":"Duplicate key name 'ai_model_config_status'"}
+[2025-11-29 14:07:03] [WARN] 索引创建失败: ai_model_config.idx_model_type {"error":"Duplicate key name 'idx_model_type'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: ai_model_config.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: ai_model_config.unique_name_provider {"error":"Duplicate key name 'unique_name_provider'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: audit_logs.idx_action {"error":"Duplicate key name 'idx_action'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: audit_logs.idx_resource {"error":"Duplicate key name 'idx_resource'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: audit_logs.idx_success {"error":"Duplicate key name 'idx_success'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: audit_logs.idx_timestamp {"error":"Duplicate key name 'idx_timestamp'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: audit_logs.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_records.idx_billing_records_charged_at {"error":"Duplicate key name 'idx_billing_records_charged_at'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_records.idx_billing_records_created_at {"error":"Duplicate key name 'idx_billing_records_created_at'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_records.idx_billing_records_status_type {"error":"Duplicate key name 'idx_billing_records_status_type'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_records.idx_billing_records_tenant_period {"error":"Duplicate key name 'idx_billing_records_tenant_period'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_rules.idx_billing_rules_default_type {"error":"Duplicate key name 'idx_billing_rules_default_type'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_rules.idx_billing_rules_effective_date {"error":"Duplicate key name 'idx_billing_rules_effective_date'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: billing_rules.idx_billing_rules_rule_type_active {"error":"Duplicate key name 'idx_billing_rules_rule_type_active'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: data_access_logs.idx_access_type {"error":"Duplicate key name 'idx_access_type'"}
+[2025-11-29 14:07:04] [WARN] 索引创建失败: data_access_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_access_logs.idx_table_name {"error":"Duplicate key name 'idx_table_name'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_access_logs.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.backup_id {"error":"Duplicate key name 'backup_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_backup_id {"error":"Duplicate key name 'idx_backup_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_backup_status {"error":"Duplicate key name 'idx_backup_status'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_backup_type {"error":"Duplicate key name 'idx_backup_type'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_cleanup_log_id {"error":"Duplicate key name 'idx_cleanup_log_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_expires_at {"error":"Duplicate key name 'idx_expires_at'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: data_backup_records.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_invitation_id {"error":"Duplicate key name 'idx_invitation_id'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_invited_by {"error":"Duplicate key name 'idx_invited_by'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_role_in_tenant {"error":"Duplicate key name 'idx_role_in_tenant'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:05] [WARN] 索引创建失败: global_user_tenant_relations.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: global_user_tenant_relations.uk_user_tenant {"error":"Duplicate key name 'uk_user_tenant'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: global_users.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: global_users.idx_last_login_at {"error":"Duplicate key name 'idx_last_login_at'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: global_users.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: global_users.uk_phone {"error":"Duplicate key name 'uk_phone'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.idx_expires_at {"error":"Duplicate key name 'idx_expires_at'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.idx_invite_code {"error":"Duplicate key name 'idx_invite_code'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.idx_invited_by {"error":"Duplicate key name 'idx_invited_by'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: invitation_links.invite_code {"error":"Duplicate key name 'invite_code'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: login_history.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: login_history.idx_ip_address {"error":"Duplicate key name 'idx_ip_address'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: login_history.idx_success {"error":"Duplicate key name 'idx_success'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: login_history.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:07:06] [WARN] 索引创建失败: notification_logs.idx_days_until_deletion {"error":"Duplicate key name 'idx_days_until_deletion'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: notification_logs.idx_notification_method {"error":"Duplicate key name 'idx_notification_method'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: notification_logs.idx_notification_type {"error":"Duplicate key name 'idx_notification_type'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: notification_logs.idx_send_status {"error":"Duplicate key name 'idx_send_status'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: notification_logs.idx_sent_at {"error":"Duplicate key name 'idx_sent_at'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: notification_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: permission_changes.idx_change_type {"error":"Duplicate key name 'idx_change_type'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: permission_changes.idx_changed_by {"error":"Duplicate key name 'idx_changed_by'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: permission_changes.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: permission_changes.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: scheduled_tasks.idx_enabled {"error":"Duplicate key name 'idx_enabled'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: scheduled_tasks.idx_last_run_at {"error":"Duplicate key name 'idx_last_run_at'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: scheduled_tasks.idx_next_run_at {"error":"Duplicate key name 'idx_next_run_at'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: scheduled_tasks.idx_task_type {"error":"Duplicate key name 'idx_task_type'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: security_events.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:07] [WARN] 索引创建失败: security_events.idx_event_type {"error":"Duplicate key name 'idx_event_type'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: security_events.idx_severity {"error":"Duplicate key name 'idx_severity'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: security_events.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: security_events.idx_user_id {"error":"Duplicate key name 'idx_user_id'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: system_config.config_key {"error":"Duplicate key name 'config_key'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: system_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: system_logs.idx_log_level {"error":"Duplicate key name 'idx_log_level'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: system_logs.idx_log_type {"error":"Duplicate key name 'idx_log_type'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.idx_account_type {"error":"Duplicate key name 'idx_account_type'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.idx_next_billing_date {"error":"Duplicate key name 'idx_next_billing_date'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.idx_tenant_id {"error":"Duplicate key name 'idx_tenant_id'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_account_type {"error":"Duplicate key name 'tenant_accounts_account_type'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_next_billing_date {"error":"Duplicate key name 'tenant_accounts_next_billing_date'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_status {"error":"Duplicate key name 'tenant_accounts_status'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_accounts.tenant_accounts_tenant_id {"error":"Duplicate key name 'tenant_accounts_tenant_id'"}
+[2025-11-29 14:07:08] [WARN] 索引创建失败: tenant_billing_rules.idx_tenant_billing_rules_rule {"error":"Duplicate key name 'idx_tenant_billing_rules_rule'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_billing_rules.idx_tenant_billing_rules_tenant_active {"error":"Duplicate key name 'idx_tenant_billing_rules_tenant_active'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_billing_rules.uk_tenant_billing_rules {"error":"Duplicate key name 'uk_tenant_billing_rules'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_cleanup_logs.idx_backup_id {"error":"Duplicate key name 'idx_backup_id'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_cleanup_logs.idx_cleanup_started_at {"error":"Duplicate key name 'idx_cleanup_started_at'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_cleanup_logs.idx_cleanup_status {"error":"Duplicate key name 'idx_cleanup_status'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_cleanup_logs.idx_scheduled_deletion_at {"error":"Duplicate key name 'idx_scheduled_deletion_at'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_cleanup_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_progress.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_progress.idx_overall_status {"error":"Duplicate key name 'idx_overall_status'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_progress.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_progress.tenant_code {"error":"Duplicate key name 'tenant_code'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_steps.idx_progress_id {"error":"Duplicate key name 'idx_progress_id'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_steps.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_init_steps.uk_progress_step {"error":"Duplicate key name 'uk_progress_step'"}
+[2025-11-29 14:07:09] [WARN] 索引创建失败: tenant_resource_cleanup.idx_resource_type {"error":"Duplicate key name 'idx_resource_type'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_resource_cleanup.idx_scheduled_deletion {"error":"Duplicate key name 'idx_scheduled_deletion'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_resource_cleanup.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_resource_cleanup.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_resource_cleanup.idx_unique_resource {"error":"Duplicate key name 'idx_unique_resource'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_status {"error":"Duplicate key name 'idx_tenant_sub_accounts_status'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_tenant_id {"error":"Duplicate key name 'idx_tenant_sub_accounts_tenant_id'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_sub_accounts.idx_tenant_sub_accounts_user_phone {"error":"Duplicate key name 'idx_tenant_sub_accounts_user_phone'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenant_sub_accounts.uk_tenant_user_phone {"error":"Duplicate key name 'uk_tenant_user_phone'"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:10] [WARN] 索引创建失败: tenants.database_name_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.database_name_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.domain_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.domain_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.domain_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:11] [WARN] 索引创建失败: tenants.domain_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.domain_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.idx_deleted_at {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:12] [WARN] 索引创建失败: tenants.idx_domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.idx_status {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.idx_tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_10 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_11 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_12 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_13 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_14 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_15 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_16 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_17 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_18 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_19 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_2 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:13] [WARN] 索引创建失败: tenants.tenant_id_3 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_4 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_5 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_6 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_7 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_8 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenant_id_9 {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenants_deleted_at {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenants_domain {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenants_status {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: tenants.tenants_tenant_id {"error":"Too many keys specified; max 64 keys allowed"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: unified_auth_logs.idx_action {"error":"Duplicate key name 'idx_action'"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: unified_auth_logs.idx_created_at {"error":"Duplicate key name 'idx_created_at'"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: unified_auth_logs.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: unified_auth_logs.idx_phone {"error":"Duplicate key name 'idx_phone'"}
+[2025-11-29 14:07:14] [WARN] 索引创建失败: unified_auth_logs.idx_phone_created_at {"error":"Duplicate key name 'idx_phone_created_at'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: unified_auth_logs.idx_result {"error":"Duplicate key name 'idx_result'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: unified_auth_logs.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_global_user_id {"error":"Duplicate key name 'idx_global_user_id'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_invitation_id {"error":"Duplicate key name 'idx_invitation_id'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_phone {"error":"Duplicate key name 'idx_phone'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_registered_at {"error":"Duplicate key name 'idx_registered_at'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_status {"error":"Duplicate key name 'idx_status'"}
+[2025-11-29 14:07:15] [WARN] 索引创建失败: user_registrations.idx_tenant_code {"error":"Duplicate key name 'idx_tenant_code'"}
+[2025-11-29 14:07:15] [INFO] 成功获取 7 个外键约束
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: data_backup_records.data_backup_records_ibfk_1 {"error":"Duplicate foreign key constraint name 'data_backup_records_ibfk_1'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: global_user_tenant_relations.fk_global_user_tenant_relations_user_id {"error":"Duplicate foreign key constraint name 'fk_global_user_tenant_relations_user_id'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: invitation_links.invitation_links_ibfk_1 {"error":"Duplicate foreign key constraint name 'invitation_links_ibfk_1'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: tenant_accounts.tenant_accounts_ibfk_1 {"error":"Duplicate foreign key constraint name 'tenant_accounts_ibfk_1'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: tenant_init_steps.tenant_init_steps_ibfk_1 {"error":"Duplicate foreign key constraint name 'tenant_init_steps_ibfk_1'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: user_registrations.user_registrations_ibfk_1 {"error":"Duplicate foreign key constraint name 'user_registrations_ibfk_1'"}
+[2025-11-29 14:07:15] [WARN] 外键约束创建失败: user_registrations.user_registrations_ibfk_2 {"error":"Duplicate foreign key constraint name 'user_registrations_ibfk_2'"}
+[2025-11-29 14:07:16] [INFO] 已重新启用外键检查
+[2025-11-29 14:07:16] [INFO] 数据库结构复制完成: test_tl_1764396411248
+[2025-11-29 14:07:16] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:16] [INFO] 更新初始化步骤: test_tl_1764396411248 - 复制数据库结构 {"status":"completed","progress":100}
+[2025-11-29 14:07:16] [INFO] 步骤完成: 复制数据库结构 {"tenantCode":"test_tl_1764396411248","耗时":"22090ms"}
+[2025-11-29 14:07:17] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:17] [INFO] 更新初始化步骤: test_tl_1764396411248 - 初始化基础数据 {"status":"running","progress":50}
+[2025-11-29 14:07:17] [INFO] 执行初始化步骤: 初始化基础数据 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:07:18] [WARN] 创建角色失败: 超级管理员 {"error":"Table 'tenant_test_tl_1764396411248.roles' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建角色失败: 管理员 {"error":"Table 'tenant_test_tl_1764396411248.roles' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建角色失败: 教师 {"error":"Table 'tenant_test_tl_1764396411248.roles' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建角色失败: 家长 {"error":"Table 'tenant_test_tl_1764396411248.roles' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建角色失败: 普通用户 {"error":"Table 'tenant_test_tl_1764396411248.roles' doesn't exist"}
+[2025-11-29 14:07:18] [INFO] 角色初始化完成，创建了 0 个角色
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 用户查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 用户创建 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 用户编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 用户删除 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 角色查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 角色创建 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 角色编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 角色删除 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 权限查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 权限分配 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 系统设置查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 系统设置编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 学生查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 学生创建 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 学生编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 学生删除 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 班级查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 班级创建 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 班级编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 班级删除 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:18] [WARN] 创建权限失败: 课程查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 课程创建 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 课程编辑 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 课程删除 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 报表查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 报表导出 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 财务查看 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建权限失败: 财务管理 {"error":"Table 'tenant_test_tl_1764396411248.permissions' doesn't exist"}
+[2025-11-29 14:07:19] [INFO] 权限初始化完成，创建了 0 个权限
+[2025-11-29 14:07:19] [WARN] 创建配置失败: system_name {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: system_version {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: max_students_per_class {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: school_start_time {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: school_end_time {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: enable_parent_app {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: enable_teacher_app {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: default_language {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: timezone {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: date_format {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: currency {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: enable_sms {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [WARN] 创建配置失败: enable_email {"error":"Table 'tenant_test_tl_1764396411248.system_configs' doesn't exist"}
+[2025-11-29 14:07:19] [INFO] 系统配置初始化完成，创建了 0 个配置项
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 首页 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 用户管理 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 角色管理 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 学生管理 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 班级管理 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 课程管理 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 报表中心 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [WARN] 创建菜单失败: 系统设置 {"error":"Table 'tenant_test_tl_1764396411248.menus' doesn't exist"}
+[2025-11-29 14:07:20] [INFO] 菜单初始化完成，创建了 0 个菜单项
+[2025-11-29 14:07:20] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:20] [INFO] 更新初始化步骤: test_tl_1764396411248 - 初始化基础数据 {"status":"completed","progress":100}
+[2025-11-29 14:07:20] [INFO] 步骤完成: 初始化基础数据 {"tenantCode":"test_tl_1764396411248","耗时":"3404ms"}
+[2025-11-29 14:07:21] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:21] [INFO] 更新初始化步骤: test_tl_1764396411248 - 复制督检中心文档 {"status":"running","progress":50}
+[2025-11-29 14:07:21] [INFO] 执行初始化步骤: 复制督检中心文档 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:07:21] [INFO] 开始初始化督检中心文档数据: test_tl_1764396411248
+[2025-11-29 14:07:21] [WARN] 跳过督检中心文档数据初始化，继续其他初始化步骤
+[2025-11-29 14:07:22] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:22] [INFO] 更新初始化步骤: test_tl_1764396411248 - 复制督检中心文档 {"status":"completed","progress":100}
+[2025-11-29 14:07:22] [INFO] 步骤完成: 复制督检中心文档 {"tenantCode":"test_tl_1764396411248","耗时":"757ms"}
+[2025-11-29 14:07:22] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:22] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建管理员账户 {"status":"running","progress":50}
+[2025-11-29 14:07:22] [INFO] 执行初始化步骤: 创建管理员账户 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:07:23] [INFO] 开始创建租户管理员: test_tl_1764396411248
+[2025-11-29 14:07:23] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:07:23] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建管理员账户 {"status":"failed","progress":0,"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist\nError: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:103:17)"}
+[2025-11-29 14:07:24] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:09:40] [INFO] 开始初始化租户数据库: test_tl_1764396411248
+[2025-11-29 14:09:40] [INFO] 开始断点续传租户初始化: test_tl_1764396411248 {"当前状态":"failed","失败步骤":["创建管理员账户"]}
+[2025-11-29 14:09:40] [INFO] 发现未完成的初始化进度: test_tl_1764396411248 {"状态":"failed","进度":67}
+[2025-11-29 14:09:40] [INFO] 断点续传: 从步骤 "创建管理员账户" 继续执行
+[2025-11-29 14:09:40] [INFO] 租户初始化状态检查: test_tl_1764396411248 {"databaseExists":true,"schemaInitialized":true,"baseDataInitialized":false,"adminExists":false}
+[2025-11-29 14:09:41] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:09:41] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建管理员账户 {"status":"running","progress":50}
+[2025-11-29 14:09:41] [INFO] 执行初始化步骤: 创建管理员账户 {"tenantCode":"test_tl_1764396411248"}
+[2025-11-29 14:09:42] [INFO] 开始创建租户管理员: test_tl_1764396411248
+[2025-11-29 14:09:42] [INFO] 保存租户初始化进度: test_tl_1764396411248
+[2025-11-29 14:09:42] [INFO] 更新初始化步骤: test_tl_1764396411248 - 创建管理员账户 {"status":"failed","progress":0,"error":"Table 'tenant_test_tl_1764396411248.users' doesn't exist\nError: Table 'tenant_test_tl_1764396411248.users' doesn't exist\n    at PromiseConnection.execute (/home/zhgue/kyyupgame/unified-tenant-system/server/node_modules/mysql2/promise.js:111:22)\n    at TenantAdminInitService.createAdminUser (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:41:54)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async TenantAdminInitService.createDefaultAdmin (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-admin-init.service.js:121:16)\n    at async /home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:275:37\n    at async TenantDatabaseInitService.executeStep (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:334:13)\n    at async TenantDatabaseInitService.initializeTenantDatabase (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/services/tenant-database-init.service.js:272:17)\n    at async performTenantInitialization (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:153:24)\n    at async Immediate.<anonymous> (/home/zhgue/kyyupgame/unified-tenant-system/server/dist/controllers/tenant-progress.controller.js:284:17)"}
+[2025-11-29 14:09:43] [INFO] 保存租户初始化进度: test_tl_1764396411248
