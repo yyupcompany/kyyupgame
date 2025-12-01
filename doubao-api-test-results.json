@@ -1,0 +1,340 @@
+{
+  "timestamp": "2025-11-30T08:15:17.738Z",
+  "databaseConfig": {
+    "host": "dbconn.sealoshzh.site",
+    "port": 43906,
+    "database": "admin_tenant_management",
+    "user": "root",
+    "password": "pwk5ls7j",
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
+  "models": [
+    {
+      "id": 17,
+      "name": "volcengine-vod-service",
+      "display_name": "火山引擎视频点播服务 (VOD)",
+      "provider": "bytedance_doubao",
+      "model_type": "vod",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/vod",
+      "api_key": "1c155dc7-0cec-441b-9b00-0fb8ccc16089",
+      "model_parameters": {
+        "region": "cn-beijing",
+        "secretKey": "ZTc3YTFlNTliMjgyNDk1NDg1NjEzNDM2YzJlNDlmNDI",
+        "accessKeyId": "AKLTZWNkNjBmMTYxMTEwNGZiYjhiNzA5MGExMmNkOWF"
+      },
+      "status": "active",
+      "is_default": 1
+    },
+    {
+      "id": 18,
+      "name": "volcengine-tts-v3-unidirectional",
+      "display_name": "火山引擎TTS V3单向流式",
+      "provider": "bytedance_doubao",
+      "model_type": "speech",
+      "endpoint_url": "wss://openspeech.bytedance.com/api/v3/tts/unidirectional/stream",
+      "api_key": "3251d95f-1039-4daa-9afa-eb3bfe345552",
+      "model_parameters": {
+        "format": "mp3",
+        "speaker": "zh_female_cancan_mars_bigtts",
+        "resourceId": "volc.service_type.10029",
+        "sampleRate": 24000
+      },
+      "status": "active",
+      "is_default": 1
+    },
+    {
+      "id": 19,
+      "name": "volcengine-tts-v3-bidirection",
+      "display_name": "火山引擎TTS V3双向流式",
+      "provider": "bytedance_doubao",
+      "model_type": "speech",
+      "endpoint_url": "wss://openspeech.bytedance.com/api/v3/tts/bidirection",
+      "api_key": "7563592522",
+      "model_parameters": {
+        "appKey": "7563592522",
+        "format": "mp3",
+        "speaker": "zh_female_cancan_mars_bigtts",
+        "accessKey": "jq3vA4Ep5EsN-FU4mKizV6ePioXR3Ol3",
+        "resourceId": "volc.service_type.10029",
+        "sampleRate": 24000
+      },
+      "status": "active",
+      "is_default": 1
+    },
+    {
+      "id": 20,
+      "name": "doubao-seed-1-6-flash-250715",
+      "display_name": "豆包Flash-1.6（快速推理版）",
+      "provider": "bytedance_doubao",
+      "model_type": "text",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "1c155dc7-0cec-441b-9b00-0fb8ccc16089",
+      "model_parameters": {
+        "top_p": 0.9,
+        "model_id": "doubao-seed-1-6-flash-250715",
+        "max_tokens": 1024,
+        "temperature": 0.1,
+        "supports_tools": true,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "supports_fast_inference": true
+      },
+      "status": "active",
+      "is_default": 1
+    },
+    {
+      "id": 24,
+      "name": "volcengine-asr-streaming",
+      "display_name": "火山引擎流式语音识别",
+      "provider": "bytedance_doubao",
+      "model_type": "speech",
+      "endpoint_url": "wss://openspeech.bytedance.com/api/v3/asr",
+      "api_key": "3251d95f-1039-4daa-9afa-eb3bfe345552",
+      "model_parameters": {
+        "format": "pcm",
+        "language": "zh-CN",
+        "resourceId": "volc.bigasr.sauc.duration",
+        "sampleRate": 16000
+      },
+      "status": "active",
+      "is_default": 1
+    },
+    {
+      "id": 11,
+      "name": "doubao-seed-1-6-thinking-250615",
+      "display_name": "Doubao 1.6 Thinking (推理增强版)",
+      "provider": "bytedance_doubao",
+      "model_type": "text",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "1c155dc7-0cec-441b-9b00-0fb8ccc16089",
+      "model_parameters": {
+        "topP": 0.9,
+        "top_p": 0.9,
+        "model_id": "doubao-seed-1-6-thinking-250615",
+        "maxTokens": 2000,
+        "max_tokens": 2000,
+        "temperature": 0.7,
+        "context_length": 32768,
+        "supports_tools": true,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "supports_thinking": true,
+        "supports_multimodal": true
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 12,
+      "name": "doubao-seedream-3-0-t2i-250415",
+      "display_name": "Doubao SeedDream 3.0 (文生图)",
+      "provider": "bytedance_doubao",
+      "model_type": "image",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/images/generations",
+      "api_key": "ffb6e528-e998-4ebf-b601-38a8a33c2365",
+      "model_parameters": {
+        "size": "1024x1024",
+        "style": "natural",
+        "quality": "standard",
+        "watermark": true,
+        "context_length": 2048,
+        "guidance_scale": 2.5,
+        "response_format": "url"
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 13,
+      "name": "doubao-seedance-1-0-pro-250528",
+      "display_name": "Doubao SeedDance 1.0 Pro (图生视频)",
+      "provider": "bytedance_doubao",
+      "model_type": "video",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/contents/generations/tasks",
+      "api_key": "99944eb3-b9bf-46f2-940e-3ee480b699a0",
+      "model_parameters": {
+        "quality": "standard",
+        "duration": "5s",
+        "frame_rate": 24,
+        "video_ratio": "16:9",
+        "motion_style": "natural",
+        "context_length": 4096
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 14,
+      "name": "doubao-tts-bigmodel",
+      "display_name": "Doubao TTS 大模型语音合成",
+      "provider": "bytedance_doubao",
+      "model_type": "speech",
+      "endpoint_url": "wss://openspeech.bytedance.com/api/v3/tts/bidirection",
+      "api_key": "ffb6e528-e998-4ebf-b601-38a8a33c2365",
+      "model_parameters": {
+        "speed": 1,
+        "voice": "zh_female_cancan_mars_bigtts",
+        "appKey": "7563592522",
+        "format": "mp3",
+        "emotion": "natural",
+        "quality": "standard",
+        "speaker": "zh_female_cancan_mars_bigtts",
+        "accessKey": "jq3vA4Ep5EsN-FU4mKizV6ePioXR3Ol3",
+        "resourceId": "volc.service_type.10029",
+        "sampleRate": 24000,
+        "context_length": 1024,
+        "response_format": "mp3"
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 21,
+      "name": "Doubao-Seed-1.6",
+      "display_name": "豆包Seed-1.6（工具调用+多模态）",
+      "provider": "ByteDance",
+      "model_type": "text",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "99944eb3-b9bf-46f2-940e-3ee480b699a0",
+      "model_parameters": {
+        "top_p": 0.9,
+        "model_id": "250615",
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "supports_tools": true,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "supports_thinking": true,
+        "supports_multimodal": true
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 22,
+      "name": "doubao-ultra-fast-100",
+      "display_name": "豆包Ultra-Fast 100（超快速版）",
+      "provider": "bytedance_doubao",
+      "model_type": "text",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "1c155dc7-0cec-441b-9b00-0fb8ccc16089",
+      "model_parameters": {
+        "top_p": 0.9,
+        "stream": false,
+        "model_id": "250715",
+        "use_cache": true,
+        "max_tokens": 100,
+        "temperature": 0.1,
+        "supports_tools": false,
+        "presence_penalty": 0,
+        "response_timeout": 5000,
+        "frequency_penalty": 0,
+        "supports_multimodal": false
+      },
+      "status": "active",
+      "is_default": 0
+    },
+    {
+      "id": 23,
+      "name": "doubao-fast-200",
+      "display_name": "豆包Fast 200（快速版）",
+      "provider": "bytedance_doubao",
+      "model_type": "text",
+      "endpoint_url": "https://ark.cn-beijing.volces.com/api/v3/chat/completions",
+      "api_key": "1c155dc7-0cec-441b-9b00-0fb8ccc16089",
+      "model_parameters": {
+        "top_p": 0.9,
+        "stream": false,
+        "model_id": "250715",
+        "use_cache": true,
+        "max_tokens": 200,
+        "temperature": 0.2,
+        "supports_tools": false,
+        "presence_penalty": 0,
+        "response_timeout": 8000,
+        "frequency_penalty": 0,
+        "supports_multimodal": false
+      },
+      "status": "active",
+      "is_default": 0
+    }
+  ],
+  "testResults": [
+    {
+      "success": false,
+      "model": "volcengine-vod-service",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "volcengine-tts-v3-unidirectional",
+      "error": "Unsupported protocol wss:"
+    },
+    {
+      "success": false,
+      "model": "volcengine-tts-v3-bidirection",
+      "error": "Unsupported protocol wss:"
+    },
+    {
+      "success": false,
+      "model": "doubao-seed-1-6-flash-250715",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "volcengine-asr-streaming",
+      "error": "Unsupported protocol wss:"
+    },
+    {
+      "success": false,
+      "model": "doubao-seed-1-6-thinking-250615",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "doubao-seedream-3-0-t2i-250415",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "doubao-seedance-1-0-pro-250528",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "doubao-tts-bigmodel",
+      "error": "Unsupported protocol wss:"
+    },
+    {
+      "success": false,
+      "model": "Doubao-Seed-1.6",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "doubao-ultra-fast-100",
+      "error": "Request failed with status code 503",
+      "status": 503
+    },
+    {
+      "success": false,
+      "model": "doubao-fast-200",
+      "error": "Request failed with status code 503",
+      "status": 503
+    }
+  ],
+  "statistics": {
+    "total": 12,
+    "success": 0,
+    "failed": 12,
+    "successRate": "0.0%"
+  }
+}

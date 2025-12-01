@@ -1,0 +1,66 @@
+{
+  "name": "marketing-tests",
+  "version": "1.0.0",
+  "description": "幼儿园管理系统营销板块完整测试套件",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "test:unit": "jest unit/",
+    "test:integration": "jest integration/",
+    "test:e2e": "jest e2e/",
+    "test:all": "jest --detectOpenHandles --forceExit",
+    "setup": "node setup.js",
+    "cleanup": "node cleanup.js"
+  },
+  "keywords": [
+    "marketing",
+    "group-buy",
+    "collect-activity",
+    "tiered-rewards",
+    "payment",
+    "testing"
+  ],
+  "author": "Marketing Test Team",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/jest": "^29.5.5",
+    "@types/supertest": "^2.0.16",
+    "jest": "^29.7.0",
+    "playwright": "^1.57.0",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!node_modules/**",
+      "!coverage/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "html"
+    ],
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
+    "verbose": true,
+    "detectOpenHandles": false,
+    "forceExit": true,
+    "testTimeout": 30000
+  }
+}

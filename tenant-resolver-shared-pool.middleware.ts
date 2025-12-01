@@ -5,7 +5,7 @@
 
 import { Request, Response, NextFunction } from 'express';
 import { tenantDatabaseSharedPoolService } from '../services/tenant-database-shared-pool.service';
-import { logger } from '../utils/logger';
+import { CallingLogger } from "./unified-tenant-system/server/src/utils/CallingLogger"
 import { ApiResponse } from '../utils/apiResponse';
 
 /**
@@ -32,7 +32,12 @@ export const tenantResolverSharedPoolMiddleware = async (
     // 获取请求域名
     const domain = req.get('Host') || req.hostname;
 
-    logger.info('[租户识别] 处理请求', {
+    const context = CallingLogger.createContext(req, {
+      module: 'TENANT',
+      operation: 'RESOLVE_TENANT'
+    });
+
+    CallingLogger.logInfo(context, '开始处理租户识别请求', {
       method: req.method,
       url: req.url,
       domain
@@ -42,14 +47,14 @@ export const tenantResolverSharedPoolMiddleware = async (
     const tenantCode = extractTenantCode(domain);
 
     if (!tenantCode) {
-      logger.warn('[租户识别] 无法解析租户代码', { domain });
+      CallingLogger.logWarn(context, '无法解析租户代码', { domain });
 
       if (process.env.NODE_ENV === 'production') {
         ApiResponse.error(res, '无法识别的租户域名', 'INVALID_TENANT_DOMAIN');
         return;
       } else {
         // 开发环境允许使用默认配置
-        logger.info('[租户识别] 使用开发环境默认配置');
+        CallingLogger.logInfo(context, '使用开发环境默认配置');
         req.tenant = {
           code: 'dev',
           domain: domain,
@@ -62,9 +67,9 @@ export const tenantResolverSharedPoolMiddleware = async (
     }
 
     // 验证租户是否存在
-    const tenantInfo = await validateTenant(tenantCode);
+    const tenantInfo = await validateTenant(tenantCode, req);
     if (!tenantInfo) {
-      logger.warn('[租户识别] 租户不存在或未激活', { tenantCode, domain });
+      CallingLogger.logWarn(context, '租户不存在或未激活', { tenantCode, domain });
       ApiResponse.error(res, '租户不存在或未激活', 'TENANT_NOT_FOUND');
       return;
     }
@@ -79,19 +84,23 @@ export const tenantResolverSharedPoolMiddleware = async (
     // 获取共享的全局数据库连接
     try {
       req.tenantDb = tenantDatabaseSharedPoolService.getGlobalConnection();
-      logger.info('[租户识别] 租户识别成功', {
+      CallingLogger.logSuccess(context, '租户识别成功', {
         tenantCode,
         databaseName: req.tenant.databaseName
       });
     } catch (error) {
-      logger.error('[租户识别] 获取数据库连接失败', { tenantCode, error });
+      CallingLogger.logError(context, '获取数据库连接失败', error, { tenantCode });
       ApiResponse.error(res, '数据库连接失败', 'DB_CONNECTION_FAILED');
       return;
     }
 
     next();
   } catch (error) {
-    logger.error('[租户识别] 中间件错误', error);
+    const errorContext = CallingLogger.createContext(req, {
+      module: 'TENANT',
+      operation: 'RESOLVE_TENANT_ERROR'
+    });
+    CallingLogger.logError(errorContext, '中间件处理错误', error);
     ApiResponse.error(res, '租户识别失败', 'TENANT_RESOLVER_ERROR');
   }
 };
@@ -123,7 +132,13 @@ function extractTenantCode(domain: string): string | null {
  * 验证租户是否存在
  * 从统一认证系统验证
  */
-async function validateTenant(tenantCode: string): Promise<boolean> {
+async function validateTenant(tenantCode: string, req: RequestWithTenant): Promise<boolean> {
+  const context = CallingLogger.createContext(req, {
+    module: 'TENANT',
+    operation: 'VALIDATE_TENANT',
+    tenantCode
+  });
+
   try {
     // TODO: 调用统一认证系统验证租户
     // const result = await adminIntegrationService.validateTenant(tenantCode);
@@ -132,7 +147,7 @@ async function validateTenant(tenantCode: string): Promise<boolean> {
     // 临时实现：假设所有k开头的租户都有效
     return /^k\d+$/.test(tenantCode);
   } catch (error) {
-    logger.error('[租户识别] 租户验证失败', { tenantCode, error });
+    CallingLogger.logError(context, '租户验证失败', error, { tenantCode });
     return false;
   }
 }

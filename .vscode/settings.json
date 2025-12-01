@@ -1,0 +1,46 @@
+{
+    "typescript.preferences.includePackageJsonAutoImports": "off",
+    "typescript.suggest.autoImports": false,
+    "typescript.maxTsServerMemory": 8192,
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "typescript.tsserver.maxTsServerMemory": 8192,
+    "typescript.tsserver.experimental.enableProjectDiagnostics": false,
+    "typescript.tsserver.useSeparateSyntaxServer": true,
+    "typescript.tsserver.useWatchService": true,
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    "javascript.suggest.autoImports": false,
+    "javascript.preferences.includePackageJsonAutoImports": "off",
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/.git/**": true,
+        "**/dist/**": true,
+        "**/build/**": true,
+        "**/coverage/**": true,
+        "**/temp/**": true,
+        "**/tmp/**": true,
+        "**/*.log": true,
+        "**/k.yyup.com/node_modules/**": true,
+        "**/unified-tenant-system/node_modules/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/temp": true,
+        "**/tmp": true,
+        "**/*.log": true,
+        "**/k.yyup.com/node_modules": true,
+        "**/unified-tenant-system/node_modules": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/coverage": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    }
+}
