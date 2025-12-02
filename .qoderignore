@@ -2,44 +2,74 @@
 # 此文件配置哪些文件应该被Qoder的Wiki功能索引
 
 # ============================================
-# 排除的目录
+# 排除的目录（最高优先级）
 # ============================================
 
-# 依赖目录
+# 依赖目录 - 这是最大的问题源
+node_modules/
+**/node_modules/
 **/node_modules/**
-**/bower_components/**
 
 # 构建输出目录
-**/dist/**
-**/build/**
-**/.next/**
-**/.nuxt/**
-**/out/**
-**/.output/**
+dist/
+build/
+.next/
+.nuxt/
+out/
+.output/
+**/dist/
+**/build/
+**/.next/
+**/.nuxt/
+**/out/
+**/.output/
 
 # 版本控制
-**/.git/**
-**/.svn/**
+.git/
+.svn/
+**/.git/
+**/.svn/
 
 # IDE配置
-**/.vscode/**
-**/.idea/**
-**/.cursor/**
+.vscode/
+.idea/
+.cursor/
+**/.vscode/
+**/.idea/
+**/.cursor/
 
 # 测试目录
-**/tests/**
-**/test/**
-**/__tests__/**
-**/coverage/**
+tests/
+test/
+__tests__/
+coverage/
+**/tests/
+**/test/
+**/__tests__/
+**/coverage/
+
+# 日志和临时文件
+logs/
+temp/
+tmp/
+**/logs/
+**/temp/
+**/tmp/
 
 # 文档目录（如果不想索引文档）
-**/docs/**
+docs/
+**/docs/
 
 # ============================================
 # 排除的文件类型
 # ============================================
 
 # 测试文件
+*.test.ts
+*.test.js
+*.spec.ts
+*.spec.js
+*.test.vue
 **/*.test.ts
 **/*.test.js
 **/*.spec.ts
@@ -47,22 +77,39 @@
 **/*.test.vue
 
 # 类型声明文件
+*.d.ts
 **/*.d.ts
 
 # 锁文件
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
 **/package-lock.json
 **/yarn.lock
 **/pnpm-lock.yaml
 
 # 日志文件
+*.log
 **/*.log
 
 # 临时文件
+*.tmp
+*.temp
+.DS_Store
 **/*.tmp
 **/*.temp
 **/.DS_Store
 
 # 图片和媒体文件
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.mp4
+*.mp3
+*.webp
 **/*.png
 **/*.jpg
 **/*.jpeg
@@ -74,23 +121,33 @@
 **/*.webp
 
 # 字体文件
+*.woff
+*.woff2
+*.ttf
+*.eot
 **/*.woff
 **/*.woff2
 **/*.ttf
 **/*.eot
 
 # CSS预处理器映射文件
+*.css.map
+*.scss.map
+*.less.map
 **/*.css.map
 **/*.scss.map
 **/*.less.map
 
 # 编译后的CSS（如果只关注源码）
+# *.css
 # **/*.css
 
 # HTML文件（如果只关注Vue组件）
+# *.html
 # **/*.html
 
 # Markdown文件（保留或排除根据需求）
+*.md
 **/*.md
 
 # ============================================
@@ -106,4 +163,6 @@
 # - *config* (各类配置文件)
 # - .env* (环境变量文件)
 #
+# 实际源代码文件约：7,277 个
 # 如需调整，请修改上述规则
+#
