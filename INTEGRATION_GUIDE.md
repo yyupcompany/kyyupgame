@@ -185,7 +185,7 @@ POST /api/tenant/test-dns
   "success": true,
   "data": {
     "domain": "k001.yyup.cc",
-    "ip": "192.168.1.243",
+    "ip": "47.94.82.59",
     "responseTime": 30,
     "status": "resolved"
   }
