@@ -1,0 +1,134 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    // ============================================
+    // 统一认证系统 (unified-tenant-system)
+    // ============================================
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "🔐 统一认证 - 后端调试",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/unified-tenant-system/server",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "*"
+      },
+      "outputCapture": "std",
+      "sourceMaps": true
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "🔐 统一认证 - 前端调试",
+      "url": "http://localhost:5174",
+      "webRoot": "${workspaceFolder}/unified-tenant-system/client/src",
+      "sourceMaps": true,
+      "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile-unified",
+      "preLaunchTask": "启动统一认证前端",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "🔐 统一认证 - 附加到后端",
+      "port": 9229,
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
+    },
+    
+    // ============================================
+    // 租户系统 (k.yyup.com)
+    // ============================================
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "🏢 租户系统 - 后端调试",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/k.yyup.com/server",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development",
+        "DEBUG": "*"
+      },
+      "outputCapture": "std",
+      "sourceMaps": true
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "🏢 租户系统 - 前端调试",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/k.yyup.com/client/src",
+      "sourceMaps": true,
+      "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile-kyy",
+      "preLaunchTask": "启动租户系统前端",
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+    },
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "🏢 租户系统 - 附加到后端",
+      "port": 9230,
+      "restart": true,
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
+    }
+  ],
+  "compounds": [
+    // ============================================
+    // 组合调试配置 - 同时调试前后端
+    // ============================================
+    {
+      "name": "🚀 统一认证 - 全栈调试",
+      "configurations": [
+        "🔐 统一认证 - 后端调试",
+        "🔐 统一认证 - 前端调试"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "unified-tenant-system",
+        "order": 1
+      }
+    },
+    {
+      "name": "🚀 租户系统 - 全栈调试",
+      "configurations": [
+        "🏢 租户系统 - 后端调试",
+        "🏢 租户系统 - 前端调试"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "k.yyup.com",
+        "order": 2
+      }
+    },
+    {
+      "name": "🎯 所有服务 - 完整调试",
+      "configurations": [
+        "🔐 统一认证 - 后端调试",
+        "🔐 统一认证 - 前端调试",
+        "🏢 租户系统 - 后端调试",
+        "🏢 租户系统 - 前端调试"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "all",
+        "order": 3
+      }
+    }
+  ]
+}

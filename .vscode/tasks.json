@@ -1,0 +1,104 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // ============================================
+    // 统一认证系统前端任务
+    // ============================================
+    {
+      "label": "启动统一认证前端",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/unified-tenant-system/client"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": {
+          "regexp": "^ERROR",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE v",
+          "endsPattern": "Local:.*http://localhost:5174"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "unified-tenant-system"
+      }
+    },
+    {
+      "label": "停止统一认证前端",
+      "type": "shell",
+      "command": "pkill -f 'vite.*unified-tenant-system/client'",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    
+    // ============================================
+    // 租户系统前端任务
+    // ============================================
+    {
+      "label": "启动租户系统前端",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/k.yyup.com/client"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": {
+          "regexp": "^ERROR",
+          "file": 1,
+          "location": 2,
+          "message": 3
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE v",
+          "endsPattern": "Local:.*http://localhost:5173"
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "group": "k.yyup.com"
+      }
+    },
+    {
+      "label": "停止租户系统前端",
+      "type": "shell",
+      "command": "pkill -f 'vite.*k.yyup.com/client'",
+      "presentation": {
+        "reveal": "silent"
+      }
+    },
+    
+    // ============================================
+    // 组合任务
+    // ============================================
+    {
+      "label": "启动所有前端服务",
+      "dependsOn": [
+        "启动统一认证前端",
+        "启动租户系统前端"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "停止所有前端服务",
+      "dependsOn": [
+        "停止统一认证前端",
+        "停止租户系统前端"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
