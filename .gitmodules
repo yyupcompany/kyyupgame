@@ -1,0 +1,3 @@
+[submodule "k.yyup.com"]
+	path = k.yyup.com
+	url = https://github.com/yyupcompany/kyyupgame.git
