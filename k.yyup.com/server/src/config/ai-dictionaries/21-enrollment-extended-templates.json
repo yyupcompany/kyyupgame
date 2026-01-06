@@ -1,0 +1,170 @@
+{
+  "name": "招生流程扩展查询模板字典",
+  "description": "招生申请材料、招生申请、招生咨询跟进、招生面试、招生计划、招生配额等招生流程扩展相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 招生申请材料相关查询模板 ===": "注释",
+    "招生申请材料总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_application_materials",
+      "description": "查询招生申请材料总数",
+      "table": "enrollment_application_materials",
+      "response": "招生申请材料总数为{count}个",
+      "tokens": 10
+    },
+    "材料类型统计": {
+      "sql": "SELECT material_type, COUNT(*) as count FROM enrollment_application_materials GROUP BY material_type ORDER BY count DESC",
+      "description": "统计申请材料类型分布",
+      "table": "enrollment_application_materials",
+      "response": "申请材料类型统计完成",
+      "tokens": 20
+    },
+    "材料审核状态": {
+      "sql": "SELECT review_status, COUNT(*) as count FROM enrollment_application_materials GROUP BY review_status ORDER BY count DESC",
+      "description": "统计材料审核状态分布",
+      "table": "enrollment_application_materials",
+      "response": "材料审核状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 招生申请相关查询模板 ===": "注释",
+    "招生申请总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_applications",
+      "description": "查询招生申请总数",
+      "table": "enrollment_applications",
+      "response": "招生申请总数为{count}个",
+      "tokens": 10
+    },
+    "申请状态统计": {
+      "sql": "SELECT application_status, COUNT(*) as count FROM enrollment_applications GROUP BY application_status ORDER BY count DESC",
+      "description": "统计申请状态分布",
+      "table": "enrollment_applications",
+      "response": "申请状态统计完成",
+      "tokens": 20
+    },
+    "本月新申请": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_applications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新申请数量",
+      "table": "enrollment_applications",
+      "response": "本月新申请{count}个",
+      "tokens": 20
+    },
+
+    "// === 招生咨询跟进相关查询模板 ===": "注释",
+    "咨询跟进总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_consultation_followups",
+      "description": "查询咨询跟进总数",
+      "table": "enrollment_consultation_followups",
+      "response": "咨询跟进总数为{count}个",
+      "tokens": 10
+    },
+    "跟进状态统计": {
+      "sql": "SELECT followup_status, COUNT(*) as count FROM enrollment_consultation_followups GROUP BY followup_status ORDER BY count DESC",
+      "description": "统计跟进状态分布",
+      "table": "enrollment_consultation_followups",
+      "response": "跟进状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 招生咨询相关查询模板 ===": "注释",
+    "招生咨询总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_consultations",
+      "description": "查询招生咨询总数",
+      "table": "enrollment_consultations",
+      "response": "招生咨询总数为{count}个",
+      "tokens": 10
+    },
+    "咨询方式统计": {
+      "sql": "SELECT consultation_method, COUNT(*) as count FROM enrollment_consultations GROUP BY consultation_method ORDER BY count DESC",
+      "description": "统计咨询方式分布",
+      "table": "enrollment_consultations",
+      "response": "咨询方式统计完成",
+      "tokens": 20
+    },
+
+    "// === 招生面试相关查询模板 ===": "注释",
+    "招生面试总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_interviews",
+      "description": "查询招生面试总数",
+      "table": "enrollment_interviews",
+      "response": "招生面试总数为{count}个",
+      "tokens": 10
+    },
+    "面试状态统计": {
+      "sql": "SELECT interview_status, COUNT(*) as count FROM enrollment_interviews GROUP BY interview_status ORDER BY count DESC",
+      "description": "统计面试状态分布",
+      "table": "enrollment_interviews",
+      "response": "面试状态统计完成",
+      "tokens": 20
+    },
+    "面试结果统计": {
+      "sql": "SELECT interview_result, COUNT(*) as count FROM enrollment_interviews WHERE interview_result IS NOT NULL GROUP BY interview_result ORDER BY count DESC",
+      "description": "统计面试结果分布",
+      "table": "enrollment_interviews",
+      "response": "面试结果统计完成",
+      "tokens": 20
+    },
+
+    "// === 招生计划相关查询模板 ===": "注释",
+    "招生计划总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plans",
+      "description": "查询招生计划总数",
+      "table": "enrollment_plans",
+      "response": "招生计划总数为{count}个",
+      "tokens": 10
+    },
+    "计划状态统计": {
+      "sql": "SELECT plan_status, COUNT(*) as count FROM enrollment_plans GROUP BY plan_status ORDER BY count DESC",
+      "description": "统计计划状态分布",
+      "table": "enrollment_plans",
+      "response": "计划状态统计完成",
+      "tokens": 20
+    },
+    "活跃招生计划": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plans WHERE plan_status = 'active'",
+      "description": "查询活跃招生计划数量",
+      "table": "enrollment_plans",
+      "response": "活跃招生计划{count}个",
+      "tokens": 12
+    },
+
+    "// === 招生配额相关查询模板 ===": "注释",
+    "招生配额总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_quotas",
+      "description": "查询招生配额总数",
+      "table": "enrollment_quotas",
+      "response": "招生配额总数为{count}个",
+      "tokens": 10
+    },
+    "配额使用统计": {
+      "sql": "SELECT SUM(total_quota) as total_quota, SUM(used_quota) as used_quota, SUM(remaining_quota) as remaining_quota FROM enrollment_quotas",
+      "description": "统计配额使用情况",
+      "table": "enrollment_quotas",
+      "response": "配额使用统计完成",
+      "tokens": 25
+    },
+    "配额利用率分析": {
+      "sql": "SELECT AVG(CASE WHEN total_quota > 0 THEN (used_quota * 100.0 / total_quota) ELSE 0 END) as avg_utilization_rate FROM enrollment_quotas",
+      "description": "分析配额利用率",
+      "table": "enrollment_quotas",
+      "response": "配额利用率分析完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "招生流程扩展概览": {
+      "sql": "SELECT 'enrollment_applications' as category, COUNT(*) as count FROM enrollment_applications UNION ALL SELECT 'enrollment_consultations' as category, COUNT(*) as count FROM enrollment_consultations UNION ALL SELECT 'enrollment_interviews' as category, COUNT(*) as count FROM enrollment_interviews UNION ALL SELECT 'enrollment_plans' as category, COUNT(*) as count FROM enrollment_plans UNION ALL SELECT 'enrollment_quotas' as category, COUNT(*) as count FROM enrollment_quotas UNION ALL SELECT 'enrollment_application_materials' as category, COUNT(*) as count FROM enrollment_application_materials",
+      "description": "招生流程扩展数据总览",
+      "table": "multiple",
+      "response": "招生流程扩展概览查询完成",
+      "tokens": 40
+    },
+    "招生转化漏斗分析": {
+      "sql": "SELECT COUNT(DISTINCT ec.id) as consultations, COUNT(DISTINCT ea.id) as applications, COUNT(DISTINCT ei.id) as interviews FROM enrollment_consultations ec LEFT JOIN enrollment_applications ea ON ec.student_id = ea.student_id LEFT JOIN enrollment_interviews ei ON ea.id = ei.application_id",
+      "description": "分析招生转化漏斗",
+      "table": "enrollment_consultations",
+      "joins": ["enrollment_applications", "enrollment_interviews"],
+      "response": "招生转化漏斗分析完成",
+      "tokens": 35
+    }
+  }
+}

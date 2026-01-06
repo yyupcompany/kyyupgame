@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试覆盖报告 - 演示仪表板</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        .metric { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+        .metric:last-child { border-bottom: none; }
+        .metric-value { font-weight: bold; color: #667eea; }
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .chart-container { position: relative; height: 300px; }
+        .recommendation {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        .action-item {
+            background: #e8f5e8;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-excellent { background-color: #4CAF50; }
+        .status-good { background-color: #8BC34A; }
+        .status-fair { background-color: #FF9800; }
+        .status-poor { background-color: #f44336; }
+        .tabs { display: flex; margin-bottom: 20px; }
+        .tab {
+            padding: 12px 24px;
+            background: #f5f5f5;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active { background: white; color: #667eea; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 幼儿园管理系统</h1>
+            <div class="subtitle">测试覆盖报告 - 演示仪表板</div>
+            <div style="margin-top: 15px; color: #666;">
+                生成时间: 2025/11/26 00:53:24
+            </div>
+        </div>
+
+        <!-- 关键指标 -->
+        <div class="dashboard-grid">
+            <div class="card">
+                <h3>📊 覆盖率总览</h3>
+                <div class="metric">
+                    <span>总体覆盖率</span>
+                    <span class="metric-value">80.1%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 80.1%">80.1%</div>
+                </div>
+                <div class="metric">
+                    <span>已覆盖组件</span>
+                    <span class="metric-value">214</span>
+                </div>
+                <div class="metric">
+                    <span>未覆盖组件</span>
+                    <span class="metric-value">53</span>
+                </div>
+                <div class="metric">
+                    <span>总组件数</span>
+                    <span class="metric-value">267</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ 风险分析</h3>
+                <div class="chart-container">
+                    <canvas id="riskChart"></canvas>
+                </div>
+                <div class="metric">
+                    <span><span class="status-indicator status-poor"></span>高风险</span>
+                    <span class="metric-value">8</span>
+                </div>
+                <div class="metric">
+                    <span><span class="status-indicator status-fair"></span>中风险</span>
+                    <span class="metric-value">23</span>
+                </div>
+                <div class="metric">
+                    <span><span class="status-indicator status-good"></span>低风险</span>
+                    <span class="metric-value">22</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🏆 质量评估</h3>
+                <div class="metric">
+                    <span>质量等级</span>
+                    <span class="metric-value">B+</span>
+                </div>
+                <div class="metric">
+                    <span>质量评分</span>
+                    <span class="metric-value">82/100</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 82%">82分</div>
+                </div>
+                <div class="metric">
+                    <span>健康评分</span>
+                    <span class="metric-value">75/100</span>
+                </div>
+                <div class="metric">
+                    <span>健康状态</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-good"></span>good
+                    </span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📈 分类覆盖</h3>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- 详细分析 -->
+        <div class="card">
+            <h3>📋 详细分析</h3>
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('metrics')">质量指标</button>
+                <button class="tab" onclick="showTab('categories')">分类表现</button>
+                <button class="tab" onclick="showTab('recommendations')">改进建议</button>
+                <button class="tab" onclick="showTab('actions')">行动计划</button>
+            </div>
+
+            <div id="metrics" class="tab-content active">
+                <div class="metric">
+                    <span>可靠性</span>
+                    <span class="metric-value">81%</span>
+                </div>
+                <div class="metric">
+                    <span>可维护性</span>
+                    <span class="metric-value">76%</span>
+                </div>
+                <div class="metric">
+                    <span>可测试性</span>
+                    <span class="metric-value">73%</span>
+                </div>
+                <div class="metric">
+                    <span>安全性</span>
+                    <span class="metric-value">79%</span>
+                </div>
+                <div class="metric">
+                    <span>整体质量</span>
+                    <span class="metric-value">77%</span>
+                </div>
+                <div class="metric">
+                    <span>测试债务</span>
+                    <span class="metric-value">142 (high)</span>
+                </div>
+            </div>
+
+            <div id="categories" class="tab-content">
+                
+                <div class="metric">
+                    <span>system</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-good"></span>
+                        87.5% (B+)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>admin</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-good"></span>
+                        89.3% (B+)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>finance</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-good"></span>
+                        88.9% (B+)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>teacher-center</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-good"></span>
+                        84.4% (B)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>marketing</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-fair"></span>
+                        78.9% (C+)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>activity</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-fair"></span>
+                        72.0% (C)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>ai</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-fair"></span>
+                        68.2% (C)
+                    </span>
+                </div>
+                
+                <div class="metric">
+                    <span>other</span>
+                    <span class="metric-value">
+                        <span class="status-indicator status-fair"></span>
+                        74.6% (C)
+                    </span>
+                </div>
+                
+            </div>
+
+            <div id="recommendations" class="tab-content">
+                
+                <div class="recommendation">
+                    <h4>优先处理高风险组件</h4>
+                    <p>8个高风险组件需要立即测试覆盖，这些是核心业务组件</p>
+                    <small>优先级: critical | 影响: 保护核心业务功能 | 工作量: 高</small>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>提升整体覆盖率</h4>
+                    <p>当前覆盖率80.1%，建议提升到90%的目标</p>
+                    <small>优先级: high | 影响: 降低系统风险 | 工作量: 中等</small>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>改善测试债务</h4>
+                    <p>当前测试债务142，建议逐步偿还</p>
+                    <small>优先级: medium | 影响: 提升代码质量 | 工作量: 长期</small>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>建立持续监控机制</h4>
+                    <p>建立自动化的测试覆盖监控和报告机制</p>
+                    <small>优先级: medium | 影响: 持续改进测试质量 | 工作量: 一次性投入</small>
+                </div>
+                
+            </div>
+
+            <div id="actions" class="tab-content">
+                
+                <div class="action-item">
+                    <h4>立即创建高风险组件测试</h4>
+                    <p><strong>步骤:</strong> 识别高风险组件 → 创建单元测试 → 验证覆盖率提升</p>
+                    <p><strong>预计时间:</strong> 2-3天 | <strong>负责人:</strong> 测试工程师</p>
+                    <p><strong>成功指标:</strong> 高风险组件数量降为0</p>
+                </div>
+                
+                <div class="action-item">
+                    <h4>提升覆盖率到目标值</h4>
+                    <p><strong>步骤:</strong> 分析未覆盖组件 → 制定测试计划 → 逐步实现</p>
+                    <p><strong>预计时间:</strong> 1-2周 | <strong>负责人:</strong> 开发团队</p>
+                    <p><strong>成功指标:</strong> 覆盖率达到90%以上</p>
+                </div>
+                
+                <div class="action-item">
+                    <h4>建立测试文化</h4>
+                    <p><strong>步骤:</strong> 培训团队 → 建立规范 → 持续改进</p>
+                    <p><strong>预计时间:</strong> 长期 | <strong>负责人:</strong> 技术负责人</p>
+                    <p><strong>成功指标:</strong> 测试覆盖率稳定在目标水平</p>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- 未覆盖组件示例 -->
+        <div class="card">
+            <h3>🚨 未覆盖组件示例</h3>
+            
+            <div class="metric">
+                <span><code>UserPermissionDialog</code></span>
+                <span class="metric-value">
+                    <span class="status-indicator status-poor"></span>
+                    system - high
+                </span>
+            </div>
+            
+            <div class="metric">
+                <span><code>TeacherDashboard</code></span>
+                <span class="metric-value">
+                    <span class="status-indicator status-fair"></span>
+                    teacher-center - medium
+                </span>
+            </div>
+            
+            <div class="metric">
+                <span><code>MarketingCampaignForm</code></span>
+                <span class="metric-value">
+                    <span class="status-indicator status-fair"></span>
+                    marketing - medium
+                </span>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 风险分布图表
+            const riskCtx = document.getElementById('riskChart').getContext('2d');
+            new Chart(riskCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['高风险', '中风险', '低风险'],
+                    datasets: [{
+                        data: [8, 23, 22],
+                        backgroundColor: ['rgba(244, 67, 54, 0.8)', 'rgba(255, 152, 0, 0.8)', 'rgba(76, 175, 80, 0.8)']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // 分类覆盖图表
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            new Chart(categoryCtx, {
+                type: 'bar',
+                data: {
+                    labels: ["system","teacher-center","admin","marketing","activity","ai","finance","other"],
+                    datasets: [{
+                        label: '覆盖率 (%)',
+                        data: [88,84,89,79,72,68,89,75],
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        });
+
+        function showTab(tabName) {
+            // 隐藏所有内容
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 移除所有活动标签
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // 显示选中的内容
+            document.getElementById(tabName).classList.add('active');
+
+            // 激活选中的标签
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

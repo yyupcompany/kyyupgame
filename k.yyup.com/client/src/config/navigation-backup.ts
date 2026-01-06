@@ -1,0 +1,1363 @@
+/**
+ * 统一导航配置
+ * 将路由配置和侧边栏菜单集成到一个配置文件中
+ */
+
+export interface NavigationItem {
+  id: string;
+  title: string;
+  route: string;
+  icon: string;
+  children?: NavigationItem[];
+  permission?: string;
+  roles?: string[];
+  hidden?: boolean;
+  meta?: {
+    requiresAuth?: boolean;
+    keepAlive?: boolean;
+    breadcrumb?: string[];
+  };
+}
+
+export interface NavigationSection {
+  id: string;
+  title: string;
+  items: NavigationItem[];
+  roles?: string[];
+  permission?: string;
+}
+
+// 工作台菜单 - 根据实际页面文件更新路由
+export const dashboardSection: NavigationSection = {
+  id: 'dashboard',
+  title: '工作台',
+  items: [
+    {
+      id: 'dashboard-overview',
+      title: '数据概览',
+      route: '/dashboard',
+      icon: 'dashboard',
+      meta: {
+        requiresAuth: true,
+        keepAlive: true,
+        breadcrumb: ['工作台', '数据概览']
+      }
+    },
+    {
+      id: 'campus-overview',
+      title: '校园概览',
+      route: '/dashboard/campus-overview',
+      icon: 'classes',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '校园概览']
+      }
+    },
+    {
+      id: 'schedule',
+      title: '日程管理',
+      route: '/dashboard/schedule',
+      icon: 'activities',
+      children: [
+        {
+          id: 'schedule-calendar',
+          title: '日历视图',
+          route: '/dashboard/schedule/calendar',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '日程管理', '日历视图'] }
+        },
+        {
+          id: 'schedule-todo',
+          title: '待办事项',
+          route: '/dashboard/schedule/todo',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '日程管理', '待办事项'] }
+        },
+        {
+          id: 'schedule-weekly',
+          title: '周视图',
+          route: '/dashboard/schedule-weekly-view',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '日程管理', '周视图'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '日程管理']
+      }
+    },
+    {
+      id: 'notices',
+      title: '重要通知',
+      route: '/dashboard/important-notices',
+      icon: 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '重要通知']
+      }
+    },
+    {
+      id: 'data-statistics',
+      title: '数据统计',
+      route: '/dashboard/data-statistics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '数据统计']
+      }
+    },
+    {
+      id: 'notification-center',
+      title: '通知中心',
+      route: '/dashboard/notification-center',
+      icon: 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '通知中心']
+      }
+    },
+    {
+      id: 'analytics-overview',
+      title: '智能分析',
+      route: '/dashboard/analytics',
+      icon: 'statistics',
+      children: [
+        {
+          id: 'enrollment-trends',
+          title: '招生趋势分析',
+          route: '/dashboard/analytics/enrollment-trends',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '智能分析', '招生趋势分析'] }
+        },
+        {
+          id: 'financial-analysis',
+          title: '财务分析',
+          route: '/dashboard/analytics/financial-analysis',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '智能分析', '财务分析'] }
+        },
+        {
+          id: 'student-performance',
+          title: '学生表现分析',
+          route: '/dashboard/analytics/student-performance',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '智能分析', '学生表现分析'] }
+        },
+        {
+          id: 'teacher-effectiveness',
+          title: '教师效果分析',
+          route: '/dashboard/analytics/teacher-effectiveness',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '智能分析', '教师效果分析'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '智能分析']
+      }
+    },
+    {
+      id: 'performance-overview',
+      title: '绩效管理',
+      route: '/dashboard/performance',
+      icon: 'statistics',
+      children: [
+        {
+          id: 'kpi-dashboard',
+          title: 'KPI仪表板',
+          route: '/dashboard/performance/kpi-dashboard',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '绩效管理', 'KPI仪表板'] }
+        },
+        {
+          id: 'performance-overview-detail',
+          title: '绩效概览',
+          route: '/dashboard/performance/performance-overview',
+          icon: '',
+          meta: { breadcrumb: ['工作台', '绩效管理', '绩效概览'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['工作台', '绩效管理']
+      }
+    }
+  ]
+};
+
+// 招生管理菜单 - 根据实际页面文件更新路由
+export const enrollmentSection: NavigationSection = {
+  id: 'enrollment',
+  title: '招生管理',
+  items: [
+    {
+      id: 'enrollment-plan',
+      title: '招生计划',
+      route: '/enrollment-plan',
+      icon: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z',
+      children: [
+        {
+          id: 'enrollment-plan-list',
+          title: '计划列表',
+          route: '/enrollment-plan',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '计划列表'] }
+        },
+        {
+          id: 'enrollment-plan-create',
+          title: '创建计划',
+          route: '/enrollment-plan/create',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '创建计划'] }
+        },
+        {
+          id: 'enrollment-plan-statistics',
+          title: '计划统计',
+          route: '/enrollment-plan/statistics',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '计划统计'] }
+        },
+        {
+          id: 'enrollment-plan-quota',
+          title: '名额管理',
+          route: '/enrollment-plan/quota-manage',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '名额管理'] }
+        },
+        {
+          id: 'enrollment-smart-planning',
+          title: '智能规划',
+          route: '/enrollment-plan/smart-planning/smart-planning',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '智能规划'] }
+        },
+        {
+          id: 'enrollment-analytics',
+          title: '招生分析',
+          route: '/enrollment-plan/analytics/enrollment-analytics',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '招生分析'] }
+        },
+        {
+          id: 'enrollment-forecast',
+          title: '招生预测',
+          route: '/enrollment-plan/forecast/enrollment-forecast',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '招生预测'] }
+        },
+        {
+          id: 'enrollment-strategy',
+          title: '招生策略',
+          route: '/enrollment-plan/strategy/enrollment-strategy',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '招生策略'] }
+        },
+        {
+          id: 'capacity-optimization',
+          title: '容量优化',
+          route: '/enrollment-plan/optimization/capacity-optimization',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '容量优化'] }
+        },
+        {
+          id: 'trend-analysis',
+          title: '趋势分析',
+          route: '/enrollment-plan/trends/trend-analysis',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '趋势分析'] }
+        },
+        {
+          id: 'enrollment-simulation',
+          title: '招生仿真',
+          route: '/enrollment-plan/simulation/enrollment-simulation',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '招生仿真'] }
+        },
+        {
+          id: 'plan-management',
+          title: '计划管理',
+          route: '/enrollment-plan/management/plan-management',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '计划管理'] }
+        },
+        {
+          id: 'plan-evaluation',
+          title: '计划评估',
+          route: '/enrollment-plan/evaluation/plan-evaluation',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '招生计划', '计划评估'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['招生管理', '招生计划']
+      }
+    },
+    {
+      id: 'enrollment-activity',
+      title: '招生活动',
+      route: '/enrollment',
+      icon: 'M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zM4 19h16v2H4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['招生管理', '招生活动']
+      }
+    },
+    {
+      id: 'application',
+      title: '入学申请',
+      route: '/application',
+      icon: 'M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 7h-2V7h2v2zm0 4h-2v-2h2v2z',
+      children: [
+        {
+          id: 'application-list',
+          title: '申请列表',
+          route: '/application',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '入学申请', '申请列表'] }
+        },
+        {
+          id: 'application-detail',
+          title: '申请详情',
+          route: '/application/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['招生管理', '入学申请', '申请详情'] }
+        },
+        {
+          id: 'application-review',
+          title: '申请审核',
+          route: '/application/review',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '入学申请', '申请审核'] }
+        },
+        {
+          id: 'application-interview',
+          title: '面试安排',
+          route: '/application/interview',
+          icon: '',
+          meta: { breadcrumb: ['招生管理', '入学申请', '面试安排'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['招生管理', '入学申请']
+      }
+    }
+  ],
+  permission: 'ENROLLMENT_VIEW'
+};
+
+// 客户管理菜单 - 根据实际页面文件更新路由
+export const customerSection: NavigationSection = {
+  id: 'customer',
+  title: '客户管理',
+  items: [
+    {
+      id: 'customer-list',
+      title: '客户列表',
+      route: '/customer',
+      icon: 'M16 7c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4zM12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z',
+      children: [
+        {
+          id: 'customer-detail',
+          title: '客户详情',
+          route: '/customer/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['客户管理', '客户列表', '客户详情'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['客户管理', '客户列表']
+      }
+    },
+    {
+      id: 'customer-analytics',
+      title: '客户分析',
+      route: '/customer/analytics/customer-analytics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['客户管理', '客户分析']
+      }
+    },
+    {
+      id: 'customer-pool',
+      title: '客户池',
+      route: '/principal/customer-pool',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      roles: ['principal', 'admin'],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['客户管理', '客户池']
+      }
+    }
+  ],
+  permission: 'CUSTOMER_VIEW'
+};
+
+// 教师管理菜单 - 根据实际页面文件更新路由
+export const teacherSection: NavigationSection = {
+  id: 'teacher',
+  title: '教师管理',
+  items: [
+    {
+      id: 'teacher-list',
+      title: '教师列表',
+      route: '/teacher',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      children: [
+        {
+          id: 'teacher-detail',
+          title: '教师详情',
+          route: '/teacher/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['教师管理', '教师列表', '教师详情'] }
+        },
+        {
+          id: 'teacher-edit',
+          title: '编辑教师',
+          route: '/teacher/edit/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['教师管理', '教师列表', '编辑教师'] }
+        },
+        {
+          id: 'teacher-performance',
+          title: '教师绩效',
+          route: '/teacher/performance/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['教师管理', '教师列表', '教师绩效'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['教师管理', '教师列表']
+      }
+    },
+    {
+      id: 'teacher-development',
+      title: '教师发展',
+      route: '/teacher/development/teacher-development',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['教师管理', '教师发展']
+      }
+    },
+    {
+      id: 'teacher-evaluation',
+      title: '教师评估',
+      route: '/teacher/evaluation/teacher-evaluation',
+      icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['教师管理', '教师评估']
+      }
+    }
+  ],
+  permission: 'TEACHER_VIEW'
+};
+
+// 学生管理菜单 - 根据实际页面文件更新路由
+export const studentSection: NavigationSection = {
+  id: 'student',
+  title: '学生管理',
+  items: [
+    {
+      id: 'student-list',
+      title: '学生列表',
+      route: '/student',
+      icon: 'user-group',
+      children: [
+        {
+          id: 'student-detail',
+          title: '学生详情',
+          route: '/student/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['学生管理', '学生列表', '学生详情'] }
+        },
+        {
+          id: 'student-analytics',
+          title: '学生分析',
+          route: '/student/analytics/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['学生管理', '学生列表', '学生分析'] }
+        },
+        {
+          id: 'student-growth',
+          title: '成长记录',
+          route: '/student/:id/growth',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['学生管理', '学生列表', '成长记录'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['学生管理', '学生列表']
+      }
+    },
+    {
+      id: 'student-assessment',
+      title: '学生评估',
+      route: '/student/assessment/student-assessment',
+      icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['学生管理', '学生评估']
+      }
+    }
+  ],
+  permission: 'STUDENT_VIEW'
+};
+
+// 班级管理菜单 - 根据实际页面文件更新路由
+export const classSection: NavigationSection = {
+  id: 'class',
+  title: '班级管理',
+  items: [
+    {
+      id: 'class-list',
+      title: '班级列表',
+      route: '/class',
+      icon: 'classes',
+      children: [
+        {
+          id: 'class-detail',
+          title: '班级详情',
+          route: '/class/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['班级管理', '班级列表', '班级详情'] }
+        },
+        {
+          id: 'class-students',
+          title: '学生管理',
+          route: '/class/students/id',
+          icon: '',
+          meta: { breadcrumb: ['班级管理', '班级列表', '学生管理'] }
+        },
+        {
+          id: 'class-teachers',
+          title: '教师分配',
+          route: '/class/teachers/id',
+          icon: '',
+          meta: { breadcrumb: ['班级管理', '班级列表', '教师分配'] }
+        },
+        {
+          id: 'class-smart-management',
+          title: '智能管理',
+          route: '/class/smart-management/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['班级管理', '班级列表', '智能管理'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['班级管理', '班级列表']
+      }
+    },
+    {
+      id: 'class-analytics',
+      title: '班级分析',
+      route: '/class/analytics/class-analytics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['班级管理', '班级分析']
+      }
+    },
+    {
+      id: 'class-optimization',
+      title: '班级优化',
+      route: '/class/optimization/class-optimization',
+      icon: 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['班级管理', '班级优化']
+      }
+    }
+  ],
+  permission: 'CLASS_VIEW'
+};
+
+// 家长管理菜单 - 根据实际页面文件更新路由
+export const parentSection: NavigationSection = {
+  id: 'parent',
+  title: '家长管理',
+  items: [
+    {
+      id: 'parent-list',
+      title: '家长列表',
+      route: '/parent',
+      icon: 'user-group',
+      children: [
+        {
+          id: 'parent-detail',
+          title: '家长详情',
+          route: '/parent/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['家长管理', '家长列表', '家长详情'] }
+        },
+        {
+          id: 'parent-edit',
+          title: '编辑家长',
+          route: '/parent/edit/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['家长管理', '家长列表', '编辑家长'] }
+        },
+        {
+          id: 'parent-children',
+          title: '儿童列表',
+          route: '/parent/children',
+          icon: '',
+          meta: { breadcrumb: ['家长管理', '儿童列表'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '家长列表']
+      }
+    },
+    {
+      id: 'parent-follow-up',
+      title: '跟进管理',
+      route: '/parent/FollowUp',
+      icon: 'M2.01 21L23 12 2.01 3 2 10l15 2-15 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '跟进管理']
+      }
+    },
+    {
+      id: 'parent-communication',
+      title: '沟通中心',
+      route: '/parent/communication/smart-hub',
+      icon: 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '沟通中心']
+      }
+    },
+    {
+      id: 'child-growth',
+      title: '成长记录',
+      route: '/parent/ChildGrowth',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '成长记录']
+      }
+    },
+    {
+      id: 'assign-activity',
+      title: '分配活动',
+      route: '/parent/AssignActivity',
+      icon: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '分配活动']
+      }
+    },
+    {
+      id: 'parent-feedback',
+      title: '家长反馈',
+      route: '/parent/feedback/parent-feedback',
+      icon: 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['家长管理', '家长反馈']
+      }
+    }
+  ],
+  permission: 'PARENT_VIEW'
+};
+
+// 活动管理菜单 - 根据实际页面文件更新路由
+export const activitySection: NavigationSection = {
+  id: 'activity',
+  title: '活动管理',
+  items: [
+    {
+      id: 'activity-list',
+      title: '活动列表',
+      route: '/activity',
+      icon: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4z',
+      children: [
+        {
+          id: 'activity-detail',
+          title: '活动详情',
+          route: '/activity/detail/:id',
+          icon: '',
+          hidden: true,
+          meta: { breadcrumb: ['活动管理', '活动列表', '活动详情'] }
+        },
+        {
+          id: 'activity-create',
+          title: '创建活动',
+          route: '/activity/create',
+          icon: '',
+          meta: { breadcrumb: ['活动管理', '活动列表', '创建活动'] }
+        },
+        {
+          id: 'activity-edit',
+          title: '编辑活动',
+          route: '/activity/activity-edit',
+          icon: '',
+          meta: { breadcrumb: ['活动管理', '活动列表', '编辑活动'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', '活动列表']
+      }
+    },
+    {
+      id: 'activity-planner',
+      title: 'AI活动规划器',
+      route: '/activity/plan/activity-planner',
+      icon: 'ai-center',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', 'AI活动规划器']
+      }
+    },
+    {
+      id: 'activity-analytics',
+      title: '活动分析',
+      route: '/activity/analytics/activity-analytics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', '活动分析']
+      }
+    },
+    {
+      id: 'activity-optimizer',
+      title: '活动优化器',
+      route: '/activity/optimization/activity-optimizer',
+      icon: 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', '活动优化器']
+      }
+    },
+    {
+      id: 'registration-dashboard',
+      title: '报名仪表板',
+      route: '/activity/registration/registration-dashboard',
+      icon: 'dashboard',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', '报名仪表板']
+      }
+    },
+    {
+      id: 'activity-evaluation',
+      title: '活动评估',
+      route: '/activity/evaluation/activity-evaluation',
+      icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['活动管理', '活动评估']
+      }
+    }
+  ],
+  permission: 'ACTIVITY_VIEW'
+};
+
+// AI功能菜单 - 根据实际页面文件更新路由
+export const aiSection: NavigationSection = {
+  id: 'ai',
+  title: 'AI功能',
+  items: [
+    {
+      id: 'ai-assistant',
+      title: 'AI助手',
+      route: '/ai',
+      icon: 'ai-center',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', 'AI助手']
+      }
+    },
+    {
+      id: 'ai-chat-interface',
+      title: 'AI对话界面',
+      route: '/ai/chat-interface',
+      icon: 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', 'AI对话界面']
+      }
+    },
+    {
+      id: 'ai-model-management',
+      title: 'AI模型管理',
+      route: '/ai/ModelManagementPage',
+      icon: 'M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', 'AI模型管理']
+      }
+    },
+    {
+      id: 'expert-consultation',
+      title: '专家咨询',
+      route: '/ai/ExpertConsultationPage',
+      icon: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', '专家咨询']
+      }
+    },
+    {
+      id: 'memory-management',
+      title: '记忆管理',
+      route: '/ai/MemoryManagementPage',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', '记忆管理']
+      }
+    },
+    {
+      id: 'ai-analytics',
+      title: 'AI数据分析',
+      route: '/ai/conversation/nlp-analytics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', 'AI数据分析']
+      }
+    },
+    {
+      id: 'ai-prediction',
+      title: '预测引擎',
+      route: '/ai/deep-learning/prediction-engine',
+      icon: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', '预测引擎']
+      }
+    },
+    {
+      id: 'ai-maintenance',
+      title: '维护优化',
+      route: '/ai/predictive/maintenance-optimizer',
+      icon: 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', '维护优化']
+      }
+    },
+    {
+      id: 'ai-visualization',
+      title: '3D可视化',
+      route: '/ai/visualization/3d-analytics',
+      icon: 'M12 7.77L18.39 18H5.61L12 7.77M12 4L2 20h20L12 4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['AI功能', '3D可视化']
+      }
+    }
+  ],
+  permission: 'AI_ACCESS'
+};
+
+// 系统管理菜单 - 根据实际页面文件更新路由
+export const systemSection: NavigationSection = {
+  id: 'system',
+  title: '系统管理',
+  items: [
+    {
+      id: 'system-users',
+      title: '用户管理',
+      route: '/system/users',
+      icon: 'user-group',
+      children: [
+        {
+          id: 'user-management-enhanced',
+          title: '用户管理增强版',
+          route: '/system/users/user-management',
+          icon: '',
+          meta: { breadcrumb: ['系统管理', '用户管理', '用户管理增强版'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '用户管理']
+      }
+    },
+    {
+      id: 'system-roles',
+      title: '角色管理',
+      route: '/system/roles',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      children: [
+        {
+          id: 'role-management-enhanced',
+          title: '角色管理增强版',
+          route: '/system/roles/role-management',
+          icon: '',
+          meta: { breadcrumb: ['系统管理', '角色管理', '角色管理增强版'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '角色管理']
+      }
+    },
+    {
+      id: 'system-permissions',
+      title: '权限管理',
+      route: '/system/permissions',
+      icon: 'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '权限管理']
+      }
+    },
+    {
+      id: 'system-logs',
+      title: '系统日志',
+      route: '/system/logs/system-logs',
+      icon: 'M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 7h-2V7h2v2zm0 4h-2v-2h2v2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '系统日志']
+      }
+    },
+    {
+      id: 'system-backup',
+      title: '备份管理',
+      route: '/system/backup/backup-management',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '备份管理']
+      }
+    },
+    {
+      id: 'system-monitoring',
+      title: '系统监控',
+      route: '/system/monitoring/system-monitoring',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '系统监控']
+      }
+    },
+    {
+      id: 'system-security',
+      title: '安全设置',
+      route: '/system/security/security-settings',
+      icon: 'M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '安全设置']
+      }
+    },
+    {
+      id: 'system-integration',
+      title: '集成中心',
+      route: '/system/integration/integration-hub',
+      icon: 'M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '集成中心']
+      }
+    },
+    {
+      id: 'system-notifications',
+      title: '通知设置',
+      route: '/system/notifications/notification-settings',
+      icon: 'M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '通知设置']
+      }
+    },
+    {
+      id: 'system-maintenance',
+      title: '维护调度器',
+      route: '/system/maintenance/maintenance-scheduler',
+      icon: 'M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '维护调度器']
+      }
+    },
+    {
+      id: 'system-database',
+      title: '数据库管理',
+      route: '/system/database/database-manager',
+      icon: 'M12 3C6.48 3 2 6.48 2 11c0 4.52 4.48 8 10 8s10-3.48 10-8c0-4.52-4.48-8-10-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '数据库管理']
+      }
+    },
+    {
+      id: 'system-api',
+      title: 'API管理',
+      route: '/system/api/api-management',
+      icon: 'M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', 'API管理']
+      }
+    },
+    {
+      id: 'system-settings',
+      title: '系统设置',
+      route: '/system/settings',
+      icon: 'M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['系统管理', '系统设置']
+      }
+    }
+  ],
+  permission: 'SYSTEM_MANAGE',
+  roles: ['admin', 'super_admin']
+};
+
+// 园长功能菜单 - 根据实际页面文件更新路由
+export const principalSection: NavigationSection = {
+  id: 'principal',
+  title: '园长工作台',
+  items: [
+    {
+      id: 'principal-dashboard',
+      title: '园长仪表盘',
+      route: '/principal/dashboard',
+      icon: 'dashboard',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '园长仪表盘']
+      }
+    },
+    {
+      id: 'principal-activities',
+      title: '活动管理',
+      route: '/principal/activities',
+      icon: 'M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '活动管理']
+      }
+    },
+    {
+      id: 'principal-performance',
+      title: '绩效管理',
+      route: '/principal/performance',
+      icon: 'statistics',
+      children: [
+        {
+          id: 'performance-rules',
+          title: '绩效规则',
+          route: '/principal/PerformanceRules',
+          icon: '',
+          meta: { breadcrumb: ['园长工作台', '绩效管理', '绩效规则'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '绩效管理']
+      }
+    },
+    {
+      id: 'customer-pool',
+      title: '客户池',
+      route: '/principal/customer-pool',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '客户池']
+      }
+    },
+    {
+      id: 'marketing-analysis',
+      title: '营销分析',
+      route: '/principal/marketing-analysis',
+      icon: 'M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '营销分析']
+      }
+    },
+    {
+      id: 'poster-management',
+      title: '海报管理',
+      route: '/principal/PosterTemplates',
+      icon: 'M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z',
+      children: [
+        {
+          id: 'poster-editor',
+          title: '海报编辑器',
+          route: '/principal/PosterEditor',
+          icon: '',
+          meta: { breadcrumb: ['园长工作台', '海报管理', '海报编辑器'] }
+        },
+        {
+          id: 'poster-generator',
+          title: '海报生成器',
+          route: '/principal/PosterGenerator',
+          icon: '',
+          meta: { breadcrumb: ['园长工作台', '海报管理', '海报生成器'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '海报管理']
+      }
+    },
+    {
+      id: 'decision-support',
+      title: '决策支持',
+      route: '/principal/decision-support/intelligent-dashboard',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['园长工作台', '决策支持']
+      }
+    }
+  ],
+  permission: 'PRINCIPAL_VIEW',
+  roles: ['principal', 'admin']
+};
+
+// 广告管理菜单 - 根据实际页面文件更新路由
+export const advertisementSection: NavigationSection = {
+  id: 'advertisement',
+  title: '广告管理',
+  items: [
+    {
+      id: 'advertisement-list',
+      title: '广告列表',
+      route: '/advertisement',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['广告管理', '广告列表']
+      }
+    }
+  ],
+  permission: 'ADVERTISEMENT_VIEW'
+};
+
+// 统计分析菜单 - 根据实际页面文件更新路由
+export const statisticsSection: NavigationSection = {
+  id: 'statistics',
+  title: '统计分析',
+  items: [
+    {
+      id: 'statistics-overview',
+      title: '统计概览',
+      route: '/statistics',
+      icon: 'statistics',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['统计分析', '统计概览']
+      }
+    },
+    {
+      id: 'report-builder',
+      title: '报表构建器',
+      route: '/analytics/ReportBuilder',
+      icon: 'M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 7h-2V7h2v2zm0 4h-2v-2h2v2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['统计分析', '报表构建器']
+      }
+    }
+  ],
+  permission: 'STATISTICS_VIEW'
+};
+
+// 沟通中心菜单 - 根据实际页面文件更新路由
+export const chatSection: NavigationSection = {
+  id: 'chat',
+  title: '沟通中心',
+  items: [
+    {
+      id: 'chat-center',
+      title: '消息中心',
+      route: '/chat',
+      icon: 'M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['沟通中心', '消息中心']
+      }
+    }
+  ],
+  permission: 'CHAT_VIEW'
+};
+
+// 营销管理菜单 - 根据实际页面文件更新路由
+export const marketingSection: NavigationSection = {
+  id: 'marketing',
+  title: '营销管理',
+  items: [
+    {
+      id: 'marketing-campaigns',
+      title: '营销活动',
+      route: '/marketing',
+      icon: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      children: [
+        {
+          id: 'coupon-management',
+          title: '优惠券管理',
+          route: '/marketing/coupons',
+          icon: '',
+          meta: { breadcrumb: ['营销管理', '营销活动', '优惠券管理'] }
+        },
+        {
+          id: 'consultation-management',
+          title: '咨询管理',
+          route: '/marketing/consultations',
+          icon: '',
+          meta: { breadcrumb: ['营销管理', '营销活动', '咨询管理'] }
+        }
+      ],
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['营销管理', '营销活动']
+      }
+    },
+    {
+      id: 'intelligent-marketing-engine',
+      title: '智能营销引擎',
+      route: '/marketing/intelligent-engine/marketing-engine',
+      icon: 'ai-center',
+      meta: {
+        requiresAuth: true,
+        breadcrumb: ['营销管理', '智能营销引擎']
+      }
+    }
+  ],
+  permission: 'MARKETING_VIEW'
+};
+
+// 完整的导航配置
+export const navigationConfig: NavigationSection[] = [
+  dashboardSection,
+  enrollmentSection,
+  customerSection,
+  teacherSection,
+  studentSection,
+  classSection,
+  parentSection,
+  activitySection,
+  aiSection,
+  principalSection,
+  marketingSection,
+  chatSection,
+  advertisementSection,
+  statisticsSection,
+  systemSection
+];
+
+// 根据用户角色和权限过滤导航菜单的工具函数
+export function filterNavigationByRole(
+  sections: NavigationSection[], 
+  userRole: string, 
+  userPermissions: string[] = []
+): NavigationSection[] {
+  // 检查是否有通配符权限或是admin角色
+  const hasFullAccess = userPermissions.includes('*') || userRole === 'admin' || userRole === 'ADMIN';
+  
+  return sections.filter(section => {
+    // 如果有全部权限，跳过权限检查
+    if (!hasFullAccess) {
+      // 检查章节权限
+      if (section.permission && !userPermissions.includes(section.permission)) {
+        return false;
+      }
+      
+      // 检查章节角色
+      if (section.roles && !section.roles.includes(userRole)) {
+        return false;
+      }
+    }
+    
+    // 过滤章节内的菜单项
+    section.items = section.items.filter(item => {
+      if (!hasFullAccess) {
+        if (item.permission && !userPermissions.includes(item.permission)) {
+          return false;
+        }
+        
+        if (item.roles && !item.roles.includes(userRole)) {
+          return false;
+        }
+      }
+      
+      return true;
+    });
+    
+    return section.items.length > 0;
+  });
+}
+
+// 根据路径查找菜单项的工具函数
+export function findMenuItemByPath(path: string, sections: NavigationSection[]): NavigationItem | null {
+  for (const section of sections) {
+    for (const item of section.items) {
+      // 检查主菜单项
+      if (isRouteMatch(path, item.route)) {
+        return item;
+      }
+      
+      // 检查子菜单项
+      if (item.children) {
+        for (const child of item.children) {
+          if (isRouteMatch(path, child.route)) {
+            return child;
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
+// 智能路由匹配函数
+function isRouteMatch(currentPath: string, routePattern: string): boolean {
+  // 完全匹配
+  if (currentPath === routePattern) {
+    return true;
+  }
+  
+  // 处理动态参数路由 (如 /student/:id)
+  const routeRegex = routePattern.replace(/:[^/]+/g, '[^/]+');
+  const regex = new RegExp(`^${routeRegex}$`);
+  
+  if (regex.test(currentPath)) {
+    return true;
+  }
+  
+  // 处理嵌套路由 (如 /dashboard 匹配 /dashboard/schedule)
+  if (routePattern !== '/' && currentPath.startsWith(routePattern + '/')) {
+    return true;
+  }
+  
+  return false;
+}
+
+// 获取面包屑导航
+export function getBreadcrumb(path: string, sections: NavigationSection[]): string[] {
+  const menuItem = findMenuItemByPath(path, sections);
+  return menuItem?.meta?.breadcrumb || [];
+}

@@ -1,0 +1,137 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 1080,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      },
+      "tag": "socks-inbound"
+    },
+    {
+      "port": 8080,
+      "protocol": "http",
+      "settings": {},
+      "tag": "http-inbound"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "45.95.212.92",
+            "port": 443,
+            "users": [
+              {
+                "id": "c65abf0e-3fef-46d1-8c4f-b84db14c84b9",
+                "alterId": 0,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "http",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "serverName": "reinvent.awsevents.com"
+        },
+        "httpSettings": {
+          "host": ["reinvent.awsevents.com"],
+          "path": "/content/dam/reinvent/2024/media/ripples/fav-icon.svg",
+          "method": "GET"
+        }
+      },
+      "tag": "japan-node1"
+    },
+    {
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "46.3.45.37",
+            "port": 443,
+            "users": [
+              {
+                "id": "c65abf0e-3fef-46d1-8c4f-b84db14c84b9",
+                "alterId": 0,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "http",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "serverName": "assets.adobedtm.com"
+        },
+        "httpSettings": {
+          "host": ["assets.adobedtm.com"],
+          "path": "/c58e7dfcc1ae/92b65f6de1d8/launch-96dadb4bf747.min.js",
+          "method": "GET"
+        }
+      },
+      "tag": "japan-node2"
+    },
+    {
+      "protocol": "balancer",
+      "settings": {
+        "selector": ["japan-node1", "japan-node2"],
+        "strategy": {
+          "type": "leastPing"
+        }
+      },
+      "tag": "japan-balancer"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "domain": ["geosite:private"]
+      },
+      {
+        "type": "field",
+        "outboundTag": "direct",
+        "ip": ["geoip:private"]
+      },
+      {
+        "type": "field",
+        "outboundTag": "japan-balancer",
+        "network": "tcp,udp"
+      }
+    ]
+  },
+  "observatory": {
+    "subjectSelector": ["japan-node1", "japan-node2"],
+    "probeUrl": "https://www.google.com/generate_204",
+    "probeInterval": "10s",
+    "enableConcurrency": true
+  },
+  "burstObservatory": {
+    "subjectSelector": ["japan-node1", "japan-node2"],
+    "pingConfig": {
+      "destination": "https://www.google.com/generate_204",
+      "interval": "10s",
+      "sampling": 3,
+      "timeout": "3s"
+    }
+  }
+} 

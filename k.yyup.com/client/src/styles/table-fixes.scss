@@ -1,0 +1,264 @@
+/*
+ * 表格组件统一样式修复
+ * 解决中心页面列表组件的一致性问题
+ */
+
+// 统一表格操作列样式
+.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+
+  // 按钮组样式统一
+  .el-button-group {
+    .el-button {
+      margin: 0;
+      border-radius: 0;
+
+      &:first-child {
+        border-top-left-radius: var(--el-border-radius-base);
+        border-bottom-left-radius: var(--el-border-radius-base);
+      }
+
+      &:last-child {
+        border-top-right-radius: var(--el-border-radius-base);
+        border-bottom-right-radius: var(--el-border-radius-base);
+      }
+
+      // 图标间距统一
+      .el-icon {
+        margin-right: 4px;
+        font-size: var(--text-sm);
+      }
+
+      // 小尺寸按钮优化
+      &.el-button--small {
+        padding: 5px 8px;
+        font-size: var(--text-xs);
+
+        .el-icon {
+          font-size: var(--text-xs);
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+
+  // 分散按钮样式
+  .el-button:not(.el-button-group .el-button) {
+    margin: 0 4px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+// 统一状态标签样式
+.el-table {
+  .el-tag {
+    &.el-tag--small {
+      height: 20px;
+      line-height: 18px;
+      font-size: 11px;
+      padding: 0 6px;
+      border-radius: 2px;
+    }
+
+    // 状态标签颜色优化
+    &.el-tag--success {
+      background-color: #f0f9ff;
+      border-color: #67c23a;
+      color: #529b2e;
+    }
+
+    &.el-tag--warning {
+      background-color: #fdf6ec;
+      border-color: #e6a23c;
+      color: #b88230;
+    }
+
+    &.el-tag--danger {
+      background-color: #fef0f0;
+      border-color: #f56c6c;
+      color: #c45656;
+    }
+
+    &.el-tag--info {
+      background-color: #f4f4f5;
+      border-color: #909399;
+      color: #73767a;
+    }
+  }
+}
+
+// 统一列宽度标准
+.unified-table-columns {
+  // ID列
+  .column-id {
+    width: 80px;
+  }
+
+  // 序号列
+  .column-index {
+    width: 80px;
+  }
+
+  // 状态列
+  .column-status {
+    width: 100px;
+  }
+
+  // 时间列
+  .column-datetime {
+    width: 180px;
+  }
+
+  .column-date {
+    width: 120px;
+  }
+
+  // 金额列
+  .column-money {
+    width: 120px;
+  }
+
+  // 联系方式列
+  .column-phone {
+    width: 140px;
+  }
+
+  .column-email {
+    width: 180px;
+  }
+
+  // 操作列标准宽度
+  .column-actions {
+    &.single-action {
+      width: 100px;
+    }
+
+    &.double-actions {
+      width: 160px;
+    }
+
+    &.triple-actions {
+      width: 220px;
+    }
+
+    &.multiple-actions {
+      width: 280px;
+    }
+
+    // 操作列居中对齐
+    text-align: center;
+
+    .cell {
+      padding: 0 8px;
+    }
+  }
+}
+
+// 响应式优化
+@media (max-width: var(--breakpoint-md)) {
+  .table-actions {
+    .el-button-group {
+      .el-button {
+        padding: 3px 6px;
+        font-size: 11px;
+
+        .el-icon {
+          font-size: 11px;
+          margin-right: 1px;
+        }
+      }
+    }
+  }
+
+  .unified-table-columns {
+    .column-actions {
+      &.triple-actions {
+        width: 200px;
+      }
+
+      &.multiple-actions {
+        width: 250px;
+      }
+    }
+  }
+}
+
+// 表格加载和空状态优化
+.el-table {
+  .el-loading-mask {
+    border-radius: var(--el-border-radius-base);
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .el-table__empty-block {
+    .el-table__empty-text {
+      color: var(--el-text-color-placeholder);
+      font-size: var(--text-sm);
+    }
+  }
+}
+
+// 表格边框和条纹优化
+.el-table--border {
+  border: 1px solid var(--el-border-color-light);
+  border-radius: var(--el-border-radius-base);
+  overflow: hidden;
+
+  &.el-table--striped {
+    .el-table__body {
+      tr.el-table__row--striped {
+        td {
+          background-color: var(--el-fill-color-extra-light);
+        }
+      }
+    }
+  }
+}
+
+// 表格头部样式统一
+.el-table__header-wrapper {
+  .el-table__header {
+    th {
+      background-color: var(--el-fill-color-light);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+      border-bottom: 2px solid var(--el-border-color);
+
+      .cell {
+        padding: var(--spacing-md);
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+// 表格体样式优化
+.el-table__body-wrapper {
+  .el-table__body {
+    tr {
+      &:hover {
+        td {
+          background-color: var(--el-fill-color-extra-light);
+        }
+      }
+
+      td {
+        .cell {
+          padding: var(--spacing-md);
+          line-height: 1.4;
+          word-break: break-word;
+        }
+      }
+    }
+  }
+}

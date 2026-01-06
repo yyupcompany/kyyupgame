@@ -1,0 +1,17 @@
+# 简单打包整个项目的Dockerfile (使用国内镜像源)
+FROM registry.cn-hangzhou.aliyuncs.com/library/ubuntu:20.04
+
+# 设置工作目录
+WORKDIR /project
+
+# 复制整个项目到容器中
+COPY . /project/
+
+# 设置环境变量
+ENV PROJECT_PATH=/project
+
+# 暴露一些常用端口（可选）
+EXPOSE 3000 5173 80
+
+# 保持容器运行
+CMD ["tail", "-f", "/dev/null"]

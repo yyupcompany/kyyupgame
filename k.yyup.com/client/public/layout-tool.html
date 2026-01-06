@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>布局调整工具</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 24px;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+
+        .control-section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e4e7ed;
+        }
+
+        .control-section h3 {
+            margin-bottom: 16px;
+            color: #303133;
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .control-item label {
+            min-width: 200px;
+            font-size: 14px;
+            color: #606266;
+        }
+
+        .slider-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider {
+            flex: 1;
+        }
+
+        .value-display {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 600;
+            color: #409eff;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .preview-section {
+            background: #f2f3f5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .preview-dashboard {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .mock-welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mock-welcome-content {
+            flex: 1;
+        }
+
+        .mock-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .mock-description {
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .mock-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .mock-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .mock-stat-card {
+            background: white;
+            border: 1px solid #e4e7ed;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #303133;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .css-output {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            color: #495057;
+            white-space: pre-wrap;
+            margin-top: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>🛠️ Dashboard 外边距调整工具</h1>
+        <p style="margin-bottom: 24px; color: #606266;">实时调整Dashboard欢迎区域的外边距（margin），找到最合适的布局配置</p>
+
+        <div class="control-section">
+            <h3>📏 欢迎区域外边距控制</h3>
+            <div class="control-item">
+                <label>上边距 (margin-top):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginTop" min="0" max="60" step="4" value="24">
+                    <span class="value-display" id="marginTopValue">24px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>下边距 (margin-bottom):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginBottom" min="0" max="60" step="4" value="32">
+                    <span class="value-display" id="marginBottomValue">32px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>左边距 (margin-left):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginLeft" min="0" max="80" step="4" value="24">
+                    <span class="value-display" id="marginLeftValue">24px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>右边距 (margin-right):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginRight" min="0" max="80" step="4" value="24">
+                    <span class="value-display" id="marginRightValue">24px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>📐 内容区域内边距控制（保持舒适）</h3>
+            <div class="control-item">
+                <label>水平内边距 (padding-x):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="paddingX" min="16" max="48" step="4" value="24">
+                    <span class="value-display" id="paddingXValue">24px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>垂直内边距 (padding-y):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="paddingY" min="16" max="48" step="4" value="24">
+                    <span class="value-display" id="paddingYValue">24px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>⚡ 快速预设</h3>
+            <div class="preset-buttons">
+                <button onclick="applyPreset('compact')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">紧凑</button>
+                <button onclick="applyPreset('normal')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">标准</button>
+                <button onclick="applyPreset('comfortable')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">舒适</button>
+                <button onclick="applyPreset('spacious')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">宽敞</button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h3>👁️ 实时预览</h3>
+            <div class="preview-dashboard">
+                <div class="mock-welcome-section" id="mockWelcome">
+                    <div class="mock-welcome-content" id="mockContent">
+                        <h2 class="mock-title">🏠 综合工作台</h2>
+                        <p class="mock-description">
+                            这里是幼儿园管理系统的核心枢纽，您可以快速总览各业务中心数据与入口，掌握园区运营状况
+                        </p>
+                    </div>
+                    <div class="mock-actions">
+                        <button style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; color: white; cursor: pointer;">刷新数据</button>
+                        <button style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; color: white; cursor: pointer;">快捷操作</button>
+                    </div>
+                </div>
+
+                <div class="mock-stats-grid">
+                    <div class="mock-stat-card">👦 在读学生<br>150</div>
+                    <div class="mock-stat-card">👩‍🏫 教职员工<br>25</div>
+                    <div class="mock-stat-card">🏫 班级数量<br>8</div>
+                    <div class="mock-stat-card">📅 活动数量<br>12</div>
+                </div>
+            </div>
+
+            <div class="css-output" id="cssOutput">
+/* CSS Variables */
+:root {
+  --welcome-section-margin-top: 24px;
+  --welcome-section-margin-right: 24px;
+  --welcome-section-margin-bottom: 32px;
+  --welcome-section-margin-left: 24px;
+  --welcome-section-padding-x: 24px;
+  --welcome-section-padding-y: 24px;
+}
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="copyToClipboard()" style="padding: 10px 20px; background: #409eff; color: white; border: none; border-radius: 4px; cursor: pointer;">📋 复制CSS代码</button>
+            <button onclick="saveAsFile()" style="padding: 10px 20px; background: #67c23a; color: white; border: none; border-radius: 4px; cursor: pointer;">💾 保存配置文件</button>
+            <button onclick="resetToDefault()" style="padding: 10px 20px; background: #f56c6c; color: white; border: none; border-radius: 4px; cursor: pointer;">🔄 重置默认</button>
+        </div>
+    </div>
+
+    <script>
+        // 预设配置
+        const presets = {
+            compact: { marginTop: 16, marginBottom: 16, marginLeft: 16, marginRight: 16, paddingX: 16, paddingY: 16 },
+            normal: { marginTop: 24, marginBottom: 32, marginLeft: 24, marginRight: 24, paddingX: 24, paddingY: 24 },
+            comfortable: { marginTop: 32, marginBottom: 40, marginLeft: 32, marginRight: 32, paddingX: 28, paddingY: 28 },
+            spacious: { marginTop: 40, marginBottom: 48, marginLeft: 40, marginRight: 40, paddingX: 32, paddingY: 32 }
+        };
+
+        // 获取控件
+        const marginTopSlider = document.getElementById('marginTop');
+        const marginBottomSlider = document.getElementById('marginBottom');
+        const marginLeftSlider = document.getElementById('marginLeft');
+        const marginRightSlider = document.getElementById('marginRight');
+        const paddingXSlider = document.getElementById('paddingX');
+        const paddingYSlider = document.getElementById('paddingY');
+
+        const marginTopValue = document.getElementById('marginTopValue');
+        const marginBottomValue = document.getElementById('marginBottomValue');
+        const marginLeftValue = document.getElementById('marginLeftValue');
+        const marginRightValue = document.getElementById('marginRightValue');
+        const paddingXValue = document.getElementById('paddingXValue');
+        const paddingYValue = document.getElementById('paddingYValue');
+
+        const mockWelcome = document.getElementById('mockWelcome');
+        const cssOutput = document.getElementById('cssOutput');
+
+        // 更新样式
+        function updateStyles() {
+            const marginTop = marginTopSlider.value;
+            const marginBottom = marginBottomSlider.value;
+            const marginLeft = marginLeftSlider.value;
+            const marginRight = marginRightSlider.value;
+            const paddingX = paddingXSlider.value;
+            const paddingY = paddingYSlider.value;
+
+            // 更新显示值
+            marginTopValue.textContent = marginTop + 'px';
+            marginBottomValue.textContent = marginBottom + 'px';
+            marginLeftValue.textContent = marginLeft + 'px';
+            marginRightValue.textContent = marginRight + 'px';
+            paddingXValue.textContent = paddingX + 'px';
+            paddingYValue.textContent = paddingY + 'px';
+
+            // 更新预览 - 应用外边距和内边距
+            mockWelcome.style.margin = `${marginTop}px ${marginLeft}px ${marginBottom}px ${marginRight}px`;
+            mockWelcome.style.padding = `${paddingY}px ${paddingX}px`;
+
+            // 更新CSS输出
+            cssOutput.textContent = `/* CSS Variables */
+:root {
+  --welcome-section-margin-top: ${marginTop}px;
+  --welcome-section-margin-right: ${marginRight}px;
+  --welcome-section-margin-bottom: ${marginBottom}px;
+  --welcome-section-margin-left: ${marginLeft}px;
+  --welcome-section-padding-x: ${paddingX}px;
+  --welcome-section-padding-y: ${paddingY}px;
+}`;
+        }
+
+        // 应用预设
+        function applyPreset(presetName) {
+            const preset = presets[presetName];
+            marginTopSlider.value = preset.marginTop;
+            marginBottomSlider.value = preset.marginBottom;
+            marginLeftSlider.value = preset.marginLeft;
+            marginRightSlider.value = preset.marginRight;
+            paddingXSlider.value = preset.paddingX;
+            paddingYSlider.value = preset.paddingY;
+            updateStyles();
+
+            const presetNames = {
+                compact: '紧凑',
+                normal: '标准',
+                comfortable: '舒适',
+                spacious: '宽敞'
+            };
+            showMessage(`已应用"${presetNames[presetName]}"预设`);
+        }
+
+        // 复制到剪贴板
+        async function copyToClipboard() {
+            try {
+                await navigator.clipboard.writeText(cssOutput.textContent);
+                showMessage('CSS代码已复制到剪贴板 ✅');
+            } catch (error) {
+                showMessage('复制失败，请手动复制');
+            }
+        }
+
+        // 保存为文件
+        function saveAsFile() {
+            const cssCode = cssOutput.textContent;
+            const blob = new Blob([cssCode], { type: 'text/css' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dashboard-layout.css';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessage('配置文件已下载 💾');
+        }
+
+        // 重置默认
+        function resetToDefault() {
+            marginTopSlider.value = 24;
+            marginBottomSlider.value = 32;
+            marginLeftSlider.value = 24;
+            marginRightSlider.value = 24;
+            paddingXSlider.value = 24;
+            paddingYSlider.value = 24;
+            updateStyles();
+            showMessage('已重置为默认值 🔄');
+        }
+
+        // 显示消息
+        function showMessage(message) {
+            // 创建消息提示
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #67c23a;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+            `;
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 300);
+            }, 2000);
+        }
+
+        // 添加动画样式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 绑定事件监听器
+        marginTopSlider.addEventListener('input', updateStyles);
+        marginBottomSlider.addEventListener('input', updateStyles);
+        marginLeftSlider.addEventListener('input', updateStyles);
+        marginRightSlider.addEventListener('input', updateStyles);
+        paddingXSlider.addEventListener('input', updateStyles);
+        paddingYSlider.addEventListener('input', updateStyles);
+
+        // 初始化
+        updateStyles();
+    </script>
+</body>
+</html>

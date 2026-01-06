@@ -1,0 +1,32 @@
+{
+  "testTime": "2025/11/17 22:25:48",
+  "summary": {
+    "total": 3,
+    "success": 2,
+    "failed": 1,
+    "successRate": "66.7"
+  },
+  "results": [
+    {
+      "endpoint": "/classes",
+      "method": "GET",
+      "success": true,
+      "statusCode": 200,
+      "message": "✅ Classes API正常工作"
+    },
+    {
+      "endpoint": "/tasks",
+      "method": "GET",
+      "success": true,
+      "statusCode": 200,
+      "message": "✅ Tasks GET API正常工作"
+    },
+    {
+      "endpoint": "/tasks",
+      "method": "GET/PUT",
+      "success": false,
+      "error": "The \"chunk\" argument must be of type string or an instance of Buffer or Uint8Array. Received an instance of Object",
+      "message": "❌ Tasks API无法访问"
+    }
+  ]
+}

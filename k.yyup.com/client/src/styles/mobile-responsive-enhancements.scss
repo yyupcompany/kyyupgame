@@ -1,0 +1,662 @@
+/**
+ * 移动端响应式增强样式
+ * Mobile Responsive Enhancements
+ *
+ * 统一修复Vant组件在移动端的排版和响应式问题
+ * Unified fixes for Vant components mobile layout and responsive issues
+ */
+
+// 导入设计令牌
+@use '@/styles/design-tokens.scss' as *;
+
+// ==================== Vant组件移动端增强 ====================
+// Vant Components Mobile Enhancements
+
+// Vant Card 组件增强
+:deep(.van-card) {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color-light);
+  overflow: hidden;
+
+  .van-card__header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color-light);
+
+    .van-card__header .van-card__title {
+      @include mobile-fluid-font(16px, 18px);
+      font-weight: var(--font-semibold);
+      color: var(--mobile-text-primary);
+      line-height: var(--leading-tight);
+      word-break: break-word;
+    }
+
+    .van-card__header .van-card__desc {
+      @include mobile-fluid-font(13px, 14px);
+      color: var(--mobile-text-secondary);
+      margin-top: var(--spacing-xs);
+      line-height: var(--leading-normal);
+    }
+  }
+
+  .van-card__content {
+    padding: var(--spacing-md);
+
+    .van-card__text {
+      @include mobile-fluid-font(14px, 15px);
+      color: var(--mobile-text-secondary);
+      line-height: var(--leading-relaxed);
+      word-break: break-word;
+    }
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    .van-card__header,
+    .van-card__content {
+      padding: var(--spacing-sm);
+    }
+
+    .van-card__header .van-card__title {
+      @include mobile-fluid-font(15px, 16px);
+    }
+
+    .van-card__header .van-card__desc {
+      @include mobile-fluid-font(12px, 13px);
+    }
+
+    .van-card__content .van-card__text {
+      @include mobile-fluid-font(13px, 14px);
+    }
+  }
+}
+
+// Vant Cell 组件增强
+:deep(.van-cell) {
+  padding: var(--spacing-md);
+  font-size: inherit;
+
+  .van-cell__title {
+    @include mobile-fluid-font(15px, 16px);
+    font-weight: var(--font-medium);
+    color: var(--mobile-text-primary);
+    line-height: var(--leading-tight);
+    word-break: break-word;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .van-cell__label {
+    @include mobile-fluid-font(13px, 14px);
+    color: var(--mobile-text-secondary);
+    margin-top: var(--spacing-xs);
+    line-height: var(--leading-normal);
+    word-break: break-word;
+
+    // 限制标签行数
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .van-cell__value {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-secondary);
+    flex-shrink: 0;
+    margin-left: var(--spacing-sm);
+  }
+
+  .van-cell__left-icon,
+  .van-cell__right-icon {
+    font-size: var(--text-lg);
+    color: var(--mobile-text-tertiary);
+  }
+
+  .van-cell__left-icon {
+    margin-right: var(--spacing-sm);
+    color: var(--primary-color);
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm) var(--spacing-xs);
+
+    .van-cell__title {
+      @include mobile-fluid-font(14px, 15px);
+    }
+
+    .van-cell__label {
+      @include mobile-fluid-font(12px, 13px);
+    }
+
+    .van-cell__value {
+      @include mobile-fluid-font(13px, 14px);
+    }
+  }
+}
+
+// Vant Cell Group 组件增强
+:deep(.van-cell-group) {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+
+  &--inset {
+    margin: 0;
+  }
+
+  .van-cell {
+    &:not(:last-child)::after {
+      left: var(--spacing-md);
+      right: var(--spacing-md);
+      border-color: var(--border-color-light);
+    }
+
+    @media (max-width: 479px) {
+      &:not(:last-child)::after {
+        left: var(--spacing-sm);
+        right: var(--spacing-sm);
+      }
+    }
+  }
+}
+
+// Vant Field 组件增强
+:deep(.van-field) {
+  .van-field__label {
+    @include mobile-fluid-font(14px, 15px);
+    font-weight: var(--font-medium);
+    color: var(--mobile-text-primary);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .van-field__control {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-primary);
+    line-height: var(--leading-normal);
+  }
+
+  .van-field__placeholder {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-tertiary);
+  }
+
+  .van-field__error-message {
+    @include mobile-fluid-font(12px, 13px);
+    color: var(--danger-color);
+    margin-top: var(--spacing-xs);
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    .van-field__label {
+      @include mobile-fluid-font(13px, 14px);
+      width: 70px;
+    }
+
+    .van-field__control {
+      @include mobile-fluid-font(13px, 14px);
+    }
+
+    .van-field__placeholder {
+      @include mobile-fluid-font(13px, 14px);
+    }
+  }
+}
+
+// Vant Button 组件增强
+:deep(.van-button) {
+  // 统一触摸目标最小尺寸
+  min-height: 44px;
+  padding: 0 var(--spacing-md);
+  border-radius: var(--radius-md);
+
+  .van-button__text {
+    @include mobile-fluid-font(14px, 15px);
+    font-weight: var(--font-medium);
+  }
+
+  // 小尺寸按钮
+  &--small {
+    min-height: 32px;
+    padding: 0 var(--spacing-sm);
+
+    .van-button__text {
+      @include mobile-fluid-font(12px, 13px);
+    }
+  }
+
+  // 迷你尺寸按钮
+  &--mini {
+    min-height: 28px;
+    padding: 0 var(--spacing-xs);
+
+    .van-button__text {
+      @include mobile-fluid-font(11px, 12px);
+    }
+  }
+
+  // 大尺寸按钮
+  &--large {
+    min-height: 52px;
+    padding: 0 var(--spacing-lg);
+
+    .van-button__text {
+      @include mobile-fluid-font(16px, 17px);
+    }
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    &--small {
+      min-height: 30px;
+    }
+
+    &--mini {
+      min-height: 26px;
+    }
+  }
+}
+
+// Vant Tag 组件增强
+:deep(.van-tag) {
+  @include mobile-fluid-font(12px, 13px);
+  padding: 2px var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-medium);
+
+  &--small {
+    @include mobile-fluid-font(11px, 12px);
+    padding: 1px var(--spacing-xs);
+  }
+
+  &--medium {
+    @include mobile-fluid-font(13px, 14px);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  &--large {
+    @include mobile-fluid-font(14px, 15px);
+    padding: 6px var(--spacing-md);
+  }
+}
+
+// Vant Progress 组件增强
+:deep(.van-progress) {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-secondary);
+
+  &__portion {
+    border-radius: 3px;
+    transition: width var(--transition-base);
+  }
+
+  &__pivot {
+    @include mobile-fluid-font(11px, 12px);
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    margin-left: var(--spacing-xs);
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    height: 4px;
+  }
+}
+
+// Vant Tab 组件增强
+:deep(.van-tabs) {
+  .van-tabs__wrap {
+    background: var(--card-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .van-tabs__nav {
+    background: transparent;
+    padding: 0 var(--spacing-md);
+
+    .van-tab {
+      @include mobile-fluid-font(14px, 15px);
+      font-weight: var(--font-medium);
+      color: var(--mobile-text-secondary);
+      padding: var(--spacing-sm) var(--spacing-xs);
+      flex: 1;
+      min-width: 0;
+
+      &--active {
+        color: var(--primary-color);
+        font-weight: var(--font-semibold);
+      }
+
+      .van-tab__text {
+        word-break: keep-all;
+        white-space: nowrap;
+      }
+    }
+
+    .van-tabs__line {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--primary-color);
+    }
+  }
+
+  .van-tabs__content {
+    background: var(--mobile-bg-primary);
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    .van-tabs__nav {
+      padding: 0 var(--spacing-sm);
+
+      .van-tab {
+        @include mobile-fluid-font(13px, 14px);
+        padding: var(--spacing-xs);
+      }
+    }
+  }
+}
+
+// Vant Picker 组件增强
+:deep(.van-picker) {
+  background: var(--card-bg);
+
+  .van-picker__toolbar {
+    border-bottom: 1px solid var(--border-color-light);
+    padding: var(--spacing-md);
+
+    .van-picker__cancel,
+    .van-picker__confirm {
+      @include mobile-fluid-font(14px, 15px);
+      font-weight: var(--font-medium);
+      min-height: 36px;
+    }
+
+    .van-picker__title {
+      @include mobile-fluid-font(16px, 17px);
+      font-weight: var(--font-semibold);
+      color: var(--mobile-text-primary);
+    }
+  }
+
+  .van-picker-column {
+    .van-picker-column__item {
+      @include mobile-fluid-font(15px, 16px);
+      padding: var(--spacing-sm);
+    }
+  }
+}
+
+// Vant Popup 组件增强
+:deep(.van-popup) {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+
+  &--center {
+    border-radius: var(--radius-lg);
+    max-width: 90vw;
+    max-height: 80vh;
+  }
+
+  &--bottom {
+    max-height: 70vh;
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    &--center {
+      max-width: 95vw;
+    }
+
+    &--bottom {
+      max-height: 60vh;
+    }
+  }
+
+  // 横屏适配
+  @media screen and (orientation: landscape) and (max-height: 600px) {
+    &--bottom {
+      max-height: 50vh;
+    }
+  }
+}
+
+// Vant Empty 组件增强
+:deep(.van-empty) {
+  padding: var(--spacing-5xl) var(--spacing-md);
+
+  .van-empty__description {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-secondary);
+    margin-top: var(--spacing-md);
+    line-height: var(--leading-relaxed);
+  }
+
+  .van-empty__image {
+    width: 120px;
+    height: 120px;
+
+    @media (max-width: 479px) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+// Vant Loading 组件增强
+:deep(.van-loading) {
+  .van-loading__text {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-secondary);
+    margin-top: var(--spacing-sm);
+  }
+
+  &--vertical {
+    .van-loading__spinner {
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+}
+
+// Vant Notice Bar 组件增强
+:deep(.van-notice-bar) {
+  @include mobile-fluid-font(13px, 14px);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+
+  .van-notice-bar__content {
+    line-height: var(--leading-normal);
+  }
+
+  .van-notice-bar__left-icon,
+  .van-notice-bar__right-icon {
+    font-size: var(--text-base);
+  }
+}
+
+// Vant Pagination 组件增强
+:deep(.van-pagination) {
+  .van-pagination__item {
+    @include mobile-fluid-font(13px, 14px);
+    min-width: 36px;
+    min-height: 36px;
+    margin: 0 2px;
+
+    &--active {
+      background: var(--primary-color);
+      color: white;
+    }
+  }
+
+  .van-pagination__prev,
+  .van-pagination__next {
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    .van-pagination__item {
+      @include mobile-fluid-font(12px, 13px);
+      min-width: 32px;
+      min-height: 32px;
+    }
+
+    .van-pagination__prev,
+    .van-pagination__next {
+      min-width: 32px;
+      min-height: 32px;
+    }
+  }
+}
+
+// Vant Swipe Cell 组件增强
+:deep(.van-swipe-cell) {
+  .van-swipe-cell__wrapper {
+    display: block;
+  }
+
+  .van-swipe-cell__right {
+    display: flex;
+    align-items: stretch;
+
+    .van-button {
+      border-radius: 0;
+      border: none;
+      min-width: 80px;
+
+      .van-button__text {
+        @include mobile-fluid-font(13px, 14px);
+      }
+    }
+  }
+}
+
+// Vant Dialog 组件增强
+:deep(.van-dialog) {
+  border-radius: var(--radius-lg);
+  max-width: 90vw;
+
+  .van-dialog__header {
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color-light);
+
+    .van-dialog__title {
+      @include mobile-fluid-font(17px, 18px);
+      font-weight: var(--font-semibold);
+      color: var(--mobile-text-primary);
+      line-height: var(--leading-tight);
+    }
+  }
+
+  .van-dialog__content {
+    padding: var(--spacing-lg) var(--spacing-md);
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .van-dialog__footer {
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-md);
+    border-top: 1px solid var(--border-color-light);
+    display: flex;
+    gap: var(--spacing-sm);
+
+    .van-button {
+      flex: 1;
+      min-height: 44px;
+
+      .van-button__text {
+        @include mobile-fluid-font(14px, 15px);
+        font-weight: var(--font-medium);
+      }
+    }
+  }
+
+  // 小屏幕适配
+  @media (max-width: 479px) {
+    max-width: 95vw;
+
+    .van-dialog__header .van-dialog__title {
+      @include mobile-fluid-font(16px, 17px);
+    }
+
+    .van-dialog__content {
+      @include mobile-fluid-font(13px, 14px);
+    }
+  }
+}
+
+// Vant Toast 组件增强
+:deep(.van-toast) {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  max-width: 80vw;
+
+  .van-toast__text {
+    @include mobile-fluid-font(14px, 15px);
+    color: var(--mobile-text-primary);
+    line-height: var(--leading-normal);
+    text-align: center;
+  }
+
+  .van-toast__icon {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-xs);
+  }
+}
+
+// ==================== 全局移动端组件覆盖 ====================
+// Global Mobile Component Overrides
+
+// 确保所有移动端页面都有一致的底部间距
+.mobile-page {
+  padding-bottom: max(
+    var(--spacing-5xl),
+    env(safe-area-inset-bottom),
+    60px
+  );
+}
+
+// 横屏模式下的特殊处理
+@media screen and (orientation: landscape) {
+  .mobile-page {
+    padding-bottom: max(
+      var(--spacing-3xl),
+      env(safe-area-inset-bottom),
+      50px
+    );
+  }
+}
+
+// 超小屏幕适配
+@media (max-width: 374px) {
+  :deep(.van-cell) {
+    padding: var(--spacing-xs);
+
+    .van-cell__title {
+      @include mobile-fluid-font(13px, 14px);
+    }
+
+    .van-cell__label {
+      @include mobile-fluid-font(11px, 12px);
+    }
+  }
+
+  :deep(.van-button) {
+    min-height: 40px;
+
+    .van-button__text {
+      @include mobile-fluid-font(13px, 14px);
+    }
+  }
+}

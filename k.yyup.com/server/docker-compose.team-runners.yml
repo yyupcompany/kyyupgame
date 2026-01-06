@@ -1,0 +1,149 @@
+version: '3.8'
+
+services:
+  # GitHub Team Runner 1
+  github-team-runner-1:
+    image: github-runners-github-runner-1
+    container_name: github-team-runner-1
+    restart: unless-stopped
+    user: root
+    privileged: true
+    environment:
+      # GitHub Team 组织 URL
+      - GITHUB_REPOSITORY_URL=https://github.com/yyupcompany
+      # 组织级注册 token（通过环境变量设置）
+      - GITHUB_TOKEN=${TEAM_REGISTRATION_TOKEN}
+      - GITHUB_ORG=yyupcompany
+      - GITHUB_RUNNER_NAME=team-docker-runner-1
+      - GITHUB_RUNNER_LABELS=team,docker,self-hosted,linux,runner-1,org-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+      - RUNNER_ALLOW_RUNASROOT=1
+      - RUNNER_MANUALLY_TRAP_SIG=1
+      # 代理配置 - 指向宿主机的 v2ray
+      - HTTP_PROXY=http://host.docker.internal:10809
+      - HTTPS_PROXY=http://host.docker.internal:10809
+      - NO_PROXY=localhost,127.0.0.1,172.16.0.0/12,192.168.0.0/16,10.0.0.0/8
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/team-runner-cache-1:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-team-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Team Runner 2
+  github-team-runner-2:
+    image: github-runners-github-runner-2
+    container_name: github-team-runner-2
+    restart: unless-stopped
+    user: root
+    privileged: true
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/yyupcompany
+      - GITHUB_TOKEN=${TEAM_REGISTRATION_TOKEN}
+      - GITHUB_ORG=yyupcompany
+      - GITHUB_RUNNER_NAME=team-docker-runner-2
+      - GITHUB_RUNNER_LABELS=team,docker,self-hosted,linux,runner-2,org-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+      - RUNNER_ALLOW_RUNASROOT=1
+      - RUNNER_MANUALLY_TRAP_SIG=1
+      # 代理配置
+      - HTTP_PROXY=http://host.docker.internal:10809
+      - HTTPS_PROXY=http://host.docker.internal:10809
+      - NO_PROXY=localhost,127.0.0.1,172.16.0.0/12,192.168.0.0/16,10.0.0.0/8
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/team-runner-cache-2:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-team-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Team Runner 3
+  github-team-runner-3:
+    image: github-runners-github-runner-3
+    container_name: github-team-runner-3
+    restart: unless-stopped
+    user: root
+    privileged: true
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/yyupcompany
+      - GITHUB_TOKEN=${TEAM_REGISTRATION_TOKEN}
+      - GITHUB_ORG=yyupcompany
+      - GITHUB_RUNNER_NAME=team-docker-runner-3
+      - GITHUB_RUNNER_LABELS=team,docker,self-hosted,linux,runner-3,org-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+      - RUNNER_ALLOW_RUNASROOT=1
+      - RUNNER_MANUALLY_TRAP_SIG=1
+      # 代理配置
+      - HTTP_PROXY=http://host.docker.internal:10809
+      - HTTPS_PROXY=http://host.docker.internal:10809
+      - NO_PROXY=localhost,127.0.0.1,172.16.0.0/12,192.168.0.0/16,10.0.0.0/8
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/team-runner-cache-3:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-team-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Team Runner 4
+  github-team-runner-4:
+    image: github-runners-github-runner-4
+    container_name: github-team-runner-4
+    restart: unless-stopped
+    user: root
+    privileged: true
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/yyupcompany
+      - GITHUB_TOKEN=${TEAM_REGISTRATION_TOKEN}
+      - GITHUB_ORG=yyupcompany
+      - GITHUB_RUNNER_NAME=team-docker-runner-4
+      - GITHUB_RUNNER_LABELS=team,docker,self-hosted,linux,runner-4,org-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+      - RUNNER_ALLOW_RUNASROOT=1
+      - RUNNER_MANUALLY_TRAP_SIG=1
+      # 代理配置
+      - HTTP_PROXY=http://host.docker.internal:10809
+      - HTTPS_PROXY=http://host.docker.internal:10809
+      - NO_PROXY=localhost,127.0.0.1,172.16.0.0/12,192.168.0.0/16,10.0.0.0/8
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/team-runner-cache-4:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-team-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  github-team-runners-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+
+volumes:
+  team-runner-cache-1:
+  team-runner-cache-2:
+  team-runner-cache-3:
+  team-runner-cache-4:

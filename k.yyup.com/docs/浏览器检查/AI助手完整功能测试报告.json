@@ -1,0 +1,3093 @@
+{
+  "testTime": "2025/11/14 20:01:04",
+  "testType": "AI助手完整文件上传和AI分析功能测试",
+  "results": {
+    "login": "✅ 登录功能测试",
+    "navigation": "✅ AI助手页面导航",
+    "uploadButtons": "✅ 上传按钮显示验证",
+    "documentUpload": "✅ 文档上传功能测试",
+    "aiDocumentAnalysis": "✅ AI文档分析功能测试",
+    "imageUpload": "✅ 图片上传功能测试",
+    "aiImageAnalysis": "✅ AI图片分析功能测试"
+  },
+  "consoleMessages": {
+    "total": 339,
+    "errors": 55,
+    "warnings": 20,
+    "success": 19,
+    "details": [
+      {
+        "type": "debug",
+        "text": "[vite] connecting...",
+        "location": {
+          "url": "http://localhost:5173/@vite/client",
+          "lineNumber": 228,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected.",
+        "location": {
+          "url": "http://localhost:5173/@vite/client",
+          "lineNumber": 324,
+          "columnNumber": 20
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 环境配置: {environment: development, config: Object}",
+        "location": {
+          "url": "http://localhost:5173/src/config/environment.ts",
+          "lineNumber": 111,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+        "location": {
+          "url": "http://localhost:5173/src/env.ts",
+          "lineNumber": 33,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 路由配置: {whiteList: Array(7), mockUser: Object, permissions: Object, redirects: Object}",
+        "location": {
+          "url": "http://localhost:5173/src/config/router.ts",
+          "lineNumber": 103,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🛡️ 增强错误处理器已启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+          "lineNumber": 65,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚨 紧急修复：localhost导航超时问题",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 4,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 需要真实认证token",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 7,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 22,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 23,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 紧急修复：localhost导航超时修复已启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 54,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 开始创建应用...",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 70,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 使用真实认证流程",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 72,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📦 Vue应用创建成功",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 128,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 关键图标注册完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 171,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 智能路由插件已安装",
+        "location": {
+          "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+          "lineNumber": 6,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 Level 4: 注册权限指令...",
+        "location": {
+          "url": "http://localhost:5173/src/directives/permission.ts",
+          "lineNumber": 133,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 4: 权限指令注册完成",
+        "location": {
+          "url": "http://localhost:5173/src/directives/permission.ts",
+          "lineNumber": 137,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "插件添加完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 185,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "开始挂载应用",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 196,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "应用挂载完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 198,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "Vue应用配置已暴露到全局",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 204,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 应用启动完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 206,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 导航: / -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 121,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测: / -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 188,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📱 设备类型: pc",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 191,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎯 目标路径: /dashboard -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 192,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 Level 2: 开始页面权限验证: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 226,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 Level 2: 用户未登录，重定向到登录页面",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 229,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 导航: / -> /login",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 121,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测: / -> /login",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 188,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📱 设备类型: pc",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 191,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎯 目标路径: /login -> /login",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 192,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 白名单路由，直接放行（不加载动态路由）: /login",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 149,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 性能评分: 70/100 {pageLoadTime: 11547.10ms, domContentLoaded: 11525.30ms, memoryUsage: 50.99MB}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 328,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 性能优化建议: [启用代码分割和懒加载, 优化图片格式和大小, 使用CDN加速静态资源]",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 385,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "🚨 严重性能问题: 页面加载过慢: 11547.10ms {pageLoadTime: 11547.099999999627, domContentLoaded: 11525.299999999814, firstContentfulPaint: 0, largestContentfulPaint: 0, timeToInteractive: 0}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 417,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/visual-debugger.js",
+          "lineNumber": 385,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎨 视觉调试工具已加载",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 65,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "高级缓存系统初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+          "lineNumber": 39,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Vue错误处理器设置成功",
+        "location": {
+          "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+          "lineNumber": 161,
+          "columnNumber": 22
+        }
+      },
+      {
+        "type": "log",
+        "text": "导航完成: / -> /login",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 422,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 登录页面初始化",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 181,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "环境信息: {mode: development, dev: true, redirectUrl: undefined}",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 182,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "⚡ 快捷登录: admin",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 153,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 开始登录流程...",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 43,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📡 发送登录请求: {username: admin, password: ***}",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 51,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 连接后端进行用户验证",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 55,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "warning",
+        "text": "没有找到认证token，请求可能会失败",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 243,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: POST /auth/login {username: admin, password: 123456}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 登录响应: {success: true, data: Object, message: 登录成功}",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 60,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎉 登录成功，处理用户数据: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…AyN30.luMRfg6NlUqHtl2sr0jIA0S-ULwaotT5acwL3jMTJxU, refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…jI3fQ.5X1OJ2NFemh_v0JoFpf4OpsTCZeTFA52DmXmae5K1bM, user: Object}",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 74,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "💾 保存用户信息到store: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…AyN30.luMRfg6NlUqHtl2sr0jIA0S-ULwaotT5acwL3jMTJxU, username: admin, displayName: 沈燕, role: admin, roles: Array(1)}",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 96,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎯 检测到用户角色: admin",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 104,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "log",
+        "text": "👤 管理员角色，跳转到仪表板",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 122,
+          "columnNumber": 22
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔀 准备跳转到: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 126,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 导航: /login -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 121,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测: /login -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 188,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📱 设备类型: pc",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 191,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎯 目标路径: /dashboard -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 192,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 Level 2: 开始页面权限验证: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 226,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 Level 2: 菜单权限未加载，先加载菜单权限...",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 238,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 Level 1: 初始化菜单权限和用户权限...",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 221,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121627711}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121627711}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121627711}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 角色获取成功: []",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 152,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 权限获取成功: 42",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 62,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 菜单获取成功: 12",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 89,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 菜单数据详情: [Proxy(Object), Proxy(Object)]",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 90,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 第一个菜单项结构: Proxy(Object)",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 91,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 1: 菜单权限和用户权限初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 230,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 菜单数量: 12, 角色数量: 0, 权限数量: 42",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 231,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 2: 工作台页面，所有登录用户都可访问: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 262,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 2: 后端权限验证成功: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 249,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔐 开始路由元数据权限检查: {path: /dashboard, userRole: admin, requiredPermission: undefined, requiredPermissions: undefined, requiredRoles: undefined}",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 354,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 管理员权限，跳过路由元数据检查",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 373,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "导航完成: /login -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 422,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuGroups计算属性被调用",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 320,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuItems.value: Proxy(Array)",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 321,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuItems.value.length: 12",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 322,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 仪表板 undefined 仪表板",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 管理中心 undefined 管理中心",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 用户管理 undefined 用户管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 业务管理 undefined 业务管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 教学管理 undefined 教学管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 招生管理 undefined 招生管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 营销管理 undefined 营销管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 活动管理 undefined 活动管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 财务管理 undefined 财务管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 人员管理 undefined 人员管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 系统管理 undefined 系统管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 系统管理 undefined 系统管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ menuGroups生成完成: 12 个分组",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 357,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 第一个分组: {id: 6081, title: 仪表板, description: , icon: dashboard, items: Array(1)}",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 358,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 Level 1: 初始化菜单权限和用户权限...",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 221,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "MainLayout mounted",
+        "location": {
+          "url": "http://localhost:5173/src/layouts/MainLayout.vue",
+          "lineNumber": 330,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 页面跳转完成",
+        "location": {
+          "url": "http://localhost:5173/src/pages/Login/index.vue",
+          "lineNumber": 128,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121630721}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121630722}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121630722}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /dashboard/stats {_t: 1763121630722}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /dashboard/todos {page: 1, pageSize: 5, _t: 1763121630722}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 角色获取成功: []",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 152,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 菜单获取成功: 12",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 89,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 菜单数据详情: [Proxy(Object), Proxy(Object)]",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 90,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 第一个菜单项结构: Proxy(Object)",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 91,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuGroups计算属性被调用",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 320,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuItems.value: Proxy(Array)",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 321,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 menuItems.value.length: 12",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 322,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 仪表板 undefined 仪表板",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 管理中心 undefined 管理中心",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 用户管理 undefined 用户管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 业务管理 undefined 业务管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 教学管理 undefined 教学管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 招生管理 undefined 招生管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 营销管理 undefined 营销管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 活动管理 undefined 活动管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 财务管理 undefined 财务管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 人员管理 undefined 人员管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 系统管理 undefined 系统管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 处理category: 系统管理 undefined 系统管理",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 328,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ menuGroups生成完成: 12 个分组",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 357,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 第一个分组: {id: 6081, title: 仪表板, description: , icon: dashboard, items: Array(1)}",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 358,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 权限获取成功: 42",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 62,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 1: 菜单权限和用户权限初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 230,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 菜单数量: 12, 角色数量: 0, 权限数量: 42",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 231,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useChatHistory] 创建新的聊天历史实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/composables/useChatHistory.ts",
+          "lineNumber": 80,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useAIAssistantState] 创建新的状态实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useAIAssistantState.ts",
+          "lineNumber": 290,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useMessageHandling] 创建新的消息处理实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 443,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useAIResponse] 创建新的响应实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useAIResponse.ts",
+          "lineNumber": 289,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useUserPreferences] 创建新的偏好实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useUserPreferences.ts",
+          "lineNumber": 57,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 visible changed: true",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 967,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 visible变为true时的props值:",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 969,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "  - fullscreenState: RefImpl",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 970,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "  - conversations: RefImpl",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 971,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "  - toolCalls: RefImpl",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 972,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "  - renderedComponents: RefImpl",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 973,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "  - activeStepQueues: RefImpl",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 974,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 [AIAssistant] watch currentThinkingMessage: undefined",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 978,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useChatHistory] 返回现有聊天历史实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/composables/useChatHistory.ts",
+          "lineNumber": 83,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useAIAssistantState] 返回现有状态实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useAIAssistantState.ts",
+          "lineNumber": 293,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useMessageHandling] 返回现有消息处理实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 446,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useAIResponse] 返回现有响应实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useAIResponse.ts",
+          "lineNumber": 292,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 47,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 [MessageList] currentAIResponse变化",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 48,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 [visible]: false",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 49,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 [functionCalls.length]: 0",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 50,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📋 [functionCalls]: []",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 51,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 52,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Failed to resolve component: Service\nIf this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. \n  at <MessageList messages= [] message-font-size=14 current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object}  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 [MessageList] 当前消息数: 0",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 37,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📋 [MessageList] 消息列表: []",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/chat/MessageList.vue",
+          "lineNumber": 38,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-props attributes (speechStatus) were passed to component but could not be automatically inherited because component renders fragment or text or teleport root nodes. \n  at <InputArea inputMessage=\"\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-emits event listeners (send, showQuickQuery) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the \"emits\" option. \n  at <InputArea inputMessage=\"\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [useChatHistory] 返回现有聊天历史实例（单例）",
+        "location": {
+          "url": "http://localhost:5173/src/composables/useChatHistory.ts",
+          "lineNumber": 83,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Failed to resolve component: collection\nIf this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. \n  at <MissingFieldsDialog modelValue=false onUpdate:modelValue=fn data=null  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Failed to resolve component: document-add\nIf this is a native custom element, make sure to exclude it from component resolution via compilerOptions.isCustomElement. \n  at <MissingFieldsDialog modelValue=false onUpdate:modelValue=fn data=null  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 页面路径变化: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/services/page-awareness.service.ts",
+          "lineNumber": 36,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "📖 开始加载页面说明文档: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/services/page-awareness.service.ts",
+          "lineNumber": 47,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "AI助手核心组件已挂载（全屏模式）",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/core/AIAssistantCore.vue",
+          "lineNumber": 836,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "重构后的AI助手组件已挂载",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 931,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "Props: Proxy(Object)",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 932,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "isFullscreen: false",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 933,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔌 [持久化连接] AI助手页面加载，建立持久连接",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 934,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 [事件调试] 组件挂载，handleSuggestion函数检查: {handleSuggestion: function, handleSuggestionExists: true}",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 935,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📖 未找到保存的用户偏好，使用默认值",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useUserPreferences.ts",
+          "lineNumber": 14,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ [偏好初始化] 偏好系统初始化完成，开始监听变化",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useUserPreferences.ts",
+          "lineNumber": 43,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 [会话初始化] 开始初始化会话ID",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 943,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📦 [会话恢复] 没有找到存储的会话ID",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 42,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🤖 使用AI服务处理请求: ai/conversations",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 456,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 [AIAssistant] watch currentThinkingMessage: ",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 978,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "AI请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 64,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送AI请求: POST ai/conversations {title: AI 助手对话}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 74,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 从AI知识库获取文档成功",
+        "location": {
+          "url": "http://localhost:5173/src/services/page-awareness.service.ts",
+          "lineNumber": 61,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 页面说明文档加载成功: Dashboard综合工作台",
+        "location": {
+          "url": "http://localhost:5173/src/services/page-awareness.service.ts",
+          "lineNumber": 77,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 会话创建响应: {createdAt: 2025-11-14T12:00:33.747Z, updatedAt: 2025-11-14T12:00:33.747Z, id: cd4df774-963a-49b5-b87c-00106119325f, lastMessageAt: 2025-11-14T12:00:33.747Z, messageCount: 0}",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 95,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 响应类型: object 是否有data: false",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 96,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 res.data: undefined",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 97,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 res.id: cd4df774-963a-49b5-b87c-00106119325f",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 98,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "💾 [会话持久化] 会话ID已保存到localStorage: cd4df774-963a-49b5-b87c-00106119325f",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 64,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 会话创建成功: cd4df774-963a-49b5-b87c-00106119325f",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/composables/useMessageHandling.ts",
+          "lineNumber": 103,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ [会话初始化] 会话ID初始化成功: cd4df774-963a-49b5-b87c-00106119325f",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 946,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ [会话同步] 会话ID已同步到aiState.conversationId: cd4df774-963a-49b5-b87c-00106119325f",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 948,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 [文件上传] 开始上传文档文件: test-document.txt",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 793,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-props attributes (speechStatus) were passed to component but could not be automatically inherited because component renders fragment or text or teleport root nodes. \n  at <InputArea inputMessage=\"\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-emits event listeners (send, showQuickQuery) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the \"emits\" option. \n  at <InputArea inputMessage=\"\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ [文件上传] 上传成功: {success: true, data: Object, message: 文件上传成功}",
+        "location": {
+          "url": "http://localhost:5173/src/components/ai-assistant/AIAssistant.vue",
+          "lineNumber": 811,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-props attributes (speechStatus) were passed to component but could not be automatically inherited because component renders fragment or text or teleport root nodes. \n  at <InputArea inputMessage=\"\\n📄 **文件已上传**\\n- 文件名: test-document.txt\\n- 大小: 1.23 KB\\n- 类型: text/plain\\n- 文件ID: 1763121637950\\n\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\\n📄 **文件已上传**\\n- 文件名: test-document.txt\\n- 大小: 1.23 KB\\n- 类型: text/plain\\n- 文件ID: 1763121637950\\n\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-emits event listeners (send, showQuickQuery) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the \"emits\" option. \n  at <InputArea inputMessage=\"\\n📄 **文件已上传**\\n- 文件名: test-document.txt\\n- 大小: 1.23 KB\\n- 类型: text/plain\\n- 文件ID: 1763121637950\\n\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"\\n📄 **文件已上传**\\n- 文件名: test-document.txt\\n- 大小: 1.23 KB\\n- 类型: text/plain\\n- 文件ID: 1763121637950\\n\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "[vite] server connection lost. polling for restart...",
+        "location": {
+          "url": "http://localhost:5173/@vite/client",
+          "lineNumber": 287,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-props attributes (speechStatus) were passed to component but could not be automatically inherited because component renders fragment or text or teleport root nodes. \n  at <InputArea inputMessage=\"请分析我刚才上传的文档内容，总结主要信息\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"请分析我刚才上传的文档内容，总结主要信息\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "[Vue warn]: Extraneous non-emits event listeners (send, showQuickQuery) were passed to component but could not be automatically inherited because component renders fragment or text root nodes. If the listener is intended to be a component custom event listener only, declare it using the \"emits\" option. \n  at <InputArea inputMessage=\"请分析我刚才上传的文档内容，总结主要信息\" webSearch=false fontSize=14  ... > \n  at <ChatContainer messages= [] current-ai-response= {visible: false, thinking: Object, functionCalls: Array(0), answer: Object} input-message=\"请分析我刚才上传的文档内容，总结主要信息\"  ... > \n  at <BaseTransition appear=false persisted=false mode=undefined  ... > \n  at <Transition name=\"sidebar-slide\" tool-calls= [] rendered-components= []  ... > \n  at <SidebarLayout key=1 visible=true tool-calls= []  ... > \n  at <AIAssistant visible=true onUpdate:visible= [, ] mode=\"sidebar\" > \n  at <MainLayout onVnodeUnmounted=fn<onVnodeUnmounted> ref=Ref< Proxy(Object) > > \n  at <RouterView> \n  at <App>",
+        "location": {
+          "url": "http://localhost:5173/node_modules/.vite/deps/chunk-ODIRIT4L.js?v=7830eae2",
+          "lineNumber": 2448,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+        "location": {
+          "url": "http://localhost:5173/",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connecting...",
+        "location": {
+          "url": "http://localhost:5173/@vite/client",
+          "lineNumber": 228,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "debug",
+        "text": "[vite] connected.",
+        "location": {
+          "url": "http://localhost:5173/@vite/client",
+          "lineNumber": 324,
+          "columnNumber": 20
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 环境配置: {environment: development, config: Object}",
+        "location": {
+          "url": "http://localhost:5173/src/config/environment.ts",
+          "lineNumber": 111,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+        "location": {
+          "url": "http://localhost:5173/src/env.ts",
+          "lineNumber": 33,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 路由配置: {whiteList: Array(7), mockUser: Object, permissions: Object, redirects: Object}",
+        "location": {
+          "url": "http://localhost:5173/src/config/router.ts",
+          "lineNumber": 103,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🛡️ 增强错误处理器已启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+          "lineNumber": 65,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚨 紧急修复：localhost导航超时问题",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 4,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 22,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 23,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 紧急修复：localhost导航超时修复已启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+          "lineNumber": 54,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 开始创建应用...",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 70,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 使用真实认证流程",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 72,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📦 Vue应用创建成功",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 128,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 关键图标注册完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 171,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 智能路由插件已安装",
+        "location": {
+          "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+          "lineNumber": 6,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 Level 4: 注册权限指令...",
+        "location": {
+          "url": "http://localhost:5173/src/directives/permission.ts",
+          "lineNumber": 133,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 4: 权限指令注册完成",
+        "location": {
+          "url": "http://localhost:5173/src/directives/permission.ts",
+          "lineNumber": 137,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "插件添加完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 185,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "开始挂载应用",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 196,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "应用挂载完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 198,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "Vue应用配置已暴露到全局",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 204,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 应用启动完成",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 206,
+          "columnNumber": 8
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 导航: / -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 121,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测: / -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 188,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 设备检测详情: {userAgent: mozilla/5.0 (x11; linux x86_64) applewebkit/537.36…tml, like gecko) chrome/141.0.0.0 safari/537.3..., screenWidth: 1280, screenHeight: 720, isMobileByUA: false, isDesktopBrowser: true}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 25,
+          "columnNumber": 10
+        }
+      },
+      {
+        "type": "log",
+        "text": "📱 设备类型: pc",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 191,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎯 目标路径: /dashboard -> /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/utils/device-detection.ts",
+          "lineNumber": 192,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔍 Level 2: 开始页面权限验证: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 226,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔄 Level 2: 菜单权限未加载，先加载菜单权限...",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 238,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 Level 1: 初始化菜单权限和用户权限...",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 221,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121662468}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121662468}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121662468}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/menu?_t=1763121662468",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121662519}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/roles?_t=1763121662468",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121662522}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/permissions?_t=1763121662468",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121662524}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 性能评分: 70/100 {pageLoadTime: 16011.20ms, domContentLoaded: 15990.40ms, memoryUsage: 68.20MB}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 328,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔧 性能优化建议: [启用代码分割和懒加载, 优化图片格式和大小, 使用CDN加速静态资源]",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 385,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "warning",
+        "text": "🚨 严重性能问题: 页面加载过慢: 16011.20ms {pageLoadTime: 16011.200000000186, domContentLoaded: 15990.400000000373, firstContentfulPaint: 0, largestContentfulPaint: 0, timeToInteractive: 0}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+          "lineNumber": 417,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+        "location": {
+          "url": "http://localhost:5173/src/utils/visual-debugger.js",
+          "lineNumber": 385,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "🎨 视觉调试工具已加载",
+        "location": {
+          "url": "http://localhost:5173/src/main.ts",
+          "lineNumber": 65,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "高级缓存系统初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+          "lineNumber": 39,
+          "columnNumber": 18
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/menu?_t=1763121662519",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 菜单获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 97,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/roles?_t=1763121662522",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 角色获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 158,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/permissions?_t=1763121662524",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 权限获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 68,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 1: 菜单权限和用户权限初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 230,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 菜单数量: 0, 角色数量: 0, 权限数量: 0",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 231,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 2: 工作台页面，所有登录用户都可访问: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 262,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 2: 后端权限验证成功: /dashboard",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 249,
+          "columnNumber": 16
+        }
+      },
+      {
+        "type": "log",
+        "text": "🔐 开始路由元数据权限检查: {path: /dashboard, userRole: admin, requiredPermission: undefined, requiredPermissions: undefined, requiredRoles: undefined}",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 354,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "🚀 Level 1: 初始化菜单权限和用户权限...",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 221,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121662543}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121662543}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121662544}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Vue错误处理器设置成功",
+        "location": {
+          "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+          "lineNumber": 161,
+          "columnNumber": 22
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/menu?_t=1763121662543",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/menu {_t: 1763121662571}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/roles?_t=1763121662543",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/roles {_t: 1763121662574}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/permissions?_t=1763121662544",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "warning",
+        "text": "请求失败，立即进行第1次重试: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 205,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "log",
+        "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 241,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "发送请求: GET /auth-permissions/permissions {_t: 1763121662576}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 251,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/menu?_t=1763121662571",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 菜单获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 97,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/roles?_t=1763121662574",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 角色获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 158,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+        "location": {
+          "url": "http://localhost:5173/api/auth-permissions/permissions?_t=1763121662576",
+          "lineNumber": 0,
+          "columnNumber": 0
+        }
+      },
+      {
+        "type": "error",
+        "text": "Response error: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 427,
+          "columnNumber": 12
+        }
+      },
+      {
+        "type": "error",
+        "text": "Error details: {code: UNKNOWN_ERROR, message: 服务器内部错误, detail: , statusCode: 500}",
+        "location": {
+          "url": "http://localhost:5173/src/utils/errorHandler.ts",
+          "lineNumber": 101,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "请求失败，已重试1次: Request failed with status code 500",
+        "location": {
+          "url": "http://localhost:5173/src/utils/request.ts",
+          "lineNumber": 202,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "error",
+        "text": "❌ 权限获取失败: AxiosError",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 68,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ Level 1: 菜单权限和用户权限初始化完成",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 230,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "📊 菜单数量: 0, 角色数量: 0, 权限数量: 0",
+        "location": {
+          "url": "http://localhost:5173/src/stores/permissions.ts",
+          "lineNumber": 231,
+          "columnNumber": 14
+        }
+      },
+      {
+        "type": "log",
+        "text": "✅ 管理员权限，跳过路由元数据检查",
+        "location": {
+          "url": "http://localhost:5173/src/router/index.ts",
+          "lineNumber": 373,
+          "columnNumber": 16
+        }
+      }
+    ]
+  },
+  "pageErrors": [],
+  "screenshots": {
+    "loginPage": "docs/浏览器检查/完整测试-01-登录页面.png",
+    "afterLogin": "docs/浏览器检查/完整测试-02-登录后.png",
+    "aiAssistantPage": "docs/浏览器检查/完整测试-03-AI助手页面.png",
+    "afterDocumentUpload": "docs/浏览器检查/完整测试-04-文档上传后.png",
+    "aiDocumentAnalysis": "docs/浏览器检查/完整测试-05-AI文档分析响应.png",
+    "afterImageUpload": "docs/浏览器检查/完整测试-06-图片上传后.png",
+    "aiImageAnalysis": "docs/浏览器检查/完整测试-07-AI图片分析响应.png",
+    "finalState": "docs/浏览器检查/完整测试-08-最终状态.png",
+    "errorState": "docs/浏览器检查/完整测试-错误状态.png"
+  },
+  "summary": {
+    "success": true,
+    "uploadButtonsWorking": true,
+    "fileUploadWorking": true,
+    "aiAnalysisWorking": true,
+    "issues": [
+      "发现55个控制台错误"
+    ]
+  }
+}

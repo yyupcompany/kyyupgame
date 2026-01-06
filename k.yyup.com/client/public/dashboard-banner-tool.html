@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard 欢迎横幅外边距调整工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+            background: #f5f7fa;
+            padding: 24px;
+        }
+
+        .tool-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 24px;
+        }
+
+        .control-section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e4e7ed;
+        }
+
+        .control-section h3 {
+            margin-bottom: 16px;
+            color: #303133;
+        }
+
+        .control-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .control-item label {
+            min-width: 200px;
+            font-size: 14px;
+            color: #606266;
+        }
+
+        .slider-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .slider {
+            flex: 1;
+        }
+
+        .value-display {
+            min-width: 60px;
+            text-align: right;
+            font-weight: 600;
+            color: #409eff;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .preview-section {
+            background: #f2f3f5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .preview-dashboard {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* 模拟UnifiedCenterLayout欢迎区域 */
+        .mock-unified-welcome {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 24px;
+            margin-bottom: 20px;
+        }
+
+        .mock-unified-content h2 {
+            margin: 0 0 8px 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .mock-unified-content p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* 模拟Dashboard欢迎横幅 - 这是我们需要调整的区域 */
+        .mock-dashboard-banner {
+            background: linear-gradient(135deg, #409eff 0%, #67c23a 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .mock-banner-content h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .mock-banner-content p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .mock-banner-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .mock-banner-stat {
+            text-align: center;
+        }
+
+        .mock-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .mock-stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* 模拟业务中心卡片（参考宽度） */
+        .mock-centers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .mock-center-card {
+            background: white;
+            border: 1px solid #e4e7ed;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #303133;
+        }
+
+        .css-output {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 16px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            color: #495057;
+            white-space: pre-wrap;
+            margin-top: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="tool-container">
+        <h1>🛠️ Dashboard 欢迎横幅外边距调整工具</h1>
+        <p style="margin-bottom: 24px; color: #606266;">调整Dashboard内部"早上好，管理员"欢迎横幅的外边距，使其与下方业务中心卡片保持一致的宽度</p>
+
+        <div class="control-section">
+            <h3>📏 欢迎横幅外边距控制</h3>
+            <div class="control-item">
+                <label>上边距 (margin-top):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginTop" min="0" max="60" step="4" value="0">
+                    <span class="value-display" id="marginTopValue">0px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>下边距 (margin-bottom):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginBottom" min="0" max="60" step="4" value="24">
+                    <span class="value-display" id="marginBottomValue">24px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>左边距 (margin-left):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginLeft" min="0" max="80" step="4" value="0">
+                    <span class="value-display" id="marginLeftValue">0px</span>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <label>右边距 (margin-right):</label>
+                <div class="slider-container">
+                    <input type="range" class="slider" id="marginRight" min="0" max="80" step="4" value="0">
+                    <span class="value-display" id="marginRightValue">0px</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-section">
+            <h3>⚡ 快速预设</h3>
+            <div class="preset-buttons">
+                <button onclick="applyPreset('match-centers')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">对齐中心卡片</button>
+                <button onclick="applyPreset('full-width')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">全宽度</button>
+                <button onclick="applyPreset('compact')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">紧凑</button>
+                <button onclick="applyPreset('comfortable')" style="padding: 8px 16px; border: 1px solid #dcdfe6; border-radius: 4px; background: white; cursor: pointer;">舒适</button>
+            </div>
+        </div>
+
+        <div class="preview-section">
+            <h3>👁️ 实时预览</h3>
+            <div class="preview-dashboard">
+                <!-- 模拟UnifiedCenterLayout欢迎区域（紫色渐变） -->
+                <div class="mock-unified-welcome">
+                    <div class="mock-unified-content">
+                        <h2>🏠 综合工作台</h2>
+                        <p>这里是幼儿园管理系统的核心枢纽，您可以快速总览各业务中心数据与入口，掌握园区运营状况</p>
+                    </div>
+                    <div class="mock-unified-actions">
+                        <button style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; color: white; cursor: pointer;">刷新数据</button>
+                        <button style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 4px; color: white; cursor: pointer;">快捷操作</button>
+                    </div>
+                </div>
+
+                <!-- 模拟Dashboard内部欢迎横幅（蓝色渐变）- 这是我们需要调整外边距的区域 -->
+                <div class="mock-dashboard-banner" id="mockWelcome">
+                    <div class="mock-banner-content">
+                        <h3>早上好，管理员</h3>
+                        <p>欢迎回到幼儿园管理系统！这里可快速总览各业务中心数据与入口。</p>
+                    </div>
+                    <div class="mock-banner-stats">
+                        <div class="mock-banner-stat">
+                            <div class="mock-stat-value">150</div>
+                            <div class="mock-stat-label">在读学生</div>
+                        </div>
+                        <div class="mock-banner-stat">
+                            <div class="mock-stat-value">25</div>
+                            <div class="mock-stat-label">教职员工</div>
+                        </div>
+                        <div class="mock-banner-stat">
+                            <div class="mock-stat-value">8</div>
+                            <div class="mock-stat-label">班级数量</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 模拟业务中心卡片（参考宽度） -->
+                <div class="mock-centers-grid">
+                    <div class="mock-center-card">🎓 招生中心</div>
+                    <div class="mock-center-card">📚 教学中心</div>
+                    <div class="mock-center-card">🎉 活动中心</div>
+                    <div class="mock-center-card">💰 财务中心</div>
+                </div>
+            </div>
+
+            <div class="css-output" id="cssOutput">
+/* CSS Variables - Dashboard Welcome Banner */
+:root {
+  --dashboard-banner-margin-top: 0px;
+  --dashboard-banner-margin-right: 0px;
+  --dashboard-banner-margin-bottom: 24px;
+  --dashboard-banner-margin-left: 0px;
+}
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="copyToClipboard()" style="padding: 10px 20px; background: #409eff; color: white; border: none; border-radius: 4px; cursor: pointer;">📋 复制CSS代码</button>
+            <button onclick="saveAsFile()" style="padding: 10px 20px; background: #67c23a; color: white; border: none; border-radius: 4px; cursor: pointer;">💾 保存配置文件</button>
+            <button onclick="resetToDefault()" style="padding: 10px 20px; background: #f56c6c; color: white; border: none; border-radius: 4px; cursor: pointer;">🔄 重置默认</button>
+        </div>
+    </div>
+
+    <script>
+        // 预设配置
+        const presets = {
+            'match-centers': { marginTop: 0, marginBottom: 24, marginLeft: 0, marginRight: 0 },
+            'full-width': { marginTop: 0, marginBottom: 24, marginLeft: 0, marginRight: 0 },
+            'compact': { marginTop: 0, marginBottom: 16, marginLeft: 0, marginRight: 0 },
+            'comfortable': { marginTop: 0, marginBottom: 32, marginLeft: 0, marginRight: 0 }
+        };
+
+        // 获取控件
+        const marginTopSlider = document.getElementById('marginTop');
+        const marginBottomSlider = document.getElementById('marginBottom');
+        const marginLeftSlider = document.getElementById('marginLeft');
+        const marginRightSlider = document.getElementById('marginRight');
+
+        const marginTopValue = document.getElementById('marginTopValue');
+        const marginBottomValue = document.getElementById('marginBottomValue');
+        const marginLeftValue = document.getElementById('marginLeftValue');
+        const marginRightValue = document.getElementById('marginRightValue');
+
+        const mockWelcome = document.getElementById('mockWelcome');
+        const cssOutput = document.getElementById('cssOutput');
+
+        // 更新样式
+        function updateStyles() {
+            const marginTop = marginTopSlider.value;
+            const marginBottom = marginBottomSlider.value;
+            const marginLeft = marginLeftSlider.value;
+            const marginRight = marginRightSlider.value;
+
+            // 更新显示值
+            marginTopValue.textContent = marginTop + 'px';
+            marginBottomValue.textContent = marginBottom + 'px';
+            marginLeftValue.textContent = marginLeft + 'px';
+            marginRightValue.textContent = marginRight + 'px';
+
+            // 更新预览 - 应用外边距
+            mockWelcome.style.margin = `${marginTop}px ${marginLeft}px ${marginBottom}px ${marginRight}px`;
+
+            // 更新CSS输出
+            cssOutput.textContent = `/* CSS Variables - Dashboard Welcome Banner */
+:root {
+  --dashboard-banner-margin-top: ${marginTop}px;
+  --dashboard-banner-margin-right: ${marginRight}px;
+  --dashboard-banner-margin-bottom: ${marginBottom}px;
+  --dashboard-banner-margin-left: ${marginLeft}px;
+}`;
+        }
+
+        // 应用预设
+        function applyPreset(presetName) {
+            const preset = presets[presetName];
+            marginTopSlider.value = preset.marginTop;
+            marginBottomSlider.value = preset.marginBottom;
+            marginLeftSlider.value = preset.marginLeft;
+            marginRightSlider.value = preset.marginRight;
+            updateStyles();
+
+            const presetNames = {
+                'match-centers': '对齐中心卡片',
+                'full-width': '全宽度',
+                'compact': '紧凑',
+                'comfortable': '舒适'
+            };
+            showMessage(`已应用"${presetNames[presetName]}"预设`);
+        }
+
+        // 复制到剪贴板
+        async function copyToClipboard() {
+            try {
+                await navigator.clipboard.writeText(cssOutput.textContent);
+                showMessage('CSS代码已复制到剪贴板 ✅');
+            } catch (error) {
+                showMessage('复制失败，请手动复制');
+            }
+        }
+
+        // 保存为文件
+        function saveAsFile() {
+            const cssCode = cssOutput.textContent;
+            const blob = new Blob([cssCode], { type: 'text/css' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dashboard-banner-layout.css';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessage('配置文件已下载 💾');
+        }
+
+        // 重置默认
+        function resetToDefault() {
+            marginTopSlider.value = 0;
+            marginBottomSlider.value = 24;
+            marginLeftSlider.value = 0;
+            marginRightSlider.value = 0;
+            updateStyles();
+            showMessage('已重置为默认值 🔄');
+        }
+
+        // 显示消息
+        function showMessage(message) {
+            // 创建消息提示
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #67c23a;
+                color: white;
+                padding: 12px 20px;
+                border-radius: 4px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                z-index: 9999;
+                animation: slideIn 0.3s ease;
+            `;
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                messageDiv.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(messageDiv);
+                }, 300);
+            }, 2000);
+        }
+
+        // 添加动画样式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 绑定事件监听器
+        marginTopSlider.addEventListener('input', updateStyles);
+        marginBottomSlider.addEventListener('input', updateStyles);
+        marginLeftSlider.addEventListener('input', updateStyles);
+        marginRightSlider.addEventListener('input', updateStyles);
+
+        // 初始化
+        updateStyles();
+    </script>
+</body>
+</html>

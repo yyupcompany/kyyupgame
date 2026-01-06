@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="zh-CN" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>综合工作台 · 现代演示（多彩版）</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.0.0/dist/flowbite.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- 新主题（多色调） -->
+  <link rel="stylesheet" href="./workbench_theme_1_vibrant.css" />
+  <style>
+    :root { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    body { background: var(--background) !important; color: var(--foreground) !important; }
+
+    /* 容器与通用组件 */
+    .surface-1 { background: var(--surface-1) !important; border: 1px solid var(--border) !important; border-radius: 12px !important; box-shadow: var(--shadow-sm, 0 1px 3px hsl(0 0% 0%/0.06)) !important; }
+    .surface-2 { background: var(--surface-2) !important; border-right: 1px solid var(--border) !important; }
+    .topbar { background: var(--surface-1) !important; border-bottom: 1px solid var(--border) !important; }
+    .btn { background: var(--surface-1) !important; color: var(--foreground) !important; border: 1px solid var(--border) !important; border-radius: 10px !important; padding: 8px 12px !important; transition: all .18s ease !important; }
+    .btn:hover { transform: translateY(-1px) !important; box-shadow: 0 6px 18px rgba(0,0,0,.10) !important; }
+    .btn-primary { background: var(--accent) !important; color: var(--accent-contrast) !important; border-color: color-mix(in oklab, var(--accent) 50%, black) !important; }
+    .title { font-weight: 700 !important; letter-spacing: .2px !important; }
+    .subtle { color: var(--muted-foreground) !important; }
+
+    /* 徽章/标签 */
+    .chip { background: color-mix(in oklab, var(--accent) 10%, white) !important; color: var(--foreground) !important; border: 1px solid color-mix(in oklab, var(--accent) 35%, white) !important; border-radius: 9999px !important; padding: 4px 10px !important; }
+    .chip--amber { background: color-mix(in oklab, var(--accent-2) 12%, white) !important; border-color: color-mix(in oklab, var(--accent-2) 35%, white) !important; }
+    .chip--green { background: color-mix(in oklab, var(--accent-green) 12%, white) !important; border-color: color-mix(in oklab, var(--accent-green) 35%, white) !important; }
+    .chip--rose { background: color-mix(in oklab, var(--accent-rose) 12%, white) !important; border-color: color-mix(in oklab, var(--accent-rose) 35%, white) !important; }
+    .chip--violet { background: color-mix(in oklab, var(--accent-violet) 12%, white) !important; border-color: color-mix(in oklab, var(--accent-violet) 35%, white) !important; }
+
+    /* 导航链接 */
+    .nav-link { display:flex !important; gap:10px !important; align-items:center !important; padding:10px 12px !important; border-radius:10px !important; color: var(--foreground) !important; transition: all .18s ease !important; }
+    .nav-link:hover { background: var(--surface-3) !important; box-shadow: 0 2px 10px rgba(0,0,0,.06) !important; }
+    .nav-link.active { background: color-mix(in oklab, var(--accent) 14%, white) !important; color: var(--accent-contrast) !important; }
+
+    /* 统计卡片与多色变体 */
+    .stat { border: 1px solid var(--border) !important; border-radius: 12px !important; background: var(--surface-1) !important; padding: 14px !important; display:flex !important; gap:12px !important; align-items:center !important; transition: transform .18s ease, box-shadow .18s ease !important; }
+    .stat:hover { transform: translateY(-2px) !important; box-shadow: 0 10px 24px rgba(0,0,0,.10) !important; }
+    .stat--green { background: color-mix(in oklab, var(--accent-green) 9%, white) !important; border-color: color-mix(in oklab, var(--accent-green) 30%, white) !important; }
+    .stat--amber { background: color-mix(in oklab, var(--accent-2) 10%, white) !important; border-color: color-mix(in oklab, var(--accent-2) 30%, white) !important; }
+    .stat--orange { background: color-mix(in oklab, var(--accent-orange) 9%, white) !important; border-color: color-mix(in oklab, var(--accent-orange) 30%, white) !important; }
+    .stat--rose { background: color-mix(in oklab, var(--accent-rose) 9%, white) !important; border-color: color-mix(in oklab, var(--accent-rose) 30%, white) !important; }
+    .stat--violet { background: color-mix(in oklab, var(--accent-violet) 9%, white) !important; border-color: color-mix(in oklab, var(--accent-violet) 30%, white) !important; }
+    .stat--lime { background: color-mix(in oklab, var(--accent-lime) 9%, white) !important; border-color: color-mix(in oklab, var(--accent-lime) 30%, white) !important; }
+
+    /* 圆点与品牌块 */
+    .dot { width: 8px !important; height: 8px !important; border-radius: 9999px !important; flex: none !important; margin-top: 6px !important; }
+    .dot-accent { background: var(--accent) !important; }
+    .dot-amber { background: var(--accent-2) !important; }
+    .dot-rose { background: var(--accent-rose) !important; }
+    .dot-violet { background: var(--accent-violet) !important; }
+    .brand-badge { width: 36px !important; height: 36px !important; border-radius: 12px !important; display:flex !important; align-items:center !important; justify-content:center !important; color: var(--accent-contrast) !important; background: color-mix(in oklab, var(--accent-green) 22%, white) !important; }
+    .profile-avatar { width: 32px !important; height: 32px !important; border-radius: 9999px !important; display:flex !important; align-items:center !important; justify-content:center !important; background: color-mix(in oklab, var(--accent-violet) 22%, white) !important; }
+
+    /* 图表颜色更丰富 */
+    .chart { height: 260px !important; border-radius: 12px !important; border: 1px dashed var(--border) !important; background: repeating-linear-gradient(90deg,
+      color-mix(in oklab, var(--accent-green) 12%, white) 0 8px,
+      color-mix(in oklab, var(--accent-orange) 12%, white) 8px 16px,
+      transparent 16px 24px
+    ) !important; }
+    .donut { height: 260px !important; border-radius: 12px !important; border: 1px dashed var(--border) !important; background:
+      radial-gradient(circle at 50% 50%, transparent 45%, var(--surface-1) 45%) ,
+      conic-gradient(
+        color-mix(in oklab, var(--accent-green) 72%, black) 0 110deg,
+        color-mix(in oklab, var(--accent-orange) 72%, black) 110deg 200deg,
+        color-mix(in oklab, var(--accent-rose) 72%, black) 200deg 280deg,
+        color-mix(in oklab, var(--accent-violet) 72%, black) 280deg 360deg
+      ) !important;
+    }
+
+    /* 表格工具类 */
+    .table-spaced { border-spacing: 0 8px !important; }
+
+    /* 进场动画 */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .a-fadeUp { animation: fadeUp .4s ease both !important; }
+    .a-fadeUp-del-1 { animation-delay: .06s !important; }
+    .a-fadeUp-del-2 { animation-delay: .12s !important; }
+    .a-fadeUp-del-3 { animation-delay: .18s !important; }
+
+    /* 浮动主题按钮 */
+    .theme-fab { position: fixed !important; right: 16px !important; bottom: 16px !important; width: 46px !important; height: 46px !important; border-radius: 50% !important; border:1px solid var(--border) !important; background: var(--surface-1) !important; color: var(--foreground) !important; display:flex !important;align-items:center !important;justify-content:center !important; box-shadow: 0 8px 20px rgba(0,0,0,.12) !important; transition: transform .18s ease !important; }
+    .theme-fab:hover { transform: translateY(-2px) !important; }
+  </style>
+</head>
+<body class="theme-workbench theme-light min-h-screen">
+  <div class="grid grid-cols-[260px_1fr] min-h-screen">
+    <!-- 侧边栏 -->
+    <aside class="surface-2 p-4">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="brand-badge"><i data-lucide="sparkles"></i></div>
+        <div class="font-semibold">婴婴向上</div>
+      </div>
+      <nav class="grid gap-1">
+        <a class="nav-link active" href="#"><i data-lucide="layout-dashboard" class="w-4 h-4"></i><span>工作台</span></a>
+        <a class="nav-link" href="#"><i data-lucide="users" class="w-4 h-4"></i><span>人员中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="calendar" class="w-4 h-4"></i><span>活动中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="school" class="w-4 h-4"></i><span>招生中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="megaphone" class="w-4 h-4"></i><span>营销中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="bot" class="w-4 h-4"></i><span>AI中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="settings" class="w-4 h-4"></i><span>系统中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="wallet" class="w-4 h-4"></i><span>财务中心</span></a>
+        <a class="nav-link" href="#"><i data-lucide="check-square" class="w-4 h-4"></i><span>任务中心</span></a>
+      </nav>
+      <div class="mt-8 p-3 surface-1 flex items-center gap-3 a-fadeUp">
+        <div class="profile-avatar">A</div>
+        <div>
+          <div class="text-sm">admin</div>
+          <div class="text-xs subtle">系统管理员</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主区 -->
+    <main class="flex flex-col">
+      <!-- 顶部栏 -->
+      <header class="topbar px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3 text-sm subtle">
+          <span>首页</span>
+          <span>/</span>
+          <span class="text-[color:var(--foreground)]">数据概览</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="btn"><i data-lucide="maximize"></i></button>
+          <button class="btn" id="theme-toggle-btn"><i data-lucide="contrast"></i></button>
+          <button class="btn btn-primary">退出登录</button>
+        </div>
+      </header>
+
+      <!-- 页头欢迎区 -->
+      <section class="p-6">
+        <div class="surface-1 p-5 a-fadeUp grid md:grid-cols-[1fr_auto] gap-4">
+          <div>
+            <h1 class="title text-2xl mb-1 flex items-center gap-2"><i data-lucide="gauge"></i>综合工作台</h1>
+            <p class="subtle">上午好，管理员！欢迎回到幼儿园管理系统</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 border border-[color:var(--border)] rounded-xl px-3 py-2 bg-[color:var(--surface-1)]">
+              <i data-lucide="search" class="w-4 h-4 subtle"></i>
+              <input class="outline-none bg-transparent text-sm" placeholder="输入页面名称快速跳转，如：活动中心…" />
+              <button class="btn">跳转</button>
+            </div>
+            <button class="btn btn-primary"><i data-lucide="refresh-ccw"></i> 刷新数据</button>
+            <button class="btn"><i data-lucide="flashlight"></i> 快捷操作</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 业务中心概览 3×3 -->
+      <section class="px-6">
+        <div class="surface-1 p-5 a-fadeUp a-fadeUp-del-1">
+          <div class="flex items-center justify-between mb-4">
+            <div class="title">业务中心概览</div>
+            <div class="chip chip--violet">网格视图</div>
+          </div>
+          <div class="grid md:grid-cols-3 gap-4">
+            <!-- 九宫格卡片（多色调） -->
+            <div class="stat stat--green"><i data-lucide="activity"></i><div><div class="title">仪表板中心</div><div class="subtle">系统健康度</div></div></div>
+            <div class="stat stat--amber"><i data-lucide="users"></i><div><div class="title">人事中心</div><div class="subtle">教师总数</div></div></div>
+            <div class="stat stat--rose"><i data-lucide="calendar"></i><div><div class="title">活动中心</div><div class="subtle">本月活动</div></div></div>
+            <div class="stat stat--violet"><i data-lucide="school"></i><div><div class="title">招生中心</div><div class="subtle">在读学生</div></div></div>
+            <div class="stat stat--orange"><i data-lucide="megaphone"></i><div><div class="title">营销中心</div><div class="subtle">活跃客户</div></div></div>
+            <div class="stat stat--lime"><i data-lucide="bot"></i><div><div class="title">AI中心</div><div class="subtle">今日调用</div></div></div>
+            <div class="stat"><i data-lucide="settings"></i><div><div class="title">系统管理</div><div class="subtle">系统健康</div></div></div>
+            <div class="stat"><i data-lucide="check-square"></i><div><div class="title">任务中心</div><div class="subtle">待办任务</div></div></div>
+            <div class="stat"><i data-lucide="file-stack"></i><div><div class="title">话术中心</div><div class="subtle">常用模板</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 快速统计 6卡 -->
+      <section class="p-6 pt-4">
+        <div class="surface-1 p-5 a-fadeUp a-fadeUp-del-2">
+          <div class="title mb-4">快速统计</div>
+          <div class="grid md:grid-cols-6 gap-3">
+            <div class="stat stat--green"><i data-lucide="user-round"></i><div><div class="title text-base">在读学生</div><div class="subtle">1</div></div></div>
+            <div class="stat stat--amber"><i data-lucide="book"></i><div><div class="title text-base">课程数</div><div class="subtle">24</div></div></div>
+            <div class="stat stat--violet"><i data-lucide="trending-up"></i><div><div class="title text-base">转化率</div><div class="subtle">12.4%</div></div></div>
+            <div class="stat stat--orange"><i data-lucide="wallet"></i><div><div class="title text-base">本月营收</div><div class="subtle">¥ 86,000</div></div></div>
+            <div class="stat stat--rose"><i data-lucide="sparkles"></i><div><div class="title text-base">AI调用</div><div class="subtle">1,204</div></div></div>
+            <div class="stat"><i data-lucide="alert-circle"></i><div><div class="title text-base">待处理</div><div class="subtle">7</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 指标图表 双列 -->
+      <section class="px-6 grid md:grid-cols-[1.2fr_1fr] gap-4">
+        <div class="surface-1 p-5 a-fadeUp a-fadeUp-del-3">
+          <div class="title mb-4">趋势分析</div>
+          <div class="chart"></div>
+        </div>
+        <div class="surface-1 p-5 a-fadeUp a-fadeUp-del-3">
+          <div class="title mb-4">占比分析</div>
+          <div class="donut"></div>
+        </div>
+      </section>
+
+      <!-- 时间线 / 待办 -->
+      <section class="p-6 grid md:grid-cols-2 gap-4">
+        <div class="surface-1 p-5">
+          <div class="title mb-4">最近活动</div>
+          <div class="space-y-3">
+            <div class="flex gap-3 items-start">
+              <div class="dot dot-accent"></div>
+              <div>
+                <div class="text-sm">新增「秋季招生」营销方案</div>
+                <div class="subtle text-xs">10:20 · 由 admin</div>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="dot dot-amber"></div>
+              <div>
+                <div class="text-sm">活动中心发布「亲子运动会」</div>
+                <div class="subtle text-xs">09:15 · 由 Lily</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="surface-1 p-5">
+          <div class="title mb-4">待办清单</div>
+          <div class="grid gap-2">
+            <label class="flex items-center gap-3 p-2 border border-[color:var(--border)] rounded-lg bg-[color:var(--surface-1)]"><input type="checkbox"/> 跟进家长回访</label>
+            <label class="flex items-center gap-3 p-2 border border-[color:var(--border)] rounded-lg bg-[color:var(--surface-1)]"><input type="checkbox"/> 导入学生花名册</label>
+            <label class="flex items-center gap-3 p-2 border border-[color:var(--border)] rounded-lg bg-[color:var(--surface-1)]"><input type="checkbox"/> 审核活动预算</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 数据表 -->
+      <section class="px-6 pb-6">
+        <div class="surface-1 p-5">
+          <div class="title mb-4">最新数据</div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm border-separate table-spaced">
+              <thead class="subtle">
+                <tr>
+                  <th class="text-left px-3 py-2">名称</th>
+                  <th class="text-left px-3 py-2">类型</th>
+                  <th class="text-left px-3 py-2">状态</th>
+                  <th class="text-left px-3 py-2">更新时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-[color:var(--surface-1)] shadow-sm">
+                  <td class="px-3 py-3 rounded-l-lg border border-[color:var(--border)]">亲子运动会</td>
+                  <td class="px-3 py-3 border border-[color:var(--border)]">活动</td>
+                  <td class="px-3 py-3 border border-[color:var(--border)]"><span class="chip">进行中</span></td>
+                  <td class="px-3 py-3 rounded-r-lg border border-[color:var(--border)]">今天 09:15</td>
+                </tr>
+                <tr class="bg-[color:var(--surface-1)] shadow-sm">
+                  <td class="px-3 py-3 rounded-l-lg border border-[color:var(--border)]">秋季招生</td>
+                  <td class="px-3 py-3 border border-[color:var(--border)]">营销</td>
+                  <td class="px-3 py-3 border border-[color:var(--border)]"><span class="chip chip--amber">筹备</span></td>
+                  <td class="px-3 py-3 rounded-r-lg border border-[color:var(--border)]">昨天 16:40</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 页脚 -->
+      <footer class="px-6 pb-6 subtle text-xs">© 幼儿园管理系统 · v1.0.0</footer>
+    </main>
+  </div>
+
+  <!-- 浮动主题切换按钮 -->
+  <button class="theme-fab" onclick="(function(){const b=document.body;const dark=b.classList.toggle('theme-dark');b.classList.toggle('theme-light',!dark);})()" title="切换主题">
+    <i data-lucide="moon"></i>
+  </button>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

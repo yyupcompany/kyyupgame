@@ -1,0 +1,408 @@
+/**
+ * RTP音频流处理服务
+ * 
+ * 功能：
+ * 1. 接收来自SIP服务器的RTP音频流
+ * 2. 将音频流发送给豆包实时语音服务进行ASR+LLM+TTS处理
+ * 3. 将合成的语音通过RTP发送回SIP服务器
+ * 
+ * RTP协议：
+ * - 端口范围：10000-20000
+ * - 编码格式：PCM 16kHz 16bit mono
+ * - 传输协议：UDP
+ */
+
+import dgram from 'dgram';
+import { EventEmitter } from 'events';
+import { doubaoRealtimeVoiceService } from './doubao-realtime-voice.service';
+
+interface RTPSession {
+  callId: string;
+  localPort: number;
+  remoteHost: string;
+  remotePort: number;
+  socket: dgram.Socket;
+  voiceSessionId?: string;
+  audioBuffer: Buffer[];
+  lastPacketTime: number;
+  sequenceNumber: number;
+  timestamp: number;
+  ssrc: number;
+}
+
+interface RTPHeader {
+  version: number;
+  padding: boolean;
+  extension: boolean;
+  csrcCount: number;
+  marker: boolean;
+  payloadType: number;
+  sequenceNumber: number;
+  timestamp: number;
+  ssrc: number;
+}
+
+export class RTPAudioHandlerService extends EventEmitter {
+  private static instance: RTPAudioHandlerService;
+  private activeSessions: Map<string, RTPSession> = new Map();
+  private portPool: Set<number> = new Set();
+  private readonly PORT_RANGE_START = 10000;
+  private readonly PORT_RANGE_END = 20000;
+  private readonly AUDIO_BUFFER_SIZE = 48000; // 1.5秒的PCM数据 (16kHz * 2 bytes * 1.5)
+
+  private constructor() {
+    super();
+    this.initializePortPool();
+    this.setupVoiceServiceListeners();
+  }
+
+  static getInstance(): RTPAudioHandlerService {
+    if (!RTPAudioHandlerService.instance) {
+      RTPAudioHandlerService.instance = new RTPAudioHandlerService();
+    }
+    return RTPAudioHandlerService.instance;
+  }
+
+  /**
+   * 初始化端口池
+   */
+  private initializePortPool(): void {
+    for (let port = this.PORT_RANGE_START; port <= this.PORT_RANGE_END; port += 2) {
+      this.portPool.add(port);
+    }
+    console.log(`📊 RTP端口池初始化完成: ${this.portPool.size} 个可用端口`);
+  }
+
+  /**
+   * 分配RTP端口
+   */
+  private allocatePort(): number | null {
+    const availablePorts = Array.from(this.portPool);
+    if (availablePorts.length === 0) {
+      console.error('❌ 没有可用的RTP端口');
+      return null;
+    }
+    const port = availablePorts[0];
+    this.portPool.delete(port);
+    return port;
+  }
+
+  /**
+   * 释放RTP端口
+   */
+  private releasePort(port: number): void {
+    this.portPool.add(port);
+  }
+
+  /**
+   * 设置语音服务监听器
+   */
+  private setupVoiceServiceListeners(): void {
+    // 监听AI语音回复
+    doubaoRealtimeVoiceService.on('ai-response', (data: any) => {
+      this.handleAIResponse(data);
+    });
+
+    // 监听会话错误
+    doubaoRealtimeVoiceService.on('session-error', (data: any) => {
+      console.error(`❌ 语音服务错误 (${data.callId}):`, data.error);
+      this.emit('session-error', data);
+    });
+  }
+
+  /**
+   * 创建RTP会话
+   */
+  public async createSession(
+    callId: string,
+    remoteHost: string,
+    remotePort: number,
+    customerId?: number,
+    systemPrompt?: string
+  ): Promise<{ localPort: number; sessionId: string }> {
+    const localPort = this.allocatePort();
+    if (!localPort) {
+      throw new Error('无法分配RTP端口');
+    }
+
+    // 创建UDP socket
+    const socket = dgram.createSocket('udp4');
+
+    // 绑定本地端口
+    await new Promise<void>((resolve, reject) => {
+      socket.bind(localPort, () => {
+        console.log(`✅ RTP Socket绑定到端口: ${localPort}`);
+        resolve();
+      });
+      socket.on('error', reject);
+    });
+
+    // 创建豆包实时语音会话
+    const voiceSessionId = await doubaoRealtimeVoiceService.createSession(
+      callId,
+      customerId,
+      systemPrompt
+    );
+
+    // 创建RTP会话
+    const session: RTPSession = {
+      callId,
+      localPort,
+      remoteHost,
+      remotePort,
+      socket,
+      voiceSessionId,
+      audioBuffer: [],
+      lastPacketTime: Date.now(),
+      sequenceNumber: Math.floor(Math.random() * 65536),
+      timestamp: 0,
+      ssrc: Math.floor(Math.random() * 0xFFFFFFFF)
+    };
+
+    // 设置socket监听器
+    socket.on('message', (msg: Buffer, rinfo: dgram.RemoteInfo) => {
+      this.handleRTPPacket(callId, msg, rinfo);
+    });
+
+    socket.on('error', (error: Error) => {
+      console.error(`❌ RTP Socket错误 (${callId}):`, error.message);
+      this.emit('rtp-error', { callId, error: error.message });
+    });
+
+    this.activeSessions.set(callId, session);
+    console.log(`📞 创建RTP会话: ${callId}, 本地端口: ${localPort}, 远程: ${remoteHost}:${remotePort}`);
+
+    return { localPort, sessionId: voiceSessionId };
+  }
+
+  /**
+   * 处理接收到的RTP数据包
+   */
+  private handleRTPPacket(callId: string, packet: Buffer, rinfo: dgram.RemoteInfo): void {
+    const session = this.activeSessions.get(callId);
+    if (!session) {
+      console.warn(`⚠️  未找到RTP会话: ${callId}`);
+      return;
+    }
+
+    // 解析RTP头部
+    const header = this.parseRTPHeader(packet);
+    if (!header) {
+      console.error(`❌ 无效的RTP数据包 (${callId})`);
+      return;
+    }
+
+    // 提取音频数据（跳过RTP头部，通常是12字节）
+    const audioData = packet.slice(12);
+    
+    // 添加到缓冲区
+    session.audioBuffer.push(audioData);
+    session.lastPacketTime = Date.now();
+
+    // 计算缓冲区大小
+    const totalBufferSize = session.audioBuffer.reduce((sum, buf) => sum + buf.length, 0);
+
+    // 当缓冲区达到1秒数据时，发送给语音服务
+    if (totalBufferSize >= this.AUDIO_BUFFER_SIZE) {
+      this.flushAudioBuffer(callId);
+    }
+  }
+
+  /**
+   * 解析RTP头部
+   */
+  private parseRTPHeader(packet: Buffer): RTPHeader | null {
+    if (packet.length < 12) {
+      return null;
+    }
+
+    const byte0 = packet[0];
+    const byte1 = packet[1];
+
+    return {
+      version: (byte0 >> 6) & 0x03,
+      padding: ((byte0 >> 5) & 0x01) === 1,
+      extension: ((byte0 >> 4) & 0x01) === 1,
+      csrcCount: byte0 & 0x0F,
+      marker: ((byte1 >> 7) & 0x01) === 1,
+      payloadType: byte1 & 0x7F,
+      sequenceNumber: packet.readUInt16BE(2),
+      timestamp: packet.readUInt32BE(4),
+      ssrc: packet.readUInt32BE(8)
+    };
+  }
+
+  /**
+   * 刷新音频缓冲区
+   */
+  private async flushAudioBuffer(callId: string): Promise<void> {
+    const session = this.activeSessions.get(callId);
+    if (!session || session.audioBuffer.length === 0) {
+      return;
+    }
+
+    // 合并音频数据
+    const audioData = Buffer.concat(session.audioBuffer);
+    session.audioBuffer = [];
+
+    console.log(`📤 [RTP→ASR] 发送音频到语音服务: ${audioData.length} bytes (${callId})`);
+    console.log(`   VoiceSessionId: ${session.voiceSessionId}`);
+
+    // 发送给豆包实时语音服务
+    if (session.voiceSessionId) {
+      try {
+        await doubaoRealtimeVoiceService.sendAudio(session.voiceSessionId, audioData);
+        console.log(`✅ [RTP→ASR] 音频发送成功 (${callId})`);
+      } catch (error) {
+        console.error(`❌ [RTP→ASR] 发送音频失败 (${callId}):`, error);
+      }
+    } else {
+      console.error(`❌ [RTP→ASR] VoiceSessionId为空 (${callId})`);
+    }
+  }
+
+  /**
+   * 处理AI语音回复
+   */
+  private handleAIResponse(data: any): void {
+    const { sessionId, callId, audioData, text } = data;
+
+    // 优先使用callId，如果没有则通过sessionId查找
+    let targetCallId = callId;
+    if (!targetCallId) {
+      // 通过sessionId查找callId
+      for (const [cid, session] of this.activeSessions.entries()) {
+        if (session.voiceSessionId === sessionId) {
+          targetCallId = cid;
+          break;
+        }
+      }
+    }
+
+    const session = this.activeSessions.get(targetCallId);
+
+    if (!session) {
+      console.warn(`⚠️  未找到RTP会话: ${targetCallId || sessionId}`);
+      return;
+    }
+
+    console.log(`🔊 发送AI语音回复 (${targetCallId}): ${text}, 音频大小: ${audioData?.length || 0} bytes`);
+
+    if (!audioData || audioData.length === 0) {
+      console.error(`❌ AI回复音频数据为空 (${targetCallId})`);
+      return;
+    }
+
+    // 将音频数据封装成RTP包并发送
+    this.sendRTPAudio(targetCallId, audioData);
+  }
+
+  /**
+   * 发送RTP音频数据
+   */
+  private sendRTPAudio(callId: string, audioData: Buffer): void {
+    const session = this.activeSessions.get(callId);
+    if (!session) {
+      return;
+    }
+
+    // 将音频数据分割成RTP包（每包160字节，对应10ms音频）
+    const PACKET_SIZE = 160;
+    const packets = [];
+
+    for (let offset = 0; offset < audioData.length; offset += PACKET_SIZE) {
+      const chunk = audioData.slice(offset, Math.min(offset + PACKET_SIZE, audioData.length));
+      const rtpPacket = this.buildRTPPacket(session, chunk);
+      packets.push(rtpPacket);
+      
+      session.sequenceNumber = (session.sequenceNumber + 1) % 65536;
+      session.timestamp += 160; // 10ms @ 16kHz
+    }
+
+    // 发送所有RTP包
+    packets.forEach((packet, index) => {
+      setTimeout(() => {
+        session.socket.send(packet, session.remotePort, session.remoteHost, (error) => {
+          if (error) {
+            console.error(`❌ 发送RTP包失败 (${callId}):`, error.message);
+          }
+        });
+      }, index * 10); // 每10ms发送一个包
+    });
+
+    console.log(`📤 发送RTP音频: ${packets.length} 个包 (${callId})`);
+  }
+
+  /**
+   * 构建RTP数据包
+   */
+  private buildRTPPacket(session: RTPSession, audioData: Buffer): Buffer {
+    const header = Buffer.alloc(12);
+    
+    // Byte 0: V(2) P(1) X(1) CC(4)
+    header[0] = 0x80; // Version 2, no padding, no extension, no CSRC
+    
+    // Byte 1: M(1) PT(7)
+    header[1] = 0x00; // No marker, payload type 0 (PCMU)
+    
+    // Bytes 2-3: Sequence number
+    header.writeUInt16BE(session.sequenceNumber, 2);
+    
+    // Bytes 4-7: Timestamp
+    header.writeUInt32BE(session.timestamp, 4);
+    
+    // Bytes 8-11: SSRC
+    header.writeUInt32BE(session.ssrc, 8);
+    
+    return Buffer.concat([header, audioData]);
+  }
+
+  /**
+   * 结束RTP会话
+   */
+  public async endSession(callId: string): Promise<void> {
+    const session = this.activeSessions.get(callId);
+    if (!session) {
+      return;
+    }
+
+    console.log(`📞 结束RTP会话: ${callId}`);
+
+    // 刷新剩余的音频缓冲区
+    if (session.audioBuffer.length > 0) {
+      await this.flushAudioBuffer(callId);
+    }
+
+    // 结束语音服务会话
+    if (session.voiceSessionId) {
+      await doubaoRealtimeVoiceService.endSession(session.voiceSessionId);
+    }
+
+    // 关闭socket
+    session.socket.close();
+
+    // 释放端口
+    this.releasePort(session.localPort);
+
+    // 删除会话
+    this.activeSessions.delete(callId);
+  }
+
+  /**
+   * 获取会话信息
+   */
+  public getSessionInfo(callId: string): RTPSession | undefined {
+    return this.activeSessions.get(callId);
+  }
+
+  /**
+   * 获取活跃会话数
+   */
+  public getActiveSessionCount(): number {
+    return this.activeSessions.size;
+  }
+}
+
+// 导出单例
+export const rtpAudioHandlerService = RTPAudioHandlerService.getInstance();
+

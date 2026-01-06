@@ -1,0 +1,330 @@
+{
+  "name": "聚合函数字典",
+  "description": "中文聚合表达式到SQL聚合函数的映射",
+  "version": "1.0.0",
+  "aggregations": {
+    "// === 数量统计 ===": "注释",
+    "总数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "总数统计",
+      "alias": "total_count"
+    },
+    "数量": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "数量统计",
+      "alias": "count"
+    },
+    "个数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "个数统计",
+      "alias": "count"
+    },
+    "人数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "人数统计",
+      "alias": "person_count"
+    },
+    "学生数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "学生数量",
+      "alias": "student_count",
+      "table": "students"
+    },
+    "教师数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "教师数量",
+      "alias": "teacher_count",
+      "table": "teachers"
+    },
+    "班级数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "班级数量",
+      "alias": "class_count",
+      "table": "classes"
+    },
+    "活动数": {
+      "sql": "COUNT(*)",
+      "type": "count",
+      "description": "活动数量",
+      "alias": "activity_count",
+      "table": "activities"
+    },
+
+    "// === 数值统计 ===": "注释",
+    "平均值": {
+      "sql": "AVG({field})",
+      "type": "average",
+      "description": "平均值",
+      "alias": "average_value",
+      "requiresField": true
+    },
+    "平均数": {
+      "sql": "AVG({field})",
+      "type": "average",
+      "description": "平均数",
+      "alias": "average",
+      "requiresField": true
+    },
+    "均值": {
+      "sql": "AVG({field})",
+      "type": "average",
+      "description": "均值",
+      "alias": "mean",
+      "requiresField": true
+    },
+    "平均年龄": {
+      "sql": "AVG(YEAR(NOW()) - YEAR(birth_date))",
+      "type": "average",
+      "description": "平均年龄",
+      "alias": "average_age",
+      "field": "birth_date"
+    },
+    "平均工资": {
+      "sql": "AVG(salary)",
+      "type": "average",
+      "description": "平均工资",
+      "alias": "average_salary",
+      "field": "salary",
+      "table": "teachers"
+    },
+    "平均费用": {
+      "sql": "AVG(fee)",
+      "type": "average",
+      "description": "平均费用",
+      "alias": "average_fee",
+      "field": "fee"
+    },
+
+    "最大值": {
+      "sql": "MAX({field})",
+      "type": "maximum",
+      "description": "最大值",
+      "alias": "max_value",
+      "requiresField": true
+    },
+    "最高值": {
+      "sql": "MAX({field})",
+      "type": "maximum",
+      "description": "最高值",
+      "alias": "max_value",
+      "requiresField": true
+    },
+    "最多": {
+      "sql": "MAX({field})",
+      "type": "maximum",
+      "description": "最多",
+      "alias": "max_count",
+      "requiresField": true
+    },
+    "最高工资": {
+      "sql": "MAX(salary)",
+      "type": "maximum",
+      "description": "最高工资",
+      "alias": "max_salary",
+      "field": "salary",
+      "table": "teachers"
+    },
+    "最高费用": {
+      "sql": "MAX(fee)",
+      "type": "maximum",
+      "description": "最高费用",
+      "alias": "max_fee",
+      "field": "fee"
+    },
+
+    "最小值": {
+      "sql": "MIN({field})",
+      "type": "minimum",
+      "description": "最小值",
+      "alias": "min_value",
+      "requiresField": true
+    },
+    "最低值": {
+      "sql": "MIN({field})",
+      "type": "minimum",
+      "description": "最低值",
+      "alias": "min_value",
+      "requiresField": true
+    },
+    "最少": {
+      "sql": "MIN({field})",
+      "type": "minimum",
+      "description": "最少",
+      "alias": "min_count",
+      "requiresField": true
+    },
+    "最低工资": {
+      "sql": "MIN(salary)",
+      "type": "minimum",
+      "description": "最低工资",
+      "alias": "min_salary",
+      "field": "salary",
+      "table": "teachers"
+    },
+    "最低费用": {
+      "sql": "MIN(fee)",
+      "type": "minimum",
+      "description": "最低费用",
+      "alias": "min_fee",
+      "field": "fee"
+    },
+
+    "总和": {
+      "sql": "SUM({field})",
+      "type": "sum",
+      "description": "总和",
+      "alias": "total_sum",
+      "requiresField": true
+    },
+    "合计": {
+      "sql": "SUM({field})",
+      "type": "sum",
+      "description": "合计",
+      "alias": "sum",
+      "requiresField": true
+    },
+    "总计": {
+      "sql": "SUM({field})",
+      "type": "sum",
+      "description": "总计",
+      "alias": "total",
+      "requiresField": true
+    },
+    "总工资": {
+      "sql": "SUM(salary)",
+      "type": "sum",
+      "description": "总工资",
+      "alias": "total_salary",
+      "field": "salary",
+      "table": "teachers"
+    },
+    "总费用": {
+      "sql": "SUM(fee)",
+      "type": "sum",
+      "description": "总费用",
+      "alias": "total_fee",
+      "field": "fee"
+    },
+    "总收入": {
+      "sql": "SUM(amount)",
+      "type": "sum",
+      "description": "总收入",
+      "alias": "total_income",
+      "field": "amount"
+    },
+
+    "// === 分组统计 ===": "注释",
+    "按性别统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按性别分组统计",
+      "alias": "count_by_gender",
+      "groupBy": "gender"
+    },
+    "按班级统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按班级分组统计",
+      "alias": "count_by_class",
+      "groupBy": "class_id"
+    },
+    "按年级统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按年级分组统计",
+      "alias": "count_by_grade",
+      "groupBy": "grade"
+    },
+    "按状态统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按状态分组统计",
+      "alias": "count_by_status",
+      "groupBy": "status"
+    },
+    "按类型统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按类型分组统计",
+      "alias": "count_by_type",
+      "groupBy": "type"
+    },
+    "按月统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按月分组统计",
+      "alias": "count_by_month",
+      "groupBy": "DATE_FORMAT(created_at, '%Y-%m')"
+    },
+    "按年统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按年分组统计",
+      "alias": "count_by_year",
+      "groupBy": "YEAR(created_at)"
+    },
+    "按日统计": {
+      "sql": "COUNT(*)",
+      "type": "group_count",
+      "description": "按日分组统计",
+      "alias": "count_by_date",
+      "groupBy": "DATE(created_at)"
+    },
+
+    "// === 百分比统计 ===": "注释",
+    "占比": {
+      "sql": "COUNT(*) * 100.0 / (SELECT COUNT(*) FROM {table})",
+      "type": "percentage",
+      "description": "占比统计",
+      "alias": "percentage",
+      "requiresTable": true
+    },
+    "百分比": {
+      "sql": "COUNT(*) * 100.0 / (SELECT COUNT(*) FROM {table})",
+      "type": "percentage",
+      "description": "百分比统计",
+      "alias": "percentage",
+      "requiresTable": true
+    },
+    "比例": {
+      "sql": "COUNT(*) * 1.0 / (SELECT COUNT(*) FROM {table})",
+      "type": "ratio",
+      "description": "比例统计",
+      "alias": "ratio",
+      "requiresTable": true
+    },
+
+    "// === 排名统计 ===": "注释",
+    "排名": {
+      "sql": "ROW_NUMBER() OVER (ORDER BY {field} DESC)",
+      "type": "ranking",
+      "description": "排名",
+      "alias": "rank",
+      "requiresField": true,
+      "requiresOrderBy": true
+    },
+    "排行": {
+      "sql": "ROW_NUMBER() OVER (ORDER BY {field} DESC)",
+      "type": "ranking",
+      "description": "排行",
+      "alias": "ranking",
+      "requiresField": true,
+      "requiresOrderBy": true
+    },
+    "名次": {
+      "sql": "ROW_NUMBER() OVER (ORDER BY {field} DESC)",
+      "type": "ranking",
+      "description": "名次",
+      "alias": "position",
+      "requiresField": true,
+      "requiresOrderBy": true
+    }
+  }
+}

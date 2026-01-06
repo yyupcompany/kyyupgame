@@ -1,0 +1,2019 @@
+/**
+ * CLS优化样式文件
+ * 防止累积布局偏移，提升Web Core Vitals性能
+ */
+
+/* 1. 图片和媒体元素优化 */
+img, video, iframe, object, embed {
+  /* 为所有媒体元素设置最小尺寸，防止加载时布局跳动 */
+  min-width: 1px;
+  min-height: 1px;
+  
+  /* 确保图片容器有默认尺寸 */
+  &:not([width]):not([height]) {
+    aspect-ratio: 1;
+    width: auto;
+    height: auto;
+  }
+  
+  /* 防止图片加载时的布局偏移 */
+  &:not([loading="lazy"]) {
+    content-visibility: auto;
+  }
+  
+  /* 加载状态优化 */
+  &[loading="lazy"] {
+    /* 懒加载图片应该有占位符 */
+    background-color: var(--bg-tertiary);
+    background-image: 
+      linear-gradient(
+        45deg,
+        var(--bg-secondary) 25%,
+        transparent 25%
+      ),
+      linear-gradient(
+        -45deg,
+        var(--bg-secondary) 25%,
+        transparent 25%
+      );
+    background-size: 12px 12px;
+    background-position: 0 0, 6px 6px;
+  }
+}
+
+/* 2. 字体加载优化 */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap; /* 避免字体加载时的布局偏移 */
+}
+
+/* 系统字体栈，减少字体加载时的CLS */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 3. 骨架屏和加载状态优化 */
+.loading-container {
+  /* 使用动态高度，避免固定高度造成的布局偏移 */
+  min-height: 100vh; /* 回退支持 */
+  min-height: 100dvh; /* 动态视口高度，避免移动端地址栏影响 */
+  max-height: 100vh; /* 回退支持 */
+  max-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  contain: layout;
+  
+  /* 针对不同内容类型的优化 */
+  &.loading-container--table {
+    min-height: 400px;
+    max-height: 600px;
+  }
+  
+  &.loading-container--card {
+    min-height: 200px;
+    max-height: 400px;
+  }
+  
+  &.loading-container--detail {
+    min-height: 300px;
+    max-height: 800px;
+  }
+  
+  &.loading-container--list {
+    min-height: 250px;
+    max-height: 500px;
+  }
+  
+  /* 骨架屏动画 - 修复CLS问题 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 1;
+  }
+  
+  /* 自适应父容器高度 */
+  &.loading-container--auto {
+    min-height: auto;
+    max-height: none;
+    height: 100%;
+  }
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 4. 图表和数据可视化优化 */
+.chart-container {
+  /* 为图表容器设置固定高度 */
+  height: var(--chart-height, 300px);
+  min-height: 200px;
+  position: relative;
+  width: 100%;
+  contain: layout;
+  
+  /* 加载状态占位符 */
+  &.loading {
+    background: linear-gradient(
+      90deg,
+      var(--bg-secondary) 25%,
+      var(--bg-tertiary) 50%,
+      var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 5. 表格和列表优化 */
+.el-table {
+  /* 表格最小高度，防止数据加载时跳动 */
+  min-height: 200px;
+  width: 100%;
+  table-layout: fixed;
+  contain: layout;
+  
+  /* 空状态占位符 */
+  .el-table__empty-block {
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  /* 表格行高度固定 */
+  .el-table__row {
+    height: 48px;
+    
+    td {
+      height: 48px;
+      vertical-align: middle;
+    }
+  }
+}
+
+/* 6. 卡片组件优化 */
+.app-card, .el-card {
+  /* 卡片最小高度 */
+  min-height: 100px;
+  width: 100%;
+  position: relative;
+  contain: layout;
+  
+  /* 防止内容突然出现 */
+  .card-content {
+    min-height: 50px;
+    position: relative;
+  }
+  
+  /* 卡片加载状态 */
+  &.loading {
+    .card-content {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      background: linear-gradient(
+        90deg,
+        var(--bg-secondary) 25%,
+        var(--bg-tertiary) 50%,
+        var(--bg-secondary) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
+      border-radius: 4px;
+    }
+  }
+}
+
+/* 7. 导航菜单优化 */
+.sidebar-menu {
+  /* 菜单项预留空间 */
+  .el-menu-item, .el-sub-menu {
+    min-height: 48px;
+  }
+}
+
+/* 8. 响应式图片优化 */
+.responsive-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  
+  /* 16:9 宽高比 */
+  &.ratio-16-9 {
+    padding-bottom: 56.25%;
+  }
+  
+  /* 4:3 宽高比 */
+  &.ratio-4-3 {
+    padding-bottom: 75%;
+  }
+  
+  /* 正方形 */
+  &.ratio-1-1 {
+    padding-bottom: 100%;
+  }
+  
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* 9. 文本内容优化 */
+.text-content {
+  /* 防止文本加载时的布局偏移 */
+  line-height: 1.6;
+  
+  /* 文本占位符 */
+  &.loading {
+    color: transparent;
+    background: linear-gradient(
+      90deg,
+      var(--bg-secondary) 25%,
+      var(--bg-tertiary) 50%,
+      var(--bg-secondary) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 4px;
+  }
+}
+
+/* 10. 统计数据优化 */
+.statistics-value {
+  /* 统计数值容器固定高度 */
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  
+  /* 数字加载动画 */
+  &.loading {
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 24px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 11. 通用骨架屏组件 */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 4px;
+  
+  &.skeleton-text {
+    height: 1em;
+    margin: 0.5em 0;
+  }
+  
+  &.skeleton-title {
+    height: 2em;
+    width: 60%;
+    margin: 1em 0;
+  }
+  
+  &.skeleton-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  &.skeleton-button {
+    width: 80px;
+    height: 32px;
+    border-radius: 4px;
+  }
+}
+
+/* 12. 防止Flash of Unstyled Content (FOUC) */
+.vue-transition {
+  /* Vue过渡动画优化 */
+  &.fade-enter-active,
+  &.fade-leave-active {
+    transition: opacity 0.3s ease;
+  }
+  
+  &.fade-enter-from,
+  &.fade-leave-to {
+    opacity: 0;
+  }
+}
+
+/* 13. 关键资源预加载样式 */
+.preload-content {
+  /* 预加载内容容器 */
+  visibility: hidden;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  
+  &.loaded {
+    visibility: visible;
+    position: static;
+    top: auto;
+    left: auto;
+  }
+}
+
+/* 14. 移动端优化 */
+@media (max-width: var(--breakpoint-md)) {
+  .mobile-optimized {
+    /* 移动端减少动画，提升性能 */
+    * {
+      animation-duration: 0.1s !important;
+      transition-duration: 0.1s !important;
+    }
+  }
+}
+
+/* 15. 特殊情况处理 */
+.layout-stable {
+  /* 强制布局稳定 */
+  contain: layout;
+  
+  /* 防止子元素影响布局 */
+  overflow: hidden;
+  
+  /* 确保容器尺寸固定 */
+  &.fixed-height {
+    height: 100%;
+    max-height: 100%;
+  }
+}
+
+/* 16. 高优先级修复 */
+.cls-critical-fix {
+  /* 关键CLS修复 */
+  .logo-image {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .sidebar-menu .el-menu-item {
+    min-height: 48px !important;
+  }
+  
+  .chart-container {
+    height: 300px !important;
+    min-height: 200px !important;
+  }
+  
+  .statistics-card {
+    min-height: 120px !important;
+  }
+}
+
+/* 17. 2024年关键CLS修复 - 针对具体报告的CLS问题 */
+.cls-performance-fix {
+  /* 用户头像固定尺寸 */
+  .user-avatar img {
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+  }
+  
+  /* 图片预览固定尺寸 */
+  .image-preview img {
+    max-width: 600px !important;
+    max-height: 400px !important;
+    object-fit: contain !important;
+  }
+  
+  /* 模板缩略图固定尺寸 */
+  .template-thumbnail img {
+    width: 120px !important;
+    height: 160px !important;
+    object-fit: cover !important;
+    border-radius: 4px !important;
+  }
+  
+  /* 海报模板缩略图固定尺寸 */
+  .poster-thumbnail img {
+    width: 200px !important;
+    height: 280px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+  }
+  
+  /* 表格固定最小高度 */
+  .el-table {
+    min-height: 300px !important;
+  }
+  
+  /* 图表容器高度使用变量，默认自适应，允许页面覆盖 */
+  .chart-container {
+    height: var(--chart-height, auto) !important;
+    min-height: var(--chart-min-height, 300px) !important;
+  }
+
+  /* 统计图表容器 */
+  .statistics-chart-container {
+    height: var(--chart-height, auto) !important;
+    min-height: var(--chart-min-height, 300px) !important;
+  }
+
+  /* 仪表盘图表容器 */
+  .dashboard-chart-container {
+    height: var(--chart-height, auto) !important;
+    min-height: var(--chart-min-height, 300px) !important;
+  }
+}
+
+/* 18. 2025年CLS严重问题修复 - 解决0.227的布局偏移问题 */
+.cls-critical-fix-2025 {
+  /* 页面容器优化 */
+  .page-container {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    contain: layout !important;
+  }
+  
+  /* 详情页面内容区优化 */
+  .detail-content {
+    flex: 1 !important;
+    min-height: 0 !important;
+    contain: layout !important;
+  }
+  
+  /* 防止Element Plus组件导致的布局偏移 */
+  .el-skeleton {
+    width: 100% !important;
+    contain: layout !important;
+  }
+  
+  .el-skeleton__item {
+    height: 20px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  /* 卡片组件稳定化 */
+  .el-card {
+    min-height: 120px !important;
+    contain: layout !important;
+  }
+  
+  .el-card__header {
+    min-height: 48px !important;
+    padding: var(--spacing-md) !important;
+    contain: layout !important;
+  }
+  
+  .el-card__body {
+    min-height: 72px !important;
+    contain: layout !important;
+  }
+  
+  /* 按钮组优化 */
+  .detail-header .actions {
+    min-height: 40px !important;
+    contain: layout !important;
+  }
+  
+  /* 信息网格优化 */
+  .info-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: var(--spacing-md) !important;
+    contain: layout !important;
+  }
+  
+  .info-item {
+    min-height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    contain: layout !important;
+  }
+  
+  /* 标题区域优化 */
+  .detail-header {
+    min-height: 80px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    contain: layout !important;
+  }
+  
+  .class-title {
+    min-height: 40px !important;
+    line-height: 40px !important;
+    contain: layout !important;
+  }
+}
+
+/* 19. 2025年7月CLS核心问题修复 - MainLayout第53行布局偏移 */
+.cls-critical-sidebar-fix {
+  /* 侧边栏菜单核心优化 */
+  .sidebar-menu {
+    /* 为菜单容器预分配固定高度 */
+    min-height: 650px !important;
+    max-height: 650px !important;
+    contain: layout !important;
+    overflow-y: auto !important;
+    
+    /* 优化菜单项的CLS性能 */
+    .cls-menu-optimized {
+      /* 强制保持空间分配 */
+      contain: layout !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      will-change: auto !important;
+      
+      /* 确保隐藏时不影响布局 */
+      &[v-show="false"] {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        /* 使用transform代替display:none */
+        transform: translateY(-100%) !important;
+        position: absolute !important;
+        z-index: -1 !important;
+        /* 保留原始高度 */
+        min-height: 50px !important;
+        max-height: 50px !important;
+      }
+    }
+    
+    /* 确保菜单项固定高度 */
+    .el-sub-menu {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      contain: layout !important;
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      
+      /* 菜单标题固定高度 */
+      .el-sub-menu__title {
+        height: 50px !important;
+        line-height: 50px !important;
+        contain: layout !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 20px !important;
+      }
+      
+      /* 菜单项图标固定尺寸 */
+      .el-icon {
+        width: 20px !important;
+        height: 20px !important;
+        margin-right: 8px !important;
+        flex-shrink: 0 !important;
+      }
+      
+      /* 菜单项文本固定高度 */
+      span {
+        line-height: 20px !important;
+        height: 20px !important;
+        display: block !important;
+        contain: layout !important;
+      }
+    }
+    
+    /* 子菜单项固定高度 */
+    .el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      line-height: 40px !important;
+      contain: layout !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+  }
+  
+  /* 权限检查时的稳定化 */
+  .sidebar-menu [v-show] {
+    /* 为v-show元素预分配空间 */
+    min-height: 50px !important;
+    contain: layout !important;
+    
+    /* 隐藏时保留空间 */
+    &[style*="display: none"] {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      /* 保留高度避免布局偏移 */
+      min-height: 50px !important;
+      max-height: 50px !important;
+    }
+  }
+  
+  /* 骨架屏优化 - 与实际菜单项完全匹配 */
+  .sidebar-loading {
+    .loading-placeholder {
+      .placeholder-item {
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        margin-bottom: 0 !important;
+        border-radius: 0 !important;
+        contain: layout !important;
+        
+        /* 确保8个占位符项目 */
+        &:nth-child(1) { width: 90% !important; }
+        &:nth-child(2) { width: 85% !important; }
+        &:nth-child(3) { width: 80% !important; }
+        &:nth-child(4) { width: 88% !important; }
+        &:nth-child(5) { width: 82% !important; }
+        &:nth-child(6) { width: 86% !important; }
+        &:nth-child(7) { width: 84% !important; }
+        &:nth-child(8) { width: 90% !important; }
+      }
+    }
+  }
+}
+
+/* 20. 2025年7月CLS严重问题终极修复 - 0.151 → 0.05 */
+.cls-ultimate-fix-2025 {
+  /* 页面级别的CLS优化 */
+  .app-container {
+    /* 强制硬件加速 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+
+    /* 确保容器尺寸稳定，但允许内容滚动 */
+    width: 100vw !important;
+    height: 100vh !important;
+    overflow: visible !important;
+    contain: layout !important;
+  }
+  
+  /* 侧边栏强化优化 */
+  .sidebar {
+    /* 固定侧边栏尺寸 - 调整为240px */
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    contain: layout !important;
+    transform: translateZ(0) !important;
+    
+    &.sidebar-collapsed {
+      width: 64px !important;
+      min-width: 64px !important;
+      max-width: 64px !important;
+    }
+    
+    /* 菜单项预分配空间 */
+    .el-menu {
+      min-height: 600px !important;
+      contain: layout !important;
+      
+      /* 所有菜单项统一高度 */
+      .el-sub-menu,
+      .el-menu-item {
+        min-height: 50px !important;
+        max-height: 50px !important;
+        contain: layout !important;
+        transform: translateZ(0) !important;
+        
+        /* 确保icon尺寸固定 */
+        .el-icon {
+          width: 16px !important;
+          height: 16px !important;
+          flex-shrink: 0 !important;
+        }
+      }
+    }
+  }
+  
+  /* 主内容区域优化 */
+  .main-container {
+    /* 确保主内容区域尺寸稳定 */
+    flex: 1 !important;
+    min-width: 0 !important;
+    contain: layout !important;
+    transform: translateZ(0) !important;
+    
+    /* 导航栏固定高度 */
+    .navbar {
+      height: 60px !important;
+      min-height: 60px !important;
+      max-height: 60px !important;
+      contain: layout !important;
+    }
+    
+    /* 页面内容区域 */
+    .page-content {
+      flex: 1 !important;
+      min-height: 0 !important;
+      contain: layout !important;
+      overflow-y: auto !important;
+    }
+  }
+  
+  /* 权限检查期间的占位符优化 */
+  .permission-placeholder {
+    /* 为权限检查期间的菜单项预留空间 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    opacity: 0.3 !important;
+    contain: layout !important;
+    pointer-events: none !important;
+    
+    /* 骨架屏样式 */
+    background: linear-gradient(
+      90deg,
+      var(--bg-tertiary) 25%,
+      var(--bg-hover) 50%,
+      var(--bg-tertiary) 75%
+    ) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer-fast 1s infinite !important;
+  }
+  
+  /* 快速骨架屏动画 */
+  @keyframes shimmer-fast {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* 确保所有图片都有固定尺寸 */
+  img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    
+    /* Logo图片特殊处理 */
+    &.logo-image {
+      width: 40px !important;
+      height: 40px !important;
+      object-fit: cover !important;
+    }
+  }
+}
+
+/* 21. 2025年7月CLS严重问题急救修复 - 0.223 → 0.05 (MainLayout:53行) */
+.cls-emergency-fix-2025 {
+  /* 针对MainLayout第53行的急救修复 */
+  
+  /* 权限加载状态预设 */
+  .sidebar-menu {
+    /* 确保菜单容器在权限加载前就有正确的高度 */
+    min-height: 700px !important;
+    max-height: 700px !important;
+    contain: layout style !important;
+    overflow-y: auto !important;
+    
+    /* 硬件加速优化 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    will-change: scroll-position !important;
+    
+    /* 使用全局滚动条样式 */
+  }
+  
+  /* 菜单项动态隐藏优化 - 终极版本 */
+  .cls-menu-hidden {
+    /* 使用visibility+opacity完全避免布局计算 */
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    
+    /* 保持完整的占位空间 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    
+    /* 禁止所有可能影响布局的属性 */
+    transform: translateZ(0) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    
+    /* 强制保持display块级元素 */
+    display: block !important;
+    position: relative !important;
+    
+    /* 确保内容不可见但占位 */
+    * {
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+    
+    /* 子菜单项也保持高度 */
+    &.el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+    }
+    
+    /* 确保子菜单标题也保持高度 */
+    .el-sub-menu__title {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+    }
+  }
+  
+  /* 加载状态优化 */
+  .cls-menu-loading {
+    /* 加载状态保持完整高度 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    opacity: 0.3 !important;
+    pointer-events: none !important;
+    
+    /* 加载动画不影响布局 */
+    animation: menu-loading-stable 1.5s ease-in-out infinite !important;
+    
+    &.el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+    }
+  }
+  
+  /* 稳定的加载动画 */
+  @keyframes menu-loading-stable {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+  
+  /* 菜单项统一高度强制执行 */
+  .cls-menu-stable {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    contain: layout style !important;
+    
+    /* 确保标题区域固定高度 */
+    .el-sub-menu__title {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+      contain: layout style !important;
+    }
+  }
+  
+  /* 权限检查期间的占位符增强 */
+  .sidebar-loading {
+    /* 完全匹配真实菜单的高度 */
+    min-height: 700px !important;
+    max-height: 700px !important;
+    contain: layout !important;
+    
+    .loading-placeholder {
+      .placeholder-item {
+        /* 每个占位符严格匹配菜单项高度 */
+        min-height: 50px !important;
+        max-height: 50px !important;
+        height: 50px !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        
+        /* 确保8个主菜单项占位符 */
+        &:nth-child(1) { width: 100% !important; }
+        &:nth-child(2) { width: 100% !important; }
+        &:nth-child(3) { width: 100% !important; }
+        &:nth-child(4) { width: 100% !important; }
+        &:nth-child(5) { width: 100% !important; }
+        &:nth-child(6) { width: 100% !important; }
+        &:nth-child(7) { width: 100% !important; }
+        &:nth-child(8) { width: 100% !important; }
+      }
+    }
+  }
+  
+  /* Element Plus菜单默认样式重置 */
+  .el-menu {
+    /* 防止Element Plus的默认样式影响布局 */
+    min-height: initial !important;
+    
+    .el-sub-menu {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      contain: layout !important;
+      
+      .el-sub-menu__title {
+        min-height: 50px !important;
+        max-height: 50px !important;
+        height: 50px !important;
+        contain: layout !important;
+      }
+    }
+    
+    .el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+      contain: layout !important;
+    }
+  }
+  
+  /* 防止权限状态切换时的布局跳动 */
+  .permission-transition {
+    /* 权限状态切换时的过渡效果 */
+    transition: none !important;
+    
+    /* 确保动态条件渲染不影响布局 */
+    &[v-show] {
+      transition: opacity 0.1s ease !important;
+    }
+  }
+  
+  /* 空间预留菜单项 - 2025年7月CLS 0.303修复 */
+  .cls-menu-space-reserved {
+    /* 强制保留空间，完全避免布局偏移 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    contain: layout style !important;
+    
+    /* 确保即使隐藏也保留空间 */
+    display: block !important;
+    position: relative !important;
+    
+    /* 平滑过渡效果 */
+    transition: opacity 0.2s ease, visibility 0.2s ease !important;
+    
+    /* 确保标题区域也保持固定高度 */
+    .el-sub-menu__title {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      contain: layout style !important;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0 20px !important;
+    }
+    
+    /* 子菜单项也保持固定高度 */
+    .el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+      contain: layout style !important;
+    }
+    
+    /* 隐藏状态下的优化 */
+    &[style*="visibility: hidden"] {
+      pointer-events: none !important;
+      
+      /* 确保所有子元素也不可交互 */
+      * {
+        pointer-events: none !important;
+      }
+    }
+  }
+}
+
+/* 2025年7月CLS 0.151修复 - 优化菜单项渲染 */
+.cls-optimized-menu {
+  /* 强制保留空间，完全避免布局偏移 */
+  min-height: 50px !important;
+  max-height: 50px !important;
+  height: 50px !important;
+  contain: layout style !important;
+  
+  /* 确保即使隐藏也保留空间 */
+  display: block !important;
+  position: relative !important;
+  
+  /* 无布局偏移的隐藏方式 */
+  &.cls-menu-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    
+    /* 确保所有子元素也不可交互 */
+    * {
+      pointer-events: none !important;
+    }
+  }
+  
+  /* 加载状态优化 */
+  &.cls-menu-loading {
+    opacity: 0.3 !important;
+    
+    /* 加载动画 */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-color);
+      border-top: 2px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 1;
+    }
+  }
+  
+  /* 确保标题区域也保持固定高度 */
+  .el-sub-menu__title {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    contain: layout style !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+  
+  /* 子菜单项也保持固定高度 */
+  .el-menu-item {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+    contain: layout style !important;
+  }
+}
+
+/* 2025年7月CLS 0.151→0.02最终修复 - 菜单容器超稳定优化 */
+.sidebar-menu-container {
+  /* 超严格固定容器高度，确保零布局偏移 */
+  height: calc(100vh - 120px) !important;
+  min-height: calc(100vh - 120px) !important;
+  max-height: calc(100vh - 120px) !important;
+  width: 100% !important;
+  contain: layout style paint !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  position: relative !important;
+  
+  /* 硬件加速优化 */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: scroll-position !important;
+  
+  /* 确保骨架屏和真实菜单的切换零影响布局 */
+  .sidebar-loading {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    contain: layout style paint !important;
+    z-index: 1 !important;
+    
+    .loading-placeholder {
+      height: 100% !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      
+      .placeholder-item {
+        /* 精确匹配菜单项高度，绝对一致 */
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        flex-shrink: 0 !important;
+        
+        /* 高性能骨架屏动画 */
+        background: linear-gradient(
+          90deg,
+          var(--bg-secondary) 0%,
+          var(--bg-tertiary) 50%,
+          var(--bg-secondary) 100%
+        ) !important;
+        background-size: 200% 100% !important;
+        animation: shimmer 1.5s infinite linear !important;
+        
+        /* 确保8个占位符精确对应8个主菜单项 */
+        &:nth-child(1) { opacity: 1; }
+        &:nth-child(2) { opacity: 1; }
+        &:nth-child(3) { opacity: 1; }
+        &:nth-child(4) { opacity: 1; }
+        &:nth-child(5) { opacity: 1; }
+        &:nth-child(6) { opacity: 1; }
+        &:nth-child(7) { opacity: 1; }
+        &:nth-child(8) { opacity: 1; }
+        
+        /* 完全禁止任何可能影响布局的属性 */
+        transform: none !important;
+        transition: none !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+    }
+  }
+  
+  /* 确保真实菜单完全匹配容器 */
+  .sidebar-menu {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: 100% !important;
+    width: 100% !important;
+    contain: layout style paint !important;
+    z-index: 2 !important;
+    
+    /* 所有菜单项强制固定高度 */
+    .el-sub-menu {
+      height: 50px !important;
+      min-height: 50px !important;
+      max-height: 50px !important;
+      flex-shrink: 0 !important;
+      contain: layout style !important;
+      
+      .el-sub-menu__title {
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        line-height: 50px !important;
+        contain: layout style !important;
+      }
+    }
+    
+    .el-menu-item {
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+      flex-shrink: 0 !important;
+      contain: layout style !important;
+    }
+  }
+}
+
+/* 旋转动画 */
+@keyframes spin {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* 22. 2025年7月CLS 0.223最终修复 - 确保布局完全稳定 */
+.cls-final-fix-2025 {
+  /* 页面级别的稳定性保证 */
+  .app-container {
+    /* 固定页面尺寸 */
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    
+    /* 硬件加速 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    will-change: auto !important;
+    
+    /* 确保布局稳定，但允许内容滚动 */
+    contain: layout style !important;
+    overflow: visible !important;
+  }
+  
+  /* 侧边栏完全稳定化 */
+  .sidebar {
+    /* 固定侧边栏尺寸 - 调整为240px */
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    
+    /* 完全稳定的定位 */
+    position: relative !important;
+    flex-shrink: 0 !important;
+    
+    /* 硬件加速 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 确保布局稳定 */
+    contain: layout style !important;
+    
+    &.sidebar-collapsed {
+      width: 64px !important;
+      min-width: 64px !important;
+      max-width: 64px !important;
+    }
+  }
+  
+  /* 菜单容器完全稳定化 */
+  .sidebar-menu {
+    /* 固定菜单高度 */
+    height: calc(100vh - 120px) !important;
+    min-height: calc(100vh - 120px) !important;
+    max-height: calc(100vh - 120px) !important;
+    
+    /* 确保滚动稳定 */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    
+    /* 硬件加速 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    will-change: scroll-position !important;
+    
+    /* 确保布局稳定 */
+    contain: layout style !important;
+    
+    /* 所有菜单项统一处理 */
+    .el-sub-menu,
+    .el-menu-item {
+      /* 强制固定高度 */
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      
+      /* 硬件加速 */
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      
+      /* 确保布局稳定 */
+      contain: layout style !important;
+      
+      /* 强制保持块级元素 */
+      display: block !important;
+      position: relative !important;
+      
+      /* 过渡效果只影响视觉，不影响布局 */
+      transition: opacity 0.2s ease, visibility 0.2s ease !important;
+    }
+    
+    /* 子菜单项高度 */
+    .el-menu-item:not(.el-sub-menu) {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+    }
+    
+    /* 子菜单标题高度 */
+    .el-sub-menu__title {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+      
+      /* 硬件加速 */
+      transform: translateZ(0) !important;
+      backface-visibility: hidden !important;
+      
+      /* 确保布局稳定 */
+      contain: layout style !important;
+    }
+  }
+  
+  /* 权限状态切换时的稳定性 */
+  .cls-menu-hidden {
+    /* 完全隐藏但保留空间 */
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    
+    /* 强制保持完整的占位空间 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    
+    /* 强制保持块级元素 */
+    display: block !important;
+    position: relative !important;
+    
+    /* 禁止所有可能影响布局的属性 */
+    transform: translateZ(0) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    
+    /* 确保所有子元素也保持隐藏 */
+    * {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    
+    /* 子菜单项也保持高度 */
+    &.el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+    }
+    
+    /* 确保子菜单标题也保持高度 */
+    .el-sub-menu__title {
+      min-height: 50px !important;
+      max-height: 50px !important;
+      height: 50px !important;
+      line-height: 50px !important;
+    }
+  }
+  
+  /* 加载状态完全匹配 */
+  .cls-menu-loading {
+    /* 完全匹配真实菜单项 */
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    
+    /* 视觉反馈 */
+    opacity: 0.3 !important;
+    
+    /* 稳定的动画效果 */
+    animation: menu-pulse 1.5s ease-in-out infinite !important;
+    
+    /* 子菜单项也保持高度 */
+    &.el-menu-item {
+      min-height: 40px !important;
+      max-height: 40px !important;
+      height: 40px !important;
+    }
+  }
+  
+  /* 稳定的加载动画 */
+  @keyframes menu-pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+  
+  /* 加载占位符完全匹配 */
+  .sidebar-loading {
+    /* 完全匹配菜单容器 */
+    height: calc(100vh - 120px) !important;
+    min-height: calc(100vh - 120px) !important;
+    max-height: calc(100vh - 120px) !important;
+    
+    /* 确保布局稳定 */
+    contain: layout style !important;
+    
+    .loading-placeholder {
+      .placeholder-item {
+        /* 完全匹配菜单项高度 */
+        min-height: 50px !important;
+        max-height: 50px !important;
+        height: 50px !important;
+        
+        /* 确保8个占位符项目 */
+        margin: 0 !important;
+        border-radius: 0 !important;
+        
+        /* 确保布局稳定 */
+        contain: layout style !important;
+        
+        /* 与真实菜单项完全匹配的宽度 */
+        width: 100% !important;
+      }
+    }
+  }
+  
+  /* 主内容区域稳定性 */
+  .main-container {
+    /* 确保主内容区域稳定 */
+    flex: 1 !important;
+    min-width: 0 !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+
+    /* 硬件加速 */
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+
+    /* 确保布局稳定，但允许内容滚动 */
+    contain: layout style !important;
+    overflow: visible !important;
+  }
+
+  /* 互动课程生成器 - 主容器例外 */
+  .interactive-curriculum-container .main-container {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* 互动课程生成器 - 页面内容例外 */
+  .interactive-curriculum-container .page-content {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  /* 导航栏固定高度 */
+  .navbar {
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    
+    /* 确保布局稳定 */
+    contain: layout style !important;
+    flex-shrink: 0 !important;
+  }
+  
+  /* 页面内容区域 */
+  .page-content {
+    flex: 1 !important;
+    min-height: 0 !important;
+    height: calc(100vh - 60px) !important;
+    min-height: calc(100vh - 60px) !important;
+    max-height: calc(100vh - 60px) !important;
+
+    /* 确保布局稳定 */
+    contain: layout style !important;
+    overflow-y: auto !important;
+  }
+
+  /* 互动课程生成器 - 特殊处理，覆盖所有高度限制 */
+  /* 注意：.interactive-curriculum-container 在 .page-content 内部，所以需要用 :has() 选择器 */
+  .page-content:has(.interactive-curriculum-container) {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  /* 互动课程生成器内部的 .main-container */
+  .interactive-curriculum-container .main-container {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+
+/* 23. 2025年7月9日CLS 0.151→0.02终极修复 - 全局布局锁定 */
+.cls-zero-shift-global {
+  /* 全局页面容器超稳定化 */
+  .app-container {
+    /* 绝对固定页面尺寸 */
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    overflow: hidden !important;
+    
+    /* 超强硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    perspective: 1000px !important;
+    will-change: auto !important;
+    
+    /* 布局超稳定化 */
+    contain: layout style paint !important;
+    isolation: isolate !important;
+  }
+  
+  /* 侧边栏超级固定 */
+  .sidebar {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    z-index: 10 !important;
+    
+    /* 硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 超稳定布局 */
+    contain: layout style paint !important;
+    
+    &.sidebar-collapsed {
+      width: 64px !important;
+      min-width: 64px !important;
+      max-width: 64px !important;
+    }
+  }
+  
+  /* 主内容区域超级固定 */
+  .main-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 5 !important;
+    margin-left: 240px !important;
+    
+    /* 硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 超稳定布局 */
+    contain: layout style paint !important;
+    
+    /* 收起状态适配 */
+    &.main-expanded {
+      margin-left: 64px !important;
+    }
+  }
+  
+  /* 导航栏超级固定 */
+  .navbar {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    z-index: 8 !important;
+    
+    /* 硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 超稳定布局 */
+    contain: layout style paint !important;
+  }
+  
+  /* 页面内容超级固定 */
+  .page-content {
+    position: absolute !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    
+    /* 硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 超稳定布局 */
+    contain: layout style paint !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* 菜单容器终极优化 */
+  .sidebar-menu-container {
+    position: absolute !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 60px !important;
+    
+    /* 硬件加速 */
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    
+    /* 超稳定布局 */
+    contain: layout style paint !important;
+  }
+  
+  /* 权限检查期间菜单项完全固定 */
+  .cls-menu-hidden {
+    /* 使用opacity而非visibility，性能更好 */
+    opacity: 0 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    
+    /* 强制保持空间占用 */
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    
+    /* 禁止任何可能的布局变化 */
+    position: relative !important;
+    display: block !important;
+    overflow: hidden !important;
+    contain: layout style paint !important;
+    
+    /* 子菜单项也保持高度 */
+    &.el-menu-item {
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+    }
+    
+    /* 确保所有子元素也保持隐藏 */
+    * {
+      opacity: 0 !important;
+      pointer-events: none !important;
+      user-select: none !important;
+    }
+  }
+  
+  /* 加载状态完全匹配 */
+  .cls-menu-loading {
+    opacity: 0.4 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    
+    /* 保持完整高度 */
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    
+    /* 禁止布局变化 */
+    contain: layout style paint !important;
+    
+    /* 简单脉冲动画 */
+    animation: cls-loading-pulse 1s ease-in-out infinite !important;
+    
+    &.el-menu-item {
+      height: 40px !important;
+      min-height: 40px !important;
+      max-height: 40px !important;
+    }
+  }
+  
+  /* 超轻量加载动画 */
+  @keyframes cls-loading-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+  }
+}
+
+/* 24. 防布局偏移增强动画 */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* 25. 2025年7月10日CLS 0.223→0.02终极修复 - 零布局偏移策略 */
+.cls-menu-absolute-stable {
+  /* 完全稳定的菜单项 - 绝对零布局偏移 */
+  min-height: 50px !important;
+  max-height: 50px !important;
+  height: 50px !important;
+  
+  /* 强制保持块级元素，永不改变 */
+  display: block !important;
+  position: relative !important;
+  
+  /* 超强布局稳定性 */
+  contain: layout style paint !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: auto !important;
+  
+  /* 禁止任何可能影响布局的属性变化 */
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  
+  /* 确保子元素也稳定 */
+  .el-sub-menu__title {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    line-height: 50px !important;
+    contain: layout style paint !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+  
+  /* 子菜单项也完全稳定 */
+  .el-menu-item {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+    contain: layout style paint !important;
+  }
+}
+
+.cls-menu-opacity-hidden {
+  /* 使用opacity隐藏，完全避免布局重计算 */
+  opacity: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  
+  /* 强制保持完整空间占用 */
+  min-height: 50px !important;
+  max-height: 50px !important;
+  height: 50px !important;
+  
+  /* 确保所有子元素也不可交互但保持空间 */
+  * {
+    pointer-events: none !important;
+    user-select: none !important;
+  }
+  
+  /* 子菜单项保持高度 */
+  .el-menu-item {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* 标题区域保持高度 */
+  .el-sub-menu__title {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    line-height: 50px !important;
+  }
+}
+
+/* 平滑过渡效果，不影响布局 */
+.cls-menu-absolute-stable {
+  transition: opacity 0.2s ease !important;
+  
+  &:not(.cls-menu-opacity-hidden) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+  }
+}
+
+/* 27. 2025年7月10日CLS 0.303→0.02最终修复 - 完全静态菜单策略 */
+.cls-menu-always-visible {
+  /* 完全静态显示的菜单项 - 永不隐藏，零布局偏移 */
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+  
+  /* 固定高度确保布局稳定 */
+  min-height: 50px !important;
+  max-height: 50px !important;
+  height: 50px !important;
+  
+  /* 确保布局稳定性 */
+  contain: layout style paint !important;
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  
+  /* 强制保持块级元素 */
+  display: block !important;
+  position: relative !important;
+  
+  /* 禁止任何可能影响布局的属性变化 */
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  
+  /* 子菜单项也保持固定高度 */
+  &.el-menu-item {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* 确保子菜单标题固定高度 */
+  .el-sub-menu__title {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    line-height: 50px !important;
+    contain: layout style paint !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 20px !important;
+  }
+  
+  /* 确保图标固定尺寸 */
+  .el-icon {
+    width: 16px !important;
+    height: 16px !important;
+    flex-shrink: 0 !important;
+    margin-right: 8px !important;
+  }
+  
+  /* 确保文本固定高度 */
+  span {
+    line-height: 20px !important;
+    height: 20px !important;
+    display: block !important;
+    contain: layout !important;
+  }
+}
+
+.cls-menu-static-stable {
+  /* 静态稳定的菜单容器 - 零状态变化 */
+  min-height: 700px !important;
+  max-height: 700px !important;
+  height: 700px !important;
+  contain: layout style paint !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  
+  /* 硬件加速优化 */
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  will-change: scroll-position !important;
+  
+  /* 确保所有菜单项统一高度 */
+  .el-sub-menu,
+  .el-menu-item {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    contain: layout style paint !important;
+    transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+  }
+  
+  /* 子菜单项高度 */
+  .el-menu-item:not(.el-sub-menu) {
+    min-height: 40px !important;
+    max-height: 40px !important;
+    height: 40px !important;
+  }
+  
+  /* 子菜单标题高度 */
+  .el-sub-menu__title {
+    min-height: 50px !important;
+    max-height: 50px !important;
+    height: 50px !important;
+    line-height: 50px !important;
+    contain: layout style paint !important;
+  }
+  
+  /* 使用全局滚动条样式 */
+}
+
+/* 26. 全局应用CLS修复类 - 直接应用样式 */
+.cls-performance-fix.cls-critical-fix.cls-critical-sidebar-fix.cls-ultimate-fix-2025.cls-emergency-fix-2025.cls-final-fix-2025 {
+  /* 应用全局CLS修复 */
+  .app-container {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100vw !important;
+    min-height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    overflow: hidden !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    perspective: 1000px !important;
+    will-change: auto !important;
+    contain: layout style paint !important;
+    isolation: isolate !important;
+  }
+  
+  .sidebar {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+    z-index: 10 !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    contain: layout style paint !important;
+    
+    &.sidebar-collapsed {
+      width: 64px !important;
+      min-width: 64px !important;
+      max-width: 64px !important;
+    }
+  }
+  
+  .main-container {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 5 !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    contain: layout style paint !important;
+    margin-left: 240px !important;
+    
+    &.main-expanded {
+      margin-left: 64px !important;
+    }
+  }
+  
+  .navbar {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    z-index: 8 !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    contain: layout style paint !important;
+  }
+  
+  .page-content {
+    position: absolute !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: translate3d(0, 0, 0) !important;
+    backface-visibility: hidden !important;
+    contain: layout style paint !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  /* 互动课程生成器 - 覆盖 absolute 定位 */
+  .page-content:has(.interactive-curriculum-container) {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+  }
+
+  .interactive-curriculum-container .main-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* ==================== 互动课程生成器 - 全局高度修复 ==================== */
+/* 这个规则必须在所有其他规则之后，以确保最高优先级 */
+/* 使用 :has() 选择器来匹配包含 .interactive-curriculum-container 的 .page-content */
+.page-content:has(.interactive-curriculum-container) {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.interactive-curriculum-container .main-container {
+  height: auto !important;
+  max-height: none !important;
+  min-height: auto !important;
+  overflow: visible !important;
+}

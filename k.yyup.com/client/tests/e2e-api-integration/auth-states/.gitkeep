@@ -1,0 +1,2 @@
+# This directory stores authentication state files for different user roles
+# Files in this directory are generated during test setup and should not be committed to version control

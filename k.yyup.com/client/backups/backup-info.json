@@ -1,0 +1,2348 @@
+{
+  "timestamp": "2025-11-13T00:37:32.102Z",
+  "files": [
+    {
+      "original": "src/components/workflow/WorkflowStepQueue.vue",
+      "backup": "backups/src/components/workflow/WorkflowStepQueue.vue",
+      "size": 11597
+    },
+    {
+      "original": "src/components/testing/RoleSwitcher.vue",
+      "backup": "backups/src/components/testing/RoleSwitcher.vue",
+      "size": 14062
+    },
+    {
+      "original": "src/components/testing/PerformanceMonitor.vue",
+      "backup": "backups/src/components/testing/PerformanceMonitor.vue",
+      "size": 19394
+    },
+    {
+      "original": "src/components/testing/MobileTestSuite.vue",
+      "backup": "backups/src/components/testing/MobileTestSuite.vue",
+      "size": 21676
+    },
+    {
+      "original": "src/components/task/TaskFormDialog.vue",
+      "backup": "backups/src/components/task/TaskFormDialog.vue",
+      "size": 21925
+    },
+    {
+      "original": "src/components/system/UserRoles.vue",
+      "backup": "backups/src/components/system/UserRoles.vue",
+      "size": 10046
+    },
+    {
+      "original": "src/components/system/UserLogs.vue",
+      "backup": "backups/src/components/system/UserLogs.vue",
+      "size": 11510
+    },
+    {
+      "original": "src/components/system/UserList.vue",
+      "backup": "backups/src/components/system/UserList.vue",
+      "size": 11769
+    },
+    {
+      "original": "src/components/system/UserForm.vue",
+      "backup": "backups/src/components/system/UserForm.vue",
+      "size": 11332
+    },
+    {
+      "original": "src/components/system/RolePermission.vue",
+      "backup": "backups/src/components/system/RolePermission.vue",
+      "size": 11546
+    },
+    {
+      "original": "src/components/system/RolePagePermission.vue",
+      "backup": "backups/src/components/system/RolePagePermission.vue",
+      "size": 5639
+    },
+    {
+      "original": "src/components/system/RoleList.vue",
+      "backup": "backups/src/components/system/RoleList.vue",
+      "size": 9758
+    },
+    {
+      "original": "src/components/system/RoleForm.vue",
+      "backup": "backups/src/components/system/RoleForm.vue",
+      "size": 5022
+    },
+    {
+      "original": "src/components/student/StudentDetail.vue",
+      "backup": "backups/src/components/student/StudentDetail.vue",
+      "size": 7038
+    },
+    {
+      "original": "src/components/preview/WeChatMomentsPreview.vue",
+      "backup": "backups/src/components/preview/WeChatMomentsPreview.vue",
+      "size": 8528
+    },
+    {
+      "original": "src/components/preview/PosterPreview.vue",
+      "backup": "backups/src/components/preview/PosterPreview.vue",
+      "size": 13526
+    },
+    {
+      "original": "src/components/preview/MobilePhonePreview.vue",
+      "backup": "backups/src/components/preview/MobilePhonePreview.vue",
+      "size": 8412
+    },
+    {
+      "original": "src/components/preview/DraggableResizableQR.vue",
+      "backup": "backups/src/components/preview/DraggableResizableQR.vue",
+      "size": 16857
+    },
+    {
+      "original": "src/components/performance/PerformanceRulesList.vue",
+      "backup": "backups/src/components/performance/PerformanceRulesList.vue",
+      "size": 9607
+    },
+    {
+      "original": "src/components/performance/PerformanceRuleForm.vue",
+      "backup": "backups/src/components/performance/PerformanceRuleForm.vue",
+      "size": 12784
+    },
+    {
+      "original": "src/components/notifications/ApplicationReviewDialog.vue",
+      "backup": "backups/src/components/notifications/ApplicationReviewDialog.vue",
+      "size": 7639
+    },
+    {
+      "original": "src/components/marketing/CreateCampaignDialog.vue",
+      "backup": "backups/src/components/marketing/CreateCampaignDialog.vue",
+      "size": 8875
+    },
+    {
+      "original": "src/components/layout/UnifiedCenterLayout.vue",
+      "backup": "backups/src/components/layout/UnifiedCenterLayout.vue",
+      "size": 3626
+    },
+    {
+      "original": "src/components/layout/SidebarItem.vue",
+      "backup": "backups/src/components/layout/SidebarItem.vue",
+      "size": 5755
+    },
+    {
+      "original": "src/components/layout/PageContainer.vue",
+      "backup": "backups/src/components/layout/PageContainer.vue",
+      "size": 9816
+    },
+    {
+      "original": "src/components/layout/OptimizedHeaderActions.vue",
+      "backup": "backups/src/components/layout/OptimizedHeaderActions.vue",
+      "size": 9525
+    },
+    {
+      "original": "src/components/layout/MenuItemComponent.vue",
+      "backup": "backups/src/components/layout/MenuItemComponent.vue",
+      "size": 5000
+    },
+    {
+      "original": "src/components/layout/ImprovedSidebar.vue",
+      "backup": "backups/src/components/layout/ImprovedSidebar.vue",
+      "size": 13441
+    },
+    {
+      "original": "src/components/layout/Breadcrumb.vue",
+      "backup": "backups/src/components/layout/Breadcrumb.vue",
+      "size": 2304
+    },
+    {
+      "original": "src/components/kindergarten/KindergartenImageGenerator.vue",
+      "backup": "backups/src/components/kindergarten/KindergartenImageGenerator.vue",
+      "size": 13547
+    },
+    {
+      "original": "src/components/icons/UnifiedIcon.vue",
+      "backup": "backups/src/components/icons/UnifiedIcon.vue",
+      "size": 29329
+    },
+    {
+      "original": "src/components/icons/MultiStyleIcon.vue",
+      "backup": "backups/src/components/icons/MultiStyleIcon.vue",
+      "size": 18006
+    },
+    {
+      "original": "src/components/icons/LucideIcon.vue",
+      "backup": "backups/src/components/icons/LucideIcon.vue",
+      "size": 13564
+    },
+    {
+      "original": "src/components/forms/StudentForm.vue",
+      "backup": "backups/src/components/forms/StudentForm.vue",
+      "size": 16296
+    },
+    {
+      "original": "src/components/examples/SimplePermissionExample.vue",
+      "backup": "backups/src/components/examples/SimplePermissionExample.vue",
+      "size": 6784
+    },
+    {
+      "original": "src/components/examples/PermissionSystemDemo.vue",
+      "backup": "backups/src/components/examples/PermissionSystemDemo.vue",
+      "size": 11988
+    },
+    {
+      "original": "src/components/examples/AsyncDataExample.vue",
+      "backup": "backups/src/components/examples/AsyncDataExample.vue",
+      "size": 15538
+    },
+    {
+      "original": "src/components/enrollment/QuotaStatistics.vue",
+      "backup": "backups/src/components/enrollment/QuotaStatistics.vue",
+      "size": 2805
+    },
+    {
+      "original": "src/components/enrollment/EnrollmentPlanStatusTag.vue",
+      "backup": "backups/src/components/enrollment/EnrollmentPlanStatusTag.vue",
+      "size": 1707
+    },
+    {
+      "original": "src/components/dialogs/StudentEditDialog.vue",
+      "backup": "backups/src/components/dialogs/StudentEditDialog.vue",
+      "size": 9174
+    },
+    {
+      "original": "src/components/dialogs/StudentDetailDialog.vue",
+      "backup": "backups/src/components/dialogs/StudentDetailDialog.vue",
+      "size": 6607
+    },
+    {
+      "original": "src/components/demo/StreamingChat.vue",
+      "backup": "backups/src/components/demo/StreamingChat.vue",
+      "size": 10495
+    },
+    {
+      "original": "src/components/demo/ExpertCard.vue",
+      "backup": "backups/src/components/demo/ExpertCard.vue",
+      "size": 6455
+    },
+    {
+      "original": "src/components/data-import/FieldComparisonTable.vue",
+      "backup": "backups/src/components/data-import/FieldComparisonTable.vue",
+      "size": 10753
+    },
+    {
+      "original": "src/components/data-import/DataImportWorkflow.vue",
+      "backup": "backups/src/components/data-import/DataImportWorkflow.vue",
+      "size": 10602
+    },
+    {
+      "original": "src/components/customer/PDFOptionsDialog.vue",
+      "backup": "backups/src/components/customer/PDFOptionsDialog.vue",
+      "size": 8286
+    },
+    {
+      "original": "src/components/customer/FollowupAnalysisPanel.vue",
+      "backup": "backups/src/components/customer/FollowupAnalysisPanel.vue",
+      "size": 11548
+    },
+    {
+      "original": "src/components/customer/CustomerBatchImportPreview.vue",
+      "backup": "backups/src/components/customer/CustomerBatchImportPreview.vue",
+      "size": 7576
+    },
+    {
+      "original": "src/components/customer/AIAssignDialog.vue",
+      "backup": "backups/src/components/customer/AIAssignDialog.vue",
+      "size": 12397
+    },
+    {
+      "original": "src/components/class/ClassTypeTag.vue",
+      "backup": "backups/src/components/class/ClassTypeTag.vue",
+      "size": 1357
+    },
+    {
+      "original": "src/components/class/ClassStatusTag.vue",
+      "backup": "backups/src/components/class/ClassStatusTag.vue",
+      "size": 1488
+    },
+    {
+      "original": "src/components/class/ClassDetailView.vue",
+      "backup": "backups/src/components/class/ClassDetailView.vue",
+      "size": 7177
+    },
+    {
+      "original": "src/components/class/ClassActions.vue",
+      "backup": "backups/src/components/class/ClassActions.vue",
+      "size": 3364
+    },
+    {
+      "original": "src/components/common/UnifiedTable.vue",
+      "backup": "backups/src/components/common/UnifiedTable.vue",
+      "size": 11216
+    },
+    {
+      "original": "src/components/common/StatCard.vue",
+      "backup": "backups/src/components/common/StatCard.vue",
+      "size": 16439
+    },
+    {
+      "original": "src/components/common/PerformancePanel.vue",
+      "backup": "backups/src/components/common/PerformancePanel.vue",
+      "size": 11898
+    },
+    {
+      "original": "src/components/common/PageWrapper.vue",
+      "backup": "backups/src/components/common/PageWrapper.vue",
+      "size": 8134
+    },
+    {
+      "original": "src/components/common/PageLoadingGuard.vue",
+      "backup": "backups/src/components/common/PageLoadingGuard.vue",
+      "size": 1634
+    },
+    {
+      "original": "src/components/common/PageHelpButton.vue",
+      "backup": "backups/src/components/common/PageHelpButton.vue",
+      "size": 6731
+    },
+    {
+      "original": "src/components/common/PageHeader.vue",
+      "backup": "backups/src/components/common/PageHeader.vue",
+      "size": 772
+    },
+    {
+      "original": "src/components/common/MonacoEditor.vue",
+      "backup": "backups/src/components/common/MonacoEditor.vue",
+      "size": 5873
+    },
+    {
+      "original": "src/components/common/MermaidRenderer.vue",
+      "backup": "backups/src/components/common/MermaidRenderer.vue",
+      "size": 15992
+    },
+    {
+      "original": "src/components/common/MarkdownRenderer.vue",
+      "backup": "backups/src/components/common/MarkdownRenderer.vue",
+      "size": 20289
+    },
+    {
+      "original": "src/components/common/LoadingState.vue",
+      "backup": "backups/src/components/common/LoadingState.vue",
+      "size": 9530
+    },
+    {
+      "original": "src/components/common/LoadingSpinner.vue",
+      "backup": "backups/src/components/common/LoadingSpinner.vue",
+      "size": 7316
+    },
+    {
+      "original": "src/components/common/LazyDataTable.vue",
+      "backup": "backups/src/components/common/LazyDataTable.vue",
+      "size": 7453
+    },
+    {
+      "original": "src/components/common/GlobalLoading.vue",
+      "backup": "backups/src/components/common/GlobalLoading.vue",
+      "size": 3730
+    },
+    {
+      "original": "src/components/common/ErrorFallback.vue",
+      "backup": "backups/src/components/common/ErrorFallback.vue",
+      "size": 992
+    },
+    {
+      "original": "src/components/common/ErrorBoundary.vue",
+      "backup": "backups/src/components/common/ErrorBoundary.vue",
+      "size": 10856
+    },
+    {
+      "original": "src/components/common/EmptyState.vue",
+      "backup": "backups/src/components/common/EmptyState.vue",
+      "size": 14124
+    },
+    {
+      "original": "src/components/common/ElementImageUploader.vue",
+      "backup": "backups/src/components/common/ElementImageUploader.vue",
+      "size": 6887
+    },
+    {
+      "original": "src/components/common/AutoImageGenerator.vue",
+      "backup": "backups/src/components/common/AutoImageGenerator.vue",
+      "size": 9784
+    },
+    {
+      "original": "src/components/common/AsyncComponentWrapper.vue",
+      "backup": "backups/src/components/common/AsyncComponentWrapper.vue",
+      "size": 7050
+    },
+    {
+      "original": "src/components/charts/UsageTypePieChart.vue",
+      "backup": "backups/src/components/charts/UsageTypePieChart.vue",
+      "size": 3079
+    },
+    {
+      "original": "src/components/charts/UsageTrendChart.vue",
+      "backup": "backups/src/components/charts/UsageTrendChart.vue",
+      "size": 3077
+    },
+    {
+      "original": "src/components/charts/EnrollmentChart.vue",
+      "backup": "backups/src/components/charts/EnrollmentChart.vue",
+      "size": 1159
+    },
+    {
+      "original": "src/components/call-center/SIPSettingsDialog.vue",
+      "backup": "backups/src/components/call-center/SIPSettingsDialog.vue",
+      "size": 9759
+    },
+    {
+      "original": "src/components/call-center/MakeCallDialog.vue",
+      "backup": "backups/src/components/call-center/MakeCallDialog.vue",
+      "size": 18848
+    },
+    {
+      "original": "src/components/call-center/CallStatusPanel.vue",
+      "backup": "backups/src/components/call-center/CallStatusPanel.vue",
+      "size": 16167
+    },
+    {
+      "original": "src/components/call-center/CallRecordingDialog.vue",
+      "backup": "backups/src/components/call-center/CallRecordingDialog.vue",
+      "size": 19437
+    },
+    {
+      "original": "src/components/call-center/CallControlPanel.vue",
+      "backup": "backups/src/components/call-center/CallControlPanel.vue",
+      "size": 12025
+    },
+    {
+      "original": "src/components/call-center/AIAnalysisPanel.vue",
+      "backup": "backups/src/components/call-center/AIAnalysisPanel.vue",
+      "size": 30688
+    },
+    {
+      "original": "src/components/centers/TabContainer.vue",
+      "backup": "backups/src/components/centers/TabContainer.vue",
+      "size": 8685
+    },
+    {
+      "original": "src/components/centers/StatCard.vue",
+      "backup": "backups/src/components/centers/StatCard.vue",
+      "size": 16494
+    },
+    {
+      "original": "src/components/centers/SimpleFormModal.vue",
+      "backup": "backups/src/components/centers/SimpleFormModal.vue",
+      "size": 5336
+    },
+    {
+      "original": "src/components/centers/FormModal.vue",
+      "backup": "backups/src/components/centers/FormModal.vue",
+      "size": 13894
+    },
+    {
+      "original": "src/components/centers/DetailPanel.vue",
+      "backup": "backups/src/components/centers/DetailPanel.vue",
+      "size": 11634
+    },
+    {
+      "original": "src/components/centers/DataTable.vue",
+      "backup": "backups/src/components/centers/DataTable.vue",
+      "size": 17288
+    },
+    {
+      "original": "src/components/centers/ChartContainer.vue",
+      "backup": "backups/src/components/centers/ChartContainer.vue",
+      "size": 16684
+    },
+    {
+      "original": "src/components/centers/CenterContainer.vue",
+      "backup": "backups/src/components/centers/CenterContainer.vue",
+      "size": 12238
+    },
+    {
+      "original": "src/components/centers/ActionToolbar.vue",
+      "backup": "backups/src/components/centers/ActionToolbar.vue",
+      "size": 11153
+    },
+    {
+      "original": "src/components/centers/ActionCard.vue",
+      "backup": "backups/src/components/centers/ActionCard.vue",
+      "size": 3291
+    },
+    {
+      "original": "src/components/business-center/QuickActionDialog.vue",
+      "backup": "backups/src/components/business-center/QuickActionDialog.vue",
+      "size": 5342
+    },
+    {
+      "original": "src/components/application/ApplicationStatusTag.vue",
+      "backup": "backups/src/components/application/ApplicationStatusTag.vue",
+      "size": 1130
+    },
+    {
+      "original": "src/components/application/ApplicationReviewForm.vue",
+      "backup": "backups/src/components/application/ApplicationReviewForm.vue",
+      "size": 4845
+    },
+    {
+      "original": "src/components/ai/VisualFeedback.vue",
+      "backup": "backups/src/components/ai/VisualFeedback.vue",
+      "size": 6217
+    },
+    {
+      "original": "src/components/ai/TodoList.vue",
+      "backup": "backups/src/components/ai/TodoList.vue",
+      "size": 9406
+    },
+    {
+      "original": "src/components/ai/ReportChart.vue",
+      "backup": "backups/src/components/ai/ReportChart.vue",
+      "size": 12830
+    },
+    {
+      "original": "src/components/ai/OperationPanel.vue",
+      "backup": "backups/src/components/ai/OperationPanel.vue",
+      "size": 7666
+    },
+    {
+      "original": "src/components/ai/MessageList.vue",
+      "backup": "backups/src/components/ai/MessageList.vue",
+      "size": 14926
+    },
+    {
+      "original": "src/components/ai/MessageInput.vue",
+      "backup": "backups/src/components/ai/MessageInput.vue",
+      "size": 12689
+    },
+    {
+      "original": "src/components/ai/MemorySearchComponent.vue",
+      "backup": "backups/src/components/ai/MemorySearchComponent.vue",
+      "size": 10321
+    },
+    {
+      "original": "src/components/ai/MemoryListComponent.vue",
+      "backup": "backups/src/components/ai/MemoryListComponent.vue",
+      "size": 9330
+    },
+    {
+      "original": "src/components/ai/MediaGallery.vue",
+      "backup": "backups/src/components/ai/MediaGallery.vue",
+      "size": 18898
+    },
+    {
+      "original": "src/components/ai/DocumentImport.vue",
+      "backup": "backups/src/components/ai/DocumentImport.vue",
+      "size": 18918
+    },
+    {
+      "original": "src/components/ai/DataTable.vue",
+      "backup": "backups/src/components/ai/DataTable.vue",
+      "size": 13778
+    },
+    {
+      "original": "src/components/ai/CreateModelDialog.vue",
+      "backup": "backups/src/components/ai/CreateModelDialog.vue",
+      "size": 6805
+    },
+    {
+      "original": "src/components/ai/ComponentRenderer.vue",
+      "backup": "backups/src/components/ai/ComponentRenderer.vue",
+      "size": 18217
+    },
+    {
+      "original": "src/components/ai/ChatSettings.vue",
+      "backup": "backups/src/components/ai/ChatSettings.vue",
+      "size": 9913
+    },
+    {
+      "original": "src/components/ai/ChatContainer.vue",
+      "backup": "backups/src/components/ai/ChatContainer.vue",
+      "size": 11889
+    },
+    {
+      "original": "src/components/ai-assistant/PromptPreview.vue",
+      "backup": "backups/src/components/ai-assistant/PromptPreview.vue",
+      "size": 15986
+    },
+    {
+      "original": "src/components/ai-assistant/DraggableTable.vue",
+      "backup": "backups/src/components/ai-assistant/DraggableTable.vue",
+      "size": 10270
+    },
+    {
+      "original": "src/components/ai-assistant/AIAssistant.vue",
+      "backup": "backups/src/components/ai-assistant/AIAssistant.vue",
+      "size": 65167
+    },
+    {
+      "original": "src/components/activity/TimelineItem.vue",
+      "backup": "backups/src/components/activity/TimelineItem.vue",
+      "size": 8528
+    },
+    {
+      "original": "src/components/activity/ShareLinkDialog.vue",
+      "backup": "backups/src/components/activity/ShareLinkDialog.vue",
+      "size": 6272
+    },
+    {
+      "original": "src/components/activity/DetailPanel.vue",
+      "backup": "backups/src/components/activity/DetailPanel.vue",
+      "size": 12625
+    },
+    {
+      "original": "src/components/activity/ActivityStatusTag.vue",
+      "backup": "backups/src/components/activity/ActivityStatusTag.vue",
+      "size": 1927
+    },
+    {
+      "original": "src/components/activity/ActivitySharePreview.vue",
+      "backup": "backups/src/components/activity/ActivitySharePreview.vue",
+      "size": 5518
+    },
+    {
+      "original": "src/components/activity/ActivityActions.vue",
+      "backup": "backups/src/components/activity/ActivityActions.vue",
+      "size": 2593
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/index.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/index.vue",
+      "size": 17008
+    },
+    {
+      "original": "src/pages/teacher-center/notifications/index.vue",
+      "backup": "backups/src/pages/teacher-center/notifications/index.vue",
+      "size": 23340
+    },
+    {
+      "original": "src/pages/teacher-center/tasks/index.vue",
+      "backup": "backups/src/pages/teacher-center/tasks/index.vue",
+      "size": 38936
+    },
+    {
+      "original": "src/pages/teacher-center/tasks/demo.vue",
+      "backup": "backups/src/pages/teacher-center/tasks/demo.vue",
+      "size": 17452
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/index.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/index.vue",
+      "size": 20867
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/index-unified.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/index-unified.vue",
+      "size": 15085
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/index-original.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/index-original.vue",
+      "size": 17127
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/index.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/index.vue",
+      "size": 13601
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/detail.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/detail.vue",
+      "size": 11193
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/detail-simple.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/detail-simple.vue",
+      "size": 1054
+    },
+    {
+      "original": "src/pages/teacher-center/enrollment/index.vue",
+      "backup": "backups/src/pages/teacher-center/enrollment/index.vue",
+      "size": 29556
+    },
+    {
+      "original": "src/pages/teacher-center/customer-pool/index.vue",
+      "backup": "backups/src/pages/teacher-center/customer-pool/index.vue",
+      "size": 17140
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/interactive-curriculum.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/interactive-curriculum.vue",
+      "size": 39177
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/index.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/index.vue",
+      "size": 19850
+    },
+    {
+      "original": "src/pages/teacher-center/components/TaskOverviewCard.vue",
+      "backup": "backups/src/pages/teacher-center/components/TaskOverviewCard.vue",
+      "size": 521
+    },
+    {
+      "original": "src/pages/teacher-center/components/ClassOverviewCard.vue",
+      "backup": "backups/src/pages/teacher-center/components/ClassOverviewCard.vue",
+      "size": 521
+    },
+    {
+      "original": "src/pages/teacher-center/components/ActivityReminderCard.vue",
+      "backup": "backups/src/pages/teacher-center/components/ActivityReminderCard.vue",
+      "size": 529
+    },
+    {
+      "original": "src/pages/teacher-center/attendance/index.vue",
+      "backup": "backups/src/pages/teacher-center/attendance/index.vue",
+      "size": 4812
+    },
+    {
+      "original": "src/pages/teacher-center/activities/index.vue",
+      "backup": "backups/src/pages/teacher-center/activities/index.vue",
+      "size": 15071
+    },
+    {
+      "original": "src/pages/teacher/performance/[id].vue",
+      "backup": "backups/src/pages/teacher/performance/[id].vue",
+      "size": 41403
+    },
+    {
+      "original": "src/pages/teacher/performance/TeacherPerformance.vue",
+      "backup": "backups/src/pages/teacher/performance/TeacherPerformance.vue",
+      "size": 906
+    },
+    {
+      "original": "src/pages/teacher/evaluation/TeacherEvaluation.vue",
+      "backup": "backups/src/pages/teacher/evaluation/TeacherEvaluation.vue",
+      "size": 2486
+    },
+    {
+      "original": "src/pages/centers/script-templates.vue",
+      "backup": "backups/src/pages/centers/script-templates.vue",
+      "size": 17509
+    },
+    {
+      "original": "src/pages/centers/TemplateDetail.vue",
+      "backup": "backups/src/pages/centers/TemplateDetail.vue",
+      "size": 15954
+    },
+    {
+      "original": "src/pages/centers/TeachingCenter.vue",
+      "backup": "backups/src/pages/centers/TeachingCenter.vue",
+      "size": 28691
+    },
+    {
+      "original": "src/pages/centers/TaskForm.vue",
+      "backup": "backups/src/pages/centers/TaskForm.vue",
+      "size": 11953
+    },
+    {
+      "original": "src/pages/centers/TaskCenter.vue",
+      "backup": "backups/src/pages/centers/TaskCenter.vue",
+      "size": 23747
+    },
+    {
+      "original": "src/pages/centers/SystemCenter.vue",
+      "backup": "backups/src/pages/centers/SystemCenter.vue",
+      "size": 44130
+    },
+    {
+      "original": "src/pages/centers/SystemCenter-Unified.vue",
+      "backup": "backups/src/pages/centers/SystemCenter-Unified.vue",
+      "size": 18757
+    },
+    {
+      "original": "src/pages/centers/SystemCenter-Original.vue",
+      "backup": "backups/src/pages/centers/SystemCenter-Original.vue",
+      "size": 17847
+    },
+    {
+      "original": "src/pages/centers/SystemCenter-Enhanced.vue",
+      "backup": "backups/src/pages/centers/SystemCenter-Enhanced.vue",
+      "size": 44186
+    },
+    {
+      "original": "src/pages/centers/ScriptCenter.vue",
+      "backup": "backups/src/pages/centers/ScriptCenter.vue",
+      "size": 42114
+    },
+    {
+      "original": "src/pages/centers/PersonnelCenter.vue",
+      "backup": "backups/src/pages/centers/PersonnelCenter.vue",
+      "size": 71213
+    },
+    {
+      "original": "src/pages/centers/MarketingCenter.vue",
+      "backup": "backups/src/pages/centers/MarketingCenter.vue",
+      "size": 17262
+    },
+    {
+      "original": "src/pages/centers/MarketingCenter-Original.vue",
+      "backup": "backups/src/pages/centers/MarketingCenter-Original.vue",
+      "size": 14944
+    },
+    {
+      "original": "src/pages/centers/MarketingCenter-Enhanced.vue",
+      "backup": "backups/src/pages/centers/MarketingCenter-Enhanced.vue",
+      "size": 40733
+    },
+    {
+      "original": "src/pages/centers/InspectionCenter.vue",
+      "backup": "backups/src/pages/centers/InspectionCenter.vue",
+      "size": 61766
+    },
+    {
+      "original": "src/pages/centers/FinanceCenter.vue",
+      "backup": "backups/src/pages/centers/FinanceCenter.vue",
+      "size": 40832
+    },
+    {
+      "original": "src/pages/centers/FinanceCenter-Original.vue",
+      "backup": "backups/src/pages/centers/FinanceCenter-Original.vue",
+      "size": 21029
+    },
+    {
+      "original": "src/pages/centers/EnrollmentCenter.vue",
+      "backup": "backups/src/pages/centers/EnrollmentCenter.vue",
+      "size": 96817
+    },
+    {
+      "original": "src/pages/centers/DocumentTemplateCenter.vue",
+      "backup": "backups/src/pages/centers/DocumentTemplateCenter.vue",
+      "size": 17266
+    },
+    {
+      "original": "src/pages/centers/DocumentStatistics.vue",
+      "backup": "backups/src/pages/centers/DocumentStatistics.vue",
+      "size": 14719
+    },
+    {
+      "original": "src/pages/centers/DocumentInstanceList.vue",
+      "backup": "backups/src/pages/centers/DocumentInstanceList.vue",
+      "size": 14101
+    },
+    {
+      "original": "src/pages/centers/DocumentEditor.vue",
+      "backup": "backups/src/pages/centers/DocumentEditor.vue",
+      "size": 15740
+    },
+    {
+      "original": "src/pages/centers/DocumentCollaboration.vue",
+      "backup": "backups/src/pages/centers/DocumentCollaboration.vue",
+      "size": 19142
+    },
+    {
+      "original": "src/pages/centers/CustomerPoolCenter.vue",
+      "backup": "backups/src/pages/centers/CustomerPoolCenter.vue",
+      "size": 50234
+    },
+    {
+      "original": "src/pages/centers/CallCenter.vue",
+      "backup": "backups/src/pages/centers/CallCenter.vue",
+      "size": 37823
+    },
+    {
+      "original": "src/pages/centers/BusinessCenter.vue",
+      "backup": "backups/src/pages/centers/BusinessCenter.vue",
+      "size": 54144
+    },
+    {
+      "original": "src/pages/centers/AttendanceCenter.vue",
+      "backup": "backups/src/pages/centers/AttendanceCenter.vue",
+      "size": 12077
+    },
+    {
+      "original": "src/pages/centers/AssessmentCenter.vue",
+      "backup": "backups/src/pages/centers/AssessmentCenter.vue",
+      "size": 25880
+    },
+    {
+      "original": "src/pages/centers/AnalyticsCenter.vue",
+      "backup": "backups/src/pages/centers/AnalyticsCenter.vue",
+      "size": 17210
+    },
+    {
+      "original": "src/pages/centers/AnalyticsCenter-Original.vue",
+      "backup": "backups/src/pages/centers/AnalyticsCenter-Original.vue",
+      "size": 24453
+    },
+    {
+      "original": "src/pages/centers/AnalyticsCenter-Enhanced.vue",
+      "backup": "backups/src/pages/centers/AnalyticsCenter-Enhanced.vue",
+      "size": 52681
+    },
+    {
+      "original": "src/pages/centers/ActivityCenter.vue",
+      "backup": "backups/src/pages/centers/ActivityCenter.vue",
+      "size": 11622
+    },
+    {
+      "original": "src/pages/centers/AICenter.vue",
+      "backup": "backups/src/pages/centers/AICenter.vue",
+      "size": 25226
+    },
+    {
+      "original": "src/pages/teacher/development/TeacherDevelopment.vue",
+      "backup": "backups/src/pages/teacher/development/TeacherDevelopment.vue",
+      "size": 3282
+    },
+    {
+      "original": "src/pages/system/users/index.vue",
+      "backup": "backups/src/pages/system/users/index.vue",
+      "size": 12162
+    },
+    {
+      "original": "src/pages/system/settings/index.vue",
+      "backup": "backups/src/pages/system/settings/index.vue",
+      "size": 15382
+    },
+    {
+      "original": "src/pages/system/roles/index.vue",
+      "backup": "backups/src/pages/system/roles/index.vue",
+      "size": 7991
+    },
+    {
+      "original": "src/pages/system/roles/RoleManagement.vue",
+      "backup": "backups/src/pages/system/roles/RoleManagement.vue",
+      "size": 2377
+    },
+    {
+      "original": "src/pages/system/permissions/index.vue",
+      "backup": "backups/src/pages/system/permissions/index.vue",
+      "size": 8053
+    },
+    {
+      "original": "src/pages/system/notifications/NotificationSettings.vue",
+      "backup": "backups/src/pages/system/notifications/NotificationSettings.vue",
+      "size": 1144
+    },
+    {
+      "original": "src/pages/system/maintenance/MaintenanceScheduler.vue",
+      "backup": "backups/src/pages/system/maintenance/MaintenanceScheduler.vue",
+      "size": 1146
+    },
+    {
+      "original": "src/pages/system/backup/BackupManagement.vue",
+      "backup": "backups/src/pages/system/backup/BackupManagement.vue",
+      "size": 2429
+    },
+    {
+      "original": "src/pages/system/ai-shortcuts/index.vue",
+      "backup": "backups/src/pages/system/ai-shortcuts/index.vue",
+      "size": 18537
+    },
+    {
+      "original": "src/pages/student/growth/StudentGrowth.vue",
+      "backup": "backups/src/pages/student/growth/StudentGrowth.vue",
+      "size": 19922
+    },
+    {
+      "original": "src/pages/student/detail/[id].vue",
+      "backup": "backups/src/pages/student/detail/[id].vue",
+      "size": 18620
+    },
+    {
+      "original": "src/pages/student/detail/StudentDetail.vue",
+      "backup": "backups/src/pages/student/detail/StudentDetail.vue",
+      "size": 17337
+    },
+    {
+      "original": "src/pages/student/assessment/StudentAssessment.vue",
+      "backup": "backups/src/pages/student/assessment/StudentAssessment.vue",
+      "size": 23377
+    },
+    {
+      "original": "src/pages/student/analytics/[id].vue",
+      "backup": "backups/src/pages/student/analytics/[id].vue",
+      "size": 29020
+    },
+    {
+      "original": "src/pages/student/analytics/StudentAnalytics.vue",
+      "backup": "backups/src/pages/student/analytics/StudentAnalytics.vue",
+      "size": 17884
+    },
+    {
+      "original": "src/pages/principal/media-center/VideoCreatorTimeline.vue",
+      "backup": "backups/src/pages/principal/media-center/VideoCreatorTimeline.vue",
+      "size": 101553
+    },
+    {
+      "original": "src/pages/principal/media-center/VideoCreator.vue",
+      "backup": "backups/src/pages/principal/media-center/VideoCreator.vue",
+      "size": 40057
+    },
+    {
+      "original": "src/pages/principal/media-center/TextToSpeechTimeline.vue",
+      "backup": "backups/src/pages/principal/media-center/TextToSpeechTimeline.vue",
+      "size": 27634
+    },
+    {
+      "original": "src/pages/principal/media-center/TextToSpeech.vue",
+      "backup": "backups/src/pages/principal/media-center/TextToSpeech.vue",
+      "size": 21490
+    },
+    {
+      "original": "src/pages/principal/media-center/CopywritingCreatorTimeline.vue",
+      "backup": "backups/src/pages/principal/media-center/CopywritingCreatorTimeline.vue",
+      "size": 34472
+    },
+    {
+      "original": "src/pages/principal/media-center/CopywritingCreatorNew.vue",
+      "backup": "backups/src/pages/principal/media-center/CopywritingCreatorNew.vue",
+      "size": 13579
+    },
+    {
+      "original": "src/pages/principal/media-center/CopywritingCreator.vue",
+      "backup": "backups/src/pages/principal/media-center/CopywritingCreator.vue",
+      "size": 38139
+    },
+    {
+      "original": "src/pages/principal/media-center/ArticleCreator.vue",
+      "backup": "backups/src/pages/principal/media-center/ArticleCreator.vue",
+      "size": 38407
+    },
+    {
+      "original": "src/pages/principal/decision-support/intelligent-dashboard.vue",
+      "backup": "backups/src/pages/principal/decision-support/intelligent-dashboard.vue",
+      "size": 65158
+    },
+    {
+      "original": "src/pages/parent-center/share-stats/index.vue",
+      "backup": "backups/src/pages/parent-center/share-stats/index.vue",
+      "size": 6045
+    },
+    {
+      "original": "src/pages/parent-center/profile/index.vue",
+      "backup": "backups/src/pages/parent-center/profile/index.vue",
+      "size": 31095
+    },
+    {
+      "original": "src/pages/parent-center/games/records.vue",
+      "backup": "backups/src/pages/parent-center/games/records.vue",
+      "size": 8049
+    },
+    {
+      "original": "src/pages/parent-center/games/index.vue",
+      "backup": "backups/src/pages/parent-center/games/index.vue",
+      "size": 4658
+    },
+    {
+      "original": "src/pages/parent-center/games/achievements.vue",
+      "backup": "backups/src/pages/parent-center/games/achievements.vue",
+      "size": 8493
+    },
+    {
+      "original": "src/pages/parent-center/feedback/ParentFeedback.vue",
+      "backup": "backups/src/pages/parent-center/feedback/ParentFeedback.vue",
+      "size": 2426
+    },
+    {
+      "original": "src/pages/parent-center/dashboard/index.vue",
+      "backup": "backups/src/pages/parent-center/dashboard/index.vue",
+      "size": 8186
+    },
+    {
+      "original": "src/pages/parent-center/communication/smart-hub.vue",
+      "backup": "backups/src/pages/parent-center/communication/smart-hub.vue",
+      "size": 39573
+    },
+    {
+      "original": "src/pages/parent-center/children/index.vue",
+      "backup": "backups/src/pages/parent-center/children/index.vue",
+      "size": 18477
+    },
+    {
+      "original": "src/pages/parent-center/children/Growth.vue",
+      "backup": "backups/src/pages/parent-center/children/Growth.vue",
+      "size": 20364
+    },
+    {
+      "original": "src/pages/parent-center/children/FollowUp.vue",
+      "backup": "backups/src/pages/parent-center/children/FollowUp.vue",
+      "size": 10748
+    },
+    {
+      "original": "src/pages/parent-center/assessment/index.vue",
+      "backup": "backups/src/pages/parent-center/assessment/index.vue",
+      "size": 5172
+    },
+    {
+      "original": "src/pages/parent-center/assessment/Start.vue",
+      "backup": "backups/src/pages/parent-center/assessment/Start.vue",
+      "size": 8332
+    },
+    {
+      "original": "src/pages/parent-center/assessment/Report.vue",
+      "backup": "backups/src/pages/parent-center/assessment/Report.vue",
+      "size": 25440
+    },
+    {
+      "original": "src/pages/parent-center/assessment/GrowthTrajectory.vue",
+      "backup": "backups/src/pages/parent-center/assessment/GrowthTrajectory.vue",
+      "size": 13711
+    },
+    {
+      "original": "src/pages/parent-center/assessment/Doing.vue",
+      "backup": "backups/src/pages/parent-center/assessment/Doing.vue",
+      "size": 16602
+    },
+    {
+      "original": "src/pages/parent-center/ai-assistant/index.vue",
+      "backup": "backups/src/pages/parent-center/ai-assistant/index.vue",
+      "size": 10440
+    },
+    {
+      "original": "src/pages/parent-center/activities/index.vue",
+      "backup": "backups/src/pages/parent-center/activities/index.vue",
+      "size": 8472
+    },
+    {
+      "original": "src/pages/parent/feedback/ParentFeedback.vue",
+      "backup": "backups/src/pages/parent/feedback/ParentFeedback.vue",
+      "size": 2426
+    },
+    {
+      "original": "src/pages/parent/edit/ParentEdit.vue",
+      "backup": "backups/src/pages/parent/edit/ParentEdit.vue",
+      "size": 2473
+    },
+    {
+      "original": "src/pages/parent/communication/smart-hub.vue",
+      "backup": "backups/src/pages/parent/communication/smart-hub.vue",
+      "size": 39589
+    },
+    {
+      "original": "src/pages/parent/communication/SmartHub.vue",
+      "backup": "backups/src/pages/parent/communication/SmartHub.vue",
+      "size": 39629
+    },
+    {
+      "original": "src/pages/mobile/layouts/MobileLayout.vue",
+      "backup": "backups/src/pages/mobile/layouts/MobileLayout.vue",
+      "size": 5043
+    },
+    {
+      "original": "src/pages/marketing/smart-promotion/SmartPromotionCenter.vue",
+      "backup": "backups/src/pages/marketing/smart-promotion/SmartPromotionCenter.vue",
+      "size": 17305
+    },
+    {
+      "original": "src/pages/marketing/referrals/index.vue",
+      "backup": "backups/src/pages/marketing/referrals/index.vue",
+      "size": 15684
+    },
+    {
+      "original": "src/pages/marketing/funnel/index.vue",
+      "backup": "backups/src/pages/marketing/funnel/index.vue",
+      "size": 24831
+    },
+    {
+      "original": "src/pages/marketing/conversions/index.vue",
+      "backup": "backups/src/pages/marketing/conversions/index.vue",
+      "size": 26561
+    },
+    {
+      "original": "src/pages/marketing/channels/index.vue",
+      "backup": "backups/src/pages/marketing/channels/index.vue",
+      "size": 15516
+    },
+    {
+      "original": "src/pages/finance/workbench/UniversalFinanceWorkbench.vue",
+      "backup": "backups/src/pages/finance/workbench/UniversalFinanceWorkbench.vue",
+      "size": 45556
+    },
+    {
+      "original": "src/pages/enrollment-plan/trends/trend-analysis.vue",
+      "backup": "backups/src/pages/enrollment-plan/trends/trend-analysis.vue",
+      "size": 21862
+    },
+    {
+      "original": "src/pages/enrollment-plan/strategy/enrollment-strategy.vue",
+      "backup": "backups/src/pages/enrollment-plan/strategy/enrollment-strategy.vue",
+      "size": 20739
+    },
+    {
+      "original": "src/pages/enrollment-plan/smart-planning/smart-planning.vue",
+      "backup": "backups/src/pages/enrollment-plan/smart-planning/smart-planning.vue",
+      "size": 19025
+    },
+    {
+      "original": "src/pages/enrollment-plan/simulation/enrollment-simulation.vue",
+      "backup": "backups/src/pages/enrollment-plan/simulation/enrollment-simulation.vue",
+      "size": 24143
+    },
+    {
+      "original": "src/pages/enrollment-plan/optimization/capacity-optimization.vue",
+      "backup": "backups/src/pages/enrollment-plan/optimization/capacity-optimization.vue",
+      "size": 21500
+    },
+    {
+      "original": "src/pages/enrollment-plan/management/PlanManagement.vue",
+      "backup": "backups/src/pages/enrollment-plan/management/PlanManagement.vue",
+      "size": 299
+    },
+    {
+      "original": "src/pages/enrollment-plan/forecast/enrollment-forecast.vue",
+      "backup": "backups/src/pages/enrollment-plan/forecast/enrollment-forecast.vue",
+      "size": 18333
+    },
+    {
+      "original": "src/pages/enrollment-plan/evaluation/plan-evaluation.vue",
+      "backup": "backups/src/pages/enrollment-plan/evaluation/plan-evaluation.vue",
+      "size": 28097
+    },
+    {
+      "original": "src/pages/enrollment-plan/analytics/enrollment-analytics.vue",
+      "backup": "backups/src/pages/enrollment-plan/analytics/enrollment-analytics.vue",
+      "size": 39139
+    },
+    {
+      "original": "src/pages/dashboard/analytics/TeacherEffectiveness.vue",
+      "backup": "backups/src/pages/dashboard/analytics/TeacherEffectiveness.vue",
+      "size": 1919
+    },
+    {
+      "original": "src/pages/dashboard/analytics/FinancialAnalysis.vue",
+      "backup": "backups/src/pages/dashboard/analytics/FinancialAnalysis.vue",
+      "size": 1882
+    },
+    {
+      "original": "src/pages/dashboard/analytics/EnrollmentTrends.vue",
+      "backup": "backups/src/pages/dashboard/analytics/EnrollmentTrends.vue",
+      "size": 1875
+    },
+    {
+      "original": "src/pages/customer/lifecycle/intelligent-management.vue",
+      "backup": "backups/src/pages/customer/lifecycle/intelligent-management.vue",
+      "size": 34710
+    },
+    {
+      "original": "src/pages/customer/edit/[id].vue",
+      "backup": "backups/src/pages/customer/edit/[id].vue",
+      "size": 7431
+    },
+    {
+      "original": "src/pages/customer/detail/index.vue",
+      "backup": "backups/src/pages/customer/detail/index.vue",
+      "size": 130
+    },
+    {
+      "original": "src/pages/customer/detail/CustomerDetail.vue",
+      "backup": "backups/src/pages/customer/detail/CustomerDetail.vue",
+      "size": 2420
+    },
+    {
+      "original": "src/pages/customer/create/index.vue",
+      "backup": "backups/src/pages/customer/create/index.vue",
+      "size": 6507
+    },
+    {
+      "original": "src/pages/customer/analytics/CustomerAnalytics.vue",
+      "backup": "backups/src/pages/customer/analytics/CustomerAnalytics.vue",
+      "size": 1646
+    },
+    {
+      "original": "src/pages/class/teachers/id.vue",
+      "backup": "backups/src/pages/class/teachers/id.vue",
+      "size": 36759
+    },
+    {
+      "original": "src/pages/class/students/id.vue",
+      "backup": "backups/src/pages/class/students/id.vue",
+      "size": 28813
+    },
+    {
+      "original": "src/pages/class/smart-management/[id].vue",
+      "backup": "backups/src/pages/class/smart-management/[id].vue",
+      "size": 49256
+    },
+    {
+      "original": "src/pages/class/smart-management/SmartManagement.vue",
+      "backup": "backups/src/pages/class/smart-management/SmartManagement.vue",
+      "size": 49939
+    },
+    {
+      "original": "src/pages/class/optimization/ClassOptimization.vue",
+      "backup": "backups/src/pages/class/optimization/ClassOptimization.vue",
+      "size": 29122
+    },
+    {
+      "original": "src/pages/class/detail/[id].vue",
+      "backup": "backups/src/pages/class/detail/[id].vue",
+      "size": 1559
+    },
+    {
+      "original": "src/pages/class/detail/ClassDetail.vue",
+      "backup": "backups/src/pages/class/detail/ClassDetail.vue",
+      "size": 23467
+    },
+    {
+      "original": "src/pages/class/components/ClassFormDialog.vue",
+      "backup": "backups/src/pages/class/components/ClassFormDialog.vue",
+      "size": 17299
+    },
+    {
+      "original": "src/pages/class/components/ClassDetailDialog.vue",
+      "backup": "backups/src/pages/class/components/ClassDetailDialog.vue",
+      "size": 14751
+    },
+    {
+      "original": "src/pages/class/analytics/ClassAnalytics.vue",
+      "backup": "backups/src/pages/class/analytics/ClassAnalytics.vue",
+      "size": 18913
+    },
+    {
+      "original": "src/pages/application/review/ApplicationReview.vue",
+      "backup": "backups/src/pages/application/review/ApplicationReview.vue",
+      "size": 2386
+    },
+    {
+      "original": "src/pages/application/interview/ApplicationInterview.vue",
+      "backup": "backups/src/pages/application/interview/ApplicationInterview.vue",
+      "size": 3132
+    },
+    {
+      "original": "src/pages/ai/website-automation/WebsiteOperationPage.vue",
+      "backup": "backups/src/pages/ai/website-automation/WebsiteOperationPage.vue",
+      "size": 18389
+    },
+    {
+      "original": "src/pages/ai/website-automation/TaskExecution.vue",
+      "backup": "backups/src/pages/ai/website-automation/TaskExecution.vue",
+      "size": 28511
+    },
+    {
+      "original": "src/pages/ai/website-automation/ScreenshotAnalysis.vue",
+      "backup": "backups/src/pages/ai/website-automation/ScreenshotAnalysis.vue",
+      "size": 24512
+    },
+    {
+      "original": "src/pages/ai/website-automation/ElementRecognition.vue",
+      "backup": "backups/src/pages/ai/website-automation/ElementRecognition.vue",
+      "size": 26977
+    },
+    {
+      "original": "src/pages/ai/visualization/3d-analytics.vue",
+      "backup": "backups/src/pages/ai/visualization/3d-analytics.vue",
+      "size": 41526
+    },
+    {
+      "original": "src/pages/ai/predictive/maintenance-optimizer.vue",
+      "backup": "backups/src/pages/ai/predictive/maintenance-optimizer.vue",
+      "size": 57452
+    },
+    {
+      "original": "src/pages/ai/predictions/index.vue",
+      "backup": "backups/src/pages/ai/predictions/index.vue",
+      "size": 17782
+    },
+    {
+      "original": "src/pages/ai/nlp/TextAnalysis.vue",
+      "backup": "backups/src/pages/ai/nlp/TextAnalysis.vue",
+      "size": 22204
+    },
+    {
+      "original": "src/pages/ai/monitoring/AIPerformanceMonitor.vue",
+      "backup": "backups/src/pages/ai/monitoring/AIPerformanceMonitor.vue",
+      "size": 25878
+    },
+    {
+      "original": "src/pages/ai/models/index.vue",
+      "backup": "backups/src/pages/ai/models/index.vue",
+      "size": 16185
+    },
+    {
+      "original": "src/pages/ai/machine-learning/ModelTraining.vue",
+      "backup": "backups/src/pages/ai/machine-learning/ModelTraining.vue",
+      "size": 28793
+    },
+    {
+      "original": "src/pages/ai/deep-learning/prediction-engine.vue",
+      "backup": "backups/src/pages/ai/deep-learning/prediction-engine.vue",
+      "size": 37836
+    },
+    {
+      "original": "src/pages/ai/conversation/nlp-analytics.vue",
+      "backup": "backups/src/pages/ai/conversation/nlp-analytics.vue",
+      "size": 47838
+    },
+    {
+      "original": "src/pages/ai/components/QueryTemplatesDialog.vue",
+      "backup": "backups/src/pages/ai/components/QueryTemplatesDialog.vue",
+      "size": 16906
+    },
+    {
+      "original": "src/pages/ai/components/QueryResultDisplay.vue",
+      "backup": "backups/src/pages/ai/components/QueryResultDisplay.vue",
+      "size": 20999
+    },
+    {
+      "original": "src/pages/ai/components/QueryHistoryDialog.vue",
+      "backup": "backups/src/pages/ai/components/QueryHistoryDialog.vue",
+      "size": 15962
+    },
+    {
+      "original": "src/pages/ai/components/FeedbackDialog.vue",
+      "backup": "backups/src/pages/ai/components/FeedbackDialog.vue",
+      "size": 15659
+    },
+    {
+      "original": "src/pages/ai/components/ExampleQueriesDialog.vue",
+      "backup": "backups/src/pages/ai/components/ExampleQueriesDialog.vue",
+      "size": 18108
+    },
+    {
+      "original": "src/pages/ai/automation/WorkflowAutomation.vue",
+      "backup": "backups/src/pages/ai/automation/WorkflowAutomation.vue",
+      "size": 26740
+    },
+    {
+      "original": "src/pages/ai/analytics/real-time-analytics.vue",
+      "backup": "backups/src/pages/ai/analytics/real-time-analytics.vue",
+      "size": 15457
+    },
+    {
+      "original": "src/pages/ai/analytics/predictive-analytics.vue",
+      "backup": "backups/src/pages/ai/analytics/predictive-analytics.vue",
+      "size": 18550
+    },
+    {
+      "original": "src/pages/ai/analytics/index.vue",
+      "backup": "backups/src/pages/ai/analytics/index.vue",
+      "size": 16594
+    },
+    {
+      "original": "src/pages/ai/analytics/AdvancedAnalytics.vue",
+      "backup": "backups/src/pages/ai/analytics/AdvancedAnalytics.vue",
+      "size": 28939
+    },
+    {
+      "original": "src/pages/activity/registration/RegistrationDashboard.vue",
+      "backup": "backups/src/pages/activity/registration/RegistrationDashboard.vue",
+      "size": 19323
+    },
+    {
+      "original": "src/pages/activity/plan/ActivityPlanner.vue",
+      "backup": "backups/src/pages/activity/plan/ActivityPlanner.vue",
+      "size": 13598
+    },
+    {
+      "original": "src/pages/activity/optimization/ActivityOptimizer.vue",
+      "backup": "backups/src/pages/activity/optimization/ActivityOptimizer.vue",
+      "size": 19660
+    },
+    {
+      "original": "src/pages/activity/evaluation/ActivityEvaluation.vue",
+      "backup": "backups/src/pages/activity/evaluation/ActivityEvaluation.vue",
+      "size": 20117
+    },
+    {
+      "original": "src/pages/activity/detail/_id.vue",
+      "backup": "backups/src/pages/activity/detail/_id.vue",
+      "size": 11694
+    },
+    {
+      "original": "src/pages/activity/analytics/intelligent-analysis.vue",
+      "backup": "backups/src/pages/activity/analytics/intelligent-analysis.vue",
+      "size": 45547
+    },
+    {
+      "original": "src/pages/activity/analytics/ActivityAnalytics.vue",
+      "backup": "backups/src/pages/activity/analytics/ActivityAnalytics.vue",
+      "size": 18790
+    },
+    {
+      "original": "src/components/system/settings/StorageSettings.vue",
+      "backup": "backups/src/components/system/settings/StorageSettings.vue",
+      "size": 10710
+    },
+    {
+      "original": "src/components/system/settings/SecuritySettings.vue",
+      "backup": "backups/src/components/system/settings/SecuritySettings.vue",
+      "size": 5457
+    },
+    {
+      "original": "src/components/system/settings/EmailSettings.vue",
+      "backup": "backups/src/components/system/settings/EmailSettings.vue",
+      "size": 5532
+    },
+    {
+      "original": "src/components/system/settings/BasicSettings.vue",
+      "backup": "backups/src/components/system/settings/BasicSettings.vue",
+      "size": 4767
+    },
+    {
+      "original": "src/components/data-import/steps/PermissionCheck.vue",
+      "backup": "backups/src/components/data-import/steps/PermissionCheck.vue",
+      "size": 7387
+    },
+    {
+      "original": "src/components/centers/activity/RegistrationManagement.vue",
+      "backup": "backups/src/components/centers/activity/RegistrationManagement.vue",
+      "size": 16085
+    },
+    {
+      "original": "src/components/centers/activity/RegistrationDetail.vue",
+      "backup": "backups/src/components/centers/activity/RegistrationDetail.vue",
+      "size": 13477
+    },
+    {
+      "original": "src/components/centers/activity/NotificationTemplates.vue",
+      "backup": "backups/src/components/centers/activity/NotificationTemplates.vue",
+      "size": 10370
+    },
+    {
+      "original": "src/components/centers/activity/NotificationSettings.vue",
+      "backup": "backups/src/components/centers/activity/NotificationSettings.vue",
+      "size": 16827
+    },
+    {
+      "original": "src/components/centers/activity/NotificationManagement.vue",
+      "backup": "backups/src/components/centers/activity/NotificationManagement.vue",
+      "size": 16061
+    },
+    {
+      "original": "src/components/centers/activity/NotificationForm.vue",
+      "backup": "backups/src/components/centers/activity/NotificationForm.vue",
+      "size": 5990
+    },
+    {
+      "original": "src/components/centers/activity/NotificationDetail.vue",
+      "backup": "backups/src/components/centers/activity/NotificationDetail.vue",
+      "size": 9978
+    },
+    {
+      "original": "src/components/centers/activity/ActivityManagement.vue",
+      "backup": "backups/src/components/centers/activity/ActivityManagement.vue",
+      "size": 15802
+    },
+    {
+      "original": "src/components/centers/activity/ActivityAnalytics.vue",
+      "backup": "backups/src/components/centers/activity/ActivityAnalytics.vue",
+      "size": 16867
+    },
+    {
+      "original": "src/components/ai/website/TaskTemplateEditor.vue",
+      "backup": "backups/src/components/ai/website/TaskTemplateEditor.vue",
+      "size": 28216
+    },
+    {
+      "original": "src/components/ai/website/TaskManager.vue",
+      "backup": "backups/src/components/ai/website/TaskManager.vue",
+      "size": 24045
+    },
+    {
+      "original": "src/components/ai/website/TaskEditor.vue",
+      "backup": "backups/src/components/ai/website/TaskEditor.vue",
+      "size": 29422
+    },
+    {
+      "original": "src/components/ai/website/ElementSelector.vue",
+      "backup": "backups/src/components/ai/website/ElementSelector.vue",
+      "size": 24101
+    },
+    {
+      "original": "src/components/ai/website/DOMInspector.vue",
+      "backup": "backups/src/components/ai/website/DOMInspector.vue",
+      "size": 24704
+    },
+    {
+      "original": "src/components/ai/model/ModelManagement.vue",
+      "backup": "backups/src/components/ai/model/ModelManagement.vue",
+      "size": 16601
+    },
+    {
+      "original": "src/components/ai/memory/MemoryVisualization.vue",
+      "backup": "backups/src/components/ai/memory/MemoryVisualization.vue",
+      "size": 13452
+    },
+    {
+      "original": "src/components/ai/memory/MemoryStatistics.vue",
+      "backup": "backups/src/components/ai/memory/MemoryStatistics.vue",
+      "size": 9445
+    },
+    {
+      "original": "src/components/ai/memory/MemorySettings.vue",
+      "backup": "backups/src/components/ai/memory/MemorySettings.vue",
+      "size": 9937
+    },
+    {
+      "original": "src/components/ai/memory/MemorySearch.vue",
+      "backup": "backups/src/components/ai/memory/MemorySearch.vue",
+      "size": 11718
+    },
+    {
+      "original": "src/components/ai/memory/MemoryCard.vue",
+      "backup": "backups/src/components/ai/memory/MemoryCard.vue",
+      "size": 4557
+    },
+    {
+      "original": "src/components/ai/activity/ActivityPlanner.vue",
+      "backup": "backups/src/components/ai/activity/ActivityPlanner.vue",
+      "size": 0
+    },
+    {
+      "original": "src/components/ai-assistant/ui/StepBlock.vue",
+      "backup": "backups/src/components/ai-assistant/ui/StepBlock.vue",
+      "size": 5224
+    },
+    {
+      "original": "src/components/ai-assistant/search/SearchProgress.vue",
+      "backup": "backups/src/components/ai-assistant/search/SearchProgress.vue",
+      "size": 1270
+    },
+    {
+      "original": "src/components/ai-assistant/search/SearchAnimation.vue",
+      "backup": "backups/src/components/ai-assistant/search/SearchAnimation.vue",
+      "size": 10318
+    },
+    {
+      "original": "src/components/ai-assistant/quick-query/QuickQuerySidebar.vue",
+      "backup": "backups/src/components/ai-assistant/quick-query/QuickQuerySidebar.vue",
+      "size": 7985
+    },
+    {
+      "original": "src/components/ai-assistant/prompt/SmartPromptRecommender.vue",
+      "backup": "backups/src/components/ai-assistant/prompt/SmartPromptRecommender.vue",
+      "size": 20630
+    },
+    {
+      "original": "src/components/ai-assistant/prompt/PromptOptimizationDialog.vue",
+      "backup": "backups/src/components/ai-assistant/prompt/PromptOptimizationDialog.vue",
+      "size": 18753
+    },
+    {
+      "original": "src/components/ai-assistant/preview/HtmlPreview.vue",
+      "backup": "backups/src/components/ai-assistant/preview/HtmlPreview.vue",
+      "size": 9023
+    },
+    {
+      "original": "src/components/ai-assistant/panels/RightSidebar.vue",
+      "backup": "backups/src/components/ai-assistant/panels/RightSidebar.vue",
+      "size": 60390
+    },
+    {
+      "original": "src/components/ai-assistant/panels/MarkdownMessage.vue",
+      "backup": "backups/src/components/ai-assistant/panels/MarkdownMessage.vue",
+      "size": 6786
+    },
+    {
+      "original": "src/components/ai-assistant/layout/SidebarLayout.vue",
+      "backup": "backups/src/components/ai-assistant/layout/SidebarLayout.vue",
+      "size": 9103
+    },
+    {
+      "original": "src/components/ai-assistant/layout/FullscreenLayout.vue",
+      "backup": "backups/src/components/ai-assistant/layout/FullscreenLayout.vue",
+      "size": 7715
+    },
+    {
+      "original": "src/components/ai-assistant/input/InputArea.vue",
+      "backup": "backups/src/components/ai-assistant/input/InputArea.vue",
+      "size": 43457
+    },
+    {
+      "original": "src/components/ai-assistant/expert/ExpertSelector.vue",
+      "backup": "backups/src/components/ai-assistant/expert/ExpertSelector.vue",
+      "size": 7862
+    },
+    {
+      "original": "src/components/ai-assistant/expert/CustomExpertDialog.vue",
+      "backup": "backups/src/components/ai-assistant/expert/CustomExpertDialog.vue",
+      "size": 9593
+    },
+    {
+      "original": "src/components/ai-assistant/document/DocumentPreview.vue",
+      "backup": "backups/src/components/ai-assistant/document/DocumentPreview.vue",
+      "size": 10147
+    },
+    {
+      "original": "src/components/ai-assistant/document/DocumentGenerationResult.vue",
+      "backup": "backups/src/components/ai-assistant/document/DocumentGenerationResult.vue",
+      "size": 7773
+    },
+    {
+      "original": "src/components/ai-assistant/document/DocumentGenerationProgress.vue",
+      "backup": "backups/src/components/ai-assistant/document/DocumentGenerationProgress.vue",
+      "size": 8948
+    },
+    {
+      "original": "src/components/ai-assistant/dialogs/QuickQueryGroups.vue",
+      "backup": "backups/src/components/ai-assistant/dialogs/QuickQueryGroups.vue",
+      "size": 13999
+    },
+    {
+      "original": "src/components/ai-assistant/dialogs/MissingFieldsDialog.vue",
+      "backup": "backups/src/components/ai-assistant/dialogs/MissingFieldsDialog.vue",
+      "size": 16332
+    },
+    {
+      "original": "src/components/ai-assistant/dialogs/BatchImportDialog.vue",
+      "backup": "backups/src/components/ai-assistant/dialogs/BatchImportDialog.vue",
+      "size": 12892
+    },
+    {
+      "original": "src/components/ai-assistant/dialogs/AIStatistics.vue",
+      "backup": "backups/src/components/ai-assistant/dialogs/AIStatistics.vue",
+      "size": 16871
+    },
+    {
+      "original": "src/components/ai-assistant/core/AIAssistantCore.vue",
+      "backup": "backups/src/components/ai-assistant/core/AIAssistantCore.vue",
+      "size": 49127
+    },
+    {
+      "original": "src/components/ai-assistant/components/TokenUsageCircle.vue",
+      "backup": "backups/src/components/ai-assistant/components/TokenUsageCircle.vue",
+      "size": 11615
+    },
+    {
+      "original": "src/components/ai-assistant/chat/WelcomeMessage.vue",
+      "backup": "backups/src/components/ai-assistant/chat/WelcomeMessage.vue",
+      "size": 7905
+    },
+    {
+      "original": "src/components/ai-assistant/chat/MessageList.vue",
+      "backup": "backups/src/components/ai-assistant/chat/MessageList.vue",
+      "size": 9723
+    },
+    {
+      "original": "src/components/ai-assistant/chat/MessageItem.vue",
+      "backup": "backups/src/components/ai-assistant/chat/MessageItem.vue",
+      "size": 20785
+    },
+    {
+      "original": "src/components/ai-assistant/chat/MessageFeedback.vue",
+      "backup": "backups/src/components/ai-assistant/chat/MessageFeedback.vue",
+      "size": 5980
+    },
+    {
+      "original": "src/components/ai-assistant/chat/ChatContainer.vue",
+      "backup": "backups/src/components/ai-assistant/chat/ChatContainer.vue",
+      "size": 6771
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/ToolCallBar.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/ToolCallBar.vue",
+      "size": 5581
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/ThinkingSubtitle.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/ThinkingSubtitle.vue",
+      "size": 5584
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/ThinkingProcess.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/ThinkingProcess.vue",
+      "size": 8000
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/LoadingMessage.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/LoadingMessage.vue",
+      "size": 2464
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/FunctionCallList.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/FunctionCallList.vue",
+      "size": 1872
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/FunctionCallItem.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/FunctionCallItem.vue",
+      "size": 12456
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/ContextOptimization.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/ContextOptimization.vue",
+      "size": 11071
+    },
+    {
+      "original": "src/components/ai-assistant/ai-response/AnswerDisplay.vue",
+      "backup": "backups/src/components/ai-assistant/ai-response/AnswerDisplay.vue",
+      "size": 7647
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/TeachingStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/TeachingStatCard.vue",
+      "size": 1929
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/TeachingRecordDialog.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/TeachingRecordDialog.vue",
+      "size": 9996
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/TeachingRecord.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/TeachingRecord.vue",
+      "size": 11876
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/TeachingProgress.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/TeachingProgress.vue",
+      "size": 15131
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/StudentManagement.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/StudentManagement.vue",
+      "size": 15728
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/MediaUpload.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/MediaUpload.vue",
+      "size": 7487
+    },
+    {
+      "original": "src/pages/teacher-center/teaching/components/ClassManagement.vue",
+      "backup": "backups/src/pages/teacher-center/teaching/components/ClassManagement.vue",
+      "size": 12591
+    },
+    {
+      "original": "src/pages/teacher-center/notifications/components/NotificationStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/notifications/components/NotificationStatCard.vue",
+      "size": 1879
+    },
+    {
+      "original": "src/pages/teacher-center/notifications/components/NotificationDetail.vue",
+      "backup": "backups/src/pages/teacher-center/notifications/components/NotificationDetail.vue",
+      "size": 9129
+    },
+    {
+      "original": "src/pages/teacher-center/tasks/components/TaskStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/tasks/components/TaskStatCard.vue",
+      "size": 1822
+    },
+    {
+      "original": "src/pages/teacher-center/tasks/components/TaskDetail.vue",
+      "backup": "backups/src/pages/teacher-center/tasks/components/TaskDetail.vue",
+      "size": 7347
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/components/TaskOverviewCard.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/components/TaskOverviewCard.vue",
+      "size": 5272
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/components/QuickActionsPanel.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/components/QuickActionsPanel.vue",
+      "size": 4965
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/components/NotificationCard.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/components/NotificationCard.vue",
+      "size": 5307
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/components/ClassOverviewCard.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/components/ClassOverviewCard.vue",
+      "size": 4810
+    },
+    {
+      "original": "src/pages/teacher-center/dashboard/components/ActivityReminderCard.vue",
+      "backup": "backups/src/pages/teacher-center/dashboard/components/ActivityReminderCard.vue",
+      "size": 4898
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/TrackingStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/TrackingStatCard.vue",
+      "size": 2173
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/TaskItem.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/TaskItem.vue",
+      "size": 5827
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/SuccessProbabilityCard.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/SuccessProbabilityCard.vue",
+      "size": 4047
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/ScreenshotUpload.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/ScreenshotUpload.vue",
+      "size": 3161
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/SOPStageFlow.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/SOPStageFlow.vue",
+      "size": 12082
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/SOPProgressCard.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/SOPProgressCard.vue",
+      "size": 3890
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/FollowRecord.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/FollowRecord.vue",
+      "size": 10236
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/DataStatistics.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/DataStatistics.vue",
+      "size": 1234
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/CustomerList.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/CustomerList.vue",
+      "size": 7352
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/CustomerInfoCard.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/CustomerInfoCard.vue",
+      "size": 4499
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/CustomerCard.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/CustomerCard.vue",
+      "size": 4208
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/CreateCustomerDialog.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/CreateCustomerDialog.vue",
+      "size": 3738
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/ConversionFunnel.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/ConversionFunnel.vue",
+      "size": 9687
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/ConversationTimeline.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/ConversationTimeline.vue",
+      "size": 3498
+    },
+    {
+      "original": "src/pages/teacher-center/customer-tracking/components/AISuggestionPanel.vue",
+      "backup": "backups/src/pages/teacher-center/customer-tracking/components/AISuggestionPanel.vue",
+      "size": 4389
+    },
+    {
+      "original": "src/pages/teacher-center/enrollment/components/EnrollmentStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/enrollment/components/EnrollmentStatCard.vue",
+      "size": 2179
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/VideoPlayer.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/VideoPlayer.vue",
+      "size": 3830
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/TypingCodeDisplay.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/TypingCodeDisplay.vue",
+      "size": 8962
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/TemplateSelector.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/TemplateSelector.vue",
+      "size": 6039
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/ScheduleBuilder.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/ScheduleBuilder.vue",
+      "size": 8397
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/ProgressPanel.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/ProgressPanel.vue",
+      "size": 4931
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/KeyboardShortcuts.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/KeyboardShortcuts.vue",
+      "size": 6597
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/ImageCarousel.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/ImageCarousel.vue",
+      "size": 4148
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/CurriculumStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/CurriculumStatCard.vue",
+      "size": 2179
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/CurriculumPreview.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/CurriculumPreview.vue",
+      "size": 8822
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/CodeEditor.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/CodeEditor.vue",
+      "size": 6690
+    },
+    {
+      "original": "src/pages/teacher-center/creative-curriculum/components/AICurriculumAssistant.vue",
+      "backup": "backups/src/pages/teacher-center/creative-curriculum/components/AICurriculumAssistant.vue",
+      "size": 31560
+    },
+    {
+      "original": "src/pages/teacher-center/attendance/components/TeacherCheckIn.vue",
+      "backup": "backups/src/pages/teacher-center/attendance/components/TeacherCheckIn.vue",
+      "size": 17614
+    },
+    {
+      "original": "src/pages/teacher-center/attendance/components/StudentAttendance.vue",
+      "backup": "backups/src/pages/teacher-center/attendance/components/StudentAttendance.vue",
+      "size": 18164
+    },
+    {
+      "original": "src/pages/teacher-center/attendance/components/AttendanceStatistics.vue",
+      "backup": "backups/src/pages/teacher-center/attendance/components/AttendanceStatistics.vue",
+      "size": 13203
+    },
+    {
+      "original": "src/pages/teacher-center/attendance/components/AttendanceHistory.vue",
+      "backup": "backups/src/pages/teacher-center/attendance/components/AttendanceHistory.vue",
+      "size": 12426
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/MyActivities.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/MyActivities.vue",
+      "size": 10638
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityStatCard.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityStatCard.vue",
+      "size": 1440
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivitySignin.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivitySignin.vue",
+      "size": 7228
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityList.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityList.vue",
+      "size": 8791
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityForm.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityForm.vue",
+      "size": 7819
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityEvaluation.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityEvaluation.vue",
+      "size": 12406
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityDetail.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityDetail.vue",
+      "size": 10953
+    },
+    {
+      "original": "src/pages/teacher-center/activities/components/ActivityCalendar.vue",
+      "backup": "backups/src/pages/teacher-center/activities/components/ActivityCalendar.vue",
+      "size": 6180
+    },
+    {
+      "original": "src/pages/centers/components/ScoreDetailDialog.vue",
+      "backup": "backups/src/pages/centers/components/ScoreDetailDialog.vue",
+      "size": 9168
+    },
+    {
+      "original": "src/pages/centers/components/PrintPreviewDialog.vue",
+      "backup": "backups/src/pages/centers/components/PrintPreviewDialog.vue",
+      "size": 5196
+    },
+    {
+      "original": "src/pages/centers/components/OutdoorTrainingDetail.vue",
+      "backup": "backups/src/pages/centers/components/OutdoorTrainingDetail.vue",
+      "size": 8594
+    },
+    {
+      "original": "src/pages/centers/components/MediaStatusIndicator.vue",
+      "backup": "backups/src/pages/centers/components/MediaStatusIndicator.vue",
+      "size": 5684
+    },
+    {
+      "original": "src/pages/centers/components/MediaPreviewDialog.vue",
+      "backup": "backups/src/pages/centers/components/MediaPreviewDialog.vue",
+      "size": 12665
+    },
+    {
+      "original": "src/pages/centers/components/InspectionTimelineEditor.vue",
+      "backup": "backups/src/pages/centers/components/InspectionTimelineEditor.vue",
+      "size": 32346
+    },
+    {
+      "original": "src/pages/centers/components/InspectionTimeline.vue",
+      "backup": "backups/src/pages/centers/components/InspectionTimeline.vue",
+      "size": 23602
+    },
+    {
+      "original": "src/pages/centers/components/InspectionTaskDialog.vue",
+      "backup": "backups/src/pages/centers/components/InspectionTaskDialog.vue",
+      "size": 9782
+    },
+    {
+      "original": "src/pages/centers/components/InspectionReportPrintTemplate.vue",
+      "backup": "backups/src/pages/centers/components/InspectionReportPrintTemplate.vue",
+      "size": 14881
+    },
+    {
+      "original": "src/pages/centers/components/InspectionRectificationPrintTemplate.vue",
+      "backup": "backups/src/pages/centers/components/InspectionRectificationPrintTemplate.vue",
+      "size": 10717
+    },
+    {
+      "original": "src/pages/centers/components/InspectionRectificationDialog.vue",
+      "backup": "backups/src/pages/centers/components/InspectionRectificationDialog.vue",
+      "size": 17585
+    },
+    {
+      "original": "src/pages/centers/components/InspectionRecordPrintTemplate.vue",
+      "backup": "backups/src/pages/centers/components/InspectionRecordPrintTemplate.vue",
+      "size": 10685
+    },
+    {
+      "original": "src/pages/centers/components/InspectionRecordDialog.vue",
+      "backup": "backups/src/pages/centers/components/InspectionRecordDialog.vue",
+      "size": 14827
+    },
+    {
+      "original": "src/pages/centers/components/InspectionPlanEditDialog.vue",
+      "backup": "backups/src/pages/centers/components/InspectionPlanEditDialog.vue",
+      "size": 8181
+    },
+    {
+      "original": "src/pages/centers/components/InspectionPlanDetailDialog.vue",
+      "backup": "backups/src/pages/centers/components/InspectionPlanDetailDialog.vue",
+      "size": 7622
+    },
+    {
+      "original": "src/pages/centers/components/ExternalDisplayDetail.vue",
+      "backup": "backups/src/pages/centers/components/ExternalDisplayDetail.vue",
+      "size": 8352
+    },
+    {
+      "original": "src/pages/centers/components/CoursePlanDetail.vue",
+      "backup": "backups/src/pages/centers/components/CoursePlanDetail.vue",
+      "size": 6299
+    },
+    {
+      "original": "src/pages/centers/components/ClassDetailDialog.vue",
+      "backup": "backups/src/pages/centers/components/ClassDetailDialog.vue",
+      "size": 16736
+    },
+    {
+      "original": "src/pages/centers/components/ChampionshipDetailDialog.vue",
+      "backup": "backups/src/pages/centers/components/ChampionshipDetailDialog.vue",
+      "size": 19539
+    },
+    {
+      "original": "src/pages/centers/components/ChampionshipDetail.vue",
+      "backup": "backups/src/pages/centers/components/ChampionshipDetail.vue",
+      "size": 10618
+    },
+    {
+      "original": "src/pages/centers/components/AIScoringDrawer.vue",
+      "backup": "backups/src/pages/centers/components/AIScoringDrawer.vue",
+      "size": 18436
+    },
+    {
+      "original": "src/pages/parent-center/games/play/SpaceTreasure.vue",
+      "backup": "backups/src/pages/parent-center/games/play/SpaceTreasure.vue",
+      "size": 25088
+    },
+    {
+      "original": "src/pages/parent-center/games/play/RobotFactory.vue",
+      "backup": "backups/src/pages/parent-center/games/play/RobotFactory.vue",
+      "size": 13803
+    },
+    {
+      "original": "src/pages/parent-center/games/play/PrincessMemory.vue",
+      "backup": "backups/src/pages/parent-center/games/play/PrincessMemory.vue",
+      "size": 20223
+    },
+    {
+      "original": "src/pages/parent-center/games/play/PrincessGarden.vue",
+      "backup": "backups/src/pages/parent-center/games/play/PrincessGarden.vue",
+      "size": 23117
+    },
+    {
+      "original": "src/pages/parent-center/games/play/FruitSequence.vue",
+      "backup": "backups/src/pages/parent-center/games/play/FruitSequence.vue",
+      "size": 25420
+    },
+    {
+      "original": "src/pages/parent-center/games/play/DollhouseTidy.vue",
+      "backup": "backups/src/pages/parent-center/games/play/DollhouseTidy.vue",
+      "size": 14426
+    },
+    {
+      "original": "src/pages/parent-center/games/play/DinosaurMemory.vue",
+      "backup": "backups/src/pages/parent-center/games/play/DinosaurMemory.vue",
+      "size": 19239
+    },
+    {
+      "original": "src/pages/parent-center/games/play/ColorSorting.vue",
+      "backup": "backups/src/pages/parent-center/games/play/ColorSorting.vue",
+      "size": 18363
+    },
+    {
+      "original": "src/pages/parent-center/games/play/AnimalObserver.vue",
+      "backup": "backups/src/pages/parent-center/games/play/AnimalObserver.vue",
+      "size": 25073
+    },
+    {
+      "original": "src/pages/parent-center/games/components/GameCard.vue",
+      "backup": "backups/src/pages/parent-center/games/components/GameCard.vue",
+      "size": 4411
+    },
+    {
+      "original": "src/pages/parent-center/assessment/games/MemoryGame.vue",
+      "backup": "backups/src/pages/parent-center/assessment/games/MemoryGame.vue",
+      "size": 10718
+    },
+    {
+      "original": "src/pages/parent-center/assessment/games/LogicGame.vue",
+      "backup": "backups/src/pages/parent-center/assessment/games/LogicGame.vue",
+      "size": 12148
+    },
+    {
+      "original": "src/pages/parent-center/assessment/games/AttentionGame.vue",
+      "backup": "backups/src/pages/parent-center/assessment/games/AttentionGame.vue",
+      "size": 8886
+    },
+    {
+      "original": "src/pages/parent-center/assessment/components/GameComponent.vue",
+      "backup": "backups/src/pages/parent-center/assessment/components/GameComponent.vue",
+      "size": 1788
+    },
+    {
+      "original": "src/pages/mobile/pages/activity/ActivityList.vue",
+      "backup": "backups/src/pages/mobile/pages/activity/ActivityList.vue",
+      "size": 12290
+    },
+    {
+      "original": "src/pages/mobile/pages/activity/ActivityDetail.vue",
+      "backup": "backups/src/pages/mobile/pages/activity/ActivityDetail.vue",
+      "size": 22506
+    },
+    {
+      "original": "src/pages/mobile/components/common/MobileToast.vue",
+      "backup": "backups/src/pages/mobile/components/common/MobileToast.vue",
+      "size": 2603
+    },
+    {
+      "original": "src/pages/mobile/components/common/MobileTabBar.vue",
+      "backup": "backups/src/pages/mobile/components/common/MobileTabBar.vue",
+      "size": 3280
+    },
+    {
+      "original": "src/pages/mobile/components/common/MobileLoading.vue",
+      "backup": "backups/src/pages/mobile/components/common/MobileLoading.vue",
+      "size": 1498
+    },
+    {
+      "original": "src/pages/mobile/components/common/MobileHeader.vue",
+      "backup": "backups/src/pages/mobile/components/common/MobileHeader.vue",
+      "size": 5820
+    },
+    {
+      "original": "src/pages/mobile/components/common/AIChatButton.vue",
+      "backup": "backups/src/pages/mobile/components/common/AIChatButton.vue",
+      "size": 16419
+    },
+    {
+      "original": "src/pages/mobile/components/activity/RegistrationForm.vue",
+      "backup": "backups/src/pages/mobile/components/activity/RegistrationForm.vue",
+      "size": 12490
+    },
+    {
+      "original": "src/pages/mobile/components/activity/GroupBuyCard.vue",
+      "backup": "backups/src/pages/mobile/components/activity/GroupBuyCard.vue",
+      "size": 11430
+    },
+    {
+      "original": "src/pages/mobile/components/activity/ActivityCard.vue",
+      "backup": "backups/src/pages/mobile/components/activity/ActivityCard.vue",
+      "size": 6198
+    },
+    {
+      "original": "src/pages/marketing/smart-promotion/components/StrategyOptimizationDialog.vue",
+      "backup": "backups/src/pages/marketing/smart-promotion/components/StrategyOptimizationDialog.vue",
+      "size": 16789
+    },
+    {
+      "original": "src/pages/marketing/smart-promotion/components/SmartPosterDialog.vue",
+      "backup": "backups/src/pages/marketing/smart-promotion/components/SmartPosterDialog.vue",
+      "size": 16659
+    },
+    {
+      "original": "src/pages/marketing/referrals/components/ReferralCodeDialog.vue",
+      "backup": "backups/src/pages/marketing/referrals/components/ReferralCodeDialog.vue",
+      "size": 17491
+    },
+    {
+      "original": "src/pages/marketing/referrals/components/QrcodeGenerator.vue",
+      "backup": "backups/src/pages/marketing/referrals/components/QrcodeGenerator.vue",
+      "size": 9314
+    },
+    {
+      "original": "src/pages/marketing/referrals/components/PosterGenerator.vue",
+      "backup": "backups/src/pages/marketing/referrals/components/PosterGenerator.vue",
+      "size": 6953
+    },
+    {
+      "original": "src/pages/marketing/referrals/components/AIPosterGeneratorDialog.vue",
+      "backup": "backups/src/pages/marketing/referrals/components/AIPosterGeneratorDialog.vue",
+      "size": 18760
+    },
+    {
+      "original": "src/pages/marketing/funnel/components/StageDetailDialog.vue",
+      "backup": "backups/src/pages/marketing/funnel/components/StageDetailDialog.vue",
+      "size": 16613
+    },
+    {
+      "original": "src/pages/marketing/funnel/components/DimensionDetailDialog.vue",
+      "backup": "backups/src/pages/marketing/funnel/components/DimensionDetailDialog.vue",
+      "size": 18968
+    },
+    {
+      "original": "src/pages/marketing/conversions/components/ConversionDetailDialog.vue",
+      "backup": "backups/src/pages/marketing/conversions/components/ConversionDetailDialog.vue",
+      "size": 15878
+    },
+    {
+      "original": "src/pages/marketing/channels/components/TagManageDialog.vue",
+      "backup": "backups/src/pages/marketing/channels/components/TagManageDialog.vue",
+      "size": 6832
+    },
+    {
+      "original": "src/pages/marketing/channels/components/MetricsDialog.vue",
+      "backup": "backups/src/pages/marketing/channels/components/MetricsDialog.vue",
+      "size": 11722
+    },
+    {
+      "original": "src/pages/marketing/channels/components/ContactManageDialog.vue",
+      "backup": "backups/src/pages/marketing/channels/components/ContactManageDialog.vue",
+      "size": 5811
+    },
+    {
+      "original": "src/pages/marketing/channels/components/ChannelEditDialog.vue",
+      "backup": "backups/src/pages/marketing/channels/components/ChannelEditDialog.vue",
+      "size": 6151
+    },
+    {
+      "original": "src/pages/centers/components/attendance/StatisticsTab.vue",
+      "backup": "backups/src/pages/centers/components/attendance/StatisticsTab.vue",
+      "size": 10246
+    },
+    {
+      "original": "src/pages/centers/components/attendance/RecordsManagementTab.vue",
+      "backup": "backups/src/pages/centers/components/attendance/RecordsManagementTab.vue",
+      "size": 5880
+    },
+    {
+      "original": "src/pages/centers/components/attendance/HealthMonitoringTab.vue",
+      "backup": "backups/src/pages/centers/components/attendance/HealthMonitoringTab.vue",
+      "size": 2911
+    },
+    {
+      "original": "src/pages/centers/components/attendance/ClassStatisticsTab.vue",
+      "backup": "backups/src/pages/centers/components/attendance/ClassStatisticsTab.vue",
+      "size": 3395
+    },
+    {
+      "original": "src/pages/centers/components/attendance/AbnormalAnalysisTab.vue",
+      "backup": "backups/src/pages/centers/components/attendance/AbnormalAnalysisTab.vue",
+      "size": 3342
+    }
+  ],
+  "totalFiles": 468,
+  "successCount": 468,
+  "failCount": 0
+}

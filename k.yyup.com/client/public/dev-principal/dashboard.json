@@ -1,0 +1,102 @@
+{
+  "statsCards": [
+    {
+      "label": "学生总数", 
+      "value": "256", 
+      "icon": "User", 
+      "type": "primary",
+      "trend": "up",
+      "trendValue": "5.2%"
+    },
+    {
+      "label": "班级总数", 
+      "value": "12", 
+      "icon": "School", 
+      "type": "success",
+      "trend": "up",
+      "trendValue": "8.3%"
+    },
+    {
+      "label": "待审核申请", 
+      "value": "18", 
+      "icon": "Document", 
+      "type": "warning",
+      "trend": "down",
+      "trendValue": "2.1%"
+    },
+    {
+      "label": "招生率", 
+      "value": "92%", 
+      "icon": "Trophy", 
+      "type": "info",
+      "trend": "up",
+      "trendValue": "3.5%"
+    }
+  ],
+  "enrollmentTrend": {
+    "week": {
+      "dates": ["周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+      "values": [5, 7, 9, 12, 10, 18, 8]
+    },
+    "month": {
+      "dates": ["1日", "5日", "10日", "15日", "20日", "25日", "30日"],
+      "values": [15, 25, 32, 45, 55, 60, 68]
+    },
+    "year": {
+      "dates": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+      "values": [35, 42, 55, 68, 75, 82, 90, 105, 118, 132, 145, 160]
+    }
+  },
+  "todos": [
+    {
+      "id": 1,
+      "title": "审核新入学申请",
+      "dueDate": "2023-06-05 12:00:00",
+      "priority": "高"
+    },
+    {
+      "id": 2,
+      "title": "招生计划月度会议",
+      "dueDate": "2023-06-06 14:30:00",
+      "priority": "中"
+    },
+    {
+      "id": 3,
+      "title": "家长开放日准备",
+      "dueDate": "2023-06-08 09:00:00",
+      "priority": "高"
+    },
+    {
+      "id": 4,
+      "title": "更新招生简章",
+      "dueDate": "2023-06-10 17:00:00",
+      "priority": "低"
+    }
+  ],
+  "notices": [
+    {
+      "id": 1,
+      "title": "2023年秋季招生计划已发布",
+      "publishTime": "2023-06-01 10:00:00",
+      "importance": "重要",
+      "readCount": 28,
+      "totalCount": 35
+    },
+    {
+      "id": 2,
+      "title": "本周五开展招生宣传培训",
+      "publishTime": "2023-06-02 16:30:00",
+      "importance": "一般",
+      "readCount": 15,
+      "totalCount": 22
+    },
+    {
+      "id": 3,
+      "title": "六月份招生指标已下达",
+      "publishTime": "2023-06-03 09:15:00",
+      "importance": "紧急",
+      "readCount": 20,
+      "totalCount": 20
+    }
+  ]
+} 

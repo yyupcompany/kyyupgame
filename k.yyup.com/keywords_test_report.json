@@ -1,0 +1,140 @@
+{
+  "timestamp": "2025-11-21T08:09:25.559Z",
+  "results": [
+    {
+      "keyword": "学生总数",
+      "success": true,
+      "hasMessages": true,
+      "hasApiCall": true,
+      "hasResponse": true,
+      "pageTextLength": 561
+    },
+    {
+      "keyword": "班级信息",
+      "success": true,
+      "hasMessages": true,
+      "hasApiCall": true,
+      "hasResponse": true,
+      "pageTextLength": 740
+    },
+    {
+      "keyword": "教师",
+      "success": true,
+      "hasMessages": true,
+      "hasApiCall": true,
+      "hasResponse": true,
+      "pageTextLength": 822
+    },
+    {
+      "keyword": "活动",
+      "success": true,
+      "hasMessages": true,
+      "hasApiCall": true,
+      "hasResponse": true,
+      "pageTextLength": 874
+    },
+    {
+      "keyword": "财务",
+      "success": true,
+      "hasMessages": true,
+      "hasApiCall": true,
+      "hasResponse": true,
+      "pageTextLength": 998
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "success": 5,
+    "failed": 0
+  },
+  "consoleLogs": [
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: <[PLHD20_never_used_51bce0c785ca2f68081bfa7d91973934]>[{\"name\":\"any_query\",\"parameters\":{\"userQuery\":\"查询财务相关数据\",\"queryType\":\"list\"}}]<[PLHD21_never_used_51bce0c785ca2f68081bfa7d91973934]>\n需要查询财务相关数据，使用any_query工具",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T08:09:21.255Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T08:09:21.239Z, totalEvents: 3, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.13217391304347825}",
+      "timestamp": "2025-11-21T08:09:21.256Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T08:09:21.256Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T08:09:21.256Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T08:09:21.256Z"
+    }
+  ],
+  "errors": [],
+  "networkLogs": [
+    {
+      "url": "http://localhost:5173/api/ai/token-monitor/stats",
+      "status": 200,
+      "timestamp": "2025-11-21T08:08:39.454Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:08:44.312Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:08:52.466Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:09:00.704Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:09:08.932Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/token-monitor/stats",
+      "status": 200,
+      "timestamp": "2025-11-21T08:09:09.374Z"
+    },
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:09:17.146Z"
+    }
+  ]
+}

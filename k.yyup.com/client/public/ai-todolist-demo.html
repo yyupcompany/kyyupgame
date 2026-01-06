@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助手TodoList管理器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', '-apple-system', BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .controls button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .controls button:hover {
+            background: #5a67d8;
+            transform: translateY(-1px);
+        }
+
+        .controls button.danger {
+            background: #e53e3e;
+        }
+
+        .controls button.danger:hover {
+            background: #c53030;
+        }
+
+        .todolist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .todolist-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .todolist-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .todolist-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+        }
+
+        .todolist-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .todolist-meta {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .todolist-body {
+            padding: 20px;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-checkbox {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+
+        .task-content {
+            flex: 1;
+        }
+
+        .task-title {
+            font-weight: 500;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .task-title.completed {
+            text-decoration: line-through;
+            color: #a0aec0;
+        }
+
+        .task-meta {
+            font-size: 0.85em;
+            color: #718096;
+        }
+
+        .priority-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .priority-highest { background: #fed7d7; color: #c53030; }
+        .priority-high { background: #feebc8; color: #dd6b20; }
+        .priority-medium { background: #bee3f8; color: #3182ce; }
+        .priority-low { background: #c6f6d5; color: #38a169; }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+        }
+
+        .spinner {
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .todolist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI助手TodoList管理器</h1>
+            <p>查看和管理AI为您创建的任务清单</p>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-lists">0</div>
+                <div class="stat-label">总清单数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-tasks">0</div>
+                <div class="stat-label">总任务数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completed-tasks">0</div>
+                <div class="stat-label">已完成任务</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="completion-rate">0%</div>
+                <div class="stat-label">完成率</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="refreshData()">🔄 刷新数据</button>
+            <button onclick="exportData()">📤 导出数据</button>
+            <button onclick="cleanupExpired()" class="danger">🗑️ 清理过期</button>
+        </div>
+
+        <div id="content">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>正在加载TodoList数据...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TodoList本地存储管理器
+        class LocalTodoListManager {
+            static PREFIX = 'ai_todolist_';
+
+            static getAllTodoLists() {
+                const todoLists = [];
+                const keys = Object.keys(localStorage);
+                
+                keys.forEach(key => {
+                    if (key.startsWith(this.PREFIX)) {
+                        try {
+                            const data = localStorage.getItem(key);
+                            if (data) {
+                                const todoList = JSON.parse(data);
+                                
+                                // 检查是否过期
+                                if (todoList.expiresAt && new Date(todoList.expiresAt) < new Date()) {
+                                    localStorage.removeItem(key);
+                                    console.log(`🗑️ 清理过期TodoList: ${key}`);
+                                } else {
+                                    todoLists.push(todoList);
+                                }
+                            }
+                        } catch (error) {
+                            console.error(`解析TodoList失败: ${key}`, error);
+                        }
+                    }
+                });
+                
+                return todoLists.sort((a, b) => 
+                    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                );
+            }
+
+            static updateTaskStatus(todoListId, taskId, status) {
+                try {
+                    const key = `${this.PREFIX}${todoListId}`;
+                    const data = localStorage.getItem(key);
+                    
+                    if (data) {
+                        const todoList = JSON.parse(data);
+                        const task = todoList.tasks.find(t => t.id === taskId);
+                        
+                        if (task) {
+                            task.status = status;
+                            task.completed = status === 'completed';
+                            task.completedAt = status === 'completed' ? new Date().toISOString() : null;
+                            
+                            // 更新整体进度
+                            const completedTasks = todoList.tasks.filter(t => t.completed).length;
+                            todoList.progress = Math.round((completedTasks / todoList.tasks.length) * 100);
+                            todoList.updatedAt = new Date().toISOString();
+                            
+                            if (completedTasks === todoList.tasks.length) {
+                                todoList.status = 'completed';
+                            }
+                            
+                            localStorage.setItem(key, JSON.stringify(todoList));
+                            return true;
+                        }
+                    }
+                } catch (error) {
+                    console.error(`更新任务状态失败: ${todoListId} - ${taskId}`, error);
+                }
+                return false;
+            }
+
+            static getStatistics() {
+                const todoLists = this.getAllTodoLists();
+                
+                const stats = {
+                    total: todoLists.length,
+                    active: todoLists.filter(tl => tl.status === 'active').length,
+                    completed: todoLists.filter(tl => tl.status === 'completed').length,
+                    totalTasks: todoLists.reduce((sum, tl) => sum + tl.tasks.length, 0),
+                    completedTasks: todoLists.reduce((sum, tl) => 
+                        sum + tl.tasks.filter(task => task.completed).length, 0
+                    )
+                };
+                
+                return {
+                    ...stats,
+                    completionRate: stats.totalTasks > 0 
+                        ? Math.round((stats.completedTasks / stats.totalTasks) * 100) 
+                        : 0
+                };
+            }
+
+            static cleanupExpired() {
+                let cleanedCount = 0;
+                const keys = Object.keys(localStorage);
+                
+                keys.forEach(key => {
+                    if (key.startsWith(this.PREFIX)) {
+                        try {
+                            const data = localStorage.getItem(key);
+                            if (data) {
+                                const todoList = JSON.parse(data);
+                                if (todoList.expiresAt && new Date(todoList.expiresAt) < new Date()) {
+                                    localStorage.removeItem(key);
+                                    cleanedCount++;
+                                }
+                            }
+                        } catch (error) {
+                            console.error(`清理TodoList失败: ${key}`, error);
+                        }
+                    }
+                });
+                
+                return cleanedCount;
+            }
+
+            static exportData() {
+                const todoLists = this.getAllTodoLists();
+                return JSON.stringify({
+                    exportTime: new Date().toISOString(),
+                    version: '1.0',
+                    todoLists
+                }, null, 2);
+            }
+        }
+
+        // 页面功能
+        function loadData() {
+            const todoLists = LocalTodoListManager.getAllTodoLists();
+            const stats = LocalTodoListManager.getStatistics();
+            
+            // 更新统计数据
+            document.getElementById('total-lists').textContent = stats.total;
+            document.getElementById('total-tasks').textContent = stats.totalTasks;
+            document.getElementById('completed-tasks').textContent = stats.completedTasks;
+            document.getElementById('completion-rate').textContent = stats.completionRate + '%';
+            
+            // 渲染TodoList
+            renderTodoLists(todoLists);
+        }
+
+        function renderTodoLists(todoLists) {
+            const content = document.getElementById('content');
+            
+            if (todoLists.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <h3>📋 暂无TodoList</h3>
+                        <p>使用AI助手创建复杂任务时，系统会自动生成TodoList<br/>
+                        例如：输入"帮我策划一个六一儿童节活动"</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const todoListsHTML = todoLists.map(todoList => {
+                const progress = calculateProgress(todoList);
+                
+                return `
+                    <div class="todolist-card">
+                        <div class="todolist-header">
+                            <div class="todolist-title">${todoList.title}</div>
+                            <div class="todolist-meta">
+                                📅 ${new Date(todoList.createdAt).toLocaleString()}
+                                • 🏷️ ${todoList.category}
+                                • 👤 ${todoList.assignTo}
+                            </div>
+                        </div>
+                        <div class="todolist-body">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progress}%"></div>
+                            </div>
+                            <div style="text-align: center; margin-bottom: 15px; color: #667eea; font-weight: 500;">
+                                进度: ${progress}% (${todoList.tasks.filter(t => t.completed).length}/${todoList.tasks.length})
+                            </div>
+                            ${todoList.tasks.map(task => `
+                                <div class="task-item">
+                                    <input type="checkbox" class="task-checkbox" 
+                                           ${task.completed ? 'checked' : ''} 
+                                           onchange="toggleTask('${todoList.id}', '${task.id}', this.checked)">
+                                    <div class="task-content">
+                                        <div class="task-title ${task.completed ? 'completed' : ''}">
+                                            ${task.title}
+                                        </div>
+                                        <div class="task-meta">
+                                            <span class="priority-badge priority-${task.priority}">${getPriorityText(task.priority)}</span>
+                                            • ⏱️ ${task.estimatedTime}
+                                            ${task.description ? `• ${task.description}` : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            content.innerHTML = `<div class="todolist-grid">${todoListsHTML}</div>`;
+        }
+
+        function calculateProgress(todoList) {
+            if (!todoList.tasks || todoList.tasks.length === 0) return 0;
+            const completed = todoList.tasks.filter(task => task.completed).length;
+            return Math.round((completed / todoList.tasks.length) * 100);
+        }
+
+        function getPriorityText(priority) {
+            const priorityMap = {
+                'highest': '最高',
+                'high': '高',
+                'medium': '中',
+                'low': '低',
+                'lowest': '最低'
+            };
+            return priorityMap[priority] || priority;
+        }
+
+        function toggleTask(todoListId, taskId, checked) {
+            const status = checked ? 'completed' : 'pending';
+            const success = LocalTodoListManager.updateTaskStatus(todoListId, taskId, status);
+            
+            if (success) {
+                console.log(`✅ 任务状态已更新: ${taskId} -> ${status}`);
+                // 重新加载数据以更新UI
+                setTimeout(() => loadData(), 100);
+            } else {
+                console.error(`❌ 更新任务状态失败: ${taskId}`);
+                // 恢复checkbox状态
+                event.target.checked = !checked;
+            }
+        }
+
+        function refreshData() {
+            document.getElementById('content').innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>正在刷新数据...</p>
+                </div>
+            `;
+            setTimeout(() => loadData(), 500);
+        }
+
+        function exportData() {
+            const data = LocalTodoListManager.exportData();
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ai-todolist-export-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('📤 TodoList数据已导出！');
+        }
+
+        function cleanupExpired() {
+            const cleanedCount = LocalTodoListManager.cleanupExpired();
+            alert(`🗑️ 已清理 ${cleanedCount} 个过期TodoList`);
+            if (cleanedCount > 0) {
+                loadData();
+            }
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 AI TodoList管理器已加载');
+            setTimeout(() => loadData(), 300);
+        });
+
+        // 自动刷新数据（每30秒）
+        setInterval(() => {
+            const stats = LocalTodoListManager.getStatistics();
+            document.getElementById('total-lists').textContent = stats.total;
+            document.getElementById('total-tasks').textContent = stats.totalTasks;
+            document.getElementById('completed-tasks').textContent = stats.completedTasks;
+            document.getElementById('completion-rate').textContent = stats.completionRate + '%';
+        }, 30000);
+    </script>
+</body>
+</html>
+
+

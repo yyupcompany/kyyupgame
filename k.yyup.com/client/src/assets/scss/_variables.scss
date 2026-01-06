@@ -1,0 +1,143 @@
+// Global SCSS Variables
+
+// 导入sass:color模块以使用新的颜色函数
+@use "sass:color";
+
+// Colors
+// Primary Palette
+$primary-color: #007bff; // 鲜艳的蓝色，适合主要操作和品牌色
+$primary-light: color.scale($primary-color, $lightness: 15%);
+$primary-dark: color.scale($primary-color, $lightness: -15%);
+
+// Secondary Palette
+$secondary-color: #6c757d; // 中性灰色，适合次要文本和元素
+$secondary-light: color.scale($secondary-color, $lightness: 15%);
+$secondary-dark: color.scale($secondary-color, $lightness: -15%);
+
+// Accent Colors
+$success-color: #28a745; // 绿色，用于成功状态
+$danger-color: #dc3545;  // 红色，用于错误或危险状态
+$warning-color: #ffc107; // 黄色，用于警告信息
+$info-color: #17a2b8;    // 青色，用于信息提示
+
+// Grayscale Palette
+$white: #ffffff;
+$gray-100: #f8f9fa; // 非常浅的灰色，适合背景
+$gray-200: #e9ecef; // 浅灰色，适合边框
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d; // 中灰色，即 secondary-color
+$gray-700: #495057; // 深灰色，适合正文
+$gray-800: #343a40; // 更深的灰色，适合标题
+$gray-900: #212529; // 接近黑色
+$black: #000000;
+$gray-50: #f9fafb; // 比 $gray-100 更浅一点
+
+// Text Colors
+$text-color: $gray-700;
+$text-color-light: $gray-600;
+$text-color-secondary: $gray-500; // Added for secondary text elements
+$heading-color: $gray-800;
+$link-color: $primary-color;
+$link-hover-color: $primary-dark;
+
+// Background Colors
+$body-bg: $white;
+$content-bg: $gray-100; // 用于页面主要内容区域的背景
+$card-bg: $white;
+
+// Borders
+$border-color: $gray-200;
+$border-radius: 0.25rem; // 4px
+$border-radius-lg: 0.5rem; // 8px
+$border-radius-sm: 0.2rem; // ~3px
+
+// Box Shadows
+$box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075);
+$box-shadow: 0 0.5rem 1rem rgba($black, 0.15);
+$box-shadow-lg: 0 1rem 3rem rgba($black, 0.175);
+
+// Typography
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-base: $font-family-sans-serif;
+
+$font-size-base: 1rem; // 假设 1rem = 16px
+$font-size-lg: $font-size-base * 1.25; // 20px
+$font-size-sm: $font-size-base * 0.875; // 14px
+$font-size-xs: $font-size-base * 0.75; // 12px
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: 1.5;
+$line-height-lg: 2;
+$line-height-sm: 1.2;
+
+$h1-font-size: $font-size-base * 2.5;   // 40px
+$h2-font-size: $font-size-base * 2;     // 32px
+$h3-font-size: $font-size-base * 1.75;  // 28px
+$h4-font-size: $font-size-base * 1.5;   // 24px
+$h5-font-size: $font-size-base * 1.25;  // 20px
+$h6-font-size: $font-size-base;        // 16px
+
+// Spacing
+// 使用 1rem = 16px 作为基准
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,  // 4px
+  2: $spacer * .5,   // 8px
+  3: $spacer,        // 16px
+  4: $spacer * 1.5,  // 24px
+  5: $spacer * 3     // 48px
+);
+
+// Transitions
+$transition-base: all .2s ease-in-out;
+$transition-fade: opacity .15s linear;
+$transition-collapse: height .2s ease;
+
+// Z-index master list
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070;
+
+// Breakpoints for responsive design
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Container max widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+); 
+
+// Navbar
+$navbar-height: 60px; // Default navbar height, adjust as needed
+$navbar-padding-y: $spacer * 0.5;
+$navbar-padding-x: $spacer; 
+
+// Table
+$table-header-bg: $gray-100;
+$table-header-color: $gray-700;
+$table-stripe-bg: $gray-50; 

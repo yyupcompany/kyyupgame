@@ -1,0 +1,230 @@
+{
+  "name": "基础查询字典",
+  "description": "学生、教师、班级管理相关的基础查询",
+  "version": "1.0.0",
+  "directMatches": {
+    "// === 学生管理模块 ===": "注释",
+    "学生总数": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "多少学生": {
+      "response": "正在查询学生总数...",
+      "action": "count_students", 
+      "tokens": 10
+    },
+    "学生数量": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "当前学生": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "今天有多少学生": {
+      "response": "正在查询今日在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "今天有多少学生在校": {
+      "response": "正在查询今日在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "学生在校": {
+      "response": "正在查询在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "在校学生": {
+      "response": "正在查询在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "学生列表": {
+      "response": "正在跳转到学生列表页面...",
+      "action": "navigate_to_student_list",
+      "tokens": 5
+    },
+    "添加学生": {
+      "response": "正在跳转到学生添加页面...",
+      "action": "navigate_to_student_create",
+      "tokens": 5
+    },
+    "新增学生": {
+      "response": "正在跳转到学生添加页面...",
+      "action": "navigate_to_student_create",
+      "tokens": 5
+    },
+    "学生管理": {
+      "response": "正在跳转到学生列表页面...",
+      "action": "navigate_to_student_list",
+      "tokens": 5
+    },
+    "学生信息": {
+      "response": "正在跳转到学生列表页面...",
+      "action": "navigate_to_student_list",
+      "tokens": 5
+    },
+    "学生档案": {
+      "response": "正在跳转到学生列表页面...",
+      "action": "navigate_to_student_list",
+      "tokens": 5
+    },
+
+    "// === 教师管理模块 ===": "注释",
+    "教师总数": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "多少教师": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "教师数量": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "老师总数": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "多少老师": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "教师列表": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+    "老师列表": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+    "教师管理": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+    "添加教师": {
+      "response": "教师添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "新增教师": {
+      "response": "教师添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "教师信息": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+    "教师档案": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+
+    "// === 班级管理模块 ===": "注释",
+    "班级总数": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+    "多少班级": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+    "班级数量": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+    "班级列表": {
+      "response": "正在跳转到班级列表页面...",
+      "action": "navigate_to_class_list",
+      "tokens": 5
+    },
+    "班级管理": {
+      "response": "正在跳转到班级列表页面...",
+      "action": "navigate_to_class_list",
+      "tokens": 5
+    },
+    "添加班级": {
+      "response": "正在跳转到班级添加页面...",
+      "action": "navigate_to_class_create",
+      "tokens": 5
+    },
+    "新增班级": {
+      "response": "正在跳转到班级添加页面...",
+      "action": "navigate_to_class_create",
+      "tokens": 5
+    },
+    "班级信息": {
+      "response": "正在跳转到班级列表页面...",
+      "action": "navigate_to_class_list",
+      "tokens": 5
+    },
+
+
+    "// === 数据统计模块 ===": "注释",
+    "统计各班级学生人数": {
+      "response": "班级学生分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "班级学生分布": {
+      "response": "班级学生分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "各班级学生人数": {
+      "response": "班级学生分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "班级人数分布": {
+      "response": "班级学生分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "学生年龄分布": {
+      "response": "学生年龄分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "年龄段分布": {
+      "response": "学生年龄分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "性别分布": {
+      "response": "学生性别分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "男女比例": {
+      "response": "学生性别分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "学生性别统计": {
+      "response": "学生性别分布统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    }
+  }
+}

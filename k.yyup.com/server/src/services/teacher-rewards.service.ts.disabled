@@ -1,0 +1,527 @@
+import { Op } from 'sequelize'
+import { TeacherReward, TeacherReferral, User, Customer } from '../models'
+import { sequelize } from '../models'
+
+export interface TeacherRewardStats {
+  availableRewards: number
+  usedRewards: number
+  expiredRewards: number
+  totalRewards: number
+  totalValue: number
+  availableValue: number
+  usedValue: number
+}
+
+export interface GetRewardsListParams {
+  teacherId: number
+  status?: string
+  type?: string
+  page: number
+  pageSize: number
+  sortBy: string
+  sortOrder: 'asc' | 'desc'
+}
+
+export interface UseVoucherParams {
+  useLocation: string
+  notes?: string
+  usedBy: number
+}
+
+export interface CreateReferralParams {
+  teacherId: number
+  visitorName: string
+  visitorPhone: string
+  childName?: string
+  childAge?: number
+  notes?: string
+  referralCode: string
+}
+
+export interface GetReferralListParams {
+  teacherId: number
+  status?: string
+  page: number
+  pageSize: number
+}
+
+export class TeacherRewardsService {
+  /**
+   * 获取教师奖励列表
+   */
+  async getRewardsList(params: GetRewardsListParams) {
+    const { teacherId, status, type, page, pageSize, sortBy, sortOrder } = params
+
+    // 构建查询条件
+    const whereCondition: any = { teacherId }
+    if (status) {
+      whereCondition.status = status
+    }
+    if (type) {
+      whereCondition.type = type
+    }
+
+    // 构建排序条件
+    const order: any[] = []
+    if (sortBy) {
+      order.push([sortBy, sortOrder.toUpperCase()])
+    } else {
+      order.push(['createdAt', 'DESC'])
+    }
+
+    const offset = (page - 1) * pageSize
+
+    const { count, rows } = await TeacherReward.findAndCountAll({
+      where: whereCondition,
+      order,
+      offset,
+      limit: pageSize,
+      include: [
+        {
+          model: TeacherReferral,
+          as: 'referral',
+          required: false,
+          include: [
+            {
+              model: Customer,
+              as: 'customer',
+              required: false
+            }
+          ]
+        }
+      ]
+    })
+
+    // 处理奖励数据，添加转介绍信息
+    const processedRows = await Promise.all(
+      rows.map(async (reward) => {
+        const rewardData = reward.toJSON() as any
+
+        // 如果有转介绍ID，获取相关线索信息
+        if (rewardData.referralId) {
+          const referral = await TeacherReferral.findOne({
+            where: { id: rewardData.referralId },
+            include: [
+              {
+                model: Customer,
+                as: 'customers',
+                required: false
+              }
+            ]
+          })
+
+          if (referral) {
+            const referralData = referral.toJSON() as any
+            rewardData.shareInfo = {
+              leads: (referralData.customers || []).map((customer: any) => ({
+                id: customer.id,
+                childName: customer.childName,
+                visitorName: customer.visitorName,
+                visitorPhone: customer.visitorPhone,
+                assignedTeacher: customer.assignedTeacher || '待分配',
+                status: customer.status,
+                statusText: this.getStatusText(customer.status),
+                sopProgress: customer.sopProgress || null
+              }))
+            }
+          }
+        }
+
+        return rewardData
+      })
+    )
+
+    // 获取统计信息
+    const stats = await this.getRewardStats(teacherId)
+
+    return {
+      list: processedRows,
+      total: count,
+      page,
+      pageSize,
+      stats
+    }
+  }
+
+  /**
+   * 获取奖励统计信息
+   */
+  async getRewardStats(teacherId: number): Promise<TeacherRewardStats> {
+    const rewards = await TeacherReward.findAll({
+      where: { teacherId }
+    })
+
+    const stats: TeacherRewardStats = {
+      availableRewards: 0,
+      usedRewards: 0,
+      expiredRewards: 0,
+      totalRewards: rewards.length,
+      totalValue: 0,
+      availableValue: 0,
+      usedValue: 0
+    }
+
+    const now = new Date()
+
+    rewards.forEach(reward => {
+      const value = reward.value || 0
+
+      if (reward.status === 'available') {
+        stats.availableRewards++
+        stats.availableValue += value
+
+        // 检查是否过期
+        if (reward.expiryDate && new Date(reward.expiryDate) < now) {
+          stats.expiredRewards++
+          stats.availableRewards--
+          stats.availableValue -= value
+        }
+      } else if (reward.status === 'used') {
+        stats.usedRewards++
+        stats.usedValue += value
+      } else if (reward.status === 'expired') {
+        stats.expiredRewards++
+      }
+
+      stats.totalValue += value
+    })
+
+    return stats
+  }
+
+  /**
+   * 获取单个奖励详情
+   */
+  async getRewardDetail(id: number, teacherId: number) {
+    const reward = await TeacherReward.findOne({
+      where: { id, teacherId },
+      include: [
+        {
+          model: TeacherReferral,
+          as: 'referral',
+          required: false
+        }
+      ]
+    })
+
+    if (!reward) {
+      return null
+    }
+
+    const rewardData = reward.toJSON() as any
+
+    // 如果有转介绍ID，获取相关线索信息
+    if (rewardData.referralId) {
+      const referral = await TeacherReferral.findOne({
+        where: { id: rewardData.referralId },
+        include: [
+          {
+            model: Customer,
+            as: 'customers',
+            required: false
+          }
+        ]
+      })
+
+      if (referral) {
+        const referralData = referral.toJSON() as any
+        rewardData.shareInfo = {
+          leads: (referralData.customers || []).map((customer: any) => ({
+            id: customer.id,
+            childName: customer.childName,
+            visitorName: customer.visitorName,
+            visitorPhone: customer.visitorPhone,
+            assignedTeacher: customer.assignedTeacher || '待分配',
+            status: customer.status,
+            statusText: this.getStatusText(customer.status),
+            sopProgress: customer.sopProgress || null
+          }))
+        }
+      }
+    }
+
+    return rewardData
+  }
+
+  /**
+   * 使用代金券
+   */
+  async useVoucher(id: number, teacherId: number, params: UseVoucherParams) {
+    const reward = await TeacherReward.findOne({
+      where: { id, teacherId, type: 'voucher', status: 'available' }
+    })
+
+    if (!reward) {
+      throw new Error('代金券不存在或不可用')
+    }
+
+    // 检查是否过期
+    if (reward.expiryDate && new Date(reward.expiryDate) < new Date()) {
+      await reward.update({ status: 'expired' })
+      throw new Error('代金券已过期')
+    }
+
+    // 更新奖励状态
+    await reward.update({
+      status: 'used',
+      usedAt: new Date(),
+      usedBy: params.usedBy,
+      usageLocation: params.useLocation,
+      usageNotes: params.notes
+    })
+
+    return {
+      success: true,
+      usedAt: reward.usedAt,
+      message: '代金券使用成功'
+    }
+  }
+
+  /**
+   * 获取转介绍分享带来的线索信息
+   */
+  async getReferralLeads(rewardId: number, teacherId: number) {
+    const reward = await TeacherReward.findOne({
+      where: { id: rewardId, teacherId },
+      include: [
+        {
+          model: TeacherReferral,
+          as: 'referral',
+          required: true,
+          include: [
+            {
+              model: Customer,
+              as: 'customers',
+              required: false
+            }
+          ]
+        }
+      ]
+    })
+
+    if (!reward || !reward.referral) {
+      return []
+    }
+
+    const referralData = reward.referral.toJSON() as any
+
+    return (referralData.customers || []).map((customer: any) => ({
+      id: customer.id,
+      childName: customer.childName,
+      visitorName: customer.visitorName,
+      visitorPhone: customer.visitorPhone,
+      assignedTeacher: customer.assignedTeacher || '待分配',
+      status: customer.status,
+      statusText: this.getStatusText(customer.status),
+      sopProgress: customer.sopProgress || null
+    }))
+  }
+
+  /**
+   * 获取教师转介绍统计数据
+   */
+  async getReferralStats(teacherId: number) {
+    const referrals = await TeacherReferral.findAll({
+      where: { teacherId },
+      include: [
+        {
+          model: Customer,
+          as: 'customers',
+          required: false
+        }
+      ]
+    })
+
+    const stats = {
+      totalReferrals: referrals.length,
+      convertedReferrals: 0,
+      pendingReferrals: 0,
+      totalRewards: 0,
+      conversionRate: 0,
+      monthlyStats: [] as Array<{
+        month: string
+        referrals: number
+        conversions: number
+        rewards: number
+      }>
+    }
+
+    // 统计线索状态
+    referrals.forEach(referral => {
+      const referralData = referral.toJSON() as any
+      const customers = referralData.customers || []
+
+      customers.forEach((customer: any) => {
+        if (customer.status === 'converted') {
+          stats.convertedReferrals++
+        } else if (customer.status === 'pending' || customer.status === 'assigned') {
+          stats.pendingReferrals++
+        }
+      })
+    })
+
+    // 计算转化率
+    if (stats.totalReferrals > 0) {
+      stats.conversionRate = Math.round((stats.convertedReferrals / stats.totalReferrals) * 100)
+    }
+
+    // 统计奖励数量
+    const rewards = await TeacherReward.findAll({
+      where: { teacherId }
+    })
+    stats.totalRewards = rewards.filter(r => r.source?.includes('转介绍')).length
+
+    // 月度统计
+    const monthlyData = new Map<string, { referrals: number; conversions: number; rewards: number }>()
+
+    // 获取最近6个月的数据
+    for (let i = 5; i >= 0; i--) {
+      const date = new Date()
+      date.setMonth(date.getMonth() - i)
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+      monthlyData.set(monthKey, { referrals: 0, conversions: 0, rewards: 0 })
+    }
+
+    // 填充月度数据
+    referrals.forEach(referral => {
+      const referralData = referral.toJSON() as any
+      const monthKey = referralData.createdAt.substring(0, 7) // YYYY-MM
+
+      if (monthlyData.has(monthKey)) {
+        const monthStat = monthlyData.get(monthKey)!
+        monthStat.referrals++
+
+        // 统计该月转化的奖励
+        const customers = referralData.customers || []
+        customers.forEach((customer: any) => {
+          if (customer.status === 'converted' &&
+              customer.convertedAt?.substring(0, 7) === monthKey) {
+            monthStat.conversions++
+          }
+        })
+      }
+    })
+
+    // 统计每月获得的奖励
+    rewards.forEach(reward => {
+      const rewardData = reward.toJSON() as any
+      const monthKey = rewardData.createdAt.substring(0, 7)
+
+      if (monthlyData.has(monthKey) && rewardData.source?.includes('转介绍')) {
+        monthlyData.get(monthKey)!.rewards++
+      }
+    })
+
+    stats.monthlyStats = Array.from(monthlyData.entries()).map(([month, data]) => ({
+      month,
+      ...data
+    }))
+
+    return stats
+  }
+
+  /**
+   * 创建转介绍记录
+   */
+  async createReferral(params: CreateReferralParams) {
+    const {
+      teacherId,
+      visitorName,
+      visitorPhone,
+      childName,
+      childAge,
+      notes,
+      referralCode
+    } = params
+
+    // 验证教师是否存在
+    const teacher = await User.findByPk(teacherId)
+    if (!teacher) {
+      throw new Error('教师不存在')
+    }
+
+    // 创建转介绍记录
+    const referral = await TeacherReferral.create({
+      teacherId,
+      referralCode,
+      visitorName,
+      visitorPhone,
+      childName,
+      childAge,
+      notes,
+      status: 'pending'
+    })
+
+    // 生成分享URL
+    const shareUrl = `${process.env.FRONTEND_URL || 'http://localhost:5173'}/referral/${referralCode}`
+
+    return {
+      id: referral.id,
+      referralCode,
+      shareUrl
+    }
+  }
+
+  /**
+   * 获取转介绍记录列表
+   */
+  async getReferralList(params: GetReferralListParams) {
+    const { teacherId, status, page, pageSize } = params
+
+    const whereCondition: any = { teacherId }
+    if (status) {
+      whereCondition.status = status
+    }
+
+    const offset = (page - 1) * pageSize
+
+    const { count, rows } = await TeacherReferral.findAndCountAll({
+      where: whereCondition,
+      offset,
+      limit: pageSize,
+      include: [
+        {
+          model: User,
+          as: 'teacher',
+          attributes: ['id', 'realName', 'phone']
+        },
+        {
+          model: Customer,
+          as: 'customers',
+          required: false
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    })
+
+    const processedRows = rows.map(referral => {
+      const referralData = referral.toJSON() as any
+      return {
+        ...referralData,
+        customerCount: referralData.customers?.length || 0,
+        convertedCount: referralData.customers?.filter((c: any) => c.status === 'converted').length || 0
+      }
+    })
+
+    return {
+      list: processedRows,
+      total: count,
+      page,
+      pageSize
+    }
+  }
+
+  /**
+   * 获取状态文本
+   */
+  private getStatusText(status: string): string {
+    const statusMap: Record<string, string> = {
+      pending: '待跟进',
+      assigned: '已分配',
+      following: '跟进中',
+      converted: '已转化',
+      abandoned: '已放弃'
+    }
+    return statusMap[status] || status
+  }
+}

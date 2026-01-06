@@ -1,0 +1,4571 @@
+{
+  "totalIcons": 253,
+  "problematicIcons": [
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "button",
+      "className": "header-icon-btn sidebar-toggle",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-243d8871=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 120.75,
+        "y": 11.5,
+        "width": 64,
+        "height": 40
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      },
+      "reason": "显示为菜单图标（三个杠）"
+    }
+  ],
+  "iconSystems": {},
+  "iconDetails": [
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "logo-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<img data-v-243d8871=\"\" src=\"/src/assets/logo.png\" alt=\"幼儿园管理系统\" class=\"logo-image\">",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 28,
+        "y": 0.25,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "button",
+      "className": "header-icon-btn sidebar-toggle",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-243d8871=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 120.75,
+        "y": 11.5,
+        "width": 64,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-sun",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 18px; height: 18px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 956.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 956.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "icon-system-selector",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<button data-v-243d8871=\"\" class=\"header-action-btn icon-system-btn\"><div data-v-fbf9babb=\"\" data-v-243d8871=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-i",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1018.03125,
+        "y": 11.5,
+        "width": 64,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "button",
+      "className": "header-action-btn icon-system-btn",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-243d8871=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-icon-library\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"18\" ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1018.03125,
+        "y": 11.5,
+        "width": 64,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-icon-library",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 18px; height: 18px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1027.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1027.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-close",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 16px; height: 16px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1198,
+        "y": 23.5,
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1198,
+        "y": 23.5,
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 103.375,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 198.625,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-settings\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M1",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 243.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-settings",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.15.1a2 2 0 0 1-2.12-.1l-.12-.08a2 2 0 0 0-2.83 0l-.31.31a2 2 0 0 0 0 2.83l.08.12a2 2 0 0 1 .1 2.12l-.1.15",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 243.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 293.875,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 533.125,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-service\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 578,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-service",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 578,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-enrollment\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 626,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-enrollment",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16-.21 2.31-.54 3.42-1.01C19.94 24.67 22 20.67 22 16V7l-10-5z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" strok",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 626,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-activities\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 674,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-activities",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-lin",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 674,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 724.375,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-user\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 769.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-user",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 769.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-calendar\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M8",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 913.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-calendar",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-lin",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 913.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-media\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 961.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-media",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-li",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 961.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1011.625,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1154.875,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-marketing\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1199.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-marketing",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM7.5 16L12 13.5 16.5 16 12 18.5 7.5 16z\" stroke=\"curren",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1199.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-messages\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M2",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1247.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-messages",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1247.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-customers\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1295.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-customers",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g da",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1295.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-script\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M14 ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1343.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-script",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z\" stroke=\"currentColor\" fill=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1343.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1394.125,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1489.375,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-finance\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1534.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-finance",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1.81.45 1.61 1.67 1.61 1.16 ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1534.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-performance\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1582.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-performance",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M18 20V10M12 20V4M6 20v-6\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1582.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1680.625,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-personnel\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1725.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-personnel",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g da",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1725.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-task\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M9 11H",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1773.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-task",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1773.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-messages\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M2",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1821.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-messages",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1821.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 1871.875,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-system\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M19.",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1916.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-system",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.9",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1916.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-design\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1964.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-design",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 19l7-7 3 3-7 7-3-3z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g data-v-c42d3057=\"\" s",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1964.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "span",
+      "className": "toggle-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "−",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 223.921875,
+        "y": 2063.125,
+        "width": 11.890625,
+        "height": 17.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<svg data-v-c42d3057=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" class=\"icon-svg icon-menu\" style=\"width: 20px; height: 20px; color: currentcolor;\"><!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "card-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用UnifiedIcon组件 --> <div data-v-fbf9babb=\"\" data-v-ddd1c7bb=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9ba",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 217,
+        "width": 44,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--primary-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" fill=\"none\" stroke=\"var(--primary-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <g d",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "card-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用UnifiedIcon组件 --> <div data-v-fbf9babb=\"\" data-v-ddd1c7bb=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-users\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9b",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 811.5,
+        "y": 217,
+        "width": 44,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-users",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--success-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 811.5,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\" fill=\"none\" stroke=\"var(--success-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <g d",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 811.5,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 835.5,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 835.5,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1089.890625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "card-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用UnifiedIcon组件 --> <div data-v-fbf9babb=\"\" data-v-ddd1c7bb=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-home\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9ba",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 358,
+        "width": 44,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-home",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--warning-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 358,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\" fill=\"none\" stroke=\"var(--warning-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if--",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 358,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 360,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 360,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 360.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "card-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用UnifiedIcon组件 --> <div data-v-fbf9babb=\"\" data-v-ddd1c7bb=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user-plus\"><!-- 使用 SVG 渲染图标 --> <svg data-v-f",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 807.093505859375,
+        "y": 350.0474853515625,
+        "width": 52.81298828125,
+        "height": 31.905029296875
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user-plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--info-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height: 2",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 807.093505859375,
+        "y": 350.0474853515625,
+        "width": 29.9005126953125,
+        "height": 29.90045166015625
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"var(--info-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 807.093505859375,
+        "y": 350.0474853515625,
+        "width": 29.9005126953125,
+        "height": 29.90045166015625
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 834.7889404296875,
+        "y": 354.74420166015625,
+        "width": 24.9171142578125,
+        "height": 24.917083740234375
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 834.7889404296875,
+        "y": 354.74420166015625,
+        "width": 24.9171142578125,
+        "height": 24.917083740234375
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1093.390625,
+        "y": 356.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon enrollment",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 434,
+        "y": 575.25,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon teaching",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 812.5,
+        "y": 575.25,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon activity",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 434,
+        "y": 709.75,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon finance",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 812.5,
+        "y": 709.75,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon marketing",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 434,
+        "y": 844.25,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "center-icon ai",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 812.5,
+        "y": 844.25,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "action-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 477,
+        "y": 1019,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "action-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 661,
+        "y": 1019,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "action-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 477,
+        "y": 1128.375,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "action-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<div data-v-fbf9babb=\"\" data-v-c7d6ac09=\"\" class=\"unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default\"><!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" heigh",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 661,
+        "y": 1128.375,
+        "width": 40,
+        "height": 40
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "i[class*=\"el-icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "i[class*=\"el-icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1089.890625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "i[class*=\"el-icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 360.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "i[class*=\"el-icon\"]",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1093.390625,
+        "y": 356.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 956.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1027.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1198,
+        "y": 23.5,
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 148.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-settings",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.15.1a2 2 0 0 1-2.12-.1l-.12-.08a2 2 0 0 0-2.83 0l-.31.31a2 2 0 0 0 0 2.83l.08.12a2 2 0 0 1 .1 2.12l-.1.15",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 243.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 338.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 386.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 434.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 482.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-service",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 578,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-enrollment",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2L2 7v10c0 5.55 3.84 10 9 11 1.16-.21 2.31-.54 3.42-1.01C19.94 24.67 22 20.67 22 16V7l-10-5z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" strok",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 626,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-activities",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-lin",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 674,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-user",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 769.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 817.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 865.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-calendar",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M8 2v4m8-4v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-lin",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 913.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-media",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-li",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 961.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1056.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1104.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-marketing",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm3.5 6L12 10.5 8.5 8 12 5.5 15.5 8zM7.5 16L12 13.5 16.5 16 12 18.5 7.5 16z\" stroke=\"curren",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1199.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-messages",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1247.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-customers",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g da",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1295.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-script",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z\" stroke=\"currentColor\" fill=\"",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1343.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1439,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-finance",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1.81.45 1.61 1.67 1.61 1.16 ",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1534.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-performance",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M18 20V10M12 20V4M6 20v-6\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1582.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 1630.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-personnel",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g da",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1725.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-task",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1773.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-messages",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1821.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-system",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.9",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1916.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-design",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M12 19l7-7 3 3-7 7-3-3z\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <g data-v-c42d3057=\"\" s",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 24,
+        "y": 1964.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2012.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2108,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2156,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 现代简约风格 --> <path data-v-c42d3057=\"\" d=\"M3 12h18M3 6h18M3 18h18\" stroke=\"currentColor\" fill=\"none\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!--v-if--> <!-- 彩色扁平风格",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 24,
+        "y": 2204,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" fill=\"none\" stroke=\"var(--primary-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <g d",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2\" fill=\"none\" stroke=\"var(--success-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <g d",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 811.5,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 835.5,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\" fill=\"none\" stroke=\"var(--warning-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if--",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 358,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 360,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"var(--info-color)\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 807.093505859375,
+        "y": 350.0474853515625,
+        "width": 29.9005126953125,
+        "height": 29.90045166015625
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 834.7889404296875,
+        "y": 354.74420166015625,
+        "width": 24.9171142578125,
+        "height": 24.917083740234375
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": "svg[class*=\"icon\"]",
+      "tagName": "svg",
+      "className": "icon-svg",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 主要路径 --> <path data-v-fbf9babb=\"\" d=\"M3 12h18M3 6h18M3 18h18\" fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <!-- 额外元素 --> <!--v-if-->",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".el-icon",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": ".el-icon",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1089.890625,
+        "y": 219.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": ".el-icon",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 711.390625,
+        "y": 360.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": ".el-icon",
+      "tagName": "i",
+      "className": "el-icon trend-icon",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!--v-if--> <!--v-if--> <svg data-v-ddd1c7bb=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1024 1024\"><path fill=\"currentColor\" d=\"M128 544h768a32 32 0 1 0 0-64H128a32 32 0 0 0 0 64\"></path></svg",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1093.390625,
+        "y": 356.625,
+        "width": 10.5,
+        "height": 10.5
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-menu",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": true,
+      "boundingBox": {
+        "x": 142.75,
+        "y": 21.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-sun",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 18px; height: 18px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 956.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-icon-library",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 18px; height: 18px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1027.03125,
+        "y": 22.5,
+        "width": 18,
+        "height": 18
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-close",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 16px; height: 16px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1198,
+        "y": 23.5,
+        "width": 16,
+        "height": 16
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--primary-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-users",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--success-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 811.5,
+        "y": 217,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 835.5,
+        "y": 219,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-home",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--warning-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 433,
+        "y": 358,
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 457,
+        "y": 360,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-user-plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"var(--info-color)\" stroke-width=\"1.5\" class=\"icon-svg\" style=\"width: 24px; height: 2",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 807.093505859375,
+        "y": 350.0474853515625,
+        "width": 29.9005126953125,
+        "height": 29.90045166015625
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 834.7889404296875,
+        "y": 354.74420166015625,
+        "width": 24.9171142578125,
+        "height": 24.917083740234375
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 585.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 582,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 719.75,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 716.5,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 444,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 727.5,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 822.5,
+        "y": 854.25,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-ArrowRight",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 1106,
+        "y": 851,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-Plus",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1029,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 487,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    },
+    {
+      "selector": ".unified-icon",
+      "tagName": "div",
+      "className": "unified-icon unified-icon icon-system-[object Object] icon-variant-default icon-default",
+      "ariaLabel": null,
+      "dataIcon": null,
+      "innerHTML": "<!-- 使用 SVG 渲染图标 --> <svg data-v-fbf9babb=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"currentColor\" stroke-width=\"2\" class=\"icon-svg\" style=\"width: 20px; height: 20px; co",
+      "isMenuIcon": false,
+      "boundingBox": {
+        "x": 671,
+        "y": 1138.375,
+        "width": 20,
+        "height": 20
+      }
+    }
+  ]
+}

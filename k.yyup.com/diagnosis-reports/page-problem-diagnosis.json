@@ -1,0 +1,507 @@
+{
+  "timestamp": "2025-12-10T14:29:35.296Z",
+  "summary": {
+    "total": 10,
+    "working": 3,
+    "navigation_failed": 0,
+    "not_found": 0,
+    "blank_page": 0,
+    "empty_page": 7,
+    "no_business_components": 0,
+    "has_errors": 0,
+    "diagnosis_failed": 0
+  },
+  "details": [
+    {
+      "page": "仪表板",
+      "path": "/dashboard",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": true,
+          "content": true
+        },
+        "businessComponentCount": 36,
+        "bodyChildren": 3,
+        "meaningfulContent": 508,
+        "isBlankPage": false
+      },
+      "screenshot": "diagnosis_仪表板.png",
+      "finalStatus": "working",
+      "navigation": {
+        "success": true,
+        "loadTime": 1885,
+        "finalUrl": "http://localhost:5173/dashboard",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": true,
+        "contentLength": 508,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": "幼儿园管理系统\n首页\n/\n数据概览\nAI\n主题\n图标\nA\nadmin\n退出\n幼儿园管理系统\n管理控制台\n业务管理\n业务中心\n活动中心\n招生中心\n客户池中心\n任务中心\n话术中心\n文档中心\n财务中心\n营销管理\n营销中心\n呼叫中心\n相册中心\n新媒体中心\n人事与教学管理\n数据与分析管理\n治理与集团管理\n系统与AI管理\n251\n人\n在读学生\n0.0%\n较上月\n18\n人\n教职员工\n0.0%\n较上月\n9\n个\n班"
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "学生管理",
+      "path": "/student-management",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_学生管理.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1305,
+        "finalUrl": "http://localhost:5173/student-management",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "教师管理",
+      "path": "/teacher-management",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_教师管理.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1343,
+        "finalUrl": "http://localhost:5173/teacher-management",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "活动管理",
+      "path": "/activity-management",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_活动管理.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1309,
+        "finalUrl": "http://localhost:5173/activity-management",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "活动创建",
+      "path": "/activity/create",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": true
+        },
+        "businessComponentCount": 52,
+        "bodyChildren": 4,
+        "meaningfulContent": 720,
+        "isBlankPage": false
+      },
+      "screenshot": "diagnosis_活动创建.png",
+      "finalStatus": "working",
+      "navigation": {
+        "success": true,
+        "loadTime": 1997,
+        "finalUrl": "http://localhost:5173/activity/create",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": true,
+        "contentLength": 720,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": "1\n基本信息\n活动基础信息设置\n2\n海报设计\n选择模板并设计海报\n3\n营销配置\n设置团购、积攒等营销策略\n4\n预览发布\n预览效果并发布活动\n📝 活动基本信息\n\n请填写活动的基础信息，这些信息将用于生成海报和营销内容\n\n第1步：完善活动基本信息\n\n✅ 填写完整的活动信息后，点击\"下一步\"进入海报设计阶段\n\n💡 提示：活动标题、时间、地点是必填项，其他信息将帮助AI生成更精美的海报\n\n检测到您正在"
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "AI助手",
+      "path": "/ai-assistant",
+      "priority": "P0",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_AI助手.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1325,
+        "finalUrl": "http://localhost:5173/ai-assistant",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "班级管理",
+      "path": "/class-management",
+      "priority": "P1",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_班级管理.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1315,
+        "finalUrl": "http://localhost:5173/class-management",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "学生统计",
+      "path": "/student-statistics",
+      "priority": "P1",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_学生统计.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1295,
+        "finalUrl": "http://localhost:5173/student-statistics",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "教师统计",
+      "path": "/teacher-statistics",
+      "priority": "P1",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": false,
+          "content": false
+        },
+        "businessComponentCount": 0,
+        "bodyChildren": 2,
+        "meaningfulContent": 0,
+        "isBlankPage": true
+      },
+      "screenshot": "diagnosis_教师统计.png",
+      "finalStatus": "empty_page",
+      "navigation": {
+        "success": true,
+        "loadTime": 1331,
+        "finalUrl": "http://localhost:5173/teacher-statistics",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": "",
+        "contentLength": 0,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": ""
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    },
+    {
+      "page": "用户管理",
+      "path": "/system/users",
+      "priority": "P2",
+      "issues": [],
+      "networkRequests": [],
+      "consoleErrors": {
+        "errors": [],
+        "warnings": []
+      },
+      "domAnalysis": {
+        "hasVueApp": true,
+        "hasRouterView": false,
+        "layoutElements": {
+          "mainLayout": false,
+          "header": false,
+          "sidebar": true,
+          "content": true
+        },
+        "businessComponentCount": 34,
+        "bodyChildren": 3,
+        "meaningfulContent": 1182,
+        "isBlankPage": false
+      },
+      "screenshot": "diagnosis_用户管理.png",
+      "finalStatus": "working",
+      "navigation": {
+        "success": true,
+        "loadTime": 5876,
+        "finalUrl": "http://localhost:5173/system/users",
+        "is404": false,
+        "isError": false
+      },
+      "content": {
+        "title": "幼儿园招生管理系统",
+        "hasContent": true,
+        "contentLength": 1182,
+        "errorElements": 0,
+        "loadingElements": 0,
+        "contentSample": "幼儿园管理系统\n首页\n/\n用户管理\nAI\n主题\n图标\nA\nadmin\n退出\n幼儿园管理系统\n管理控制台\n业务管理\n业务中心\n活动中心\n招生中心\n客户池中心\n任务中心\n话术中心\n文档中心\n财务中心\n营销管理\n营销中心\n呼叫中心\n相册中心\n新媒体中心\n人事与教学管理\n数据与分析管理\n治理与集团管理\n系统与AI管理\n用户名\n角色\n请选择角色\n状态\n请选择状态\n搜索\n重置\n用户列表\n新增用户\n \n批量删除"
+      },
+      "networkAnalysis": {
+        "error": "this.page.metrics is not a function"
+      }
+    }
+  ],
+  "rootCauses": {
+    "routing": [],
+    "component": [],
+    "content": [
+      {
+        "name": "学生管理",
+        "path": "/student-management",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "教师管理",
+        "path": "/teacher-management",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "活动管理",
+        "path": "/activity-management",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "AI助手",
+        "path": "/ai-assistant",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "班级管理",
+        "path": "/class-management",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "学生统计",
+        "path": "/student-statistics",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      },
+      {
+        "name": "教师统计",
+        "path": "/teacher-statistics",
+        "issue": "页面内容为空，可能是数据加载失败或组件渲染问题"
+      }
+    ]
+  }
+}

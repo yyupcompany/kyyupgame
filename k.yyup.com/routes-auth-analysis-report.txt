@@ -1,0 +1,1562 @@
+🔍 开始分析路由文件权限配置统一性...
+
+📊 共发现 222 个路由文件
+
+📈 统计数据：
+├── 总路由文件数: 222
+├── 使用全局认证: 173
+├── 全局认证被注释: 164
+├── 使用单独认证: 85
+├── 完全没有认证: 35
+├── 有权限检查: 54
+├── 已标准化认证: 7
+└── 需要修复: 215
+
+📋 详细分析结果：
+
+✅ 已标准化认证的文件：
+   activity-registrations.routes.ts
+   assessment.routes.ts
+   notifications.routes.ts
+   parent.routes.ts
+   student.routes.ts
+   teacher-assessment.routes.ts
+   teacher-center-creative-curriculum.routes.ts
+
+   共 7 个文件
+
+⚠️  需要修复的文件：
+
+   📁 SequelizeMeta.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 activity-checkin.routes.ts
+      - 全局认证被注释掉
+      - 存在多个不同的认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 activity-evaluation.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 activity-evaluations.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 activity-plan.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 activity-plans.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 activity-poster.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 activity-registration-page.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 activity-registration.routes.ts
+      - 使用单独认证而非全局认证
+      - 缺少认证中间件导入
+      ✗ 使用单独认证
+
+   📁 activity-template.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 admin.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 admission-notification.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 admission-notifications.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 admission-result.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 admission-results.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 advertisement.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 advertisements.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-analysis.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-assistant-optimized.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 ai-billing.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-bridge.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-cache.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-conversation.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 ai-curriculum.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-knowledge.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-mock.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-performance.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 ai-query.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-scoring.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-shortcuts.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 ai-smart-assign.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 ai-stats.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 api-list.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 api.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 assessment-admin.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 assessment-analytics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 assessment-share.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 attendance-center.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 auth-permissions.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 auth.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken, authenticateWithUnifiedAuth } from '../middlewares/auth.middleware'
+
+   📁 avatar-upload.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 base.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 batch-import.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 business-center.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 call-center.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 center-fixes.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 change-log.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 channel-tracking.routes.ts
+      - 全局认证被注释掉
+      - 缺少认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+
+   📁 channel-trackings.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 channels.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 chat.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 classes.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 conversion-tracking.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 conversion-trackings.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 coupons.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 crud.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 customer-applications.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 customer-follow-enhanced.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 customer-pool.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 customers.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 dashboard.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 data-import.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 database-metadata.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 debug-env.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 debug-oss.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 document-import.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 document-instance.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 document-statistics.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 document-template.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 enrollment-ai.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-application.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-applications.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment-center.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-consultation.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-consultations.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment-finance.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate, checkRole, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-interview.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-interviews.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment-plan.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-plans.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment-quota.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-quotas.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment-statistics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enrollment-tasks.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 enrollment.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 enterprise-dashboard.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 errors.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 example.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 field-template.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 files.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 finance.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 followup-analysis.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 followup.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 game-background.routes.js
+      - 全局认证被注释掉
+      - 缺少认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+
+   📁 game-background.routes.ts
+      - 全局认证被注释掉
+      - 缺少认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+
+   📁 game.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 group.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 inspection-ai.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 inspection-record.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 inspection-rectification.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 inspection.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 interactive-curriculum.routes.ts
+      - 完全没有认证保护
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 kindergarten-basic-info.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 kindergarten-completeness.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 kindergarten.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 kindergartens.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 like-collect-config.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 like-collect-records.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 marketing-campaign.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 marketing-campaigns.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 marketing-center.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 marketing.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 media-center.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 message-templates.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 migration.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 notification-center.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 operation-logs.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 organization-status.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 oss-diagnostics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 oss-manager.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 oss-proxy.routes.ts
+      - 完全没有认证保护
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 page-guide-section.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 page-guide.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 page-permissions.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 parent-assistant.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 parent-permission.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 parent-student-relation.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 parent-student-relations.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 parents.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 performance-evaluation.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 performance-evaluations.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 performance-report.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 performance-reports.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 performance-rule.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 performance-rules.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 performance.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 permission.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 permissions-backup.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 permissions.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 personal-posters.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 personnel-center.routes.ts
+      - 完全没有认证保护
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 photo-album.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate, checkAlbumPermission } from '../middlewares/auth.middleware'
+
+   📁 poster-generation.routes.ts
+      - 全局认证被注释掉
+      - 缺少认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+
+   📁 poster-generations.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 poster-template.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 poster-templates.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 poster-upload.routes.ts
+      - 全局认证被注释掉
+      - 存在多个不同的认证中间件导入
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 principal-performance.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 principal.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 progress.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 quick-query-groups.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 referral-codes.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 referral-relationships.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 referral-rewards.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 referral-statistics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 referral.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 reminder-log.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 role-permission.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 role-permissions.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 role.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 roles-backup.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 roles.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 schedules.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 script-category.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 script-template.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 script.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 security.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 sequelize-meta.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 session.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 setup-permissions.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 simple-permissions.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 simplified-centers.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 six-dimension-memory.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 smart-promotion.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 statistics-adapter.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 statistics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 students.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 system-ai-models.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 system-backup.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 system-configs.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 system-logs.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 system.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 task-attachments.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 task-comment.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 task.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 tasks.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkRole } from '../middlewares/auth.middleware'
+
+   📁 teacher-approval.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 teacher-attendance.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 teacher-checkin.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 teacher-customers.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 teacher-dashboard.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 teacher-sop.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 teachers.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 teaching-center.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 temp-create-users.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 tenant-token.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 text-polish.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { authenticate, verifyToken } from '../middlewares/auth.middleware'
+
+   📁 text-to-speech.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 todos.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 token-blacklist.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 training.routes.ts
+      - 使用单独认证而非全局认证
+      ✗ 使用单独认证
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 unified-ai.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 unified-statistics.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 upload.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+   📁 usage-center.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 usage-quota.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 user-profile.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 user-role.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 user-roles.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 user.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      ✗ 使用单独认证
+      导入: import { verifyToken, checkPermission } from '../middlewares/auth.middleware'
+
+   📁 users.routes.ts
+      - 全局认证被注释掉
+      ✓ 使用全局认证
+      ✗ 全局认证被注释
+      导入: import { verifyToken } from '../middlewares/auth.middleware'
+
+   📁 video-creation.routes.ts
+      - 完全没有认证保护
+      导入: import { authMiddleware } from '../middlewares/auth.middleware'
+
+   📁 voice-config.routes.ts
+      - 完全没有认证保护
+      导入: import { authenticate } from '../middlewares/auth.middleware'
+
+
+❌ 发现的问题汇总：
+   - SequelizeMeta.routes.ts: 全局认证被注释掉
+   - activity-checkin.routes.ts: 全局认证被注释掉
+   - activity-checkin.routes.ts: 存在多个不同的认证中间件导入
+   - activity-evaluation.routes.ts: 全局认证被注释掉
+   - activity-evaluations.routes.ts: 全局认证被注释掉
+   - activity-plan.routes.ts: 全局认证被注释掉
+   - activity-plans.routes.ts: 全局认证被注释掉
+   - activity-poster.routes.ts: 全局认证被注释掉
+   - activity-registration-page.routes.ts: 完全没有认证保护
+   - activity-registration.routes.ts: 使用单独认证而非全局认证
+   - activity-registration.routes.ts: 缺少认证中间件导入
+   - activity-template.routes.ts: 全局认证被注释掉
+   - admin.routes.ts: 完全没有认证保护
+   - admission-notification.routes.ts: 全局认证被注释掉
+   - admission-notifications.routes.ts: 全局认证被注释掉
+   - admission-result.routes.ts: 全局认证被注释掉
+   - admission-results.routes.ts: 全局认证被注释掉
+   - advertisement.routes.ts: 全局认证被注释掉
+   - advertisements.routes.ts: 全局认证被注释掉
+   - ai-analysis.routes.ts: 全局认证被注释掉
+   - ai-assistant-optimized.routes.ts: 完全没有认证保护
+   - ai-billing.routes.ts: 使用单独认证而非全局认证
+   - ai-bridge.routes.ts: 全局认证被注释掉
+   - ai-cache.routes.ts: 全局认证被注释掉
+   - ai-conversation.routes.ts: 完全没有认证保护
+   - ai-curriculum.routes.ts: 全局认证被注释掉
+   - ai-knowledge.routes.ts: 全局认证被注释掉
+   - ai-mock.routes.ts: 全局认证被注释掉
+   - ai-performance.routes.ts: 全局认证被注释掉
+   - ai-query.routes.ts: 全局认证被注释掉
+   - ai-scoring.routes.ts: 全局认证被注释掉
+   - ai-shortcuts.routes.ts: 全局认证被注释掉
+   - ai-smart-assign.routes.ts: 完全没有认证保护
+   - ai-stats.routes.ts: 全局认证被注释掉
+   - api-list.routes.ts: 全局认证被注释掉
+   - api.routes.ts: 全局认证被注释掉
+   - assessment-admin.routes.ts: 全局认证被注释掉
+   - assessment-analytics.routes.ts: 全局认证被注释掉
+   - assessment-share.routes.ts: 全局认证被注释掉
+   - attendance-center.routes.ts: 完全没有认证保护
+   - auth-permissions.routes.ts: 全局认证被注释掉
+   - auth.routes.ts: 使用单独认证而非全局认证
+   - avatar-upload.routes.ts: 完全没有认证保护
+   - base.routes.ts: 全局认证被注释掉
+   - batch-import.routes.ts: 使用单独认证而非全局认证
+   - business-center.routes.ts: 完全没有认证保护
+   - call-center.routes.ts: 完全没有认证保护
+   - center-fixes.routes.ts: 全局认证被注释掉
+   - change-log.routes.ts: 全局认证被注释掉
+   - channel-tracking.routes.ts: 全局认证被注释掉
+   - channel-tracking.routes.ts: 缺少认证中间件导入
+   - channel-trackings.routes.ts: 全局认证被注释掉
+   - channels.routes.ts: 全局认证被注释掉
+   - chat.routes.ts: 全局认证被注释掉
+   - classes.routes.ts: 全局认证被注释掉
+   - conversion-tracking.routes.ts: 全局认证被注释掉
+   - conversion-trackings.routes.ts: 全局认证被注释掉
+   - coupons.routes.ts: 全局认证被注释掉
+   - crud.routes.ts: 全局认证被注释掉
+   - customer-applications.routes.ts: 全局认证被注释掉
+   - customer-follow-enhanced.routes.ts: 全局认证被注释掉
+   - customer-pool.routes.ts: 使用单独认证而非全局认证
+   - customers.routes.ts: 使用单独认证而非全局认证
+   - dashboard.routes.ts: 全局认证被注释掉
+   - data-import.routes.ts: 全局认证被注释掉
+   - database-metadata.routes.ts: 全局认证被注释掉
+   - debug-env.routes.ts: 全局认证被注释掉
+   - debug-oss.routes.ts: 全局认证被注释掉
+   - document-import.routes.ts: 全局认证被注释掉
+   - document-instance.routes.ts: 完全没有认证保护
+   - document-statistics.routes.ts: 完全没有认证保护
+   - document-template.routes.ts: 完全没有认证保护
+   - enrollment-ai.routes.ts: 全局认证被注释掉
+   - enrollment-application.routes.ts: 全局认证被注释掉
+   - enrollment-applications.routes.ts: 全局认证被注释掉
+   - enrollment-center.routes.ts: 全局认证被注释掉
+   - enrollment-consultation.routes.ts: 全局认证被注释掉
+   - enrollment-consultations.routes.ts: 全局认证被注释掉
+   - enrollment-finance.routes.ts: 完全没有认证保护
+   - enrollment-interview.routes.ts: 全局认证被注释掉
+   - enrollment-interviews.routes.ts: 全局认证被注释掉
+   - enrollment-plan.routes.ts: 全局认证被注释掉
+   - enrollment-plans.routes.ts: 全局认证被注释掉
+   - enrollment-quota.routes.ts: 全局认证被注释掉
+   - enrollment-quotas.routes.ts: 全局认证被注释掉
+   - enrollment-statistics.routes.ts: 全局认证被注释掉
+   - enrollment-tasks.routes.ts: 全局认证被注释掉
+   - enrollment.routes.ts: 全局认证被注释掉
+   - enterprise-dashboard.routes.ts: 全局认证被注释掉
+   - errors.routes.ts: 全局认证被注释掉
+   - example.routes.ts: 全局认证被注释掉
+   - field-template.routes.ts: 使用单独认证而非全局认证
+   - files.routes.ts: 全局认证被注释掉
+   - finance.routes.ts: 全局认证被注释掉
+   - followup-analysis.routes.ts: 完全没有认证保护
+   - followup.routes.ts: 完全没有认证保护
+   - game-background.routes.js: 全局认证被注释掉
+   - game-background.routes.js: 缺少认证中间件导入
+   - game-background.routes.ts: 全局认证被注释掉
+   - game-background.routes.ts: 缺少认证中间件导入
+   - game.routes.ts: 使用单独认证而非全局认证
+   - group.routes.ts: 全局认证被注释掉
+   - inspection-ai.routes.ts: 全局认证被注释掉
+   - inspection-record.routes.ts: 全局认证被注释掉
+   - inspection-rectification.routes.ts: 全局认证被注释掉
+   - inspection.routes.ts: 全局认证被注释掉
+   - interactive-curriculum.routes.ts: 完全没有认证保护
+   - kindergarten-basic-info.routes.ts: 全局认证被注释掉
+   - kindergarten-completeness.routes.ts: 完全没有认证保护
+   - kindergarten.routes.ts: 全局认证被注释掉
+   - kindergartens.routes.ts: 全局认证被注释掉
+   - like-collect-config.routes.ts: 全局认证被注释掉
+   - like-collect-records.routes.ts: 全局认证被注释掉
+   - marketing-campaign.routes.ts: 全局认证被注释掉
+   - marketing-campaigns.routes.ts: 全局认证被注释掉
+   - marketing-center.routes.ts: 全局认证被注释掉
+   - marketing.routes.ts: 全局认证被注释掉
+   - media-center.routes.ts: 全局认证被注释掉
+   - message-templates.routes.ts: 全局认证被注释掉
+   - migration.routes.ts: 全局认证被注释掉
+   - notification-center.routes.ts: 完全没有认证保护
+   - operation-logs.routes.ts: 全局认证被注释掉
+   - organization-status.routes.ts: 全局认证被注释掉
+   - oss-diagnostics.routes.ts: 全局认证被注释掉
+   - oss-manager.routes.ts: 全局认证被注释掉
+   - oss-proxy.routes.ts: 完全没有认证保护
+   - page-guide-section.routes.ts: 全局认证被注释掉
+   - page-guide.routes.ts: 全局认证被注释掉
+   - page-permissions.routes.ts: 使用单独认证而非全局认证
+   - parent-assistant.routes.ts: 全局认证被注释掉
+   - parent-permission.routes.ts: 完全没有认证保护
+   - parent-student-relation.routes.ts: 全局认证被注释掉
+   - parent-student-relations.routes.ts: 全局认证被注释掉
+   - parents.routes.ts: 全局认证被注释掉
+   - performance-evaluation.routes.ts: 完全没有认证保护
+   - performance-evaluations.routes.ts: 全局认证被注释掉
+   - performance-report.routes.ts: 完全没有认证保护
+   - performance-reports.routes.ts: 全局认证被注释掉
+   - performance-rule.routes.ts: 完全没有认证保护
+   - performance-rules.routes.ts: 全局认证被注释掉
+   - performance.routes.ts: 全局认证被注释掉
+   - permission.routes.ts: 全局认证被注释掉
+   - permissions-backup.routes.ts: 全局认证被注释掉
+   - permissions.routes.ts: 使用单独认证而非全局认证
+   - personal-posters.routes.ts: 全局认证被注释掉
+   - personnel-center.routes.ts: 完全没有认证保护
+   - photo-album.routes.ts: 完全没有认证保护
+   - poster-generation.routes.ts: 全局认证被注释掉
+   - poster-generation.routes.ts: 缺少认证中间件导入
+   - poster-generations.routes.ts: 全局认证被注释掉
+   - poster-template.routes.ts: 全局认证被注释掉
+   - poster-templates.routes.ts: 全局认证被注释掉
+   - poster-upload.routes.ts: 全局认证被注释掉
+   - poster-upload.routes.ts: 存在多个不同的认证中间件导入
+   - principal-performance.routes.ts: 全局认证被注释掉
+   - principal.routes.ts: 完全没有认证保护
+   - progress.routes.ts: 全局认证被注释掉
+   - quick-query-groups.routes.ts: 全局认证被注释掉
+   - referral-codes.routes.ts: 全局认证被注释掉
+   - referral-relationships.routes.ts: 全局认证被注释掉
+   - referral-rewards.routes.ts: 全局认证被注释掉
+   - referral-statistics.routes.ts: 全局认证被注释掉
+   - referral.routes.ts: 完全没有认证保护
+   - reminder-log.routes.ts: 全局认证被注释掉
+   - role-permission.routes.ts: 全局认证被注释掉
+   - role-permissions.routes.ts: 全局认证被注释掉
+   - role.routes.ts: 全局认证被注释掉
+   - roles-backup.routes.ts: 全局认证被注释掉
+   - roles.routes.ts: 全局认证被注释掉
+   - schedules.routes.ts: 使用单独认证而非全局认证
+   - script-category.routes.ts: 全局认证被注释掉
+   - script-template.routes.ts: 完全没有认证保护
+   - script.routes.ts: 全局认证被注释掉
+   - security.routes.ts: 使用单独认证而非全局认证
+   - sequelize-meta.routes.ts: 全局认证被注释掉
+   - session.routes.ts: 全局认证被注释掉
+   - setup-permissions.routes.ts: 全局认证被注释掉
+   - simple-permissions.routes.ts: 使用单独认证而非全局认证
+   - simplified-centers.routes.ts: 全局认证被注释掉
+   - six-dimension-memory.routes.ts: 全局认证被注释掉
+   - smart-promotion.routes.ts: 全局认证被注释掉
+   - statistics-adapter.routes.ts: 全局认证被注释掉
+   - statistics.routes.ts: 全局认证被注释掉
+   - students.routes.ts: 全局认证被注释掉
+   - system-ai-models.routes.ts: 全局认证被注释掉
+   - system-backup.routes.ts: 全局认证被注释掉
+   - system-configs.routes.ts: 全局认证被注释掉
+   - system-logs.routes.ts: 全局认证被注释掉
+   - system.routes.ts: 全局认证被注释掉
+   - task-attachments.routes.ts: 全局认证被注释掉
+   - task-comment.routes.ts: 全局认证被注释掉
+   - task.routes.ts: 全局认证被注释掉
+   - tasks.routes.ts: 全局认证被注释掉
+   - teacher-approval.routes.ts: 全局认证被注释掉
+   - teacher-attendance.routes.ts: 完全没有认证保护
+   - teacher-checkin.routes.ts: 完全没有认证保护
+   - teacher-customers.routes.ts: 全局认证被注释掉
+   - teacher-dashboard.routes.ts: 完全没有认证保护
+   - teacher-sop.routes.ts: 全局认证被注释掉
+   - teachers.routes.ts: 全局认证被注释掉
+   - teaching-center.routes.ts: 完全没有认证保护
+   - temp-create-users.routes.ts: 全局认证被注释掉
+   - tenant-token.routes.ts: 全局认证被注释掉
+   - text-polish.routes.ts: 全局认证被注释掉
+   - text-to-speech.routes.ts: 全局认证被注释掉
+   - todos.routes.ts: 全局认证被注释掉
+   - token-blacklist.routes.ts: 全局认证被注释掉
+   - training.routes.ts: 使用单独认证而非全局认证
+   - unified-ai.routes.ts: 全局认证被注释掉
+   - unified-statistics.routes.ts: 全局认证被注释掉
+   - upload.routes.ts: 完全没有认证保护
+   - usage-center.routes.ts: 全局认证被注释掉
+   - usage-quota.routes.ts: 全局认证被注释掉
+   - user-profile.routes.ts: 全局认证被注释掉
+   - user-role.routes.ts: 全局认证被注释掉
+   - user-roles.routes.ts: 全局认证被注释掉
+   - user.routes.ts: 全局认证被注释掉
+   - users.routes.ts: 全局认证被注释掉
+   - video-creation.routes.ts: 完全没有认证保护
+   - voice-config.routes.ts: 完全没有认证保护
+
+
+📝 标准化路由文件模板：
+```typescript
+import { Router } from 'express';
+import { verifyToken, checkPermission } from '../middlewares/auth.middleware';
+
+const router = Router();
+
+// 全局认证中间件 - 所有路由都需要认证
+router.use(verifyToken);
+
+// 示例路由 - 需要特定权限
+router.get('/', checkPermission('resource:read'), (req, res) => {
+  // 路由处理逻辑
+});
+
+// 示例路由 - 仅需认证
+router.post('/', (req, res) => {
+  // 路由处理逻辑
+});
+
+// 公开路由（如需要）应该在单独的文件中定义
+export default router;
+```
+
+🔧 修复建议：
+1. 所有路由文件应该使用全局认证中间件
+2. 统一使用 ../middlewares/auth.middleware 导入路径
+3. 需要特定权限的路由使用 checkPermission 中间件
+4. 公开路由应该定义在单独的路由文件中
+5. 避免在每个路由中单独添加认证中间件
+
+🚨 修复优先级：
+
+   高优先级（立即修复）：
+   - 完全没有认证的文件
+   - 全局认证被注释的文件
+
+   中优先级（本周修复）：
+   - 使用单独认证的文件
+   - 导入路径不标准的文件
+
+   低优先级（下个迭代）：
+   - 添加权限检查中间件
+   - 代码风格统一

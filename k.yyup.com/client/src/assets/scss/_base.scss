@@ -1,0 +1,164 @@
+// Base styles, resets, and typographic defaults
+@use "variables" as vars;
+@use "mixins" as mix;
+
+// Box sizing normalization
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+// Basic reset for margin and padding on common elements
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+// Set core body defaults
+html,
+body {
+  height: 100%; // Ensure html and body take full viewport height
+  font-family: vars.$font-family-base;
+  font-size: vars.$font-size-base;
+  font-weight: vars.$font-weight-base;
+  line-height: vars.$line-height-base;
+  color: vars.$text-color;
+  background-color: vars.$body-bg;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+// Remove list styles on ul, ol elements with a class attribute
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+// Make images responsive by default
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Remove border from iframe
+iframe {
+  border: 0;
+}
+
+// Typography
+a {
+  color: vars.$link-color;
+  text-decoration: none; // Personal preference, can be overridden
+  transition: vars.$transition-base;
+
+  &:hover {
+    color: vars.$link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: vars.$spacer * 0.5;
+  font-family: vars.$font-family-base; // Or a specific heading font if defined
+  font-weight: vars.$font-weight-bold;
+  line-height: vars.$line-height-sm;
+  color: vars.$heading-color;
+}
+
+h1 { font-size: vars.$h1-font-size; }
+h2 { font-size: vars.$h2-font-size; }
+h3 { font-size: vars.$h3-font-size; }
+h4 { font-size: vars.$h4-font-size; }
+h5 { font-size: vars.$h5-font-size; }
+h6 { font-size: vars.$h6-font-size; }
+
+p {
+  margin-bottom: vars.$spacer;
+}
+
+// Horizontal rule
+hr {
+  border: 0;
+  border-top: 1px solid vars.$border-color;
+  margin: vars.$spacer 0;
+}
+
+// Global form styles (very basic, can be expanded)
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+// Basic table styling
+table {
+  width: 100%;
+  margin-bottom: vars.$spacer;
+  color: vars.$text-color;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: vars.$spacer * 0.75;
+  vertical-align: top;
+  border-top: 1px solid vars.$border-color;
+}
+
+thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid vars.$border-color;
+}
+
+// Prevent text selection when not needed
+[unselectable="on"] {
+  user-select: none;
+}
+
+// 使用全局极细滚动条样式
+
+// Smooth scrolling for anchors
+html {
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+} 

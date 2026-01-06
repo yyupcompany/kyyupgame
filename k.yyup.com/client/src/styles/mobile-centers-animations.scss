@@ -1,0 +1,551 @@
+/**
+ * 移动端 Centers 页面动画样式
+ * Mobile Centers Page Animation Styles
+ *
+ * 定义移动端 centers 页面使用的所有动画效果
+ * 包括淡入、滑动、缩放、涟漪等动画
+ */
+
+/* ==================== 基础动画定义 ==================== */
+
+/* 淡入上移动画 - 最常用的入场动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 淡入下移动画 */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 淡入左移动画 */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 淡入右移动画 */
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 淡入缩放动画 */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 纯淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==================== 交互动画 ==================== */
+
+/* 涟漪效果 - Material Design 风格 */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* 脉冲发光效果 */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+/* 浮动效果 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 呼吸效果 */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* 旋转效果 */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 弹跳效果 */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 摇晃效果 */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* ==================== 加载动画 ==================== */
+
+/* 旋转加载 */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 脉冲加载 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* 波浪加载 */
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.5);
+  }
+}
+
+/* ==================== 过渡动画 ==================== */
+
+/* 滑入从左侧 */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 滑入从右侧 */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* 滑入从上方 */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 滑入从下方 */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 动画工具类 ==================== */
+
+/* 交错淡入类 - 用于列表项 */
+.stagger-fade-in {
+  animation: fadeInUp var(--center-animation-fast, 200ms) ease-out forwards;
+  opacity: 0;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      // 使用 SCSS 变量计算延迟，然后转换为 CSS 变量
+      $delay: $i * 50ms;
+      animation-delay: $delay;
+    }
+  }
+}
+
+/* 交错淡入（快速） */
+.stagger-fade-in-fast {
+  animation: fadeInUp 150ms ease-out forwards;
+  opacity: 0;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 30ms};
+    }
+  }
+}
+
+/* 交错淡入（慢速） */
+.stagger-fade-in-slow {
+  animation: fadeInUp 300ms ease-out forwards;
+  opacity: 0;
+
+  @for $i from 1 through 20 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 80ms};
+    }
+  }
+}
+
+/* ==================== 组件动画类 ==================== */
+
+/* 卡片入场动画 */
+.card-enter {
+  animation: fadeInUp 300ms ease-out forwards;
+}
+
+/* 卡片离开动画 */
+.card-leave {
+  animation: fadeInDown 200ms ease-in forwards;
+}
+
+/* 列表项入场 */
+.list-item-enter {
+  animation: fadeInLeft 250ms ease-out forwards;
+}
+
+/* 模态框入场 */
+.modal-enter {
+  animation: fadeInScale 300ms ease-out forwards;
+}
+
+/* 页面切换动画 */
+.page-enter {
+  animation: slideInRight 300ms ease-out forwards;
+}
+
+.page-leave {
+  animation: slideInLeft 200ms ease-in forwards;
+}
+
+/* ==================== 交互状态动画 ==================== */
+
+/* 悬停效果 */
+.hover-lift {
+  transition: transform 150ms ease-out;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.hover-scale {
+  transition: transform 150ms ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hover-glow {
+  transition: box-shadow 150ms ease-out;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* 点击效果 */
+.click-shrink {
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.click-pulse {
+  &:active {
+    animation: pulse-glow 600ms ease-out;
+  }
+}
+
+/* ==================== 特殊效果类 ==================== */
+
+/* 脉冲发光 */
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* 浮动效果 */
+.float-effect {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 呼吸效果 */
+.breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+/* 旋转效果 */
+.rotate {
+  animation: rotate 2s linear infinite;
+}
+
+/* 弹跳效果 */
+.bounce {
+  animation: bounce 1s ease-in-out;
+}
+
+/* 摇晃效果 */
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* ==================== 加载状态类 ==================== */
+
+/* 旋转加载 */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* 脉冲加载 */
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* 波浪加载（用于多个元素） */
+.wave {
+  animation: wave 1s ease-in-out infinite;
+
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.1s};
+    }
+  }
+}
+
+/* ==================== Vue Transition 组件动画 ==================== */
+
+/* Fade Transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 200ms ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Slide Up Transition */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 300ms ease-out;
+}
+
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+/* Scale Transition */
+.scale-enter-active,
+.scale-leave-active {
+  transition: all 200ms ease-out;
+}
+
+.scale-enter-from,
+.scale-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Slide Left Right Transition (用于页面切换） */
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 300ms ease-out;
+  position: absolute;
+  width: 100%;
+}
+
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-right-enter-from {
+  transform: translateX(-100%);
+}
+
+.slide-right-leave-to {
+  transform: translateX(100%);
+}
+
+/* ==================== 列表过渡动画 ==================== */
+
+/* List Transition (用于 v-for 列表） */
+.list-enter-active,
+.list-leave-active {
+  transition: all 300ms ease-out;
+}
+
+.list-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-move {
+  transition: transform 300ms ease-out;
+}
+
+/* ==================== 折叠面板动画 ==================== */
+
+.collapse-enter-active,
+.collapse-leave-active {
+  transition: max-height 300ms ease-out, opacity 300ms ease-out;
+  overflow: hidden;
+}
+
+.collapse-enter-from,
+.collapse-leave-to {
+  max-height: 0;
+  opacity: 0;
+}
+
+.collapse-enter-to,
+.collapse-leave-from {
+  max-height: 2000px;
+  opacity: 1;
+}
+
+/* ==================== 无障碍支持 ==================== */
+
+/* 尊重用户减少动画的偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .stagger-fade-in,
+  .stagger-fade-in-fast,
+  .stagger-fade-in-slow {
+    animation-delay: 0s !important;
+  }
+}
+
+/* ==================== 性能优化 ==================== */
+
+/* GPU 加速提示 */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.will-change-all {
+  will-change: transform, opacity;
+}
+
+/* 使用 translate3d 触发 GPU 加速 */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}

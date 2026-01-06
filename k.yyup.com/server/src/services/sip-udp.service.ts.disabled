@@ -1,0 +1,796 @@
+/**
+ * SIP UDP客户端服务
+ * 
+ * 使用UDP协议发送SIP消息到Kamailio服务器
+ * 基于成功的Python测试脚本改写
+ */
+
+import dgram from 'dgram';
+import { EventEmitter } from 'events';
+import { aiBridgeService } from './ai/bridge/ai-bridge.service';
+import { AIModelConfig } from '../models/ai-model-config.model';
+import { sipConfigService, SIPConfig as DBSIPConfig } from './sip-config.service';
+import { rtpAudioHandlerService } from './rtp-audio-handler.service';
+
+interface SIPConfig {
+  serverHost: string;
+  serverPort: number;
+  localHost: string;
+  localPort: number;
+  publicHost?: string; // 公网IP，用于SDP
+  username: string;
+  displayName: string;
+  protocol: 'UDP' | 'TCP';
+}
+
+interface CallSession {
+  callId: string;
+  phoneNumber: string;
+  startTime: Date;
+  status: 'connecting' | 'ringing' | 'answered' | 'ended' | 'failed';
+  socket?: dgram.Socket;
+  customerId?: number;
+  systemPrompt?: string;
+  rtpLocalPort?: number;
+  rtpRemoteHost?: string;
+  rtpRemotePort?: number;
+  voiceSessionId?: string;
+}
+
+export class SIPUDPService extends EventEmitter {
+  private static instance: SIPUDPService;
+  private config: SIPConfig | null = null;
+  private activeCalls: Map<string, CallSession> = new Map();
+  private isInitialized: boolean = false;
+  private globalSocket: dgram.Socket | null = null; // 全局共享socket
+
+  private constructor() {
+    super();
+  }
+
+  static getInstance(): SIPUDPService {
+    if (!SIPUDPService.instance) {
+      SIPUDPService.instance = new SIPUDPService();
+    }
+    return SIPUDPService.instance;
+  }
+
+  /**
+   * 初始化服务，从数据库加载配置
+   */
+  async initialize(): Promise<void> {
+    if (this.isInitialized) {
+      return;
+    }
+
+    try {
+      console.log('📞 初始化SIP UDP服务...');
+
+      // 优先使用环境变量配置（用于测试）
+      // 如果环境变量中配置了SIP_USERNAME，则使用环境变量配置
+      const useEnvConfig = process.env.SIP_USERNAME || process.env.SIP_USE_ENV_CONFIG === 'true';
+
+      if (useEnvConfig) {
+        console.log('✅ 使用环境变量SIP配置');
+        this.config = {
+          serverHost: process.env.SIP_SERVER_HOST || '47.94.82.59',
+          serverPort: parseInt(process.env.SIP_SERVER_PORT || '5060'),
+          localHost: process.env.SIP_LOCAL_HOST || '192.168.1.243',
+          localPort: parseInt(process.env.SIP_LOCAL_PORT || '5061'),
+          publicHost: process.env.SIP_PUBLIC_HOST, // 公网IP（可选）
+          username: process.env.SIP_USERNAME || 'test',
+          displayName: process.env.SIP_DISPLAY_NAME || 'Test Caller',
+          protocol: 'UDP'
+        };
+      } else {
+        // 从数据库加载SIP配置
+        await sipConfigService.loadConfig();
+        const dbConfig = sipConfigService.getConfig();
+
+        if (!dbConfig) {
+          console.warn('⚠️  未找到SIP配置，使用默认配置');
+          // 降级到默认配置
+          this.config = {
+            serverHost: '47.94.82.59',
+            serverPort: 5060,
+            localHost: '192.168.1.243',
+            localPort: 5061,
+            publicHost: undefined,
+            username: 'test',
+            displayName: 'Test Caller',
+            protocol: 'UDP'
+          };
+        } else {
+          // 使用数据库配置
+          this.config = {
+            serverHost: dbConfig.server_host,
+            serverPort: dbConfig.server_port,
+            localHost: process.env.SIP_LOCAL_HOST || '192.168.1.243',
+            localPort: parseInt(process.env.SIP_LOCAL_PORT || '5061'),
+            publicHost: process.env.SIP_PUBLIC_HOST, // 公网IP（可选）
+            username: dbConfig.username,
+            displayName: process.env.SIP_DISPLAY_NAME || '幼儿园招生顾问',
+            protocol: dbConfig.protocol
+          };
+          console.log('✅ 使用数据库SIP配置');
+        }
+      }
+
+      console.log(`   服务器: ${this.config.serverHost}:${this.config.serverPort}`);
+      console.log(`   协议: ${this.config.protocol}`);
+      console.log(`   用户名: ${this.config.username}`);
+      console.log(`   本地: ${this.config.localHost}:${this.config.localPort}`);
+
+      // 创建全局socket
+      await this.ensureGlobalSocket();
+
+      // 发送SIP REGISTER注册
+      await this.registerSIP();
+
+      this.isInitialized = true;
+    } catch (error) {
+      console.error('❌ 初始化SIP UDP服务失败:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 确保服务已初始化
+   */
+  private async ensureInitialized(): Promise<void> {
+    console.log(`🔍 检查SIP服务初始化状态: isInitialized=${this.isInitialized}, config=${this.config ? '已加载' : 'null'}`);
+
+    if (!this.isInitialized) {
+      console.log('⚠️  SIP服务未初始化，开始初始化...');
+      await this.initialize();
+    }
+
+    if (!this.config) {
+      console.error('❌ SIP配置为null，isInitialized=' + this.isInitialized);
+      throw new Error('配置未加载');
+    }
+
+    console.log('✅ SIP服务已就绪');
+  }
+
+  /**
+   * 发送SIP REGISTER注册
+   * 让SIP服务器知道我们的存在，并记录我们的NAT映射地址
+   */
+  private async registerSIP(): Promise<void> {
+    const timestamp = Date.now();
+    const branch = `z9hG4bK-reg${timestamp}`;
+    const tag = `tag-reg${timestamp}`;
+    const callId = `register-${timestamp}@${this.config.localHost}`;
+
+    const registerMessage = `REGISTER sip:${this.config.serverHost} SIP/2.0\r
+Via: SIP/2.0/UDP ${this.config.localHost}:${this.config.localPort};branch=${branch}\r
+Max-Forwards: 70\r
+From: <sip:${this.config.username}@${this.config.serverHost}>;tag=${tag}\r
+To: <sip:${this.config.username}@${this.config.serverHost}>\r
+Call-ID: ${callId}\r
+CSeq: 1 REGISTER\r
+Contact: <sip:${this.config.username}@${this.config.localHost}:${this.config.localPort}>\r
+Expires: 3600\r
+Content-Length: 0\r
+\r
+`;
+
+    console.log('📝 发送SIP REGISTER:');
+    console.log('─'.repeat(60));
+    console.log(registerMessage);
+    console.log('─'.repeat(60));
+
+    // 发送REGISTER消息
+    const message = Buffer.from(registerMessage);
+    await new Promise<void>((resolve, reject) => {
+      this.globalSocket!.send(
+        message,
+        0,
+        message.length,
+        this.config.serverPort,
+        this.config.serverHost,
+        (err) => {
+          if (err) {
+            console.error('❌ 发送REGISTER失败:', err);
+            reject(err);
+          } else {
+            console.log('✅ SIP REGISTER已发送，等待响应...');
+            // 等待2秒接收响应
+            setTimeout(() => resolve(), 2000);
+          }
+        }
+      );
+    });
+  }
+
+  /**
+   * 生成SIP INVITE消息（带SDP）
+   * 基于Python脚本的格式，添加SDP支持
+   * 返回: { invite: string, sipCallId: string }
+   */
+  private generateSIPInvite(phoneNumber: string, callId: string, rtpPort: number): { invite: string; sipCallId: string } {
+    const timestamp = Math.floor(Date.now() / 1000);
+    const branch = `z9hG4bK-${callId}`;
+    const tag = `tag-${callId}`;
+    const sipCallId = `${callId}-${timestamp}@${this.config.localHost}`;
+
+    // 生成SDP内容
+    const sdp = this.generateSDP(rtpPort);
+    const sdpLength = Buffer.byteLength(sdp, 'utf8');
+
+    const sipInvite = `INVITE sip:${phoneNumber}@${this.config.serverHost} SIP/2.0
+Via: SIP/2.0/UDP ${this.config.localHost}:${this.config.localPort};branch=${branch}
+Max-Forwards: 70
+From: "${this.config.displayName}" <sip:${this.config.username}@${this.config.localHost}>;tag=${tag}
+To: <sip:${phoneNumber}@${this.config.serverHost}>
+Call-ID: ${sipCallId}
+CSeq: 100 INVITE
+Contact: <sip:${this.config.username}@${this.config.localHost}:${this.config.localPort}>
+Content-Type: application/sdp
+Content-Length: ${sdpLength}
+
+${sdp}`;
+
+    return { invite: sipInvite, sipCallId };
+  }
+
+  /**
+   * 生成SDP（会话描述协议）
+   * 如果配置了公网IP，则在SDP中使用公网IP，这样SIP服务器才能将RTP流发送到正确的地址
+   */
+  private generateSDP(rtpPort: number): string {
+    const sessionId = Date.now();
+    const sessionVersion = sessionId;
+
+    // 优先使用公网IP，如果没有配置则使用本地IP
+    const sdpHost = this.config.publicHost || this.config.localHost;
+
+    console.log(`📝 生成SDP - 使用IP: ${sdpHost} (${this.config.publicHost ? '公网' : '内网'})`);
+
+    return `v=0
+o=- ${sessionId} ${sessionVersion} IN IP4 ${sdpHost}
+s=Call
+c=IN IP4 ${sdpHost}
+t=0 0
+m=audio ${rtpPort} RTP/AVP 0 8 101
+a=rtpmap:0 PCMU/8000
+a=rtpmap:8 PCMA/8000
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15
+a=sendrecv
+a=ptime:20
+`;
+  }
+
+  /**
+   * 格式化电话号码 - 去掉+86前缀，只保留纯数字
+   */
+  private formatPhoneNumber(phoneNumber: string): string {
+    // 去掉所有非数字字符
+    let cleaned = phoneNumber.replace(/\D/g, '');
+
+    // 如果以86开头且长度为13位，去掉86前缀
+    if (cleaned.startsWith('86') && cleaned.length === 13) {
+      cleaned = cleaned.substring(2);
+    }
+
+    console.log(`📱 号码格式化: ${phoneNumber} -> ${cleaned}`);
+    return cleaned;
+  }
+
+  /**
+   * 确保全局socket已创建并绑定
+   */
+  private async ensureGlobalSocket(): Promise<dgram.Socket> {
+    if (this.globalSocket) {
+      console.log(`✅ 使用已存在的全局Socket (${this.config.localHost}:${this.config.localPort})`);
+      console.log(`   监听器数量: message=${this.globalSocket.listenerCount('message')}, error=${this.globalSocket.listenerCount('error')}`);
+      return this.globalSocket;
+    }
+
+    return new Promise((resolve, reject) => {
+      const socket = dgram.createSocket('udp4');
+
+      // 设置错误处理器（绑定前后都需要）
+      const errorHandler = (err: Error) => {
+        console.error('❌ Socket错误:', err);
+        this.emit('socket-error', { error: err.message });
+        reject(err);
+      };
+
+      socket.once('error', errorHandler);
+
+      // 先设置消息监听器，再绑定端口，避免丢失消息
+      socket.on('message', (msg, rinfo) => {
+        this.handleSIPResponse(msg, rinfo);
+      });
+
+      // 绑定本地端口
+      socket.bind(this.config.localPort, this.config.localHost, () => {
+        console.log(`✅ 全局Socket已绑定到 ${this.config.localHost}:${this.config.localPort}`);
+        console.log(`   Socket状态: 已绑定`);
+        console.log(`   监听器数量: message=${socket.listenerCount('message')}, error=${socket.listenerCount('error')}`);
+
+        // 移除临时错误处理器，添加永久错误处理器
+        socket.removeListener('error', errorHandler);
+        socket.on('error', (err) => {
+          console.error('❌ Socket运行时错误:', err);
+          this.emit('socket-error', { error: err.message });
+        });
+
+        this.globalSocket = socket;
+        resolve(socket);
+      });
+    });
+  }
+
+  /**
+   * 处理SIP响应（全局处理器）
+   */
+  private async handleSIPResponse(msg: Buffer, rinfo: dgram.RemoteInfo): Promise<void> {
+    const response = msg.toString();
+    console.log(`\n${'='.repeat(60)}`);
+    console.log(`📥 收到SIP响应 (${rinfo.address}:${rinfo.port})`);
+    console.log(`   大小: ${msg.length} 字节`);
+    console.log(`   时间: ${new Date().toISOString()}`);
+    console.log(`${'='.repeat(60)}`);
+    console.log(response);
+    console.log(`${'='.repeat(60)}\n`);
+
+    // 从响应中提取Call-ID
+    const callIdMatch = response.match(/Call-ID:\s*([^\r\n]+)/i);
+    if (!callIdMatch) {
+      console.warn('⚠️  无法从SIP响应中提取Call-ID');
+      return;
+    }
+
+    const callId = callIdMatch[1].trim();
+
+    // 检查是否是REGISTER响应
+    if (callId.startsWith('register-')) {
+      const statusMatch = response.match(/SIP\/2\.0 (\d+)/);
+      if (statusMatch) {
+        const statusCode = parseInt(statusMatch[1]);
+        if (statusCode === 200) {
+          console.log('✅ SIP注册成功！服务器已记录我们的NAT映射地址');
+        } else if (statusCode === 401 || statusCode === 407) {
+          console.log('🔐 需要认证，但当前配置为无认证模式');
+        } else {
+          console.log(`⚠️  注册响应: ${statusCode}`);
+        }
+      }
+      return;
+    }
+
+    const callSession = this.activeCalls.get(callId);
+
+    if (!callSession) {
+      console.warn(`⚠️  未找到呼叫会话: ${callId}`);
+      return;
+    }
+
+    // 解析SIP响应状态码
+    const statusMatch = response.match(/SIP\/2\.0 (\d+)/);
+    if (statusMatch) {
+      const statusCode = parseInt(statusMatch[1]);
+
+      if (statusCode === 100) {
+        // 100 Trying
+        console.log('📞 呼叫尝试中...');
+        this.emit('call-trying', { callId });
+      } else if (statusCode === 180 || statusCode === 183) {
+        // 180 Ringing / 183 Session Progress
+        console.log('📞 对方振铃中...');
+        callSession.status = 'ringing';
+        this.emit('call-ringing', { callId });
+      } else if (statusCode === 200) {
+        // 200 OK - 呼叫接通
+        console.log('✅ 呼叫已接通！');
+        callSession.status = 'answered';
+
+        // 解析SDP，获取远程RTP端口
+        const sdpMatch = response.match(/m=audio\s+(\d+)/);
+        if (sdpMatch) {
+          const remoteRTPPort = parseInt(sdpMatch[1]);
+          callSession.rtpRemotePort = remoteRTPPort;
+
+          // 解析远程IP地址
+          const connectionMatch = response.match(/c=IN\s+IP4\s+([\d.]+)/);
+          if (connectionMatch) {
+            callSession.rtpRemoteHost = connectionMatch[1];
+            console.log(`🎵 远程RTP: ${callSession.rtpRemoteHost}:${remoteRTPPort}`);
+
+            // 更新RTP会话的远程地址
+            const rtpSession = rtpAudioHandlerService.getSessionInfo(callId);
+            if (rtpSession) {
+              rtpSession.remoteHost = callSession.rtpRemoteHost;
+              rtpSession.remotePort = remoteRTPPort;
+            }
+          }
+        }
+
+        this.emit('call-answered', { callId });
+      } else if (statusCode >= 400) {
+        // 4xx/5xx/6xx - 呼叫失败
+        console.error(`❌ SIP错误: ${statusCode}`);
+        callSession.status = 'failed';
+        this.emit('call-failed', { callId, statusCode });
+      }
+    }
+  }
+
+  /**
+   * 发起呼叫
+   */
+  async makeCall(
+    phoneNumber: string,
+    customerId?: number,
+    systemPrompt?: string
+  ): Promise<string> {
+    // 确保服务已初始化
+    await this.ensureInitialized();
+
+    // 确保全局socket已创建
+    const socket = await this.ensureGlobalSocket();
+
+    // 格式化电话号码 - 去掉+86前缀
+    const formattedPhone = this.formatPhoneNumber(phoneNumber);
+
+    const callId = `call_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+
+    console.log(`📞 发起呼叫: ${formattedPhone} (原始: ${phoneNumber})`);
+    console.log(`   Call ID: ${callId}`);
+    console.log(`   目标服务器: ${this.config.serverHost}:${this.config.serverPort}`);
+    console.log(`   本地地址: ${this.config.localHost}:${this.config.localPort}`);
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        // 创建RTP会话，获取本地RTP端口
+        const { localPort: rtpPort, sessionId: voiceSessionId } = await rtpAudioHandlerService.createSession(
+          callId,
+          this.config.serverHost,
+          0, // 远程端口将从SDP响应中获取
+          customerId,
+          systemPrompt
+        );
+
+        console.log(`🎵 RTP会话已创建: 本地端口 ${rtpPort}, 语音会话 ${voiceSessionId}`);
+
+        // 生成SIP INVITE消息（使用格式化后的号码和RTP端口）
+        const { invite: sipInvite, sipCallId } = this.generateSIPInvite(formattedPhone, callId, rtpPort);
+
+        const callSession: CallSession = {
+          callId: sipCallId,  // 使用完整的SIP Call-ID
+          phoneNumber: formattedPhone,
+          startTime: new Date(),
+          status: 'connecting',
+          customerId,
+          systemPrompt,
+          rtpLocalPort: rtpPort,
+          voiceSessionId
+        };
+
+        // 使用完整的SIP Call-ID作为key
+        this.activeCalls.set(sipCallId, callSession);
+
+      console.log('\n' + '='.repeat(60));
+      console.log('📤 发送SIP INVITE');
+      console.log('   目标: ' + this.config.serverHost + ':' + this.config.serverPort);
+      console.log('   Call-ID: ' + sipCallId);
+      console.log('   电话: ' + formattedPhone);
+      console.log('='.repeat(60));
+      console.log(sipInvite);
+      console.log('='.repeat(60) + '\n');
+
+      // 发送SIP INVITE（使用全局socket）
+      const inviteBuffer = Buffer.from(sipInvite);
+      socket.send(
+        inviteBuffer,
+        0,
+        inviteBuffer.length,
+        this.config.serverPort,
+        this.config.serverHost,
+        (err) => {
+          if (err) {
+            console.error('❌ 发送SIP INVITE失败:', err);
+            this.activeCalls.delete(sipCallId);
+            callSession.status = 'failed';
+            this.emit('call-failed', { callId: sipCallId, error: err.message });
+            reject(err);
+            return;
+          }
+
+          console.log('✅ SIP INVITE已发送，等待响应...');
+          console.log(`   监听地址: ${this.config.localHost}:${this.config.localPort}`);
+          console.log(`   活动呼叫数: ${this.activeCalls.size}`);
+          callSession.status = 'ringing';
+          this.emit('call-initiated', { callId: sipCallId, phoneNumber });
+        }
+      );
+
+      // 设置超时（30秒无响应则失败）
+      setTimeout(() => {
+        if (callSession.status === 'connecting' || callSession.status === 'ringing') {
+          console.warn(`⏱️  呼叫超时: ${sipCallId}`);
+          callSession.status = 'failed';
+          this.activeCalls.delete(sipCallId);
+          this.emit('call-timeout', { callId: sipCallId });
+          reject(new Error('呼叫超时'));
+        }
+      }, 30000); // 30秒超时
+
+      // 监听呼叫接通事件
+      this.once('call-answered', async (event) => {
+        if (event.callId === sipCallId) {
+          // 🚀 使用AIBridge服务启动豆包实时语音会话
+          try {
+            console.log('🤖 通过AIBridge启动豆包实时语音会话...');
+
+            // 从数据库加载豆包模型配置（用于后续的对话）
+            const { Op } = require('sequelize');
+            const doubaoModel = await AIModelConfig.findOne({
+              where: {
+                modelType: 'text',
+                status: 'active',
+                name: { [Op.like]: '%doubao%' }
+              }
+            });
+
+            if (!doubaoModel) {
+              console.warn('⚠️  未找到豆包模型配置');
+            } else {
+              console.log(`✅ 找到豆包模型: ${doubaoModel.name}`);
+            }
+
+            // 初始化AI会话提示词
+            const initialPrompt = systemPrompt || `你是一位专业的幼儿园招生顾问，负责通过电话与家长沟通。
+请保持友好、专业的态度，了解家长需求，介绍幼儿园特色，并引导家长预约参观。`;
+
+            console.log('✅ 豆包实时语音会话已准备就绪');
+            console.log(`   Call ID: ${sipCallId}`);
+            console.log(`   Customer ID: ${customerId || '未指定'}`);
+
+            // 存储AI会话信息到callSession
+            callSession.systemPrompt = initialPrompt;
+
+            // 发出会话就绪事件
+            this.emit('ai-session-ready', {
+              callId: sipCallId,
+              customerId,
+              systemPrompt: initialPrompt,
+              modelConfig: doubaoModel
+            });
+
+          } catch (error) {
+            console.error('❌ 启动豆包实时语音会话失败:', error);
+          }
+
+          resolve(sipCallId);
+        }
+      });
+
+      // 监听呼叫失败事件
+      this.once('call-failed', async (event) => {
+        if (event.callId === sipCallId) {
+          const statusCode = event.statusCode || 0;
+          if (statusCode >= 400) {
+            // 4xx/5xx/6xx - 呼叫失败
+            console.error(`❌ 呼叫失败: ${statusCode}`);
+            callSession.status = 'failed';
+            this.activeCalls.delete(sipCallId);
+
+            // 清理RTP会话
+            await rtpAudioHandlerService.endSession(callId);
+
+            reject(new Error(`SIP错误: ${statusCode}`));
+          }
+        }
+      });
+      } catch (error) {
+        console.error('❌ 创建呼叫失败:', error);
+        reject(error);
+      }
+    });
+  }
+
+  /**
+   * 处理来自SIP的音频数据
+   * 转发给豆包实时语音服务
+   */
+  async processAudio(callId: string, audioData: Buffer): Promise<void> {
+    const callSession = this.activeCalls.get(callId);
+    if (!callSession) {
+      console.warn(`⚠️  通话会话不存在: ${callId}`);
+      return;
+    }
+
+    if (callSession.status !== 'answered') {
+      console.warn(`⚠️  通话未接通，无法处理音频: ${callId}`);
+      return;
+    }
+
+    try {
+      // 🚀 使用AIBridge处理音频
+      console.log(`🎤 处理音频数据: ${callId}, 大小: ${audioData.length} 字节`);
+
+      // 1. 语音转文字 (ASR)
+      const transcription = await aiBridgeService.speechToText({
+        model: 'whisper-1',
+        file: audioData,
+        filename: `audio_${callId}.wav`,
+        language: 'zh'
+      });
+
+      if (transcription && transcription.text) {
+        console.log(`🎤 用户说: ${transcription.text}`);
+
+        // 2. AI对话 (LLM)
+        const { Op } = require('sequelize');
+        const doubaoModel = await AIModelConfig.findOne({
+          where: {
+            modelType: 'text',
+            status: 'active',
+            name: { [Op.like]: '%doubao%' }
+          }
+        });
+
+        if (doubaoModel) {
+          const response = await aiBridgeService.generateChatCompletion({
+            model: doubaoModel.name,
+            messages: [
+              {
+                role: 'system',
+                content: callSession.systemPrompt || '你是一位专业的幼儿园招生顾问'
+              },
+              {
+                role: 'user',
+                content: transcription.text
+              }
+            ],
+            temperature: 0.7,
+            max_tokens: 500
+          }, {
+            endpointUrl: doubaoModel.endpointUrl,
+            apiKey: doubaoModel.apiKey
+          });
+
+          if (response && response.choices && response.choices[0]) {
+            const aiReply = response.choices[0].message.content;
+            console.log(`🤖 AI回复: ${aiReply}`);
+
+            // 3. 文字转语音 (TTS)
+            const ttsResult = await aiBridgeService.textToSpeech({
+              model: 'tts-1',
+              input: aiReply,
+              voice: 'zh_female_cancan_mars_bigtts',
+              speed: 1.0
+            });
+
+            if (ttsResult && ttsResult.audioData) {
+              console.log(`🔊 语音合成成功，大小: ${ttsResult.audioData.length} 字节`);
+
+              // 发出音频响应事件（由SIP服务发送回客户）
+              this.emit('audio-response', {
+                callId,
+                audioData: ttsResult.audioData,
+                text: aiReply
+              });
+            }
+          }
+        }
+      }
+
+    } catch (error) {
+      console.error(`❌ 处理音频失败 (${callId}):`, error);
+      this.emit('audio-error', {
+        callId,
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  }
+
+  /**
+   * 挂断通话
+   */
+  async hangupCall(callId: string): Promise<void> {
+    const callSession = this.activeCalls.get(callId);
+    if (!callSession) {
+      console.warn(`⚠️  通话会话不存在: ${callId}`);
+      return;
+    }
+
+    console.log(`📞 挂断通话: ${callId}`);
+
+    try {
+      // 发送SIP BYE消息
+      if (callSession.socket && callSession.status === 'answered') {
+        const sipBye = this.generateSIPBye(callSession.phoneNumber, callId);
+        callSession.socket.send(
+          sipBye,
+          this.config.serverPort,
+          this.config.serverHost,
+          (err) => {
+            if (err) {
+              console.error('❌ 发送SIP BYE失败:', err);
+            } else {
+              console.log('✅ SIP BYE已发送');
+            }
+          }
+        );
+      }
+
+      // 关闭socket
+      if (callSession.socket) {
+        callSession.socket.close();
+      }
+
+      // 🚀 结束RTP会话和AI会话
+      console.log(`🤖 结束RTP和AI会话: ${callId}`);
+      await rtpAudioHandlerService.endSession(callId);
+
+      // 更新状态
+      callSession.status = 'ended';
+      
+      // 计算通话时长
+      const duration = Math.floor((Date.now() - callSession.startTime.getTime()) / 1000);
+      
+      // 删除会话
+      this.activeCalls.delete(callId);
+
+      console.log(`✅ 通话已结束，时长: ${duration}秒`);
+      this.emit('call-ended', { callId, duration });
+    } catch (error) {
+      console.error(`❌ 挂断通话失败 (${callId}):`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * 生成SIP BYE消息
+   */
+  private generateSIPBye(phoneNumber: string, callId: string): string {
+    const timestamp = Math.floor(Date.now() / 1000);
+    const branch = `z9hG4bK-bye-${callId}`;
+    const tag = `tag-${callId}`;
+    const sipCallId = `${callId}-${timestamp}@${this.config.localHost}`;
+
+    const sipBye = `BYE sip:${phoneNumber}@${this.config.serverHost} SIP/2.0
+Via: SIP/2.0/UDP ${this.config.localHost}:${this.config.localPort};branch=${branch}
+Max-Forwards: 70
+From: "${this.config.displayName}" <sip:${this.config.username}@${this.config.localHost}>;tag=${tag}
+To: <sip:${phoneNumber}@${this.config.serverHost}>
+Call-ID: ${sipCallId}
+CSeq: 101 BYE
+Content-Length: 0
+
+`;
+
+    return sipBye;
+  }
+
+  /**
+   * 获取活跃通话列表
+   */
+  getActiveCalls(): CallSession[] {
+    return Array.from(this.activeCalls.values());
+  }
+
+  /**
+   * 获取通话信息
+   */
+  getCallInfo(callId: string): CallSession | undefined {
+    return this.activeCalls.get(callId);
+  }
+
+  /**
+   * 获取活跃通话数
+   */
+  getActiveCallCount(): number {
+    return this.activeCalls.size;
+  }
+}
+
+// 导出单例
+export const sipUDPService = SIPUDPService.getInstance();
+

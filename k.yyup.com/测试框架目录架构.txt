@@ -1,0 +1,159 @@
+幼儿园管理系统 - 测试框架目录架构
+
+================================
+根目录测试结构 (/tests)
+================================
+tests/
+├── ai-assistant/                    # AI助手测试
+│   ├── utils/                       # 测试工具函数
+│   ├── 01-basic-access.test.ts      # 基础访问测试
+│   ├── 02-interface-testing.test.ts # 界面测试
+│   ├── 03-smart-components.test.ts  # 智能组件测试
+│   ├── 03-intelligent-tool-calling.spec.ts # 智能工具调用测试
+│   ├── 04-memory-system.test.ts     # 记忆系统测试
+│   ├── 04-tool-call-result-display.spec.ts # 工具调用结果显示测试
+│   ├── 05-integration-tests.test.ts # 集成测试
+│   └── 06-customer-journey.test.ts  # 客户旅程测试
+├── centers/                         # 中心模块测试
+│   └── components.spec.ts           # 组件测试
+├── deployment/                      # 部署测试
+│   ├── global-setup.ts              # 全局设置
+│   ├── global-teardown.ts           # 全局清理
+│   ├── post-deployment-validation.test.ts # 部署后验证测试
+│   └── playwright.config.ts         # Playwright配置
+├── performance/                     # 性能测试
+│   ├── test-data/                   # 测试数据
+│   │   └── users.csv                # 用户数据
+│   └── load-test.yml                # 负载测试配置
+├── dashboard-performance.spec.ts     # 仪表板性能测试
+├── dashboard-authenticated-performance.spec.ts # 认证性能测试
+├── dashboard-performance-robust.spec.ts # 性能鲁棒性测试
+└── dashboard-performance-simple.spec.ts # 简单性能测试
+
+================================
+前端测试结构 (/client/tests)
+================================
+client/tests/
+├── agents/                          # 代理测试
+├── e2e/                            # 端到端测试
+├── e2e-api-integration/             # API集成E2E测试
+├── e2e-local/                      # 本地E2E测试
+├── integration/                    # 集成测试
+├── mocks/                          # 模拟数据
+├── page-detection/                 # 页面检测测试
+├── reports/                        # 测试报告
+├── scripts/                        # 测试脚本
+├── selenium/                       # Selenium测试
+├── unit/                           # 单元测试
+├── utils/                          # 测试工具
+├── ai-assistant-integration.test.ts # AI助手集成测试
+├── ai-assistant-send-test.js       # AI助手发送测试
+├── ai-page-verification.js         # AI页面验证
+├── auth-test.ts                    # 认证测试
+├── e2e-ai-assistant.test.ts        # E2E AI助手测试
+├── personnel-center.test.ts        # 人事中心测试
+├── quick-ai-test.ts                # 快速AI测试
+├── setup.ts                        # 测试设置
+├── global-setup.ts                 # 全局设置
+└── global-teardown.ts              # 全局清理
+
+================================
+后端测试结构 (/server/tests)
+================================
+server/tests/
+├── integration/                    # 集成测试
+├── mocks/                          # 模拟数据
+├── setup/                          # 测试设置
+├── unit/                           # 单元测试
+├── ai-optimization.test.ts         # AI优化测试
+├── ai-tool-calling.test.js         # AI工具调用测试
+├── expert-consultation.test.ts     # 专家咨询测试
+├── setup.ts                        # 测试设置
+├── global-setup.ts                 # 全局设置
+└── global-teardown.ts              # 全局清理
+
+================================
+API测试结构 (/server/APItest)
+================================
+server/APItest/
+├── comprehensive/                  # 综合测试
+├── e2e/                           # 端到端测试
+├── fixtures/                      # 测试固件
+├── helpers/                       # 测试助手
+├── integration/                   # 集成测试
+├── parameters/                    # 测试参数
+├── reports/                       # 测试报告
+├── scripts/                       # 测试脚本
+├── unit/                          # 单元测试
+├── jest.config.js                 # Jest配置
+├── package.json                   # 包配置
+├── README.md                      # 说明文档
+├── TEST_EXECUTION_REPORT.md       # 测试执行报告
+└── TEST_SUMMARY.md               # 测试总结
+
+================================
+测试框架统计信息
+================================
+
+测试文件总数: 563个
+- 根目录测试 (/tests): 21个文件
+- 前端测试 (/client/tests): 224个文件
+- 后端测试 (/server/tests): 207个文件
+- API测试 (/server/APItest): 90个文件
+
+源代码文件总数: 1,468个
+- 前端源代码 (/client/src): 685个文件
+- 后端源代码 (/server/src): 783个文件
+
+测试用例覆盖比例: 38.3%
+(测试文件数 / 源代码文件数 = 563 / 1,468)
+
+================================
+测试类型分布
+================================
+1. 单元测试 (Unit Tests): ~35%
+2. 集成测试 (Integration Tests): ~25%
+3. 端到端测试 (E2E Tests): ~20%
+4. 性能测试 (Performance Tests): ~10%
+5. AI功能测试 (AI Feature Tests): ~10%
+
+================================
+测试技术栈
+================================
+前端测试:
+- Vitest (单元测试)
+- Playwright (E2E测试)
+- Selenium (自动化测试)
+- Jest (部分测试)
+
+后端测试:
+- Jest (单元测试和集成测试)
+- Supertest (API测试)
+- 自定义测试框架
+
+API测试:
+- Jest (测试框架)
+- 自定义测试套件
+- 参数化测试
+
+================================
+测试覆盖范围
+================================
+核心模块覆盖:
+✓ 用户认证和授权
+✓ AI助手功能
+✓ 仪表板和数据中心
+✓ 人事管理
+✓ 招生管理
+✓ 活动管理
+✓ 系统设置
+✓ 性能监控
+✓ 部署验证
+
+测试特点:
+- 多层次测试架构
+- 自动化测试覆盖
+- 性能基准测试
+- AI功能专项测试
+- 部署流程验证
+- 端到端业务流程测试

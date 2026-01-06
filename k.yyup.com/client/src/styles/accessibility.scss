@@ -1,0 +1,434 @@
+/**
+ * 移动端无障碍支持样式
+ * Mobile Accessibility Support Styles
+ */
+
+/* ==================== 跳过链接 ==================== */
+/* Skip Links */
+.skip-links {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  right: 0;
+  z-index: var(--mobile-z-toast);
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+    color: var(--text-on-primary);
+    padding: var(--mobile-padding-sm) var(--mobile-padding-md);
+    text-decoration: none;
+    font-weight: var(--font-semibold);
+    border-radius: 0 0 var(--radius-md) 0;
+    transform: translateY(-100%);
+    transition: transform var(--transition-fast) var(--ease-out);
+
+    &:focus {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ==================== 焦点管理 ==================== */
+/* Focus Management */
+
+// 增强焦点可见性
+.focusable {
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+// 高对比度焦点样式
+@media (prefers-contrast: high) {
+  .focusable {
+    &:focus-visible {
+      outline-width: 3px;
+      outline-color: var(--text-primary);
+      background-color: var(--primary-color);
+      color: var(--text-on-primary);
+    }
+  }
+}
+
+// 键盘导航优化
+.keyboard-nav {
+  *:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
+  }
+
+  // 焦点陷阱
+  &.focus-trap {
+    *:not(:focus-visible) {
+      opacity: 0.7;
+    }
+  }
+}
+
+/* ==================== 屏幕阅读器支持 ==================== */
+/* Screen Reader Support */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// 为屏幕阅读器提供的描述性标签
+.aria-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==================== 减少动画支持 ==================== */
+/* Reduced Motion Support */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .theme-transitioning,
+  .theme-transitioning * {
+    transition: none !important;
+  }
+
+  .theme-indicator {
+    animation: none !important;
+  }
+
+  // 主题切换过渡
+  [data-theme="dark"],
+  [data-theme="light"],
+  :not([data-theme]) {
+    animation: none !important;
+  }
+
+  // 移动端组件动画
+  .mobile-header,
+  .mobile-footer,
+  .mobile-main-content {
+    transition: none !important;
+  }
+
+  .tab-fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ==================== 高对比度模式支持 ==================== */
+/* High Contrast Mode Support */
+
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #000000;
+    --border-color-light: #333333;
+    --text-primary: #000000;
+    --bg-color: #ffffff;
+  }
+
+  [data-theme="dark"] {
+    --border-color: #ffffff;
+    --border-color-light: #cccccc;
+    --text-primary: #ffffff;
+    --bg-color: #000000;
+  }
+
+  // 增强边框和轮廓
+  .mobile-main-layout,
+  .mobile-header,
+  .mobile-footer {
+    border: 2px solid var(--text-primary);
+  }
+
+  // 按钮增强
+  button,
+  .van-tabbar-item,
+  .van-nav-bar__arrow {
+    border: 2px solid var(--text-primary);
+
+    &:focus-visible {
+      border-width: 3px;
+    }
+  }
+
+  // 链接增强
+  a {
+    text-decoration: underline;
+    font-weight: var(--font-semibold);
+  }
+}
+
+/* ==================== 色盲支持 ==================== */
+/* Color Blind Support */
+
+// 确保不仅依赖颜色来传达信息
+.color-blind-support {
+  *:not([aria-label]) {
+    &:after {
+      content: attr(aria-label);
+      position: absolute;
+      left: -9999px;
+    }
+  }
+
+  // 为图标添加文本标签
+  .icon-with-text {
+    position: relative;
+
+    .text-label {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: var(--mobile-font-size-xs);
+      background: var(--bg-color);
+      padding: 2px 4px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+  }
+}
+
+/* ==================== 触摸和指针设备支持 ==================== */
+/* Touch and Pointer Device Support */
+
+// 大触摸目标（至少44px）
+.touch-target-large {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// 基于指针类型的样式
+@media (pointer: fine) {
+  // 精细指针（鼠标）- 悬停效果
+  .hover-effect {
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+  }
+}
+
+@media (pointer: coarse) {
+  // 粗糙指针（触摸）- 触摸效果
+  .touch-effect {
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+/* ==================== 响应式无障碍 ==================== */
+/* Responsive Accessibility */
+
+// 移动设备专用无障碍
+@media (max-width: 767px) {
+  // 增大触摸目标
+  .mobile-touch-target {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  // 增大字体
+  .mobile-large-text {
+    font-size: var(--mobile-font-size-lg);
+    line-height: 1.5;
+  }
+
+  // 简化导航
+  .mobile-simple-nav {
+    .nav-item {
+      padding: var(--mobile-padding-md);
+      margin: var(--mobile-padding-sm);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+
+      &:focus-visible {
+        background-color: var(--primary-color);
+        color: var(--text-on-primary);
+      }
+    }
+  }
+}
+
+// 大屏幕专用无障碍
+@media (min-width: 1024px) {
+  // 键盘导航增强
+  .desktop-keyboard-nav {
+    tab-size: 4;
+
+    *:focus {
+      outline-offset: 3px;
+    }
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+/* Print Styles */
+
+@media print {
+  .no-print,
+  .mobile-header,
+  .mobile-footer {
+    display: none !important;
+  }
+
+  .mobile-main-content {
+    .content-scroll {
+      overflow: visible !important;
+    }
+  }
+
+  // 确保文本可读性
+  * {
+    color: black !important;
+    background: white !important;
+  }
+
+  // 链接显示URL
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* ==================== 实用工具类 ==================== */
+/* Utility Classes */
+
+// 焦点管理
+.focus-within-parent:focus-within {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+// 隐藏但保持可访问性
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// 确保足够的颜色对比度
+.high-contrast-text {
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+
+  &[data-theme="dark"] {
+    color: var(--text-primary-dark);
+    background-color: var(--bg-color-dark);
+  }
+}
+
+// 标签和关联
+.accessible-label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.accessible-error {
+  color: var(--danger-color);
+  font-weight: var(--font-medium);
+  margin-top: var(--spacing-xs);
+}
+
+.accessible-success {
+  color: var(--success-color);
+  font-weight: var(--font-medium);
+  margin-top: var(--spacing-xs);
+}
+
+/* ==================== 表单无障碍 ==================== */
+/* Form Accessibility */
+
+.accessible-form {
+  fieldset {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--mobile-padding-md);
+    margin: var(--mobile-padding-md) 0;
+
+    legend {
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      padding: 0 var(--mobile-padding-sm);
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+
+    &[for] {
+      cursor: pointer;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--mobile-padding-sm);
+    font-size: var(--mobile-font-size-base);
+
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+    }
+
+    &:invalid {
+      border-color: var(--danger-color);
+    }
+
+    &:required {
+      border-left: 4px solid var(--primary-color);
+    }
+  }
+
+  button[type="submit"] {
+    margin-top: var(--mobile-padding-md);
+    min-height: var(--mobile-min-touch-target);
+  }
+}

@@ -1,0 +1,231 @@
+/* Carbon Design System Grid Implementation */
+/* 基于16列网格系统的布局组件 */
+
+// 导入设计令牌和Sass模块
+@use 'sass:map';
+@use '../design-tokens.scss' as *;
+
+// 网格断点定义
+$grid-breakpoints: (
+  sm: 320px,   // 小屏幕
+  md: 672px,   // 中等屏幕
+  lg: 1056px,  // 大屏幕
+  xlg: 1312px, // 超大屏幕
+  max: 1584px  // 最大屏幕
+);
+
+// 网格配置
+$grid-columns: 16;
+$grid-gutter-width: 32px;
+$grid-gutter-condensed: 16px;
+$grid-gutter-narrow: 16px;
+
+// 网格容器
+.cds-grid {
+  display: grid;
+  grid-template-columns: repeat($grid-columns, 1fr);
+  gap: var(--spacing-md, 16px); // 默认使用16px间距
+  width: 100%;
+  max-width: 1584px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg, 24px); // 容器左右内边距
+
+  // 紧凑模式
+  &.cds-grid--condensed {
+    gap: var(--spacing-sm, 8px);
+    padding: 0 var(--spacing-sm, 8px);
+  }
+
+  // 窄间距模式
+  &.cds-grid--narrow {
+    gap: var(--spacing-xs, 4px);
+    padding: 0 var(--spacing-xs, 4px);
+  }
+
+  // 全宽模式
+  &.cds-grid--full-width {
+    max-width: none;
+  }
+
+  // 无内边距模式
+  &.cds-grid--no-padding {
+    padding: 0;
+  }
+}
+
+// 行容器（用于兼容旧的flexbox布局）
+.cds-row {
+  display: contents;
+}
+
+// 列基础样式
+[class*="cds-col"] {
+  min-width: 0;
+  word-wrap: break-word;
+}
+
+// 生成列类
+@for $i from 1 through $grid-columns {
+  .cds-col-#{$i} {
+    grid-column: span #{$i};
+  }
+}
+
+// 响应式列类 - 小屏幕 (sm)
+@media (min-width: map.get($grid-breakpoints, sm)) {
+  @for $i from 1 through $grid-columns {
+    .cds-col-sm-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  
+  // 偏移类
+  @for $i from 0 through ($grid-columns - 1) {
+    .cds-offset-sm-#{$i} {
+      grid-column-start: #{$i + 1};
+    }
+  }
+}
+
+// 响应式列类 - 中等屏幕 (md)
+@media (min-width: map.get($grid-breakpoints, md)) {
+  @for $i from 1 through $grid-columns {
+    .cds-col-md-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  
+  // 偏移类
+  @for $i from 0 through ($grid-columns - 1) {
+    .cds-offset-md-#{$i} {
+      grid-column-start: #{$i + 1};
+    }
+  }
+}
+
+// 响应式列类 - 大屏幕 (lg)
+@media (min-width: map.get($grid-breakpoints, lg)) {
+  @for $i from 1 through $grid-columns {
+    .cds-col-lg-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  
+  // 偏移类
+  @for $i from 0 through ($grid-columns - 1) {
+    .cds-offset-lg-#{$i} {
+      grid-column-start: #{$i + 1};
+    }
+  }
+}
+
+// 响应式列类 - 超大屏幕 (xlg)
+@media (min-width: map.get($grid-breakpoints, xlg)) {
+  @for $i from 1 through $grid-columns {
+    .cds-col-xlg-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  
+  // 偏移类
+  @for $i from 0 through ($grid-columns - 1) {
+    .cds-offset-xlg-#{$i} {
+      grid-column-start: #{$i + 1};
+    }
+  }
+}
+
+// 响应式列类 - 最大屏幕 (max)
+@media (min-width: map.get($grid-breakpoints, max)) {
+  @for $i from 1 through $grid-columns {
+    .cds-col-max-#{$i} {
+      grid-column: span #{$i};
+    }
+  }
+  
+  // 偏移类
+  @for $i from 0 through ($grid-columns - 1) {
+    .cds-offset-max-#{$i} {
+      grid-column-start: #{$i + 1};
+    }
+  }
+}
+
+// 隐藏列的工具类
+.cds-col-hidden {
+  display: none;
+}
+
+@media (min-width: map.get($grid-breakpoints, sm)) {
+  .cds-col-sm-hidden { display: none; }
+}
+
+@media (min-width: map.get($grid-breakpoints, md)) {
+  .cds-col-md-hidden { display: none; }
+}
+
+@media (min-width: map.get($grid-breakpoints, lg)) {
+  .cds-col-lg-hidden { display: none; }
+}
+
+@media (min-width: map.get($grid-breakpoints, xlg)) {
+  .cds-col-xlg-hidden { display: none; }
+}
+
+@media (min-width: map.get($grid-breakpoints, max)) {
+  .cds-col-max-hidden { display: none; }
+}
+
+// 自动列宽
+.cds-col-auto {
+  grid-column: auto;
+}
+
+// 填充剩余空间
+.cds-col-fill {
+  grid-column: 1 / -1;
+}
+
+// 调试模式 - 显示网格线
+.cds-grid--debug {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: $grid-gutter-width;
+    right: $grid-gutter-width;
+    bottom: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.1) 0,
+      rgba(255, 0, 0, 0.1) calc(100% / #{$grid-columns} - #{$grid-gutter-width}),
+      transparent calc(100% / #{$grid-columns} - #{$grid-gutter-width}),
+      transparent calc(100% / #{$grid-columns})
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+}
+
+// 响应式工具类
+@media (max-width: map.get($grid-breakpoints, sm) - 1) {
+  .cds-hidden-xs { display: none !important; }
+}
+
+@media (max-width: map.get($grid-breakpoints, md) - 1) {
+  .cds-hidden-sm { display: none !important; }
+}
+
+@media (max-width: map.get($grid-breakpoints, lg) - 1) {
+  .cds-hidden-md { display: none !important; }
+}
+
+@media (max-width: map.get($grid-breakpoints, xlg) - 1) {
+  .cds-hidden-lg { display: none !important; }
+}
+
+@media (max-width: map.get($grid-breakpoints, max) - 1) {
+  .cds-hidden-xlg { display: none !important; }
+}

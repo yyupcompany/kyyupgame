@@ -1,0 +1,395 @@
+{
+  "name": "操作类型字典",
+  "description": "中文操作词到SQL操作的映射",
+  "version": "1.0.0",
+  "operations": {
+    "// === 查询操作 ===": "注释",
+    "查询": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "基本查询操作"
+    },
+    "查看": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "查看数据"
+    },
+    "显示": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "显示数据"
+    },
+    "列出": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "列出数据"
+    },
+    "获取": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "获取数据"
+    },
+    "找出": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "找出数据"
+    },
+    "搜索": {
+      "sql": "SELECT",
+      "type": "select",
+      "description": "搜索数据"
+    },
+
+    "// === 统计操作 ===": "注释",
+    "统计": {
+      "sql": "COUNT",
+      "type": "aggregate",
+      "description": "统计数量"
+    },
+    "计算": {
+      "sql": "COUNT",
+      "type": "aggregate", 
+      "description": "计算数量"
+    },
+    "总数": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "总数统计"
+    },
+    "数量": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "数量统计"
+    },
+    "多少": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "数量查询"
+    },
+    "几个": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "数量查询"
+    },
+    "几名": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "人数查询"
+    },
+    "几人": {
+      "sql": "COUNT(*)",
+      "type": "aggregate",
+      "description": "人数查询"
+    },
+
+    "// === 聚合操作 ===": "注释",
+    "平均": {
+      "sql": "AVG",
+      "type": "aggregate",
+      "description": "平均值"
+    },
+    "平均数": {
+      "sql": "AVG",
+      "type": "aggregate",
+      "description": "平均数"
+    },
+    "均值": {
+      "sql": "AVG",
+      "type": "aggregate",
+      "description": "均值"
+    },
+    "最大": {
+      "sql": "MAX",
+      "type": "aggregate",
+      "description": "最大值"
+    },
+    "最高": {
+      "sql": "MAX",
+      "type": "aggregate",
+      "description": "最高值"
+    },
+    "最多": {
+      "sql": "MAX",
+      "type": "aggregate",
+      "description": "最多"
+    },
+    "最小": {
+      "sql": "MIN",
+      "type": "aggregate",
+      "description": "最小值"
+    },
+    "最低": {
+      "sql": "MIN",
+      "type": "aggregate",
+      "description": "最低值"
+    },
+    "最少": {
+      "sql": "MIN",
+      "type": "aggregate",
+      "description": "最少"
+    },
+    "总和": {
+      "sql": "SUM",
+      "type": "aggregate",
+      "description": "求和"
+    },
+    "合计": {
+      "sql": "SUM",
+      "type": "aggregate",
+      "description": "合计"
+    },
+    "求和": {
+      "sql": "SUM",
+      "type": "aggregate",
+      "description": "求和"
+    },
+
+    "// === 分析操作 ===": "注释",
+    "分析": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "数据分析",
+      "requiresGroupBy": true
+    },
+    "分布": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "分布分析",
+      "requiresGroupBy": true
+    },
+    "排行": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "排行分析",
+      "requiresOrderBy": true
+    },
+    "排名": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "排名分析",
+      "requiresOrderBy": true
+    },
+    "排序": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "排序查询",
+      "requiresOrderBy": true
+    },
+    "比较": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "比较分析"
+    },
+    "对比": {
+      "sql": "SELECT",
+      "type": "analysis",
+      "description": "对比分析"
+    },
+
+    "// === 报告操作 ===": "注释",
+    "报告": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "生成报告",
+      "requiresGroupBy": true
+    },
+    "汇总": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "数据汇总",
+      "requiresGroupBy": true
+    },
+    "总结": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "数据总结",
+      "requiresGroupBy": true
+    },
+    "概览": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "数据概览"
+    },
+    "概况": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "数据概况"
+    },
+    "情况": {
+      "sql": "SELECT",
+      "type": "report",
+      "description": "情况查询"
+    },
+
+    "// === 筛选操作 ===": "注释",
+    "筛选": {
+      "sql": "SELECT",
+      "type": "filter",
+      "description": "数据筛选",
+      "requiresWhere": true
+    },
+    "过滤": {
+      "sql": "SELECT",
+      "type": "filter",
+      "description": "数据过滤",
+      "requiresWhere": true
+    },
+    "选择": {
+      "sql": "SELECT",
+      "type": "filter",
+      "description": "选择数据",
+      "requiresWhere": true
+    },
+    "挑选": {
+      "sql": "SELECT",
+      "type": "filter",
+      "description": "挑选数据",
+      "requiresWhere": true
+    }
+  },
+
+  "// === 条件操作符 ===": "注释",
+  "conditions": {
+    "等于": {
+      "sql": "=",
+      "type": "comparison",
+      "description": "等于"
+    },
+    "是": {
+      "sql": "=",
+      "type": "comparison",
+      "description": "是"
+    },
+    "为": {
+      "sql": "=",
+      "type": "comparison",
+      "description": "为"
+    },
+    "不等于": {
+      "sql": "!=",
+      "type": "comparison",
+      "description": "不等于"
+    },
+    "不是": {
+      "sql": "!=",
+      "type": "comparison",
+      "description": "不是"
+    },
+    "大于": {
+      "sql": ">",
+      "type": "comparison",
+      "description": "大于"
+    },
+    "超过": {
+      "sql": ">",
+      "type": "comparison",
+      "description": "超过"
+    },
+    "多于": {
+      "sql": ">",
+      "type": "comparison",
+      "description": "多于"
+    },
+    "小于": {
+      "sql": "<",
+      "type": "comparison",
+      "description": "小于"
+    },
+    "少于": {
+      "sql": "<",
+      "type": "comparison",
+      "description": "少于"
+    },
+    "低于": {
+      "sql": "<",
+      "type": "comparison",
+      "description": "低于"
+    },
+    "大于等于": {
+      "sql": ">=",
+      "type": "comparison",
+      "description": "大于等于"
+    },
+    "不少于": {
+      "sql": ">=",
+      "type": "comparison",
+      "description": "不少于"
+    },
+    "至少": {
+      "sql": ">=",
+      "type": "comparison",
+      "description": "至少"
+    },
+    "小于等于": {
+      "sql": "<=",
+      "type": "comparison",
+      "description": "小于等于"
+    },
+    "不超过": {
+      "sql": "<=",
+      "type": "comparison",
+      "description": "不超过"
+    },
+    "最多": {
+      "sql": "<=",
+      "type": "comparison",
+      "description": "最多"
+    },
+    "包含": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "包含",
+      "pattern": "%{value}%"
+    },
+    "含有": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "含有",
+      "pattern": "%{value}%"
+    },
+    "以开头": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "以...开头",
+      "pattern": "{value}%"
+    },
+    "开头是": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "开头是",
+      "pattern": "{value}%"
+    },
+    "以结尾": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "以...结尾",
+      "pattern": "%{value}"
+    },
+    "结尾是": {
+      "sql": "LIKE",
+      "type": "string",
+      "description": "结尾是",
+      "pattern": "%{value}"
+    },
+    "在范围内": {
+      "sql": "BETWEEN",
+      "type": "range",
+      "description": "在范围内"
+    },
+    "之间": {
+      "sql": "BETWEEN",
+      "type": "range",
+      "description": "之间"
+    },
+    "属于": {
+      "sql": "IN",
+      "type": "list",
+      "description": "属于"
+    },
+    "在列表中": {
+      "sql": "IN",
+      "type": "list",
+      "description": "在列表中"
+    }
+  }
+}

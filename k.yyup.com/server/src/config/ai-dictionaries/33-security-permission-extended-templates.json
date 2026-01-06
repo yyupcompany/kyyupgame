@@ -1,0 +1,131 @@
+{
+  "name": "系统安全和权限扩展查询模板字典",
+  "description": "AI用户权限、AI模型使用量、令牌黑名单、脚本使用量等系统安全和权限扩展功能相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === AI用户权限相关查询模板 ===": "注释",
+    "权限类型统计": {
+      "sql": "SELECT permission_type, COUNT(*) as count FROM ai_user_permissions GROUP BY permission_type ORDER BY count DESC",
+      "description": "统计AI用户权限类型分布",
+      "table": "ai_user_permissions",
+      "response": "权限类型统计完成",
+      "tokens": 20
+    },
+    "权限状态统计": {
+      "sql": "SELECT permission_status, COUNT(*) as count FROM ai_user_permissions GROUP BY permission_status ORDER BY count DESC",
+      "description": "统计AI用户权限状态分布",
+      "table": "ai_user_permissions",
+      "response": "权限状态统计完成",
+      "tokens": 20
+    },
+    "活跃AI权限": {
+      "sql": "SELECT COUNT(*) as count FROM ai_user_permissions WHERE permission_status = 'active'",
+      "description": "查询活跃的AI用户权限数量",
+      "table": "ai_user_permissions",
+      "response": "活跃AI权限{count}条",
+      "tokens": 12
+    },
+    "// === AI模型使用量相关查询模板 ===": "注释",
+    "AI模型使用量总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_model_usage",
+      "description": "查询AI模型使用量记录总数",
+      "table": "ai_model_usage",
+      "response": "AI模型使用量记录总数为{count}条",
+      "tokens": 10
+    },
+    "模型使用统计": {
+      "sql": "SELECT model_name, COUNT(*) as usage_count, SUM(token_count) as total_tokens FROM ai_model_usage GROUP BY model_name ORDER BY usage_count DESC",
+      "description": "统计各AI模型使用情况",
+      "table": "ai_model_usage",
+      "response": "模型使用统计完成",
+      "tokens": 30
+    },
+    "使用状态统计": {
+      "sql": "SELECT usage_status, COUNT(*) as count FROM ai_model_usage GROUP BY usage_status ORDER BY count DESC",
+      "description": "统计AI模型使用状态分布",
+      "table": "ai_model_usage",
+      "response": "使用状态统计完成",
+      "tokens": 20
+    },
+    "本月模型使用": {
+      "sql": "SELECT COUNT(*) as count, SUM(token_count) as total_tokens FROM ai_model_usage WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月AI模型使用情况",
+      "table": "ai_model_usage",
+      "response": "本月模型使用统计完成",
+      "tokens": 25
+    },
+    "// === 令牌黑名单相关查询模板 ===": "注释",
+    "令牌黑名单总数": {
+      "sql": "SELECT COUNT(*) as count FROM token_blacklist",
+      "description": "查询令牌黑名单总数",
+      "table": "token_blacklist",
+      "response": "令牌黑名单总数为{count}个",
+      "tokens": 10
+    },
+    "黑名单类型统计": {
+      "sql": "SELECT blacklist_type, COUNT(*) as count FROM token_blacklist GROUP BY blacklist_type ORDER BY count DESC",
+      "description": "统计令牌黑名单类型分布",
+      "table": "token_blacklist",
+      "response": "黑名单类型统计完成",
+      "tokens": 20
+    },
+    "黑名单状态统计": {
+      "sql": "SELECT blacklist_status, COUNT(*) as count FROM token_blacklist GROUP BY blacklist_status ORDER BY count DESC",
+      "description": "统计令牌黑名单状态分布",
+      "table": "token_blacklist",
+      "response": "黑名单状态统计完成",
+      "tokens": 20
+    },
+    "活跃黑名单": {
+      "sql": "SELECT COUNT(*) as count FROM token_blacklist WHERE blacklist_status = 'active'",
+      "description": "查询活跃的令牌黑名单数量",
+      "table": "token_blacklist",
+      "response": "活跃黑名单{count}个",
+      "tokens": 12
+    },
+    "本月新增黑名单": {
+      "sql": "SELECT COUNT(*) as count FROM token_blacklist WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增令牌黑名单数量",
+      "table": "token_blacklist",
+      "response": "本月新增黑名单{count}个",
+      "tokens": 20
+    },
+    "// === 脚本使用量相关查询模板 ===": "注释",
+    "脚本使用量总数": {
+      "sql": "SELECT COUNT(*) as count FROM script_usages",
+      "description": "查询脚本使用量记录总数",
+      "table": "script_usages",
+      "response": "脚本使用量记录总数为{count}条",
+      "tokens": 10
+    },
+    "脚本使用统计": {
+      "sql": "SELECT script_id, COUNT(*) as usage_count FROM script_usages GROUP BY script_id ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计脚本使用频率排行",
+      "table": "script_usages",
+      "response": "脚本使用统计完成",
+      "tokens": 25
+    },
+    "使用结果统计": {
+      "sql": "SELECT usage_result, COUNT(*) as count FROM script_usages GROUP BY usage_result ORDER BY count DESC",
+      "description": "统计脚本使用结果分布",
+      "table": "script_usages",
+      "response": "使用结果统计完成",
+      "tokens": 20
+    },
+    "今日脚本使用": {
+      "sql": "SELECT COUNT(*) as count FROM script_usages WHERE DATE(created_at) = CURDATE()",
+      "description": "查询今日脚本使用数量",
+      "table": "script_usages",
+      "response": "今日脚本使用{count}次",
+      "tokens": 15
+    },
+    "// === 综合统计查询模板 ===": "注释",
+    "安全权限扩展概览": {
+      "sql": "SELECT 'ai_user_permissions' as category, COUNT(*) as count FROM ai_user_permissions UNION ALL SELECT 'ai_model_usage' as category, COUNT(*) as count FROM ai_model_usage UNION ALL SELECT 'token_blacklist' as category, COUNT(*) as count FROM token_blacklist UNION ALL SELECT 'script_usages' as category, COUNT(*) as count FROM script_usages",
+      "description": "系统安全和权限扩展数据总览",
+      "table": "multiple",
+      "response": "安全权限扩展概览查询完成",
+      "tokens": 35
+    }
+  }
+}

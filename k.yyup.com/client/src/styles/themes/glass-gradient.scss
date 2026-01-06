@@ -1,0 +1,300 @@
+// 渐变玻璃态主题变量定义 - 与明亮/暗黑主题统一
+:root.glass-gradient,
+[data-theme="glass-gradient"] {
+  // ==================== 核心色彩系统 ====================
+  // 玻璃态主题色彩 - 梦幻粉红色系主色调（与明亮/暗黑主题统一主色）
+  --primary-color: #6366f1;
+  --primary-color-rgb: 99, 102, 241;
+  --primary-hover: #4f46e5;
+  --primary-light: #a5b4fc;
+  --primary-lighter: #c7d2fe;
+  --primary-extra-light: #e0e7ff;
+  --primary-dark: #4338ca;
+  --secondary-color: #06b6d4;
+  --accent-color: #f59e0b;
+  --danger-color: #ef4444;
+  --warning-color: #f97316;
+  --info-color: #3b82f6;
+  --success-color: #10b981;
+
+  // 浅色背景变量 (用于登录页面等)
+  --primary-light-bg: rgba(99, 102, 241, 0.15);
+  --success-light-bg: rgba(16, 185, 129, 0.15);
+  --warning-light-bg: rgba(249, 115, 22, 0.15);
+  --danger-light-bg: rgba(239, 68, 68, 0.15);
+  --info-light-bg: rgba(59, 130, 246, 0.15);
+
+  // 背景系统 - 高度不透明的白色背景（提高可读性）
+  --bg-primary: rgba(255, 255, 255, 0.95);
+  --bg-secondary: rgba(255, 255, 255, 0.92);
+  --bg-tertiary: rgba(255, 255, 255, 0.88);
+  --bg-card: rgba(255, 255, 255, 0.98);
+  --bg-hover: rgba(236, 72, 153, 0.1);
+  --bg-accent: rgba(99, 102, 241, 0.08);
+  --bg-subtle: rgba(255, 255, 255, 0.9);
+  --bg-gradient-primary: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(139, 92, 246, 0.2));
+  --bg-gradient-secondary: linear-gradient(135deg, rgba(236, 72, 153, 0.25), rgba(139, 92, 246, 0.15));
+  --bg-gradient-success: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(34, 197, 94, 0.15));
+
+  // 文字系统 - 深色文字确保对比度
+  --text-primary: #1a1a2e;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --text-disabled: #999999;
+  --text-tertiary: #666666;
+
+  // 边框系统 - 梦幻粉红色边框
+  --border-color: rgba(236, 72, 153, 0.4);
+  --border: rgba(236, 72, 153, 0.4);
+  --border-light: rgba(236, 72, 153, 0.25);
+  --border-focus: rgba(99, 102, 241, 0.6);
+  --border-accent: rgba(236, 72, 153, 0.5);
+  --border-subtle: rgba(236, 72, 153, 0.2);
+
+  // 阴影系统 - 轻微的梦幻阴影
+  --shadow-sm: 0 2px 8px rgba(236, 72, 153, 0.15);
+  --shadow-md: 0 4px 16px rgba(236, 72, 153, 0.2);
+  --shadow-lg: 0 8px 24px rgba(236, 72, 153, 0.25);
+  --shadow-xl: 0 12px 32px rgba(236, 72, 153, 0.3);
+  --shadow-colored: 0 4px 14px rgba(236, 72, 153, 0.2);
+  --shadow-inset: inset 0 1px 2px rgba(236, 72, 153, 0.1);
+
+  // 圆角 - 柔和的圆角设计
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  // 间距 - 舒适的间距系统
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  // 字体大小
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  // 过渡动画
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+
+  // 组件尺寸
+  --table-column-selection: 55px;
+  --table-column-index: 50px;
+  --table-column-sm: 100px;
+  --table-column-md: 120px;
+  --table-column-lg: 180px;
+  --table-column-xl: 200px;
+  --dialog-width-sm: 500px;
+  --dialog-width-md: 600px;
+  --dialog-width-lg: 700px;
+  --form-label-width: 100px;
+  --row-gutter: 10px;
+
+  // 动画效果
+  --transform-hover-sm: translateY(-2px);
+  --transform-hover-md: translateY(-4px);
+  --transform-slide: translateX(4px);
+  --transform-active: translateY(0);
+
+  // 位置偏移
+  --position-offset-sm: -4px;
+  --position-offset-md: -8px;
+
+  // 额外间距
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 5rem;
+  --spacing-5xl: 6rem;
+  --app-gap-lg: var(--spacing-xl);
+
+  // ============ 侧边栏全局变量 ============
+  // 玻璃态侧边栏 - 统一变量规范
+  --sidebar-bg: rgba(255, 255, 255, 0.9);
+  --sidebar-border: rgba(236, 72, 153, 0.3);
+  --sidebar-text: #333333;
+  --sidebar-text-hover: #1a1a2e;
+  --sidebar-item-hover: rgba(236, 72, 153, 0.1);
+  --sidebar-item-active: var(--primary-color);
+  --sidebar-item-active-text: #ffffff;
+  --sidebar-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+
+  // ============ 按钮和命令相关变量 ============
+  --button-primary-bg: var(--primary-color);
+  --button-primary-hover: var(--primary-hover);
+  --button-primary-active: var(--primary-dark);
+  --button-primary-border: var(--primary-color);
+
+  --button-success-bg: var(--success-color);
+  --button-success-hover: var(--success-600);
+  --button-success-active: var(--success-color);
+  --button-success-border: var(--success-color);
+
+  --button-warning-bg: var(--warning-color);
+  --button-warning-hover: var(--warning-600);
+  --button-warning-active: var(--warning-color);
+  --button-warning-border: var(--warning-color);
+
+  --button-danger-bg: var(--danger-color);
+  --button-danger-hover: var(--danger-600);
+  --button-danger-active: var(--danger-color);
+  --button-danger-border: var(--danger-color);
+
+  --button-info-bg: var(--info-color);
+  --button-info-hover: var(--info-600);
+  --button-info-active: var(--info-color);
+  --button-info-border: var(--info-color);
+
+  // 修复：强制覆盖可能冲突的变量
+  --muted-foreground: var(--gray-500);
+  --text-muted: var(--gray-500);
+
+  // 玻璃态装饰变量
+  --glass-effect: backdrop-filter: blur(15px);
+  --gradient-primary: var(--primary-color);
+  --gradient-success: var(--success-color);
+  --gradient-warning: var(--warning-color);
+  --gradient-danger: var(--danger-color);
+  --gradient-subtle: rgba(236, 72, 153, 0.08);
+
+  // ============ Element Plus 玻璃态主题变量覆盖 ============
+  // 高度不透明以确保可读性，同时保持梦幻的玻璃态效果
+  --el-bg-color: rgba(255, 255, 255, 0.98);
+  --el-bg-color-page: rgba(255, 255, 255, 0.95);
+  --el-bg-color-overlay: rgba(236, 72, 153, 0.1);
+  --el-text-color-primary: #1a1a2e;
+  --el-text-color-regular: #333333;
+  --el-text-color-secondary: #666666;
+  --el-text-color-placeholder: #999999;
+  --el-text-color-disabled: #cccccc;
+
+  // 边框色 - 梦幻粉红色
+  --el-border-color: rgba(236, 72, 153, 0.3);
+  --el-border-color-light: rgba(236, 72, 153, 0.2);
+  --el-border-color-lighter: rgba(236, 72, 153, 0.12);
+  --el-border-color-extra-light: rgba(236, 72, 153, 0.08);
+  --el-border-color-dark: rgba(236, 72, 153, 0.4);
+  --el-border-color-darker: rgba(236, 72, 153, 0.5);
+
+  // 填充色 - 高不透明度白色
+  --el-fill-color: rgba(255, 255, 255, 0.92);
+  --el-fill-color-light: rgba(255, 255, 255, 0.88);
+  --el-fill-color-lighter: rgba(255, 255, 255, 0.84);
+  --el-fill-color-extra-light: rgba(255, 255, 255, 0.8);
+  --el-fill-color-dark: rgba(236, 72, 153, 0.08);
+  --el-fill-color-darker: rgba(236, 72, 153, 0.12);
+  --el-fill-color-blank: rgba(255, 255, 255, 0.98);
+
+  // 卡片和容器美化
+  --el-card-bg: rgba(255, 255, 255, 0.95);
+  --el-card-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+  --el-card-border-radius: 12px;
+  --el-card-padding: var(--spacing-lg);
+
+  // 遮罩色
+  --el-mask-color: rgba(0, 0, 0, 0.3);
+  --el-mask-color-extra-light: rgba(0, 0, 0, 0.1);
+}
+
+// 玻璃态主题特定样式
+.glass-gradient,
+[data-theme="glass-gradient"] {
+  // 全局玻璃态效果
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  // 按钮梯度效果
+  .el-button {
+    &.el-button--primary {
+      background: var(--gradient-primary) !important;
+      border: 1px solid var(--border-color) !important;
+      box-shadow: var(--shadow-primary);
+    }
+
+    &.el-button--success {
+      box-shadow: var(--glow-success);
+    }
+
+    &.el-button--warning {
+      box-shadow: var(--glow-warning);
+      }
+
+    &.el-button--danger {
+      box-shadow: var(--glow-danger);
+    }
+  }
+
+  // 卡片玻璃态效果
+  .el-card {
+    background: var(--el-card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--el-card-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  // 表格玻璃态效果
+  .el-table {
+    background-color: transparent !important;
+
+    .el-table__header,
+    .el-table__body {
+      background-color: var(--el-bg-color) !important;
+    }
+  }
+
+  // 输入框玻璃态效果
+  .el-input__wrapper {
+    background: var(--el-fill-color) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+
+  // 下拉菜单玻璃态效果
+  .el-dropdown-menu {
+    background: var(--el-bg-color) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 16px rgba(236, 72, 153, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  // 弹框玻璃态效果
+  .el-dialog {
+    .el-dialog__header {
+      background: var(--el-bg-color) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+
+    .el-dialog__body {
+      background: var(--el-bg-color) !important;
+    }
+  }
+
+  // 抽屉玻璃态效果
+  .el-drawer {
+    background: var(--el-bg-color) !important;
+    box-shadow: -4px 0 16px rgba(236, 72, 153, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  // 标签页玻璃态效果
+  .el-tabs {
+    .el-tabs__nav {
+      background: rgba(255, 255, 255, 0.5) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+      }
+
+    .el-tabs__content {
+      background: transparent !important;
+    }
+  }
+}

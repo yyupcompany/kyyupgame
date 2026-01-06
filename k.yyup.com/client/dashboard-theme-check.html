@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘主题检查</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .check-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .error {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+        .success {
+            background-color: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            color: #ef6c00;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+        }
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
+        .dark-mode .check-item {
+            border-color: #444;
+            background-color: #2a2a2a;
+        }
+        .dark-mode pre {
+            background: #333;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .dark-mode button {
+            background-color: #0d6efd;
+        }
+        .dark-mode button:hover {
+            background-color: #0b5ed7;
+        }
+        .iframe-container {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #ddd;
+            margin: 20px 0;
+        }
+        .dark-mode .iframe-container {
+            border-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>仪表盘暗黑主题检查工具</h1>
+
+    <button onclick="toggleTheme()">切换主题</button>
+    <button onclick="checkDashboard()">检查仪表盘</button>
+    <button onclick="analyzeThemeStyles()">分析主题样式</button>
+
+    <div id="results">
+        <h2>检查结果</h2>
+        <div id="check-list"></div>
+    </div>
+
+    <div class="iframe-container">
+        <iframe id="dashboard-frame" src="http://localhost:5173/dashboard" width="100%" height="100%"></iframe>
+    </div>
+
+    <script>
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            updateThemeDisplay();
+        }
+
+        function updateThemeDisplay() {
+            const themeText = isDarkMode ? '暗黑模式' : '亮色模式';
+            document.querySelector('h1').textContent = `仪表盘${themeText}检查工具`;
+        }
+
+        function checkDashboard() {
+            const frame = document.getElementById('dashboard-frame');
+            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+            const checkList = document.getElementById('check-list');
+            checkList.innerHTML = '';
+
+            const checks = [
+                {
+                    name: '检查页面是否加载',
+                    test: () => frameDoc.readyState === 'complete'
+                },
+                {
+                    name: '检查Element Plus卡片组件',
+                    test: () => frameDoc.querySelector('.el-card') !== null
+                },
+                {
+                    name: '检查仪表盘容器',
+                    test: () => frameDoc.querySelector('.dashboard') !== null
+                },
+                {
+                    name: '检查主题切换按钮',
+                    test: () => frameDoc.querySelector('.theme-switch') !== null ||
+                           frameDoc.querySelector('[class*="theme"]') !== null
+                }
+            ];
+
+            checks.forEach(check => {
+                const result = check.test();
+                addCheckResult(check.name, result, result ? '通过' : '失败');
+            });
+        }
+
+        function analyzeThemeStyles() {
+            const frame = document.getElementById('dashboard-frame');
+            const frameDoc = frame.contentDocument || frame.contentWindow.document;
+            const checkList = document.getElementById('check-list');
+            checkList.innerHTML = '';
+
+            try {
+                // 检查CSS变量
+                const rootStyles = getComputedStyle(frameDoc.documentElement);
+                const cardBorderColor = rootStyles.getPropertyValue('--el-card-border-color');
+                const textColor = rootStyles.getPropertyValue('--el-text-color-primary');
+                const bgColor = rootStyles.getPropertyValue('--el-bg-color');
+
+                addCheckResult('CSS变量 --el-card-border-color', !!cardBorderColor,
+                    cardBorderColor || '未定义');
+                addCheckResult('CSS变量 --el-text-color-primary', !!textColor,
+                    textColor || '未定义');
+                addCheckResult('CSS变量 --el-bg-color', !!bgColor,
+                    bgColor || '未定义');
+
+                // 检查卡片组件样式
+                const cards = frameDoc.querySelectorAll('.el-card');
+                if (cards.length > 0) {
+                    const cardStyle = getComputedStyle(cards[0]);
+                    const cardBorder = cardStyle.border;
+                    const cardBorderRadius = cardStyle.borderRadius;
+                    const cardBoxShadow = cardStyle.boxShadow;
+
+                    addCheckResult('找到卡片组件数量', cards.length > 0,
+                        `${cards.length}个卡片`);
+                    addCheckResult('卡片边框样式', !!cardBorder, cardBorder);
+                    addCheckResult('卡片圆角', !!cardBorderRadius, cardBorderRadius);
+                    addCheckResult('卡片阴影', !!cardBoxShadow, cardBoxShadow);
+
+                    // 检查是否有硬编码的白色边框
+                    if (cardBorder.includes('white') || cardBorder.includes('#fff') ||
+                        cardBorder.includes('#ffffff') || cardBorder.includes('rgb(255, 255, 255)')) {
+                        addCheckResult('硬编码白色边框检测', false, '发现硬编码白色边框');
+                    } else {
+                        addCheckResult('硬编码白色边框检测', true, '未发现硬编码白色边框');
+                    }
+                } else {
+                    addCheckResult('找到卡片组件', false, '未找到卡片组件');
+                }
+
+                // 检查主题类名
+                const hasDarkClass = frameDoc.documentElement.classList.contains('dark') ||
+                                   frameDoc.body.classList.contains('dark');
+                addCheckResult('暗黑主题类名', hasDarkClass,
+                    hasDarkClass ? '已应用' : '未应用');
+
+                // 检查Element Plus主题
+                const hasElementDark = frameDoc.documentElement.classList.contains('dark') ||
+                                    frameDoc.body.classList.contains('el-dark');
+                addCheckResult('Element Plus暗黑主题', hasElementDark,
+                    hasElementDark ? '已应用' : '未应用');
+
+            } catch (error) {
+                addCheckResult('样式分析', false, `错误: ${error.message}`);
+            }
+        }
+
+        function addCheckResult(name, success, details) {
+            const checkList = document.getElementById('check-list');
+            const item = document.createElement('div');
+            item.className = `check-item ${success ? 'success' : 'error'}`;
+
+            let content = `<strong>${name}:</strong> ${details}`;
+            if (!success && details.includes('错误')) {
+                item.className = 'check-item error';
+            } else if (!success) {
+                item.className = 'check-item warning';
+            }
+
+            item.innerHTML = content;
+            checkList.appendChild(item);
+        }
+
+        // 页面加载完成后自动检查
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                checkDashboard();
+            }, 2000);
+        });
+
+        // 监听iframe加载
+        document.getElementById('dashboard-frame').addEventListener('load', () => {
+            setTimeout(() => {
+                checkDashboard();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

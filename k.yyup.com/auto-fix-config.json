@@ -1,0 +1,88 @@
+{
+  "claudeCode": {
+    "command": "claude-code",
+    "timeout": 300000,
+    "maxTokens": 4000,
+    "model": "claude-3-sonnet-20240229"
+  },
+  "project": {
+    "name": "幼儿园招生管理系统",
+    "type": "vue3-typescript",
+    "framework": "element-plus"
+  },
+  "execution": {
+    "concurrency": 1,
+    "maxRetries": 3,
+    "retryDelay": 2000,
+    "batchSize": 5,
+    "pauseBetweenBatches": 10000
+  },
+  "paths": {
+    "client": "./client",
+    "views": "./client/src/views",
+    "components": "./client/src/components",
+    "stores": "./client/src/stores",
+    "api": "./client/src/api"
+  },
+  "categories": {
+    "system": {
+      "name": "系统管理",
+      "priority": 1,
+      "description": "用户、角色、权限管理"
+    },
+    "education": {
+      "name": "教育管理", 
+      "priority": 2,
+      "description": "学生、教师、家长、班级管理"
+    },
+    "enrollment": {
+      "name": "招生管理",
+      "priority": 3,
+      "description": "招生计划、统计分析"
+    },
+    "activity": {
+      "name": "活动管理",
+      "priority": 4,
+      "description": "活动创建、管理、跟踪"
+    },
+    "ai": {
+      "name": "AI系统",
+      "priority": 5,
+      "description": "AI对话、助手、模型管理"
+    },
+    "principal": {
+      "name": "园长功能",
+      "priority": 6,
+      "description": "园长专用功能模块"
+    },
+    "business": {
+      "name": "业务扩展",
+      "priority": 7,
+      "description": "统计、客户、营销管理"
+    }
+  },
+  "templates": {
+    "vue3Component": {
+      "script": "composition-api",
+      "typescript": true,
+      "style": "scoped"
+    },
+    "apiCall": {
+      "errorHandling": true,
+      "loading": true,
+      "validation": true
+    },
+    "form": {
+      "validation": "element-plus",
+      "submit": "async",
+      "reset": true
+    }
+  },
+  "quality": {
+    "codeStyle": "prettier",
+    "linting": "eslint",
+    "typeChecking": "strict",
+    "accessibility": true,
+    "performance": true
+  }
+}

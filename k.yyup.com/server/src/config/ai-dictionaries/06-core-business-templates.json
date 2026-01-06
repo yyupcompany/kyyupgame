@@ -1,0 +1,147 @@
+{
+  "name": "核心业务查询模板字典",
+  "description": "班级教师、幼儿园、家长等核心业务表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 班级教师相关查询模板 ===": "注释",
+    "班级教师总数": {
+      "sql": "SELECT COUNT(*) as count FROM class_teachers",
+      "description": "查询班级教师关系总数",
+      "table": "class_teachers",
+      "response": "当前班级教师关系总数为{count}个",
+      "tokens": 10
+    },
+    "班级教师分布": {
+      "sql": "SELECT c.name as class_name, COUNT(ct.id) as teacher_count FROM classes c LEFT JOIN class_teachers ct ON c.id = ct.class_id WHERE c.status = 1 GROUP BY c.id, c.name ORDER BY teacher_count DESC",
+      "description": "查询各班级的教师分布情况",
+      "table": "class_teachers",
+      "joins": ["classes"],
+      "response": "班级教师分布统计完成",
+      "tokens": 25
+    },
+    "教师班级分布": {
+      "sql": "SELECT u.real_name as teacher_name, COUNT(ct.id) as class_count FROM teachers t LEFT JOIN class_teachers ct ON t.id = ct.teacher_id LEFT JOIN users u ON t.user_id = u.id WHERE t.status = 1 GROUP BY t.id, u.real_name ORDER BY class_count DESC",
+      "description": "查询教师负责的班级分布情况",
+      "table": "class_teachers",
+      "joins": ["teachers", "users"],
+      "response": "教师班级分布统计完成",
+      "tokens": 30
+    },
+
+    "// === 幼儿园相关查询模板 ===": "注释",
+    "幼儿园总数": {
+      "sql": "SELECT COUNT(*) as count FROM kindergartens WHERE status = 1",
+      "description": "查询活跃幼儿园总数",
+      "table": "kindergartens",
+      "response": "当前活跃幼儿园总数为{count}个",
+      "tokens": 10
+    },
+    "幼儿园概况": {
+      "sql": "SELECT name, address, phone, student_count, teacher_count FROM kindergartens WHERE status = 1 ORDER BY student_count DESC",
+      "description": "查询幼儿园基本概况",
+      "table": "kindergartens",
+      "response": "幼儿园概况查询完成",
+      "tokens": 20
+    },
+    "幼儿园学生分布": {
+      "sql": "SELECT k.name as kindergarten_name, COUNT(s.id) as student_count FROM kindergartens k LEFT JOIN students s ON k.id = s.kindergarten_id WHERE k.status = 1 AND s.status = 1 GROUP BY k.id, k.name ORDER BY student_count DESC",
+      "description": "查询各幼儿园的学生分布情况",
+      "table": "kindergartens",
+      "joins": ["students"],
+      "response": "幼儿园学生分布统计完成",
+      "tokens": 30
+    },
+
+    "// === 家长相关查询模板 ===": "注释",
+    "家长总数": {
+      "sql": "SELECT COUNT(*) as count FROM parents WHERE deleted_at IS NULL",
+      "description": "查询活跃家长总数",
+      "table": "parents",
+      "response": "当前活跃家长总数为{count}人",
+      "tokens": 10
+    },
+    "本月新增家长": {
+      "sql": "SELECT COUNT(*) as count FROM parents WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增家长数量",
+      "table": "parents",
+      "response": "本月新增家长{count}人",
+      "tokens": 20
+    },
+    "家长关系分布": {
+      "sql": "SELECT relationship, COUNT(*) as count, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM parents WHERE deleted_at IS NULL) as percentage FROM parents WHERE deleted_at IS NULL GROUP BY relationship",
+      "description": "查询家长关系分布",
+      "table": "parents",
+      "response": "家长关系分布统计完成",
+      "tokens": 25
+    },
+    "家长联系方式统计": {
+      "sql": "SELECT COUNT(*) as total_parents, COUNT(CASE WHEN work_unit IS NOT NULL AND work_unit != '' THEN 1 END) as has_work_unit, COUNT(CASE WHEN occupation IS NOT NULL AND occupation != '' THEN 1 END) as has_occupation FROM parents WHERE deleted_at IS NULL",
+      "description": "统计家长信息完整度",
+      "table": "parents",
+      "response": "家长信息统计完成",
+      "tokens": 30
+    },
+
+    "// === 家长跟进相关查询模板 ===": "注释",
+    "家长跟进总数": {
+      "sql": "SELECT COUNT(*) as count FROM parent_followups",
+      "description": "查询家长跟进记录总数",
+      "table": "parent_followups",
+      "response": "家长跟进记录总数为{count}条",
+      "tokens": 10
+    },
+    "本月家长跟进": {
+      "sql": "SELECT COUNT(*) as count FROM parent_followups WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月家长跟进记录数量",
+      "table": "parent_followups",
+      "response": "本月家长跟进记录{count}条",
+      "tokens": 20
+    },
+    "家长跟进类型分布": {
+      "sql": "SELECT followup_type, COUNT(*) as count FROM parent_followups GROUP BY followup_type ORDER BY count DESC",
+      "description": "查询家长跟进类型分布",
+      "table": "parent_followups",
+      "response": "家长跟进类型分布统计完成",
+      "tokens": 20
+    },
+    "家长跟进效果统计": {
+      "sql": "SELECT result, COUNT(*) as count, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM parent_followups) as percentage FROM parent_followups GROUP BY result ORDER BY count DESC",
+      "description": "统计家长跟进效果",
+      "table": "parent_followups",
+      "response": "家长跟进效果统计完成",
+      "tokens": 25
+    },
+
+    "// === 家长学生关系查询模板 ===": "注释",
+    "家长学生关系总数": {
+      "sql": "SELECT COUNT(*) as count FROM parent_student_relations",
+      "description": "查询家长学生关系总数",
+      "table": "parent_student_relations",
+      "response": "家长学生关系总数为{count}个",
+      "tokens": 10
+    },
+    "家长子女数量分布": {
+      "sql": "SELECT student_count, COUNT(*) as families FROM (SELECT user_id, COUNT(*) as student_count FROM parent_student_relations WHERE deleted_at IS NULL GROUP BY user_id) as parent_stats GROUP BY student_count ORDER BY student_count",
+      "description": "统计家长子女数量分布",
+      "table": "parent_student_relations",
+      "response": "家长子女数量分布统计完成",
+      "tokens": 30
+    },
+    "学生家长数量分布": {
+      "sql": "SELECT student_count, COUNT(*) as students FROM (SELECT student_id, COUNT(*) as student_count FROM parent_student_relations GROUP BY student_id) as student_stats GROUP BY student_count ORDER BY student_count",
+      "description": "统计学生家长数量分布",
+      "table": "parent_student_relations",
+      "response": "学生家长数量分布统计完成",
+      "tokens": 30
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "核心业务数据概览": {
+      "sql": "SELECT 'kindergartens' as category, COUNT(*) as count FROM kindergartens WHERE status = 1 UNION ALL SELECT 'parents' as category, COUNT(*) as count FROM parents WHERE deleted_at IS NULL UNION ALL SELECT 'class_teachers' as category, COUNT(*) as count FROM class_teachers UNION ALL SELECT 'parent_followups' as category, COUNT(*) as count FROM parent_followups WHERE deleted_at IS NULL UNION ALL SELECT 'parent_student_relations' as category, COUNT(*) as count FROM parent_student_relations WHERE deleted_at IS NULL",
+      "description": "核心业务数据总览",
+      "table": "multiple",
+      "response": "核心业务数据概览查询完成",
+      "tokens": 40
+    }
+  }
+}

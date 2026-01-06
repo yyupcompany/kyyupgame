@@ -1,0 +1,58 @@
+{
+  "timestamp": "2025-11-14T06:31:15.643Z",
+  "role": "老师",
+  "roleName": "老师",
+  "username": "test_teacher",
+  "login": {
+    "success": true,
+    "data": {
+      "success": true,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc5MiwidXNlcm5hbWUiOiJ0ZXN0X3RlYWNoZXIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzYzMTAxODc1LCJleHAiOjE3NjMxODgyNzV9.y_jNcrweNh7sebFNTTbUhyC7w9sjONhEiFG-MrlwvCY",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc5MiwidXNlcm5hbWUiOiJ0ZXN0X3RlYWNoZXIiLCJ0eXBlIjoicmVmcmVzaCIsImlzUmVmcmVzaFRva2VuIjp0cnVlLCJpYXQiOjE3NjMxMDE4NzUsImV4cCI6MTc2NTY5Mzg3NX0.4PpScm-zwOgOMXErP3d4mTrLp5tzFjifDvUoC0iVNs4",
+        "user": {
+          "id": 792,
+          "username": "test_teacher",
+          "email": "test_teacher@test.com",
+          "realName": "test_teacher",
+          "role": "user",
+          "roleName": "普通用户",
+          "isAdmin": false,
+          "kindergartenId": null,
+          "roles": []
+        }
+      },
+      "message": "登录成功"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjc5MiwidXNlcm5hbWUiOiJ0ZXN0X3RlYWNoZXIiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzYzMTAxODc1LCJleHAiOjE3NjMxODgyNzV9.y_jNcrweNh7sebFNTTbUhyC7w9sjONhEiFG-MrlwvCY"
+  },
+  "permissions": {
+    "success": true,
+    "permissions": []
+  },
+  "styleCheck": {
+    "pageBasics": {
+      "pageTitle": "幼儿园招生管理系统",
+      "currentUrl": "http://localhost:5173/dashboard",
+      "userRole": "老师"
+    },
+    "designTokens": {
+      "primaryColor": "#409eff",
+      "successColor": "#67c23a",
+      "warningColor": "#e6a23c",
+      "dangerColor": "#f56c6c"
+    },
+    "components": {
+      "header": "app-header",
+      "sidebar": "app-sidebar",
+      "mainContent": "main-content",
+      "cards": 0,
+      "menus": 0
+    },
+    "layout": {
+      "screenWidth": 1920,
+      "screenHeight": 1080,
+      "responsive": true
+    }
+  }
+}

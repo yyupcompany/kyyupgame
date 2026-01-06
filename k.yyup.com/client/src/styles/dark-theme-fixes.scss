@@ -1,0 +1,294 @@
+/* 暗黑主题修复 - 解决logo分割线和滚动条问题 */
+
+/*
+ * 修复问题：
+ * 1. Logo区域白色分割线
+ * 2. 侧边栏滚动条不是暗黑色系
+ */
+
+/* ==================== 暗黑主题专用修复 ==================== */
+:root.theme-dark {
+  /* 强制修复侧边栏边框颜色 */
+  --sidebar-border: #1a1625 !important;
+
+  /* 滚动条颜色变量 */
+  --scrollbar-track: #1a1625;
+  --scrollbar-thumb: #374151;
+  --scrollbar-thumb-hover: #4b5563;
+}
+
+/* ==================== Logo区域修复 ==================== */
+.theme-dark .sidebar {
+  /* 修复sidebar-header的边框颜色 */
+  .sidebar-header {
+    border-bottom: 1px solid var(--sidebar-border) !important;
+    border-bottom-color: #1a1625 !important;
+  }
+
+  /* 确保logo容器没有额外的边框 */
+  .sidebar-logo {
+    border: none !important;
+    border-bottom: none !important;
+  }
+
+  /* 确保logo图标容器没有边框 */
+  .logo-icon {
+    border: none !important;
+  }
+}
+
+/* ==================== 滚动条样式修复 ==================== */
+.theme-dark .sidebar {
+  /* 侧边栏导航滚动条 */
+  .sidebar-nav,
+  nav,
+  .nav {
+    /* Firefox 滚动条样式 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+
+    /* Webkit 滚动条样式 (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: var(--scrollbar-track);
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: var(--scrollbar-track);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--scrollbar-thumb-hover);
+      }
+    }
+
+    &::-webkit-scrollbar-corner {
+      background-color: var(--scrollbar-track);
+    }
+  }
+}
+
+/* ==================== 全局暗黑主题滚动条 ==================== */
+.theme-dark {
+  /* 应用到所有可滚动元素 */
+  * {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  /* Webkit 滚动条 */
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: var(--scrollbar-track);
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 3px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+  }
+
+  *::-webkit-scrollbar-corner {
+    background-color: var(--scrollbar-track);
+  }
+}
+
+/* ==================== 特殊情况修复 ==================== */
+.theme-dark {
+  /* 确保主内容区域的滚动条也是暗色 */
+  .main-content,
+  .dashboard-content,
+  .content-area {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  /* 修复可能的边框冲突 */
+  .sidebar .sidebar-header::after,
+  .sidebar .sidebar-logo::after {
+    display: none !important;
+  }
+}
+
+/* ==================== 强制覆盖可能的冲突样式 ==================== */
+html.theme-dark .sidebar .sidebar-header {
+  border-bottom-color: #1a1625 !important;
+}
+
+html.theme-dark .sidebar-header {
+  border-bottom: 1px solid #1a1625 !important;
+}
+
+
+/* ==================== 侧边栏暗黑主题背景与文字统一 ==================== */
+.theme-dark .sidebar {
+  background-color: var(--sidebar-bg) !important;
+  color: var(--sidebar-text) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+  box-shadow: var(--sidebar-shadow, none);
+
+  .nav-item,
+  .nav-text,
+  .nav-icon,
+  .center-item {
+    color: var(--sidebar-text) !important;
+  }
+
+  .nav-item:hover {
+    background-color: var(--sidebar-item-hover) !important;
+    .nav-text,
+    .nav-icon,
+    .center-item {
+      color: var(--sidebar-text-hover) !important;
+    }
+  }
+
+  .nav-item.active,
+  .nav-item.router-link-active {
+    background-color: var(--sidebar-item-active) !important;
+    .nav-text,
+    .nav-icon,
+    .center-item {
+      color: var(--sidebar-item-active-text) !important;
+    }
+  }
+}
+
+/* ==================== Element Plus el-tag 暗黑主题适配 ==================== */
+.theme-dark,
+[data-theme="dark"] {
+  /* 基础 el-tag 样式覆盖 */
+  .el-tag {
+    background-color: rgba(156, 163, 175, 0.15) !important;
+    border-color: rgba(156, 163, 175, 0.25) !important;
+    color: #d1d5db !important;
+
+    /* 浅色主题的 success 标签在暗黑模式下 */
+    &.el-tag--success {
+      background-color: rgba(74, 222, 128, 0.15) !important;
+      border-color: rgba(74, 222, 128, 0.25) !important;
+      color: #4ade80 !important;
+    }
+
+    /* 浅色主题的 warning 标签在暗黑模式下 */
+    &.el-tag--warning {
+      background-color: rgba(251, 191, 36, 0.15) !important;
+      border-color: rgba(251, 191, 36, 0.25) !important;
+      color: #fbbf24 !important;
+    }
+
+    /* 浅色主题的 danger 标签在暗黑模式下 */
+    &.el-tag--danger {
+      background-color: rgba(248, 113, 113, 0.15) !important;
+      border-color: rgba(248, 113, 113, 0.25) !important;
+      color: #f87171 !important;
+    }
+
+    /* 浅色主题的 info 标签在暗黑模式下 */
+    &.el-tag--info {
+      background-color: rgba(156, 163, 175, 0.15) !important;
+      border-color: rgba(156, 163, 175, 0.25) !important;
+      color: #9ca3af !important;
+    }
+
+    /* 浅色主题的 primary 标签在暗黑模式下 */
+    &.el-tag--primary {
+      background-color: rgba(139, 92, 246, 0.15) !important;
+      border-color: rgba(139, 92, 246, 0.25) !important;
+      color: #a78bfa !important;
+    }
+
+    /* 空心/简洁样式适配 */
+    &.el-tag--plain {
+      background-color: transparent !important;
+
+      &.el-tag--success {
+        border-color: rgba(74, 222, 128, 0.4) !important;
+        color: #4ade80 !important;
+      }
+
+      &.el-tag--warning {
+        border-color: rgba(251, 191, 36, 0.4) !important;
+        color: #fbbf24 !important;
+      }
+
+      &.el-tag--danger {
+        border-color: rgba(248, 113, 113, 0.4) !important;
+        color: #f87171 !important;
+      }
+
+      &.el-tag--info {
+        border-color: rgba(156, 163, 175, 0.4) !important;
+        color: #9ca3af !important;
+      }
+
+      &.el-tag--primary {
+        border-color: rgba(139, 92, 246, 0.4) !important;
+        color: #a78bfa !important;
+      }
+    }
+  }
+}
+
+/* ==================== 卡片内标签暗黑主题适配 ==================== */
+.theme-dark,
+[data-theme="dark"] {
+  .el-card {
+    background-color: var(--bg-card) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+
+    /* 卡片内部的 el-tag 样式 */
+    .el-tag {
+      background-color: rgba(156, 163, 175, 0.15) !important;
+      border-color: rgba(156, 163, 175, 0.25) !important;
+      color: #d1d5db !important;
+
+      &.el-tag--success {
+        background-color: rgba(74, 222, 128, 0.15) !important;
+        border-color: rgba(74, 222, 128, 0.25) !important;
+        color: #4ade80 !important;
+      }
+
+      &.el-tag--warning {
+        background-color: rgba(251, 191, 36, 0.15) !important;
+        border-color: rgba(251, 191, 36, 0.25) !important;
+        color: #fbbf24 !important;
+      }
+
+      &.el-tag--danger {
+        background-color: rgba(248, 113, 113, 0.15) !important;
+        border-color: rgba(248, 113, 113, 0.25) !important;
+        color: #f87171 !important;
+      }
+
+      &.el-tag--info {
+        background-color: rgba(156, 163, 175, 0.15) !important;
+        border-color: rgba(156, 163, 175, 0.25) !important;
+        color: #9ca3af !important;
+      }
+
+      &.el-tag--primary {
+        background-color: rgba(139, 92, 246, 0.15) !important;
+        border-color: rgba(139, 92, 246, 0.25) !important;
+        color: #a78bfa !important;
+      }
+    }
+  }
+}

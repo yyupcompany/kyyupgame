@@ -1,0 +1,174 @@
+{
+  "description": "100个园长视角测试提示词 - 用于AI助手功能测试",
+  "created": "2025-12-23",
+  "total_count": 100,
+  "categories": {
+    "basic_query": {
+      "name": "基础查询类",
+      "count": 10,
+      "prompts": [
+        { "id": 1, "text": "幼儿园有多少学生", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 2, "text": "查看全园教师信息", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 3, "text": "今天有多少学生请假", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 4, "text": "查看大班有几个孩子", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 5, "text": "显示所有班级信息", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 6, "text": "查看本月新入园学生", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 7, "text": "统计各班级学生人数", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 8, "text": "查看待审批的请假申请", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 9, "text": "显示今天的课程安排", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 10, "text": "查看幼儿园基本信息", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "student_crud": {
+      "name": "学生CRUD操作类",
+      "count": 15,
+      "prompts": [
+        { "id": 11, "text": "把小明的名字改成张明", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 12, "text": "新增一个学生叫李小花，3岁，女", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 13, "text": "删除学生王小五的档案", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 14, "text": "更新学生张三的联系电话为13800138000", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 15, "text": "把小红从中班转到大班", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 16, "text": "修改小刚的出生日期为2020年5月1日", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 17, "text": "添加学生家长信息：爸爸叫李强，电话13912345678", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 18, "text": "删除已毕业学生的记录", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 19, "text": "更新小丽的健康档案信息", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 20, "text": "把小明的照片换成新的", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 21, "text": "批量更新大班所有学生的班级为毕业班", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 22, "text": "给学生小华添加过敏信息：对花生过敏", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 23, "text": "创建新学生档案：姓名王小明，性别男，年龄4岁", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 24, "text": "更新学生紧急联系人信息", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 25, "text": "删除重复的学生记录", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true }
+      ]
+    },
+    "teacher_management": {
+      "name": "教师管理类",
+      "count": 10,
+      "prompts": [
+        { "id": 26, "text": "查看张老师的SOP执行进度", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 27, "text": "检查所有老师的任务完成情况", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 28, "text": "更新李老师的职位为主班老师", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 29, "text": "新增一名教师：姓名王芳，电话13600001111", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 30, "text": "删除已离职教师的账号", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 31, "text": "查看教师请假记录", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 32, "text": "给王老师分配到小班A", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 33, "text": "查看教师工作量统计", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 34, "text": "更新教师培训记录", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 35, "text": "查看老师SOP进度排名", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "notification": {
+      "name": "通知发送类",
+      "count": 10,
+      "prompts": [
+        { "id": 36, "text": "给全园家长发送明天放假通知", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 37, "text": "给大班家长发送家长会通知", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 38, "text": "发送缴费提醒给未缴费家长", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 39, "text": "给所有老师发送会议通知", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 40, "text": "发送活动报名通知给所有家长", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 41, "text": "发送紧急停课通知", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 42, "text": "给小班家长发送体检通知", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 43, "text": "发送节日祝福给全体家长", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 44, "text": "发送周报给园长办公室", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 45, "text": "给接送人发送放学提醒", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true }
+      ]
+    },
+    "task_management": {
+      "name": "任务管理类",
+      "count": 10,
+      "prompts": [
+        { "id": 46, "text": "创建一个新任务：准备六一活动物资", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 47, "text": "查看我的待办任务列表", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 48, "text": "把安全检查任务标记为已完成", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 49, "text": "删除过期的任务", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 50, "text": "给张老师分配一个任务：整理教室", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 51, "text": "更新任务截止日期为下周五", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 52, "text": "查看所有逾期任务", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 53, "text": "创建每周例会任务并设置重复", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 54, "text": "批量完成所有已过期任务", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 55, "text": "查看任务完成统计报表", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "activity_management": {
+      "name": "活动管理类",
+      "count": 10,
+      "prompts": [
+        { "id": 56, "text": "创建一个亲子运动会活动", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 57, "text": "查看本月所有活动安排", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 58, "text": "修改六一活动的时间为下午2点", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 59, "text": "取消明天的户外活动", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 60, "text": "查看活动报名人数统计", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 61, "text": "创建端午节主题活动方案", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 62, "text": "更新活动参与人员名单", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 63, "text": "删除已结束的活动记录", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 64, "text": "查看活动反馈和评价", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 65, "text": "制定下个月活动计划", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true }
+      ]
+    },
+    "enrollment": {
+      "name": "招生管理类",
+      "count": 10,
+      "prompts": [
+        { "id": 66, "text": "查看本月招生申请数量", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 67, "text": "审批通过张小明的入园申请", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 68, "text": "拒绝李小红的入园申请", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 69, "text": "创建新的招生计划", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 70, "text": "查看待处理的入园申请", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 71, "text": "更新招生宣传资料", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 72, "text": "删除无效的招生线索", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 73, "text": "查看招生转化率统计", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 74, "text": "安排家长到园参观", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 75, "text": "查看各渠道招生效果分析", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "finance": {
+      "name": "财务管理类",
+      "count": 10,
+      "prompts": [
+        { "id": 76, "text": "查看本月收费情况", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 77, "text": "给小明家长录入缴费记录", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 78, "text": "更新学费标准", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 79, "text": "查看未缴费家长名单", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 80, "text": "删除错误的缴费记录", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 81, "text": "生成财务月报", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 82, "text": "添加新的收费项目", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 83, "text": "查看支出明细", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 84, "text": "更新报销审批状态", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 85, "text": "查看财务预算执行情况", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "class_management": {
+      "name": "班级管理类",
+      "count": 8,
+      "prompts": [
+        { "id": 86, "text": "创建新的小班C", "expected_tool": "http_request", "type": "CREATE", "needs_confirm": true },
+        { "id": 87, "text": "查看各班级人数分布", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 88, "text": "更新中班A的教室位置", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 89, "text": "删除已撤销的班级", "expected_tool": "http_request", "type": "DELETE", "needs_confirm": true },
+        { "id": 90, "text": "调整班级人数上限为30人", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 91, "text": "查看班级课表安排", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 92, "text": "给大班分配新的班主任", "expected_tool": "http_request", "type": "UPDATE", "needs_confirm": true },
+        { "id": 93, "text": "查看班级出勤率排名", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    },
+    "report_analysis": {
+      "name": "报表分析类",
+      "count": 7,
+      "prompts": [
+        { "id": 94, "text": "生成本周运营报告", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 95, "text": "分析学生年龄分布情况", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 96, "text": "统计本月家长满意度", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 97, "text": "对比上月和本月招生数据", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 98, "text": "分析教师工作负荷分布", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 99, "text": "生成学生健康档案统计", "expected_tool": "api_search+http_request", "type": "READ" },
+        { "id": 100, "text": "查看幼儿园综合评分趋势", "expected_tool": "api_search+http_request", "type": "READ" }
+      ]
+    }
+  },
+  "summary": {
+    "READ_operations": 45,
+    "CREATE_operations": 22,
+    "UPDATE_operations": 25,
+    "DELETE_operations": 8,
+    "needs_confirm_count": 55
+  }
+}

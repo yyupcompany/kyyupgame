@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端AI助手 - 面包屑导航风格</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .ai-gradient {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+
+        .bounce-in {
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .slide-up {
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 自定义滚动条 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        /* 面包屑样式 */
+        .breadcrumb-item {
+            position: relative;
+        }
+
+        .breadcrumb-item:not(:last-child)::after {
+            content: '›';
+            margin: 0 8px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- 主容器 -->
+    <div class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative">
+        
+        <!-- 顶部状态栏 -->
+        <div class="gradient-bg text-white px-4 py-2 text-xs flex justify-between items-center">
+            <div class="flex items-center space-x-1">
+                <div class="w-1 h-1 bg-white rounded-full pulse-dot"></div>
+                <span>智能助手在线</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i data-lucide="wifi" class="w-3 h-3"></i>
+                <i data-lucide="battery" class="w-3 h-3"></i>
+                <span>9:41</span>
+            </div>
+        </div>
+
+        <!-- 面包屑导航 -->
+        <div class="bg-white border-b border-gray-100 px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <div class="breadcrumb-item">
+                    <i data-lucide="home" class="w-4 h-4 inline"></i>
+                    首页
+                </div>
+                <div class="breadcrumb-item">AI工作台</div>
+                <div class="breadcrumb-item text-blue-600 font-medium">智能对话</div>
+            </div>
+        </div>
+
+        <!-- 用户角色切换 -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-3 border-b border-gray-100">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-gray-900">管理员模式</div>
+                        <div class="text-xs text-gray-500">全权限访问</div>
+                    </div>
+                </div>
+                <button class="p-1 rounded-md hover:bg-white/50 transition-colors">
+                    <i data-lucide="chevron-down" class="w-4 h-4 text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- AI功能模块导航 -->
+        <div class="px-4 py-3 bg-white">
+            <div class="grid grid-cols-3 gap-3">
+                <button class="p-3 bg-blue-50 rounded-xl border border-blue-100 active:scale-95 transition-transform">
+                    <i data-lucide="brain" class="w-5 h-5 text-blue-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-blue-800 font-medium">智能体</div>
+                </button>
+                <button class="p-3 bg-purple-50 rounded-xl border border-purple-100 active:scale-95 transition-transform">
+                    <i data-lucide="wrench" class="w-5 h-5 text-purple-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-purple-800 font-medium">工具集</div>
+                </button>
+                <button class="p-3 bg-emerald-50 rounded-xl border border-emerald-100 active:scale-95 transition-transform">
+                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-emerald-800 font-medium">工作流</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 数据看板（可折叠） -->
+        <div class="border-b border-gray-100">
+            <button id="dashboardToggle" class="w-full px-4 py-3 bg-gray-50 flex items-center justify-between hover:bg-gray-100 transition-colors">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="bar-chart-3" class="w-4 h-4 text-gray-600"></i>
+                    <span class="text-sm font-medium text-gray-800">数据看板</span>
+                </div>
+                <i id="dashboardArrow" data-lucide="chevron-down" class="w-4 h-4 text-gray-600 transition-transform"></i>
+            </button>
+            <div id="dashboardContent" class="px-4 py-3 bg-white">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-lg text-white">
+                        <div class="text-xs opacity-90">今日对话</div>
+                        <div class="text-lg font-bold">248</div>
+                        <div class="text-xs opacity-75 flex items-center mt-1">
+                            <i data-lucide="trending-up" class="w-3 h-3 mr-1"></i>
+                            +12%
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-lg text-white">
+                        <div class="text-xs opacity-90">活跃用户</div>
+                        <div class="text-lg font-bold">156</div>
+                        <div class="text-xs opacity-75 flex items-center mt-1">
+                            <i data-lucide="users" class="w-3 h-3 mr-1"></i>
+                            在线
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 聊天区域 -->
+        <div class="flex-1 px-4 py-4 space-y-4 max-h-96 overflow-y-auto custom-scrollbar">
+            <!-- AI消息 -->
+            <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 ai-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="bg-gray-100 rounded-lg rounded-tl-none px-3 py-2">
+                        <p class="text-sm text-gray-800">您好！我是幼儿园AI智能助手。我可以帮助您处理招生管理、教务安排、家长沟通等各种事务。请告诉我您需要什么帮助？</p>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">AI助手 • 刚刚</div>
+                </div>
+            </div>
+
+            <!-- 用户消息 -->
+            <div class="flex items-start space-x-3 justify-end">
+                <div class="flex-1 text-right">
+                    <div class="bg-blue-500 text-white rounded-lg rounded-tr-none px-3 py-2 inline-block">
+                        <p class="text-sm">帮我分析一下本月的招生情况</p>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">您 • 1分钟前</div>
+                </div>
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="user" class="w-4 h-4 text-white"></i>
+                </div>
+            </div>
+
+            <!-- AI回复 -->
+            <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 ai-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="bg-gray-100 rounded-lg rounded-tl-none px-3 py-2">
+                        <div class="text-sm text-gray-800 mb-2">
+                            好的！我来为您分析本月招生情况：
+                        </div>
+                        <div class="bg-white rounded-lg p-3 mb-2 border">
+                            <div class="grid grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <div class="text-gray-600">新增报名</div>
+                                    <div class="font-bold text-green-600">45人</div>
+                                </div>
+                                <div>
+                                    <div class="text-gray-600">待审核</div>
+                                    <div class="font-bold text-orange-600">12人</div>
+                                </div>
+                                <div>
+                                    <div class="text-gray-600">已确认</div>
+                                    <div class="font-bold text-blue-600">33人</div>
+                                </div>
+                                <div>
+                                    <div class="text-gray-600">完成率</div>
+                                    <div class="font-bold text-purple-600">73.3%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700">建议重点跟进待审核的12名学生，预计本月可达成招生目标。</p>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1">AI助手 • 正在输入...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 多模态输入区域 -->
+        <div class="p-4 bg-white border-t border-gray-100">
+            <!-- 输入功能按钮 -->
+            <div class="flex items-center space-x-2 mb-3">
+                <button class="p-2 bg-blue-50 rounded-lg active:scale-95 transition-transform">
+                    <i data-lucide="mic" class="w-4 h-4 text-blue-600"></i>
+                </button>
+                <button class="p-2 bg-purple-50 rounded-lg active:scale-95 transition-transform">
+                    <i data-lucide="camera" class="w-4 h-4 text-purple-600"></i>
+                </button>
+                <button class="p-2 bg-emerald-50 rounded-lg active:scale-95 transition-transform">
+                    <i data-lucide="paperclip" class="w-4 h-4 text-emerald-600"></i>
+                </button>
+                <div class="flex-1"></div>
+                <button class="p-2 bg-gray-50 rounded-lg active:scale-95 transition-transform">
+                    <i data-lucide="settings" class="w-4 h-4 text-gray-600"></i>
+                </button>
+            </div>
+
+            <!-- 输入框 -->
+            <div class="flex items-center space-x-2">
+                <div class="flex-1 relative">
+                    <input type="text" 
+                           placeholder="输入您的问题或指令..." 
+                           class="w-full px-4 py-3 bg-gray-50 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none text-sm">
+                </div>
+                <button class="p-3 bg-blue-500 rounded-xl text-white active:scale-95 transition-transform hover:bg-blue-600">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- 快捷指令 -->
+            <div class="mt-3 flex items-center space-x-2 overflow-x-auto">
+                <button class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs whitespace-nowrap border border-blue-200">
+                    查看今日课程
+                </button>
+                <button class="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs whitespace-nowrap border border-emerald-200">
+                    学生考勤统计
+                </button>
+                <button class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs whitespace-nowrap border border-purple-200">
+                    家长沟通记录
+                </button>
+            </div>
+        </div>
+
+        <!-- 底部安全区域 -->
+        <div class="h-6 bg-white"></div>
+    </div>
+
+    <script>
+        // 初始化Lucide图标
+        lucide.createIcons();
+
+        // 数据看板折叠功能
+        document.getElementById('dashboardToggle').addEventListener('click', function() {
+            const content = document.getElementById('dashboardContent');
+            const arrow = document.getElementById('dashboardArrow');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                content.classList.add('slide-up');
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(-90deg)';
+            }
+        });
+
+        // 添加一些交互效果
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // 简单的波纹效果
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // 添加波纹动画CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 模拟AI正在输入效果
+        setTimeout(() => {
+            const typingIndicator = document.querySelector('[data-typing]');
+            if (typingIndicator) {
+                let dots = '';
+                setInterval(() => {
+                    dots = dots.length >= 3 ? '' : dots + '.';
+                    typingIndicator.textContent = 'AI助手正在输入' + dots;
+                }, 500);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

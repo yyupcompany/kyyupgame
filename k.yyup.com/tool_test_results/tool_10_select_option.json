@@ -1,0 +1,9 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T23:03:08.453Z"}
+
+event: final_answer
+data: {"message":"💬 AI回答完成","content":"您的请求似乎缺少一些关键信息，请您具体说明是想在哪个活动的报名表中进行选择？例如\"亲子运动会报名表\"、\"春游活动报名表\"等，以便我准确协助您。","toolUsed":0,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T23:03:10.867Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T23:03:10.868Z","totalEvents":3,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.1782608695652174}
+

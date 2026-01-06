@@ -1,0 +1,34 @@
+{
+  "testTime": "2025/11/15 17:49:28",
+  "testUrl": "http://localhost:5173",
+  "loginCredentials": {
+    "username": "testparent",
+    "password": "123456"
+  },
+  "pageUrl": "http://localhost:5173/parent-center/assessment/index",
+  "pageTitle": "页面不存在 - 幼儿园招生管理系统",
+  "testResults": {
+    "儿童发育商测评": {
+      "status": "功能未找到",
+      "details": [
+        "在页面中未找到儿童发育商测评入口"
+      ]
+    },
+    "幼小衔接测评": {
+      "status": "功能未找到",
+      "details": [
+        "在页面中未找到幼小衔接测评入口"
+      ]
+    },
+    "学科测评": {
+      "status": "功能未找到",
+      "details": [
+        "在页面中未找到学科测评入口"
+      ]
+    }
+  },
+  "issues": {
+    "consoleErrors": [],
+    "pageErrors": []
+  }
+}

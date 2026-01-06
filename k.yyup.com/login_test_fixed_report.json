@@ -1,0 +1,72 @@
+{
+  "testTime": "2025-11-14T05:46:05.783Z",
+  "baseUrl": "http://localhost:5173",
+  "summary": {
+    "totalTests": 4,
+    "successTests": 0,
+    "failedTests": 4
+  },
+  "results": [
+    {
+      "role": "管理员",
+      "username": "admin",
+      "password": "123456",
+      "success": false,
+      "errorMessage": "未找到登录提交按钮",
+      "actualUsername": null,
+      "actualPassword": null,
+      "loginSuccess": false,
+      "screenshotPath": null
+    },
+    {
+      "role": "园长",
+      "username": "principal",
+      "password": "123456",
+      "success": false,
+      "errorMessage": "未找到登录按钮",
+      "actualUsername": null,
+      "actualPassword": null,
+      "loginSuccess": false,
+      "screenshotPath": null
+    },
+    {
+      "role": "老师",
+      "username": "test_teacher",
+      "password": "123456",
+      "success": false,
+      "errorMessage": "未找到登录按钮",
+      "actualUsername": null,
+      "actualPassword": null,
+      "loginSuccess": false,
+      "screenshotPath": null
+    },
+    {
+      "role": "家长",
+      "username": "test_parent",
+      "password": "123456",
+      "success": false,
+      "errorMessage": "未找到登录按钮",
+      "actualUsername": null,
+      "actualPassword": null,
+      "loginSuccess": false,
+      "screenshotPath": null
+    }
+  ],
+  "screenshots": [
+    "admin_after_click.png",
+    "admin_after_quick_click.png",
+    "admin_initial.png",
+    "admin_login_page.png",
+    "dashboard_admin_1763091483815.png",
+    "dashboard_parent_1763091547998.png",
+    "dashboard_principal_1763091505274.png",
+    "dashboard_teacher_1763091526964.png",
+    "login_admin_1763091472364.png",
+    "login_parent_1763091536677.png",
+    "login_principal_1763091493881.png",
+    "login_teacher_1763091515436.png",
+    "parent_initial.png",
+    "principal_initial.png",
+    "teacher_initial.png"
+  ]
+}

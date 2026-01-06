@@ -1,0 +1,15 @@
+{
+  "name": "pc-e2e-tests",
+  "version": "1.0.0",
+  "description": "PC端四角色完整测试套件",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:simple": "playwright test tests/simple-test.spec.ts --reporter=list"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}

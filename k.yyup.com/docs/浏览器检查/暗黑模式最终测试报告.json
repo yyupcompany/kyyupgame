@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-11-14T19:00:13.671Z",
+  "cardBorderCheck": [
+    {
+      "index": 0,
+      "borderColor": "rgba(255, 255, 255, 0.12)",
+      "backgroundColor": "rgb(30, 41, 59)",
+      "borderWidth": "1px",
+      "borderStyle": "solid"
+    },
+    {
+      "index": 1,
+      "borderColor": "rgba(255, 255, 255, 0.12)",
+      "backgroundColor": "rgb(30, 41, 59)",
+      "borderWidth": "0px",
+      "borderStyle": "none"
+    },
+    {
+      "index": 2,
+      "borderColor": "rgba(255, 255, 255, 0.12)",
+      "backgroundColor": "rgb(30, 41, 59)",
+      "borderWidth": "0px",
+      "borderStyle": "none"
+    },
+    {
+      "index": 3,
+      "borderColor": "rgba(255, 255, 255, 0.12)",
+      "backgroundColor": "rgb(30, 41, 59)",
+      "borderWidth": "0px",
+      "borderStyle": "none"
+    },
+    {
+      "index": 4,
+      "borderColor": "rgba(255, 255, 255, 0.12)",
+      "backgroundColor": "rgb(30, 41, 59)",
+      "borderWidth": "0px",
+      "borderStyle": "none"
+    }
+  ],
+  "hasWhiteBorder": true,
+  "finalStatus": "已执行强制修复",
+  "screenshotFiles": [
+    "01-登录页面.png",
+    "02-暗黑模式Dashboard.png",
+    "03-强制修复后.png",
+    "04-最终结果.png"
+  ]
+}

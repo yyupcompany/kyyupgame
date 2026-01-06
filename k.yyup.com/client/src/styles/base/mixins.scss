@@ -1,0 +1,77 @@
+// SCSS混合器定义
+
+// 弹性布局
+@mixin flex($direction: row, $justify: flex-start, $align: stretch, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+// 绝对定位
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// 截断文本
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本截断
+@mixin multi-line-truncate($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// 响应式断点
+@mixin breakpoint($point) {
+  @if $point == sm {
+    @media (max-width: 576px) { @content; }
+  }
+  @else if $point == md {
+    @media (max-width: var(--breakpoint-md)) { @content; }
+  }
+  @else if $point == lg {
+    @media (max-width: 992px) { @content; }
+  }
+  @else if $point == xl {
+    @media (max-width: 1200px) { @content; }
+  }
+}
+
+// 清除浮动
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+// 卡片样式
+@mixin card {
+  background-color: var(--bg-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: box-shadow var(--transition-time);
+}
+
+// 文本颜色变体
+@mixin text-variant($color) {
+  color: var($color);
+}
+
+// 背景颜色变体
+@mixin bg-variant($color) {
+  background-color: var($color);
+} 

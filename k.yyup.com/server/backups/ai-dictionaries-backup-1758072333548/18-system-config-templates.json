@@ -1,0 +1,207 @@
+{
+  "name": "系统配置管理查询模板字典",
+  "description": "系统配置、安全配置、AI模型配置、点赞收集配置、系统日志等系统配置管理相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 系统配置相关查询模板 ===": "注释",
+    "系统配置总数": {
+      "sql": "SELECT COUNT(*) as count FROM system_configs WHERE deleted_at IS NULL",
+      "description": "查询系统配置总数",
+      "table": "system_configs",
+      "response": "系统配置总数为{count}个",
+      "tokens": 10
+    },
+    "系统配置分组统计": {
+      "sql": "SELECT group_key, COUNT(*) as count FROM system_configs WHERE deleted_at IS NULL GROUP BY group_key ORDER BY count DESC",
+      "description": "统计系统配置分组分布",
+      "table": "system_configs",
+      "response": "系统配置分组统计完成",
+      "tokens": 20
+    },
+    "系统级配置": {
+      "sql": "SELECT COUNT(*) as count FROM system_configs WHERE is_system = 1 AND deleted_at IS NULL",
+      "description": "查询系统级配置数量",
+      "table": "system_configs",
+      "response": "系统级配置{count}个",
+      "tokens": 12
+    },
+    "只读配置统计": {
+      "sql": "SELECT COUNT(*) as count FROM system_configs WHERE is_readonly = 1 AND deleted_at IS NULL",
+      "description": "查询只读配置数量",
+      "table": "system_configs",
+      "response": "只读配置{count}个",
+      "tokens": 12
+    },
+    "配置值类型统计": {
+      "sql": "SELECT value_type, COUNT(*) as count FROM system_configs WHERE deleted_at IS NULL GROUP BY value_type ORDER BY count DESC",
+      "description": "统计配置值类型分布",
+      "table": "system_configs",
+      "response": "配置值类型统计完成",
+      "tokens": 20
+    },
+    "本月更新配置": {
+      "sql": "SELECT COUNT(*) as count FROM system_configs WHERE YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月更新的配置数量",
+      "table": "system_configs",
+      "response": "本月更新配置{count}个",
+      "tokens": 20
+    },
+
+    "// === 安全配置相关查询模板 ===": "注释",
+    "安全配置总数": {
+      "sql": "SELECT COUNT(*) as count FROM security_configs",
+      "description": "查询安全配置总数",
+      "table": "security_configs",
+      "response": "安全配置总数为{count}个",
+      "tokens": 10
+    },
+    "活跃安全配置": {
+      "sql": "SELECT COUNT(*) as count FROM security_configs WHERE isActive = 1",
+      "description": "查询活跃安全配置数量",
+      "table": "security_configs",
+      "response": "活跃安全配置{count}个",
+      "tokens": 12
+    },
+    "安全配置分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM security_configs GROUP BY category ORDER BY count DESC",
+      "description": "统计安全配置分类分布",
+      "table": "security_configs",
+      "response": "安全配置分类统计完成",
+      "tokens": 20
+    },
+    "本月更新安全配置": {
+      "sql": "SELECT COUNT(*) as count FROM security_configs WHERE YEAR(updatedAt) = YEAR(NOW()) AND MONTH(updatedAt) = MONTH(NOW())",
+      "description": "查询本月更新的安全配置数量",
+      "table": "security_configs",
+      "response": "本月更新安全配置{count}个",
+      "tokens": 20
+    },
+
+    "// === AI模型配置相关查询模板 ===": "注释",
+    "AI模型配置总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_model_config",
+      "description": "查询AI模型配置总数",
+      "table": "ai_model_config",
+      "response": "AI模型配置总数为{count}个",
+      "tokens": 10
+    },
+    "AI模型提供商统计": {
+      "sql": "SELECT provider, COUNT(*) as count FROM ai_model_config GROUP BY provider ORDER BY count DESC",
+      "description": "统计AI模型提供商分布",
+      "table": "ai_model_config",
+      "response": "AI模型提供商统计完成",
+      "tokens": 20
+    },
+    "AI模型类型统计": {
+      "sql": "SELECT model_type, COUNT(*) as count FROM ai_model_config GROUP BY model_type ORDER BY count DESC",
+      "description": "统计AI模型类型分布",
+      "table": "ai_model_config",
+      "response": "AI模型类型统计完成",
+      "tokens": 20
+    },
+    "默认AI模型": {
+      "sql": "SELECT COUNT(*) as count FROM ai_model_config WHERE is_default = 1",
+      "description": "查询默认AI模型数量",
+      "table": "ai_model_config",
+      "response": "默认AI模型{count}个",
+      "tokens": 12
+    },
+    "活跃AI模型": {
+      "sql": "SELECT COUNT(*) as count FROM ai_model_config WHERE status = 'active'",
+      "description": "查询活跃AI模型数量",
+      "table": "ai_model_config",
+      "response": "活跃AI模型{count}个",
+      "tokens": 12
+    },
+    "AI模型令牌限制分析": {
+      "sql": "SELECT AVG(max_tokens) as avg_tokens, MIN(max_tokens) as min_tokens, MAX(max_tokens) as max_tokens FROM ai_model_config WHERE max_tokens IS NOT NULL",
+      "description": "分析AI模型令牌限制",
+      "table": "ai_model_config",
+      "response": "AI模型令牌限制分析完成",
+      "tokens": 25
+    },
+
+    "// === 点赞收集配置相关查询模板 ===": "注释",
+    "点赞收集配置总数": {
+      "sql": "SELECT COUNT(*) as count FROM like_collect_config",
+      "description": "查询点赞收集配置总数",
+      "table": "like_collect_config",
+      "response": "点赞收集配置总数为{count}个",
+      "tokens": 10
+    },
+    "点赞收集奖励统计": {
+      "sql": "SELECT reward_type, COUNT(*) as count, SUM(reward_amount) as total_reward FROM like_collect_config GROUP BY reward_type ORDER BY count DESC",
+      "description": "统计点赞收集奖励情况",
+      "table": "like_collect_config",
+      "response": "点赞收集奖励统计完成",
+      "tokens": 25
+    },
+    "点赞目标分析": {
+      "sql": "SELECT AVG(target_likes) as avg_target, MIN(target_likes) as min_target, MAX(target_likes) as max_target FROM like_collect_config",
+      "description": "分析点赞目标设置",
+      "table": "like_collect_config",
+      "response": "点赞目标分析完成",
+      "tokens": 20
+    },
+    "活跃点赞配置": {
+      "sql": "SELECT COUNT(*) as count FROM like_collect_config WHERE status = 'active'",
+      "description": "查询活跃点赞配置数量",
+      "table": "like_collect_config",
+      "response": "活跃点赞配置{count}个",
+      "tokens": 12
+    },
+
+    "// === 系统日志相关查询模板 ===": "注释",
+    "系统日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs",
+      "description": "查询系统日志总数",
+      "table": "system_logs",
+      "response": "系统日志总数为{count}条",
+      "tokens": 10
+    },
+    "系统日志级别统计": {
+      "sql": "SELECT level, COUNT(*) as count FROM system_logs GROUP BY level ORDER BY count DESC",
+      "description": "统计系统日志级别分布",
+      "table": "system_logs",
+      "response": "系统日志级别统计完成",
+      "tokens": 20
+    },
+    "系统日志分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM system_logs GROUP BY category ORDER BY count DESC",
+      "description": "统计系统日志分类分布",
+      "table": "system_logs",
+      "response": "系统日志分类统计完成",
+      "tokens": 20
+    },
+    "错误日志统计": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs WHERE level = 'error'",
+      "description": "查询错误日志数量",
+      "table": "system_logs",
+      "response": "错误日志{count}条",
+      "tokens": 12
+    },
+    "本月系统日志": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月系统日志数量",
+      "table": "system_logs",
+      "response": "本月系统日志{count}条",
+      "tokens": 20
+    },
+    "系统日志来源统计": {
+      "sql": "SELECT source, COUNT(*) as count FROM system_logs WHERE source IS NOT NULL GROUP BY source ORDER BY count DESC LIMIT 10",
+      "description": "统计系统日志来源分布",
+      "table": "system_logs",
+      "response": "系统日志来源统计完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "系统配置管理概览": {
+      "sql": "SELECT 'system_configs' as category, COUNT(*) as count FROM system_configs WHERE deleted_at IS NULL UNION ALL SELECT 'security_configs' as category, COUNT(*) as count FROM security_configs UNION ALL SELECT 'ai_model_config' as category, COUNT(*) as count FROM ai_model_config UNION ALL SELECT 'like_collect_config' as category, COUNT(*) as count FROM like_collect_config UNION ALL SELECT 'system_logs' as category, COUNT(*) as count FROM system_logs",
+      "description": "系统配置管理数据总览",
+      "table": "multiple",
+      "response": "系统配置管理概览查询完成",
+      "tokens": 40
+    }
+  }
+}

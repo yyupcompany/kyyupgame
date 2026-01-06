@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mysql-kindergarten": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@berthojoris/mcp-mysql-server",
+        "mysql://root:pwk5ls7j@dbconn.sealoshzh.site:43906/kargerdensales?ssl=false",
+        "list,read,create,update,delete,utility"
+      ]
+    }
+  }
+}
+

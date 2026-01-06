@@ -1,0 +1,41 @@
+日志记录标准检查报告
+=====================
+
+检查时间: 2025-12-13T15:20:15.629Z
+
+总体统计
+--------
+- 扫描文件数: 221
+- 有日志记录的文件: 83
+- 需要改进的文件: 83
+- 平均质量得分: 0%
+
+日志类型分布
+----------
+- console.log: 114次
+- console.error: 373次
+- console.warn: 0次
+- logger.*: 34次
+- winston.*: 0次
+
+质量评级
+--------
+D (需要改进)
+
+改进建议
+--------
+1. 统一日志格式，使用 [MODULE]: 前缀
+2. 将简单的 console.log 改为带模块前缀的格式
+3. 在错误处理中使用 console.error
+4. 考虑使用专业的日志库（如winston）
+5. 添加结构化日志记录
+
+标准格式示例
+----------
+// 好的格式
+console.log('[AUTH]: User login successful', { userId: 123 });
+console.error('[DATABASE]: Query failed', error);
+
+// 需要改进的格式
+console.log('User login');
+console.log('Query failed');

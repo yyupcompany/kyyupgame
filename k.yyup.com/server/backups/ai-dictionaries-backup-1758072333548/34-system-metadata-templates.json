@@ -1,0 +1,89 @@
+{
+  "name": "系统元数据查询模板字典",
+  "description": "Sequelize元数据、基础数据表等系统元数据相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === Sequelize元数据相关查询模板 ===": "注释",
+    "Sequelize元数据总数": {
+      "sql": "SELECT COUNT(*) as count FROM sequelize_meta",
+      "description": "查询Sequelize元数据总数",
+      "table": "sequelize_meta",
+      "response": "Sequelize元数据总数为{count}条",
+      "tokens": 10
+    },
+    "元数据记录列表": {
+      "sql": "SELECT name FROM sequelize_meta ORDER BY name",
+      "description": "查询所有Sequelize元数据记录",
+      "table": "sequelize_meta",
+      "response": "Sequelize元数据记录查询完成",
+      "tokens": 15
+    },
+    "最新元数据记录": {
+      "sql": "SELECT name FROM sequelize_meta ORDER BY name DESC LIMIT 1",
+      "description": "查询最新的Sequelize元数据记录",
+      "table": "sequelize_meta",
+      "response": "最新元数据记录查询完成",
+      "tokens": 15
+    },
+    "元数据记录检查": {
+      "sql": "SELECT CASE WHEN COUNT(*) > 0 THEN 'EXISTS' ELSE 'NOT_EXISTS' END as status FROM sequelize_meta WHERE name = 'specific_migration'",
+      "description": "检查特定元数据记录是否存在",
+      "table": "sequelize_meta",
+      "response": "元数据记录检查完成",
+      "tokens": 20
+    },
+
+    "// === 基础数据表相关查询模板 ===": "注释",
+    "基础数据总数": {
+      "sql": "SELECT COUNT(*) as count FROM base",
+      "description": "查询基础数据总数",
+      "table": "base",
+      "response": "基础数据总数为{count}条",
+      "tokens": 10
+    },
+    "系统数据统计": {
+      "sql": "SELECT is_system, COUNT(*) as count FROM base GROUP BY is_system ORDER BY is_system DESC",
+      "description": "统计系统数据和非系统数据分布",
+      "table": "base",
+      "response": "系统数据统计完成",
+      "tokens": 20
+    },
+    "创建者统计": {
+      "sql": "SELECT creator_id, COUNT(*) as count FROM base WHERE creator_id IS NOT NULL GROUP BY creator_id ORDER BY count DESC LIMIT 10",
+      "description": "统计基础数据创建者分布",
+      "table": "base",
+      "response": "创建者统计完成",
+      "tokens": 25
+    },
+    "更新者统计": {
+      "sql": "SELECT updater_id, COUNT(*) as count FROM base WHERE updater_id IS NOT NULL GROUP BY updater_id ORDER BY count DESC LIMIT 10",
+      "description": "统计基础数据更新者分布",
+      "table": "base",
+      "response": "更新者统计完成",
+      "tokens": 25
+    },
+    "软删除数据统计": {
+      "sql": "SELECT COUNT(CASE WHEN deleted_at IS NULL THEN 1 END) as active_count, COUNT(CASE WHEN deleted_at IS NOT NULL THEN 1 END) as deleted_count FROM base",
+      "description": "统计活跃和已删除的基础数据",
+      "table": "base",
+      "response": "软删除数据统计完成",
+      "tokens": 25
+    },
+    "本月新增基础数据": {
+      "sql": "SELECT COUNT(*) as count FROM base WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增基础数据数量",
+      "table": "base",
+      "response": "本月新增基础数据{count}条",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "系统元数据概览": {
+      "sql": "SELECT 'sequelize_meta' as category, COUNT(*) as count FROM sequelize_meta UNION ALL SELECT 'base' as category, COUNT(*) as count FROM base",
+      "description": "系统元数据总览",
+      "table": "multiple",
+      "response": "系统元数据概览查询完成",
+      "tokens": 25
+    }
+  }
+}

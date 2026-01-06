@@ -1,0 +1,452 @@
+/**
+ * 录音服务
+ * 处理通话录音的录制、存储和转写
+ */
+
+import fs from 'fs'
+import path from 'path'
+import { EventEmitter } from 'events'
+
+export interface RecordingConfig {
+  enabled: boolean
+  format: 'mp3' | 'wav' | 'ogg'
+  quality: 'low' | 'medium' | 'high'
+  maxDuration: number // 最大录音时长（秒）
+  storagePath: string
+  autoTranscribe: boolean
+  transcribeLanguage: string
+}
+
+export interface Recording {
+  id: string
+  callId: string
+  filename: string
+  filePath: string
+  startTime: Date
+  endTime?: Date
+  duration: number
+  fileSize: number
+  status: 'recording' | 'completed' | 'processing' | 'failed'
+  format: string
+  transcript?: string
+  transcriptConfidence?: number
+}
+
+class RecordingService extends EventEmitter {
+  private recordings: Map<string, Recording> = new Map()
+  private config: RecordingConfig
+  private activeRecorders: Map<string, any> = new Map()
+
+  constructor() {
+    super()
+
+    // 默认配置
+    this.config = {
+      enabled: true,
+      format: 'mp3',
+      quality: 'medium',
+      maxDuration: 3600, // 1小时
+      storagePath: path.join(process.cwd(), 'recordings'),
+      autoTranscribe: true,
+      transcribeLanguage: 'zh-CN'
+    }
+
+    // 确保录音目录存在
+    this.ensureStorageDirectory()
+  }
+
+  /**
+   * 确保录音目录存在
+   */
+  private ensureStorageDirectory(): void {
+    try {
+      if (!fs.existsSync(this.config.storagePath)) {
+        fs.mkdirSync(this.config.storagePath, { recursive: true })
+      }
+    } catch (error) {
+      console.error('❌ 创建录音目录失败:', error)
+    }
+  }
+
+  /**
+   * 更新录音配置
+   */
+  updateConfig(newConfig: Partial<RecordingConfig>): void {
+    this.config = { ...this.config, ...newConfig }
+    this.ensureStorageDirectory()
+  }
+
+  /**
+   * 开始录音
+   */
+  async startRecording(callId: string, audioStream?: any): Promise<Recording | null> {
+    try {
+      if (!this.config.enabled) {
+        throw new Error('录音功能未启用')
+      }
+
+      // 检查是否已经在录音
+      if (this.recordings.has(callId)) {
+        throw new Error('通话已在录音中')
+      }
+
+      const recordingId = `rec_${callId}_${Date.now()}`
+      const filename = `${recordingId}.${this.config.format}`
+      const filePath = path.join(this.config.storagePath, filename)
+
+      const recording: Recording = {
+        id: recordingId,
+        callId,
+        filename,
+        filePath,
+        startTime: new Date(),
+        duration: 0,
+        fileSize: 0,
+        status: 'recording',
+        format: this.config.format
+      }
+
+      this.recordings.set(callId, recording)
+
+      // 如果有音频流，开始录音
+      if (audioStream) {
+        await this.startAudioCapture(callId, audioStream, filePath)
+      } else {
+        // 模拟录音（实际项目中需要真实的音频流处理）
+        this.startMockRecording(callId)
+      }
+
+      this.emit('recording_started', recording)
+      console.log('🎙️ 开始录音:', callId)
+
+      return recording
+    } catch (error) {
+      console.error('❌ 开始录音失败:', error)
+      this.emit('error', { type: 'recording_start_failed', callId, error })
+      return null
+    }
+  }
+
+  /**
+   * 开始音频捕获
+   */
+  private async startAudioCapture(callId: string, audioStream: any, filePath: string): Promise<void> {
+    try {
+      // 这里需要实现实际的音频录制逻辑
+      // 使用Node.js的音频处理库如node-record-lpcm16, speaker等
+
+      // 模拟录音过程
+      const writeStream = fs.createWriteStream(filePath)
+      const recorder = {
+        stream: writeStream,
+        interval: setInterval(() => {
+          this.updateRecordingDuration(callId)
+        }, 1000),
+        stop: () => {
+          clearInterval(recorder.interval)
+          writeStream.end()
+        }
+      }
+
+      this.activeRecorders.set(callId, recorder)
+
+      // 处理音频数据
+      audioStream.on('data', (chunk: Buffer) => {
+        writeStream.write(chunk)
+      })
+
+      audioStream.on('end', () => {
+        this.stopRecording(callId)
+      })
+
+    } catch (error) {
+      console.error('❌ 音频捕获失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 模拟录音（用于演示）
+   */
+  private startMockRecording(callId: string): void {
+    const interval = setInterval(() => {
+      this.updateRecordingDuration(callId)
+    }, 1000)
+
+    this.activeRecorders.set(callId, { interval, mock: true })
+  }
+
+  /**
+   * 更新录音时长
+   */
+  private updateRecordingDuration(callId: string): void {
+    const recording = this.recordings.get(callId)
+    if (!recording || recording.status !== 'recording') return
+
+    const now = new Date()
+    recording.duration = Math.floor((now.getTime() - recording.startTime.getTime()) / 1000)
+
+    // 检查是否超过最大时长
+    if (recording.duration >= this.config.maxDuration) {
+      this.stopRecording(callId)
+    }
+
+    this.emit('recording_updated', recording)
+  }
+
+  /**
+   * 停止录音
+   */
+  async stopRecording(callId: string): Promise<Recording | null> {
+    try {
+      const recording = this.recordings.get(callId)
+      if (!recording) {
+        throw new Error('录音记录不存在')
+      }
+
+      if (recording.status !== 'recording') {
+        return recording
+      }
+
+      // 停止录音器
+      const recorder = this.activeRecorders.get(callId)
+      if (recorder) {
+        if (recorder.mock) {
+          clearInterval(recorder.interval)
+        } else {
+          recorder.stop?.()
+        }
+        this.activeRecorders.delete(callId)
+      }
+
+      recording.endTime = new Date()
+      recording.duration = Math.floor((recording.endTime.getTime() - recording.startTime.getTime()) / 1000)
+      recording.status = 'completed'
+
+      // 获取文件大小
+      try {
+        const stats = fs.statSync(recording.filePath)
+        recording.fileSize = stats.size
+      } catch (error) {
+        console.warn('⚠️ 获取录音文件大小失败:', error)
+      }
+
+      // 自动转写
+      if (this.config.autoTranscribe) {
+        this.startTranscription(recording)
+      }
+
+      this.emit('recording_stopped', recording)
+      console.log('⏹️ 停止录音:', callId, `时长: ${recording.duration}秒`)
+
+      return recording
+    } catch (error) {
+      console.error('❌ 停止录音失败:', error)
+      this.emit('error', { type: 'recording_stop_failed', callId, error })
+      return null
+    }
+  }
+
+  /**
+   * 开始转写
+   */
+  private async startTranscription(recording: Recording): Promise<void> {
+    try {
+      recording.status = 'processing'
+      this.emit('transcription_started', recording)
+
+      // 模拟转写过程
+      setTimeout(() => {
+        this.mockTranscription(recording)
+      }, 2000 + Math.random() * 3000) // 2-5秒的模拟转写时间
+
+    } catch (error) {
+      console.error('❌ 开始转写失败:', error)
+      recording.status = 'completed'
+      this.emit('error', { type: 'transcription_failed', recording, error })
+    }
+  }
+
+  /**
+   * 模拟转写结果
+   */
+  private mockTranscription(recording: Recording): void {
+    // 模拟转写文本
+    const mockTranscripts = [
+      '您好，这里是幼儿园呼叫中心，请问有什么可以帮助您的吗？',
+      '我想咨询一下你们幼儿园的招生情况。',
+      '我们目前还有少量名额，请问您的孩子多大了？',
+      '我的孩子今年三岁，想了解下你们的教学环境。',
+      '我们幼儿园有专业的师资团队和优质的教学环境，欢迎您随时来园参观。',
+      '好的，我什么时候方便带孩子过去看看呢？',
+      '我们周末都有老师在，您可以随时过来。'
+    ]
+
+    const randomTranscript = mockTranscripts[Math.floor(Math.random() * mockTranscripts.length)]
+    const confidence = 0.85 + Math.random() * 0.1 // 85%-95%的置信度
+
+    recording.transcript = randomTranscript
+    recording.transcriptConfidence = confidence
+    recording.status = 'completed'
+
+    this.emit('transcription_completed', recording)
+    console.log('📝 转写完成:', recording.callId)
+  }
+
+  /**
+   * 手动请求转写
+   */
+  async requestTranscription(recordingId: string, language: string = 'zh-CN'): Promise<boolean> {
+    try {
+      const recording = Array.from(this.recordings.values()).find(r => r.id === recordingId)
+      if (!recording) {
+        throw new Error('录音记录不存在')
+      }
+
+      if (recording.status !== 'completed') {
+        throw new Error('录音未完成，无法转写')
+      }
+
+      // 开始转写
+      await this.startTranscription(recording)
+      return true
+
+    } catch (error) {
+      console.error('❌ 请求转写失败:', error)
+      this.emit('error', { type: 'transcription_request_failed', recordingId, error })
+      return false
+    }
+  }
+
+  /**
+   * 更新转写文本
+   */
+  async updateTranscript(recordingId: string, transcript: string): Promise<boolean> {
+    try {
+      const recording = Array.from(this.recordings.values()).find(r => r.id === recordingId)
+      if (!recording) {
+        throw new Error('录音记录不存在')
+      }
+
+      recording.transcript = transcript
+      this.emit('transcript_updated', recording)
+      console.log('📝 转写文本已更新:', recordingId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 更新转写文本失败:', error)
+      this.emit('error', { type: 'transcript_update_failed', recordingId, error })
+      return false
+    }
+  }
+
+  /**
+   * 删除录音
+   */
+  async deleteRecording(recordingId: string): Promise<boolean> {
+    try {
+      const recording = Array.from(this.recordings.values()).find(r => r.id === recordingId)
+      if (!recording) {
+        throw new Error('录音记录不存在')
+      }
+
+      // 删除文件
+      if (fs.existsSync(recording.filePath)) {
+        fs.unlinkSync(recording.filePath)
+      }
+
+      // 从内存中删除
+      for (const [callId, rec] of this.recordings.entries()) {
+        if (rec.id === recordingId) {
+          this.recordings.delete(callId)
+          break
+        }
+      }
+
+      this.emit('recording_deleted', recording)
+      console.log('🗑️ 录音已删除:', recordingId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 删除录音失败:', error)
+      this.emit('error', { type: 'recording_delete_failed', recordingId, error })
+      return false
+    }
+  }
+
+  /**
+   * 获取录音信息
+   */
+  getRecording(recordingId: string): Recording | null {
+    return Array.from(this.recordings.values()).find(r => r.id === recordingId) || null
+  }
+
+  /**
+   * 获取通话录音
+   */
+  getCallRecording(callId: string): Recording | null {
+    return this.recordings.get(callId) || null
+  }
+
+  /**
+   * 获取所有录音
+   */
+  getAllRecordings(): Recording[] {
+    return Array.from(this.recordings.values())
+  }
+
+  /**
+   * 获取录音文件URL
+   */
+  getRecordingUrl(recordingId: string): string | null {
+    const recording = this.getRecording(recordingId)
+    if (!recording || recording.status !== 'completed') {
+      return null
+    }
+
+    return `/api/call-center/recordings/${recording.id}/download`
+  }
+
+  /**
+   * 清理过期录音
+   */
+  async cleanupExpiredRecordings(maxAge: number = 30 * 24 * 60 * 60 * 1000): Promise<number> {
+    try {
+      const now = Date.now()
+      const expiredRecordings: Recording[] = []
+
+      for (const recording of this.recordings.values()) {
+        if (recording.endTime && (now - recording.endTime.getTime()) > maxAge) {
+          expiredRecordings.push(recording)
+        }
+      }
+
+      let deletedCount = 0
+      for (const recording of expiredRecordings) {
+        if (await this.deleteRecording(recording.id)) {
+          deletedCount++
+        }
+      }
+
+      console.log(`🧹 清理了 ${deletedCount} 个过期录音`)
+      return deletedCount
+    } catch (error) {
+      console.error('❌ 清理过期录音失败:', error)
+      return 0
+    }
+  }
+
+  /**
+   * 获取服务状态
+   */
+  getStatus(): any {
+    return {
+      config: this.config,
+      activeRecordings: Array.from(this.recordings.values()).filter(r => r.status === 'recording'),
+      totalRecordings: this.recordings.size,
+      activeRecorders: this.activeRecorders.size
+    }
+  }
+}
+
+export default new RecordingService()

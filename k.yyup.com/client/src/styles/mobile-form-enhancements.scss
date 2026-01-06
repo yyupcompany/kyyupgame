@@ -1,0 +1,662 @@
+/**
+ * 移动端表单增强样式
+ * Mobile Form Enhancements
+ *
+ * 为移动端表单组件提供更好的响应式设计和用户体验
+ */
+
+/* ==================== 基础表单增强 ==================== */
+
+// 响应式表单容器
+.mobile-form-enhanced {
+  padding: var(--mobile-padding);
+  background: var(--bg-color);
+  min-height: 100vh;
+
+  // 表单头部
+  .form-header {
+    margin-bottom: var(--mobile-gap-lg);
+    text-align: center;
+
+    .form-title {
+      margin: 0 0 var(--mobile-gap-sm) 0;
+      @include mobile-fluid-font(20px, 24px, 320px, 768px);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .form-description {
+      margin: 0;
+      @include mobile-fluid-font(14px, 16px, 320px, 768px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+  }
+
+  // 表单内容区域
+  .form-content {
+    margin-bottom: var(--mobile-gap-xl);
+
+    // 表单组
+    .form-group {
+      margin-bottom: var(--mobile-gap-lg);
+
+      .group-title {
+        margin: 0 0 var(--mobile-gap) 0;
+        padding: 0 var(--mobile-gap-sm);
+        @include mobile-fluid-font(16px, 18px, 320px, 768px);
+        font-weight: var(--font-medium);
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: var(--mobile-gap-xs);
+
+        .required-mark {
+          color: var(--danger-color);
+          font-size: var(--mobile-text-sm);
+        }
+      }
+
+      .group-description {
+        margin: 0 0 var(--mobile-gap) 0;
+        padding: 0 var(--mobile-gap-sm);
+        @include mobile-fluid-font(12px, 14px, 320px, 768px);
+        color: var(--text-tertiary);
+        line-height: 1.4;
+      }
+    }
+  }
+
+  // 表单底部操作区
+  .form-footer {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg-color);
+    padding: var(--mobile-gap);
+    border-top: 1px solid var(--border-color-light);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    z-index: var(--z-sticky);
+
+    .form-actions {
+      display: flex;
+      gap: var(--mobile-gap);
+      align-items: stretch;
+
+      .form-action {
+        flex: 1;
+        min-height: 44px; // 触摸目标最小尺寸
+        @include mobile-fluid-font(16px, 18px, 320px, 768px);
+        font-weight: var(--font-medium);
+
+        &.action-primary {
+          background: var(--primary-color);
+          border-color: var(--primary-color);
+        }
+
+        &.action-secondary {
+          background: var(--bg-color-light);
+          border-color: var(--border-color);
+          color: var(--text-primary);
+        }
+
+        &.action-ghost {
+          background: transparent;
+          border-color: var(--primary-color);
+          color: var(--primary-color);
+        }
+      }
+    }
+  }
+}
+
+/* ==================== Vant 表单组件增强 ==================== */
+
+// Cell Group 增强样式
+:deep(.van-cell-group) {
+  margin: 0 0 var(--mobile-gap) 0;
+  border-radius: var(--mobile-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--mobile-shadow-sm);
+
+  &.form-group-inset {
+    margin: var(--mobile-gap);
+    background: var(--bg-color);
+    border: 1px solid var(--border-color-light);
+  }
+
+  &.form-group-card {
+    background: var(--bg-color);
+    border-radius: var(--mobile-radius-lg);
+    box-shadow: var(--mobile-shadow-md);
+    margin: var(--mobile-gap);
+    overflow: hidden;
+  }
+
+  .van-cell {
+    min-height: 52px; // 确保触摸目标足够大
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+
+    &::after {
+      left: var(--mobile-gap);
+      right: var(--mobile-gap);
+      background-color: var(--border-color-light);
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}
+
+// Field 组件增强
+:deep(.van-field) {
+  .van-field__label {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    font-weight: var(--font-medium);
+    color: var(--text-primary);
+    min-width: 80px; // 确保标签宽度一致
+    flex-shrink: 0;
+
+    .van-field__required {
+      color: var(--danger-color);
+    }
+  }
+
+  .van-field__value {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    color: var(--text-primary);
+  }
+
+  .van-field__control {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    color: var(--text-primary);
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: var(--text-placeholder);
+    }
+
+    // 增大触摸目标
+    &[type="text"],
+    &[type="password"],
+    &[type="number"],
+    &[type="email"],
+    &[type="tel"],
+    &[type="url"],
+    &[type="search"] {
+      min-height: 44px;
+      padding: var(--mobile-gap-sm) 0;
+    }
+  }
+
+  .van-field__button {
+    margin-left: var(--mobile-gap-sm);
+
+    .van-button {
+      min-height: 32px;
+      @include mobile-fluid-font(12px, 14px, 320px, 768px);
+    }
+  }
+
+  // 只读字段样式
+  &.field-readonly {
+    .van-field__control {
+      color: var(--text-secondary);
+      cursor: default;
+    }
+  }
+
+  // 错误状态
+  &.field-error {
+    .van-field__control {
+      color: var(--danger-color);
+    }
+
+    .van-field__error-message {
+      @include mobile-fluid-font(12px, 14px, 320px, 768px);
+      color: var(--danger-color);
+    }
+  }
+
+  // 禁用状态
+  &.field-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    .van-field__control {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Button 组件增强
+:deep(.van-button) {
+  min-height: 44px; // 触摸目标最小尺寸
+  border-radius: var(--mobile-radius-md);
+  @include mobile-fluid-font(14px, 16px, 320px, 768px);
+  font-weight: var(--font-medium);
+  transition: all var(--mobile-transition-fast) var(--transition-timing-ease);
+
+  // 大尺寸按钮
+  &.van-button--large {
+    min-height: 50px;
+    @include mobile-fluid-font(16px, 18px, 320px, 768px);
+  }
+
+  // 小尺寸按钮
+  &.van-button--small {
+    min-height: 32px;
+    @include mobile-fluid-font(12px, 14px, 320px, 768px);
+  }
+
+  // 块级按钮
+  &.van-button--block {
+    width: 100%;
+    margin: var(--mobile-gap-sm) 0;
+  }
+
+  // 圆形按钮
+  &.van-button--round {
+    border-radius: var(--mobile-radius-full);
+  }
+
+  // 主要按钮
+  &.van-button--primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+
+    &:active {
+      background: var(--primary-color-dark);
+      border-color: var(--primary-color-dark);
+    }
+  }
+
+  // 危险按钮
+  &.van-button--danger {
+    background: var(--danger-color);
+    border-color: var(--danger-color);
+
+    &:active {
+      background: var(--danger-color-dark);
+      border-color: var(--danger-color-dark);
+    }
+  }
+
+  // 成功按钮
+  &.van-button--success {
+    background: var(--success-color);
+    border-color: var(--success-color);
+
+    &:active {
+      background: var(--success-color-dark);
+      border-color: var(--success-color-dark);
+    }
+  }
+}
+
+// Switch 组件增强
+:deep(.van-switch) {
+  font-size: var(--text-xl); // 增大触摸目标
+
+  &.van-switch--on {
+    background: var(--primary-color);
+  }
+}
+
+// Checkbox 组件增强
+:deep(.van-checkbox) {
+  .van-checkbox__icon {
+    font-size: var(--text-lg); // 增大触摸目标
+
+    .van-icon {
+      border-radius: var(--mobile-radius-sm);
+    }
+  }
+
+  .van-checkbox__label {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+}
+
+// Radio 组件增强
+:deep(.van-radio) {
+  .van-radio__icon {
+    font-size: var(--text-lg); // 增大触摸目标
+
+    .van-icon {
+      border-radius: 50%;
+    }
+  }
+
+  .van-radio__label {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+}
+
+// Picker 组件增强
+:deep(.van-picker) {
+  .van-picker__toolbar {
+    height: 44px;
+    padding: 0 var(--mobile-gap);
+    border-bottom: 1px solid var(--border-color-light);
+
+    .van-picker__cancel,
+    .van-picker__confirm {
+      @include mobile-fluid-font(16px, 18px, 320px, 768px);
+      font-weight: var(--font-medium);
+      min-height: 32px;
+      padding: 0 var(--mobile-gap-sm);
+    }
+
+    .van-picker__title {
+      @include mobile-fluid-font(16px, 18px, 320px, 768px);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+    }
+  }
+
+  .van-picker__columns {
+    background: var(--bg-color);
+  }
+
+  .van-picker-column {
+    font-size: var(--mobile-text-base);
+  }
+}
+
+// DatetimePicker 组件增强
+:deep(.van-datetime-picker) {
+  .van-picker__toolbar {
+    height: 44px;
+  }
+}
+
+// Uploader 组件增强
+:deep(.van-uploader) {
+  .van-uploader__wrapper {
+    .van-uploader__upload {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--mobile-radius-md);
+      background: var(--bg-color-light);
+      transition: all var(--mobile-transition-fast) var(--transition-timing-ease);
+
+      &:active {
+        background: var(--bg-color-page);
+        border-color: var(--primary-color);
+      }
+
+      .van-uploader__upload-icon {
+        font-size: var(--text-2xl);
+        color: var(--text-secondary);
+      }
+
+      .van-uploader__upload-text {
+        @include mobile-fluid-font(12px, 14px, 320px, 768px);
+        color: var(--text-secondary);
+      }
+    }
+
+    .van-uploader__preview {
+      border-radius: var(--mobile-radius-md);
+      overflow: hidden;
+      box-shadow: var(--mobile-shadow-sm);
+
+      .van-uploader__preview-image {
+        border-radius: var(--mobile-radius-md);
+      }
+
+      .van-uploader__preview-delete {
+        width: 20px;
+        height: 20px;
+        background: var(--danger-color);
+        border-radius: 50%;
+
+        .van-icon {
+          font-size: var(--text-xs);
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+// Rate 组件增强
+:deep(.van-rate) {
+  .van-rate__item {
+    margin-right: 4px;
+
+    .van-rate__icon {
+      font-size: var(--text-2xl); // 增大触摸目标
+
+      &.van-rate__icon--full {
+        color: var(--warning-color);
+      }
+
+      &.van-rate__icon--void {
+        color: var(--border-color);
+      }
+    }
+  }
+}
+
+// Stepper 组件增强
+:deep(.van-stepper) {
+  .van-stepper__input {
+    @include mobile-fluid-font(14px, 16px, 320px, 768px);
+    min-height: 32px;
+    background: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    border-radius: var(--mobile-radius-sm);
+    color: var(--text-primary);
+  }
+
+  .van-stepper__minus,
+  .van-stepper__plus {
+    min-width: 32px;
+    min-height: 32px;
+    background: var(--bg-color-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+
+    &:active {
+      background: var(--bg-color-page);
+    }
+
+    &.van-stepper--disabled {
+      background: var(--bg-color-page);
+      color: var(--text-tertiary);
+    }
+  }
+}
+
+// Slider 组件增强
+:deep(.van-slider) {
+  margin: var(--mobile-gap) 0;
+
+  .van-slider__bar {
+    background: var(--bg-color-light);
+    border-radius: var(--mobile-radius-full);
+  }
+
+  .van-slider__button {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ==================== 响应式布局 ==================== */
+
+// 小屏幕手机 (≤374px)
+@media (max-width: 374px) {
+  .mobile-form-enhanced {
+    padding: var(--mobile-gap-sm);
+
+    .form-header {
+      .form-title {
+        @include mobile-fluid-font(18px, 20px, 320px, 374px);
+      }
+
+      .form-description {
+        @include mobile-fluid-font(12px, 14px, 320px, 374px);
+      }
+    }
+
+    .form-footer {
+      .form-actions {
+        flex-direction: column;
+
+        .form-action {
+          min-height: 48px; // 在小屏幕上增大触摸目标
+        }
+      }
+    }
+  }
+
+  :deep(.van-cell-group) {
+    .van-cell {
+      min-height: 48px;
+      padding: var(--mobile-gap-sm);
+    }
+  }
+
+  :deep(.van-field) {
+    .van-field__label {
+      min-width: 70px;
+      font-size: var(--mobile-text-sm);
+    }
+
+    .van-field__control {
+      font-size: var(--mobile-text-sm);
+    }
+  }
+}
+
+// 大屏幕手机 (480px - 767px)
+@media (min-width: 480px) and (max-width: 767px) {
+  .mobile-form-enhanced {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--mobile-gap-lg);
+
+    .form-content {
+      .form-group {
+        margin-bottom: var(--mobile-gap-xl);
+      }
+    }
+  }
+}
+
+// 平板设备 (≥768px)
+@media (min-width: 768px) {
+  .mobile-form-enhanced {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--mobile-gap-xl);
+
+    .form-content {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--mobile-gap-xl);
+
+      .form-group {
+        margin-bottom: 0;
+
+        &.form-group-full {
+          grid-column: 1 / -1;
+        }
+      }
+    }
+
+    .form-footer {
+      .form-actions {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  :deep(.van-cell-group) {
+    margin: 0;
+  }
+}
+
+/* ==================== 暗黑模式适配 ==================== */
+
+:global([data-theme="dark"]) {
+  .mobile-form-enhanced {
+    .form-footer {
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  :deep(.van-cell-group) {
+    &.form-group-inset,
+    &.form-group-card {
+      background: var(--bg-color-dark);
+      border-color: var(--border-color-dark);
+      box-shadow: var(--mobile-shadow-md-dark);
+    }
+  }
+}
+
+/* ==================== 高对比度模式 ==================== */
+
+@media (prefers-contrast: high) {
+  .mobile-form-enhanced {
+    .form-footer {
+      border-top-width: 2px;
+    }
+  }
+
+  :deep(.van-field) {
+    .van-field__control {
+      border: 1px solid var(--text-primary);
+      padding: var(--mobile-gap-sm);
+      border-radius: var(--mobile-radius-sm);
+    }
+  }
+
+  :deep(.van-button) {
+    border-width: 2px;
+  }
+}
+
+/* ==================== 减少动画模式 ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-form-enhanced,
+  :deep(.van-button),
+  :deep(.van-uploader__upload),
+  :deep(.van-field__control) {
+    transition: none;
+  }
+}
+
+/* ==================== 无障碍支持 ==================== */
+
+// 焦点样式增强
+:deep(.van-field__control:focus),
+:deep(.van-button:focus),
+:deep(.van-checkbox:focus .van-checkbox__icon),
+:deep(.van-radio:focus .van-radio__icon) {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+// 高对比度焦点
+@media (prefers-contrast: high) {
+  :deep(.van-field__control:focus),
+  :deep(.van-button:focus) {
+    outline-width: 3px;
+    outline-color: var(--text-primary);
+  }
+}

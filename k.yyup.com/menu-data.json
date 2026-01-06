@@ -1,0 +1,447 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 6114,
+      "name": "系统管理",
+      "chinese_name": "系统管理",
+      "path": "#system",
+      "component": null,
+      "icon": "Setting",
+      "sort": 1,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6115,
+          "name": "用户管理",
+          "chinese_name": "用户管理",
+          "path": "/system/User",
+          "component": "pages/system/User.vue",
+          "icon": "User",
+          "sort": 2,
+          "type": "menu",
+          "parentId": 6114,
+          "children": []
+        },
+        {
+          "id": 6116,
+          "name": "角色管理",
+          "chinese_name": "角色管理",
+          "path": "/system/Role",
+          "component": "pages/system/Role.vue",
+          "icon": "Avatar",
+          "sort": 3,
+          "type": "menu",
+          "parentId": 6114,
+          "children": []
+        },
+        {
+          "id": 6117,
+          "name": "权限管理",
+          "chinese_name": "权限管理",
+          "path": "/system/Permission",
+          "component": "pages/system/Permission.vue",
+          "icon": "Key",
+          "sort": 4,
+          "type": "menu",
+          "parentId": 6114,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6136,
+      "name": "仪表板",
+      "chinese_name": "仪表板",
+      "path": "/dashboard",
+      "component": "pages/dashboard/index.vue",
+      "icon": "dashboard",
+      "sort": 1,
+      "type": "menu",
+      "parentId": null,
+      "children": []
+    },
+    {
+      "id": 6118,
+      "name": "仪表板",
+      "chinese_name": "仪表板",
+      "path": "#dashboard",
+      "component": null,
+      "icon": "Monitor",
+      "sort": 5,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6119,
+          "name": "总览",
+          "chinese_name": "总览",
+          "path": "/dashboard",
+          "component": "pages/dashboard/index.vue",
+          "icon": "Monitor",
+          "sort": 6,
+          "type": "menu",
+          "parentId": 6118,
+          "children": []
+        },
+        {
+          "id": 6120,
+          "name": "数据统计",
+          "chinese_name": "数据统计",
+          "path": "/dashboard/data-statistics",
+          "component": "pages/dashboard/DataStatistics.vue",
+          "icon": "DataAnalysis",
+          "sort": 7,
+          "type": "menu",
+          "parentId": 6118,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6121,
+      "name": "用户管理",
+      "chinese_name": "用户管理",
+      "path": "#user",
+      "component": null,
+      "icon": "User",
+      "sort": 8,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6122,
+          "name": "学生管理",
+          "chinese_name": "学生管理",
+          "path": "/student",
+          "component": "pages/student/index.vue",
+          "icon": "User",
+          "sort": 9,
+          "type": "menu",
+          "parentId": 6121,
+          "children": []
+        },
+        {
+          "id": 6123,
+          "name": "教师管理",
+          "chinese_name": "教师管理",
+          "path": "/teacher",
+          "component": "pages/teacher/index.vue",
+          "icon": "Avatar",
+          "sort": 10,
+          "type": "menu",
+          "parentId": 6121,
+          "children": []
+        },
+        {
+          "id": 6124,
+          "name": "家长管理",
+          "chinese_name": "家长管理",
+          "path": "/parent",
+          "component": "pages/parent/index.vue",
+          "icon": "User",
+          "sort": 11,
+          "type": "menu",
+          "parentId": 6121,
+          "children": []
+        },
+        {
+          "id": 6125,
+          "name": "班级管理",
+          "chinese_name": "班级管理",
+          "path": "/class",
+          "component": "pages/class/index.vue",
+          "icon": "School",
+          "sort": 12,
+          "type": "menu",
+          "parentId": 6121,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6138,
+      "name": "用户管理",
+      "chinese_name": "用户管理",
+      "path": "/user",
+      "component": "Layout",
+      "icon": "user",
+      "sort": 10,
+      "type": "menu",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6141,
+          "name": "学生管理",
+          "chinese_name": "学生管理",
+          "path": "student",
+          "component": "pages/student/index.vue",
+          "icon": "student",
+          "sort": 1,
+          "type": "menu",
+          "parentId": 6138,
+          "children": []
+        },
+        {
+          "id": 6142,
+          "name": "教师管理",
+          "chinese_name": "教师管理",
+          "path": "teacher",
+          "component": "pages/teacher/index.vue",
+          "icon": "teacher",
+          "sort": 2,
+          "type": "menu",
+          "parentId": 6138,
+          "children": []
+        },
+        {
+          "id": 6143,
+          "name": "家长管理",
+          "chinese_name": "家长管理",
+          "path": "parent",
+          "component": "pages/parent/index.vue",
+          "icon": "parent",
+          "sort": 3,
+          "type": "menu",
+          "parentId": 6138,
+          "children": []
+        },
+        {
+          "id": 6144,
+          "name": "班级管理",
+          "chinese_name": "班级管理",
+          "path": "class",
+          "component": "pages/class/index.vue",
+          "icon": "class",
+          "sort": 4,
+          "type": "menu",
+          "parentId": 6138,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6126,
+      "name": "招生管理",
+      "chinese_name": "招生管理",
+      "path": "#enrollment",
+      "component": null,
+      "icon": "School",
+      "sort": 13,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6127,
+          "name": "招生概览",
+          "chinese_name": "招生概览",
+          "path": "/enrollment",
+          "component": "pages/enrollment/index.vue",
+          "icon": "School",
+          "sort": 14,
+          "type": "menu",
+          "parentId": 6126,
+          "children": []
+        },
+        {
+          "id": 6128,
+          "name": "招生计划",
+          "chinese_name": "招生计划",
+          "path": "/enrollment-plan",
+          "component": "pages/enrollment-plan/PlanList.vue",
+          "icon": "Document",
+          "sort": 15,
+          "type": "menu",
+          "parentId": 6126,
+          "children": []
+        },
+        {
+          "id": 6129,
+          "name": "申请管理",
+          "chinese_name": "申请管理",
+          "path": "/application",
+          "component": "pages/application/ApplicationList.vue",
+          "icon": "Files",
+          "sort": 16,
+          "type": "menu",
+          "parentId": 6126,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6130,
+      "name": "活动管理",
+      "chinese_name": "活动管理",
+      "path": "#activity",
+      "component": null,
+      "icon": "Calendar",
+      "sort": 17,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6131,
+          "name": "活动列表",
+          "chinese_name": "活动列表",
+          "path": "/activity",
+          "component": "pages/activity/index.vue",
+          "icon": "Calendar",
+          "sort": 18,
+          "type": "menu",
+          "parentId": 6130,
+          "children": []
+        },
+        {
+          "id": 6132,
+          "name": "创建活动",
+          "chinese_name": "创建活动",
+          "path": "/activity/create",
+          "component": "pages/activity/ActivityCreate.vue",
+          "icon": "Plus",
+          "sort": 19,
+          "type": "menu",
+          "parentId": 6130,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6139,
+      "name": "招生管理",
+      "chinese_name": "招生管理",
+      "path": "/enrollment",
+      "component": "Layout",
+      "icon": "enrollment",
+      "sort": 20,
+      "type": "menu",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6145,
+          "name": "招生计划",
+          "chinese_name": "招生计划",
+          "path": "enrollment-plan",
+          "component": "pages/enrollment-plan/PlanList.vue",
+          "icon": "plan",
+          "sort": 1,
+          "type": "menu",
+          "parentId": 6139,
+          "children": []
+        },
+        {
+          "id": 6146,
+          "name": "招生申请",
+          "chinese_name": "招生申请",
+          "path": "application",
+          "component": "pages/application/ApplicationList.vue",
+          "icon": "application",
+          "sort": 2,
+          "type": "menu",
+          "parentId": 6139,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6133,
+      "name": "AI助手",
+      "chinese_name": "AI助手",
+      "path": "#ai",
+      "component": null,
+      "icon": "ChatDotRound",
+      "sort": 20,
+      "type": "category",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6134,
+          "name": "AI对话",
+          "chinese_name": "AI对话",
+          "path": "/ai",
+          "component": "pages/ai/ChatInterface.vue",
+          "icon": "ChatDotRound",
+          "sort": 21,
+          "type": "menu",
+          "parentId": 6133,
+          "children": []
+        },
+        {
+          "id": 6135,
+          "name": "AI模型管理",
+          "chinese_name": "AI模型管理",
+          "path": "/ai/model-management",
+          "component": "pages/ai/ModelManagementPage.vue",
+          "icon": "Setting",
+          "sort": 22,
+          "type": "menu",
+          "parentId": 6133,
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": 6140,
+      "name": "活动管理",
+      "chinese_name": "活动管理",
+      "path": "/activity",
+      "component": "pages/activity/index.vue",
+      "icon": "activity",
+      "sort": 30,
+      "type": "menu",
+      "parentId": null,
+      "children": []
+    },
+    {
+      "id": 6137,
+      "name": "系统管理",
+      "chinese_name": "系统管理",
+      "path": "/system",
+      "component": "Layout",
+      "icon": "setting",
+      "sort": 90,
+      "type": "menu",
+      "parentId": null,
+      "children": [
+        {
+          "id": 6147,
+          "name": "用户账户",
+          "chinese_name": "用户账户",
+          "path": "User",
+          "component": "pages/system/User.vue",
+          "icon": "user",
+          "sort": 1,
+          "type": "menu",
+          "parentId": 6137,
+          "children": []
+        },
+        {
+          "id": 6148,
+          "name": "角色管理",
+          "chinese_name": "角色管理",
+          "path": "Role",
+          "component": "pages/system/Role.vue",
+          "icon": "peoples",
+          "sort": 2,
+          "type": "menu",
+          "parentId": 6137,
+          "children": []
+        },
+        {
+          "id": 6149,
+          "name": "权限管理",
+          "chinese_name": "权限管理",
+          "path": "Permission",
+          "component": "pages/system/Permission.vue",
+          "icon": "tree-table",
+          "sort": 3,
+          "type": "menu",
+          "parentId": 6137,
+          "children": []
+        }
+      ]
+    }
+  ],
+  "message": "获取菜单权限成功"
+}

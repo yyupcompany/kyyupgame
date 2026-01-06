@@ -1,0 +1,2926 @@
+{
+  "timestamp": "2025-12-25T11:36:25.157Z",
+  "summary": {
+    "total": 25,
+    "pageLoadSuccess": 25,
+    "pageNotFound": 0,
+    "routeErrors": 0,
+    "componentErrors": 0,
+    "apiErrors": 39
+  },
+  "items": [
+    {
+      "title": "仪表板",
+      "path": "/dashboard",
+      "component": "Dashboard",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/dashboard",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 605,
+        "hasVueApp": true,
+        "bodyTextLength": 818
+      }
+    },
+    {
+      "title": "人员管理",
+      "path": "/centers/personnel",
+      "component": "centers/PersonnelCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/personnel-center/overview?_t=1766662593538",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/personnel-center/distribution?_t=1766662593538",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/personnel-center/trend?_t=1766662593538",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/personnel-center/overview?_t=1766662593538",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载概览数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/PersonnelCenter.vue?t=1766662530421",
+            "lineNumber": 346,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/personnel-center/distribution?_t=1766662593538",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载图表数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/PersonnelCenter.vue?t=1766662530421",
+            "lineNumber": 403,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/personnel-center/trend?_t=1766662593538",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/personnel",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 1326,
+        "hasVueApp": true,
+        "bodyTextLength": 2072
+      }
+    },
+    {
+      "title": "文案管理",
+      "path": "/centers/script",
+      "component": "centers/ScriptCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/script",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 1590,
+        "hasVueApp": true,
+        "bodyTextLength": 1818
+      }
+    },
+    {
+      "title": "AI中心",
+      "path": "/centers/ai",
+      "component": "centers/AICenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/ai-stats/overview?_t=1766662599748",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/ai-stats/recent-tasks?_t=1766662599748",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/ai-stats/models?_t=1766662599749",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/ai-stats/overview?_t=1766662599748",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取AI概览统计失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/AICenter.vue?t=1766662530421",
+            "lineNumber": 70,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/ai-stats/recent-tasks?_t=1766662599748",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取最近AI任务失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/AICenter.vue?t=1766662530421",
+            "lineNumber": 83,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/ai-stats/models?_t=1766662599749",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取AI模型列表失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/AICenter.vue?t=1766662530421",
+            "lineNumber": 93,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/ai",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 543,
+        "hasVueApp": true,
+        "bodyTextLength": 969
+      }
+    },
+    {
+      "title": "活动管理",
+      "path": "/centers/activity",
+      "component": "centers/ActivityCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/centers/activity/overview?_t=1766662603111",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/centers/activity/timeline?_t=1766662603176",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/centers/activity/overview?_t=1766662603111",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/centers/activity/timeline?_t=1766662603176",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "❌ 加载Timeline失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/ActivityCenter.vue?t=1766662530421",
+            "lineNumber": 54,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/activity",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 424,
+        "hasVueApp": true,
+        "bodyTextLength": 440
+      }
+    },
+    {
+      "title": "测评总览",
+      "path": "/assessment-analytics/overview",
+      "component": "assessment-analytics/overview",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/api/assessment-analytics/overview?_t=1766662606641",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/api/assessment-analytics/overview?_t=1766662606641",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…essment-analytics/overview</pre>\n</body>\n</html>\n, statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载测评统计失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/assessment-analytics/overview.vue?t=1766662530421",
+            "lineNumber": 52,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/assessment-analytics/overview",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 513,
+        "hasVueApp": true,
+        "bodyTextLength": 470
+      }
+    },
+    {
+      "title": "测评记录",
+      "path": "/assessment-analytics/records",
+      "component": "assessment-analytics/records",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/api/assessment-analytics/records?keyword=&startDate=&endDate=&minScore=0&maxScore=100&minAge=2&maxAge=7&status=&page=1&pageSize=20&_t=1766662610170",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/api/assessment-analytics/records?keyword=&startDate=&endDate=&minScore=0&maxScore=100&minAge=2&maxAge=7&status=&page=1&pageSize=20&_t=1766662610170",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…sessment-analytics/records</pre>\n</body>\n</html>\n, statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载测评记录失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/assessment-analytics/records.vue?t=1766662530421",
+            "lineNumber": 78,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/assessment-analytics/records",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 984,
+        "hasVueApp": true,
+        "bodyTextLength": 804
+      }
+    },
+    {
+      "title": "测评报告",
+      "path": "/assessment-analytics/reports",
+      "component": "assessment-analytics/reports",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/api/assessment-analytics/reports?page=1&pageSize=20&_t=1766662613433",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/api/assessment-analytics/reports?page=1&pageSize=20&_t=1766662613433",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…sessment-analytics/reports</pre>\n</body>\n</html>\n, statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载报告失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/assessment-analytics/reports.vue?t=1766662530421",
+            "lineNumber": 33,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/assessment-analytics/reports",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 470,
+        "hasVueApp": true,
+        "bodyTextLength": 434
+      }
+    },
+    {
+      "title": "数据趋势",
+      "path": "/assessment-analytics/trends",
+      "component": "assessment-analytics/trends",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/api/assessment-analytics/trends?startDate=2025-06-25&endDate=2025-12-25&groupBy=month&_t=1766662616724",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/api/assessment-analytics/trends?startDate=2025-06-25&endDate=2025-12-25&groupBy=month&_t=1766662616724",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…ssessment-analytics/trends</pre>\n</body>\n</html>\n, statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载趋势数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/assessment-analytics/trends.vue?t=1766662530421",
+            "lineNumber": 36,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/assessment-analytics/trends",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 713,
+        "hasVueApp": true,
+        "bodyTextLength": 530
+      }
+    },
+    {
+      "title": "招生管理",
+      "path": "/centers/enrollment",
+      "component": "centers/EnrollmentCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/enrollment-center/overview?params[timeRange]=month&_t=1766662620370",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/enrollment-center/plans?params[page]=1&params[pageSize]=10&_t=1766662620370",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/enrollment-center/applications?params[page]=1&params[pageSize]=10&_t=1766662620371",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/enrollment-center/consultations/statistics?_t=1766662620371",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/enrollment-center/consultations?params[page]=1&params[pageSize]=10&_t=1766662620450",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/enrollment-center/overview?params[timeRange]=month&_t=1766662620370",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载概览数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/EnrollmentCenter.vue?t=1766662530421",
+            "lineNumber": 1853,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/enrollment-center/plans?params[page]=1&params[pageSize]=10&_t=1766662620370",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载计划数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/EnrollmentCenter.vue?t=1766662530421",
+            "lineNumber": 1875,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/enrollment-center/applications?params[page]=1&params[pageSize]=10&_t=1766662620371",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载申请数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/EnrollmentCenter.vue?t=1766662530421",
+            "lineNumber": 1897,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/enrollment-center/consultations/statistics?_t=1766662620371",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/enrollment-center/consultations?params[page]=1&params[pageSize]=10&_t=1766662620450",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "❌ 咨询列表API调用失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/EnrollmentCenter.vue?t=1766662530421",
+            "lineNumber": 1961,
+            "columnNumber": 18
+          }
+        },
+        {
+          "type": "error",
+          "text": "❌ 图表初始化失败: SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)",
+          "location": {
+            "url": "http://localhost:5173/src/components/centers/ChartContainer.vue",
+            "lineNumber": 140,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "🚨 关键错误: {id: error_1766662620616_fleuugm4u, type: javascript, message: Uncaught SyntaxError: Failed to execute 'addColorS…-primary-color)') could not be parsed as a color., stack: SyntaxError: Failed to execute 'addColorStop' on '…/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18), filename: http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts?v=20241225-fix",
+            "lineNumber": 448,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "🚨 错误捕获 [javascript]: Uncaught SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color. {id: error_1766662620616_fleuugm4u, type: javascript, message: Uncaught SyntaxError: Failed to execute 'addColorS…-primary-color)') could not be parsed as a color., stack: SyntaxError: Failed to execute 'addColorStop' on '…/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18), filename: http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts?v=20241225-fix",
+            "lineNumber": 235,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "error",
+          "text": "❌ 图表初始化失败: SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)",
+          "location": {
+            "url": "http://localhost:5173/src/components/centers/ChartContainer.vue",
+            "lineNumber": 140,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        },
+        {
+          "type": "pageerror",
+          "message": "Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.",
+          "stack": "SyntaxError: Failed to execute 'addColorStop' on 'CanvasGradient': The value provided ('var(--primary-color)') could not be parsed as a color.\n    at getCanvasGradient (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:8376:20)\n    at brushPath (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9404:34)\n    at brush (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:9762:5)\n    at CanvasPainter2._doPaintEl (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2181:7)\n    at repaint (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2119:17)\n    at _loop_1 (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2148:9)\n    at CanvasPainter2._doPaintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2158:7)\n    at CanvasPainter2._paintList (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:2043:19)\n    at CanvasPainter2.refresh (http://localhost:5173/node_modules/.vite/deps/chunk-DJMLIOMS.js?v=f10680ee:1984:10)\n    at ZRender2.refreshImmediately (http://localhost:5173/node_modules/.vite/deps/chunk-7NLECNQS.js?v=f10680ee:6985:18)"
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/enrollment",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 599,
+        "hasVueApp": true,
+        "bodyTextLength": 1011
+      }
+    },
+    {
+      "title": "财务管理",
+      "path": "/centers/finance",
+      "component": "centers/FinanceCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/finance/overview?_t=1766662623676",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/finance/today-payments?_t=1766662623677",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/finance/overview?_t=1766662623676",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取财务概览失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/api/modules/finance.ts?t=1766662530421",
+            "lineNumber": 8,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "❌ 加载财务概览数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/FinanceCenter.vue?t=1766662530421",
+            "lineNumber": 378,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/finance/today-payments?_t=1766662623677",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取今日收费失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/api/modules/finance.ts?t=1766662530421",
+            "lineNumber": 324,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "❌ 加载今日收费记录失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/FinanceCenter.vue?t=1766662530421",
+            "lineNumber": 397,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/finance",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 1128,
+        "hasVueApp": true,
+        "bodyTextLength": 1773
+      }
+    },
+    {
+      "title": "系统管理",
+      "path": "/centers/system",
+      "component": "centers/SystemCenter",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/centers/system/overview?_t=1766662627100",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/operation-logs?params[page]=1&params[pageSize]=20&params[module]=&params[operationType]=&_t=1766662627100",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/system/stats?_t=1766662627170",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/system-logs?params[page]=1&params[pageSize]=4&_t=1766662627171",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/centers/system/overview?_t=1766662627100",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "使用集合API初始化数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/SystemCenter.vue?t=1766662530421",
+            "lineNumber": 276,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/operation-logs?params[page]=1&params[pageSize]=20&params[module]=&params[operationType]=&_t=1766662627100",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取审计日志失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/SystemCenter.vue?t=1766662530421",
+            "lineNumber": 358,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/system/stats?_t=1766662627170",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载系统统计数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/SystemCenter.vue?t=1766662530421",
+            "lineNumber": 179,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/system-logs?params[page]=1&params[pageSize]=4&_t=1766662627171",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载系统事件失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/SystemCenter.vue?t=1766662530421",
+            "lineNumber": 202,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/centers/system",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 1306,
+        "hasVueApp": true,
+        "bodyTextLength": 1967
+      }
+    },
+    {
+      "title": "老师工作台",
+      "path": "/teacher-center/dashboard",
+      "component": "teacher-center/Dashboard",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/statistics?_t=1766662630203",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/today-tasks?_t=1766662630203",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/today-courses?_t=1766662630204",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/recent-notifications?limit=5&_t=1766662630204",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/statistics?_t=1766662630203",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载仪表板数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/dashboard/index.vue?t=1766662530421",
+            "lineNumber": 97,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/today-tasks?_t=1766662630203",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载今日任务失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/dashboard/index.vue?t=1766662530421",
+            "lineNumber": 115,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/today-courses?_t=1766662630204",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载课程安排失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/dashboard/index.vue?t=1766662530421",
+            "lineNumber": 133,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/recent-notifications?limit=5&_t=1766662630204",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662530421",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662530421",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载通知失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/dashboard/index.vue?t=1766662530421",
+            "lineNumber": 151,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/dashboard",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 600,
+        "hasVueApp": true,
+        "bodyTextLength": 849
+      }
+    },
+    {
+      "title": "教学管理",
+      "path": "/teacher-center/teaching",
+      "component": "teacher-center/Teaching",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher/courses/stats?_t=1766662634102",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher/courses?_t=1766662634102",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher/courses/stats?_t=1766662634102",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载统计数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/teaching/index.vue?t=1766662630335",
+            "lineNumber": 53,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher/courses?_t=1766662634102",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载课程列表失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/teaching/index.vue?t=1766662630335",
+            "lineNumber": 79,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/teaching",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 525,
+        "hasVueApp": true,
+        "bodyTextLength": 512
+      }
+    },
+    {
+      "title": "考勤管理",
+      "path": "/teacher-center/attendance",
+      "component": "teacher-center/Attendance",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/statistics/daily?kindergartenId=1&date=2025-12-25&_t=1766662637433",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/statistics/by-class?kindergartenId=1&startDate=2025-12-25&endDate=2025-12-25&_t=1766662637433",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/abnormal?kindergartenId=1&_t=1766662637434",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/health?kindergartenId=1&_t=1766662637434",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/records?kindergartenId=1&startDate=2025-12-25&endDate=2025-12-25&status=&page=1&pageSize=20&_t=1766662637434",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/attendance-center/overview?kindergartenId=1&date=2025-12-25&_t=1766662637434",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/statistics/daily?kindergartenId=1&date=2025-12-25&_t=1766662637433",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载统计数据失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/components/attendance/StatisticsTab.vue?t=1766662630335",
+            "lineNumber": 94,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/statistics/by-class?kindergartenId=1&startDate=2025-12-25&endDate=2025-12-25&_t=1766662637433",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载班级统计失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/components/attendance/ClassStatisticsTab.vue?t=1766662630335",
+            "lineNumber": 33,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/abnormal?kindergartenId=1&_t=1766662637434",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载异常分析失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/components/attendance/AbnormalAnalysisTab.vue?t=1766662630335",
+            "lineNumber": 32,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/health?kindergartenId=1&_t=1766662637434",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载健康监测失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/components/attendance/HealthMonitoringTab.vue?t=1766662630335",
+            "lineNumber": 31,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/records?kindergartenId=1&startDate=2025-12-25&endDate=2025-12-25&status=&page=1&pageSize=20&_t=1766662637434",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载记录失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/components/attendance/RecordsManagementTab.vue?t=1766662630335",
+            "lineNumber": 56,
+            "columnNumber": 16
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/attendance-center/overview?kindergartenId=1&date=2025-12-25&_t=1766662637434",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载全园概览失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/centers/AttendanceCenter.vue?t=1766662630335",
+            "lineNumber": 70,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/attendance",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 2079,
+        "hasVueApp": true,
+        "bodyTextLength": 1364
+      }
+    },
+    {
+      "title": "老师活动管理",
+      "path": "/teacher-center/activities",
+      "component": "teacher-center/Activities",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/activity-statistics?_t=1766662640485",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/activity-statistics?_t=1766662640485",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载活动统计失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/activities/index.vue?t=1766662630335",
+            "lineNumber": 154,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/activities",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 654,
+        "hasVueApp": true,
+        "bodyTextLength": 817
+      }
+    },
+    {
+      "title": "任务管理",
+      "path": "/teacher-center/tasks",
+      "component": "teacher-center/Tasks",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/tasks/stats?_t=1766662643989",
+          "status": 404
+        },
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/teacher-dashboard/tasks?params[page]=1&params[limit]=20&_t=1766662643989",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/tasks/stats?_t=1766662643989",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取任务统计失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/tasks/index.vue?t=1766662630335",
+            "lineNumber": 250,
+            "columnNumber": 20
+          }
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/teacher-dashboard/tasks?params[page]=1&params[limit]=20&_t=1766662643989",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: , statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "获取任务列表失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/tasks/index.vue?t=1766662630335",
+            "lineNumber": 259,
+            "columnNumber": 20
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/tasks",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 952,
+        "hasVueApp": true,
+        "bodyTextLength": 1295
+      }
+    },
+    {
+      "title": "学生测评",
+      "path": "/teacher-center/student-assessment",
+      "component": "teacher-center/student-assessment",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [
+        {
+          "type": "API_404",
+          "url": "http://localhost:5173/api/teacher/assessment/students?_t=1766662647016",
+          "status": 404
+        }
+      ],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+          "location": {
+            "url": "http://localhost:5173/api/teacher/assessment/students?_t=1766662647016",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…eacher/assessment/students</pre>\n</body>\n</html>\n, statusCode: 404}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts?t=1766662630335",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 404",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts?t=1766662630335",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载学生列表失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/pages/teacher-center/student-assessment/index.vue?t=1766662630335",
+            "lineNumber": 54,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/teacher-center/student-assessment",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 424,
+        "hasVueApp": true,
+        "bodyTextLength": 449
+      }
+    },
+    {
+      "title": "家长工作台",
+      "path": "/parent-center/dashboard",
+      "component": "parent-center/Dashboard",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/parent-center/dashboard",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 386,
+        "hasVueApp": true,
+        "bodyTextLength": 439
+      }
+    },
+    {
+      "title": "孩子管理",
+      "path": "/parent-center/children",
+      "component": "parent-center/Children",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "🚨 错误捕获 [vue]: Cannot read properties of undefined (reading 'includes') {id: error_1766662654078_j9yg5bjsg, type: vue, message: Cannot read properties of undefined (reading 'includes'), stack: TypeError: Cannot read properties of undefined (re…/.vite/deps/chunk-HWRVY4ZE.js?v=f10680ee:39648:9), timestamp: 1766662654078}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts?v=20241225-fix",
+            "lineNumber": 235,
+            "columnNumber": 12
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/parent-center/children",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 759,
+        "hasVueApp": true,
+        "bodyTextLength": 620
+      }
+    },
+    {
+      "title": "家长招生活动",
+      "path": "/parent-center/activities",
+      "component": "parent-center/Activities",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "🚨 错误捕获 [promise]: process is not defined {id: error_1766662656617_88y1elsx2, type: promise, message: process is not defined, stack: ReferenceError: process is not defined\n    at http://localhost:5173/src/config/oss-paths.ts:3:45, timestamp: 1766662656617}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts?v=20241225-fix",
+            "lineNumber": 235,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "pageerror",
+          "message": "process is not defined",
+          "stack": "ReferenceError: process is not defined\n    at http://localhost:5173/src/config/oss-paths.ts:3:45"
+        },
+        {
+          "type": "error",
+          "text": "ReferenceError: process is not defined\n    at http://localhost:5173/src/config/oss-paths.ts:3:45",
+          "location": {
+            "url": "http://localhost:5173/node_modules/.vite/deps/vue-router.js?v=f10680ee",
+            "lineNumber": 2619,
+            "columnNumber": 14
+          }
+        }
+      ],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/parent-center/activities",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": false,
+        "hasContent": false,
+        "elementCount": 81,
+        "hasVueApp": true,
+        "bodyTextLength": 15
+      }
+    },
+    {
+      "title": "成长评估",
+      "path": "/parent-center/assessment",
+      "component": "parent-center/Assessment",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/parent-center/assessment/development",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 418,
+        "hasVueApp": true,
+        "bodyTextLength": 623
+      }
+    },
+    {
+      "title": "家校沟通",
+      "path": "/parent-center/communication",
+      "component": "parent-center/Communication",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/parent-center/communication",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 493,
+        "hasVueApp": true,
+        "bodyTextLength": 673
+      }
+    },
+    {
+      "title": "智能助手",
+      "path": "/ai/assistant",
+      "component": "ai/AIAssistant",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/ai/assistant",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 487,
+        "hasVueApp": true,
+        "bodyTextLength": 726
+      }
+    },
+    {
+      "title": "智能查询",
+      "path": "/ai/query",
+      "component": "ai/AIQuery",
+      "pageLoadSuccess": true,
+      "pageNotFound": false,
+      "hasRouteError": false,
+      "hasComponentError": false,
+      "apiErrors": [],
+      "consoleErrors": [],
+      "pageInfo": {
+        "title": "幼儿园招生管理系统",
+        "url": "http://localhost:5173/ai/query",
+        "has404Page": false,
+        "hasRouteError": false,
+        "hasComponentError": false,
+        "hasLayout": true,
+        "hasSidebar": true,
+        "hasContent": true,
+        "elementCount": 422,
+        "hasVueApp": true,
+        "bodyTextLength": 649
+      }
+    }
+  ]
+}

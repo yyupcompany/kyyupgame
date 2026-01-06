@@ -1,0 +1,192 @@
+{
+  "name": "海报生成系统查询模板字典",
+  "description": "海报模板、海报分类、海报元素、海报生成等海报生成系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 海报模板相关查询模板 ===": "注释",
+    "海报模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM poster_templates WHERE deleted_at IS NULL",
+      "description": "查询海报模板总数",
+      "table": "poster_templates",
+      "response": "海报模板总数为{count}个",
+      "tokens": 10
+    },
+    "活跃海报模板": {
+      "sql": "SELECT COUNT(*) as count FROM poster_templates WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询活跃海报模板数量",
+      "table": "poster_templates",
+      "response": "活跃海报模板{count}个",
+      "tokens": 12
+    },
+    "海报模板分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM poster_templates WHERE deleted_at IS NULL GROUP BY category ORDER BY count DESC",
+      "description": "统计海报模板分类分布",
+      "table": "poster_templates",
+      "response": "海报模板分类统计完成",
+      "tokens": 20
+    },
+    "海报模板尺寸分析": {
+      "sql": "SELECT CONCAT(width, 'x', height) as size, COUNT(*) as count FROM poster_templates WHERE deleted_at IS NULL GROUP BY width, height ORDER BY count DESC",
+      "description": "分析海报模板尺寸分布",
+      "table": "poster_templates",
+      "response": "海报模板尺寸分析完成",
+      "tokens": 25
+    },
+    "海报模板使用统计": {
+      "sql": "SELECT name, usage_count FROM poster_templates WHERE deleted_at IS NULL ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计海报模板使用情况",
+      "table": "poster_templates",
+      "response": "海报模板使用统计完成",
+      "tokens": 25
+    },
+    "本月新增海报模板": {
+      "sql": "SELECT COUNT(*) as count FROM poster_templates WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月新增海报模板数量",
+      "table": "poster_templates",
+      "response": "本月新增海报模板{count}个",
+      "tokens": 20
+    },
+    "热门海报模板": {
+      "sql": "SELECT COUNT(*) as count FROM poster_templates WHERE usage_count > 10 AND deleted_at IS NULL",
+      "description": "查询热门海报模板数量",
+      "table": "poster_templates",
+      "response": "热门海报模板{count}个",
+      "tokens": 15
+    },
+
+    "// === 海报分类相关查询模板 ===": "注释",
+    "海报分类总数": {
+      "sql": "SELECT COUNT(*) as count FROM poster_categories",
+      "description": "查询海报分类总数",
+      "table": "poster_categories",
+      "response": "海报分类总数为{count}个",
+      "tokens": 10
+    },
+    "活跃海报分类": {
+      "sql": "SELECT COUNT(*) as count FROM poster_categories WHERE status = 1",
+      "description": "查询活跃海报分类数量",
+      "table": "poster_categories",
+      "response": "活跃海报分类{count}个",
+      "tokens": 12
+    },
+    "海报分类层级统计": {
+      "sql": "SELECT level, COUNT(*) as count FROM poster_categories GROUP BY level ORDER BY level",
+      "description": "统计海报分类层级分布",
+      "table": "poster_categories",
+      "response": "海报分类层级统计完成",
+      "tokens": 20
+    },
+    "顶级海报分类": {
+      "sql": "SELECT COUNT(*) as count FROM poster_categories WHERE parent_id IS NULL OR parent_id = 0",
+      "description": "查询顶级海报分类数量",
+      "table": "poster_categories",
+      "response": "顶级海报分类{count}个",
+      "tokens": 15
+    },
+    "海报分类排序分析": {
+      "sql": "SELECT AVG(sort_order) as avg_order, MIN(sort_order) as min_order, MAX(sort_order) as max_order FROM poster_categories WHERE status = 1",
+      "description": "分析海报分类排序情况",
+      "table": "poster_categories",
+      "response": "海报分类排序分析完成",
+      "tokens": 25
+    },
+    "本月更新分类": {
+      "sql": "SELECT COUNT(*) as count FROM poster_categories WHERE YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at) = MONTH(NOW())",
+      "description": "查询本月更新的分类数量",
+      "table": "poster_categories",
+      "response": "本月更新分类{count}个",
+      "tokens": 20
+    },
+
+    "// === 海报元素相关查询模板 ===": "注释",
+    "海报元素总数": {
+      "sql": "SELECT COUNT(*) as count FROM poster_elements",
+      "description": "查询海报元素总数",
+      "table": "poster_elements",
+      "response": "海报元素总数为{count}个",
+      "tokens": 10
+    },
+    "海报元素类型统计": {
+      "sql": "SELECT type, COUNT(*) as count FROM poster_elements GROUP BY type ORDER BY count DESC",
+      "description": "统计海报元素类型分布",
+      "table": "poster_elements",
+      "response": "海报元素类型统计完成",
+      "tokens": 20
+    },
+    "模板元素分布": {
+      "sql": "SELECT template_id, COUNT(*) as element_count FROM poster_elements GROUP BY template_id ORDER BY element_count DESC LIMIT 10",
+      "description": "统计各模板的元素数量分布",
+      "table": "poster_elements",
+      "response": "模板元素分布统计完成",
+      "tokens": 25
+    },
+    "海报元素尺寸分析": {
+      "sql": "SELECT AVG(width) as avg_width, AVG(height) as avg_height, MIN(width) as min_width, MAX(width) as max_width FROM poster_elements",
+      "description": "分析海报元素尺寸分布",
+      "table": "poster_elements",
+      "response": "海报元素尺寸分析完成",
+      "tokens": 30
+    },
+
+    "// === 海报生成相关查询模板 ===": "注释",
+    "海报生成总数": {
+      "sql": "SELECT COUNT(*) as count FROM poster_generations",
+      "description": "查询海报生成总数",
+      "table": "poster_generations",
+      "response": "海报生成总数为{count}个",
+      "tokens": 10
+    },
+    "海报生成模板统计": {
+      "sql": "SELECT template_id, COUNT(*) as generation_count FROM poster_generations GROUP BY template_id ORDER BY generation_count DESC LIMIT 10",
+      "description": "统计各模板的生成次数",
+      "table": "poster_generations",
+      "response": "海报生成模板统计完成",
+      "tokens": 25
+    },
+    "海报分享统计": {
+      "sql": "SELECT SUM(share_count) as total_shares, AVG(share_count) as avg_shares, COUNT(CASE WHEN share_count > 0 THEN 1 END) as shared_posters FROM poster_generations",
+      "description": "统计海报分享情况",
+      "table": "poster_generations",
+      "response": "海报分享统计完成",
+      "tokens": 30
+    },
+    "海报下载统计": {
+      "sql": "SELECT SUM(download_count) as total_downloads, AVG(download_count) as avg_downloads, COUNT(CASE WHEN download_count > 0 THEN 1 END) as downloaded_posters FROM poster_generations",
+      "description": "统计海报下载情况",
+      "table": "poster_generations",
+      "response": "海报下载统计完成",
+      "tokens": 30
+    },
+    "本月海报生成": {
+      "sql": "SELECT COUNT(*) as count FROM poster_generations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月海报生成数量",
+      "table": "poster_generations",
+      "response": "本月海报生成{count}个",
+      "tokens": 20
+    },
+    "热门生成海报": {
+      "sql": "SELECT COUNT(*) as count FROM poster_generations WHERE share_count > 5 OR download_count > 10",
+      "description": "查询热门生成海报数量",
+      "table": "poster_generations",
+      "response": "热门生成海报{count}个",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "海报系统数据概览": {
+      "sql": "SELECT 'poster_templates' as category, COUNT(*) as count FROM poster_templates WHERE deleted_at IS NULL UNION ALL SELECT 'poster_categories' as category, COUNT(*) as count FROM poster_categories UNION ALL SELECT 'poster_elements' as category, COUNT(*) as count FROM poster_elements UNION ALL SELECT 'poster_generations' as category, COUNT(*) as count FROM poster_generations",
+      "description": "海报系统数据总览",
+      "table": "multiple",
+      "response": "海报系统数据概览查询完成",
+      "tokens": 40
+    },
+    "海报模板效果分析": {
+      "sql": "SELECT pt.name, pt.usage_count, COUNT(pg.id) as generation_count FROM poster_templates pt LEFT JOIN poster_generations pg ON pt.id = pg.template_id WHERE pt.deleted_at IS NULL GROUP BY pt.id, pt.name, pt.usage_count ORDER BY pt.usage_count DESC LIMIT 10",
+      "description": "分析海报模板使用效果",
+      "table": "poster_templates",
+      "joins": ["poster_generations"],
+      "response": "海报模板效果分析完成",
+      "tokens": 35
+    }
+  }
+}

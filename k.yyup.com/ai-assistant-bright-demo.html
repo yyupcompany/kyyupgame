@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 助手 - 明亮模式</title>
+    <style>
+        /* Design Tokens */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary-color: #06b6d4;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f97316;
+            --info-color: #06b6d4;
+
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-hover: #f1f5f9;
+
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+
+            --border-radius-sm: 6px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-radius-full: 9999px;
+
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+
+            --header-height: 64px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* UnifiedIcon Mock */
+        .unified-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .ai-assistant-container {
+            width: 100%;
+            max-width: 1400px;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .ai-assistant-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            z-index: 10;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--border-radius-full);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .ai-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .ai-title {
+            margin: 0;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .ai-status {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--text-xs);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: var(--border-radius-full);
+        }
+
+        .status-indicator.online {
+            background-color: var(--success-color);
+            box-shadow: 0 0 8px var(--success-color);
+            animation: pulse 2s infinite;
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            background-color: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--text-sm);
+        }
+
+        .icon-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .ai-assistant-main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            height: calc(100vh - var(--header-height));
+        }
+
+        .ai-sidebar {
+            width: 280px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-md);
+            overflow-y: auto;
+            transition: all var(--transition-normal);
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .sidebar-item:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-item.active {
+            background-color: var(--bg-primary);
+            color: var(--primary-color);
+            font-weight: 500;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .message-list {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+            padding: var(--spacing-xl);
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .welcome-icon {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .welcome-title {
+            margin: 0 0 var(--spacing-sm) 0;
+            font-size: var(--text-2xl);
+            color: var(--text-primary);
+        }
+
+        .welcome-text {
+            margin: 0;
+            font-size: var(--text-base);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .message {
+            display: flex;
+        }
+
+        .message.user-message {
+            justify-content: flex-end;
+        }
+
+        .message.ai-message {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 75%;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .message-text {
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius-lg);
+            line-height: 1.6;
+            font-size: var(--text-base);
+            word-wrap: break-word;
+        }
+
+        .user-message .message-text {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom-right-radius: var(--border-radius-sm);
+        }
+
+        .ai-message .message-text {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-bottom-left-radius: var(--border-radius-sm);
+        }
+
+        .message-time {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            padding: 0 var(--spacing-xs);
+        }
+
+        .user-message .message-time {
+            align-self: flex-end;
+        }
+
+        .ai-message .message-time {
+            align-self: flex-start;
+        }
+
+        .prompt-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            overflow-x: auto;
+        }
+
+        .suggestion-tag {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-full);
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .suggestion-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .input-area {
+            padding: var(--spacing-lg);
+            background-color: var(--bg-primary);
+        }
+
+        .input-container {
+            display: flex;
+            align-items: flex-end;
+            gap: var(--spacing-sm);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .input-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            background-color: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            flex-shrink: 0;
+        }
+
+        .input-btn:hover {
+            background-color: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .message-input {
+            flex: 1;
+            min-height: 36px;
+            max-height: 150px;
+            border: none;
+            background-color: transparent;
+            color: var(--text-primary);
+            font-size: var(--text-base);
+            font-family: inherit;
+            resize: none;
+            padding: var(--spacing-xs) 0;
+            outline: none;
+            overflow-y: auto;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .send-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .ai-assistant-container {
+                max-width: 100%;
+            }
+
+            .ai-sidebar {
+                position: absolute;
+                left: 0;
+                top: var(--header-height);
+                height: calc(100vh - var(--header-height));
+                z-index: 100;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .sidebar-closed {
+                width: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+
+            .message .message-content {
+                max-width: 90%;
+            }
+
+            .ai-assistant-main {
+                position: relative;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ai-assistant-top-bar {
+                padding: var(--spacing-md);
+            }
+
+            .ai-avatar {
+                width: 36px;
+                height: 36px;
+            }
+
+            .ai-title {
+                font-size: var(--text-base);
+            }
+
+            .icon-btn {
+                width: 32px;
+                height: 32px;
+            }
+
+            .message-list {
+                padding: var(--spacing-md);
+            }
+
+            .prompt-suggestions {
+                padding: var(--spacing-sm);
+            }
+
+            .input-area {
+                padding: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-assistant-container">
+        <!-- Top Bar -->
+        <div class="ai-assistant-top-bar">
+            <div class="top-bar-left">
+                <div class="ai-avatar">
+                    <span class="unified-icon">🤖</span>
+                </div>
+                <div class="ai-info">
+                    <h3 class="ai-title">AI 助手</h3>
+                    <div class="ai-status">
+                        <span class="status-indicator online"></span>
+                        <span class="status-text">在线</span>
+                    </div>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <button class="icon-btn" title="收起侧边栏">☰</button>
+                <button class="icon-btn" title="设置">⚙️</button>
+            </div>
+        </div>
+
+        <div class="ai-assistant-main">
+            <!-- Sidebar -->
+            <aside class="ai-sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">💬 聊天</div>
+                    <div class="sidebar-item active">📝 新对话</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">⏰ 历史记录</div>
+                    <div class="sidebar-item">📅 昨天</div>
+                    <div class="sidebar-item">📆 本周</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">⭐ 保存的提示词</div>
+                    <div class="sidebar-item">🎨 创建活动</div>
+                    <div class="sidebar-item">📊 检查考勤</div>
+                    <div class="sidebar-item">📋 生成报告</div>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-title">⚙️ 设置</div>
+                    <div class="sidebar-item">👤 个人设置</div>
+                    <div class="sidebar-item">🔔 通知</div>
+                </div>
+            </aside>
+
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div class="message-list">
+                    <!-- Welcome Message -->
+                    <div class="welcome-message">
+                        <div class="welcome-icon">
+                            <span class="unified-icon" style="font-size: 48px;">🤖</span>
+                        </div>
+                        <h2 class="welcome-title">您好！</h2>
+                        <p class="welcome-text">我是您的AI助手，有什么可以帮助您的吗？</p>
+                    </div>
+
+                    <!-- Example Messages -->
+                    <div class="message user-message">
+                        <div class="message-content">
+                            <div class="message-text">创建一个2025年春季的新生入学活动</div>
+                            <div class="message-time">10:30</div>
+                        </div>
+                    </div>
+
+                    <div class="message ai-message">
+                        <div class="message-content">
+                            <div class="message-text">已为您创建2025年春季新生入学活动，包含以下内容：</div>
+                            <div class="message-time">10:31</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt Suggestions -->
+                <div class="prompt-suggestions">
+                    <div class="suggestion-tag">➕ 创建一个亲子活动</div>
+                    <div class="suggestion-tag">📅 统计本月考勤情况</div>
+                    <div class="suggestion-tag">📝 生成学生成长报告</div>
+                    <div class="suggestion-tag">🎨 设计活动海报</div>
+                    <div class="suggestion-tag">💬 发送活动通知</div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <button class="input-btn" title="附件">📎</button>
+                        <textarea
+                            class="message-input"
+                            placeholder="输入您的问题或需求..."
+                            rows="1"
+                            oninput="autoResize(this)"
+                        ></textarea>
+                        <button class="input-btn" title="工具">🔧</button>
+                        <button class="send-btn" title="发送">➤</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            const newHeight = Math.min(textarea.scrollHeight, 150);
+            textarea.style.height = `${newHeight}px`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,621 @@
+/**
+ * 暗黑主题样式
+ * Dark Theme Styles
+ */
+
+:root[data-theme="dark"],
+:root.theme-dark {
+  /* ==================== 色彩系统 ==================== */
+  /* Color System */
+  
+  /* 主色调 - Primary Colors */
+  --el-color-primary: #409EFF;
+  --el-color-primary-light-3: #79BBFF;
+  --el-color-primary-light-5: #A0CFFF;
+  --el-color-primary-light-7: #C6E2FF;
+  --el-color-primary-light-8: #D9ECFF;
+  --el-color-primary-light-9: #ECF5FF;
+  --el-color-primary-dark-2: #337ECC;
+
+  /* 功能色彩 - Functional Colors */
+  --el-color-success: #67C23A;
+  --el-color-success-light-3: #95D475;
+  --el-color-success-light-5: #B3E19D;
+  --el-color-success-light-7: #D1EDC4;
+  --el-color-success-light-8: #E1F3D8;
+  --el-color-success-light-9: #F0F9EB;
+  --el-color-success-dark-2: #529B2E;
+
+  --el-color-warning: #E6A23C;
+  --el-color-warning-light-3: #EEBE77;
+  --el-color-warning-light-5: #F3D19E;
+  --el-color-warning-light-7: #F8E3C5;
+  --el-color-warning-light-8: #FAECD8;
+  --el-color-warning-light-9: #FDF6EC;
+  --el-color-warning-dark-2: #B88230;
+
+  --el-color-danger: #F56C6C;
+  --el-color-danger-light-3: #F89898;
+  --el-color-danger-light-5: #FAB6B6;
+  --el-color-danger-light-7: #FCD3D3;
+  --el-color-danger-light-8: #FDE2E2;
+  --el-color-danger-light-9: #FEF0F0;
+  --el-color-danger-dark-2: #C45656;
+
+  --el-color-error: #F56C6C;
+  --el-color-error-light-3: #F89898;
+  --el-color-error-light-5: #FAB6B6;
+  --el-color-error-light-7: #FCD3D3;
+  --el-color-error-light-8: #FDE2E2;
+  --el-color-error-light-9: #FEF0F0;
+  --el-color-error-dark-2: #C45656;
+
+  --el-color-info: #909399;
+  --el-color-info-light-3: #B1B3B8;
+  --el-color-info-light-5: #C8C9CC;
+  --el-color-info-light-7: #DEDFE0;
+  --el-color-info-light-8: #E9E9EB;
+  --el-color-info-light-9: #F4F4F5;
+  --el-color-info-dark-2: #73767A;
+
+  /* 文本色彩层次 - Text Color Hierarchy */
+  --el-text-color-primary: #F8FAFC;
+  --el-text-color-regular: #E2E8F0;
+  --el-text-color-secondary: #CBD5E1;
+  --el-text-color-placeholder: #94A3B8;
+  --el-text-color-disabled: #64748B;
+
+  /* AI统计专用明亮文字颜色 - AI Statistics Bright Text Colors */
+  --ai-stats-text-primary: #FFFFFF;
+  --ai-stats-text-secondary: #F1F5F9;
+  --ai-stats-text-label: #E2E8F0;
+  --ai-stats-text-value: #FFFFFF;
+  --ai-stats-text-title: #FFFFFF;
+
+  /* 边框色彩系统 - Border Color System */
+  --el-border-color: #4C4D4F;
+  --el-border-color-light: #414243;
+  --el-border-color-lighter: #363637;
+  --el-border-color-extra-light: #2B2B2C;
+  --el-border-color-dark: #5A5A5A;
+  --el-border-color-darker: #636466;
+
+  /* 背景填充色 - Background and Fill Colors */
+  --el-bg-color: #141414;
+  --el-bg-color-page: #0A0A0A;
+  --el-bg-color-overlay: #1D1E1F;
+  --el-fill-color: #1D1D1D;
+  --el-fill-color-light: #262727;
+  --el-fill-color-lighter: #303030;
+  --el-fill-color-extra-light: #353535;
+  --el-fill-color-dark: #191919;
+  --el-fill-color-darker: #111111;
+  --el-fill-color-blank: #0A0A0A;
+
+  /* 遮罩颜色 - Mask Colors */
+  --el-mask-color: rgba(0, 0, 0, 0.8);
+  --el-mask-color-extra-light: rgba(0, 0, 0, 0.3);
+
+  /* ==================== 字体系统 ==================== */
+  /* Typography System */
+  --el-font-size-extra-large: 20px;
+  --el-font-size-large: 18px;
+  --el-font-size-medium: 16px;
+  --el-font-size-base: 14px;
+  --el-font-size-small: 13px;
+  --el-font-size-extra-small: 12px;
+
+  --el-font-weight-primary: 500;
+  --el-font-weight-secondary: 100;
+
+  --el-line-height: 24px;
+  --el-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* ==================== 圆角系统 ==================== */
+  /* Border Radius System */
+  --el-border-radius-base: 4px;
+  --el-border-radius-small: 2px;
+  --el-border-radius-round: 20px;
+  --el-border-radius-circle: 100%;
+
+  /* ==================== 阴影系统 ==================== */
+  /* Shadow System */
+  --el-box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.36), 0px 8px 20px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-light: 0px 0px 12px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-lighter: 0px 0px 6px rgba(0, 0, 0, 0.72);
+  --el-box-shadow-dark: 0px 16px 48px 16px rgba(0, 0, 0, 0.72), 0px 12px 32px rgba(0, 0, 0, 0.48), 0px 8px 16px -8px rgba(0, 0, 0, 0.8);
+
+  /* ==================== 过渡动画系统 ==================== */
+  /* Transition System */
+  --el-transition-duration: 0.3s;
+  --el-transition-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --el-transition-function-fast: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* ==================== zIndex系统 ==================== */
+  /* zIndex System */
+  --el-index-normal: 1;
+  --el-index-top: 1000;
+  --el-index-popper: 2000;
+
+  /* ==================== 组件特有变量 ==================== */
+  /* Component Specific Variables */
+  
+  /* 侧边栏变量 - Sidebar Variables */
+  --sidebar-width: 240px;
+  --sidebar-width-collapsed: 64px;
+  --sidebar-bg: #1D1E1F; /* 完全不透明的深色背景 */
+  --sidebar-text: var(--el-text-color-primary);
+  --sidebar-text-hover: var(--el-color-primary);
+  --sidebar-border: var(--el-border-color-light);
+  --sidebar-item-hover: #262727;
+  --sidebar-item-active: var(--el-color-primary-dark-2);
+  --sidebar-item-active-text: var(--el-color-primary-light-3);
+  --sidebar-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --sidebar-backdrop: none;
+
+  /* 头部变量 - Header Variables */
+  --header-height: 60px;
+  --header-bg: #1D1E1F;
+  --header-text: var(--el-text-color-primary);
+  --header-border: var(--el-border-color-light);
+
+  /* 卡片变量 - Card Variables */
+  --card-bg: #1D1E1F;
+  --card-border: var(--el-border-color-light);
+  --card-shadow: var(--el-box-shadow-lighter);
+
+  /* 按钮变量 - Button Variables */
+  --button-primary-bg: var(--el-color-primary);
+  --button-primary-hover: var(--el-color-primary-light-3);
+  --button-primary-active: var(--el-color-primary-dark-2);
+  --button-primary-border: var(--el-color-primary);
+
+  /* 表格变量 - Table Variables */
+  --table-header-bg: var(--el-fill-color-dark);
+  --table-row-hover: var(--el-fill-color);
+  --table-border: var(--el-border-color-light);
+
+  /* 滚动条变量 - Scrollbar Variables */
+  --scrollbar-track: #1D1E1F;
+  --scrollbar-thumb: #363637;
+  --scrollbar-thumb-hover: #414243;
+  
+  /* ==================== 增强型组件样式变量 ==================== */
+  /* Enhanced Component Style Variables */
+  
+  /* 布局变量 - Layout Variables */
+  --container-max-width: 1200px;
+  --page-padding: var(--spacing-lg);
+  --section-margin-bottom: 40px;
+  --section-padding: var(--spacing-lg);
+  
+  /* 卡片变量 - Card Variables */
+  --card-hover-transform: translateY(-4px);
+  --card-transition: all 0.3s ease;
+  --card-header-padding: var(--spacing-lg) 24px 16px;
+  --card-content-padding: var(--spacing-lg) 24px;
+  --card-footer-padding: var(--spacing-md) 24px 24px;
+  
+  /* 统计项变量 - Stat Item Variables */
+  --stat-item-margin-bottom: 16px;
+  --stat-label-font-size: 1rem;
+  --stat-value-font-size: 1.25rem;
+  --stat-value-font-weight: 600;
+  
+  /* 按钮变量 - Button Variables */
+  --btn-gradient-padding: var(--spacing-md) 20px;
+  --btn-gradient-border-radius: var(--el-border-radius-base);
+  --btn-gradient-font-size: var(--el-font-size-small);
+  --btn-gradient-font-weight: 500;
+  --btn-gradient-transition: all 0.15s ease;
+  --btn-gradient-hover-transform: translateY(-2px);
+  --btn-gradient-hover-box-shadow: var(--el-box-shadow-light);
+  
+  /* 响应式变量 - Responsive Variables */
+  --mobile-page-padding: var(--spacing-md);
+  --mobile-section-padding: var(--spacing-md);
+  --mobile-section-title-font-size: 1.5rem;
+  --mobile-card-grid-gap: var(--spacing-md);
+}
+
+/* ==================== 增强型组件样式 ==================== */
+/* Enhanced Component Styles */
+
+/* 页面容器 - Page Container */
+.enhanced-page-container {
+  padding: var(--page-padding);
+  background-color: var(--el-bg-color-page);
+  min-height: 100vh;
+  font-family: var(--el-font-family);
+}
+
+/* 页面头部 - Page Header */
+.enhanced-page-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: var(--spacing-lg) 0;
+}
+
+/* 页面标题 - Page Title */
+.enhanced-page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+/* 页面副标题 - Page Subtitle */
+.enhanced-page-subtitle {
+  font-size: 1.25rem;
+  color: var(--el-text-color-secondary);
+  margin-bottom: 0;
+}
+
+/* 页面内容 - Page Content */
+.enhanced-page-content {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+/* 页面区块 - Page Section */
+.enhanced-page-section {
+  margin-bottom: var(--section-margin-bottom);
+  background: var(--card-bg);
+  border-radius: var(--el-border-radius-base);
+  padding: var(--section-padding);
+  box-shadow: var(--el-box-shadow-lighter);
+}
+
+/* 区块标题 - Section Title */
+.enhanced-section-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--el-border-color);
+}
+
+/* 卡片网格 - Card Grid */
+.enhanced-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: 24px;
+}
+
+/* 增强型卡片 - Enhanced Card */
+.enhanced-card {
+  background: var(--card-bg);
+  border-radius: var(--el-border-radius-base);
+  box-shadow: var(--el-box-shadow-lighter);
+  overflow: hidden;
+  transition: var(--card-transition);
+  
+  &:hover {
+    transform: var(--card-hover-transform);
+    box-shadow: var(--el-box-shadow-light);
+  }
+}
+
+/* 卡片头部 - Card Header */
+.enhanced-card-header {
+  padding: var(--card-header-padding);
+  border-bottom: 1px solid var(--el-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  h3 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+    margin: 0;
+  }
+}
+
+/* 卡片内容 - Card Content */
+.enhanced-card-content {
+  padding: var(--card-content-padding);
+}
+
+/* 统计项 - Stat Item */
+.enhanced-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--stat-item-margin-bottom);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* 统计标签 - Stat Label */
+.enhanced-stat-label {
+  font-size: var(--stat-label-font-size);
+  color: var(--el-text-color-secondary);
+}
+
+/* 统计值 - Stat Value */
+.enhanced-stat-value {
+  font-size: var(--stat-value-font-size);
+  font-weight: var(--stat-value-font-weight);
+  color: var(--el-text-color-primary);
+  
+  &.success {
+    color: var(--el-color-success);
+  }
+  
+  &.warning {
+    color: var(--el-color-warning);
+  }
+  
+  &.info {
+    color: var(--el-color-info);
+  }
+}
+
+/* 卡片底部 - Card Footer */
+.enhanced-card-footer {
+  padding: var(--card-footer-padding);
+  text-align: right;
+}
+
+/* 按钮组 - Button Group */
+.enhanced-button-group {
+  margin-bottom: 32px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+    margin-bottom: 16px;
+  }
+}
+
+/* 按钮行 - Button Row */
+.enhanced-button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  align-items: center;
+  
+  .el-button,
+  .btn-gradient {
+    margin: var(--spacing-xs) 0;
+  }
+}
+
+/* 渐变按钮 - Gradient Button */
+.btn-gradient {
+  padding: var(--btn-gradient-padding);
+  border: none;
+  border-radius: var(--btn-gradient-border-radius);
+  color: white;
+  font-size: var(--btn-gradient-font-size);
+  font-weight: var(--btn-gradient-font-weight);
+  cursor: pointer;
+  transition: var(--btn-gradient-transition);
+  background: linear-gradient(135deg, var(--el-color-primary), var(--el-color-primary-light-3));
+  
+  &:hover {
+    transform: var(--btn-gradient-hover-transform);
+    box-shadow: var(--btn-gradient-hover-box-shadow);
+  }
+  
+  &.btn-gradient--success {
+    background: linear-gradient(135deg, var(--el-color-success), var(--el-color-success-light-3));
+  }
+  
+  &.btn-gradient--warning {
+    background: linear-gradient(135deg, var(--el-color-warning), var(--el-color-warning-light-3));
+  }
+  
+  &.btn-gradient--danger {
+    background: linear-gradient(135deg, var(--el-color-danger), var(--el-color-danger-light-3));
+  }
+}
+
+/* 响应式设计 - Responsive Design */
+@media (max-width: var(--breakpoint-md)) {
+  .enhanced-page-container {
+    padding: var(--mobile-page-padding);
+  }
+  
+  .enhanced-page-title {
+    font-size: 2rem;
+  }
+  
+  .enhanced-page-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .enhanced-page-section {
+    padding: var(--mobile-section-padding);
+  }
+  
+  .enhanced-section-title {
+    font-size: var(--mobile-section-title-font-size);
+  }
+  
+  .enhanced-card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--mobile-card-grid-gap);
+  }
+  
+  .enhanced-button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn-gradient {
+    width: 100%;
+  }
+}
+
+/* ==================== AI统计弹窗暗黑模式优化 ==================== */
+/* AI Statistics Dialog Dark Mode Optimization */
+
+/* AI统计弹窗暗黑模式优化 */
+.theme-dark .ai-statistics-dialog,
+html.theme-dark .ai-statistics-dialog {
+    .el-dialog__body {
+      background: var(--el-bg-color-overlay);
+    }
+
+    /* 统计卡片整体样式 */
+    .overview-cards .stat-card {
+      background: #1f2937 !important; /* 暗黑模式背景 */
+      border: 1px solid var(--border-color) !important; /* 使用设计令牌边框色 */
+
+      &:hover {
+        border-color: #8B5CF6 !important; /* 悬停时紫色边框 */
+      }
+    }
+
+    /* 统计卡片图标优化 */
+    .overview-cards .stat-card .card-icon {
+      background: linear-gradient(135deg, #8B5CF6, #6366F1) !important;
+      color: white !important;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3) !important;
+    }
+
+    /* 统计卡片文字优化 */
+    .stat-card {
+      .card-content {
+        .card-value {
+          color: var(--ai-stats-text-value) !important;
+          font-weight: 700 !important;
+        }
+
+        .card-label {
+          color: var(--ai-stats-text-label) !important;
+          font-weight: 500 !important;
+        }
+      }
+    }
+
+    /* 其他区域样式优化 */
+    .stats-section {
+      background: #1f2937 !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    .shortcuts-chart {
+      background: #1f2937 !important;
+      border: 1px solid var(--border-color) !important;
+    }
+
+    /* 详细统计区域文字优化 */
+    .detailed-stats {
+      .stats-section {
+        h4 {
+          color: var(--ai-stats-text-title) !important;
+          font-weight: 700 !important;
+        }
+
+        .stats-list {
+          .stats-item {
+            .label {
+              color: var(--ai-stats-text-label) !important;
+              font-weight: 500 !important;
+            }
+
+            .value {
+              color: var(--ai-stats-text-value) !important;
+              font-weight: 600 !important;
+            }
+          }
+        }
+      }
+    }
+
+    /* 快捷操作统计文字优化 */
+    .shortcuts-stats {
+      h4 {
+        color: var(--ai-stats-text-title) !important;
+        font-weight: 700 !important;
+      }
+
+      .shortcuts-chart {
+        .shortcut-item {
+          .item-name {
+            color: var(--ai-stats-text-secondary) !important;
+            font-weight: 500 !important;
+          }
+
+          .item-count {
+            color: var(--ai-stats-text-value) !important;
+            font-weight: 600 !important;
+          }
+        }
+      }
+    }
+
+    /* 操作按钮文字优化 */
+    .action-buttons {
+      .el-button {
+        color: var(--ai-stats-text-primary) !important;
+
+        &:hover {
+          color: var(--el-color-primary) !important;
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 主页面卡片暗黑模式优化 ==================== */
+/* Main Page Cards Dark Mode Optimization */
+
+/* 主页面卡片暗黑模式优化 */
+.theme-dark .stat-card,
+html.theme-dark .stat-card {
+    background: #1f2937 !important; /* 暗黑模式背景 */
+    border: 1px solid var(--border-color) !important; /* 使用设计令牌边框色 */
+
+    &:hover {
+      border-color: #8B5CF6 !important; /* 悬停时紫色边框 */
+    }
+}
+
+/* 主页面卡片图标优化 */
+.theme-dark .stat-card .card-icon,
+html.theme-dark .stat-card .card-icon {
+    background: linear-gradient(135deg, #8B5CF6, #6366F1) !important;
+    color: white !important;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* 主页面卡片文字优化 */
+.theme-dark .stat-card .card-content,
+html.theme-dark .stat-card .card-content {
+    .card-value {
+      color: var(--ai-stats-text-value) !important;
+      font-weight: 700 !important;
+    }
+
+    .card-label {
+      color: var(--ai-stats-text-label) !important;
+      font-weight: 500 !important;
+    }
+}
+
+/* 其他卡片容器样式优化 */
+.theme-dark .center-card-wrapper .stat-card,
+html.theme-dark .center-card-wrapper .stat-card,
+.theme-dark .stats-card-wrapper .stat-card,
+html.theme-dark .stats-card-wrapper .stat-card {
+    background: #1f2937 !important;
+    border: 1px solid var(--border-color) !important;
+
+    &:hover {
+      border-color: #8B5CF6 !important;
+    }
+}

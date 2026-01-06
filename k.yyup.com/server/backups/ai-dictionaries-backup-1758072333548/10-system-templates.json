@@ -1,0 +1,212 @@
+{
+  "name": "系统功能查询模板字典",
+  "description": "AI用户关系、专家咨询、通知、权限、角色、日程、待办等系统功能表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === AI用户关系相关查询模板 ===": "注释",
+    "AI用户关系总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_user_relations",
+      "description": "查询AI用户关系总数",
+      "table": "ai_user_relations",
+      "response": "AI用户关系总数为{count}个",
+      "tokens": 10
+    },
+    "活跃AI用户": {
+      "sql": "SELECT COUNT(*) as count FROM ai_user_relations WHERE last_activity >= DATE_SUB(NOW(), INTERVAL 30 DAY)",
+      "description": "查询30天内活跃的AI用户数量",
+      "table": "ai_user_relations",
+      "response": "30天内活跃AI用户{count}个",
+      "tokens": 20
+    },
+    "本月新增AI用户": {
+      "sql": "SELECT COUNT(*) as count FROM ai_user_relations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增AI用户数量",
+      "table": "ai_user_relations",
+      "response": "本月新增AI用户{count}个",
+      "tokens": 20
+    },
+
+    "// === 专家咨询相关查询模板 ===": "注释",
+    "专家咨询总数": {
+      "sql": "SELECT COUNT(*) as count FROM expert_consultations",
+      "description": "查询专家咨询记录总数",
+      "table": "expert_consultations",
+      "response": "专家咨询记录总数为{count}条",
+      "tokens": 10
+    },
+    "专家咨询状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM expert_consultations GROUP BY status ORDER BY count DESC",
+      "description": "统计专家咨询状态分布",
+      "table": "expert_consultations",
+      "response": "专家咨询状态统计完成",
+      "tokens": 20
+    },
+    "专家咨询紧急度分析": {
+      "sql": "SELECT urgency, COUNT(*) as count FROM expert_consultations GROUP BY urgency ORDER BY FIELD(urgency, 'critical', 'high', 'medium', 'low')",
+      "description": "分析专家咨询紧急度分布",
+      "table": "expert_consultations",
+      "response": "专家咨询紧急度分析完成",
+      "tokens": 25
+    },
+    "本月专家咨询": {
+      "sql": "SELECT COUNT(*) as count FROM expert_consultations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月专家咨询数量",
+      "table": "expert_consultations",
+      "response": "本月专家咨询{count}条",
+      "tokens": 20
+    },
+
+    "// === 通知相关查询模板 ===": "注释",
+    "通知总数": {
+      "sql": "SELECT COUNT(*) as count FROM notifications",
+      "description": "查询通知总数",
+      "table": "notifications",
+      "response": "通知总数为{count}条",
+      "tokens": 10
+    },
+    "未读通知统计": {
+      "sql": "SELECT COUNT(*) as unread_count, COUNT(CASE WHEN is_read = 1 THEN 1 END) as read_count FROM notifications",
+      "description": "统计已读和未读通知数量",
+      "table": "notifications",
+      "response": "通知阅读状态统计完成",
+      "tokens": 20
+    },
+    "通知类型分布": {
+      "sql": "SELECT notification_type, COUNT(*) as count FROM notifications GROUP BY notification_type ORDER BY count DESC",
+      "description": "统计通知类型分布",
+      "table": "notifications",
+      "response": "通知类型分布统计完成",
+      "tokens": 20
+    },
+    "本月通知": {
+      "sql": "SELECT COUNT(*) as count FROM notifications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月发送的通知数量",
+      "table": "notifications",
+      "response": "本月发送通知{count}条",
+      "tokens": 20
+    },
+
+    "// === 权限相关查询模板 ===": "注释",
+    "权限总数": {
+      "sql": "SELECT COUNT(*) as count FROM permissions",
+      "description": "查询系统权限总数",
+      "table": "permissions",
+      "response": "系统权限总数为{count}个",
+      "tokens": 10
+    },
+    "权限类型分布": {
+      "sql": "SELECT type, COUNT(*) as count FROM permissions GROUP BY type ORDER BY count DESC",
+      "description": "统计权限类型分布",
+      "table": "permissions",
+      "response": "权限类型分布统计完成",
+      "tokens": 20
+    },
+    "顶级权限统计": {
+      "sql": "SELECT COUNT(*) as top_level_count, COUNT(CASE WHEN parent_id IS NOT NULL THEN 1 END) as sub_level_count FROM permissions",
+      "description": "统计顶级权限和子权限数量",
+      "table": "permissions",
+      "response": "权限层级统计完成",
+      "tokens": 20
+    },
+
+    "// === 角色相关查询模板 ===": "注释",
+    "角色总数": {
+      "sql": "SELECT COUNT(*) as count FROM roles WHERE deleted_at IS NULL",
+      "description": "查询系统角色总数",
+      "table": "roles",
+      "response": "系统角色总数为{count}个",
+      "tokens": 10
+    },
+    "活跃角色统计": {
+      "sql": "SELECT COUNT(*) as active_count, COUNT(CASE WHEN status = 0 THEN 1 END) as inactive_count FROM roles WHERE deleted_at IS NULL",
+      "description": "统计活跃和非活跃角色数量",
+      "table": "roles",
+      "response": "角色状态统计完成",
+      "tokens": 20
+    },
+    "角色权限分配": {
+      "sql": "SELECT r.name as role_name, COUNT(rp.permission_id) as permission_count FROM roles r LEFT JOIN role_permissions rp ON r.id = rp.role_id WHERE r.deleted_at IS NULL GROUP BY r.id, r.name ORDER BY permission_count DESC",
+      "description": "统计各角色的权限分配情况",
+      "table": "roles",
+      "joins": ["role_permissions"],
+      "response": "角色权限分配统计完成",
+      "tokens": 30
+    },
+
+    "// === 日程相关查询模板 ===": "注释",
+    "日程总数": {
+      "sql": "SELECT COUNT(*) as count FROM schedules",
+      "description": "查询日程安排总数",
+      "table": "schedules",
+      "response": "日程安排总数为{count}个",
+      "tokens": 10
+    },
+    "今日日程": {
+      "sql": "SELECT COUNT(*) as count FROM schedules WHERE DATE(start_time) = CURDATE()",
+      "description": "查询今日日程安排数量",
+      "table": "schedules",
+      "response": "今日日程安排{count}个",
+      "tokens": 15
+    },
+    "本周日程": {
+      "sql": "SELECT COUNT(*) as count FROM schedules WHERE YEARWEEK(start_time, 1) = YEARWEEK(NOW(), 1)",
+      "description": "查询本周日程安排数量",
+      "table": "schedules",
+      "response": "本周日程安排{count}个",
+      "tokens": 20
+    },
+    "本月日程": {
+      "sql": "SELECT COUNT(*) as count FROM schedules WHERE YEAR(start_time) = YEAR(NOW()) AND MONTH(start_time) = MONTH(NOW())",
+      "description": "查询本月日程安排数量",
+      "table": "schedules",
+      "response": "本月日程安排{count}个",
+      "tokens": 20
+    },
+
+    "// === 待办事项相关查询模板 ===": "注释",
+    "待办事项总数": {
+      "sql": "SELECT COUNT(*) as count FROM todos",
+      "description": "查询待办事项总数",
+      "table": "todos",
+      "response": "待办事项总数为{count}个",
+      "tokens": 10
+    },
+    "待办事项状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM todos GROUP BY status ORDER BY FIELD(status, 'PENDING', 'COMPLETED', 'CANCELLED')",
+      "description": "统计待办事项状态分布",
+      "table": "todos",
+      "response": "待办事项状态统计完成",
+      "tokens": 20
+    },
+    "待办事项优先级分析": {
+      "sql": "SELECT priority, COUNT(*) as count FROM todos GROUP BY priority ORDER BY priority DESC",
+      "description": "分析待办事项优先级分布",
+      "table": "todos",
+      "response": "待办事项优先级分析完成",
+      "tokens": 20
+    },
+    "逾期待办事项": {
+      "sql": "SELECT COUNT(*) as overdue_count FROM todos WHERE status = 'PENDING' AND due_date < NOW()",
+      "description": "查询逾期的待办事项数量",
+      "table": "todos",
+      "response": "逾期待办事项{overdue_count}个",
+      "tokens": 20
+    },
+    "本月完成待办": {
+      "sql": "SELECT COUNT(*) as count FROM todos WHERE status = 'COMPLETED' AND YEAR(completed_date) = YEAR(NOW()) AND MONTH(completed_date) = MONTH(NOW())",
+      "description": "查询本月完成的待办事项数量",
+      "table": "todos",
+      "response": "本月完成待办事项{count}个",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "系统数据概览": {
+      "sql": "SELECT 'ai_users' as category, COUNT(*) as count FROM ai_user_relations UNION ALL SELECT 'expert_consultations' as category, COUNT(*) as count FROM expert_consultations UNION ALL SELECT 'notifications' as category, COUNT(*) as count FROM notifications UNION ALL SELECT 'permissions' as category, COUNT(*) as count FROM permissions UNION ALL SELECT 'roles' as category, COUNT(*) as count FROM roles WHERE deleted_at IS NULL UNION ALL SELECT 'schedules' as category, COUNT(*) as count FROM schedules UNION ALL SELECT 'todos' as category, COUNT(*) as count FROM todos",
+      "description": "系统功能数据总览",
+      "table": "multiple",
+      "response": "系统数据概览查询完成",
+      "tokens": 50
+    }
+  }
+}

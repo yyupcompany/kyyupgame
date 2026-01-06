@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-11-26T15:33:18.065Z",
+  "summary": {
+    "frontendEndpoints": 17,
+    "backendEndpoints": 4,
+    "matchedEndpoints": 17,
+    "missingInBackend": 0,
+    "missingInFrontend": 1,
+    "totalIssues": 1
+  },
+  "details": {
+    "frontendEndpoints": [
+      "/api/auth/unified-health",
+      "/api/auth/unified-config",
+      "/api/auth/unified-login",
+      "/api/auth/flexible-login",
+      "/api/auth/user-tenants",
+      "/api/auth/bind-tenant",
+      "/api/\n  // 角色管理\n  ROLES: '/api/roles',\n  ROLE_OPTIONS: '/api/roles/options',\n  ROLE_PERMISSIONS: '/api/roles/:id/permissions',\n\n  // 用户管理\n  USERS: '/api/users',\n  USER_OPTIONS: '/api/users/options',\n\n  // 权限管理\n  PERMISSIONS: '/api/permissions',\n  PERMISSION_TREE: '/api/permissions/tree'\n",
+      "/api/\n  // 系统配置\n  SYSTEM_CONFIG: '/api/system/config',\n  APP_SETTINGS: '/api/system/settings',\n\n  // 用户配置\n  USER_CONFIG: '/api/users/config',\n  USER_PREFERENCES: '/api/users/preferences',\n\n  // 环境配置\n  ENV_CONFIG: '/api/system/environment',\n  API_CONFIG: '/api/system/api-config'\n",
+      "/api/\n  // 可用角色\n  AVAILABLE_ROLES: '/api/roles/available',\n\n  // 角色切换\n  SWITCH_ROLE: '/api/auth/switch-role',\n\n  // 当前角色\n  CURRENT_ROLE: '/api/auth/current-role'\n",
+      "/usage-center/users",
+      "/auth-permissions/permissions",
+      "/auth-permissions/menu",
+      "/auth-permissions/roles",
+      "/auth-permissions/check-permission",
+      "/groups/${groupId}/users/${userId}",
+      "/api/\n  // 系统基础接口\n  HEALTH: '/system/health',\n  INFO: '/system/info',\n  VERSION: '/system/version',\n  DOCS: '/system/docs',\n  \n  // 测试接口\n  TEST_DATABASE: '/system/test/database',\n  TEST_EMAIL: '/system/test/email',\n  TEST_SMS: '/system/test/sms',\n  \n  // 系统功能\n  UPLOAD: '/system/upload',\n  CACHE_CLEAR: '/system/cache/clear',\n  LOGS: '/system-logs',\n  \n  // 用户管理接口 (对应 user.routes.ts)\n  USERS: '/users',\n  USER_BY_ID: (id: number | string) => `/users/${id",
+      "/api/users"
+    ],
+    "backendEndpoints": [
+      "/auth",
+      "/auth-permissions",
+      "/users",
+      "/create-test-users"
+    ],
+    "matchedEndpoints": [
+      "/api/auth/unified-health",
+      "/api/auth/unified-config",
+      "/api/auth/unified-login",
+      "/api/auth/flexible-login",
+      "/api/auth/user-tenants",
+      "/api/auth/bind-tenant",
+      "/api/\n  // 角色管理\n  ROLES: '/api/roles',\n  ROLE_OPTIONS: '/api/roles/options',\n  ROLE_PERMISSIONS: '/api/roles/:id/permissions',\n\n  // 用户管理\n  USERS: '/api/users',\n  USER_OPTIONS: '/api/users/options',\n\n  // 权限管理\n  PERMISSIONS: '/api/permissions',\n  PERMISSION_TREE: '/api/permissions/tree'\n",
+      "/api/\n  // 系统配置\n  SYSTEM_CONFIG: '/api/system/config',\n  APP_SETTINGS: '/api/system/settings',\n\n  // 用户配置\n  USER_CONFIG: '/api/users/config',\n  USER_PREFERENCES: '/api/users/preferences',\n\n  // 环境配置\n  ENV_CONFIG: '/api/system/environment',\n  API_CONFIG: '/api/system/api-config'\n",
+      "/api/\n  // 可用角色\n  AVAILABLE_ROLES: '/api/roles/available',\n\n  // 角色切换\n  SWITCH_ROLE: '/api/auth/switch-role',\n\n  // 当前角色\n  CURRENT_ROLE: '/api/auth/current-role'\n",
+      "/usage-center/users",
+      "/auth-permissions/permissions",
+      "/auth-permissions/menu",
+      "/auth-permissions/roles",
+      "/auth-permissions/check-permission",
+      "/groups/${groupId}/users/${userId}",
+      "/api/\n  // 系统基础接口\n  HEALTH: '/system/health',\n  INFO: '/system/info',\n  VERSION: '/system/version',\n  DOCS: '/system/docs',\n  \n  // 测试接口\n  TEST_DATABASE: '/system/test/database',\n  TEST_EMAIL: '/system/test/email',\n  TEST_SMS: '/system/test/sms',\n  \n  // 系统功能\n  UPLOAD: '/system/upload',\n  CACHE_CLEAR: '/system/cache/clear',\n  LOGS: '/system-logs',\n  \n  // 用户管理接口 (对应 user.routes.ts)\n  USERS: '/users',\n  USER_BY_ID: (id: number | string) => `/users/${id",
+      "/api/users"
+    ],
+    "missingInBackend": [],
+    "missingInFrontend": [
+      "/create-test-users"
+    ]
+  },
+  "issues": [
+    {
+      "type": "missing_frontend",
+      "endpoint": "/create-test-users",
+      "severity": "low"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "low",
+      "category": "前端API调用缺失",
+      "description": "后端已定义但前端未调用的API端点",
+      "action": "检查是否需要在前端添加对应的API调用",
+      "endpoints": [
+        "/create-test-users"
+      ]
+    },
+    {
+      "priority": "medium",
+      "category": "API文档完善",
+      "description": "为所有API端点添加完整的Swagger文档",
+      "action": "补充@swagger注释，包括参数、响应示例等"
+    }
+  ]
+}

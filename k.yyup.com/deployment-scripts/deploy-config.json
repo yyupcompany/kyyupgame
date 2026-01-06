@@ -1,0 +1,78 @@
+{
+  "deployment": {
+    "server": {
+      "host": "103.210.237.249",
+      "user": "szblade",
+      "port": 22,
+      "alias": "yisu",
+      "basePath": "/home/szblade/yyup-deploy"
+    },
+    "directories": {
+      "client": "kyyup-client",
+      "server": "kyyup-server"
+    },
+    "ports": {
+      "frontend": 6000,
+      "backend": 4000,
+      "database": 3306
+    },
+    "database": {
+      "host": "dbconn.sealoshzh.site",
+      "port": 43906,
+      "user": "root",
+      "password": "Yyup@2024",
+      "database": "kyyup",
+      "type": "remote"
+    },
+    "build": {
+      "frontend": {
+        "command": "npm run build",
+        "outputDir": "dist",
+        "env": {
+          "VITE_DEV_PORT": "6000",
+          "VITE_API_PROXY_TARGET": "http://localhost:4000"
+        }
+      },
+      "backend": {
+        "command": "npm run build",
+        "outputDir": "dist",
+        "env": {
+          "PORT": "4000",
+          "NODE_ENV": "production"
+        }
+      }
+    },
+    "deployment": {
+      "frontend": {
+        "buildDir": "client/dist",
+        "remoteDir": "/home/szblade/yyup-deploy/kyyup-client",
+        "startCommand": "npm run preview -- --port 6000",
+        "processName": "kyyup-client"
+      },
+      "backend": {
+        "buildDir": "server/dist",
+        "remoteDir": "/home/szblade/yyup-deploy/kyyup-server",
+        "startCommand": "PORT=4000 node dist/server.js",
+        "processName": "kyyup-server"
+      }
+    }
+  },
+  "ssh": {
+    "privateKey": "~/.ssh/id_ed25519",
+    "publicKey": "~/.ssh/id_ed25519.pub",
+    "algorithm": "ED25519",
+    "fingerprint": "SHA256:nkON27yM1DdAGN9+/IMjUF8MhDdyrGuHZB3YADruyAk"
+  },
+  "credentials": {
+    "user": "szblade",
+    "password": "Szblade3944",
+    "sudoPassword": "Szblade3944",
+    "rootPassword": "#Zgyb3944"
+  },
+  "monitoring": {
+    "healthCheckInterval": 30000,
+    "logRetention": 7,
+    "maxLogSize": "100M"
+  }
+}
+

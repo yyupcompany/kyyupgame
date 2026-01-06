@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- 🔧 禁用浏览器缓存（开发环境） -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>幼儿园招生管理系统</title>
+    <!-- Inter字体 - 本地版本，避免网络连接问题 -->
+    <link rel="stylesheet" href="/fonts/inter.css">
+    <style>
+      /* 🎯 增强的响应式基础样式 */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #app {
+        height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+        position: relative;
+        font-size: 16px; /* 基准字体大小 */
+      }
+
+      /* 确保布局容器占满全屏 */
+      .app-layout {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* 🎯 屏幕缩放优化 */
+      @media screen and (min-width: 1920px) {
+        #app {
+          font-size: 18px; /* 大屏幕增大基础字体 */
+        }
+      }
+
+      @media screen and (max-width: 1366px) {
+        #app {
+          font-size: 15px; /* 小屏幕减小基础字体 */
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        #app {
+          font-size: 14px;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        #app {
+          font-size: 13px;
+        }
+      }
+
+      /* 防止横向滚动 */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        overflow-x: hidden;
+        min-width: 320px;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts?v=20241225-fix"></script>
+  </body>
+</html> 

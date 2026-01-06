@@ -1,0 +1,101 @@
+/* Inter Font - Local Version */
+/* 本地Inter字体文件，避免Google Fonts加载问题 */
+
+/* Variable Font - 推荐使用，支持所有字重 */
+@font-face {
+  font-family: 'InterVariable';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./InterVariable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'InterVariable';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./InterVariable-Italic.woff2') format('woff2');
+}
+
+/* 兼容性别名 "Inter var" */
+@font-face {
+  font-family: 'Inter var';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./InterVariable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter var';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('./InterVariable-Italic.woff2') format('woff2');
+}
+
+/* 静态字体 - 兼容旧浏览器 */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./Inter-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./Inter-Bold.woff2') format('woff2');
+}
+
+/* 字体特性值定义 */
+@font-feature-values InterVariable {
+  @character-variant {
+    cv01: 1; /* Alternate one */
+    cv02: 2; /* Open four */
+    cv03: 3; /* Open six */
+    cv04: 4; /* Open nine */
+    cv05: 5; /* Lower-case L with tail */
+    cv06: 6; /* Simplified u */
+    cv07: 7; /* Alternate German double s */
+    cv08: 8; /* Upper-case i with serif */
+    cv09: 9; /* Flat-top three */
+    cv10: 10; /* Capital G with spur */
+    cv11: 11; /* Single-story a */
+    cv12: 12; /* Compact f */
+    cv13: 13; /* Compact t */
+  }
+  
+  @styleset {
+    ss01: 1; /* Open digits */
+    ss02: 2; /* Disambiguation (with zero) */
+    ss03: 3; /* Round quotes & commas */
+    ss04: 4; /* Disambiguation (no zero) */
+    ss05: 5; /* Circled characters */
+    ss06: 6; /* Squared characters */
+    ss07: 7; /* Square punctuation */
+    ss08: 8; /* Square quotes */
+  }
+}
+
+@font-feature-values Inter {
+  @character-variant {
+    cv01: 1; cv02: 2; cv03: 3; cv04: 4; cv05: 5; cv06: 6; cv07: 7; cv08: 8; cv09: 9; cv10: 10; cv11: 11; cv12: 12; cv13: 13;
+  }
+  
+  @styleset {
+    ss01: 1; ss02: 2; ss03: 3; ss04: 4; ss05: 5; ss06: 6; ss07: 7; ss08: 8;
+  }
+}

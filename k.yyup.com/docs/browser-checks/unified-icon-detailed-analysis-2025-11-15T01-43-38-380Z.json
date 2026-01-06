@@ -1,0 +1,91 @@
+{
+  "timestamp": "2025-11-15T01:43:38.096Z",
+  "url": "http://localhost:5173/dashboard",
+  "unifiedIconAnalysis": {
+    "inHTML": true,
+    "exactMatches": 5,
+    "unifiedIconClasses": 90
+  },
+  "iconAnalysis": {
+    "totalSVGs": 66,
+    "outlineSVGs": 67,
+    "strokeSVGs": 38,
+    "strokeLinecap": 66,
+    "strokeLinejoin": 66
+  },
+  "sidebarIcons": [
+    {
+      "index": 0,
+      "isVisible": true,
+      "textContent": "−",
+      "className": "toggle-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 1,
+      "isVisible": true,
+      "textContent": "        ",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 2,
+      "isVisible": true,
+      "textContent": "      ",
+      "className": "icon-svg icon-menu",
+      "isPlaceholder": false
+    },
+    {
+      "index": 3,
+      "isVisible": true,
+      "textContent": "−",
+      "className": "toggle-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 4,
+      "isVisible": true,
+      "textContent": "        ",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 5,
+      "isVisible": true,
+      "textContent": "      ",
+      "className": "icon-svg icon-settings",
+      "isPlaceholder": false
+    },
+    {
+      "index": 6,
+      "isVisible": true,
+      "textContent": "−",
+      "className": "toggle-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 7,
+      "isVisible": true,
+      "textContent": "        ",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "isPlaceholder": false
+    },
+    {
+      "index": 8,
+      "isVisible": true,
+      "textContent": "      ",
+      "className": "icon-svg icon-menu",
+      "isPlaceholder": false
+    },
+    {
+      "index": 9,
+      "isVisible": true,
+      "textContent": "        ",
+      "className": "multi-style-icon icon-system-modern nav-icon",
+      "isPlaceholder": false
+    }
+  ],
+  "headerIcons": [],
+  "cardIcons": [],
+  "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/docs/browser-checks/unified-icon-detailed-2025-11-15T01-43-38-380Z.png"
+}

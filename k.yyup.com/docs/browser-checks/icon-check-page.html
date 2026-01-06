@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard图标检查</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .check-item {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        .check-item h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .iframe-container {
+            margin: 20px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        .instructions {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            background: yellow;
+            padding: 2px 4px;
+        }
+        .status {
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .status.checking { background: #fff3cd; color: #856404; }
+        .status.good { background: #d4edda; color: #155724; }
+        .status.bad { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Dashboard页面图标显示检查</h1>
+
+        <div class="instructions">
+            <h2>📋 检查说明</h2>
+            <p><strong>修复内容:</strong> UnifiedIcon组件已恢复107个完整图标定义</p>
+            <p><strong>检查目标:</strong> 验证图标是否不再显示为三个杠占位符 <span class="highlight">☰</span></p>
+            <p><strong>期望结果:</strong> 显示具体的业务图标，如学校、用户、图表等</p>
+        </div>
+
+        <div class="iframe-container">
+            <iframe src="http://localhost:5173/dashboard" id="dashboardFrame"></iframe>
+        </div>
+
+        <div class="check-item">
+            <h3>📌 侧边栏导航菜单图标 <span class="status checking">检查中...</span></h3>
+            <p>检查菜单项是否显示对应的业务图标，而不是三个杠占位符</p>
+            <ul>
+                <li>用户中心 - 应显示用户相关图标</li>
+                <li>学生管理 - 应显示学生/学校图标</li>
+                <li>教师管理 - 应显示教师/教育图标</li>
+                <li>活动管理 - 应显示活动/日历图标</li>
+                <li>招生管理 - 应显示招生/注册图标</li>
+            </ul>
+        </div>
+
+        <div class="check-item">
+            <h3>📌 头部功能按钮图标 <span class="status checking">检查中...</span></h3>
+            <p>检查页面头部各种功能按钮的图标显示</p>
+            <ul>
+                <li>用户头像按钮</li>
+                <li>通知/消息图标</li>
+                <li>设置图标</li>
+                <li>主题切换图标</li>
+            </ul>
+        </div>
+
+        <div class="check-item">
+            <h3>📌 卡片操作按钮图标 <span class="status checking">检查中...</span></h3>
+            <p>检查各种卡片上的操作按钮图标</p>
+            <ul>
+                <li>编辑按钮图标</li>
+                <li>删除按钮图标</li>
+                <li>刷新按钮图标</li>
+                <li>导出按钮图标</li>
+            </ul>
+        </div>
+
+        <div class="check-item">
+            <h3>📌 统计卡片图标 <span class="status checking">检查中...</span></h3>
+            <p>检查仪表板统计卡片中的图标显示</p>
+            <ul>
+                <li>学生总数统计图标</li>
+                <li>教师数量统计图标</li>
+                <li>班级数量统计图标</li>
+                <li>收入统计图标</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h2>📊 修复前后对比</h2>
+            <p><strong>修复前:</strong> 大量图标显示为 <span class="highlight">☰</span> 三个杠占位符</p>
+            <p><strong>修复后:</strong> 应显示具体的业务图标，具有更好的视觉效果</p>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载完成后，检查iframe内容
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const iframe = document.getElementById('dashboardFrame');
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+
+                    // 检查是否成功加载dashboard页面
+                    if (iframeDoc.title && iframeDoc.title.includes('Dashboard')) {
+                        console.log('✅ Dashboard页面加载成功');
+                        document.querySelectorAll('.status').forEach(el => {
+                            el.textContent = '待手动检查';
+                            el.className = 'status checking';
+                        });
+                    } else {
+                        console.log('⚠️ Dashboard页面可能未完全加载');
+                        document.querySelectorAll('.status').forEach(el => {
+                            el.textContent = '页面加载异常';
+                            el.className = 'status bad';
+                        });
+                    }
+                } catch (e) {
+                    console.log('❌ 无法访问iframe内容，可能是跨域限制');
+                    document.querySelectorAll('.status').forEach(el => {
+                        el.textContent = '需要手动检查';
+                        el.className = 'status checking';
+                    });
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+    

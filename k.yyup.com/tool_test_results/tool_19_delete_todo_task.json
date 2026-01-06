@@ -1,0 +1,9 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T14:28:41.259Z"}
+
+event: final_answer
+data: {"message":"💬 AI回答完成","content":"需要查询待办任务列表以确定删除对象，使用read_data_record工具\n<[PLHD20_never_used_51bce0c785ca2f68081bfa7d91973934]>[{\"name\":\"read_data_record\",\"arguments\":{\"entity\":\"todo_tasks\"}}]<[PLHD21_never_used_51bce0c785ca2f68081bfa7d91973934]>","toolUsed":0,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T14:29:02.659Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T14:29:02.660Z","totalEvents":3,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.13652173913043478}
+

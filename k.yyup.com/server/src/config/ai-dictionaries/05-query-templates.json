@@ -1,0 +1,196 @@
+{
+  "name": "查询模板字典",
+  "description": "完整的中文查询到SQL查询的模板映射",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 学生相关查询模板 ===": "注释",
+    "今天有多少学生在校": {
+      "sql": "SELECT COUNT(*) as count FROM students WHERE status = 1 AND DATE(created_at) = CURDATE()",
+      "description": "查询今天在校学生数量",
+      "table": "students",
+      "response": "今天在校学生数为{count}人",
+      "tokens": 15
+    },
+    "本月新增学生数量": {
+      "sql": "SELECT COUNT(*) as count FROM students WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增学生数量",
+      "table": "students",
+      "response": "本月新增学生{count}人",
+      "tokens": 20
+    },
+    "学生总数": {
+      "sql": "SELECT COUNT(*) as count FROM students WHERE status = 1",
+      "description": "查询活跃学生总数",
+      "table": "students",
+      "response": "当前活跃学生总数为{count}人",
+      "tokens": 10
+    },
+    "学生总数？": {
+      "sql": "SELECT COUNT(*) as count FROM students WHERE status = 1",
+      "description": "查询活跃学生总数",
+      "table": "students",
+      "response": "当前活跃学生总数为{count}人",
+      "tokens": 10
+    },
+    "男女学生比例": {
+      "sql": "SELECT gender, COUNT(*) as count, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM students WHERE status = 1) as percentage FROM students WHERE status = 1 GROUP BY gender",
+      "description": "查询男女学生比例",
+      "table": "students",
+      "response": "男女学生比例统计完成",
+      "tokens": 25
+    },
+    "各班级学生人数分布": {
+      "sql": "SELECT c.name as class_name, COUNT(s.id) as student_count FROM classes c LEFT JOIN students s ON c.id = s.class_id WHERE s.status = 1 AND c.status = 1 GROUP BY c.id, c.name ORDER BY student_count DESC",
+      "description": "查询各班级学生人数分布",
+      "table": "students",
+      "joins": [
+        "classes"
+      ],
+      "response": "各班级学生人数分布统计完成",
+      "tokens": 30
+    },
+    "// === 班级相关查询模板 ===": "注释",
+    "现在有几个班级": {
+      "sql": "SELECT COUNT(*) as count FROM classes WHERE status = 1",
+      "description": "查询活跃班级总数",
+      "table": "classes",
+      "response": "当前活跃班级总数为{count}个",
+      "tokens": 10
+    },
+    "现在有几个班级？": {
+      "sql": "SELECT COUNT(*) as count FROM classes WHERE status = 1",
+      "description": "查询活跃班级总数",
+      "table": "classes",
+      "response": "当前活跃班级总数为{count}个",
+      "tokens": 10
+    },
+    "班级总数": {
+      "sql": "SELECT COUNT(*) as count FROM classes WHERE status = 1",
+      "description": "查询活跃班级总数",
+      "table": "classes",
+      "response": "当前活跃班级总数为{count}个",
+      "tokens": 10
+    },
+    "有多少个班级": {
+      "sql": "SELECT COUNT(*) as count FROM classes WHERE status = 1",
+      "description": "查询活跃班级总数",
+      "table": "classes",
+      "response": "当前活跃班级总数为{count}个",
+      "tokens": 10
+    },
+    "// === 教师相关查询模板 ===": "注释",
+    "教师总数": {
+      "sql": "SELECT COUNT(*) as count FROM teachers WHERE status = 1",
+      "description": "查询活跃教师总数",
+      "table": "teachers",
+      "response": "当前活跃教师总数为{count}人",
+      "tokens": 10
+    },
+    "教师总数是多少？": {
+      "sql": "SELECT COUNT(*) as count FROM teachers WHERE status = 1",
+      "description": "查询活跃教师总数",
+      "table": "teachers",
+      "response": "当前活跃教师总数为{count}人",
+      "tokens": 10
+    },
+    "本月新增教师": {
+      "sql": "SELECT COUNT(*) as count FROM teachers WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增教师数量",
+      "table": "teachers",
+      "response": "本月新增教师{count}人",
+      "tokens": 20
+    },
+    "按职级统计教师": {
+      "response": "教师职级统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "哪些班级的出勤率最高": {
+      "sql": "SELECT c.name as class_name, c.current_student_count, c.capacity, (c.current_student_count * 100.0 / c.capacity) as attendance_rate FROM classes c WHERE c.status = 1 AND c.capacity > 0 ORDER BY attendance_rate DESC LIMIT 10",
+      "description": "查询出勤率最高的班级",
+      "table": "classes",
+      "response": "出勤率最高的班级统计完成",
+      "tokens": 25
+    },
+    "班级容量利用率": {
+      "sql": "SELECT name as class_name, current_student_count, capacity, (current_student_count * 100.0 / capacity) as utilization_rate FROM classes WHERE status = 1 AND capacity > 0 ORDER BY utilization_rate DESC",
+      "description": "查询班级容量利用率",
+      "table": "classes",
+      "response": "班级容量利用率统计完成",
+      "tokens": 25
+    },
+    "本周新增学生数": {
+      "sql": "SELECT COUNT(*) as count FROM students WHERE YEARWEEK(created_at, 1) = YEARWEEK(NOW(), 1)",
+      "description": "查询本周新增学生数量",
+      "table": "students",
+      "response": "本周新增学生{count}人",
+      "tokens": 15
+    },
+    "系统用户数量": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE status = 'active'",
+      "description": "查询活跃系统用户数量",
+      "table": "users",
+      "response": "当前活跃系统用户{count}人",
+      "tokens": 10
+    },
+    "// === 活动相关查询模板 ===": "注释",
+    "今日活动安排": {
+      "sql": "SELECT title, start_time, end_time, location, status FROM activities WHERE DATE(start_time) = CURDATE() ORDER BY start_time",
+      "description": "查询今日活动安排",
+      "table": "activities",
+      "response": "今日活动安排查询完成",
+      "tokens": 20
+    },
+    "本周活动安排": {
+      "sql": "SELECT title, start_time, end_time, location, status FROM activities WHERE YEARWEEK(start_time, 1) = YEARWEEK(NOW(), 1) ORDER BY start_time",
+      "description": "查询本周活动安排",
+      "table": "activities",
+      "response": "本周活动安排查询完成",
+      "tokens": 25
+    },
+    "本月活动统计": {
+      "sql": "SELECT COUNT(*) as total_count, COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed_count, COUNT(CASE WHEN status = 'ongoing' THEN 1 END) as ongoing_count FROM activities WHERE YEAR(start_time) = YEAR(NOW()) AND MONTH(start_time) = MONTH(NOW())",
+      "description": "查询本月活动统计",
+      "table": "activities",
+      "response": "本月活动统计完成",
+      "tokens": 30
+    },
+    "活动参与度分析": {
+      "sql": "SELECT activity_type, COUNT(*) as activity_count, AVG(registered_count) as avg_participants, SUM(registered_count) as total_participants FROM activities WHERE status IN (4, 3) GROUP BY activity_type ORDER BY total_participants DESC",
+      "description": "分析活动参与度",
+      "table": "activities",
+      "response": "活动参与度分析完成",
+      "tokens": 35
+    },
+    "// === 招生相关查询模板 ===": "注释",
+    "招生统计": {
+      "sql": "SELECT COUNT(*) as total_applications, COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved_count, COUNT(CASE WHEN status = 'pending' THEN 1 END) as pending_count FROM enrollment_applications WHERE YEAR(created_at) = YEAR(NOW())",
+      "description": "查询招生统计",
+      "table": "enrollment_applications",
+      "response": "招生统计查询完成",
+      "tokens": 25
+    },
+    "本月招生报告": {
+      "sql": "SELECT COUNT(*) as applications, COUNT(CASE WHEN status = 'approved' THEN 1 END) as approved, (COUNT(CASE WHEN status = 'approved' THEN 1 END) * 100.0 / COUNT(*)) as approval_rate FROM enrollment_applications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "生成本月招生报告",
+      "table": "enrollment_applications",
+      "response": "本月招生报告生成完成",
+      "tokens": 30
+    },
+    "// === 综合查询模板 ===": "注释",
+    "幼儿园概况": {
+      "sql": "SELECT (SELECT COUNT(*) FROM students WHERE status = 1) as student_count, (SELECT COUNT(*) FROM teachers WHERE status = 1) as teacher_count, (SELECT COUNT(*) FROM classes WHERE status = 1) as class_count, (SELECT COUNT(*) FROM activities WHERE status IN (1, 2, 3)) as activity_count",
+      "description": "查询幼儿园整体概况",
+      "table": "multiple",
+      "response": "幼儿园概况查询完成",
+      "tokens": 35
+    },
+    "数据总览": {
+      "sql": "SELECT 'students' as category, COUNT(*) as count FROM students WHERE status = 1 UNION ALL SELECT 'teachers' as category, COUNT(*) as count FROM teachers WHERE status = 1 UNION ALL SELECT 'classes' as category, COUNT(*) as count FROM classes WHERE status = 1 UNION ALL SELECT 'activities' as category, COUNT(*) as count FROM activities WHERE status IN (1, 2, 3)",
+      "description": "查询数据总览",
+      "table": "multiple",
+      "response": "数据总览查询完成",
+      "tokens": 40
+    }
+  }
+}

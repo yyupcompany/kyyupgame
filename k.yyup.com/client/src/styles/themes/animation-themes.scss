@@ -1,0 +1,311 @@
+/**
+ * 动画主题样式 - Animation Theme Styles
+ * 为所有入场动画组件提供完整的主题支持
+ * Complete theme support for all entrance animation components
+ */
+
+:root,
+:root[data-theme="light"],
+:root.theme-light {
+  /* ==================== 动画主题色彩系统 ==================== */
+  /* Animation Theme Color System */
+
+  /* Blocks Animation Theme */
+  --animation-blocks-primary: #4CAF50;
+  --animation-blocks-secondary: #2196F3;
+  --animation-blocks-accent: #FF9800;
+  --animation-blocks-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #fef3c7 100%);
+  --animation-blocks-shadow: rgba(76, 175, 80, 0.3);
+
+  /* Gsap Cards Theme */
+  --animation-gsap-primary: #2196F3;
+  --animation-gsap-secondary: #4CAF50;
+  --animation-gsap-accent: #F44336;
+  --animation-gsap-bg-gradient: linear-gradient(135deg, #e3f2fd 0%, #e8f5e8 50%, #ffebee 100%);
+  --animation-gsap-shadow: rgba(33, 150, 243, 0.3);
+
+  /* Particle Wave Theme */
+  --animation-particle-primary: #FF6B6B;
+  --animation-particle-secondary: #4ECDC4;
+  --animation-particle-accent: #45B7D1;
+  --animation-particle-bg-gradient: linear-gradient(135deg, #fff5f5 0%, #f0fdfa 50%, #ecfeff 100%);
+  --animation-particle-shadow: rgba(255, 107, 107, 0.3);
+
+  /* Matrix Blocks Theme */
+  --animation-matrix-primary: #FF006E;
+  --animation-matrix-secondary: #FB5607;
+  --animation-matrix-accent: #FFBE0B;
+  --animation-matrix-bg-gradient: linear-gradient(135deg, #fff0f5 0%, #fff7ed 50%, #fffbeb 100%);
+  --animation-matrix-shadow: rgba(255, 0, 110, 0.3);
+
+  /* Helix Spiral Theme */
+  --animation-helix-primary: #FF006E;
+  --animation-helix-secondary: #FB5607;
+  --animation-helix-accent: #8338EC;
+  --animation-helix-bg-gradient: linear-gradient(135deg, #fdf4ff 0%, #fff5f5 50%, #fef3c7 100%);
+  --animation-helix-shadow: rgba(255, 0, 110, 0.4);
+
+  /* Cube Explosion Theme */
+  --animation-cube-primary: #FF006E;
+  --animation-cube-secondary: #FB5607;
+  --animation-cube-accent: #3A86FF;
+  --animation-cube-bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #fff0f5 50%, #fff7ed 100%);
+  --animation-cube-shadow: rgba(255, 0, 110, 0.4);
+
+  /* Liquid Flow Theme */
+  --animation-liquid-primary: #FF006E;
+  --animation-liquid-secondary: #FB5607;
+  --animation-liquid-accent: #06FFB4;
+  --animation-liquid-bg-gradient: linear-gradient(135deg, #f0fdf4 0%, #fff5f5 50%, #ecfeff 100%);
+  --animation-liquid-shadow: rgba(255, 0, 110, 0.3);
+
+  /* Neon Grid Theme */
+  --animation-neon-primary: #00ffff;
+  --animation-neon-secondary: #ff00ff;
+  --animation-neon-accent: #ffff00;
+  --animation-neon-bg-gradient: linear-gradient(135deg, #0f0f0f 0%, #1a0a0a 50%, #0a0f0f 100%);
+  --animation-neon-shadow: rgba(0, 255, 255, 0.5);
+
+  /* Light Ripple Theme (已优化) */
+  --animation-light-ripple-primary: #6366f1;
+  --animation-light-ripple-secondary: #06b6d4;
+  --animation-light-ripple-accent: #f59e0b;
+  --animation-light-ripple-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #fef3c7 100%);
+  --animation-light-ripple-shadow: rgba(99, 102, 241, 0.3);
+
+  /* Dark Starfield Theme (已优化) */
+  --animation-dark-starfield-primary: #a855f7;
+  --animation-dark-starfield-secondary: #06b6d4;
+  --animation-dark-starfield-accent: #ef4444;
+  --animation-dark-starfield-bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+  --animation-dark-starfield-shadow: rgba(168, 85, 247, 0.4);
+}
+
+/* 暗黑主题下的动画色彩调整 */
+:root[data-theme="dark"],
+:root.theme-dark {
+  /* Blocks Animation Dark Theme */
+  --animation-blocks-primary: #66BB6A;
+  --animation-blocks-secondary: #42A5F5;
+  --animation-blocks-accent: #FFA726;
+  --animation-blocks-bg-gradient: linear-gradient(135deg, #1e1e1e 0%, #263238 50%, #2e2e1a 100%);
+  --animation-blocks-shadow: rgba(102, 187, 106, 0.4);
+
+  /* Gsap Cards Dark Theme */
+  --animation-gsap-primary: #42A5F5;
+  --animation-gsap-secondary: #66BB6A;
+  --animation-gsap-accent: #EF5350;
+  --animation-gsap-bg-gradient: linear-gradient(135deg, #1e2e2e 0%, #1a2e1a 50%, #2e1e1e 100%);
+  --animation-gsap-shadow: rgba(66, 165, 245, 0.4);
+
+  /* Particle Wave Dark Theme */
+  --animation-particle-primary: #FF6B6B;
+  --animation-particle-secondary: #4ECDC4;
+  --animation-particle-accent: #45B7D1;
+  --animation-particle-bg-gradient: linear-gradient(135deg, #2e1a1a 0%, #1a2e1a 50%, #1a2e2e 100%);
+  --animation-particle-shadow: rgba(255, 107, 107, 0.4);
+
+  /* Matrix Blocks Dark Theme */
+  --animation-matrix-primary: #FF1744;
+  --animation-matrix-secondary: #FF9800;
+  --animation-matrix-accent: #FFC107;
+  --animation-matrix-bg-gradient: linear-gradient(135deg, #2e1a1a 0%, #2e2e1a 50%, #2e2a1a 100%);
+  --animation-matrix-shadow: rgba(255, 23, 68, 0.5);
+
+  /* Helix Spiral Dark Theme */
+  --animation-helix-primary: #FF1744;
+  --animation-helix-secondary: #FF9800;
+  --animation-helix-accent: #7C4DFF;
+  --animation-helix-bg-gradient: linear-gradient(135deg, #2a1a2e 0%, #2e1a1a 50%, #2e2e1a 100%);
+  --animation-helix-shadow: rgba(255, 23, 68, 0.5);
+
+  /* Cube Explosion Dark Theme */
+  --animation-cube-primary: #FF1744;
+  --animation-cube-secondary: #FF9800;
+  --animation-cube-accent: #2979FF;
+  --animation-cube-bg-gradient: linear-gradient(135deg, #1a1a2e 0%, #2e1a1a 50%, #1a2e2e 100%);
+  --animation-cube-shadow: rgba(255, 23, 68, 0.5);
+
+  /* Liquid Flow Dark Theme */
+  --animation-liquid-primary: #FF1744;
+  --animation-liquid-secondary: #FF9800;
+  --animation-liquid-accent: #00E676;
+  --animation-liquid-bg-gradient: linear-gradient(135deg, #1a2e1a 0%, #2e1a1a 50%, #1a2e2e 100%);
+  --animation-liquid-shadow: rgba(255, 23, 68, 0.4);
+
+  /* Neon Grid Dark Theme (增强霓虹效果) */
+  --animation-neon-primary: #00ffff;
+  --animation-neon-secondary: #ff00ff;
+  --animation-neon-accent: #ffff00;
+  --animation-neon-bg-gradient: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+  --animation-neon-shadow: rgba(0, 255, 255, 0.7);
+
+  /* Light Ripple Dark Theme */
+  --animation-light-ripple-primary: #818CF8;
+  --animation-light-ripple-secondary: #22D3EE;
+  --animation-light-ripple-accent: #FBBF24;
+  --animation-light-ripple-bg-gradient: linear-gradient(135deg, #1e1b4b 0%, #1b3d4e 50%, #3d3b1e 100%);
+  --animation-light-ripple-shadow: rgba(129, 140, 248, 0.4);
+
+  /* Dark Starfield Dark Theme */
+  --animation-dark-starfield-primary: #A78BFA;
+  --animation-dark-starfield-secondary: #22D3EE;
+  --animation-dark-starfield-accent: #F87171;
+  --animation-dark-starfield-bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1e1b4b 50%, #1b3d4e 100%);
+  --animation-dark-starfield-shadow: rgba(167, 139, 250, 0.5);
+}
+
+/* ==================== 动画组件主题样式 ==================== */
+/* Animation Component Theme Styles */
+
+/* Blocks Animation 主题 */
+.blocks-animation-container {
+  background: var(--animation-blocks-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-blocks-shadow);
+
+  .block {
+    background: var(--animation-blocks-primary);
+    border-color: var(--animation-blocks-secondary);
+  }
+
+  .module-item {
+    border-color: var(--animation-blocks-accent);
+  }
+}
+
+/* Gsap Cards 主题 */
+.gsap-cards-container {
+  background: var(--animation-gsap-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-gsap-shadow);
+
+  .gsap-card {
+    background: var(--animation-gsap-primary);
+    border-color: var(--animation-gsap-secondary);
+  }
+}
+
+/* Particle Wave 主题 */
+.particle-wave-container {
+  background: var(--animation-particle-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-particle-shadow);
+
+  .particle {
+    background: var(--animation-particle-primary);
+  }
+}
+
+/* Matrix Blocks 主题 */
+.matrix-blocks-container {
+  background: var(--animation-matrix-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-matrix-shadow);
+
+  .matrix-block {
+    background: var(--animation-matrix-primary);
+    border-color: var(--animation-matrix-secondary);
+  }
+}
+
+/* Helix Spiral 主题 */
+.helix-spiral-container {
+  background: var(--animation-helix-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-helix-shadow);
+
+  .helix-element {
+    background: var(--animation-helix-primary);
+  }
+}
+
+/* Cube Explosion 主题 */
+.cube-explosion-container {
+  background: var(--animation-cube-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-cube-shadow);
+
+  .cube {
+    background: var(--animation-cube-primary);
+    border-color: var(--animation-cube-secondary);
+  }
+}
+
+/* Liquid Flow 主题 */
+.liquid-flow-container {
+  background: var(--animation-liquid-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-liquid-shadow);
+
+  .liquid-element {
+    background: var(--animation-liquid-primary);
+  }
+}
+
+/* Neon Grid 主题 */
+.neon-grid-container {
+  background: var(--animation-neon-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-neon-shadow);
+
+  .neon-line {
+    background: var(--animation-neon-primary);
+    box-shadow: 0 0 10px var(--animation-neon-primary);
+  }
+}
+
+/* Light Ripple 主题 (已优化) */
+.light-ripple-container {
+  background: var(--animation-light-ripple-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-light-ripple-shadow);
+
+  .light-orb {
+    background: radial-gradient(circle,
+      var(--animation-light-ripple-primary) 0%,
+      var(--animation-light-ripple-secondary) 40%,
+      var(--animation-light-ripple-accent) 70%,
+      transparent 100%);
+  }
+}
+
+/* Dark Starfield 主题 (已优化) */
+.dark-starfield-container {
+  background: var(--animation-dark-starfield-bg-gradient);
+  box-shadow: 0 0 40px var(--animation-dark-starfield-shadow);
+
+  .neon-frame {
+    border-color: var(--animation-dark-starfield-primary);
+    box-shadow: 0 0 20px var(--animation-dark-starfield-primary);
+  }
+}
+
+/* ==================== 动画过渡增强 ==================== */
+/* Animation Transition Enhancements */
+
+.theme-transition-enter {
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.theme-transition-leave {
+  transition: all 0.6s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+/* 响应式优化 */
+@media (max-width: var(--breakpoint-md)) {
+  :root,
+  :root[data-theme="light"],
+  :root.theme-light {
+    /* 移动端动画色彩调整 */
+    --animation-blocks-shadow: rgba(76, 175, 80, 0.2);
+    --animation-gsap-shadow: rgba(33, 150, 243, 0.2);
+    --animation-particle-shadow: rgba(255, 107, 107, 0.2);
+    --animation-matrix-shadow: rgba(255, 0, 110, 0.2);
+    --animation-helix-shadow: rgba(255, 0, 110, 0.2);
+    --animation-cube-shadow: rgba(255, 0, 110, 0.2);
+    --animation-liquid-shadow: rgba(255, 0, 110, 0.2);
+    --animation-neon-shadow: rgba(0, 255, 255, 0.3);
+    --animation-light-ripple-shadow: rgba(99, 102, 241, 0.2);
+    --animation-dark-starfield-shadow: rgba(168, 85, 247, 0.2);
+  }
+}
+
+/* 无障碍支持 - 减少动画 */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition-enter,
+  .theme-transition-leave {
+    transition: none !important;
+  }
+}

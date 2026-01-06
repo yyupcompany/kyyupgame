@@ -1,0 +1,280 @@
+/**
+ * 响应式网格系统 Mixins
+ * Responsive Grid System Mixins
+ * 
+ * 统一的网格布局系统，支持不同屏幕尺寸下的自适应排列
+ * Unified grid layout system with adaptive arrangement for different screen sizes
+ */
+
+@use '../design-tokens.scss' as *;
+
+/* ==================== 基础网格系统 ==================== */
+/* Base Grid System */
+
+@mixin base-grid($columns: auto-fit, $min-width: 280px, $gap: var(--spacing-lg)) {
+  display: grid;
+  grid-template-columns: repeat($columns, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin flexible-grid($min-width: 240px, $gap: var(--spacing-md)) {
+  @include base-grid(auto-fit, $min-width, $gap);
+}
+
+@mixin fixed-grid($columns: 4, $gap: var(--spacing-md)) {
+  @include base-grid($columns, 1fr, $gap);
+}
+
+/* ==================== 响应式网格断点 ==================== */
+/* Responsive Grid Breakpoints */
+
+@mixin responsive-grid($min-width: 240px, $gap: var(--spacing-md)) {
+  @include flexible-grid($min-width, $gap);
+
+  // 大屏幕 (1200px+)
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(auto-fit, minmax(#{$min-width + 40px}, 1fr));
+    gap: var(--spacing-lg); /* 从xl减少到lg */
+  }
+
+  // 中等屏幕 (768px - 1199px)
+  @media (max-width: 1199px) and (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(#{$min-width - 20px}, 1fr));
+    gap: var(--spacing-md); /* 从lg减少到md */
+  }
+
+  // 小屏幕 (480px - 767px)
+  @media (max-width: 767px) and (min-width: 480px) {
+    grid-template-columns: repeat(auto-fit, minmax(#{$min-width - 40px}, 1fr));
+    gap: var(--spacing-sm); /* 从md减少到sm */
+  }
+
+  // 超小屏幕 (< 480px)
+  @media (max-width: 479px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm); /* 从md减少到sm */
+  }
+}
+
+/* ==================== 卡片专用网格 ==================== */
+/* Card-specific Grids */
+
+@mixin stats-card-grid {
+  @include responsive-grid(240px, var(--spacing-md)); /* 从280px减少到240px，从lg减少到md */
+  margin-bottom: var(--spacing-lg); /* 从xl减少到lg */
+
+  @media (max-width: var(--breakpoint-md)) {
+    margin-bottom: var(--spacing-md); /* 从lg减少到md */
+  }
+}
+
+@mixin chart-card-grid {
+  @include responsive-grid(360px, var(--spacing-md)); /* 从400px减少到360px，间距从lg减少到md */
+
+  @media (max-width: var(--breakpoint-md)) {
+    @include responsive-grid(280px, var(--spacing-sm)); /* 从300px减少到280px，间距从md减少到sm */
+  }
+}
+
+@mixin action-card-grid {
+  @include responsive-grid(220px, var(--spacing-sm)); /* 从260px减少到220px，间距从md减少到sm */
+}
+
+/* ==================== 特殊布局网格 ==================== */
+/* Special Layout Grids */
+
+@mixin dashboard-grid {
+  @include responsive-grid(240px, var(--spacing-md)); /* 从280px减少到240px，间距从lg减少到md */
+
+  // 仪表板特殊布局：大屏幕时优先显示4列
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md); /* 确保间距一致 */
+  }
+
+  @media (max-width: 1199px) and (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 899px) and (min-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+@mixin center-overview-grid {
+  @include responsive-grid(240px, var(--spacing-md)); /* 从280px减少到240px，间距从lg减少到md */
+
+  // 中心概览页面：优化的响应式布局
+  @media (min-width: 1400px) {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 1399px) and (min-width: 1100px) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 1099px) and (min-width: 800px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  @media (max-width: 799px) and (min-width: 500px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  @media (max-width: 499px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* ==================== 容器系统 ==================== */
+/* Container System */
+
+@mixin grid-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md); /* 从lg减少到md */
+
+  @media (max-width: var(--breakpoint-md)) {
+    padding: 0 var(--spacing-sm); /* 从md减少到sm */
+  }
+}
+
+@mixin section-container {
+  @include grid-container;
+  margin-bottom: var(--spacing-lg); /* 从xl减少到lg */
+
+  @media (max-width: var(--breakpoint-md)) {
+    margin-bottom: var(--spacing-md); /* 从lg减少到md */
+  }
+}
+
+/* ==================== 网格项目样式 ==================== */
+/* Grid Item Styles */
+
+@mixin grid-item {
+  min-width: 0; // 防止内容溢出
+  width: 100%;
+}
+
+@mixin grid-item-span($columns: 2) {
+  grid-column: span $columns;
+  
+  @media (max-width: var(--breakpoint-md)) {
+    grid-column: span 1;
+  }
+}
+
+/* ==================== 自适应网格 ==================== */
+/* Adaptive Grids */
+
+@mixin auto-fit-grid($min-width: 280px, $max-width: 1fr, $gap: var(--spacing-lg)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, $max-width));
+  gap: $gap;
+  
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+@mixin auto-fill-grid($min-width: 280px, $gap: var(--spacing-lg)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+  
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+/* ==================== 工具类生成器 ==================== */
+/* Utility Class Generators */
+
+@mixin generate-grid-utilities {
+  .grid-stats {
+    @include stats-card-grid;
+  }
+  
+  .grid-charts {
+    @include chart-card-grid;
+  }
+  
+  .grid-actions {
+    @include action-card-grid;
+  }
+  
+  .grid-dashboard {
+    @include dashboard-grid;
+  }
+  
+  .grid-center-overview {
+    @include center-overview-grid;
+  }
+  
+  .grid-container {
+    @include grid-container;
+  }
+  
+  .section-container {
+    @include section-container;
+  }
+  
+  .grid-item {
+    @include grid-item;
+  }
+  
+  .grid-item-span-2 {
+    @include grid-item-span(2);
+  }
+  
+  .grid-item-span-3 {
+    @include grid-item-span(3);
+  }
+  
+  .grid-auto-fit {
+    @include auto-fit-grid;
+  }
+  
+  .grid-auto-fill {
+    @include auto-fill-grid;
+  }
+}
+
+/* ==================== 特殊用途网格 ==================== */
+/* Special Purpose Grids */
+
+@mixin masonry-grid($columns: 3, $gap: var(--spacing-lg)) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+  grid-auto-rows: masonry; // 实验性功能，需要浏览器支持
+  
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+  }
+}
+
+@mixin equal-height-grid($min-width: 280px, $gap: var(--spacing-lg)) {
+  @include flexible-grid($min-width, $gap);
+  align-items: stretch; // 确保所有项目等高
+  
+  > * {
+    display: flex;
+    flex-direction: column;
+  }
+}

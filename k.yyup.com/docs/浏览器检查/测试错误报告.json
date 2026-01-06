@@ -1,0 +1,5 @@
+{
+  "timestamp": "2025-11-14T18:59:23.560Z",
+  "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/login-only.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/login-only.html\", waiting until \"networkidle\"\u001b[22m\n",
+  "stack": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5173/login-only.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:5173/login-only.html\", waiting until \"networkidle\"\u001b[22m\n\n    at /home/zhgue/kyyupgame/k.yyup.com/test-dark-mode-cards.cjs:27:16"
+}

@@ -1,0 +1,198 @@
+{
+  "name": "推荐奖励系统查询模板字典",
+  "description": "推荐关系、推荐奖励、推荐统计、转化跟踪等推荐奖励系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 推荐关系相关查询模板 ===": "注释",
+    "推荐关系总数": {
+      "sql": "SELECT COUNT(*) as count FROM referral_relationships",
+      "description": "查询推荐关系总数",
+      "table": "referral_relationships",
+      "response": "推荐关系总数为{count}个",
+      "tokens": 10
+    },
+    "推荐关系状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM referral_relationships GROUP BY status ORDER BY count DESC",
+      "description": "统计推荐关系状态分布",
+      "table": "referral_relationships",
+      "response": "推荐关系状态统计完成",
+      "tokens": 20
+    },
+    "已完成推荐关系": {
+      "sql": "SELECT COUNT(*) as count FROM referral_relationships WHERE status = 'completed'",
+      "description": "查询已完成的推荐关系数量",
+      "table": "referral_relationships",
+      "response": "已完成推荐关系{count}个",
+      "tokens": 12
+    },
+    "推荐奖励金额统计": {
+      "sql": "SELECT SUM(reward_amount) as total_reward, AVG(reward_amount) as avg_reward, COUNT(CASE WHEN reward_amount > 0 THEN 1 END) as rewarded_count FROM referral_relationships",
+      "description": "统计推荐奖励金额",
+      "table": "referral_relationships",
+      "response": "推荐奖励金额统计完成",
+      "tokens": 30
+    },
+    "本月推荐关系": {
+      "sql": "SELECT COUNT(*) as count FROM referral_relationships WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月推荐关系数量",
+      "table": "referral_relationships",
+      "response": "本月推荐关系{count}个",
+      "tokens": 20
+    },
+
+    "// === 推荐奖励相关查询模板 ===": "注释",
+    "推荐奖励总数": {
+      "sql": "SELECT COUNT(*) as count FROM referral_rewards",
+      "description": "查询推荐奖励总数",
+      "table": "referral_rewards",
+      "response": "推荐奖励总数为{count}个",
+      "tokens": 10
+    },
+    "推荐奖励类型统计": {
+      "sql": "SELECT reward_type, COUNT(*) as count FROM referral_rewards GROUP BY reward_type ORDER BY count DESC",
+      "description": "统计推荐奖励类型分布",
+      "table": "referral_rewards",
+      "response": "推荐奖励类型统计完成",
+      "tokens": 20
+    },
+    "推荐奖励状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM referral_rewards GROUP BY status ORDER BY count DESC",
+      "description": "统计推荐奖励状态分布",
+      "table": "referral_rewards",
+      "response": "推荐奖励状态统计完成",
+      "tokens": 20
+    },
+    "现金奖励统计": {
+      "sql": "SELECT SUM(reward_amount) as total_cash, AVG(reward_amount) as avg_cash, COUNT(*) as cash_rewards FROM referral_rewards WHERE reward_type = 'cash' AND reward_amount > 0",
+      "description": "统计现金奖励情况",
+      "table": "referral_rewards",
+      "response": "现金奖励统计完成",
+      "tokens": 25
+    },
+    "积分奖励统计": {
+      "sql": "SELECT SUM(reward_points) as total_points, AVG(reward_points) as avg_points, COUNT(*) as point_rewards FROM referral_rewards WHERE reward_type = 'points' AND reward_points > 0",
+      "description": "统计积分奖励情况",
+      "table": "referral_rewards",
+      "response": "积分奖励统计完成",
+      "tokens": 25
+    },
+    "已发放奖励": {
+      "sql": "SELECT COUNT(*) as count FROM referral_rewards WHERE status = 'issued'",
+      "description": "查询已发放的奖励数量",
+      "table": "referral_rewards",
+      "response": "已发放奖励{count}个",
+      "tokens": 12
+    },
+    "本月奖励发放": {
+      "sql": "SELECT COUNT(*) as count FROM referral_rewards WHERE status = 'issued' AND YEAR(issued_at) = YEAR(NOW()) AND MONTH(issued_at) = MONTH(NOW())",
+      "description": "查询本月发放的奖励数量",
+      "table": "referral_rewards",
+      "response": "本月发放奖励{count}个",
+      "tokens": 25
+    },
+
+    "// === 推荐统计相关查询模板 ===": "注释",
+    "推荐统计总数": {
+      "sql": "SELECT COUNT(*) as count FROM referral_statistics",
+      "description": "查询推荐统计记录总数",
+      "table": "referral_statistics",
+      "response": "推荐统计记录总数为{count}条",
+      "tokens": 10
+    },
+    "推荐成功率分析": {
+      "sql": "SELECT SUM(total_referrals) as total_referrals, SUM(successful_referrals) as successful_referrals, (SUM(successful_referrals) * 100.0 / NULLIF(SUM(total_referrals), 0)) as success_rate FROM referral_statistics",
+      "description": "分析推荐成功率",
+      "table": "referral_statistics",
+      "response": "推荐成功率分析完成",
+      "tokens": 30
+    },
+    "推荐奖励总额统计": {
+      "sql": "SELECT SUM(total_rewards) as total_reward_amount, AVG(total_rewards) as avg_reward_per_user, SUM(total_points) as total_points FROM referral_statistics",
+      "description": "统计推荐奖励总额",
+      "table": "referral_statistics",
+      "response": "推荐奖励总额统计完成",
+      "tokens": 25
+    },
+    "活跃推荐用户": {
+      "sql": "SELECT COUNT(*) as count FROM referral_statistics WHERE total_referrals > 0",
+      "description": "查询有推荐记录的用户数量",
+      "table": "referral_statistics",
+      "response": "活跃推荐用户{count}个",
+      "tokens": 15
+    },
+    "最近推荐活动": {
+      "sql": "SELECT COUNT(*) as count FROM referral_statistics WHERE last_referral_at >= DATE_SUB(NOW(), INTERVAL 30 DAY)",
+      "description": "查询最近30天有推荐活动的用户",
+      "table": "referral_statistics",
+      "response": "最近30天活跃推荐用户{count}个",
+      "tokens": 25
+    },
+
+    "// === 转化跟踪相关查询模板 ===": "注释",
+    "转化跟踪总数": {
+      "sql": "SELECT COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL",
+      "description": "查询转化跟踪记录总数",
+      "table": "conversion_trackings",
+      "response": "转化跟踪记录总数为{count}条",
+      "tokens": 10
+    },
+    "转化类型统计": {
+      "sql": "SELECT conversion_type, COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL GROUP BY conversion_type ORDER BY count DESC",
+      "description": "统计转化类型分布",
+      "table": "conversion_trackings",
+      "response": "转化类型统计完成",
+      "tokens": 20
+    },
+    "转化来源分析": {
+      "sql": "SELECT conversion_source, COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL GROUP BY conversion_source ORDER BY count DESC",
+      "description": "分析转化来源分布",
+      "table": "conversion_trackings",
+      "response": "转化来源分析完成",
+      "tokens": 20
+    },
+    "转化状态统计": {
+      "sql": "SELECT conversion_status, COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL GROUP BY conversion_status ORDER BY count DESC",
+      "description": "统计转化状态分布",
+      "table": "conversion_trackings",
+      "response": "转化状态统计完成",
+      "tokens": 20
+    },
+    "首次访问转化": {
+      "sql": "SELECT COUNT(*) as count FROM conversion_trackings WHERE is_first_visit = 1 AND deleted_at IS NULL",
+      "description": "查询首次访问转化数量",
+      "table": "conversion_trackings",
+      "response": "首次访问转化{count}次",
+      "tokens": 15
+    },
+    "转化价值统计": {
+      "sql": "SELECT SUM(event_value) as total_value, AVG(event_value) as avg_value, COUNT(CASE WHEN event_value > 0 THEN 1 END) as valued_conversions FROM conversion_trackings WHERE deleted_at IS NULL",
+      "description": "统计转化价值",
+      "table": "conversion_trackings",
+      "response": "转化价值统计完成",
+      "tokens": 30
+    },
+    "本月转化跟踪": {
+      "sql": "SELECT COUNT(*) as count FROM conversion_trackings WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月转化跟踪数量",
+      "table": "conversion_trackings",
+      "response": "本月转化跟踪{count}次",
+      "tokens": 20
+    },
+    "跟进状态分析": {
+      "sql": "SELECT follow_up_status, COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL GROUP BY follow_up_status ORDER BY count DESC",
+      "description": "分析跟进状态分布",
+      "table": "conversion_trackings",
+      "response": "跟进状态分析完成",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "推荐系统数据概览": {
+      "sql": "SELECT 'referral_relationships' as category, COUNT(*) as count FROM referral_relationships UNION ALL SELECT 'referral_rewards' as category, COUNT(*) as count FROM referral_rewards UNION ALL SELECT 'referral_statistics' as category, COUNT(*) as count FROM referral_statistics UNION ALL SELECT 'conversion_trackings' as category, COUNT(*) as count FROM conversion_trackings WHERE deleted_at IS NULL",
+      "description": "推荐系统数据总览",
+      "table": "multiple",
+      "response": "推荐系统数据概览查询完成",
+      "tokens": 40
+    }
+  }
+}

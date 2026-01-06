@@ -1,0 +1,122 @@
+/**
+ * 移动端设计令牌
+ * 完全使用全局设计令牌，支持明亮/暗黑主题自动切换
+ */
+
+@use '@/styles/design-tokens.scss' as *;
+
+// 移动端使用全局设计令牌，确保与PC端一致
+
+// ==================== 移动端特定令牌 ====================
+
+:root {
+  // 移动端安全区域
+  --mobile-safe-area-top: env(safe-area-inset-top);
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom);
+  --mobile-safe-area-left: env(safe-area-inset-left);
+  --mobile-safe-area-right: env(safe-area-inset-right);
+  
+  // 移动端固定高度
+  --mobile-navbar-height: 46px;
+  --mobile-tabbar-height: 50px;
+  
+  // 移动端内容区域padding
+  --mobile-content-padding: var(--spacing-md);
+}
+
+// ==================== 移动端页面基础样式 ====================
+
+.mobile-page,
+.communication-page,
+.ai-assistant-page,
+.customer-pool-page,
+.feedback-page,
+.profile-page,
+.child-growth-page,
+.promotion-center-page,
+.share-stats-page,
+.enrollment-page,
+.activities-page,
+.teaching-page,
+.performance-rewards-page,
+.appointment-management-page,
+.class-contacts-page,
+.creative-curriculum-page,
+.customer-tracking-page,
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-color-page);  // 使用设计令牌
+  color: var(--text-primary);               // 使用设计令牌
+  padding-bottom: var(--spacing-lg);
+}
+
+// ==================== 移动端统计卡片 ====================
+
+.stat-value {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+// ==================== 移动端其他通用样式 ====================
+
+.promo-stats,
+.performance-overview {
+  display: flex;
+  padding: var(--spacing-lg) 0;
+  
+  .stat-item,
+  .overview-item {
+    flex: 1;
+    text-align: center;
+    
+    .stat-value,
+    .value {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .stat-label,
+    .label {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.chart-container {
+  padding: var(--spacing-lg);
+  min-height: 200px;
+  background-color: var(--bg-color);
+}
+
+.record-stats {
+  display: flex;
+  gap: var(--spacing-md);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+// ==================== 暗黑模式支持 ====================
+
+// 暗黑模式自动跟随全局主题
+// 所有颜色都使用CSS变量，自动适配暗黑模式
+
+[data-theme="dark"] {
+  .mobile-page,
+  .communication-page,
+  .ai-assistant-page,
+  .customer-pool-page,
+  .page {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+  }
+}

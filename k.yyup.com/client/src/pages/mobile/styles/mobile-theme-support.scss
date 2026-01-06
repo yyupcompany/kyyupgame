@@ -1,0 +1,87 @@
+/**
+ * 移动端主题支持
+ * 确保移动端可以响应全局主题切换（明亮/暗黑）
+ */
+
+@use '@/styles/design-tokens.scss' as *;
+
+// ==================== 移动端通用样式（支持主题） ====================
+
+// 基础页面容器
+.mobile-page,
+.communication-page,
+.ai-assistant-page,
+.customer-pool-page,
+.feedback-page,
+.profile-page,
+.child-growth-page,
+.promotion-center-page,
+.share-stats-page,
+.enrollment-page,
+.activities-page,
+.teaching-page,
+.performance-rewards-page,
+.appointment-management-page,
+.class-contacts-page,
+.creative-curriculum-page,
+.customer-tracking-page,
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-color-page);
+  color: var(--text-primary);
+  padding-bottom: var(--spacing-lg);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+// ==================== 暗黑模式自动适配 ====================
+
+[data-theme="dark"] {
+  // 移动端页面背景
+  .mobile-page,
+  .communication-page,
+  .ai-assistant-page,
+  .customer-pool-page,
+  .page {
+    background-color: var(--bg-primary);
+  }
+  
+  // Vant组件适配
+  :deep(.van-cell-group) {
+    background-color: var(--bg-card);
+  }
+  
+  :deep(.van-cell) {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  :deep(.van-search) {
+    background-color: var(--bg-card);
+    
+    .van-field__control {
+      color: var(--text-primary);
+    }
+  }
+  
+  :deep(.van-tabs) {
+    background-color: var(--bg-card);
+    
+    .van-tab {
+      color: var(--text-secondary);
+      
+      &--active {
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  :deep(.van-nav-bar) {
+    background: var(--gradient-purple);
+  }
+  
+  :deep(.van-tabbar) {
+    background-color: var(--bg-card);
+    border-top-color: var(--border-color);
+  }
+}

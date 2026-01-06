@@ -1,0 +1,151 @@
+{
+  "name": "活动相关查询模板字典",
+  "description": "活动评估、计划、报名、人员、模板等活动相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 活动评估相关查询模板 ===": "注释",
+    "活动评估总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_evaluations WHERE deleted_at IS NULL",
+      "description": "查询活动评估记录总数",
+      "table": "activity_evaluations",
+      "response": "活动评估记录总数为{count}条",
+      "tokens": 10
+    },
+    "活动评估平均评分": {
+      "sql": "SELECT AVG(overall_rating) as avg_rating, COUNT(*) as total_evaluations FROM activity_evaluations WHERE deleted_at IS NULL AND overall_rating > 0",
+      "description": "查询活动评估平均评分",
+      "table": "activity_evaluations",
+      "response": "活动评估平均评分为{avg_rating}分，共{total_evaluations}条评估",
+      "tokens": 20
+    },
+    "活动评估分布统计": {
+      "sql": "SELECT overall_rating, COUNT(*) as count, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM activity_evaluations WHERE deleted_at IS NULL AND overall_rating > 0) as percentage FROM activity_evaluations WHERE deleted_at IS NULL AND overall_rating > 0 GROUP BY overall_rating ORDER BY overall_rating DESC",
+      "description": "统计活动评估评分分布",
+      "table": "activity_evaluations",
+      "response": "活动评估分布统计完成",
+      "tokens": 30
+    },
+    "本月活动评估": {
+      "sql": "SELECT COUNT(*) as count FROM activity_evaluations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月活动评估数量",
+      "table": "activity_evaluations",
+      "response": "本月活动评估{count}条",
+      "tokens": 20
+    },
+
+    "// === 活动计划相关查询模板 ===": "注释",
+    "活动计划总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_plans WHERE deleted_at IS NULL",
+      "description": "查询活动计划总数",
+      "table": "activity_plans",
+      "response": "活动计划总数为{count}个",
+      "tokens": 10
+    },
+    "本年度活动计划": {
+      "sql": "SELECT COUNT(*) as count FROM activity_plans WHERE year = YEAR(NOW()) AND deleted_at IS NULL",
+      "description": "查询本年度活动计划数量",
+      "table": "activity_plans",
+      "response": "本年度活动计划{count}个",
+      "tokens": 15
+    },
+    "活动计划状态分布": {
+      "sql": "SELECT status, COUNT(*) as count FROM activity_plans WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计活动计划状态分布",
+      "table": "activity_plans",
+      "response": "活动计划状态分布统计完成",
+      "tokens": 20
+    },
+    "活动计划预算统计": {
+      "sql": "SELECT COUNT(*) as total_plans, SUM(budget) as total_budget, AVG(budget) as avg_budget FROM activity_plans WHERE deleted_at IS NULL AND budget > 0",
+      "description": "统计活动计划预算情况",
+      "table": "activity_plans",
+      "response": "活动计划预算统计完成",
+      "tokens": 25
+    },
+
+    "// === 活动报名相关查询模板 ===": "注释",
+    "活动报名总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_registrations WHERE deleted_at IS NULL",
+      "description": "查询活动报名记录总数",
+      "table": "activity_registrations",
+      "response": "活动报名记录总数为{count}条",
+      "tokens": 10
+    },
+    "活动报名状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM activity_registrations WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计活动报名状态分布",
+      "table": "activity_registrations",
+      "response": "活动报名状态统计完成",
+      "tokens": 20
+    },
+    "活动报名转化统计": {
+      "sql": "SELECT conversion_status, COUNT(*) as count, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM activity_registrations WHERE deleted_at IS NULL) as percentage FROM activity_registrations WHERE deleted_at IS NULL GROUP BY conversion_status ORDER BY count DESC",
+      "description": "统计活动报名转化情况",
+      "table": "activity_registrations",
+      "response": "活动报名转化统计完成",
+      "tokens": 30
+    },
+    "本月活动报名": {
+      "sql": "SELECT COUNT(*) as count FROM activity_registrations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月活动报名数量",
+      "table": "activity_registrations",
+      "response": "本月活动报名{count}条",
+      "tokens": 20
+    },
+    "活动报名支付统计": {
+      "sql": "SELECT payment_status, COUNT(*) as count, SUM(paid_amount) as total_amount FROM activity_registrations WHERE deleted_at IS NULL GROUP BY payment_status ORDER BY count DESC",
+      "description": "统计活动报名支付情况",
+      "table": "activity_registrations",
+      "response": "活动报名支付统计完成",
+      "tokens": 25
+    },
+
+    "// === 活动人员相关查询模板 ===": "注释",
+    "活动人员总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_staffs WHERE deleted_at IS NULL",
+      "description": "查询活动人员记录总数",
+      "table": "activity_staffs",
+      "response": "活动人员记录总数为{count}条",
+      "tokens": 10
+    },
+    "活动人员角色分布": {
+      "sql": "SELECT role_type, COUNT(*) as count FROM activity_staffs WHERE deleted_at IS NULL GROUP BY role_type ORDER BY count DESC",
+      "description": "统计活动人员角色分布",
+      "table": "activity_staffs",
+      "response": "活动人员角色分布统计完成",
+      "tokens": 20
+    },
+
+    "// === 活动模板相关查询模板 ===": "注释",
+    "活动模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_templates WHERE status = 'active'",
+      "description": "查询活跃活动模板总数",
+      "table": "activity_templates",
+      "response": "活跃活动模板总数为{count}个",
+      "tokens": 10
+    },
+    "活动模板分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM activity_templates WHERE status = 'active' GROUP BY category ORDER BY count DESC",
+      "description": "统计活动模板分类分布",
+      "table": "activity_templates",
+      "response": "活动模板分类统计完成",
+      "tokens": 20
+    },
+    "活动模板使用统计": {
+      "sql": "SELECT name, usageCount, category FROM activity_templates WHERE status = 'active' ORDER BY usageCount DESC LIMIT 10",
+      "description": "查询最受欢迎的活动模板",
+      "table": "activity_templates",
+      "response": "最受欢迎活动模板统计完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "活动数据概览": {
+      "sql": "SELECT 'evaluations' as category, COUNT(*) as count FROM activity_evaluations WHERE deleted_at IS NULL UNION ALL SELECT 'plans' as category, COUNT(*) as count FROM activity_plans WHERE deleted_at IS NULL UNION ALL SELECT 'registrations' as category, COUNT(*) as count FROM activity_registrations WHERE deleted_at IS NULL UNION ALL SELECT 'staffs' as category, COUNT(*) as count FROM activity_staffs WHERE deleted_at IS NULL UNION ALL SELECT 'templates' as category, COUNT(*) as count FROM activity_templates WHERE status = 'active'",
+      "description": "活动相关数据总览",
+      "table": "multiple",
+      "response": "活动数据概览查询完成",
+      "tokens": 40
+    }
+  }
+}

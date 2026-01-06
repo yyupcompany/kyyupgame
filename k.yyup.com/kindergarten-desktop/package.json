@@ -1,0 +1,138 @@
+{
+  "name": "kindergarten-desktop",
+  "version": "1.0.0",
+  "description": "幼儿园管理系统桌面版",
+  "main": "src/main/index.js",
+  "homepage": "./",
+  "author": "Kindergarten Team",
+  "license": "ISC",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:renderer\" \"npm run dev:main\"",
+    "dev:renderer": "vite",
+    "dev:main": "electron src/main/index.js",
+    "build": "npm run build:renderer && npm run build:main",
+    "build:renderer": "vite build",
+    "build:main": "tsc",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "start": "electron dist/main/index.js",
+    "test": "vitest",
+    "lint": "eslint src --ext .vue,.js,.ts",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.5.16",
+    "vue-router": "^4.5.1",
+    "pinia": "^3.0.2",
+    "element-plus": "^2.2.16",
+    "@element-plus/icons-vue": "^2.3.1",
+    "axios": "^1.6.7",
+    "dayjs": "^1.11.13",
+    "echarts": "^5.6.0",
+    "sqlite3": "^5.1.7",
+    "sequelize": "^6.37.7",
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.1",
+    "cors": "^2.8.5",
+    "helmet": "^4.6.0"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1",
+    "vite": "^4.5.14",
+    "@vitejs/plugin-vue": "^4.6.2",
+    "typescript": "^5.0.0",
+    "vue-tsc": "^1.8.27",
+    "concurrently": "^8.2.2",
+    "vite-plugin-electron": "^0.15.5",
+    "vitest": "^1.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-vue": "^9.20.1"
+  },
+  "build": {
+    "appId": "com.kindergarten.desktop",
+    "productName": "幼儿园管理系统",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "src/main/**/*",
+      "public/**/*",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "data",
+        "to": "data",
+        "filter": ["**/*"]
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        },
+        {
+          "target": "deb",
+          "arch": ["x64"]
+        },
+        {
+          "target": "rpm",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/icon.png",
+      "category": "Education",
+      "desktop": {
+        "Name": "幼儿园管理系统",
+        "Comment": "专业的幼儿园综合管理平台",
+        "Keywords": "kindergarten;management;education;"
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "幼儿园管理系统"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "icon": "public/icon.icns",
+      "category": "public.app-category.education"
+    }
+  },
+  "keywords": [
+    "kindergarten",
+    "management",
+    "education",
+    "electron",
+    "vue",
+    "desktop"
+  ]
+}

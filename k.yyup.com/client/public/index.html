@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>幼儿园招生管理系统</title>
+    <style>
+      /* 全局CSS重置 */
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      
+      /* 侧边栏Logo强制样式 - 使用最高优先级 */
+      .sidebar-logo {
+        background-color: #192B4D !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+      
+      /* 暗黑主题下的Logo样式 */
+      [data-theme="dark"] .sidebar-logo,
+      .sidebar-logo-dark {
+        background-color: #0f172a !important;
+        border-bottom: 1px solid #374151 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html> 

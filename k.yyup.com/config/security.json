@@ -1,0 +1,49 @@
+{
+  "ai_agent": {
+    "default_role": "USER",
+    "admin_roles": ["admin", "super_admin"],
+    "required_permissions": ["AI_AGENT_USE"],
+    "max_tools_per_request": 3,
+    "request_timeout_ms": 30000,
+    "max_retries": 3,
+    "enable_caching": true,
+    "cache_ttl_ms": 300000
+  },
+  "rate_limiting": {
+    "enabled": true,
+    "max_requests_per_minute": 60,
+    "max_requests_per_hour": 1000,
+    "burst_limit": 10
+  },
+  "logging": {
+    "log_all_requests": true,
+    "log_tool_executions": true,
+    "log_security_events": true,
+    "log_performance_metrics": true,
+    "log_level": "info"
+  },
+  "security": {
+    "enable_input_validation": true,
+    "max_input_length": 10000,
+    "blocked_patterns": [
+      "eval\\(",
+      "Function\\(",
+      "setTimeout\\(",
+      "setInterval\\("
+    ],
+    "enable_output_sanitization": true
+  },
+  "performance": {
+    "enable_monitoring": true,
+    "response_time_threshold_ms": 5000,
+    "memory_threshold_mb": 500,
+    "cpu_threshold_percent": 80
+  },
+  "features": {
+    "enable_web_search": true,
+    "enable_file_upload": true,
+    "enable_voice_input": true,
+    "enable_complex_workflows": true,
+    "enable_todo_list_creation": true
+  }
+}

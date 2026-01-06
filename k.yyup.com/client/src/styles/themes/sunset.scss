@@ -1,0 +1,67 @@
+// 夕阳余晖主题
+:root,
+:root.theme-sunset {
+  // 夕阳余晖色彩
+  --primary-color: #f77f00;
+  --primary-hover: #d56a00;
+  --primary-light: #ffb700;
+  --secondary-color: #fcbf49;
+  --accent-color: #eae2b7;
+  --danger-color: #d62828;
+  --warning-color: #f77f00;
+  --info-color: #003049;
+  --success-color: #52b788;
+
+  // 文字在主色背景上的颜色
+  --text-on-primary: #000000;
+  --text-on-primary-secondary: rgba(0, 0, 0, 0.8);
+
+  // 按钮在主色背景上的样式
+  --button-on-primary-bg: rgba(255, 255, 255, 0.2);
+  --button-on-primary-border: rgba(0, 0, 0, 0.1);
+  --button-on-primary-hover-bg: rgba(255, 255, 255, 0.3);
+  --button-on-primary-hover-border: rgba(0, 0, 0, 0.2);
+
+  // 背景色
+  --bg-primary: #003049;
+  --bg-secondary: #d62828;
+  --bg-tertiary: #f77f00;
+  --bg-card: #fcbf49;
+  --bg-hover: #eae2b7;
+
+  // 文字色
+  --text-primary: #ffffff;
+  --text-secondary: #eae2b7;
+  --text-muted: #fcbf49;
+  --text-disabled: #f77f00;
+  --text-tertiary: #d62828;
+
+  // 边框色
+  --border-color: rgba(252, 191, 73, 0.3);
+  --border-light: rgba(252, 191, 73, 0.5);
+  --border-focus: rgba(252, 191, 73, 0.8);
+
+  // 温暖阴影
+  --shadow-sm: 0 1px 3px 0 rgba(247, 127, 0, 0.2);
+  --shadow-md: 0 4px 8px -2px rgba(247, 127, 0, 3);
+  --shadow-lg: 0 12px 20px -4px rgba(247, 127, 0, 0.4);
+  --shadow-xl: 0 24px 32px -8px rgba(247, 127, 0, 0.5);
+
+  // 侧边栏
+  --sidebar-bg: #003049;
+  --sidebar-border: rgba(252, 191, 73, 0.3);
+  --sidebar-text: #eae2b7;
+  --sidebar-text-hover: #ffffff;
+  --sidebar-item-hover: rgba(252, 191, 73, 0.2);
+  --sidebar-item-active: var(--primary-color);
+  --sidebar-item-active-text: #000000;
+
+  // 过渡动画
+  --transition-fast: 0.2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --transition-normal: 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --transition-slow: 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+
+  // 暖光效果
+  --warm-glow: 0 0 20px rgba(247, 127, 0, 0.3);
+  --warm-glow-hover: 0 0 30px rgba(247, 127, 0, 0.5);
+}

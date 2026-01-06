@@ -1,0 +1,157 @@
+{
+  "name": "页面引导系统查询模板字典",
+  "description": "页面引导、页面引导章节、页面描述等页面引导系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 页面引导相关查询模板 ===": "注释",
+    "页面引导总数": {
+      "sql": "SELECT COUNT(*) as count FROM page_guides",
+      "description": "查询页面引导总数",
+      "table": "page_guides",
+      "response": "页面引导总数为{count}个",
+      "tokens": 10
+    },
+    "活跃页面引导": {
+      "sql": "SELECT COUNT(*) as count FROM page_guides WHERE is_active = 1",
+      "description": "查询活跃页面引导数量",
+      "table": "page_guides",
+      "response": "活跃页面引导{count}个",
+      "tokens": 12
+    },
+    "页面引导分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM page_guides GROUP BY category ORDER BY count DESC",
+      "description": "统计页面引导分类分布",
+      "table": "page_guides",
+      "response": "页面引导分类统计完成",
+      "tokens": 20
+    },
+    "页面引导重要性分析": {
+      "sql": "SELECT importance, COUNT(*) as count FROM page_guides GROUP BY importance ORDER BY importance DESC",
+      "description": "分析页面引导重要性分布",
+      "table": "page_guides",
+      "response": "页面引导重要性分析完成",
+      "tokens": 20
+    },
+    "高重要性页面引导": {
+      "sql": "SELECT COUNT(*) as count FROM page_guides WHERE importance >= 8 AND is_active = 1",
+      "description": "查询高重要性页面引导数量",
+      "table": "page_guides",
+      "response": "高重要性页面引导{count}个",
+      "tokens": 15
+    },
+    "本月新增页面引导": {
+      "sql": "SELECT COUNT(*) as count FROM page_guides WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增页面引导数量",
+      "table": "page_guides",
+      "response": "本月新增页面引导{count}个",
+      "tokens": 20
+    },
+    "页面引导关联表统计": {
+      "sql": "SELECT COUNT(CASE WHEN related_tables IS NOT NULL AND JSON_LENGTH(related_tables) > 0 THEN 1 END) as with_tables, COUNT(*) as total_guides FROM page_guides",
+      "description": "统计关联数据表的页面引导",
+      "table": "page_guides",
+      "response": "页面引导关联表统计完成",
+      "tokens": 25
+    },
+
+    "// === 页面引导章节相关查询模板 ===": "注释",
+    "页面引导章节总数": {
+      "sql": "SELECT COUNT(*) as count FROM page_guide_sections",
+      "description": "查询页面引导章节总数",
+      "table": "page_guide_sections",
+      "response": "页面引导章节总数为{count}个",
+      "tokens": 10
+    },
+    "活跃引导章节": {
+      "sql": "SELECT COUNT(*) as count FROM page_guide_sections WHERE is_active = 1",
+      "description": "查询活跃引导章节数量",
+      "table": "page_guide_sections",
+      "response": "活跃引导章节{count}个",
+      "tokens": 12
+    },
+    "页面章节分布统计": {
+      "sql": "SELECT pg.page_name, COUNT(pgs.id) as section_count FROM page_guides pg LEFT JOIN page_guide_sections pgs ON pg.id = pgs.page_guide_id WHERE pg.is_active = 1 GROUP BY pg.id, pg.page_name ORDER BY section_count DESC",
+      "description": "统计各页面的章节数量分布",
+      "table": "page_guide_sections",
+      "joins": ["page_guides"],
+      "response": "页面章节分布统计完成",
+      "tokens": 30
+    },
+    "章节功能特性统计": {
+      "sql": "SELECT COUNT(CASE WHEN features IS NOT NULL AND JSON_LENGTH(features) > 0 THEN 1 END) as with_features, COUNT(*) as total_sections FROM page_guide_sections",
+      "description": "统计包含功能特性的章节",
+      "table": "page_guide_sections",
+      "response": "章节功能特性统计完成",
+      "tokens": 25
+    },
+    "本月新增章节": {
+      "sql": "SELECT COUNT(*) as count FROM page_guide_sections WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增章节数量",
+      "table": "page_guide_sections",
+      "response": "本月新增章节{count}个",
+      "tokens": 20
+    },
+    "章节排序分析": {
+      "sql": "SELECT AVG(sort_order) as avg_order, MIN(sort_order) as min_order, MAX(sort_order) as max_order FROM page_guide_sections WHERE is_active = 1",
+      "description": "分析章节排序情况",
+      "table": "page_guide_sections",
+      "response": "章节排序分析完成",
+      "tokens": 25
+    },
+
+    "// === 页面描述相关查询模板 ===": "注释",
+    "页面描述总数": {
+      "sql": "SELECT COUNT(*) as count FROM page_descriptions",
+      "description": "查询页面描述总数",
+      "table": "page_descriptions",
+      "response": "页面描述总数为{count}个",
+      "tokens": 10
+    },
+    "页面描述功能统计": {
+      "sql": "SELECT COUNT(CASE WHEN features IS NOT NULL AND JSON_LENGTH(features) > 0 THEN 1 END) as with_features, COUNT(*) as total_descriptions FROM page_descriptions",
+      "description": "统计包含功能描述的页面",
+      "table": "page_descriptions",
+      "response": "页面描述功能统计完成",
+      "tokens": 20
+    },
+    "页面帮助内容统计": {
+      "sql": "SELECT COUNT(CASE WHEN help_content IS NOT NULL AND JSON_LENGTH(help_content) > 0 THEN 1 END) as with_help, COUNT(*) as total_descriptions FROM page_descriptions",
+      "description": "统计包含帮助内容的页面",
+      "table": "page_descriptions",
+      "response": "页面帮助内容统计完成",
+      "tokens": 20
+    },
+    "本月更新页面描述": {
+      "sql": "SELECT COUNT(*) as count FROM page_descriptions WHERE YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at) = MONTH(NOW())",
+      "description": "查询本月更新的页面描述数量",
+      "table": "page_descriptions",
+      "response": "本月更新页面描述{count}个",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "页面引导系统概览": {
+      "sql": "SELECT 'page_guides' as category, COUNT(*) as count FROM page_guides UNION ALL SELECT 'page_guide_sections' as category, COUNT(*) as count FROM page_guide_sections UNION ALL SELECT 'page_descriptions' as category, COUNT(*) as count FROM page_descriptions",
+      "description": "页面引导系统数据总览",
+      "table": "multiple",
+      "response": "页面引导系统概览查询完成",
+      "tokens": 30
+    },
+    "页面引导完整性分析": {
+      "sql": "SELECT pg.category, COUNT(pg.id) as guide_count, COUNT(pgs.id) as section_count FROM page_guides pg LEFT JOIN page_guide_sections pgs ON pg.id = pgs.page_guide_id WHERE pg.is_active = 1 GROUP BY pg.category ORDER BY guide_count DESC",
+      "description": "分析页面引导完整性",
+      "table": "page_guides",
+      "joins": ["page_guide_sections"],
+      "response": "页面引导完整性分析完成",
+      "tokens": 35
+    },
+    "引导系统活跃度统计": {
+      "sql": "SELECT COUNT(CASE WHEN pg.is_active = 1 THEN 1 END) as active_guides, COUNT(CASE WHEN pgs.is_active = 1 THEN 1 END) as active_sections FROM page_guides pg, page_guide_sections pgs",
+      "description": "统计引导系统活跃度",
+      "table": "page_guides",
+      "joins": ["page_guide_sections"],
+      "response": "引导系统活跃度统计完成",
+      "tokens": 30
+    }
+  }
+}

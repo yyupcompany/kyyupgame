@@ -1,0 +1,196 @@
+{
+  "name": "记忆系统查询模板字典",
+  "description": "核心记忆、情节记忆、工作记忆、长期记忆、记忆索引、记忆关联等记忆系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 核心记忆相关查询模板 ===": "注释",
+    "核心记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM core_memories",
+      "description": "查询核心记忆总数",
+      "table": "core_memories",
+      "response": "核心记忆总数为{count}条",
+      "tokens": 10
+    },
+    "核心记忆类型统计": {
+      "sql": "SELECT memory_type, COUNT(*) as count FROM core_memories GROUP BY memory_type ORDER BY count DESC",
+      "description": "统计核心记忆类型分布",
+      "table": "core_memories",
+      "response": "核心记忆类型统计完成",
+      "tokens": 20
+    },
+    "核心记忆重要性分析": {
+      "sql": "SELECT importance_level, COUNT(*) as count FROM core_memories GROUP BY importance_level ORDER BY importance_level DESC",
+      "description": "分析核心记忆重要性分布",
+      "table": "core_memories",
+      "response": "核心记忆重要性分析完成",
+      "tokens": 20
+    },
+    "活跃核心记忆": {
+      "sql": "SELECT COUNT(*) as count FROM core_memories WHERE is_active = 1",
+      "description": "查询活跃核心记忆数量",
+      "table": "core_memories",
+      "response": "活跃核心记忆{count}条",
+      "tokens": 12
+    },
+
+    "// === 情节记忆相关查询模板 ===": "注释",
+    "情节记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM episodic_memories",
+      "description": "查询情节记忆总数",
+      "table": "episodic_memories",
+      "response": "情节记忆总数为{count}条",
+      "tokens": 10
+    },
+    "情节记忆事件类型统计": {
+      "sql": "SELECT event_type, COUNT(*) as count FROM episodic_memories GROUP BY event_type ORDER BY count DESC",
+      "description": "统计情节记忆事件类型分布",
+      "table": "episodic_memories",
+      "response": "情节记忆事件类型统计完成",
+      "tokens": 20
+    },
+    "情节记忆情感分析": {
+      "sql": "SELECT emotional_valence, COUNT(*) as count FROM episodic_memories WHERE emotional_valence IS NOT NULL GROUP BY emotional_valence ORDER BY count DESC",
+      "description": "分析情节记忆情感倾向",
+      "table": "episodic_memories",
+      "response": "情节记忆情感分析完成",
+      "tokens": 20
+    },
+    "本月情节记忆": {
+      "sql": "SELECT COUNT(*) as count FROM episodic_memories WHERE YEAR(event_timestamp) = YEAR(NOW()) AND MONTH(event_timestamp) = MONTH(NOW())",
+      "description": "查询本月情节记忆数量",
+      "table": "episodic_memories",
+      "response": "本月情节记忆{count}条",
+      "tokens": 20
+    },
+
+    "// === 工作记忆相关查询模板 ===": "注释",
+    "工作记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM working_memories",
+      "description": "查询工作记忆总数",
+      "table": "working_memories",
+      "response": "工作记忆总数为{count}条",
+      "tokens": 10
+    },
+    "工作记忆状态统计": {
+      "sql": "SELECT memory_status, COUNT(*) as count FROM working_memories GROUP BY memory_status ORDER BY count DESC",
+      "description": "统计工作记忆状态分布",
+      "table": "working_memories",
+      "response": "工作记忆状态统计完成",
+      "tokens": 20
+    },
+    "活跃工作记忆": {
+      "sql": "SELECT COUNT(*) as count FROM working_memories WHERE memory_status = 'active'",
+      "description": "查询活跃工作记忆数量",
+      "table": "working_memories",
+      "response": "活跃工作记忆{count}条",
+      "tokens": 12
+    },
+    "工作记忆优先级分析": {
+      "sql": "SELECT priority_level, COUNT(*) as count FROM working_memories GROUP BY priority_level ORDER BY priority_level DESC",
+      "description": "分析工作记忆优先级分布",
+      "table": "working_memories",
+      "response": "工作记忆优先级分析完成",
+      "tokens": 20
+    },
+
+    "// === 长期记忆相关查询模板 ===": "注释",
+    "长期记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM long_term_memories",
+      "description": "查询长期记忆总数",
+      "table": "long_term_memories",
+      "response": "长期记忆总数为{count}条",
+      "tokens": 10
+    },
+    "长期记忆分类统计": {
+      "sql": "SELECT memory_category, COUNT(*) as count FROM long_term_memories GROUP BY memory_category ORDER BY count DESC",
+      "description": "统计长期记忆分类分布",
+      "table": "long_term_memories",
+      "response": "长期记忆分类统计完成",
+      "tokens": 20
+    },
+    "长期记忆巩固程度": {
+      "sql": "SELECT consolidation_level, COUNT(*) as count FROM long_term_memories GROUP BY consolidation_level ORDER BY consolidation_level DESC",
+      "description": "分析长期记忆巩固程度",
+      "table": "long_term_memories",
+      "response": "长期记忆巩固程度分析完成",
+      "tokens": 20
+    },
+    "长期记忆访问统计": {
+      "sql": "SELECT AVG(access_count) as avg_access, MAX(access_count) as max_access, COUNT(CASE WHEN access_count > 0 THEN 1 END) as accessed_memories FROM long_term_memories",
+      "description": "统计长期记忆访问情况",
+      "table": "long_term_memories",
+      "response": "长期记忆访问统计完成",
+      "tokens": 25
+    },
+
+    "// === 记忆索引相关查询模板 ===": "注释",
+    "记忆索引总数": {
+      "sql": "SELECT COUNT(*) as count FROM memory_indices",
+      "description": "查询记忆索引总数",
+      "table": "memory_indices",
+      "response": "记忆索引总数为{count}个",
+      "tokens": 10
+    },
+    "索引类型统计": {
+      "sql": "SELECT index_type, COUNT(*) as count FROM memory_indices GROUP BY index_type ORDER BY count DESC",
+      "description": "统计索引类型分布",
+      "table": "memory_indices",
+      "response": "索引类型统计完成",
+      "tokens": 20
+    },
+    "索引效率分析": {
+      "sql": "SELECT AVG(search_efficiency) as avg_efficiency, MIN(search_efficiency) as min_efficiency, MAX(search_efficiency) as max_efficiency FROM memory_indices WHERE search_efficiency IS NOT NULL",
+      "description": "分析索引搜索效率",
+      "table": "memory_indices",
+      "response": "索引效率分析完成",
+      "tokens": 25
+    },
+
+    "// === 记忆关联相关查询模板 ===": "注释",
+    "记忆关联总数": {
+      "sql": "SELECT COUNT(*) as count FROM memory_associations",
+      "description": "查询记忆关联总数",
+      "table": "memory_associations",
+      "response": "记忆关联总数为{count}个",
+      "tokens": 10
+    },
+    "关联类型统计": {
+      "sql": "SELECT association_type, COUNT(*) as count FROM memory_associations GROUP BY association_type ORDER BY count DESC",
+      "description": "统计关联类型分布",
+      "table": "memory_associations",
+      "response": "关联类型统计完成",
+      "tokens": 20
+    },
+    "关联强度分析": {
+      "sql": "SELECT AVG(association_strength) as avg_strength, MIN(association_strength) as min_strength, MAX(association_strength) as max_strength FROM memory_associations WHERE association_strength IS NOT NULL",
+      "description": "分析记忆关联强度",
+      "table": "memory_associations",
+      "response": "记忆关联强度分析完成",
+      "tokens": 25
+    },
+    "强关联记忆": {
+      "sql": "SELECT COUNT(*) as count FROM memory_associations WHERE association_strength > 0.8",
+      "description": "查询强关联记忆数量",
+      "table": "memory_associations",
+      "response": "强关联记忆{count}个",
+      "tokens": 15
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "记忆系统概览": {
+      "sql": "SELECT 'core_memories' as category, COUNT(*) as count FROM core_memories UNION ALL SELECT 'episodic_memories' as category, COUNT(*) as count FROM episodic_memories UNION ALL SELECT 'working_memories' as category, COUNT(*) as count FROM working_memories UNION ALL SELECT 'long_term_memories' as category, COUNT(*) as count FROM long_term_memories UNION ALL SELECT 'memory_indices' as category, COUNT(*) as count FROM memory_indices UNION ALL SELECT 'memory_associations' as category, COUNT(*) as count FROM memory_associations",
+      "description": "记忆系统数据总览",
+      "table": "multiple",
+      "response": "记忆系统概览查询完成",
+      "tokens": 40
+    },
+    "记忆网络分析": {
+      "sql": "SELECT COUNT(DISTINCT cm.id) as core_memories, COUNT(DISTINCT em.id) as episodic_memories, COUNT(DISTINCT ma.id) as associations FROM core_memories cm LEFT JOIN memory_associations ma ON cm.id = ma.source_memory_id LEFT JOIN episodic_memories em ON ma.target_memory_id = em.id",
+      "description": "分析记忆网络连接情况",
+      "table": "core_memories",
+      "joins": ["memory_associations", "episodic_memories"],
+      "response": "记忆网络分析完成",
+      "tokens": 35
+    }
+  }
+}

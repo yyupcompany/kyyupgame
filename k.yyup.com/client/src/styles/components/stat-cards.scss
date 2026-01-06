@@ -1,0 +1,518 @@
+/**
+ * 统计卡片组件样式
+ * Statistics Cards Component Styles
+ * 
+ * 用于所有统计卡片的通用样式，包括dashboard、报表等页面
+ * Universal styles for all statistics cards, including dashboard, reports etc.
+ */
+
+@use '../design-tokens.scss' as *;
+@use '../mixins/responsive.scss' as *;
+
+/* ==================== 统计卡片网格容器 ==================== */
+/* Statistics Cards Grid Container */
+
+.stats-grid {
+  @include flexible-grid(280px, var(--spacing-lg));
+  margin-bottom: var(--spacing-xl);
+  
+  @include mobile {
+    @include flexible-grid(250px, var(--spacing-md));
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  @include large-desktop {
+    @include flexible-grid(320px, var(--spacing-xl));
+  }
+}
+
+/* ==================== 基础统计卡片 ==================== */
+/* Base Statistics Card */
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+  min-height: 120px;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  
+  /* 顶部装饰条 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
+  }
+  
+  /* 悬停效果 */
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-focus);
+    
+    &::before {
+      transform: scaleX(1);
+    }
+    
+    .stat-icon {
+      transform: scale(1.05);
+    }
+    
+    .stat-card-bg {
+      transform: translate(20%, -20%) scale(1.1);
+      opacity: 0.08;
+    }
+  }
+  
+  /* 加载状态 */
+  &.loading {
+    .stat-content {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    .stat-value {
+      background: var(--bg-light);
+      border-radius: var(--radius-sm);
+      color: transparent;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+  }
+  
+  /* 响应式调整 */
+  @include mobile {
+    padding: var(--spacing-md);
+    min-height: 100px;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  @include tablet {
+    padding: var(--spacing-lg);
+    min-height: 110px;
+  }
+  
+  @include large-desktop {
+    padding: var(--spacing-xl);
+    min-height: 140px;
+  }
+}
+
+/* ==================== 统计卡片内容 ==================== */
+/* Statistics Card Content */
+
+.stat-content {
+  @include flex-center-y;
+  gap: var(--spacing-lg);
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  
+  @include mobile {
+    gap: var(--spacing-md);
+  }
+  
+  @include large-desktop {
+    gap: var(--spacing-xl);
+  }
+}
+
+/* ==================== 统计图标 ==================== */
+/* Statistics Icon */
+
+.stat-icon {
+  @include flex-center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  flex-shrink: 0;
+  
+  /* 主题色 */
+  &--primary {
+    background: linear-gradient(135deg, var(--primary-extra-light), var(--primary-lighter));
+    color: var(--primary-color);
+  }
+  
+  /* 成功色 - 学生相关 */
+  &--students,
+  &--success {
+    background: linear-gradient(135deg, var(--success-extra-light), var(--success-lighter));
+    color: var(--success-color);
+  }
+  
+  /* 信息色 - 园区相关 */
+  &--campuses,
+  &--classes,
+  &--info {
+    background: linear-gradient(135deg, var(--info-extra-light), var(--info-lighter));
+    color: var(--info-color);
+  }
+  
+  /* 警告色 - 用户相关 */
+  &--users,
+  &--teachers,
+  &--warning {
+    background: linear-gradient(135deg, var(--warning-extra-light), var(--warning-lighter));
+    color: var(--warning-color);
+  }
+  
+  /* 危险色 - 活动相关 */
+  &--activities,
+  &--events,
+  &--danger {
+    background: linear-gradient(135deg, var(--danger-extra-light), var(--danger-lighter));
+    color: var(--danger-color);
+  }
+  
+  /* 自定义图标颜色 */
+  &--purple {
+    background: linear-gradient(135deg, #f3e8ff, #ddd6fe);
+    color: #8b5cf6;
+  }
+  
+  &--indigo {
+    background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+    color: #6366f1;
+  }
+  
+  &--pink {
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+    color: #ec4899;
+  }
+  
+  &--teal {
+    background: linear-gradient(135deg, #f0fdfa, #ccfbf1);
+    color: #14b8a6;
+  }
+  
+  /* 响应式调整 */
+  @include mobile {
+    width: 48px;
+    height: 48px;
+  }
+  
+  @include large-desktop {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ==================== 统计信息 ==================== */
+/* Statistics Information */
+
+.stat-info {
+  flex: 1;
+  min-width: 0; /* 防止flex项目溢出 */
+  
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-medium);
+    line-height: var(--leading-tight);
+    
+    @include text-truncate;
+    
+    @include mobile {
+      font-size: var(--text-xs);
+    }
+    
+    @include large-desktop {
+      font-size: var(--text-base);
+    }
+  }
+  
+  .stat-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-extrabold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-xs);
+    line-height: var(--leading-none);
+    
+    @include mobile {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+    }
+    
+    @include large-desktop {
+      font-size: var(--text-3xl);
+    }
+  }
+  
+  .stat-description {
+    font-size: var(--text-xs);
+    color: var(--text-placeholder);
+    line-height: var(--leading-tight);
+    
+    @include text-truncate-multiline(2);
+    
+    @include mobile {
+      display: none; /* 移动端隐藏描述 */
+    }
+    
+    @include tablet-up {
+      display: block;
+    }
+  }
+}
+
+/* ==================== 统计趋势 ==================== */
+/* Statistics Trend */
+
+.stat-trend {
+  @include flex-center-y;
+  gap: var(--spacing-xs);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  margin-top: var(--spacing-xs);
+  
+  .trend-icon {
+    font-size: var(--text-sm);
+    line-height: 1;
+  }
+  
+  .trend-text {
+    line-height: 1;
+  }
+  
+  /* 上升趋势 */
+  &.trend-up,
+  &--positive {
+    color: var(--success-color);
+  }
+  
+  /* 下降趋势 */
+  &.trend-down,
+  &--negative {
+    color: var(--danger-color);
+  }
+  
+  /* 平稳趋势 */
+  &.trend-stable,
+  &--neutral {
+    color: var(--text-secondary);
+  }
+  
+  @include mobile {
+    font-size: 10px;
+    gap: 2px;
+    
+    .trend-icon {
+      font-size: var(--text-xs);
+    }
+  }
+}
+
+/* ==================== 统计卡片背景装饰 ==================== */
+/* Statistics Card Background Decoration */
+
+.stat-card-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  opacity: 0.04;
+  transform: translate(25%, -25%);
+  transition: all var(--transition-slow);
+  pointer-events: none;
+  
+  /* 主题色背景 */
+  &.bg-primary { background: var(--primary-color); }
+  &.bg-students,
+  &.bg-success { background: var(--success-color); }
+  &.bg-campuses,
+  &.bg-classes,
+  &.bg-info { background: var(--info-color); }
+  &.bg-users,
+  &.bg-teachers,
+  &.bg-warning { background: var(--warning-color); }
+  &.bg-activities,
+  &.bg-events,
+  &.bg-danger { background: var(--danger-color); }
+  
+  /* 自定义背景色 */
+  &.bg-purple { background: #8b5cf6; }
+  &.bg-indigo { background: #6366f1; }
+  &.bg-pink { background: #ec4899; }
+  &.bg-teal { background: #14b8a6; }
+  
+  @include mobile {
+    width: 60px;
+    height: 60px;
+    transform: translate(20%, -20%);
+  }
+  
+  @include large-desktop {
+    width: 100px;
+    height: 100px;
+    transform: translate(30%, -30%);
+  }
+}
+
+/* ==================== 统计卡片变体 ==================== */
+/* Statistics Card Variants */
+
+/* 紧凑型卡片 */
+.stat-card--compact {
+  padding: var(--spacing-md);
+  min-height: 80px;
+  
+  .stat-content {
+    gap: var(--spacing-md);
+  }
+  
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .stat-info .stat-value {
+    font-size: var(--text-lg);
+    margin-bottom: 0;
+  }
+  
+  .stat-info .stat-label {
+    font-size: var(--text-xs);
+    margin-bottom: 2px;
+  }
+  
+  .stat-card-bg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* 大型卡片 */
+.stat-card--large {
+  padding: var(--spacing-xl);
+  min-height: 160px;
+  
+  .stat-icon {
+    width: 72px;
+    height: 72px;
+  }
+  
+  .stat-info .stat-value {
+    font-size: var(--text-4xl);
+  }
+  
+  .stat-info .stat-label {
+    font-size: var(--text-base);
+  }
+  
+  .stat-card-bg {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+/* 垂直布局卡片 */
+.stat-card--vertical {
+  .stat-content {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-md);
+  }
+  
+  .stat-info {
+    flex: none;
+  }
+  
+  .stat-info .stat-label,
+  .stat-info .stat-description {
+    text-align: center;
+  }
+}
+
+/* ==================== 动画效果 ==================== */
+/* Animation Effects */
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes countUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 数值变化动画 */
+.stat-value--animated {
+  animation: countUp 0.6s ease-out;
+}
+
+/* ==================== 无障碍支持 ==================== */
+/* Accessibility Support */
+
+.stat-card {
+  /* 为屏幕阅读器提供更好的支持 */
+  &[role="button"] {
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+    
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .stat-card {
+    border-width: 2px;
+    border-color: var(--text-primary);
+    
+    &:hover {
+      border-color: var(--primary-color);
+    }
+  }
+  
+  .stat-icon {
+    border: 1px solid currentColor;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .stat-card,
+  .stat-icon,
+  .stat-card-bg {
+    transition: none;
+  }
+  
+  .stat-card:hover {
+    transform: none;
+  }
+  
+  .stat-value--animated {
+    animation: none;
+  }
+}

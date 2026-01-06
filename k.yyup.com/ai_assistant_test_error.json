@@ -1,0 +1,203 @@
+{
+  "timestamp": "2025-11-20T23:52:23.805Z",
+  "error": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=登录, button:has-text(\"登录\"), a:has-text(\"登录\")') to be visible\u001b[22m\n",
+  "stack": "page.waitForSelector: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('text=登录, button:has-text(\"登录\"), a:has-text(\"登录\")') to be visible\u001b[22m\n\n    at testAIAssistantFlow (/home/zhgue/kyyupgame/k.yyup.com/test_ai_assistant_full_flow.cjs:58:36)",
+  "consoleErrors": [],
+  "consoleLogs": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "timestamp": "2025-11-20T23:52:07.834Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "timestamp": "2025-11-20T23:52:07.862Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "timestamp": "2025-11-20T23:52:08.097Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "timestamp": "2025-11-20T23:52:08.108Z"
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "timestamp": "2025-11-20T23:52:08.109Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "timestamp": "2025-11-20T23:52:08.109Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "timestamp": "2025-11-20T23:52:08.109Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "timestamp": "2025-11-20T23:52:08.110Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "timestamp": "2025-11-20T23:52:08.111Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "timestamp": "2025-11-20T23:52:08.111Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "timestamp": "2025-11-20T23:52:08.111Z"
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "timestamp": "2025-11-20T23:52:08.113Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "timestamp": "2025-11-20T23:52:08.113Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "timestamp": "2025-11-20T23:52:08.119Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "timestamp": "2025-11-20T23:52:08.119Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "timestamp": "2025-11-20T23:52:08.120Z"
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "timestamp": "2025-11-20T23:52:08.120Z"
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "timestamp": "2025-11-20T23:52:08.120Z"
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "timestamp": "2025-11-20T23:52:08.133Z"
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "timestamp": "2025-11-20T23:52:08.133Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "timestamp": "2025-11-20T23:52:08.133Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /dashboard",
+      "timestamp": "2025-11-20T23:52:08.134Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-20T23:52:08.134Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "timestamp": "2025-11-20T23:52:08.136Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "timestamp": "2025-11-20T23:52:08.136Z"
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "timestamp": "2025-11-20T23:52:08.139Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "timestamp": "2025-11-20T23:52:08.140Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-20T23:52:08.141Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "timestamp": "2025-11-20T23:52:08.141Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 504.80ms, domContentLoaded: 484.60ms, memoryUsage: 23.37MB}",
+      "timestamp": "2025-11-20T23:52:08.166Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "timestamp": "2025-11-20T23:52:08.167Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "timestamp": "2025-11-20T23:52:08.167Z"
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "timestamp": "2025-11-20T23:52:08.172Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "timestamp": "2025-11-20T23:52:08.196Z"
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "timestamp": "2025-11-20T23:52:10.413Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "timestamp": "2025-11-20T23:52:10.442Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "timestamp": "2025-11-20T23:52:10.457Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "timestamp": "2025-11-20T23:52:10.457Z"
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /dashboard}",
+      "timestamp": "2025-11-20T23:52:10.457Z"
+    }
+  ]
+}

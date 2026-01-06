@@ -1,0 +1,195 @@
+{
+  "name": "招生相关查询模板字典",
+  "description": "入学通知、录取结果、招生咨询、面试、计划、任务等招生相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 入学通知相关查询模板 ===": "注释",
+    "入学通知总数": {
+      "sql": "SELECT COUNT(*) as count FROM admission_notifications WHERE deleted_at IS NULL",
+      "description": "查询入学通知总数",
+      "table": "admission_notifications",
+      "response": "入学通知总数为{count}条",
+      "tokens": 10
+    },
+    "有效入学通知": {
+      "sql": "SELECT COUNT(*) as count FROM admission_notifications WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询有效入学通知数量",
+      "table": "admission_notifications",
+      "response": "有效入学通知{count}条",
+      "tokens": 12
+    },
+    "本月入学通知": {
+      "sql": "SELECT COUNT(*) as count FROM admission_notifications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月发布的入学通知数量",
+      "table": "admission_notifications",
+      "response": "本月发布入学通知{count}条",
+      "tokens": 20
+    },
+    "入学通知类型分布": {
+      "sql": "SELECT notification_type, COUNT(*) as count FROM admission_notifications WHERE deleted_at IS NULL GROUP BY notification_type ORDER BY count DESC",
+      "description": "统计入学通知类型分布",
+      "table": "admission_notifications",
+      "response": "入学通知类型分布统计完成",
+      "tokens": 20
+    },
+
+    "// === 录取结果相关查询模板 ===": "注释",
+    "录取结果总数": {
+      "sql": "SELECT COUNT(*) as count FROM admission_results WHERE deleted_at IS NULL",
+      "description": "查询录取结果记录总数",
+      "table": "admission_results",
+      "response": "录取结果记录总数为{count}条",
+      "tokens": 10
+    },
+    "录取结果统计": {
+      "sql": "SELECT result_type, COUNT(*) as count FROM admission_results WHERE deleted_at IS NULL GROUP BY result_type ORDER BY count DESC",
+      "description": "统计录取结果类型分布",
+      "table": "admission_results",
+      "response": "录取结果统计完成",
+      "tokens": 20
+    },
+    "录取支付状态": {
+      "sql": "SELECT payment_status, COUNT(*) as count, SUM(tuition_fee) as total_fee FROM admission_results WHERE deleted_at IS NULL GROUP BY payment_status ORDER BY count DESC",
+      "description": "统计录取学费支付状态",
+      "table": "admission_results",
+      "response": "录取支付状态统计完成",
+      "tokens": 25
+    },
+    "本月录取情况": {
+      "sql": "SELECT COUNT(*) as count FROM admission_results WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月录取情况",
+      "table": "admission_results",
+      "response": "本月录取{count}人",
+      "tokens": 20
+    },
+
+    "// === 招生咨询相关查询模板 ===": "注释",
+    "招生咨询总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_consultations WHERE deleted_at IS NULL",
+      "description": "查询招生咨询记录总数",
+      "table": "enrollment_consultations",
+      "response": "招生咨询记录总数为{count}条",
+      "tokens": 10
+    },
+    "招生咨询意向分布": {
+      "sql": "SELECT intention_level, COUNT(*) as count FROM enrollment_consultations WHERE deleted_at IS NULL GROUP BY intention_level ORDER BY intention_level DESC",
+      "description": "统计招生咨询意向等级分布",
+      "table": "enrollment_consultations",
+      "response": "招生咨询意向分布统计完成",
+      "tokens": 20
+    },
+    "招生咨询渠道分析": {
+      "sql": "SELECT source_channel, COUNT(*) as count FROM enrollment_consultations WHERE deleted_at IS NULL GROUP BY source_channel ORDER BY count DESC",
+      "description": "分析招生咨询来源渠道",
+      "table": "enrollment_consultations",
+      "response": "招生咨询渠道分析完成",
+      "tokens": 20
+    },
+    "本月招生咨询": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_consultations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月招生咨询数量",
+      "table": "enrollment_consultations",
+      "response": "本月招生咨询{count}条",
+      "tokens": 20
+    },
+    "招生咨询跟进状态": {
+      "sql": "SELECT followup_status, COUNT(*) as count FROM enrollment_consultations WHERE deleted_at IS NULL GROUP BY followup_status ORDER BY count DESC",
+      "description": "统计招生咨询跟进状态",
+      "table": "enrollment_consultations",
+      "response": "招生咨询跟进状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 招生面试相关查询模板 ===": "注释",
+    "招生面试总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_interviews WHERE deleted_at IS NULL",
+      "description": "查询招生面试记录总数",
+      "table": "enrollment_interviews",
+      "response": "招生面试记录总数为{count}条",
+      "tokens": 10
+    },
+    "招生面试状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM enrollment_interviews WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计招生面试状态分布",
+      "table": "enrollment_interviews",
+      "response": "招生面试状态统计完成",
+      "tokens": 20
+    },
+    "招生面试平均分": {
+      "sql": "SELECT AVG(score) as avg_score, COUNT(*) as total_interviews FROM enrollment_interviews WHERE deleted_at IS NULL AND score IS NOT NULL",
+      "description": "查询招生面试平均分数",
+      "table": "enrollment_interviews",
+      "response": "招生面试平均分为{avg_score}分，共{total_interviews}场面试",
+      "tokens": 25
+    },
+
+    "// === 招生计划相关查询模板 ===": "注释",
+    "招生计划总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plans WHERE deleted_at IS NULL",
+      "description": "查询招生计划总数",
+      "table": "enrollment_plans",
+      "response": "招生计划总数为{count}个",
+      "tokens": 10
+    },
+    "本年度招生计划": {
+      "sql": "SELECT COUNT(*) as count, SUM(target_count) as total_target FROM enrollment_plans WHERE year = YEAR(NOW()) AND deleted_at IS NULL",
+      "description": "查询本年度招生计划",
+      "table": "enrollment_plans",
+      "response": "本年度招生计划{count}个，目标招生{total_target}人",
+      "tokens": 25
+    },
+    "招生计划状态分布": {
+      "sql": "SELECT status, COUNT(*) as count FROM enrollment_plans WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计招生计划状态分布",
+      "table": "enrollment_plans",
+      "response": "招生计划状态分布统计完成",
+      "tokens": 20
+    },
+    "招生计划目标统计": {
+      "sql": "SELECT SUM(target_count) as total_target, SUM(target_amount) as total_amount, AVG(target_amount) as avg_amount FROM enrollment_plans WHERE deleted_at IS NULL",
+      "description": "统计招生计划目标和金额",
+      "table": "enrollment_plans",
+      "response": "招生计划目标统计完成",
+      "tokens": 25
+    },
+
+    "// === 招生任务相关查询模板 ===": "注释",
+    "招生任务总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_tasks WHERE deleted_at IS NULL",
+      "description": "查询招生任务总数",
+      "table": "enrollment_tasks",
+      "response": "招生任务总数为{count}个",
+      "tokens": 10
+    },
+    "招生任务完成情况": {
+      "sql": "SELECT status, COUNT(*) as count, SUM(target_count) as total_target, SUM(actual_count) as total_actual FROM enrollment_tasks WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计招生任务完成情况",
+      "table": "enrollment_tasks",
+      "response": "招生任务完成情况统计完成",
+      "tokens": 30
+    },
+    "招生任务类型分布": {
+      "sql": "SELECT task_type, COUNT(*) as count FROM enrollment_tasks WHERE deleted_at IS NULL GROUP BY task_type ORDER BY count DESC",
+      "description": "统计招生任务类型分布",
+      "table": "enrollment_tasks",
+      "response": "招生任务类型分布统计完成",
+      "tokens": 20
+    },
+    "招生任务优先级统计": {
+      "sql": "SELECT priority, COUNT(*) as count FROM enrollment_tasks WHERE deleted_at IS NULL GROUP BY priority ORDER BY priority DESC",
+      "description": "统计招生任务优先级分布",
+      "table": "enrollment_tasks",
+      "response": "招生任务优先级统计完成",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "招生数据概览": {
+      "sql": "SELECT 'notifications' as category, COUNT(*) as count FROM admission_notifications WHERE deleted_at IS NULL UNION ALL SELECT 'results' as category, COUNT(*) as count FROM admission_results WHERE deleted_at IS NULL UNION ALL SELECT 'consultations' as category, COUNT(*) as count FROM enrollment_consultations WHERE deleted_at IS NULL UNION ALL SELECT 'interviews' as category, COUNT(*) as count FROM enrollment_interviews WHERE deleted_at IS NULL UNION ALL SELECT 'plans' as category, COUNT(*) as count FROM enrollment_plans WHERE deleted_at IS NULL UNION ALL SELECT 'tasks' as category, COUNT(*) as count FROM enrollment_tasks WHERE deleted_at IS NULL",
+      "description": "招生相关数据总览",
+      "table": "multiple",
+      "response": "招生数据概览查询完成",
+      "tokens": 50
+    }
+  }
+}

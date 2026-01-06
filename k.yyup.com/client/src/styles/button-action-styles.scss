@@ -1,0 +1,613 @@
+// 导入全局样式变量
+@use './design-tokens.scss' as *;
+
+// ============================================
+// 统一按钮操作样式系统
+// ============================================
+// 用途：提供统一的表格操作按钮和按钮组样式
+// 设计原则：4px小圆角、统一间距、平滑过渡、响应式适配
+// ============================================
+
+// ============================================
+// 表格操作按钮容器 - Table Actions Container
+// ============================================
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+
+  // 统一按钮样式
+  .el-button {
+    margin: 0 !important;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-sm); // 4px小圆角
+    transition: all var(--transition-base);
+    border: none;
+    background: transparent;
+
+    // 主要操作按钮（链接样式）
+    &.el-button--primary.is-link {
+      color: var(--primary-color);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--primary-hover);
+        background: var(--primary-light-bg);
+      }
+
+      &:active {
+        color: var(--primary-active);
+      }
+    }
+
+    // 危险操作按钮（删除等）
+    &.el-button--danger.is-link {
+      color: var(--danger-color);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--danger-dark);
+        background: var(--danger-light-bg);
+      }
+
+      &:active {
+        color: var(--danger-dark);
+      }
+    }
+
+    // 成功操作按钮
+    &.el-button--success.is-link {
+      color: var(--success-color);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--success-dark);
+        background: var(--success-light-bg);
+      }
+    }
+
+    // 警告操作按钮
+    &.el-button--warning.is-link {
+      color: var(--warning-color);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--warning-dark);
+        background: var(--warning-light-bg);
+      }
+    }
+
+    // 信息操作按钮
+    &.el-button--info.is-link {
+      color: var(--info-color);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--info-dark);
+        background: var(--info-light-bg);
+      }
+    }
+
+    // 禁用状态
+    &.is-disabled {
+      color: var(--text-disabled) !important;
+      cursor: not-allowed;
+      background: transparent !important;
+
+      &:hover {
+        background: transparent !important;
+      }
+    }
+  }
+
+  // 分割线样式
+  .el-divider--vertical {
+    margin: 0 var(--spacing-xs);
+    height: 16px;
+    border-color: var(--border-color);
+  }
+}
+
+// ============================================
+// 按钮组样式 - Button Group Styles
+// ============================================
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+
+  // 主要按钮组
+  &.button-group--primary {
+    .el-button {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+
+      &:hover {
+        background: var(--primary-hover);
+        border-color: var(--primary-hover);
+      }
+
+      &:active {
+        background: var(--primary-active);
+        border-color: var(--primary-active);
+      }
+    }
+  }
+
+  // 危险按钮组
+  &.button-group--danger {
+    .el-button {
+      background: var(--danger-color);
+      color: #fff;
+      border-color: var(--danger-color);
+
+      &:hover {
+        background: var(--danger-dark);
+        border-color: var(--danger-dark);
+      }
+    }
+  }
+
+  // 幽灵按钮组（透明背景）
+  &.button-group--ghost {
+    .el-button {
+      background: transparent;
+      border-color: var(--border-color);
+      color: var(--text-primary);
+
+      &:hover {
+        background: var(--bg-secondary);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+    }
+  }
+
+  // 实心按钮组
+  &.button-group--solid {
+    .el-button:not(.is-link) {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background: var(--primary-hover);
+      }
+    }
+  }
+}
+
+// ============================================
+// 图标按钮样式 - Icon Button Styles
+// ============================================
+
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  color: var(--text-secondary);
+
+  &:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:hover {
+      background: transparent;
+      border-color: var(--border-color);
+      color: var(--text-secondary);
+      transform: none;
+      box-shadow: none;
+    }
+  }
+
+  // 尺寸变体
+  &.icon-button--sm {
+    width: 24px;
+    height: 24px;
+    font-size: var(--text-xs);
+  }
+
+  &.icon-button--md {
+    width: 32px;
+    height: 32px;
+    font-size: var(--text-sm);
+  }
+
+  &.icon-button--lg {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-base);
+  }
+
+  // 颜色变体
+  &.icon-button--primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+
+    &:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+  }
+
+  &.icon-button--danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+
+    &:hover {
+      background: var(--danger-color);
+      color: #fff;
+    }
+  }
+
+  &.icon-button--success {
+    color: var(--success-color);
+    border-color: var(--success-color);
+
+    &:hover {
+      background: var(--success-color);
+      color: #fff;
+    }
+  }
+}
+
+// ============================================
+// 操作栏样式 - Action Bar Styles
+// ============================================
+
+.action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-card);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius-lg);
+
+  // 左侧操作区
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex: 1;
+  }
+
+  // 右侧操作区
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  // 标题
+  &__title {
+    margin: 0;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  // 响应式布局
+  @media (max-width: var(--breakpoint-md)) {
+    flex-direction: column;
+    align-items: stretch;
+
+    &__left,
+    &__right {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+// ============================================
+// 工具栏按钮样式 - Toolbar Button Styles
+// ============================================
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+
+  .el-button {
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--text-sm);
+    transition: all var(--transition-base);
+
+    &:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      background: var(--primary-light-bg);
+    }
+
+    &.is-active {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+      color: #fff;
+    }
+  }
+
+  // 分割线
+  .toolbar-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border-color);
+    margin: 0 var(--spacing-xs);
+  }
+}
+
+// ============================================
+// 浮动操作按钮 - Floating Action Button
+// ============================================
+
+.fab {
+  position: fixed;
+  bottom: var(--spacing-2xl);
+  right: var(--spacing-2xl);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-2xl);
+
+  &:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  // 小尺寸
+  &.fab--sm {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-lg);
+    bottom: var(--spacing-xl);
+    right: var(--spacing-xl);
+  }
+
+  // 大尺寸
+  &.fab--lg {
+    width: 64px;
+    height: 64px;
+    font-size: var(--text-3xl);
+  }
+
+  // 扩展按钮（带标签）
+  &.fab--extended {
+    width: auto;
+    min-width: 120px;
+    padding: 0 var(--spacing-lg);
+    border-radius: 28px;
+
+    .fab__label {
+      margin-left: var(--spacing-sm);
+      font-size: var(--text-sm);
+      font-weight: 500;
+    }
+  }
+}
+
+// ============================================
+// 响应式适配 - Responsive Design
+// ============================================
+
+@media (max-width: var(--breakpoint-md)) {
+  // 移动端表格操作按钮
+  .table-actions {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+    .el-button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .el-divider--vertical {
+      display: none;
+    }
+  }
+
+  // 移动端按钮组
+  .button-group {
+    flex-wrap: wrap;
+
+    .el-button {
+      flex: 1;
+      min-width: 80px;
+    }
+  }
+
+  // 移动端工具栏
+  .toolbar {
+    flex-wrap: wrap;
+
+    .el-button {
+      flex: 1;
+      min-width: 60px;
+    }
+  }
+
+  // 移动端隐藏FAB，避免遮挡内容
+  .fab {
+    bottom: var(--spacing-xl);
+    right: var(--spacing-md);
+
+    &.fab--sm {
+      bottom: var(--spacing-lg);
+      right: var(--spacing-lg);
+    }
+  }
+}
+
+@media (max-width: var(--breakpoint-xs)) {
+  // 超小屏幕优化
+  .table-actions {
+    .el-button {
+      font-size: var(--text-xs);
+      padding: var(--spacing-xs) 8px;
+    }
+  }
+
+  .button-group {
+    gap: var(--spacing-xs);
+
+    .el-button {
+      font-size: var(--text-xs);
+      padding: var(--spacing-xs) 8px;
+    }
+  }
+}
+
+// ============================================
+// 打印样式 - Print Styles
+// ============================================
+
+@media print {
+  .table-actions,
+  .button-group,
+  .toolbar,
+  .fab,
+  .icon-button {
+    display: none !important;
+  }
+}
+
+// ============================================
+// 暗色主题适配 - Dark Theme Support
+// ============================================
+
+@media (prefers-color-scheme: dark) {
+  .table-actions {
+    .el-button {
+      &.el-button--primary.is-link {
+        &:hover {
+          background: rgba(91, 141, 239, 0.15);
+        }
+      }
+
+      &.el-button--danger.is-link {
+        &:hover {
+          background: rgba(220, 38, 38, 0.15);
+        }
+      }
+    }
+  }
+
+  .button-group {
+    &.button-group--ghost {
+      .el-button {
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+    }
+  }
+
+  .icon-button {
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .action-bar {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+  }
+
+  .toolbar {
+    background: var(--bg-secondary);
+  }
+}
+
+// ============================================
+// 使用示例 - Usage Examples
+// ============================================
+
+// 表格操作按钮
+// <div class="table-actions">
+//   <el-button type="primary" link>编辑</el-button>
+//   <el-divider direction="vertical" />
+//   <el-button type="danger" link>删除</el-button>
+// </div>
+
+// 按钮组
+// <div class="button-group button-group--primary">
+//   <el-button>按钮1</el-button>
+//   <el-button>按钮2</el-button>
+//   <el-button>按钮3</el-button>
+// </div>
+
+// 图标按钮
+// <button class="icon-button">
+//   <el-icon><Edit /></el-icon>
+// </button>
+
+// 操作栏
+// <div class="action-bar">
+//   <div class="action-bar__left">
+//     <h3 class="action-bar__title">标题</h3>
+//   </div>
+//   <div class="action-bar__right">
+//     <el-button type="primary">主要操作</el-button>
+//     <el-button>次要操作</el-button>
+//   </div>
+// </div>
+
+// 工具栏
+// <div class="toolbar">
+//   <el-button><el-icon><Plus /></el-icon></el-button>
+//   <el-button><el-icon><Edit /></el-icon></el-button>
+//   <div class="toolbar-divider"></div>
+//   <el-button><el-icon><Delete /></el-icon></el-button>
+// </div>
+
+// 浮动操作按钮
+// <button class="fab">
+//   <el-icon><Plus /></el-icon>
+// </button>

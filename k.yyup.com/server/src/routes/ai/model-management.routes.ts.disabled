@@ -1,0 +1,1070 @@
+import { Router } from 'express';
+import { aiModelManagementMiddleware } from '../../middlewares/ai';
+import { handleMiddlewareResponse } from './utils/handleMiddlewareResponse';
+
+const router = Router();
+
+/**
+ * @swagger
+ * tags:
+ *   name: AI模型管理
+ *   description: AI模型管理相关接口，提供模型信息查询、使用统计、用户偏好设置等功能
+ *
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *
+ *   schemas:
+ *     AIModel:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: 模型唯一标识符
+ *           example: 1
+ *         name:
+ *           type: string
+ *           description: 模型名称
+ *           example: "GPT-4 Turbo"
+ *         displayName:
+ *           type: string
+ *           description: 模型显示名称
+ *           example: "GPT-4 Turbo (128K)"
+ *         description:
+ *           type: string
+ *           description: 模型描述
+ *           example: "高性能多模态大语言模型，支持文本、图像理解和生成"
+ *         provider:
+ *           type: string
+ *           description: AI服务提供商
+ *           enum:
+ *             - OpenAI
+ *             - Anthropic
+ *             - 豆包
+ *             - 智谱AI
+ *             - 百度
+ *             - 阿里云
+ *           example: "OpenAI"
+ *         modelType:
+ *           type: string
+ *           description: 模型类型
+ *           enum: [chat, completion, embedding, image, multimodal, code]
+ *           example: "chat"
+ *         version:
+ *           type: string
+ *           description: 模型版本
+ *           example: "gpt-4-1106-preview"
+ *         capabilities:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: 模型能力列表
+ *           example: ["text-generation", "conversation", "code-generation", "reasoning"]
+ *         pricing:
+ *           type: object
+ *           properties:
+ *             inputTokenPrice:
+ *               type: number
+ *               description: 输入Token单价(美元/千tokens)
+ *               example: 0.01
+ *             outputTokenPrice:
+ *               type: number
+ *               description: 输出Token单价(美元/千tokens)
+ *               example: 0.03
+ *             currency:
+ *               type: string
+ *               description: 货币单位
+ *               example: "USD"
+ *         limits:
+ *           type: object
+ *           properties:
+ *             maxTokens:
+ *               type: integer
+ *               description: 最大Token限制
+ *               example: 128000
+ *             maxContextLength:
+ *               type: integer
+ *               description: 最大上下文长度
+ *               example: 128000
+ *             maxRequestsPerMinute:
+ *               type: integer
+ *               description: 每分钟最大请求数
+ *               example: 500
+ *             maxTokensPerMinute:
+ *               type: integer
+ *               description: 每分钟最大Token数
+ *               example: 150000
+ *         performance:
+ *           type: object
+ *           properties:
+ *             averageLatency:
+ *               type: integer
+ *               description: 平均延迟(毫秒)
+ *               example: 1200
+ *             successRate:
+ *               type: number
+ *               description: 成功率
+ *               example: 99.5
+ *             throughput:
+ *               type: number
+ *               description: 吞吐量(请求/秒)
+ *               example: 8.3
+ *         features:
+ *           type: object
+ *           properties:
+ *             supportsStreaming:
+ *               type: boolean
+ *               description: 是否支持流式响应
+ *               example: true
+ *             supportsFunctionCalling:
+ *               type: boolean
+ *               description: 是否支持函数调用
+ *               example: true
+ *             supportsVision:
+ *               type: boolean
+ *               description: 是否支持视觉理解
+ *               example: true
+ *             supportsCode:
+ *               type: boolean
+ *               description: 是否支持代码生成
+ *               example: true
+ *         isAvailable:
+ *           type: boolean
+ *           description: 模型是否可用
+ *           example: true
+ *         status:
+ *           type: string
+ *           enum: [active, maintenance, deprecated, beta]
+ *           description: 模型状态
+ *           example: "active"
+ *         releasedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 发布时间
+ *           example: "2023-11-06T00:00:00Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 最后更新时间
+ *           example: "2024-01-15T10:30:00Z"
+ *         tags:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: 模型标签
+ *           example: ["latest", "recommended", "multimodal"]
+ *
+ *     AIModelStats:
+ *       type: object
+ *       properties:
+ *         modelId:
+ *           type: integer
+ *           description: 模型ID
+ *           example: 1
+ *         modelName:
+ *           type: string
+ *           description: 模型名称
+ *           example: "GPT-4 Turbo"
+ *         period:
+ *           type: object
+ *           properties:
+ *             startDate:
+ *               type: string
+ *               format: date
+ *               description: 统计开始日期
+ *               example: "2024-01-01"
+ *             endDate:
+ *               type: string
+ *               format: date
+ *               description: 统计结束日期
+ *               example: "2024-01-31"
+ *         totalUsage:
+ *           type: object
+ *           properties:
+ *             requests:
+ *               type: integer
+ *               description: 总请求数
+ *               example: 15420
+ *             inputTokens:
+ *               type: integer
+ *               description: 输入Token总数
+ *               example: 8750000
+ *             outputTokens:
+ *               type: integer
+ *               description: 输出Token总数
+ *               example: 3250000
+ *             totalTokens:
+ *               type: integer
+ *               description: 总Token数
+ *               example: 12000000
+ *             totalCost:
+ *               type: number
+ *               description: 总费用
+ *               example: 127.45
+ *         dailyStats:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               date:
+ *                 type: string
+ *                 format: date
+ *                 description: 日期
+ *                 example: "2024-01-15"
+ *               requests:
+ *                 type: integer
+ *                 description: 当日请求数
+ *                 example: 498
+ *               inputTokens:
+ *                 type: integer
+ *                 description: 当日输入Token数
+ *                 example: 282000
+ *               outputTokens:
+ *                 type: integer
+ *                 description: 当日输出Token数
+ *                 example: 105000
+ *               cost:
+ *                 type: number
+ *                 description: 当日费用
+ *                 example: 4.12
+ *               successRate:
+ *                 type: number
+ *                 description: 当日成功率
+ *                 example: 99.2
+ *               averageLatency:
+ *                 type: number
+ *                 description: 当日平均延迟(毫秒)
+ *                 example: 1150
+ *         performanceMetrics:
+ *           type: object
+ *           properties:
+ *             averageResponseTime:
+ *               type: number
+ *               description: 平均响应时间(毫秒)
+ *               example: 1180
+ *             p95ResponseTime:
+ *               type: number
+ *               description: 95分位响应时间(毫秒)
+ *               example: 2100
+ *             p99ResponseTime:
+ *               type: number
+ *               description: 99分位响应时间(毫秒)
+ *               example: 3500
+ *             successRate:
+ *               type: number
+ *               description: 整体成功率
+ *               example: 99.1
+ *             errorRate:
+ *               type: number
+ *               description: 错误率
+ *               example: 0.9
+ *         usageByUserType:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               userType:
+ *                 type: string
+ *                 enum: [teacher, parent, admin, principal]
+ *                 description: 用户类型
+ *                 example: "teacher"
+ *               requests:
+ *                 type: integer
+ *                 description: 该类型用户的请求数
+ *                 example: 8750
+ *               tokens:
+ *                 type: integer
+ *                 description: 该类型用户的Token数
+ *                 example: 6800000
+ *               cost:
+ *                 type: number
+ *                 description: 该类型用户的费用
+ *                 example: 72.15
+ *               percentage:
+ *                 type: number
+ *                 description: 占总使用的百分比
+ *                 example: 56.6
+ *         topFeatures:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               feature:
+ *                 type: string
+ *                 description: 功能名称
+ *                 example: "课程计划生成"
+ *               usageCount:
+ *                 type: integer
+ *                 description: 使用次数
+ *                 example: 3240
+ *               percentage:
+ *                 type: number
+ *                 description: 占总使用的百分比
+ *                 example: 21.0
+ *
+ *     UserModelPreference:
+ *       type: object
+ *       properties:
+ *         userId:
+ *           type: integer
+ *           description: 用户ID
+ *           example: 123
+ *         modelId:
+ *           type: integer
+ *           description: 模型ID
+ *           example: 1
+ *         modelName:
+ *           type: string
+ *           description: 模型名称
+ *           example: "GPT-4 Turbo"
+ *         preferenceLevel:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 5
+ *           description: 偏好等级(1-5，5为最高)
+ *           example: 5
+ *         isDefault:
+ *           type: boolean
+ *           description: 是否为默认模型
+ *           example: true
+ *         usageCount:
+ *           type: integer
+ *           description: 使用次数
+ *           example: 156
+ *         lastUsedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 最后使用时间
+ *           example: "2024-01-15T14:30:00Z"
+ *         successRate:
+ *           type: number
+ *           description: 个人使用成功率
+ *           example: 98.7
+ *         averageTokensPerRequest:
+ *           type: number
+ *           description: 平均每请求Token数
+ *           example: 1250
+ *         customSettings:
+ *           type: object
+ *           properties:
+ *             temperature:
+ *               type: number
+ *               minimum: 0
+ *               maximum: 2
+ *               description: 创造性参数
+ *               example: 0.7
+ *             maxTokens:
+ *               type: integer
+ *               description: 最大Token数限制
+ *               example: 2000
+ *             systemPrompt:
+ *               type: string
+ *               description: 自定义系统提示词
+ *               example: "你是一个专业的教育顾问..."
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: 创建时间
+ *           example: "2024-01-01T09:00:00Z"
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: 更新时间
+ *           example: "2024-01-15T14:30:00Z"
+ *
+ *     ModelUsageComparison:
+ *       type: object
+ *       properties:
+ *         models:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               modelId:
+ *                 type: integer
+ *               modelName:
+ *                 type: string
+ *               requests:
+ *                 type: integer
+ *               tokens:
+ *                 type: integer
+ *               cost:
+ *                 type: number
+ *               averageLatency:
+ *                 type: number
+ *               successRate:
+ *                 type: number
+ *               userSatisfaction:
+ *                 type: number
+ *         insights:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               type:
+ *                 type: string
+ *                 enum: [performance, cost, efficiency, recommendation]
+ *               title:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *               relatedModels:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *         recommendations:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               category:
+ *                 type: string
+ *                 enum: [cost_optimization, performance, user_experience]
+ *               recommendation:
+ *                 type: string
+ *               potentialSavings:
+ *                 type: number
+ *               implementation:
+ *                 type: string
+ *         period:
+ *           type: object
+ *           properties:
+ *             startDate:
+ *               type: string
+ *               format: date
+ *             endDate:
+ *               type: string
+ *               format: date
+ *         generatedAt:
+ *           type: string
+ *           format: date-time
+ *
+ *     ModelHealthStatus:
+ *       type: object
+ *       properties:
+ *         modelId:
+ *           type: integer
+ *         modelName:
+ *           type: string
+ *         status:
+ *           type: string
+ *           enum: [healthy, degraded, down, maintenance]
+ *           description: 模型健康状态
+ *         lastCheck:
+ *           type: string
+ *           format: date-time
+ *           description: 最后检查时间
+ *         responseTime:
+ *           type: number
+ *           description: 当前响应时间(毫秒)
+ *         successRate:
+ *           type: number
+ *           description: 当前成功率
+ *         errorRate:
+ *           type: number
+ *           description: 当前错误率
+ *         uptimePercentage:
+ *           type: number
+ *           description: 运行时间百分比
+ *         recentErrors:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *               errorCode:
+ *                 type: string
+ *               errorMessage:
+ *                 type: string
+ *               affectedUsers:
+ *                 type: integer
+ *         alerts:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               level:
+ *                 type: string
+ *                 enum:
+ *                   - info
+ *                   - warning
+ *                   - error
+ *                   - critical
+ *               message:
+ *                 type: string
+ *                 description: 警报消息
+ *               timestamp:
+ *                 type: string
+ *                 format: date-time
+ *               resolved:
+ *                 type: boolean
+
+/**
+ * @swagger
+ * /api/ai/model-management:
+ *   get:
+ *     summary: 获取所有可用AI模型
+ *     description: 获取当前用户可使用的所有AI模型列表，包括模型详情、能力特性、定价信息和可用状态
+ *     tags: [AI模型管理]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 用户ID（可选，默认为当前登录用户）
+ *         example: 123
+ *       - in: query
+ *         name: provider
+ *         schema:
+ *           type: string
+ *           enum: [all, OpenAI, Anthropic, 豆包, 智谱AI, 百度, 阿里云]
+ *           default: all
+ *         description: 按AI提供商筛选
+ *       - in: query
+ *         name: modelType
+ *         schema:
+ *           type: string
+ *           enum: [all, chat, completion, embedding, image, multimodal, code]
+ *           default: all
+ *         description: 按模型类型筛选
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [all, active, maintenance, deprecated, beta]
+ *           default: active
+ *         description: 按模型状态筛选
+ *       - in: query
+ *         name: capabilities
+ *         schema:
+ *           type: string
+ *           description: 按能力筛选（多个能力用逗号分隔），如: streaming,function-calling,vision
+ *       - in: query
+ *         name: sortBy
+ *         schema:
+ *           type: string
+ *           enum: [name, provider, created, updated, usage, cost]
+ *           default: name
+ *         description: 排序字段
+ *       - in: query
+ *         name: sortOrder
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *           default: asc
+ *         description: 排序顺序
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: 页码
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 100
+ *           default: 20
+ *         description: 每页数量
+ *     responses:
+ *       200:
+ *         description: 成功获取AI模型列表
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "获取AI模型列表成功"
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     models:
+ *                       type: array
+ *                       items:
+ *                         $ref: '#/components/schemas/AIModel'
+ *                     pagination:
+ *                       type: object
+ *                       properties:
+ *                         currentPage:
+ *                           type: integer
+ *                           example: 1
+ *                         totalPages:
+ *                           type: integer
+ *                           example: 3
+ *                         totalModels:
+ *                           type: integer
+ *                           example: 47
+ *                         hasNext:
+ *                           type: boolean
+ *                           example: true
+ *                         hasPrev:
+ *                           type: boolean
+ *                           example: false
+ *                     summary:
+ *                       type: object
+ *                       properties:
+ *                         totalModels:
+ *                           type: integer
+ *                           example: 47
+ *                         activeModels:
+ *                           type: integer
+ *                           example: 42
+ *                         modelsByProvider:
+ *                           type: object
+ *                           additionalProperties:
+ *                             type: integer
+ *                         modelsByType:
+ *                           type: object
+ *                           additionalProperties:
+ *                             type: integer
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
+// 1. 获取所有可用模型
+router.get('/', async (req, res) => {
+  const { userId } = req.body; // 假设从认证中间件获取userId
+  const result = await aiModelManagementMiddleware.getAvailableModels(userId);
+  handleMiddlewareResponse(res, result);
+});
+
+/**
+ * @swagger
+ * /api/ai/model-management/{modelId}:
+ *   get:
+ *     summary: 获取AI模型详情
+ *     description: 获取指定AI模型的详细信息，包括完整的技术规格、定价信息、能力特性和使用统计数据
+ *     tags: [AI模型管理]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: modelId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 模型唯一标识符
+ *         example: 1
+ *       - in: query
+ *         name: includeUsageStats
+ *         schema:
+ *           type: boolean
+ *           default: false
+ *         description: 是否包含用户个人的使用统计数据
+ *       - in: query
+ *         name: includeHealthStatus
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *         description: 是否包含模型健康状态信息
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 用户ID（可选，默认为当前登录用户）
+ *         example: 123
+ *     responses:
+ *       200:
+ *         description: 成功获取AI模型详情
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "获取AI模型详情成功"
+ *                 data:
+ *                   allOf:
+ *                     - $ref: '#/components/schemas/AIModel'
+ *                     - type: object
+ *                       properties:
+ *                         userPreference:
+ *                           $ref: '#/components/schemas/UserModelPreference'
+ *                         healthStatus:
+ *                           $ref: '#/components/schemas/ModelHealthStatus'
+ *                         recentUsage:
+ *                           type: object
+ *                           properties:
+ *                             last24Hours:
+ *                               type: object
+ *                               properties:
+ *                                 requests:
+ *                                   type: integer
+ *                                   example: 48
+ *                                 tokens:
+ *                                   type: integer
+ *                                   example: 62000
+ *                                 cost:
+ *                                   type: number
+ *                                   example: 2.15
+ *                                 successRate:
+ *                                   type: number
+ *                                   example: 98.5
+ *                             lastWeek:
+ *                               type: object
+ *                               properties:
+ *                                 requests:
+ *                                   type: integer
+ *                                   example: 287
+ *                                 tokens:
+ *                                   type: integer
+ *                                   example: 389000
+ *                                 cost:
+ *                                   type: number
+ *                                   example: 13.42
+ *                         performanceBenchmark:
+ *                           type: object
+ *                           properties:
+ *                             overallRank:
+ *                               type: integer
+ *                               description: 在所有模型中的综合排名
+ *                               example: 3
+ *                             costEfficiency:
+ *                               type: string
+ *                               enum: [excellent, good, average, poor]
+ *                               description: 成本效益评级
+ *                               example: "good"
+ *                             speedRating:
+ *                               type: string
+ *                               enum: [excellent, good, average, poor]
+ *                               description: 速度评级
+ *                               example: "excellent"
+ *                             qualityRating:
+ *                               type: string
+ *                               enum: [excellent, good, average, poor]
+ *                               description: 质量评级
+ *                               example: "excellent"
+ *                         recommendations:
+ *                           type: array
+ *                           items:
+ *                             type: object
+ *                             properties:
+ *                               useCase:
+ *                                 type: string
+ *                                 description: 推荐使用场景
+ *                                 example: "复杂推理任务"
+ *                               confidence:
+ *                                 type: number
+ *                                 minimum: 0
+ *                                 maximum: 1
+ *                                 description: 推荐置信度
+ *                                 example: 0.92
+ *                               reasoning:
+ *                                 type: string
+ *                                 description: 推荐理由
+ *                                 example: "该模型在复杂推理任务中表现出色，准确性高"
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
+// 2. 获取模型详情
+router.get('/:modelId', async (req, res) => {
+  const { modelId } = req.params;
+  const { userId } = req.body;
+  const result = await aiModelManagementMiddleware.getModelDetails(userId, parseInt(modelId, 10));
+  handleMiddlewareResponse(res, result);
+});
+
+/**
+ * @swagger
+ * /api/ai/model-management/stats/{modelId}:
+ *   get:
+ *     summary: 获取AI模型使用统计
+ *     description: 获取指定AI模型在特定时间范围内的详细使用统计，包括请求数、Token消耗、费用分析和性能指标
+ *     tags: [AI模型管理]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: modelId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 模型唯一标识符
+ *         example: 1
+ *       - in: query
+ *         name: startDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: 统计开始日期 (YYYY-MM-DD格式，默认为30天前)
+ *         example: "2024-01-01"
+ *       - in: query
+ *         name: endDate
+ *         schema:
+ *           type: string
+ *           format: date
+ *         description: 统计结束日期 (YYYY-MM-DD格式，默认为当前日期)
+ *         example: "2024-01-31"
+ *       - in: query
+ *         name: granularity
+ *         schema:
+ *           type: string
+ *           enum: [hour, day, week, month]
+ *           default: day
+ *         description: 统计粒度
+ *       - in: query
+ *         name: includeUserBreakdown
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *         description: 是否包含用户类型分布数据
+ *       - in: query
+ *         name: includeFeatureAnalysis
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *         description: 是否包含功能使用分析
+ *       - in: query
+ *         name: includePerformanceMetrics
+ *         schema:
+ *           type: boolean
+ *           default: true
+ *         description: 是否包含性能指标分析
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 用户ID（可选，用于筛选特定用户的数据）
+ *         example: 123
+ *     responses:
+ *       200:
+ *         description: 成功获取AI模型使用统计数据
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "获取AI模型使用统计成功"
+ *                 data:
+ *                   $ref: '#/components/schemas/AIModelStats'
+ *       400:
+ *         $ref: '#/components/responses/BadRequest'
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
+// 3. 获取模型使用统计
+router.get('/stats/:modelId', async (req, res) => {
+    const { modelId } = req.params;
+    const { startDate, endDate } = req.query;
+
+    const now = new Date();
+    const defaultStartDate = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+    const start = startDate ? new Date(startDate as string) : defaultStartDate;
+    const end = endDate ? new Date(endDate as string) : now;
+
+    const result = await aiModelManagementMiddleware.getModelUsageStats(parseInt(modelId, 10), start, end);
+    handleMiddlewareResponse(res, result);
+});
+
+/**
+ * @swagger
+ * /api/ai/model-management/preferences/user/{userId}/model/{modelId}:
+ *   put:
+ *     summary: 更新用户AI模型偏好
+ *     description: 更新指定用户对特定AI模型的偏好设置，包括偏好等级、默认状态和自定义配置参数
+ *     tags: [AI模型管理]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 目标用户ID
+ *         example: 123
+ *       - in: path
+ *         name: modelId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         description: 模型ID
+ *         example: 1
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               preferenceLevel:
+ *                 type: integer
+ *                 minimum: 1
+ *                 maximum: 5
+ *                 description: 偏好等级(1-5，5为最高偏好)
+ *                 example: 5
+ *               isDefault:
+ *                 type: boolean
+ *                 description: 是否设置为默认模型
+ *                 example: true
+ *               customSettings:
+ *                 type: object
+ *                 description: 用户自定义配置
+ *                 properties:
+ *                   temperature:
+ *                     type: number
+ *                     minimum: 0
+ *                     maximum: 2
+ *                     description: 创造性参数
+ *                     example: 0.7
+ *                   maxTokens:
+ *                     type: integer
+ *                     minimum: 1
+ *                     maximum: 128000
+ *                     description: 最大Token数限制
+ *                     example: 2000
+ *                   topP:
+ *                     type: number
+ *                     minimum: 0
+ *                     maximum: 1
+ *                     description: 核采样参数
+ *                     example: 0.9
+ *                   frequencyPenalty:
+ *                     type: number
+ *                     minimum: -2
+ *                     maximum: 2
+ *                     description: 频率惩罚
+ *                     example: 0
+ *                   presencePenalty:
+ *                     type: number
+ *                     minimum: -2
+ *                     maximum: 2
+ *                     description: 存在惩罚
+ *                     example: 0
+ *                   systemPrompt:
+ *                     type: string
+ *                     maxLength: 4000
+ *                     description: 自定义系统提示词
+ *                     example: "你是一个专业的幼儿园教育顾问，请用简洁明了的语言提供建议。"
+ *               notes:
+ *                 type: string
+ *                 maxLength: 500
+ *                 description: 用户备注信息
+ *                 example: "用于处理复杂的教育规划任务"
+ *             required:
+ *               - preferenceLevel
+ *     responses:
+ *       200:
+ *         description: 成功更新用户AI模型偏好设置
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 200
+ *                 message:
+ *                   type: string
+ *                   example: "更新用户模型偏好成功"
+ *                 data:
+ *                   $ref: '#/components/schemas/UserModelPreference'
+ *       400:
+ *         description: 请求参数错误
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 400
+ *                 message:
+ *                   type: string
+ *                   example: "参数验证失败"
+ *                 errors:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       field:
+ *                         type: string
+ *                         example: "preferenceLevel"
+ *                       message:
+ *                         type: string
+ *                         example: "偏好等级必须在1-5之间"
+ *       401:
+ *         $ref: '#/components/responses/UnauthorizedError'
+ *       403:
+ *         $ref: '#/components/responses/Forbidden'
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
+ *       409:
+ *         description: 默认模型冲突
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 code:
+ *                   type: integer
+ *                   example: 409
+ *                 message:
+ *                   type: string
+ *                   example: "用户已存在其他默认模型，请先取消原有默认设置"
+ *                 conflictWith:
+ *                   type: object
+ *                   properties:
+ *                     modelId:
+ *                       type: integer
+ *                     modelName:
+ *                       type: string
+ *       500:
+ *         $ref: '#/components/responses/InternalServerError'
+ */
+// 4. 更新用户模型偏好
+router.put('/preferences/user/:userId/model/:modelId', async (req, res) => {
+    const { userId, modelId } = req.params;
+    const result = await aiModelManagementMiddleware.updateUserModelPreference(parseInt(userId, 10), parseInt(modelId, 10));
+    handleMiddlewareResponse(res, result);
+});
+
+export default router; 

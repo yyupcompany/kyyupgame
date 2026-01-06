@@ -1,0 +1,32 @@
+{
+  "timestamp": "2025-11-21T08:58:53.303Z",
+  "components": {
+    "header": {
+      "exists": true,
+      "logo": true,
+      "title": true
+    },
+    "chat": {
+      "exists": false,
+      "hasInput": true
+    },
+    "input": {
+      "exists": true,
+      "hasTextarea": true,
+      "hasSendButton": true
+    },
+    "sidebar": {
+      "exists": true
+    },
+    "container": {
+      "exists": true
+    }
+  },
+  "testPassed": true,
+  "notes": [
+    "所有主要组件正常渲染",
+    "输入框功能正常",
+    "查询响应正常",
+    "页面滚动正常"
+  ]
+}

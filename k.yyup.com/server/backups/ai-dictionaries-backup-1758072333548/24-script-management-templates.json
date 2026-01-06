@@ -1,0 +1,142 @@
+{
+  "name": "脚本管理系统查询模板字典",
+  "description": "脚本、脚本分类、脚本执行日志等脚本管理系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 脚本相关查询模板 ===": "注释",
+    "脚本总数": {
+      "sql": "SELECT COUNT(*) as count FROM scripts",
+      "description": "查询脚本总数",
+      "table": "scripts",
+      "response": "脚本总数为{count}个",
+      "tokens": 10
+    },
+    "脚本类型统计": {
+      "sql": "SELECT script_type, COUNT(*) as count FROM scripts GROUP BY script_type ORDER BY count DESC",
+      "description": "统计脚本类型分布",
+      "table": "scripts",
+      "response": "脚本类型统计完成",
+      "tokens": 20
+    },
+    "脚本状态统计": {
+      "sql": "SELECT script_status, COUNT(*) as count FROM scripts GROUP BY script_status ORDER BY count DESC",
+      "description": "统计脚本状态分布",
+      "table": "scripts",
+      "response": "脚本状态统计完成",
+      "tokens": 20
+    },
+    "活跃脚本": {
+      "sql": "SELECT COUNT(*) as count FROM scripts WHERE script_status = 'active'",
+      "description": "查询活跃脚本数量",
+      "table": "scripts",
+      "response": "活跃脚本{count}个",
+      "tokens": 12
+    },
+    "本月新增脚本": {
+      "sql": "SELECT COUNT(*) as count FROM scripts WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增脚本数量",
+      "table": "scripts",
+      "response": "本月新增脚本{count}个",
+      "tokens": 20
+    },
+    "脚本执行统计": {
+      "sql": "SELECT SUM(execution_count) as total_executions, AVG(execution_count) as avg_executions FROM scripts WHERE execution_count > 0",
+      "description": "统计脚本执行情况",
+      "table": "scripts",
+      "response": "脚本执行统计完成",
+      "tokens": 25
+    },
+
+    "// === 脚本分类相关查询模板 ===": "注释",
+    "脚本分类总数": {
+      "sql": "SELECT COUNT(*) as count FROM script_categories",
+      "description": "查询脚本分类总数",
+      "table": "script_categories",
+      "response": "脚本分类总数为{count}个",
+      "tokens": 10
+    },
+    "分类状态统计": {
+      "sql": "SELECT category_status, COUNT(*) as count FROM script_categories GROUP BY category_status ORDER BY count DESC",
+      "description": "统计分类状态分布",
+      "table": "script_categories",
+      "response": "分类状态统计完成",
+      "tokens": 20
+    },
+    "活跃分类": {
+      "sql": "SELECT COUNT(*) as count FROM script_categories WHERE category_status = 'active'",
+      "description": "查询活跃分类数量",
+      "table": "script_categories",
+      "response": "活跃分类{count}个",
+      "tokens": 12
+    },
+    "分类脚本数量统计": {
+      "sql": "SELECT sc.category_name, COUNT(s.id) as script_count FROM script_categories sc LEFT JOIN scripts s ON sc.id = s.category_id GROUP BY sc.id, sc.category_name ORDER BY script_count DESC",
+      "description": "统计各分类的脚本数量",
+      "table": "script_categories",
+      "joins": ["scripts"],
+      "response": "分类脚本数量统计完成",
+      "tokens": 30
+    },
+
+    "// === 脚本执行日志相关查询模板 ===": "注释",
+    "脚本执行日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM script_execution_logs",
+      "description": "查询脚本执行日志总数",
+      "table": "script_execution_logs",
+      "response": "脚本执行日志总数为{count}条",
+      "tokens": 10
+    },
+    "执行状态统计": {
+      "sql": "SELECT execution_status, COUNT(*) as count FROM script_execution_logs GROUP BY execution_status ORDER BY count DESC",
+      "description": "统计执行状态分布",
+      "table": "script_execution_logs",
+      "response": "执行状态统计完成",
+      "tokens": 20
+    },
+    "成功执行统计": {
+      "sql": "SELECT COUNT(*) as count FROM script_execution_logs WHERE execution_status = 'success'",
+      "description": "查询成功执行数量",
+      "table": "script_execution_logs",
+      "response": "成功执行{count}次",
+      "tokens": 12
+    },
+    "执行成功率": {
+      "sql": "SELECT (COUNT(CASE WHEN execution_status = 'success' THEN 1 END) * 100.0 / COUNT(*)) as success_rate FROM script_execution_logs",
+      "description": "计算脚本执行成功率",
+      "table": "script_execution_logs",
+      "response": "脚本执行成功率分析完成",
+      "tokens": 25
+    },
+    "本月执行日志": {
+      "sql": "SELECT COUNT(*) as count FROM script_execution_logs WHERE YEAR(executed_at) = YEAR(NOW()) AND MONTH(executed_at) = MONTH(NOW())",
+      "description": "查询本月执行日志数量",
+      "table": "script_execution_logs",
+      "response": "本月执行日志{count}条",
+      "tokens": 20
+    },
+    "执行耗时分析": {
+      "sql": "SELECT AVG(execution_duration) as avg_duration, MIN(execution_duration) as min_duration, MAX(execution_duration) as max_duration FROM script_execution_logs WHERE execution_duration IS NOT NULL",
+      "description": "分析脚本执行耗时",
+      "table": "script_execution_logs",
+      "response": "脚本执行耗时分析完成",
+      "tokens": 30
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "脚本管理系统概览": {
+      "sql": "SELECT 'scripts' as category, COUNT(*) as count FROM scripts UNION ALL SELECT 'script_categories' as category, COUNT(*) as count FROM script_categories UNION ALL SELECT 'script_execution_logs' as category, COUNT(*) as count FROM script_execution_logs",
+      "description": "脚本管理系统数据总览",
+      "table": "multiple",
+      "response": "脚本管理系统概览查询完成",
+      "tokens": 30
+    },
+    "脚本使用效果分析": {
+      "sql": "SELECT s.script_name, s.execution_count, COUNT(sel.id) as log_count, AVG(CASE WHEN sel.execution_status = 'success' THEN 1.0 ELSE 0.0 END) as success_rate FROM scripts s LEFT JOIN script_execution_logs sel ON s.id = sel.script_id GROUP BY s.id, s.script_name, s.execution_count ORDER BY s.execution_count DESC LIMIT 10",
+      "description": "分析脚本使用效果",
+      "table": "scripts",
+      "joins": ["script_execution_logs"],
+      "response": "脚本使用效果分析完成",
+      "tokens": 40
+    }
+  }
+}

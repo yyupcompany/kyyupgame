@@ -1,0 +1,98 @@
+{
+  "menuItems": [
+    {
+      "name": "财务中心",
+      "url": "http://localhost:5173/centers/finance"
+    },
+    {
+      "name": "测评中心",
+      "url": "http://localhost:5173/centers/assessment"
+    },
+    {
+      "name": "督查中心",
+      "url": "http://localhost:5173/centers/inspection"
+    },
+    {
+      "name": "管理控制台",
+      "url": "http://localhost:5173/dashboard"
+    },
+    {
+      "name": "呼叫中心",
+      "url": "http://localhost:5173/centers/call-center"
+    },
+    {
+      "name": "话术中心",
+      "url": "http://localhost:5173/centers/script"
+    },
+    {
+      "name": "活动中心",
+      "url": "http://localhost:5173/centers/activity"
+    },
+    {
+      "name": "集团中心",
+      "url": "http://localhost:5173/group"
+    },
+    {
+      "name": "教学中心",
+      "url": "http://localhost:5173/centers/teaching"
+    },
+    {
+      "name": "考勤中心",
+      "url": "http://localhost:5173/centers/attendance"
+    },
+    {
+      "name": "客户池中心",
+      "url": "http://localhost:5173/centers/customer-pool"
+    },
+    {
+      "name": "人员中心",
+      "url": "http://localhost:5173/centers/personnel"
+    },
+    {
+      "name": "任务中心",
+      "url": "http://localhost:5173/centers/task"
+    },
+    {
+      "name": "数据分析中心",
+      "url": "http://localhost:5173/centers/analytics"
+    },
+    {
+      "name": "文档中心",
+      "url": "http://localhost:5173/centers/document-center"
+    },
+    {
+      "name": "系统中心",
+      "url": "http://localhost:5173/centers/system"
+    },
+    {
+      "name": "相册中心",
+      "url": "http://localhost:5173/centers/media"
+    },
+    {
+      "name": "新媒体中心",
+      "url": "http://localhost:5173/principal/media-center"
+    },
+    {
+      "name": "业务中心",
+      "url": "http://localhost:5173/centers/business"
+    },
+    {
+      "name": "营销中心",
+      "url": "http://localhost:5173/centers/marketing"
+    },
+    {
+      "name": "用量中心",
+      "url": "http://localhost:5173/centers/usage"
+    },
+    {
+      "name": "招生中心",
+      "url": "http://localhost:5173/centers/enrollment"
+    },
+    {
+      "name": "AI中心",
+      "url": "http://localhost:5173/centers/ai"
+    }
+  ],
+  "count": 23,
+  "loginTime": "2025-12-06T08:18:46.641Z"
+}

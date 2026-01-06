@@ -1,0 +1,512 @@
+/**
+ * 头部组件统一样式
+ * Header Component Unified Styles
+ *
+ * 使用统一的设计令牌系统，确保头部样式的一致性和可维护性
+ */
+
+@use '@/styles/design-tokens.scss' as tokens;
+
+// ==================== 头部基础样式 ====================
+.app-header {
+  height: var(--header-height, 64px);
+  background: var(--header-bg, var(--bg-card));
+  backdrop-filter: var(--header-backdrop, blur(10px));
+  border-bottom: var(--border-width-base) solid var(--header-border, var(--border-color));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-sm) var(--header-padding-x, var(--spacing-xl));
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header, 100);
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-xs);
+}
+
+// ==================== 头部区域布局 ====================
+.header-section {
+  display: flex;
+  align-items: center;
+  gap: var(--header-section-gap, var(--spacing-md));
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--header-right-gap, var(--spacing-sm));
+}
+
+// ==================== 头部按钮统一样式 ====================
+.header-icon-btn,
+.header-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-btn-height, 40px);
+  padding: 0 var(--header-btn-padding-x, var(--spacing-sm));
+  border: var(--border-width-base) solid var(--header-btn-border, transparent);
+  border-radius: var(--header-btn-radius, var(--radius-md));
+  background: var(--header-btn-bg, var(--bg-card));
+  color: var(--header-btn-color, var(--text-primary));
+  font-size: var(--header-btn-font-size, var(--text-sm));
+  font-weight: var(--header-btn-font-weight, var(--font-medium));
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  outline: none;
+  user-select: none;
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background: var(--header-btn-hover-bg, var(--bg-hover));
+    color: var(--header-btn-hover-color, var(--primary-color));
+    border-color: var(--header-btn-hover-border, var(--primary-color));
+    transform: var(--header-btn-hover-transform, translateY(-1px));
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: var(--header-btn-active-transform, translateY(0) scale(0.98));
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--header-btn-focus-outline, var(--primary-color));
+    outline-offset: 2px;
+  }
+
+  .unified-icon {
+    transition: var(--transition-fast);
+  }
+}
+
+// 带标签的按钮
+.header-action-btn {
+  gap: var(--header-action-btn-gap, var(--spacing-xs));
+  min-width: var(--header-action-btn-min-width, auto);
+
+  .btn-label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--header-btn-label-color, var(--text-secondary));
+    white-space: nowrap;
+    transition: var(--transition-fast);
+  }
+
+  .unified-icon {
+    color: var(--header-icon-color, var(--text-secondary));
+    transition: var(--transition-fast);
+  }
+
+  // 只有图标的按钮保持原样
+  &:not(:has(.btn-label)) {
+    .unified-icon {
+      color: var(--text-primary);
+    }
+  }
+
+  // 有标签的按钮hover状态
+  &:hover {
+    .btn-label {
+      color: var(--header-btn-hover-color, var(--primary-color));
+    }
+
+    .unified-icon {
+      color: var(--header-btn-hover-color, var(--primary-color));
+    }
+  }
+
+  // 主题按钮特殊样式
+  &.theme-btn {
+    .unified-icon {
+      color: var(--primary-color);
+    }
+  }
+
+  // 图标系统按钮特殊样式
+  &.icon-system-btn {
+    .unified-icon {
+      color: var(--primary-color);
+    }
+  }
+}
+
+// ==================== 用户信息样式 ====================
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--user-profile-gap, var(--spacing-sm));
+  padding: var(--user-profile-padding, var(--spacing-xs) var(--spacing-sm));
+  background: var(--user-profile-bg, var(--bg-card));
+  border: var(--border-width-base) solid var(--user-profile-border, var(--border-color));
+  border-radius: var(--user-profile-radius, var(--radius-xl));
+  height: var(--user-profile-height, 40px);
+  transition: var(--transition-base);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--user-profile-hover-bg, var(--bg-hover));
+    border-color: var(--user-profile-hover-border, var(--primary-color));
+    transform: var(--user-profile-hover-transform, translateY(-1px));
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.user-avatar {
+  width: var(--user-avatar-size, 32px);
+  height: var(--user-avatar-size, 32px);
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-on-primary);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    transform: var(--user-avatar-hover-transform, scale(1.05));
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  .user-name {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+}
+
+// ==================== 面包屑导航样式 ====================
+.breadcrumb-nav {
+  margin-left: var(--breadcrumb-nav-margin-left, var(--spacing-md));
+
+  :deep(.el-breadcrumb__item) {
+    .el-breadcrumb__inner {
+      color: var(--breadcrumb-color, var(--text-secondary));
+      font-size: var(--breadcrumb-font-size, var(--text-sm));
+      font-weight: var(--font-medium);
+
+      &:hover {
+        color: var(--breadcrumb-hover-color, var(--primary-color));
+      }
+    }
+
+    &:last-child .el-breadcrumb__inner {
+      color: var(--breadcrumb-active-color, var(--text-primary));
+      font-weight: var(--font-semibold);
+    }
+  }
+}
+
+// ==================== 下拉菜单样式 ====================
+.theme-dropdown,
+.icon-system-dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-sm));
+  right: 0;
+  min-width: var(--dropdown-width, 200px);
+  background: var(--bg-card);
+  border: var(--border-width-base) solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xs);
+  z-index: var(--z-dropdown, 1000);
+  backdrop-filter: blur(10px);
+}
+
+.theme-option,
+.icon-system-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+
+  &:hover {
+    background: var(--bg-hover);
+
+    .theme-icon .unified-icon {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+  }
+
+  &.active {
+    background: var(--primary-light-bg);
+    color: var(--primary-color);
+
+    .theme-icon .unified-icon {
+      color: var(--primary-color) !important;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.theme-icon {
+  width: var(--spacing-2xl);
+  height: var(--spacing-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  .unified-icon {
+    transition: all var(--transition-fast);
+    color: var(--theme-icon-color, currentColor) !important;
+  }
+}
+
+.theme-preview {
+  width: var(--spacing-3xl);
+  height: var(--spacing-3xl);
+  border-radius: var(--radius-sm);
+  border: var(--border-width-base) solid var(--border-color-light);
+}
+
+.theme-name,
+.icon-system-name {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+}
+
+.icon-system-desc {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+// ==================== AI助手按钮样式 ====================
+.ai-avatar {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: var(--text-on-primary);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
+
+  &.active {
+    background: var(--gradient-success);
+  }
+
+  .ai-text {
+    font-size: var(--text-base); // 增大字体大小
+    font-weight: 700; // 增加字重
+    letter-spacing: 0.5px; // 增加字间距
+    line-height: 1;
+  }
+}
+
+.status-dot {
+  width: var(--status-dot-size, 6px);
+  height: var(--status-dot-size, 6px);
+  border-radius: var(--radius-full);
+  background: var(--success-color);
+  margin-left: var(--spacing-xs);
+  transition: var(--transition-base);
+  box-shadow: 0 0 0 2px var(--bg-card);
+
+  &.active {
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 var(--spacing-sm) var(--success-color);
+  }
+
+  &.idle {
+    background: var(--info-color);
+  }
+
+  &.error {
+    background: var(--danger-color);
+    animation: blink 1s infinite;
+  }
+}
+
+// ==================== Logo区域样式 ====================
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-right: var(--spacing-md); // 右侧增加间距，不贴边
+}
+
+// ==================== Logo和圆形按钮样式 ====================
+.logo-icon,
+.ai-avatar {
+  width: var(--logo-size, 40px);
+  height: var(--logo-size, 40px);
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: var(--text-on-primary);
+  font-weight: var(--font-semibold, 600);
+  font-size: var(--text-sm, 14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+
+  &:hover {
+    transform: var(--logo-hover-transform, scale(1.05));
+    box-shadow: var(--shadow-md);
+  }
+
+  &.active {
+    background: var(--gradient-success);
+  }
+
+  .logo-image {
+    width: 32px; /* Fixed size替代calc(var(--logo-size, 40px) * 0.8) */
+    height: 32px; /* Fixed size替代calc(var(--logo-size, 40px) * 0.8) */
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+  }
+}
+
+// Logo文字样式
+.logo-text {
+  font-size: var(--logo-text-size, var(--text-lg, 18px));
+  font-weight: var(--logo-text-weight, var(--font-bold, 700));
+  color: var(--logo-text-color, var(--text-primary));
+  line-height: var(--logo-text-line-height, 1.2);
+  white-space: nowrap;
+}
+
+// ==================== 退出按钮样式 ====================
+.logout-btn {
+  color: var(--danger-color);
+  border-color: var(--danger-color-alpha, rgba(220, 38, 38, 0.2));
+  background: var(--danger-color-alpha-bg, rgba(220, 38, 38, 0.08));
+
+  .btn-label {
+    color: var(--danger-color);
+    font-weight: var(--font-semibold);
+  }
+
+  .unified-icon {
+    color: var(--danger-color);
+  }
+
+  &:hover {
+    background: var(--danger-color);
+    color: var(--text-on-primary);
+    border-color: var(--danger-color);
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    transform: translateY(-2px);
+
+    .btn-label {
+      color: var(--text-on-primary);
+    }
+
+    .unified-icon {
+      color: var(--text-on-primary);
+    }
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// ==================== 动画效果 ====================
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.3;
+  }
+}
+
+// ==================== 响应式设计 ====================
+@media (max-width: var(--breakpoint-md)) {
+  .app-header {
+    padding: 0 var(--spacing-md);
+    height: 56px;
+  }
+
+  .header-right {
+    gap: var(--spacing-xs);
+  }
+
+  .header-action-btn .btn-label {
+    display: none; // 移动端隐藏文字标签
+  }
+
+  .user-details {
+    display: none; // 移动端隐藏用户详情
+  }
+
+  .breadcrumb-nav {
+    display: none; // 移动端隐藏面包屑
+  }
+
+  .logo-section {
+    margin-right: var(--spacing-sm); // 移动端减小间距
+  }
+
+  .logo-text {
+    font-size: var(--text-base); // 移动端减小字体
+  }
+}
+
+// ==================== 主题适配 ====================
+[data-theme="dark"] {
+  .app-header {
+    background: var(--bg-card);
+    border-bottom-color: var(--border-color);
+  }
+
+  .user-profile {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+  }
+
+  .theme-dropdown,
+  .icon-system-dropdown {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+  }
+}

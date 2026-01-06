@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相机拍照上传花名册演示</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .demo-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .step-number {
+            background: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+
+        .step-description {
+            color: #5a6c7d;
+            line-height: 1.6;
+        }
+
+        .demo-section {
+            background: #ecf0f1;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .demo-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .roster-preview {
+            background: white;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .roster-header {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #34495e;
+        }
+
+        .class-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .class-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            border-left: 4px solid #e74c3c;
+            padding-left: 10px;
+        }
+
+        .student {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border-left: 3px solid #3498db;
+        }
+
+        .student-name {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .parent-info {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-bottom: 2px;
+        }
+
+        .address {
+            font-size: 11px;
+            color: #95a5a6;
+        }
+
+        .ai-capabilities {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .capability-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .capability-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 16px;
+        }
+
+        .upload-demo {
+            border: 3px dashed #3498db;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            background: #f0f8ff;
+            margin: 20px 0;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+
+        .success-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .tech-stack {
+            background: #2c3e50;
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .tech-icon {
+            width: 25px;
+            height: 25px;
+            background: #34495e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="header">
+            <h1>📸 相机拍照上传花名册演示</h1>
+            <p>AI助手智能识别纸质花名册，自动导入幼儿园管理系统</p>
+        </div>
+
+        <div class="workflow-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-title">📸 拍摄花名册</div>
+                <div class="step-description">
+                    使用手机或相机拍摄纸质花名册，确保照片清晰完整，包含所有学生信息
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-title">📤 上传图片</div>
+                <div class="step-description">
+                    打开AI助手页面，点击图片上传按钮，选择刚刚拍摄的花名册照片
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-title">🤖 AI智能识别</div>
+                <div class="step-description">
+                    AI助手自动识别图片中的学生姓名、班级、家长信息等关键数据
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-title">📊 数据结构化</div>
+                <div class="step-description">
+                    AI将识别到的图片内容整理成结构化的学生和家长数据格式
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-title">✅ 用户确认</div>
+                <div class="step-description">
+                    系统显示整理后的数据，用户确认无误后一键导入到数据库
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-title">⚡ 批量完成</div>
+                <div class="step-description">
+                    系统自动创建学生记录、家长关联、班级分配，完成批量导入
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📋 花名册样本示例</h2>
+            <div class="roster-preview">
+                <div class="roster-header">
+                    幼儿园花名册 2025年春季班
+                </div>
+
+                <div class="class-section">
+                    <div class="class-title">小班（3-4岁）</div>
+                    <div class="student">
+                        <div class="student-name">1. 张小明 男 3岁2个月</div>
+                        <div class="parent-info">家长：张爸爸 (13812345678)</div>
+                        <div class="address">地址：阳光小区3栋201室</div>
+                    </div>
+                    <div class="student">
+                        <div class="student-name">2. 李小红 女 3岁5个月</div>
+                        <div class="parent-info">家长：李妈妈 (13823456789)</div>
+                        <div class="address">地址：绿荫花园5栋302室</div>
+                    </div>
+                    <div class="student">
+                        <div class="student-name">3. 王小刚 男 3岁8个月</div>
+                        <div class="parent-info">家长：王爸爸 (13834567890)</div>
+                        <div class="address">地址：紫金苑8栋102室</div>
+                    </div>
+                </div>
+
+                <div class="class-section">
+                    <div class="class-title">中班（4-5岁）</div>
+                    <div class="student">
+                        <div class="student-name">4. 陈小美 女 4岁3个月</div>
+                        <div class="parent-info">家长：陈妈妈 (13845678901)</div>
+                        <div class="address">地址：幸福里小区2栋503室</div>
+                    </div>
+                    <div class="student">
+                        <div class="student-name">5. 刘小强 男 4岁7个月</div>
+                        <div class="parent-info">家长：刘爸爸 (13856789012)</div>
+                        <div class="address">地址：书香苑6栋204室</div>
+                    </div>
+                </div>
+
+                <div class="class-section">
+                    <div class="class-title">大班（5-6岁）</div>
+                    <div class="student">
+                        <div class="student-name">6. 周小芳 女 5岁6个月</div>
+                        <div class="parent-info">家长：周妈妈 (13889012345)</div>
+                        <div class="address">地址：皇家花园15栋305室</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ai-capabilities">
+            <h2>🤖 AI助手识别能力</h2>
+
+            <div class="capability-item">
+                <div class="capability-icon">👁️</div>
+                <div>
+                    <strong>图像识别</strong>
+                    <div>准确识别图片中的文字内容，包括中文和数字</div>
+                </div>
+            </div>
+
+            <div class="capability-item">
+                <div class="capability-icon">📊</div>
+                <div>
+                    <strong>数据提取</strong>
+                    <div>自动提取学生姓名、性别、年龄、班级、家长信息</div>
+                </div>
+            </div>
+
+            <div class="capability-item">
+                <div class="capability-icon">🔧</div>
+                <div>
+                    <strong>智能去重</strong>
+                    <div>检查系统中是否已有重复学生信息，避免重复录入</div>
+                </div>
+            </div>
+
+            <div class="capability-item">
+                <div class="capability-icon">🏫</div>
+                <div>
+                    <strong>班级分配</strong>
+                    <div>根据年龄自动分配到对应班级（小班、中班、大班）</div>
+                </div>
+            </div>
+
+            <div class="capability-item">
+                <div class="capability-icon">👨‍👩‍👧</div>
+                <div>
+                    <strong>家长关联</strong>
+                    <div>自动创建家长记录并建立与学生的一对多关联</div>
+                </div>
+            </div>
+
+            <div class="capability-item">
+                <div class="capability-icon">✅</div>
+                <div>
+                    <strong>确认机制</strong>
+                    <div>显示处理结果，用户确认后执行批量数据导入</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-demo">
+            <div class="upload-icon success-animation">📸</div>
+            <h3>模拟上传区域</h3>
+            <p>点击下方按钮模拟上传花名册图片</p>
+            <button class="btn-primary" onclick="simulateUpload()">📤 模拟上传花名册图片</button>
+            <div id="uploadResult" style="margin-top: 20px; font-weight: bold;"></div>
+        </div>
+
+        <div class="tech-stack">
+            <h2>🔧 技术架构</h2>
+
+            <div class="tech-item">
+                <div class="tech-icon">📤</div>
+                <div>
+                    <strong>文件上传</strong>
+                    <div>/api/files/upload - 支持图片格式自动压缩</div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-icon">💬</div>
+                <div>
+                    <strong>AI流式聊天</strong>
+                    <div>/api/ai/unified/stream-chat - SSE实时响应</div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-icon">🔧</div>
+                <div>
+                    <strong>工具调用</strong>
+                    <div>自动识别工具 + 数据库查询工具</div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-icon">🗄️</div>
+                <div>
+                    <strong>数据库操作</strong>
+                    <div>学生表、家长表、班级表的批量操作</div>
+                </div>
+            </div>
+
+            <div class="tech-item">
+                <div class="tech-icon">✅</div>
+                <div>
+                    <strong>前端确认</strong>
+                    <div>Element Plus对话框 + 用户确认流程</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #7f8c8d;">
+            <p>🎉 拍照上传花名册功能已完整实现，支持真实场景使用！</p>
+        </div>
+    </div>
+
+    <script>
+        function simulateUpload() {
+            const resultDiv = document.getElementById('uploadResult');
+            resultDiv.innerHTML = '📸 正在上传花名册图片...';
+
+            setTimeout(() => {
+                resultDiv.innerHTML = '✅ 图片上传成功！AI正在识别花名册内容...';
+
+                setTimeout(() => {
+                    resultDiv.innerHTML = '🤖 AI识别完成！<br>' +
+                                      '👶 检测到 6 名学生信息<br>' +
+                                      '🏫 小班: 3人, 中班: 2人, 大班: 1人<br>' +
+                                      '👨‍👩‍👧 家长信息: 6条<br>' +
+                                      '✅ 请确认数据后点击"批量导入"';
+
+                    // 添加成功动画效果
+                    resultDiv.classList.add('success-animation');
+                }, 2000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

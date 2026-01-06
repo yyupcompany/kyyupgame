@@ -1,0 +1,107 @@
+{
+  "timestamp": "2025-11-14T06:31:16.940Z",
+  "role": "家长",
+  "roleName": "家长",
+  "username": "test_parent",
+  "login": {
+    "success": true,
+    "data": {
+      "success": true,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInVzZXJuYW1lIjoidGVzdF9wYXJlbnQiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzYzMTAxODc3LCJleHAiOjE3NjMxODgyNzd9.tEV0jmh3He6I3FqcLMRSzxK171czU3g5gPBSduvqB7w",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInVzZXJuYW1lIjoidGVzdF9wYXJlbnQiLCJ0eXBlIjoicmVmcmVzaCIsImlzUmVmcmVzaFRva2VuIjp0cnVlLCJpYXQiOjE3NjMxMDE4NzcsImV4cCI6MTc2NTY5Mzg3N30.T_Y4WNZy3lawQJutjesSdL7ZfjJtpgqKbh-jVTbSCmg",
+        "user": {
+          "id": 8,
+          "username": "test_parent",
+          "email": "ik8220@gmail.com",
+          "realName": "刘蕾",
+          "role": "parent",
+          "roleName": "家长",
+          "isAdmin": false,
+          "kindergartenId": null,
+          "roles": [
+            {
+              "code": "parent",
+              "name": "家长"
+            }
+          ]
+        }
+      },
+      "message": "登录成功"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInVzZXJuYW1lIjoidGVzdF9wYXJlbnQiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzYzMTAxODc3LCJleHAiOjE3NjMxODgyNzd9.tEV0jmh3He6I3FqcLMRSzxK171czU3g5gPBSduvqB7w"
+  },
+  "permissions": {
+    "success": true,
+    "permissions": [
+      "PARENT_DASHBOARD",
+      "PARENT_STUDENT_INFO",
+      "PARENT_CENTER_DIRECTORY",
+      "PARENT_GROWTH_REPORT",
+      "PARENT_ASSESSMENT",
+      "PARENT_SCHOOL_READINESS",
+      "PARENT_GAMES",
+      "PARENT_AI_ASSISTANT",
+      "PARENT_ACTIVITIES",
+      "PARENT_PHOTO_ALBUM",
+      "BUSINESS_MANAGEMENT_CATEGORY",
+      "BUSINESS_CENTER",
+      "TEACHING_CENTER",
+      "MARKETING_CENTER",
+      "FINANCE_CENTER",
+      "PERSONNEL_CENTER",
+      "SYSTEM_CENTER",
+      "PARENT_PROFILE",
+      "PARENT_FEEDBACK",
+      "PARENT_SHARE_STATS",
+      "PARENT_KINDERGARTEN_REWARDS",
+      "PARENT_COMMUNICATION",
+      "ENROLLMENT_CENTER",
+      "TEACHING_MANAGEMENT_CATEGORY",
+      "ASSESSMENT_CENTER",
+      "CALL_CENTER",
+      "PERFORMANCE_CENTER",
+      "TASK_CENTER",
+      "DOCUMENT_TEMPLATE_CENTER",
+      "ACTIVITY_CENTER",
+      "INSPECTION_CENTER",
+      "MARKETING_MANAGEMENT_CATEGORY",
+      "CUSTOMER_POOL_CENTER",
+      "ANALYTICS_CENTER",
+      "FEEDBACK_CENTER",
+      "USAGE_CENTER",
+      "ATTENDANCE_CENTER",
+      "SCRIPT_CENTER",
+      "FINANCE_MANAGEMENT_CATEGORY",
+      "PHOTO_ALBUM_CENTER",
+      "PERSONNEL_MANAGEMENT_CATEGORY",
+      "SYSTEM_MANAGEMENT_CATEGORY",
+      "PARENT_CENTER"
+    ]
+  },
+  "styleCheck": {
+    "pageBasics": {
+      "pageTitle": "幼儿园招生管理系统",
+      "currentUrl": "http://localhost:5173/dashboard",
+      "userRole": "家长"
+    },
+    "designTokens": {
+      "primaryColor": "#409eff",
+      "successColor": "#67c23a",
+      "warningColor": "#e6a23c",
+      "dangerColor": "#f56c6c"
+    },
+    "components": {
+      "header": "app-header",
+      "sidebar": "app-sidebar",
+      "mainContent": "main-content",
+      "cards": 43,
+      "menus": 0
+    },
+    "layout": {
+      "screenWidth": 1920,
+      "screenHeight": 1080,
+      "responsive": true
+    }
+  }
+}

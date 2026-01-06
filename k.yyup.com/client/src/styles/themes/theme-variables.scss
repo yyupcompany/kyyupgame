@@ -1,0 +1,311 @@
+/**
+ * 主题变量定义
+ * Theme Variables - 定义四种主题的完整 CSS 变量
+ *
+ * 主题列表：
+ * - light: 明亮主题（默认）
+ * - dark: 暗黑主题
+ * - glass-light: 明亮玻璃台主题
+ * - glass-dark: 暗黑玻璃台主题
+ *
+ * 重要：使用 html[data-theme] 选择器确保优先级高于 :root
+ * html[data-theme] 优先级为 (0,2,0)，高于 :root 的 (0,1,0)
+ */
+
+/* ==================== 明亮主题 (Light) ==================== */
+html[data-theme="light"],
+html[data-theme="theme-light"],
+:root[data-theme="light"] {
+  /* 主色调 - 蓝色系 */
+  --primary-color: #6366f1;
+  --primary-color-rgb: 99, 102, 241;
+  --primary-hover: #4f46e5;
+  --primary-light: #a5b4fc;
+  --primary-lighter: #c7d2fe;
+  --primary-extra-light: #e0e7ff;
+  --primary-dark: #4338ca;
+
+  /* 次要色 */
+  --secondary-color: #06b6d4;
+  --accent-color: #f59e0b;
+
+  /* 语义色 */
+  --danger-color: #ef4444;
+  --warning-color: #f97316;
+  --info-color: #06b6d4;
+  --success-color: #10b981;
+
+  /* 背景色 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f5f9;
+  --bg-accent: rgba(99, 102, 241, 0.04);
+
+  /* 渐变背景 */
+  --bg-gradient-primary: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --bg-gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+  /* 文本色 */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+  --text-muted: #94a3b8;
+  --text-disabled: #cbd5e1;
+  --text-inverse: #ffffff;
+
+  /* 边框色 */
+  --border-color: #e2e8f0;
+  --border-light: #e4e7ed;
+  --border-lighter: #ebeef5;
+  --border-focus: #6366f1;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-colored: 0 4px 14px 0 rgba(99, 102, 241, 0.25);
+
+  /* 侧边栏 */
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-text: #64748b;
+  --sidebar-text-hover: #1e293b;
+  --sidebar-item-hover: #f1f5f9;
+  --sidebar-item-active: #e0e7ff;
+  --sidebar-item-active-text: #6366f1;
+
+  /* Element Plus */
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: #f8fafc;
+  --el-text-color-primary: #1e293b;
+  --el-text-color-regular: #64748b;
+  --el-text-color-secondary: #94a3b8;
+  --el-border-color: #e2e8f0;
+  --el-fill-color: #f8fafc;
+}
+
+/* ==================== 暗黑主题 (Dark) ==================== */
+html[data-theme="dark"],
+html[data-theme="theme-dark"],
+:root[data-theme="dark"] {
+  /* 主色调 - 靛蓝色系 */
+  --primary-color: #6366f1;
+  --primary-color-rgb: 99, 102, 241;
+  --primary-hover: #4f46e5;
+  --primary-light: #a5b4fc;
+  --primary-lighter: #c7d2fe;
+  --primary-extra-light: #e0e7ff;
+  --primary-dark: #4338ca;
+
+  /* 次要色 */
+  --secondary-color: #06b6d4;
+  --accent-color: #f59e0b;
+
+  /* 语义色 */
+  --danger-color: #f87171;
+  --warning-color: #fbbf24;
+  --info-color: #38bdf8;
+  --success-color: #34d399;
+
+  /* 背景色 - 深色系 */
+  --bg-primary: #0c0a1a;
+  --bg-secondary: #1a1625;
+  --bg-tertiary: #2d2438;
+  --bg-card: #1a1625;
+  --bg-hover: #2d2438;
+  --bg-accent: rgba(99, 102, 241, 0.1);
+
+  /* 渐变背景 */
+  --bg-gradient-primary: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  --bg-gradient-secondary: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%);
+
+  /* 文本色 */
+  --text-primary: #d1d5db;
+  --text-secondary: #9ca3af;
+  --text-tertiary: #6b7280;
+  --text-muted: #6b7280;
+  --text-disabled: #374151;
+  --text-inverse: #0c0a1a;
+
+  /* 边框色 */
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.15);
+  --border-lighter: rgba(255, 255, 255, 0.08);
+  --border-focus: #6366f1;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+  --shadow-colored: 0 4px 14px 0 rgba(99, 102, 241, 0.4);
+
+  /* 侧边栏 */
+  --sidebar-bg: #0c0a1a;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-text: #9ca3af;
+  --sidebar-text-hover: #d1d5db;
+  --sidebar-item-hover: rgba(99, 102, 241, 0.1);
+  --sidebar-item-active: rgba(99, 102, 241, 0.2);
+  --sidebar-item-active-text: #a5b4fc;
+
+  /* Element Plus */
+  --el-bg-color: #1a1625;
+  --el-bg-color-page: #0c0a1a;
+  --el-text-color-primary: #d1d5db;
+  --el-text-color-regular: #9ca3af;
+  --el-text-color-secondary: #6b7280;
+  --el-border-color: rgba(255, 255, 255, 0.1);
+  --el-fill-color: #1a1625;
+}
+
+/* ==================== 明亮玻璃台主题 (Glass Light) ==================== */
+html[data-theme="glass-light"],
+:root[data-theme="glass-light"] {
+  /* 主色调 - 青色系 */
+  --primary-color: #06b6d4;
+  --primary-color-rgb: 6, 182, 212;
+  --primary-hover: #0891b2;
+  --primary-light: #22d3ee;
+  --primary-lighter: #67e8f9;
+  --primary-extra-light: #a5f3fc;
+  --primary-dark: #0e7490;
+
+  /* 次要色 */
+  --secondary-color: #8b5cf6;
+  --accent-color: #f59e0b;
+
+  /* 语义色 */
+  --danger-color: #ef4444;
+  --warning-color: #f97316;
+  --info-color: #3b82f6;
+  --success-color: #10b981;
+
+  /* 背景色 - 玻璃态效果 */
+  --bg-primary: rgba(255, 255, 255, 0.95);
+  --bg-secondary: rgba(255, 255, 255, 0.92);
+  --bg-tertiary: rgba(255, 255, 255, 0.88);
+  --bg-card: rgba(255, 255, 255, 0.98);
+  --bg-hover: rgba(6, 182, 212, 0.1);
+  --bg-accent: rgba(6, 182, 212, 0.08);
+
+  /* 渐变背景 */
+  --bg-gradient-primary: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+  --bg-gradient-secondary: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%);
+
+  /* 文本色 */
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-muted: #64748b;
+  --text-disabled: #cbd5e1;
+  --text-inverse: #ffffff;
+
+  /* 边框色 - 玻璃态边框 */
+  --border-color: rgba(6, 182, 212, 0.3);
+  --border-light: rgba(6, 182, 212, 0.2);
+  --border-lighter: rgba(6, 182, 212, 0.12);
+  --border-focus: rgba(6, 182, 212, 0.6);
+
+  /* 阴影 - 柔和的彩色阴影 */
+  --shadow-sm: 0 2px 8px rgba(6, 182, 212, 0.1);
+  --shadow-md: 0 4px 16px rgba(6, 182, 212, 0.15);
+  --shadow-lg: 0 8px 24px rgba(6, 182, 212, 0.2);
+  --shadow-xl: 0 12px 32px rgba(6, 182, 212, 0.25);
+  --shadow-colored: 0 4px 14px rgba(6, 182, 212, 0.2);
+
+  /* 侧边栏 */
+  --sidebar-bg: rgba(255, 255, 255, 0.95);
+  --sidebar-border: rgba(6, 182, 212, 0.25);
+  --sidebar-text: #475569;
+  --sidebar-text-hover: #1e293b;
+  --sidebar-item-hover: rgba(6, 182, 212, 0.1);
+  --sidebar-item-active: rgba(6, 182, 212, 0.15);
+  --sidebar-item-active-text: #06b6d4;
+
+  /* Element Plus */
+  --el-bg-color: rgba(255, 255, 255, 0.98);
+  --el-bg-color-page: rgba(255, 255, 255, 0.95);
+  --el-text-color-primary: #1e293b;
+  --el-text-color-regular: #475569;
+  --el-text-color-secondary: #64748b;
+  --el-border-color: rgba(6, 182, 212, 0.3);
+  --el-fill-color: rgba(255, 255, 255, 0.92);
+}
+
+/* ==================== 暗黑玻璃台主题 (Glass Dark) ==================== */
+html[data-theme="glass-dark"],
+:root[data-theme="glass-dark"] {
+  /* 主色调 - 紫色系 */
+  --primary-color: #8b5cf6;
+  --primary-color-rgb: 139, 92, 246;
+  --primary-hover: #7c3aed;
+  --primary-light: #a78bfa;
+  --primary-lighter: #c4b5fd;
+  --primary-extra-light: #ddd6fe;
+  --primary-dark: #6d28d9;
+
+  /* 次要色 */
+  --secondary-color: #06b6d4;
+  --accent-color: #f59e0b;
+
+  /* 语义色 */
+  --danger-color: #ef4444;
+  --warning-color: #f97316;
+  --info-color: #3b82f6;
+  --success-color: #10b981;
+
+  /* 背景色 - 深色玻璃态效果 */
+  --bg-primary: rgba(15, 23, 42, 0.95);
+  --bg-secondary: rgba(30, 41, 59, 0.92);
+  --bg-tertiary: rgba(51, 65, 85, 0.88);
+  --bg-card: rgba(30, 41, 59, 0.98);
+  --bg-hover: rgba(139, 92, 246, 0.15);
+  --bg-accent: rgba(139, 92, 246, 0.1);
+
+  /* 渐变背景 */
+  --bg-gradient-primary: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%);
+  --bg-gradient-secondary: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+
+  /* 文本色 - 深色主题 */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  --text-muted: #94a3b8;
+  --text-disabled: #475569;
+  --text-inverse: #0f172a;
+
+  /* 边框色 - 深色玻璃态边框 */
+  --border-color: rgba(139, 92, 246, 0.4);
+  --border-light: rgba(139, 92, 246, 0.25);
+  --border-lighter: rgba(139, 92, 246, 0.15);
+  --border-focus: rgba(139, 92, 246, 0.6);
+
+  /* 阴影 - 深色柔和阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-colored: 0 4px 14px rgba(139, 92, 246, 0.3);
+
+  /* 侧边栏 */
+  --sidebar-bg: rgba(15, 23, 42, 0.95);
+  --sidebar-border: rgba(139, 92, 246, 0.25);
+  --sidebar-text: #cbd5e1;
+  --sidebar-text-hover: #f1f5f9;
+  --sidebar-item-hover: rgba(139, 92, 246, 0.15);
+  --sidebar-item-active: rgba(139, 92, 246, 0.2);
+  --sidebar-item-active-text: #a78bfa;
+
+  /* Element Plus */
+  --el-bg-color: rgba(30, 41, 59, 0.98);
+  --el-bg-color-page: rgba(15, 23, 42, 0.95);
+  --el-text-color-primary: #f1f5f9;
+  --el-text-color-regular: #cbd5e1;
+  --el-text-color-secondary: #94a3b8;
+  --el-border-color: rgba(139, 92, 246, 0.4);
+  --el-fill-color: rgba(30, 41, 59, 0.92);
+}

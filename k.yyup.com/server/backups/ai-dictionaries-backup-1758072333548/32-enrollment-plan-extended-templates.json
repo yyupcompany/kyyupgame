@@ -1,0 +1,126 @@
+{
+  "name": "招生计划扩展查询模板字典",
+  "description": "招生计划分配人员、招生计划班级、招生计划跟踪等招生计划扩展功能相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 招生计划分配人员相关查询模板 ===": "注释",
+    "招生计划分配人员总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_assignees",
+      "description": "查询招生计划分配人员总数",
+      "table": "enrollment_plan_assignees",
+      "response": "招生计划分配人员总数为{count}人",
+      "tokens": 10
+    },
+    "分配角色统计": {
+      "sql": "SELECT assignee_role, COUNT(*) as count FROM enrollment_plan_assignees GROUP BY assignee_role ORDER BY count DESC",
+      "description": "统计招生计划分配角色分布",
+      "table": "enrollment_plan_assignees",
+      "response": "分配角色统计完成",
+      "tokens": 20
+    },
+    "分配状态统计": {
+      "sql": "SELECT assignment_status, COUNT(*) as count FROM enrollment_plan_assignees GROUP BY assignment_status ORDER BY count DESC",
+      "description": "统计招生计划分配状态分布",
+      "table": "enrollment_plan_assignees",
+      "response": "分配状态统计完成",
+      "tokens": 20
+    },
+    "活跃分配人员": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_assignees WHERE assignment_status = 'active'",
+      "description": "查询活跃的招生计划分配人员数量",
+      "table": "enrollment_plan_assignees",
+      "response": "活跃分配人员{count}人",
+      "tokens": 12
+    },
+    "计划分配统计": {
+      "sql": "SELECT plan_id, COUNT(*) as assignee_count FROM enrollment_plan_assignees GROUP BY plan_id ORDER BY assignee_count DESC",
+      "description": "统计各招生计划的分配人员数量",
+      "table": "enrollment_plan_assignees",
+      "response": "计划分配统计完成",
+      "tokens": 25
+    },
+
+    "// === 招生计划班级相关查询模板 ===": "注释",
+    "招生计划班级总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_classes",
+      "description": "查询招生计划班级总数",
+      "table": "enrollment_plan_classes",
+      "response": "招生计划班级总数为{count}个",
+      "tokens": 10
+    },
+    "班级类型统计": {
+      "sql": "SELECT class_type, COUNT(*) as count FROM enrollment_plan_classes GROUP BY class_type ORDER BY count DESC",
+      "description": "统计招生计划班级类型分布",
+      "table": "enrollment_plan_classes",
+      "response": "班级类型统计完成",
+      "tokens": 20
+    },
+    "班级状态统计": {
+      "sql": "SELECT class_status, COUNT(*) as count FROM enrollment_plan_classes GROUP BY class_status ORDER BY count DESC",
+      "description": "统计招生计划班级状态分布",
+      "table": "enrollment_plan_classes",
+      "response": "班级状态统计完成",
+      "tokens": 20
+    },
+    "可招生班级": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_classes WHERE class_status = 'available'",
+      "description": "查询可招生的班级数量",
+      "table": "enrollment_plan_classes",
+      "response": "可招生班级{count}个",
+      "tokens": 12
+    },
+    "计划班级分布": {
+      "sql": "SELECT plan_id, COUNT(*) as class_count FROM enrollment_plan_classes GROUP BY plan_id ORDER BY class_count DESC",
+      "description": "统计各招生计划的班级数量分布",
+      "table": "enrollment_plan_classes",
+      "response": "计划班级分布统计完成",
+      "tokens": 25
+    },
+
+    "// === 招生计划跟踪相关查询模板 ===": "注释",
+    "招生计划跟踪总数": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_trackings",
+      "description": "查询招生计划跟踪总数",
+      "table": "enrollment_plan_trackings",
+      "response": "招生计划跟踪总数为{count}条",
+      "tokens": 10
+    },
+    "跟踪状态统计": {
+      "sql": "SELECT tracking_status, COUNT(*) as count FROM enrollment_plan_trackings GROUP BY tracking_status ORDER BY count DESC",
+      "description": "统计招生计划跟踪状态分布",
+      "table": "enrollment_plan_trackings",
+      "response": "跟踪状态统计完成",
+      "tokens": 20
+    },
+    "跟踪类型统计": {
+      "sql": "SELECT tracking_type, COUNT(*) as count FROM enrollment_plan_trackings GROUP BY tracking_type ORDER BY count DESC",
+      "description": "统计招生计划跟踪类型分布",
+      "table": "enrollment_plan_trackings",
+      "response": "跟踪类型统计完成",
+      "tokens": 20
+    },
+    "进行中跟踪": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_trackings WHERE tracking_status = 'in_progress'",
+      "description": "查询进行中的招生计划跟踪数量",
+      "table": "enrollment_plan_trackings",
+      "response": "进行中跟踪{count}条",
+      "tokens": 12
+    },
+    "本月跟踪记录": {
+      "sql": "SELECT COUNT(*) as count FROM enrollment_plan_trackings WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月招生计划跟踪记录数量",
+      "table": "enrollment_plan_trackings",
+      "response": "本月跟踪记录{count}条",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "招生计划扩展概览": {
+      "sql": "SELECT 'enrollment_plan_assignees' as category, COUNT(*) as count FROM enrollment_plan_assignees UNION ALL SELECT 'enrollment_plan_classes' as category, COUNT(*) as count FROM enrollment_plan_classes UNION ALL SELECT 'enrollment_plan_trackings' as category, COUNT(*) as count FROM enrollment_plan_trackings",
+      "description": "招生计划扩展功能数据总览",
+      "table": "multiple",
+      "response": "招生计划扩展概览查询完成",
+      "tokens": 30
+    }
+  }
+}

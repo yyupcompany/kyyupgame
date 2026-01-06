@@ -1,0 +1,772 @@
+/**
+ * 认证控制器
+ * 处理用户登录、登出和令牌刷新
+ */
+
+import { Request, Response, NextFunction } from 'express';
+import { QueryTypes } from 'sequelize';
+import { sequelize } from '../init';
+import { ApiError } from '../utils/apiError';
+import { ApiResponse } from '../utils/apiResponse';
+import { generateDynamicToken, verifyToken } from '../utils/jwt';
+import { verifyPassword } from '../utils/password';
+import { LoginDto, RefreshTokenDto } from '../types/auth';
+import { TOKEN_TYPES } from '../config/jwt.config';
+import { User, UserStatus, Role, UserRoleModel, Permission, RolePermission } from '../models/index';
+import SessionService, { UserSession } from '../services/session.service';
+import PermissionCacheService from '../services/permission-cache.service';
+import {
+  authenticateWithUnifiedAuth,
+  getUserTenants as getUserTenantsMiddleware,
+  bindUserToTenant as bindUserToTenantMiddleware
+} from '../middlewares/auth.middleware';
+
+/**
+ * 用户登录
+ */
+export const login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    console.log('登录请求:', req.body);
+    const { username, email, password } = req.body as LoginDto;
+
+    // 参数验证
+    if ((!username || username === null) && (!email || email === null)) {
+      res.status(400).json({
+        success: false,
+        error: 'MISSING_REQUIRED_FIELDS',
+        message: '用户名或邮箱不能为空'
+      });
+      return;
+    }
+
+    if (!password || password === null) {
+      res.status(400).json({
+        success: false,
+        error: 'MISSING_REQUIRED_FIELDS',
+        message: '密码不能为空'
+      });
+      return;
+    }
+
+    // 邮箱格式验证
+    if (email && email !== null) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        res.status(400).json({
+          success: false,
+          error: 'INVALID_EMAIL_FORMAT',
+          message: '邮箱格式无效'
+        });
+        return;
+      }
+    }
+
+    // 密码长度验证
+    if (password.length < 6) {
+      res.status(400).json({
+        success: false,
+        error: 'PASSWORD_TOO_SHORT',
+        message: '密码至少6位'
+      });
+      return;
+    }
+
+    // 用户名长度验证
+    if (username && (username.length < 1 || username.length > 50)) {
+      res.status(400).json({
+        success: false,
+        error: 'INVALID_USERNAME_LENGTH',
+        message: '用户名长度必须在1-50字符之间'
+      });
+      return;
+    }
+
+    // 使用原生SQL查询避免模型字段不匹配问题
+    let query = '';
+    let replacements: any = {};
+    
+    if (username && username !== null) {
+      query = 'SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE username = :username';
+      replacements = { username };
+      console.log('使用用户名查询:', username);
+    } else if (email && email !== null) {
+      query = 'SELECT id, username, password, email, real_name as realName, phone, status FROM users WHERE email = :email';
+      replacements = { email };
+      console.log('使用邮箱查询:', email);
+    }
+    
+    console.log('执行查询:', query);
+    console.log('查询参数:', replacements);
+    
+    let queryResult;
+    try {
+      queryResult = await sequelize.query(query, {
+        replacements,
+        type: QueryTypes.SELECT
+      });
+      console.log('原始查询结果:', queryResult);
+    } catch (dbError) {
+      console.log('数据库查询失败:', (dbError as Error).message);
+      res.status(500).json({
+        success: false,
+        error: 'DATABASE_ERROR',
+        message: '数据库连接失败，请稍后重试'
+      });
+      return;
+    }
+    
+    // 正确处理Sequelize查询结果
+    const userRows = Array.isArray(queryResult) ? queryResult : [];
+    console.log('处理后的结果:', userRows);
+    console.log('结果长度:', userRows.length);
+
+    if (!userRows || userRows.length === 0) {
+      console.log('用户不存在:', username || email);
+      
+      // 测试模式已禁用 - 使用真实数据库验证
+      // if ((username === 'admin' && password === '123456') ||
+      //     (username === 'test' && password === '123456')) {
+      //   console.log('启用测试模式，使用模拟用户登录');
+      //   // 模拟登录逻辑已移除
+      // }
+      
+      res.status(401).json({
+        success: false,
+        error: 'INVALID_CREDENTIALS',
+        message: '用户名或密码错误'
+      });
+      return;
+    }
+
+    const user = userRows[0] as any;
+    console.log('找到用户:', user.id, user.username, user.email);
+    
+    // 验证密码
+    console.log('验证密码, 输入:', password, '存储哈希:', user.password);
+    const isPasswordValid = await verifyPassword(password, user.password);
+    console.log('密码验证结果:', isPasswordValid);
+    
+    if (!isPasswordValid) {
+      console.log('密码不正确:', username || email);
+      res.status(401).json({
+        success: false,
+        error: 'INVALID_CREDENTIALS',
+        message: '用户名或密码错误'
+      });
+      return;
+    }
+
+    // 检查用户状态 - 只允许状态为active或1的用户登录
+    const userStatus = String(user.status).toLowerCase();
+    if (user.username !== 'admin' && userStatus !== UserStatus.ACTIVE.toLowerCase() && userStatus !== '1') {
+      console.log('账号已禁用:', username || email);
+      return ApiResponse.error(res, '账号已被禁用，请联系管理员', 'ACCOUNT_DISABLED', 200);
+    }
+    console.log('用户状态检查通过:', user.username, userStatus);
+
+    // 查询用户角色信息
+    const roleRows = await sequelize.query(`
+      SELECT r.code as role_code, r.name as role_name
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = ?
+      ORDER BY 
+        CASE 
+          WHEN r.code = 'super_admin' THEN 1
+          WHEN r.code = 'admin' THEN 2
+          ELSE 3
+        END
+      LIMIT 1
+    `, {
+      replacements: [user.id],
+      type: QueryTypes.SELECT
+    }) as Record<string, any>[];
+    const userRole = roleRows.length > 0 ? roleRows[0] as any : null;
+    
+    // 为管理员用户分配默认幼儿园ID
+    let kindergartenId = null;
+    console.log('🔍 检查用户角色:', userRole?.role_code);
+    if (userRole?.role_code === 'admin' || userRole?.role_code === 'super_admin') {
+      console.log('✅ 用户是管理员，查询幼儿园ID...');
+      const kindergartenRows = await sequelize.query(`
+        SELECT id FROM kindergartens ORDER BY id LIMIT 1
+      `, {
+        type: QueryTypes.SELECT
+      }) as Record<string, any>[];
+      console.log('🏢 查询到的幼儿园:', kindergartenRows);
+      if (kindergartenRows && kindergartenRows.length > 0) {
+        kindergartenId = kindergartenRows[0].id;
+        console.log('✅ 分配kindergartenId:', kindergartenId);
+      } else {
+        console.log('❌ 没有找到幼儿园数据');
+      }
+    } else {
+      console.log('❌ 用户不是管理员，不分配kindergartenId');
+    }
+
+    // 生成token
+    const token = await generateDynamicToken({
+      userId: user.id,
+      username: user.username,
+      type: TOKEN_TYPES.ACCESS
+    });
+
+    // 生成刷新token
+    const refreshToken = await generateDynamicToken(
+      {
+        userId: user.id,
+        username: user.username,
+        type: TOKEN_TYPES.REFRESH,
+        isRefreshToken: true
+      }
+    );
+
+    // 创建用户会话（启用单点登录）
+    const session: UserSession = {
+      userId: user.id,
+      username: user.username,
+      role: userRole?.role_code || 'user',
+      token,
+      loginTime: Date.now(),
+      lastActiveTime: Date.now(),
+      ip: req.ip || req.socket.remoteAddress,
+      userAgent: req.get('user-agent'),
+      deviceId: req.get('x-device-id')
+    };
+
+    // 单点登录（踢出其他设备）- 默认禁用,允许多设备登录
+    // 如果需要启用单点登录,前端需要明确传递 enableSSO: true
+    const enableSSO = req.body.enableSSO === true; // 默认禁用
+    await SessionService.createSession(session, enableSSO);
+
+    // 🔥 登录成功后，主动缓存用户权限到Redis
+    console.log(`🔄 开始缓存用户权限: 用户${user.id}`);
+    try {
+      // 异步缓存权限，不阻塞登录响应
+      PermissionCacheService.getUserPermissions(user.id)
+        .then(() => {
+          console.log(`✅ 用户权限已缓存: 用户${user.id}`);
+        })
+        .catch((error) => {
+          console.error(`⚠️ 权限缓存失败: 用户${user.id}`, error);
+        });
+    } catch (cacheError) {
+      console.error(`⚠️ 权限缓存异常: 用户${user.id}`, cacheError);
+      // 不影响登录流程
+    }
+
+    console.log('登录成功:', username || email, ', SSO:', enableSSO);
+    ApiResponse.success(res, {
+      token,
+      refreshToken,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email || '',
+        realName: user.realName || user.username,
+        role: userRole?.role_code || 'user',
+        roleName: userRole?.role_name || '普通用户',
+        isAdmin: userRole ? ['admin', 'super_admin'].includes(userRole.role_code) : false,
+        kindergartenId,
+        roles: userRole ? [{ code: userRole.role_code, name: userRole.role_name }] : []
+      }
+    }, '登录成功');
+  } catch (error) {
+    console.error('登录过程发生错误:', error);
+    console.error('错误堆栈:', error instanceof Error ? error.stack : String(error));
+    res.status(500).json({
+      success: false,
+      error: 'INTERNAL_SERVER_ERROR',
+      message: '服务器内部错误',
+      details: error instanceof Error ? error.message : String(error)
+    });
+  }
+};
+
+/**
+ * 刷新令牌
+ */
+export const refreshToken = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    console.log('刷新令牌请求:', req.body);
+    const { refreshToken: token } = req.body as RefreshTokenDto;
+
+    if (!token) {
+      console.log('刷新令牌为空');
+      return next(ApiError.badRequest('刷新令牌不能为空', 'REFRESH_TOKEN_REQUIRED'));
+    }
+
+    console.log('尝试验证刷新令牌:', token);
+    // 验证刷新令牌
+    try {
+      const decoded = verifyToken(token);
+      console.log('令牌解码成功:', decoded);
+
+      // 检查是否是刷新令牌
+      if (!decoded.isRefreshToken || decoded.type !== TOKEN_TYPES.REFRESH) {
+        console.log('令牌类型不正确:', decoded.isRefreshToken, decoded.type);
+        return next(ApiError.badRequest('无效的刷新令牌', 'INVALID_REFRESH_TOKEN'));
+      }
+
+      console.log('查询用户:', decoded.userId);
+      // 使用SQL查询用户
+      const userResults = await sequelize.query(
+        `SELECT id, username, status
+         FROM users
+         WHERE id = :userId`,
+        {
+          replacements: { userId: decoded.userId },
+          type: QueryTypes.SELECT
+        }
+      ) as Record<string, any>[];
+
+      const user = userResults && userResults.length > 0 ? userResults[0] as any : null;
+
+      if (!user) {
+        return next(ApiError.unauthorized('用户不存在', 'USER_NOT_FOUND'));
+      }
+
+      // 检查用户状态 - 只允许状态为active或1的用户
+      const userStatus = String(user.status).toLowerCase();
+      if (userStatus !== UserStatus.ACTIVE.toLowerCase() && userStatus !== '1') {
+        res.status(403).json({
+          success: false,
+          error: 'ACCOUNT_DISABLED',
+          message: '账号已被禁用，请联系管理员'
+        });
+        return;
+      }
+
+      // 生成新的访问令牌
+      const newToken = await generateDynamicToken({
+        userId: user.id,
+        username: user.username,
+        type: TOKEN_TYPES.ACCESS
+      });
+
+      // 生成新的刷新令牌
+      const newRefreshToken = await generateDynamicToken(
+        {
+          userId: user.id,
+          username: user.username,
+          type: TOKEN_TYPES.REFRESH,
+          isRefreshToken: true
+        }
+      );
+
+      ApiResponse.success(res, {
+        token: newToken,
+        refreshToken: newRefreshToken
+      }, '刷新令牌成功');
+    } catch (err) {
+      return next(ApiError.unauthorized('刷新令牌已过期或无效', 'INVALID_REFRESH_TOKEN'));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * 退出登录
+ */
+export const logout = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const user = (req as any).user;
+    const token = req.headers.authorization?.replace('Bearer ', '');
+
+    if (user && token) {
+      // 删除用户会话
+      await SessionService.deleteSession(user.id, token);
+
+      // 将Token加入黑名单
+      await SessionService.addToBlacklist(token);
+
+      console.log(`✅ 用户${user.id}已登出`);
+    }
+
+    ApiResponse.success(res, { message: '退出成功' });
+  } catch (error) {
+    console.error('❌ 登出失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 验证令牌
+ */
+export const verifyTokenEndpoint = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    // 如果能到达这里，说明token已经通过中间件验证
+    const user = req.user as any;
+    if (!user) {
+      return next(ApiError.unauthorized('用户信息不存在', 'USER_NOT_FOUND'));
+    }
+
+    ApiResponse.success(res, {
+      valid: true,
+      user: {
+        id: user.id,
+        username: user.username || ''
+      }
+    }, 'Token验证成功');
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * 获取当前用户信息
+ */
+export const getCurrentUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const user = req.user as any;
+    if (!user) {
+      return next(ApiError.unauthorized('用户信息不存在', 'USER_NOT_FOUND'));
+    }
+
+    // 查询完整的用户信息
+    const userResults = await sequelize.query(`
+      SELECT 
+        u.id, 
+        u.username, 
+        u.email, 
+        u.real_name as realName, 
+        u.phone, 
+        u.status,
+        u.created_at as createdAt
+      FROM users u
+      WHERE u.id = :userId
+    `, {
+      replacements: { userId: user.id },
+      type: QueryTypes.SELECT
+    }) as Record<string, any>[];
+
+    const userInfo = userResults && userResults.length > 0 ? userResults[0] as any : null;
+    if (!userInfo) {
+      return next(ApiError.notFound('用户不存在', 'USER_NOT_FOUND'));
+    }
+
+    // 查询用户角色信息
+    const roleResults = await sequelize.query(`
+      SELECT r.code as role_code, r.name as role_name
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = :userId
+    `, {
+      replacements: { userId: user.id },
+      type: QueryTypes.SELECT
+    }) as Record<string, any>[];
+
+    const roles = roleResults.map((role: any) => ({
+      code: role.role_code,
+      name: role.role_name
+    }));
+
+    ApiResponse.success(res, {
+      id: userInfo.id,
+      username: userInfo.username,
+      email: userInfo.email || '',
+      realName: userInfo.realName || userInfo.username,
+      phone: userInfo.phone || '',
+      status: userInfo.status,
+      createdAt: userInfo.createdAt,
+      roles
+    }, '获取用户信息成功');
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * 获取用户菜单权限
+ */
+const getUserMenu = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return ApiResponse.error(res, '用户信息不存在', '401');
+    }
+
+    console.log('🔍 获取用户菜单权限，用户ID:', user.id);
+
+    // 获取用户角色信息
+    const roleResults = await sequelize.query(`
+      SELECT r.code as role_code, r.name as role_name
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = :userId
+    `, {
+      replacements: { userId: user.id },
+      type: QueryTypes.SELECT
+    }) as Record<string, any>[];
+
+    const userRole = roleResults[0];
+    const isAdmin = userRole ? ['admin', 'super_admin'].includes(userRole.role_code) : false;
+
+    console.log('👤 用户角色:', userRole?.role_code, '是否管理员:', isAdmin);
+
+    // 从数据库获取中心化菜单结构
+    const centerCategories = await sequelize.query(`
+      SELECT id, name, chinese_name, code, path, icon, sort
+      FROM permissions 
+      WHERE status = 1 AND type = 'category' AND parent_id IS NULL
+      ORDER BY sort
+    `, {
+      type: QueryTypes.SELECT
+    }) as any[];
+
+    console.log('📂 找到分类:', centerCategories.length, '个');
+
+    // 构建中心化菜单
+    const menuItems: any[] = [];
+
+    for (const category of centerCategories) {
+      // 获取每个分类下的菜单项
+      const categoryMenus = await sequelize.query(`
+        SELECT id, name, chinese_name, code, path, component, icon, sort, type
+        FROM permissions 
+        WHERE status = 1 AND parent_id = :categoryId AND type = 'menu'
+        ORDER BY sort
+      `, {
+        replacements: { categoryId: category.id },
+        type: QueryTypes.SELECT
+      }) as any[];
+
+      console.log(`📁 分类 ${category.chinese_name || category.name} 下有 ${categoryMenus.length} 个菜单`);
+
+      // 构建分类项
+      const categoryItem = {
+        id: category.code.toLowerCase().replace(/_/g, '-'),
+        name: category.name,
+        chinese_name: category.chinese_name || category.name,
+        title: category.chinese_name || category.name,
+        path: category.path,
+        icon: category.icon || 'Menu',
+        type: category.type,
+        sort: category.sort,
+        visible: true,
+        children: categoryMenus.map(menu => ({
+          id: menu.code.toLowerCase().replace(/_/g, '-'),
+          name: menu.name,
+          chinese_name: menu.chinese_name || menu.name,
+          title: menu.chinese_name || menu.name,
+          path: menu.path,
+          component: menu.component,
+          icon: menu.icon || 'Menu',
+          type: menu.type,
+          sort: menu.sort,
+          visible: true
+        }))
+      };
+
+      menuItems.push(categoryItem);
+    }
+
+    console.log('🎯 最终菜单结构:', menuItems.length, '个分类');
+    console.log('📋 分类详情:', menuItems.map(item => `${item.title}(${item.children?.length || 0}个子项)`));
+
+    ApiResponse.success(res, menuItems, '获取菜单权限成功');
+  } catch (error) {
+    console.error('获取菜单权限失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 获取用户角色信息
+ */
+const getUserRoles = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = req.user;
+    if (!user) {
+      return ApiResponse.error(res, '用户信息不存在', '401');
+    }
+
+    // 查询用户角色信息
+    const roleResults = await sequelize.query(`
+      SELECT r.id, r.code, r.name, r.description, r.permissions
+      FROM user_roles ur
+      INNER JOIN roles r ON ur.role_id = r.id
+      WHERE ur.user_id = :userId
+    `, {
+      replacements: { userId: user.id },
+      type: QueryTypes.SELECT
+    }) as Record<string, any>[];
+
+    const roles = roleResults.map((role: any) => ({
+      id: role.id,
+      code: role.code,
+      name: role.name,
+      description: role.description,
+      permissions: role.permissions ? JSON.parse(role.permissions) : []
+    }));
+
+    ApiResponse.success(res, {
+      roles,
+      currentRole: roles[0] || null,
+      isAdmin: roles.some(role => ['admin', 'super_admin'].includes(role.code))
+    }, '获取角色信息成功');
+  } catch (error) {
+    console.error('获取角色信息失败:', error);
+    next(error);
+  }
+};
+
+// ========== 统一认证接口 ==========
+
+/**
+ * 统一认证登录
+ * 支持手机号+密码登录，可选择指定租户或返回租户列表
+ */
+export const unifiedLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    // 直接调用统一认证中间件处理
+    await authenticateWithUnifiedAuth(req, res, next);
+  } catch (error) {
+    console.error('[统一认证登录] 处理失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 获取用户关联的租户列表
+ * 通过手机号和密码验证后，返回用户关联的所有租户
+ */
+export const getUserTenants = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    // 直接调用获取租户中间件处理
+    await getUserTenantsMiddleware(req, res, next);
+  } catch (error) {
+    console.error('[获取用户租户] 处理失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 绑定用户到租户
+ * 将全局用户与指定租户进行绑定
+ */
+export const bindUserToTenant = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    // 直接调用绑定租户中间件处理
+    await bindUserToTenantMiddleware(req, res, next);
+  } catch (error) {
+    console.error('[绑定用户租户] 处理失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 支持多种登录方式的登录接口
+ * 自动判断登录类型：传统登录(用户名/邮箱)或统一认证登录(手机号)
+ */
+export const flexibleLogin = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { username, email, phone, password, tenantCode } = req.body;
+
+    console.log('[灵活登录] 请求参数:', {
+      hasUsername: !!username,
+      hasEmail: !!email,
+      hasPhone: !!phone,
+      hasPassword: !!password,
+      tenantCode,
+      phoneMasked: phone ? phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2') : undefined
+    });
+
+    // 参数验证
+    if (!password) {
+      return res.status(400).json({
+        success: false,
+        error: 'MISSING_PASSWORD',
+        message: '密码不能为空'
+      });
+    }
+
+    // 判断登录类型并处理
+    if (phone && (tenantCode !== undefined)) {
+      // 统一认证登录（手机号+密码，可选租户代码）
+      console.log('[灵活登录] 使用统一认证登录');
+      await unifiedLogin(req, res, next);
+    } else if (username || email) {
+      // 传统登录（用户名/邮箱+密码）
+      console.log('[灵活登录] 使用传统登录');
+      await login(req, res, next);
+    } else {
+      // 参数不完整
+      res.status(400).json({
+        success: false,
+        error: 'INSUFFICIENT_CREDENTIALS',
+        message: '请提供完整的登录信息：用户名/邮箱 或 手机号+租户代码'
+      });
+    }
+  } catch (error) {
+    console.error('[灵活登录] 处理失败:', error);
+    next(error);
+  }
+};
+
+/**
+ * 统一认证健康检查
+ * 检查统一认证中心的可用性
+ */
+export const unifiedAuthHealthCheck = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { adminIntegrationService } = await import('../services/admin-integration.service');
+
+    const healthResult = await adminIntegrationService.healthCheck();
+
+    if (healthResult.success) {
+      ApiResponse.success(res, {
+        status: 'healthy',
+        message: healthResult.message,
+        latency: healthResult.latency,
+        timestamp: new Date().toISOString()
+      }, '统一认证中心运行正常');
+    } else {
+      ApiResponse.error(res, healthResult.message, 'UNIFIED_AUTH_UNHEALTHY', 503);
+    }
+  } catch (error) {
+    console.error('[统一认证健康检查] 失败:', error);
+    ApiResponse.error(res, '统一认证中心检查失败', 'HEALTH_CHECK_ERROR', 500);
+  }
+};
+
+/**
+ * 获取统一认证配置
+ * 获取公开的统一认证配置信息
+ */
+export const getUnifiedAuthConfig = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { adminIntegrationService } = await import('../services/admin-integration.service');
+
+    const config = await adminIntegrationService.getConfig();
+
+    ApiResponse.success(res, {
+      config: config || {},
+      available: !!config,
+      timestamp: new Date().toISOString()
+    }, '获取统一认证配置成功');
+  } catch (error) {
+    console.error('[获取统一认证配置] 失败:', error);
+    ApiResponse.error(res, '获取统一认证配置失败', 'CONFIG_ERROR', 500);
+  }
+};
+
+export default {
+  // 传统认证接口
+  login,
+  refreshToken,
+  logout,
+  verifyTokenEndpoint,
+  getCurrentUser,
+  getUserMenu,
+  getUserRoles,
+
+  // 统一认证接口
+  unifiedLogin,
+  getUserTenants,
+  bindUserToTenant,
+  flexibleLogin,
+  unifiedAuthHealthCheck,
+  getUnifiedAuthConfig
+};

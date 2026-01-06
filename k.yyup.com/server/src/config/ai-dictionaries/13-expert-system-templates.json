@@ -1,0 +1,185 @@
+{
+  "name": "专家系统查询模板字典",
+  "description": "专家发言、咨询总结、程序记忆、语义记忆等专家系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 专家发言相关查询模板 ===": "注释",
+    "专家发言总数": {
+      "sql": "SELECT COUNT(*) as count FROM expert_speeches",
+      "description": "查询专家发言总数",
+      "table": "expert_speeches",
+      "response": "专家发言总数为{count}条",
+      "tokens": 10
+    },
+    "专家类型分布": {
+      "sql": "SELECT expert_type, COUNT(*) as count FROM expert_speeches GROUP BY expert_type ORDER BY count DESC",
+      "description": "统计专家类型分布",
+      "table": "expert_speeches",
+      "response": "专家类型分布统计完成",
+      "tokens": 20
+    },
+    "专家发言轮次统计": {
+      "sql": "SELECT round, COUNT(*) as count FROM expert_speeches GROUP BY round ORDER BY round",
+      "description": "统计专家发言轮次分布",
+      "table": "expert_speeches",
+      "response": "专家发言轮次统计完成",
+      "tokens": 20
+    },
+    "专家置信度分析": {
+      "sql": "SELECT AVG(confidence) as avg_confidence, MIN(confidence) as min_confidence, MAX(confidence) as max_confidence, COUNT(CASE WHEN confidence IS NOT NULL THEN 1 END) as confidence_count FROM expert_speeches",
+      "description": "分析专家发言置信度",
+      "table": "expert_speeches",
+      "response": "专家置信度分析完成",
+      "tokens": 30
+    },
+    "活跃专家统计": {
+      "sql": "SELECT expert_name, COUNT(*) as speech_count FROM expert_speeches GROUP BY expert_name ORDER BY speech_count DESC LIMIT 10",
+      "description": "统计最活跃的专家",
+      "table": "expert_speeches",
+      "response": "活跃专家统计完成",
+      "tokens": 25
+    },
+    "本月专家发言": {
+      "sql": "SELECT COUNT(*) as count FROM expert_speeches WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月专家发言数量",
+      "table": "expert_speeches",
+      "response": "本月专家发言{count}条",
+      "tokens": 20
+    },
+    "专家发言关键词统计": {
+      "sql": "SELECT COUNT(CASE WHEN keywords IS NOT NULL AND JSON_LENGTH(keywords) > 0 THEN 1 END) as with_keywords, COUNT(*) as total_speeches FROM expert_speeches",
+      "description": "统计包含关键词的专家发言",
+      "table": "expert_speeches",
+      "response": "专家发言关键词统计完成",
+      "tokens": 25
+    },
+
+    "// === 咨询总结相关查询模板 ===": "注释",
+    "咨询总结总数": {
+      "sql": "SELECT COUNT(*) as count FROM consultation_summaries",
+      "description": "查询咨询总结总数",
+      "table": "consultation_summaries",
+      "response": "咨询总结总数为{count}个",
+      "tokens": 10
+    },
+    "咨询总结置信度分析": {
+      "sql": "SELECT AVG(confidence_score) as avg_confidence, MIN(confidence_score) as min_confidence, MAX(confidence_score) as max_confidence FROM consultation_summaries WHERE confidence_score IS NOT NULL",
+      "description": "分析咨询总结置信度",
+      "table": "consultation_summaries",
+      "response": "咨询总结置信度分析完成",
+      "tokens": 25
+    },
+    "本月咨询总结": {
+      "sql": "SELECT COUNT(*) as count FROM consultation_summaries WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月咨询总结数量",
+      "table": "consultation_summaries",
+      "response": "本月咨询总结{count}个",
+      "tokens": 20
+    },
+    "咨询总结专家参与统计": {
+      "sql": "SELECT COUNT(CASE WHEN participating_experts IS NOT NULL AND JSON_LENGTH(participating_experts) > 0 THEN 1 END) as with_experts, COUNT(*) as total_summaries FROM consultation_summaries",
+      "description": "统计专家参与的咨询总结",
+      "table": "consultation_summaries",
+      "response": "咨询总结专家参与统计完成",
+      "tokens": 25
+    },
+    "咨询关键洞察统计": {
+      "sql": "SELECT COUNT(CASE WHEN key_insights IS NOT NULL AND JSON_LENGTH(key_insights) > 0 THEN 1 END) as with_insights, COUNT(*) as total_summaries FROM consultation_summaries",
+      "description": "统计包含关键洞察的咨询总结",
+      "table": "consultation_summaries",
+      "response": "咨询关键洞察统计完成",
+      "tokens": 25
+    },
+    "咨询建议统计": {
+      "sql": "SELECT COUNT(CASE WHEN recommendations IS NOT NULL AND JSON_LENGTH(recommendations) > 0 THEN 1 END) as with_recommendations, COUNT(*) as total_summaries FROM consultation_summaries",
+      "description": "统计包含建议的咨询总结",
+      "table": "consultation_summaries",
+      "response": "咨询建议统计完成",
+      "tokens": 25
+    },
+
+    "// === 程序记忆相关查询模板 ===": "注释",
+    "程序记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM procedural_memories",
+      "description": "查询程序记忆总数",
+      "table": "procedural_memories",
+      "response": "程序记忆总数为{count}条",
+      "tokens": 10
+    },
+    "程序记忆步骤统计": {
+      "sql": "SELECT procedure_name, COUNT(*) as step_count FROM procedural_memories GROUP BY procedure_name ORDER BY step_count DESC",
+      "description": "统计程序记忆步骤数量",
+      "table": "procedural_memories",
+      "response": "程序记忆步骤统计完成",
+      "tokens": 20
+    },
+    "程序记忆用户分布": {
+      "sql": "SELECT user_id, COUNT(*) as memory_count FROM procedural_memories GROUP BY user_id ORDER BY memory_count DESC",
+      "description": "统计程序记忆用户分布",
+      "table": "procedural_memories",
+      "response": "程序记忆用户分布统计完成",
+      "tokens": 20
+    },
+    "本月程序记忆": {
+      "sql": "SELECT COUNT(*) as count FROM procedural_memories WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月程序记忆数量",
+      "table": "procedural_memories",
+      "response": "本月程序记忆{count}条",
+      "tokens": 20
+    },
+
+    "// === 语义记忆相关查询模板 ===": "注释",
+    "语义记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM semantic_memories",
+      "description": "查询语义记忆总数",
+      "table": "semantic_memories",
+      "response": "语义记忆总数为{count}条",
+      "tokens": 10
+    },
+    "语义记忆分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM semantic_memories GROUP BY category ORDER BY count DESC",
+      "description": "统计语义记忆分类分布",
+      "table": "semantic_memories",
+      "response": "语义记忆分类统计完成",
+      "tokens": 20
+    },
+    "语义记忆用户分布": {
+      "sql": "SELECT user_id, COUNT(*) as memory_count FROM semantic_memories GROUP BY user_id ORDER BY memory_count DESC",
+      "description": "统计语义记忆用户分布",
+      "table": "semantic_memories",
+      "response": "语义记忆用户分布统计完成",
+      "tokens": 20
+    },
+    "本月语义记忆": {
+      "sql": "SELECT COUNT(*) as count FROM semantic_memories WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月语义记忆数量",
+      "table": "semantic_memories",
+      "response": "本月语义记忆{count}条",
+      "tokens": 20
+    },
+    "语义记忆向量统计": {
+      "sql": "SELECT COUNT(CASE WHEN embedding IS NOT NULL THEN 1 END) as with_embedding, COUNT(*) as total_memories FROM semantic_memories",
+      "description": "统计包含向量的语义记忆",
+      "table": "semantic_memories",
+      "response": "语义记忆向量统计完成",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "专家系统数据概览": {
+      "sql": "SELECT 'expert_speeches' as category, COUNT(*) as count FROM expert_speeches UNION ALL SELECT 'consultation_summaries' as category, COUNT(*) as count FROM consultation_summaries UNION ALL SELECT 'procedural_memories' as category, COUNT(*) as count FROM procedural_memories UNION ALL SELECT 'semantic_memories' as category, COUNT(*) as count FROM semantic_memories",
+      "description": "专家系统数据总览",
+      "table": "multiple",
+      "response": "专家系统数据概览查询完成",
+      "tokens": 40
+    },
+    "专家咨询效果分析": {
+      "sql": "SELECT COUNT(DISTINCT es.consultation_id) as consultations_with_speeches, COUNT(DISTINCT cs.consultation_id) as consultations_with_summaries FROM expert_speeches es LEFT JOIN consultation_summaries cs ON es.consultation_id = cs.consultation_id",
+      "description": "分析专家咨询效果",
+      "table": "expert_speeches",
+      "joins": ["consultation_summaries"],
+      "response": "专家咨询效果分析完成",
+      "tokens": 30
+    }
+  }
+}

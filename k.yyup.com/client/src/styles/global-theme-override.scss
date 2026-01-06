@@ -1,0 +1,468 @@
+/* Global Theme Overrides - 统一表面样式使用CSS变量 */
+/* Global Theme Overrides - unify surfaces using CSS variables */
+
+/* ==================== 玻璃台主题特殊处理 ==================== */
+/* Glass theme special handling - 玻璃台主题变量由专门的CSS文件定义 */
+/* 玻璃台主题CSS文件 (glass-light.css, glass-dark.css) 在 main.ts 中先加载 */
+/* 因此玻璃台主题的变量由这些文件完全控制，这里不需要重复定义 */
+
+
+
+/* ==================== 玻璃台主题覆盖全局样式 ==================== */
+/* Glass theme overrides global styles with higher specificity */
+
+.theme-workbench[data-theme="glass-light"],
+.theme-workbench.glass-light,
+[data-theme="glass-light"] .theme-workbench,
+.glass-light .theme-workbench {
+  background: var(--bg-primary) !important;
+}
+
+.theme-workbench[data-theme="glass-dark"],
+.theme-workbench.glass-dark,
+[data-theme="glass-dark"] .theme-workbench,
+.glass-dark .theme-workbench {
+  background: var(--bg-primary) !important;
+}
+
+/* ==================== 玻璃台主题的通用表面容器 ==================== */
+.theme-workbench[data-theme="glass-light"] :where(
+  .page-container,
+  .page-header,
+  .card,
+  .chart-card,
+  .table-container,
+  .management-header,
+  .management-toolbar,
+  .management-table,
+  .management-card,
+  .management-form,
+  .content-section,
+  .form-container,
+  .app-card,
+  .insights-panel,
+  .data-table-section,
+  .analysis-panel,
+  .results-panel,
+  .control-panel
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-workbench[data-theme="glass-dark"] :where(
+  .page-container,
+  .page-header,
+  .card,
+  .chart-card,
+  .table-container,
+  .management-header,
+  .management-toolbar,
+  .management-table,
+  .management-card,
+  .management-form,
+  .content-section,
+  .form-container,
+  .app-card,
+  .insights-panel,
+  .data-table-section,
+  .analysis-panel,
+  .results-panel,
+  .control-panel
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
+  background: var(--bg-card) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 主题工作台根样式 */
+.theme-workbench {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  
+  /* ✨ 修复：移除全局 * 颜色继承，避免覆盖按钮颜色 */
+  /* 不再强制所有元素继承颜色，让按钮等组件保持自己的样式 */
+  
+  /* 链接颜色 */
+  a:not(.el-button) {
+    color: var(--primary-color) !important;
+    
+    &:hover {
+      color: var(--primary-hover) !important;
+    }
+  }
+}
+
+/* 通用表面容器 (排除登录页面和自定义统计卡片) */
+/* Generic surface containers (exclude login page custom blocks and custom stat cards) */
+.theme-workbench :where(
+  .page-container,
+  .page-header,
+  .card,
+  .chart-card,
+  .table-container,
+  .management-header,
+  .management-toolbar,
+  .management-table,
+  .management-card,
+  .management-form,
+  .content-section,
+  .form-container,
+  .app-card,
+  .insights-panel,
+  .data-table-section,
+  .analysis-panel,
+  .results-panel,
+  .control-panel,
+  .dom-inspector,
+  .timeline-item,
+  .todo-item,
+  .analysis-controls,
+  .analysis-results,
+  .prediction-card,
+  .models-list,
+  .feature-card,
+  .recent-list,
+  .history-item,
+  .template-card,
+  .toolbar,
+  .expert-sidebar,
+  .consultation-content,
+  .post-item,
+  .el-descriptions,
+  .el-dialog__footer,
+  [class*='card'],
+  [class*='panel'],
+  [class*='container'],
+  [class*='section']
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page):not(.modern-login-page *) {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+  
+  /* ✨ 修复：移除全局 * 颜色继承，避免覆盖按钮颜色 */
+  /* 不再强制所有内部元素继承颜色 */
+}
+
+/* 排除统一中心布局中的页面头部 - 使用设计令牌的渐变 */
+.theme-workbench .unified-center-layout .page-header {
+  background: linear-gradient(135deg, var(--accent-marketing) 0%, var(--accent-marketing-hover) 100%) !important;
+  color: var(--text-on-primary) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure login page uses its own custom background and colors */
+.theme-workbench .login-container,
+.theme-workbench [class^='login-'],
+.theme-workbench [class*=' login-'] {
+  /* Do not force global surfaces on login page */
+  background: unset !important;
+  color: unset !important;
+  border-color: unset !important;
+}
+
+/* 布局表面 */
+/* Layout surfaces */
+
+/* 玻璃台主题的侧边栏样式 - 需要更高的优先级 */
+.theme-workbench[data-theme="glass-light"] :where(.sidebar, [class*='sidebar']):not(.ai-sidebar-header),
+.theme-workbench.glass-light :where(.sidebar, [class*='sidebar']):not(.ai-sidebar-header) {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+
+.theme-workbench[data-theme="glass-dark"] :where(.sidebar, [class*='sidebar']):not(.ai-sidebar-header),
+.theme-workbench.glass-dark :where(.sidebar, [class*='sidebar']):not(.ai-sidebar-header) {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(139, 92, 246, 0.25) !important;
+}
+
+/* ✨ 修复：排除 .ai-sidebar-header，避免覆盖紫色渐变背景 */
+.theme-workbench :where(.sidebar, [class*='sidebar']):not(.ai-sidebar-header) {
+  background: var(--bg-sidebar) !important;
+  border-color: var(--border-color) !important;
+
+  /* ✨ 修复：添加侧边栏文字颜色 */
+  color: var(--text-secondary) !important;
+
+  /* 侧边栏菜单项 */
+  .menu-item,
+  .nav-item,
+  .el-menu-item {
+    color: var(--text-secondary) !important;
+    background: var(--sidebar-item-bg) !important;
+    border-color: var(--sidebar-item-border) !important;
+
+    /* 菜单项内的文字和图标 */
+    span, div, a, i, svg {
+      color: var(--text-secondary) !important;
+    }
+
+    &:hover {
+      background: var(--sidebar-item-hover-bg) !important;
+      border-color: var(--sidebar-item-hover-border) !important;
+      color: var(--text-primary) !important;
+
+      span, div, a, i, svg {
+        color: var(--text-primary) !important;
+      }
+    }
+
+    &.active,
+    &.is-active {
+      background: var(--sidebar-item-active-bg) !important;
+      border-color: var(--sidebar-item-active-border) !important;
+      color: #ffffff !important;
+
+      span, div, a, i, svg {
+        color: #ffffff !important;
+      }
+    }
+  }
+
+  /* 侧边栏标题 */
+  .sidebar-header,
+  .menu-section-title,
+  .menu-group-label {
+    color: var(--text-primary) !important;
+  }
+}
+
+/* ✨ 修复：排除 .ai-sidebar-header，避免覆盖紫色渐变背景 */
+/* 玻璃台主题的头部样式 - 需要更高的优先级 */
+.theme-workbench[data-theme="glass-light"] :where(.header, [class*='header']):not(.modern-login-page *):not(.brand-header):not(.login-header):not(.ai-sidebar-header),
+.theme-workbench.glass-light :where(.header, [class*='header']):not(.modern-login-page *):not(.brand-header):not(.login-header):not(.ai-sidebar-header) {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(6, 182, 212, 0.25) !important;
+}
+
+.theme-workbench[data-theme="glass-dark"] :where(.header, [class*='header']):not(.modern-login-page *):not(.brand-header):not(.login-header):not(.ai-sidebar-header),
+.theme-workbench.glass-dark :where(.header, [class*='header']):not(.modern-login-page *):not(.brand-header):not(.login-header):not(.ai-sidebar-header) {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(139, 92, 246, 0.25) !important;
+}
+
+.theme-workbench :where(.header, [class*='header']):not(.modern-login-page *):not(.brand-header):not(.login-header):not(.ai-sidebar-header) {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* 玻璃台主题的Element Plus组件样式 - 需要更高的优先级 */
+.theme-workbench[data-theme="glass-light"] :where(.el-card, .el-dialog, .el-drawer, .el-popover),
+.theme-workbench.glass-light :where(.el-card, .el-dialog, .el-drawer, .el-popover) {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(6, 182, 212, 0.3) !important;
+}
+
+.theme-workbench[data-theme="glass-dark"] :where(.el-card, .el-dialog, .el-drawer, .el-popover),
+.theme-workbench.glass-dark :where(.el-card, .el-dialog, .el-drawer, .el-popover) {
+  background: rgba(30, 41, 59, 0.95) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Element Plus 核心组件 */
+/* Element Plus core components */
+.theme-workbench :where(
+  .el-card,
+  .el-dialog,
+  .el-message-box,
+  .el-drawer,
+  .el-popover,
+  .el-dropdown__popper,
+  .el-select-dropdown,
+  .el-menu,
+  .el-sub-menu__title,
+  .el-table,
+  .el-tabs__nav-wrap,
+  .el-pagination
+) {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* 专门修复Element Plus卡片的边框问题 */
+.theme-workbench .el-card {
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.theme-workbench .el-card__header {
+  border-bottom: 1px solid var(--border-color) !important;
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+.theme-workbench .el-card__body {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+}
+
+/* 修复所有带边框的元素 */
+.theme-workbench [class*='card'],
+.theme-workbench [class*='Card'],
+.theme-workbench .el-card,
+.theme-workbench .chart-container,
+.theme-workbench .stat-card,
+.theme-workbench .management-card,
+.theme-workbench .app-card {
+  border-color: var(--border-color) !important;
+  outline-color: var(--border-color) !important;
+}
+
+/* 玻璃台主题的输入框样式 - 需要更高的优先级 */
+.theme-workbench[data-theme="glass-light"] :where(.el-input__wrapper, .el-textarea__inner),
+.theme-workbench.glass-light :where(.el-input__wrapper, .el-textarea__inner) {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #1e293b !important;
+  border-color: rgba(6, 182, 212, 0.3) !important;
+
+  &:hover {
+    border-color: rgba(6, 182, 212, 0.5) !important;
+  }
+
+  &.is-focus {
+    border-color: #06b6d4 !important;
+    box-shadow: 0 0 0 1px #06b6d4 !important;
+  }
+}
+
+.theme-workbench[data-theme="glass-dark"] :where(.el-input__wrapper, .el-textarea__inner),
+.theme-workbench.glass-dark :where(.el-input__wrapper, .el-textarea__inner) {
+  background: rgba(30, 41, 59, 0.9) !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(139, 92, 246, 0.4) !important;
+
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.6) !important;
+  }
+
+  &.is-focus {
+    border-color: #8b5cf6 !important;
+    box-shadow: 0 0 0 1px #8b5cf6 !important;
+  }
+}
+
+.theme-workbench :where(.el-input__wrapper, .el-textarea__inner) {
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+
+  &:hover {
+    border-color: var(--border-focus) !important;
+  }
+
+  &.is-focus {
+    border-color: var(--primary-color) !important;
+  }
+}
+
+/* ✨ Element Plus 按钮优化 - 确保白色文字不被覆盖 */
+.theme-workbench .el-button {
+  /* 基础样式 */
+  &--primary,
+  &--success,
+  &--warning,
+  &--danger,
+  &--info {
+    /* ✨ 关键：确保按钮文字为白色，不被继承覆盖 */
+    color: #ffffff !important;
+    
+    /* 按钮内所有元素也使用白色 */
+    * {
+      color: #ffffff !important;
+    }
+    
+    span, i, svg, .el-icon {
+      color: #ffffff !important;
+    }
+  }
+  
+  &--primary {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    
+    &:hover, &:focus {
+      background: var(--primary-hover) !important;
+      border-color: var(--primary-hover) !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  &--success {
+    background: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+    
+    &:hover, &:focus {
+      background: var(--success-hover, #85ce61) !important;
+      border-color: var(--success-hover, #85ce61) !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  &--warning {
+    background: var(--warning-color) !important;
+    border-color: var(--warning-color) !important;
+    
+    &:hover, &:focus {
+      background: var(--warning-hover, #ebb563) !important;
+      border-color: var(--warning-hover, #ebb563) !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  &--danger {
+    background: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    
+    &:hover, &:focus {
+      background: var(--danger-hover, #f78989) !important;
+      border-color: var(--danger-hover, #f78989) !important;
+      color: #ffffff !important;
+    }
+  }
+  
+  &--info {
+    background: var(--info-color, #909399) !important;
+    border-color: var(--info-color, #909399) !important;
+    
+    &:hover, &:focus {
+      background: var(--info-hover, #a6a9ad) !important;
+      border-color: var(--info-hover, #a6a9ad) !important;
+      color: #ffffff !important;
+    }
+  }
+}
+
+/* Popper/dropdown arrows */
+.theme-workbench .el-popper.is-light .el-popper__arrow::before { background: var(--surface-1) !important; }
+
+/* Utility backgrounds previously using themed tints */
+.theme-workbench :where(.warning, .info, .success, .danger, .neutral) {
+  background-image: none !important;
+}
+
+/* Links and buttons */
+.theme-workbench a { color: color-mix(in oklab, var(--accent) 70%, black) !important; }
+.theme-workbench .btn-primary { background: var(--accent) !important; color: var(--accent-contrast) !important; border-color: color-mix(in oklab, var(--accent) 50%, black) !important; }
+
+
+/* Preserve AI assistant internal theming: reset base text color inside assistant panel */
+.theme-workbench .ai-sidebar-container,
+.theme-workbench .ai-sidebar-container .ai-assistant,
+.theme-workbench .ai-assistant {
+  color: var(--el-text-color-primary) !important;
+}

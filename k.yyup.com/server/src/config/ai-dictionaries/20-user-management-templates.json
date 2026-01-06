@@ -1,0 +1,183 @@
+{
+  "name": "用户管理扩展查询模板字典",
+  "description": "用户角色、用户档案、用户基础信息等用户管理扩展相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 用户角色相关查询模板 ===": "注释",
+    "用户角色分配总数": {
+      "sql": "SELECT COUNT(*) as count FROM user_roles WHERE deleted_at IS NULL",
+      "description": "查询用户角色分配总数",
+      "table": "user_roles",
+      "response": "用户角色分配总数为{count}个",
+      "tokens": 10
+    },
+    "主要角色分配统计": {
+      "sql": "SELECT COUNT(*) as count FROM user_roles WHERE is_primary = 1 AND deleted_at IS NULL",
+      "description": "查询主要角色分配数量",
+      "table": "user_roles",
+      "response": "主要角色分配{count}个",
+      "tokens": 12
+    },
+    "角色分配分布统计": {
+      "sql": "SELECT role_id, COUNT(*) as count FROM user_roles WHERE deleted_at IS NULL GROUP BY role_id ORDER BY count DESC",
+      "description": "统计角色分配分布",
+      "table": "user_roles",
+      "response": "角色分配分布统计完成",
+      "tokens": 20
+    },
+    "有效角色分配": {
+      "sql": "SELECT COUNT(*) as count FROM user_roles WHERE (end_time IS NULL OR end_time > NOW()) AND deleted_at IS NULL",
+      "description": "查询有效角色分配数量",
+      "table": "user_roles",
+      "response": "有效角色分配{count}个",
+      "tokens": 15
+    },
+    "系统角色分配": {
+      "sql": "SELECT COUNT(*) as count FROM user_roles WHERE is_system = 1 AND deleted_at IS NULL",
+      "description": "查询系统角色分配数量",
+      "table": "user_roles",
+      "response": "系统角色分配{count}个",
+      "tokens": 12
+    },
+    "本月新增角色分配": {
+      "sql": "SELECT COUNT(*) as count FROM user_roles WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月新增角色分配数量",
+      "table": "user_roles",
+      "response": "本月新增角色分配{count}个",
+      "tokens": 20
+    },
+    "多角色用户统计": {
+      "sql": "SELECT COUNT(*) as multi_role_users FROM (SELECT user_id FROM user_roles WHERE deleted_at IS NULL GROUP BY user_id HAVING COUNT(*) > 1) as multi_users",
+      "description": "统计拥有多个角色的用户数量",
+      "table": "user_roles",
+      "response": "多角色用户{multi_role_users}个",
+      "tokens": 25
+    },
+
+    "// === 用户档案相关查询模板 ===": "注释",
+    "用户档案总数": {
+      "sql": "SELECT COUNT(*) as count FROM user_profiles",
+      "description": "查询用户档案总数",
+      "table": "user_profiles",
+      "response": "用户档案总数为{count}个",
+      "tokens": 10
+    },
+    "完整档案统计": {
+      "sql": "SELECT COUNT(*) as count FROM user_profiles WHERE avatar IS NOT NULL AND gender IS NOT NULL AND birthday IS NOT NULL",
+      "description": "查询完整档案数量",
+      "table": "user_profiles",
+      "response": "完整档案{count}个",
+      "tokens": 15
+    },
+    "性别分布统计": {
+      "sql": "SELECT gender, COUNT(*) as count FROM user_profiles WHERE gender IS NOT NULL GROUP BY gender ORDER BY count DESC",
+      "description": "统计用户性别分布",
+      "table": "user_profiles",
+      "response": "用户性别分布统计完成",
+      "tokens": 20
+    },
+    "教育背景统计": {
+      "sql": "SELECT education, COUNT(*) as count FROM user_profiles WHERE education IS NOT NULL GROUP BY education ORDER BY count DESC",
+      "description": "统计用户教育背景分布",
+      "table": "user_profiles",
+      "response": "用户教育背景统计完成",
+      "tokens": 20
+    },
+    "有头像用户": {
+      "sql": "SELECT COUNT(*) as count FROM user_profiles WHERE avatar IS NOT NULL AND avatar != ''",
+      "description": "查询有头像的用户数量",
+      "table": "user_profiles",
+      "response": "有头像用户{count}个",
+      "tokens": 12
+    },
+    "本月更新档案": {
+      "sql": "SELECT COUNT(*) as count FROM user_profiles WHERE YEAR(updated_at) = YEAR(NOW()) AND MONTH(updated_at) = MONTH(NOW())",
+      "description": "查询本月更新档案数量",
+      "table": "user_profiles",
+      "response": "本月更新档案{count}个",
+      "tokens": 20
+    },
+
+    "// === 用户基础信息相关查询模板 ===": "注释",
+    "系统用户总数": {
+      "sql": "SELECT COUNT(*) as count FROM users",
+      "description": "查询系统用户总数",
+      "table": "users",
+      "response": "系统用户总数为{count}个",
+      "tokens": 10
+    },
+    "活跃用户统计": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE status = 'active'",
+      "description": "查询活跃用户数量",
+      "table": "users",
+      "response": "活跃用户{count}个",
+      "tokens": 12
+    },
+    "用户状态分布": {
+      "sql": "SELECT status, COUNT(*) as count FROM users GROUP BY status ORDER BY count DESC",
+      "description": "统计用户状态分布",
+      "table": "users",
+      "response": "用户状态分布统计完成",
+      "tokens": 20
+    },
+    "用户角色分布": {
+      "sql": "SELECT role, COUNT(*) as count FROM users GROUP BY role ORDER BY count DESC",
+      "description": "统计用户角色分布",
+      "table": "users",
+      "response": "用户角色分布统计完成",
+      "tokens": 20
+    },
+    "管理员用户": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE role = 'admin' AND status = 'active'",
+      "description": "查询活跃管理员用户数量",
+      "table": "users",
+      "response": "活跃管理员用户{count}个",
+      "tokens": 15
+    },
+    "本月新增用户": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增用户数量",
+      "table": "users",
+      "response": "本月新增用户{count}个",
+      "tokens": 20
+    },
+    "锁定用户统计": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE status = 'locked'",
+      "description": "查询锁定用户数量",
+      "table": "users",
+      "response": "锁定用户{count}个",
+      "tokens": 12
+    },
+    "有邮箱用户": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE email IS NOT NULL AND email != ''",
+      "description": "查询有邮箱的用户数量",
+      "table": "users",
+      "response": "有邮箱用户{count}个",
+      "tokens": 12
+    },
+    "有手机用户": {
+      "sql": "SELECT COUNT(*) as count FROM users WHERE phone IS NOT NULL AND phone != ''",
+      "description": "查询有手机号的用户数量",
+      "table": "users",
+      "response": "有手机号用户{count}个",
+      "tokens": 12
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "用户管理系统概览": {
+      "sql": "SELECT 'users' as category, COUNT(*) as count FROM users UNION ALL SELECT 'user_roles' as category, COUNT(*) as count FROM user_roles WHERE deleted_at IS NULL UNION ALL SELECT 'user_profiles' as category, COUNT(*) as count FROM user_profiles",
+      "description": "用户管理系统数据总览",
+      "table": "multiple",
+      "response": "用户管理系统概览查询完成",
+      "tokens": 30
+    },
+    "用户完整度分析": {
+      "sql": "SELECT COUNT(u.id) as total_users, COUNT(up.id) as users_with_profiles, COUNT(ur.user_id) as users_with_roles FROM users u LEFT JOIN user_profiles up ON u.id = up.user_id LEFT JOIN user_roles ur ON u.id = ur.user_id AND ur.deleted_at IS NULL",
+      "description": "分析用户信息完整度",
+      "table": "users",
+      "joins": ["user_profiles", "user_roles"],
+      "response": "用户完整度分析完成",
+      "tokens": 35
+    }
+  }
+}

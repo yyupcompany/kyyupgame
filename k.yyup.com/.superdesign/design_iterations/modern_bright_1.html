@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婴婴向上 - 管理后台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="modern_bright_1.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        body {
+            background-color: var(--background);
+            color: var(--foreground);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .sidebar {
+            background-color: var(--sidebar);
+            border-right: 1px solid var(--border);
+        }
+        .card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            transition: all 300ms ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+            border-radius: calc(var(--radius) - 0.25rem);
+            transition: all 200ms ease-in-out;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-primary:hover {
+            filter: brightness(1.05);
+            box-shadow: var(--shadow-md);
+        }
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+            border-radius: calc(var(--radius) - 0.25rem);
+            transition: all 200ms ease-in-out;
+            border: 1px solid var(--border);
+        }
+        .btn-secondary:hover {
+            background-color: var(--muted);
+            border-color: var(--primary);
+        }
+        .nav-item.active {
+            background-color: var(--secondary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .nav-item.active svg {
+            color: var(--primary);
+        }
+        .nav-item {
+            transition: background-color 200ms ease-in-out;
+        }
+        .nav-item:hover {
+            background-color: var(--muted);
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 flex-shrink-0 flex flex-col justify-between p-4">
+        <div>
+            <div class="flex items-center gap-2 px-4 mb-8">
+                <i data-lucide="sprout" class="text-primary w-8 h-8"></i>
+                <h1 class="text-xl font-bold text-foreground">婴婴向上</h1>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <a href="#" class="nav-item active flex items-center gap-3 px-4 py-2.5 rounded-lg">
+                    <i data-lucide="layout-grid"></i>
+                    <span>工作台</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="users"></i>
+                    <span>人员中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="calendar-days"></i>
+                    <span>活动中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="graduation-cap"></i>
+                    <span>招生中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="megaphone"></i>
+                    <span>营销中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="cpu"></i>
+                    <span>AI 中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="settings"></i>
+                    <span>系统中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="landmark"></i>
+                    <span>财务中心</span>
+                </a>
+                <a href="#" class="nav-item flex items-center gap-3 px-4 py-2.5 rounded-lg text-muted-foreground">
+                    <i data-lucide="check-square"></i>
+                    <span>任务中心</span>
+                </a>
+            </nav>
+        </div>
+        <div class="card p-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center font-bold text-accent-foreground">A</div>
+                <div>
+                    <p class="font-semibold text-foreground">admin</p>
+                    <p class="text-sm text-muted-foreground">系统管理员</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="text-sm text-muted-foreground">
+                <span>首页</span> / <span class="text-foreground font-medium">数据概览</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-muted-foreground hover:text-foreground transition-colors"><i data-lucide="fullscreen"></i></button>
+                <button class="text-muted-foreground hover:text-foreground transition-colors"><i data-lucide="moon"></i></button>
+                <button class="btn-secondary px-4 py-2 flex items-center gap-2">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span>退出登录</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Welcome Card -->
+        <section class="card p-8 mb-8 fade-in-up">
+            <div class="flex justify-between items-start">
+                <div>
+                    <div class="flex items-center gap-4 mb-2">
+                        <i data-lucide="sun" class="w-12 h-12 text-accent"></i>
+                        <h2 class="text-3xl font-bold text-foreground">综合工作台</h2>
+                    </div>
+                    <p class="text-muted-foreground text-lg">上午好, 管理员! 欢迎回到幼儿园管理系统。</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="relative w-64">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-5 h-5"></i>
+                        <input type="text" placeholder="输入页面名称快速跳转" class="w-full bg-muted border border-border rounded-md pl-10 pr-4 py-2.5 focus:ring-2 focus:ring-primary focus:outline-none">
+                    </div>
+                    <button class="btn-primary px-5 py-2.5 flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>刷新数据</span>
+                    </button>
+                    <button class="btn-secondary px-5 py-2.5 flex items-center gap-2">
+                        <i data-lucide="wrench" class="w-4 h-4"></i>
+                        <span>快捷操作</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Overview -->
+        <section class="fade-in-up" style="animation-delay: 150ms;">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-semibold">业务中心概览</h3>
+                <button class="btn-secondary px-4 py-2 text-sm">网格视图</button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #F0FFF4;">
+                    <div class="bg-green-200 p-3 rounded-lg"><i data-lucide="activity" class="text-green-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">仪表板中心</h4>
+                        <p class="text-muted-foreground">系统健康度</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #FFF8F0;">
+                    <div class="bg-orange-200 p-3 rounded-lg"><i data-lucide="users" class="text-orange-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">人事中心</h4>
+                        <p class="text-muted-foreground">教师总数</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #FBF2FF;">
+                    <div class="bg-purple-200 p-3 rounded-lg"><i data-lucide="calendar-days" class="text-purple-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">活动中心</h4>
+                        <p class="text-muted-foreground">本月活动</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #F6FFF8;">
+                    <div class="bg-lime-200 p-3 rounded-lg"><i data-lucide="cpu" class="text-lime-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">AI 中心</h4>
+                        <p class="text-muted-foreground">今日调用</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #F2F8FF;">
+                    <div class="bg-blue-200 p-3 rounded-lg"><i data-lucide="graduation-cap" class="text-blue-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">招生中心</h4>
+                        <p class="text-muted-foreground">在读学生</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #FFFBEA;">
+                    <div class="bg-yellow-200 p-3 rounded-lg"><i data-lucide="megaphone" class="text-yellow-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">营销中心</h4>
+                        <p class="text-muted-foreground">活跃客户</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #F5F5F5;">
+                    <div class="bg-gray-300 p-3 rounded-lg"><i data-lucide="settings" class="text-gray-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">系统管理</h4>
+                        <p class="text-muted-foreground">基础配置</p>
+                    </div>
+                </div>
+                <!-- Card Item -->
+                <div class="card p-6 flex items-start gap-4" style="background-color: #F3FBFF;">
+                    <div class="bg-cyan-200 p-3 rounded-lg"><i data-lucide="check-square" class="text-cyan-700"></i></div>
+                    <div>
+                        <h4 class="font-semibold text-lg">任务中心</h4>
+                        <p class="text-muted-foreground">待办任务</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+// Global SCSS Mixins
+@use "variables" as vars;
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+
+// Clearfix
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+// Responsive breakpoints
+// Usage: @include media-breakpoint-up(sm) { ... }
+@mixin media-breakpoint-up($name, $breakpoints: vars.$grid-breakpoints) {
+  $min: null;
+  @if map.has-key($breakpoints, $name) {
+    $min: map.get($breakpoints, $name);
+  }
+
+  @if $min != null {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @warn "No value found for `#{$name}` in $breakpoints map. Check `_variables.scss`.";
+  }
+}
+
+// Usage: @include media-breakpoint-down(md) { ... }
+@mixin media-breakpoint-down($name, $breakpoints: vars.$grid-breakpoints) {
+  $max: null;
+  @if map.has-key($breakpoints, $name) {
+    $max: map.get($breakpoints, $name);
+  }
+
+  @if $max != null {
+    @media (max-width: ($max - 0.02px)) { // Ensure calculation is within parentheses
+      @content;
+    }
+  } @else {
+    @warn "No value found for `#{$name}` in $breakpoints map. Check `_variables.scss`.";
+  }
+}
+
+// Usage: @include media-breakpoint-between(sm, md) { ... }
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: vars.$grid-breakpoints) {
+  $min: null;
+  $max: null;
+  @if map.has-key($breakpoints, $lower) {
+    $min: map.get($breakpoints, $lower);
+  }
+  @if map.has-key($breakpoints, $upper) {
+    $max: map.get($breakpoints, $upper);
+  }
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: ($max - 0.02px)) { // Ensure calculation is within parentheses
+      @content;
+    }
+  } @else {
+    @if $min == null {
+      @warn "No value found for `#{$lower}` in $breakpoints map. Check `_variables.scss`.";
+    }
+    @if $max == null {
+      @warn "No value found for `#{$upper}` in $breakpoints map. Check `_variables.scss`.";
+    }
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Text truncation
+@mixin truncate-text($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Aspect ratio
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    padding-top: (($height / $width) * 100%);
+  }
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Button variant generator
+@mixin button-variant($background, $border, $hover-background: color.scale($background, $lightness: 7.5%), $hover-border: color.scale($border, $lightness: 10%), $active-background: color.scale($background, $lightness: -10%), $active-border: color.scale($border, $lightness: -12.5%)) {
+  color: color-contrast($background);
+  background-color: $background;
+  border-color: $border;
+
+  &:hover {
+    color: color-contrast($hover-background);
+    background-color: $hover-background;
+    border-color: $hover-border;
+  }
+
+  &:focus, &.focus {
+    // Add focus style, possibly with box-shadow
+    box-shadow: 0 0 0 0.2rem rgba($background, 0.5);
+  }
+
+  &:active, &.active,
+  .show > &.dropdown-toggle {
+    color: color-contrast($active-background);
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:disabled, &.disabled {
+    color: color-contrast($background);
+    background-color: $background;
+    border-color: $border;
+    opacity: 0.65;
+  }
+}
+
+// Screen reader only
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// A simple function to provide a contrasting color (black or white) for a given background color
+// This is a simplified version. For more robust contrast checking, consider WCAG guidelines.
+@function color-contrast($color) {
+  $color-brightness: math.round(math.div(
+    (color.channel($color, "red") * 299) +
+    (color.channel($color, "green") * 587) +
+    (color.channel($color, "blue") * 114),
+    1000
+  ));
+  
+  $light-color: vars.$white;
+  $dark-color: vars.$gray-900;
+
+  @if $color-brightness > 155 {
+    // Threshold can be adjusted
+    @return $dark-color;
+  } @else {
+    @return $light-color;
+  }
+} 

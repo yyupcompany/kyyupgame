@@ -1,0 +1,209 @@
+/**
+ * Timeline 组件统一样式
+ * 修复图标拉伸问题，美化时间轴展示
+ */
+
+// ===== 基础 Timeline 样式 =====
+.el-timeline {
+  // 时间轴节点（左侧圆点/图标）
+  .el-timeline-item__node {
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: var(--el-color-primary-light-9) !important;
+    border: 2px solid var(--el-color-primary) !important;
+    transition: all 0.3s ease !important;
+    
+    // 图标尺寸限制
+    .el-icon {
+      width: 18px !important;
+      height: 18px !important;
+      font-size: var(--text-lg) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    // 鼠标悬停效果
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(var(--el-color-primary-rgb), 0.2);
+    }
+  }
+  
+  // 时间轴线条
+  .el-timeline-item__tail {
+    border-left: 2px solid var(--el-border-color-light);
+  }
+  
+  // 内容区域
+  .el-timeline-item__wrapper {
+    padding-left: 24px;
+    
+    .el-timeline-item__timestamp {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .el-timeline-item__content {
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+  }
+}
+
+// ===== 不同尺寸的 Timeline =====
+// 小尺寸
+.el-timeline--small {
+  .el-timeline-item__node {
+    width: 28px !important;
+    height: 28px !important;
+    
+    .el-icon {
+      width: 14px !important;
+      height: 14px !important;
+      font-size: var(--text-sm) !important;
+    }
+  }
+}
+
+// 大尺寸
+.el-timeline--large {
+  .el-timeline-item__node {
+    width: 44px !important;
+    height: 44px !important;
+    
+    .el-icon {
+      width: 22px !important;
+      height: 22px !important;
+      font-size: 22px !important;
+    }
+  }
+}
+
+// ===== 不同状态的样式 =====
+.el-timeline-item {
+  // 成功状态
+  &.is-success {
+    .el-timeline-item__node {
+      background: var(--el-color-success-light-9) !important;
+      border-color: var(--el-color-success) !important;
+      
+      .el-icon {
+        color: var(--el-color-success);
+      }
+    }
+  }
+  
+  // 警告状态
+  &.is-warning {
+    .el-timeline-item__node {
+      background: var(--el-color-warning-light-9) !important;
+      border-color: var(--el-color-warning) !important;
+      
+      .el-icon {
+        color: var(--el-color-warning);
+      }
+    }
+  }
+  
+  // 危险状态
+  &.is-danger {
+    .el-timeline-item__node {
+      background: var(--el-color-danger-light-9) !important;
+      border-color: var(--el-color-danger) !important;
+      
+      .el-icon {
+        color: var(--el-color-danger);
+      }
+    }
+  }
+  
+  // 信息状态
+  &.is-info {
+    .el-timeline-item__node {
+      background: var(--el-color-info-light-9) !important;
+      border-color: var(--el-color-info) !important;
+      
+      .el-icon {
+        color: var(--el-color-info);
+      }
+    }
+  }
+}
+
+// ===== 激活状态 =====
+.el-timeline-item--active,
+.timeline-item-active {
+  .el-timeline-item__node {
+    background: var(--el-color-primary) !important;
+    box-shadow: 0 4px 16px rgba(var(--el-color-primary-rgb), 0.4) !important;
+    transform: scale(1.15) !important;
+    
+    .el-icon {
+      color: white !important;
+    }
+  }
+  
+  .el-timeline-item__wrapper {
+    .el-timeline-item__content {
+      font-weight: 600;
+    }
+  }
+}
+
+// ===== 暗黑模式适配 =====
+.dark,
+html.dark {
+  .el-timeline {
+    .el-timeline-item__node {
+      background: var(--el-fill-color-light) !important;
+      border-color: var(--el-color-primary-light-3) !important;
+      
+      .el-icon {
+        color: var(--el-color-primary);
+      }
+    }
+    
+    .el-timeline-item__tail {
+      border-left-color: var(--el-border-color);
+    }
+  }
+  
+  // 激活状态（暗黑模式）
+  .el-timeline-item--active,
+  .timeline-item-active {
+    .el-timeline-item__node {
+      background: var(--el-color-primary) !important;
+      border-color: var(--el-color-primary-light-3) !important;
+      
+      .el-icon {
+        color: white !important;
+      }
+    }
+  }
+}
+
+// ===== 响应式设计 =====
+@media (max-width: var(--breakpoint-md)) {
+  .el-timeline {
+    .el-timeline-item__node {
+      width: 30px !important;
+      height: 30px !important;
+      
+      .el-icon {
+        width: 15px !important;
+        height: 15px !important;
+        font-size: var(--text-base) !important;
+      }
+    }
+    
+    .el-timeline-item__wrapper {
+      padding-left: 16px;
+    }
+  }
+}

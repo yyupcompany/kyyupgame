@@ -1,0 +1,1462 @@
+{
+  "timestamp": "2025-12-25T11:23:08.262Z",
+  "summary": {
+    "total": 25,
+    "success": 0,
+    "hasErrors": 25,
+    "has404": 25,
+    "consoleErrors": 125
+  },
+  "items": [
+    {
+      "title": "仪表板",
+      "path": "/dashboard",
+      "component": "Dashboard",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661797436",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/1-仪表板.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "人员管理",
+      "path": "/centers/personnel",
+      "component": "centers/PersonnelCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661802056",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/2-人员管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "文案管理",
+      "path": "/centers/script",
+      "component": "centers/ScriptCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661806722",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/3-文案管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "AI中心",
+      "path": "/centers/ai",
+      "component": "centers/AICenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661811314",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/4-AI中心.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "活动管理",
+      "path": "/centers/activity",
+      "component": "centers/ActivityCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661815932",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/5-活动管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "测评总览",
+      "path": "/assessment-analytics/overview",
+      "component": "assessment-analytics/overview",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661820549",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/6-测评总览.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "测评记录",
+      "path": "/assessment-analytics/records",
+      "component": "assessment-analytics/records",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661825199",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/7-测评记录.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "测评报告",
+      "path": "/assessment-analytics/reports",
+      "component": "assessment-analytics/reports",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661830939",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/8-测评报告.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "数据趋势",
+      "path": "/assessment-analytics/trends",
+      "component": "assessment-analytics/trends",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661835893",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/9-数据趋势.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "招生管理",
+      "path": "/centers/enrollment",
+      "component": "centers/EnrollmentCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661840482",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/10-招生管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "财务管理",
+      "path": "/centers/finance",
+      "component": "centers/FinanceCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661845018",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/11-财务管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "系统管理",
+      "path": "/centers/system",
+      "component": "centers/SystemCenter",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661849627",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/12-系统管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "工作台",
+      "path": "/teacher-center/dashboard",
+      "component": "teacher-center/Dashboard",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661854202",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/13-工作台.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "教学管理",
+      "path": "/teacher-center/teaching",
+      "component": "teacher-center/Teaching",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661858749",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/14-教学管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "考勤管理",
+      "path": "/teacher-center/attendance",
+      "component": "teacher-center/Attendance",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661863332",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/15-考勤管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "活动管理",
+      "path": "/teacher-center/activities",
+      "component": "teacher-center/Activities",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661867876",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/16-活动管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "任务管理",
+      "path": "/teacher-center/tasks",
+      "component": "teacher-center/Tasks",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661872473",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/17-任务管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "学生测评",
+      "path": "/teacher-center/student-assessment",
+      "component": "teacher-center/student-assessment",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661879130",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/18-学生测评.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "工作台",
+      "path": "/parent-center/dashboard",
+      "component": "parent-center/Dashboard",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661883727",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/19-工作台.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "孩子管理",
+      "path": "/parent-center/children",
+      "component": "parent-center/Children",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661888310",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/20-孩子管理.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "招生活动",
+      "path": "/parent-center/activities",
+      "component": "parent-center/Activities",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661892876",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/21-招生活动.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "成长评估",
+      "path": "/parent-center/assessment",
+      "component": "parent-center/Assessment",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661897844",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/22-成长评估.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "家校沟通",
+      "path": "/parent-center/communication",
+      "component": "parent-center/Communication",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661902399",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/23-家校沟通.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "智能助手",
+      "path": "/ai/assistant",
+      "component": "ai/AIAssistant",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661906985",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/24-智能助手.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    },
+    {
+      "title": "智能查询",
+      "path": "/ai/query",
+      "component": "ai/AIQuery",
+      "success": false,
+      "has404": true,
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+          "location": {
+            "url": "http://localhost:5173/api/kindergartens?_t=1766661911600",
+            "lineNumber": 0,
+            "columnNumber": 0
+          }
+        },
+        {
+          "type": "error",
+          "text": "Response error: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 458,
+            "columnNumber": 12
+          }
+        },
+        {
+          "type": "error",
+          "text": "Error details: {code: UNAUTHORIZED, message: 未提供认证令牌, detail: Object, statusCode: 401}",
+          "location": {
+            "url": "http://localhost:5173/src/utils/errorHandler.ts",
+            "lineNumber": 101,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "请求失败，已重试0次: Request failed with status code 401",
+          "location": {
+            "url": "http://localhost:5173/src/utils/request.ts",
+            "lineNumber": 233,
+            "columnNumber": 14
+          }
+        },
+        {
+          "type": "error",
+          "text": "加载幼儿园失败: AxiosError",
+          "location": {
+            "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+            "lineNumber": 82,
+            "columnNumber": 16
+          }
+        }
+      ],
+      "pageErrors": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/test-screenshots/admin-menu/25-智能查询.png",
+      "finalUrl": "http://localhost:5173/login",
+      "pageTitle": "幼儿园招生管理系统"
+    }
+  ]
+}

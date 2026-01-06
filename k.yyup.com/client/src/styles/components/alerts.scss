@@ -1,0 +1,146 @@
+/* 提示框组件样式 */
+
+.alert {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid;
+  display: flex;
+  align-items: center;
+  position: relative;
+  
+  // 关闭按钮
+  .alert-close {
+    position: absolute;
+    top: var(--spacing-xs);
+    right: var(--spacing-xs);
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity var(--transition-time) var(--transition-timing);
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  // 图标
+  .alert-icon {
+    margin-right: var(--spacing-sm);
+    font-size: var(--font-size-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  // 内容
+  .alert-content {
+    flex: 1;
+  }
+  
+  // 标题
+  .alert-title {
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--font-size-base);
+  }
+  
+  // 描述
+  .alert-description {
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+  
+  // 成功提示框
+  &--success {
+    background-color: rgba(var(--success-color-rgb, 16, 185, 129), 0.1);
+    border-color: var(--success-color);
+    color: var(--text-regular);
+    
+    .alert-icon {
+      color: var(--success-color);
+    }
+    
+    .alert-title {
+      color: var(--success-color);
+    }
+  }
+  
+  // 警告提示框
+  &--warning {
+    background-color: rgba(var(--warning-color-rgb, 245, 158, 11), 0.1);
+    border-color: var(--warning-color);
+    color: var(--text-regular);
+    
+    .alert-icon {
+      color: var(--warning-color);
+    }
+    
+    .alert-title {
+      color: var(--warning-color);
+    }
+  }
+  
+  // 错误提示框
+  &--danger {
+    background-color: rgba(var(--danger-color-rgb, 239, 68, 68), 0.1);
+    border-color: var(--danger-color);
+    color: var(--text-regular);
+    
+    .alert-icon {
+      color: var(--danger-color);
+    }
+    
+    .alert-title {
+      color: var(--danger-color);
+    }
+  }
+  
+  // 信息提示框
+  &--info {
+    background-color: rgba(var(--info-color-rgb, 107, 114, 128), 0.1);
+    border-color: var(--info-color);
+    color: var(--text-regular);
+    
+    .alert-icon {
+      color: var(--info-color);
+    }
+    
+    .alert-title {
+      color: var(--info-color);
+    }
+  }
+  
+  // 主题提示框
+  &--primary {
+    background-color: rgba(var(--primary-color-rgb, 36, 99, 235), 0.1);
+    border-color: var(--primary-color);
+    color: var(--text-regular);
+    
+    .alert-icon {
+      color: var(--primary-color);
+    }
+    
+    .alert-title {
+      color: var(--primary-color);
+    }
+  }
+  
+  // 无图标样式
+  &--no-icon {
+    padding-left: var(--spacing-md);
+  }
+  
+  // 紧凑样式
+  &--compact {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    
+    .alert-title {
+      font-size: var(--font-size-sm);
+    }
+    
+    .alert-description {
+      font-size: var(--font-size-xs);
+    }
+  }
+} 

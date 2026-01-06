@@ -1,0 +1,204 @@
+{
+  "name": "安全监控系统查询模板字典",
+  "description": "安全威胁、安全漏洞、安全扫描日志、安全配置等安全监控系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 安全威胁相关查询模板 ===": "注释",
+    "安全威胁总数": {
+      "sql": "SELECT COUNT(*) as count FROM security_threats",
+      "description": "查询安全威胁总数",
+      "table": "security_threats",
+      "response": "安全威胁总数为{count}个",
+      "tokens": 10
+    },
+    "安全威胁严重程度统计": {
+      "sql": "SELECT severity, COUNT(*) as count FROM security_threats GROUP BY severity ORDER BY FIELD(severity, 'critical', 'high', 'medium', 'low')",
+      "description": "统计安全威胁严重程度分布",
+      "table": "security_threats",
+      "response": "安全威胁严重程度统计完成",
+      "tokens": 20
+    },
+    "安全威胁状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM security_threats GROUP BY status ORDER BY count DESC",
+      "description": "统计安全威胁状态分布",
+      "table": "security_threats",
+      "response": "安全威胁状态统计完成",
+      "tokens": 20
+    },
+    "活跃安全威胁": {
+      "sql": "SELECT COUNT(*) as count FROM security_threats WHERE status = 'active'",
+      "description": "查询活跃安全威胁数量",
+      "table": "security_threats",
+      "response": "活跃安全威胁{count}个",
+      "tokens": 12
+    },
+    "高危安全威胁": {
+      "sql": "SELECT COUNT(*) as count FROM security_threats WHERE severity IN ('critical', 'high') AND status = 'active'",
+      "description": "查询高危安全威胁数量",
+      "table": "security_threats",
+      "response": "高危安全威胁{count}个",
+      "tokens": 15
+    },
+    "威胁类型统计": {
+      "sql": "SELECT threatType, COUNT(*) as count FROM security_threats GROUP BY threatType ORDER BY count DESC",
+      "description": "统计威胁类型分布",
+      "table": "security_threats",
+      "response": "威胁类型统计完成",
+      "tokens": 20
+    },
+    "威胁风险评分分析": {
+      "sql": "SELECT AVG(riskScore) as avg_score, MIN(riskScore) as min_score, MAX(riskScore) as max_score FROM security_threats WHERE riskScore IS NOT NULL",
+      "description": "分析威胁风险评分",
+      "table": "security_threats",
+      "response": "威胁风险评分分析完成",
+      "tokens": 25
+    },
+    "本月新增威胁": {
+      "sql": "SELECT COUNT(*) as count FROM security_threats WHERE YEAR(createdAt) = YEAR(NOW()) AND MONTH(createdAt) = MONTH(NOW())",
+      "description": "查询本月新增威胁数量",
+      "table": "security_threats",
+      "response": "本月新增威胁{count}个",
+      "tokens": 20
+    },
+    "已处理威胁统计": {
+      "sql": "SELECT COUNT(*) as count FROM security_threats WHERE handledBy IS NOT NULL AND handledAt IS NOT NULL",
+      "description": "查询已处理威胁数量",
+      "table": "security_threats",
+      "response": "已处理威胁{count}个",
+      "tokens": 15
+    },
+
+    "// === 安全漏洞相关查询模板 ===": "注释",
+    "安全漏洞总数": {
+      "sql": "SELECT COUNT(*) as count FROM security_vulnerabilities",
+      "description": "查询安全漏洞总数",
+      "table": "security_vulnerabilities",
+      "response": "安全漏洞总数为{count}个",
+      "tokens": 10
+    },
+    "安全漏洞严重程度统计": {
+      "sql": "SELECT severity, COUNT(*) as count FROM security_vulnerabilities GROUP BY severity ORDER BY FIELD(severity, 'critical', 'high', 'medium', 'low')",
+      "description": "统计安全漏洞严重程度分布",
+      "table": "security_vulnerabilities",
+      "response": "安全漏洞严重程度统计完成",
+      "tokens": 20
+    },
+    "安全漏洞状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM security_vulnerabilities GROUP BY status ORDER BY count DESC",
+      "description": "统计安全漏洞状态分布",
+      "table": "security_vulnerabilities",
+      "response": "安全漏洞状态统计完成",
+      "tokens": 20
+    },
+    "未修复漏洞": {
+      "sql": "SELECT COUNT(*) as count FROM security_vulnerabilities WHERE status IN ('open', 'confirmed')",
+      "description": "查询未修复漏洞数量",
+      "table": "security_vulnerabilities",
+      "response": "未修复漏洞{count}个",
+      "tokens": 12
+    },
+    "高危漏洞统计": {
+      "sql": "SELECT COUNT(*) as count FROM security_vulnerabilities WHERE severity IN ('critical', 'high') AND status IN ('open', 'confirmed')",
+      "description": "查询高危未修复漏洞数量",
+      "table": "security_vulnerabilities",
+      "response": "高危未修复漏洞{count}个",
+      "tokens": 15
+    },
+    "漏洞分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM security_vulnerabilities GROUP BY category ORDER BY count DESC",
+      "description": "统计漏洞分类分布",
+      "table": "security_vulnerabilities",
+      "response": "漏洞分类统计完成",
+      "tokens": 20
+    },
+    "CVSS评分分析": {
+      "sql": "SELECT AVG(cvssScore) as avg_score, MIN(cvssScore) as min_score, MAX(cvssScore) as max_score FROM security_vulnerabilities WHERE cvssScore IS NOT NULL",
+      "description": "分析CVSS评分分布",
+      "table": "security_vulnerabilities",
+      "response": "CVSS评分分析完成",
+      "tokens": 25
+    },
+    "本月发现漏洞": {
+      "sql": "SELECT COUNT(*) as count FROM security_vulnerabilities WHERE YEAR(createdAt) = YEAR(NOW()) AND MONTH(createdAt) = MONTH(NOW())",
+      "description": "查询本月发现漏洞数量",
+      "table": "security_vulnerabilities",
+      "response": "本月发现漏洞{count}个",
+      "tokens": 20
+    },
+    "已修复漏洞统计": {
+      "sql": "SELECT COUNT(*) as count FROM security_vulnerabilities WHERE status = 'fixed' AND fixedAt IS NOT NULL",
+      "description": "查询已修复漏洞数量",
+      "table": "security_vulnerabilities",
+      "response": "已修复漏洞{count}个",
+      "tokens": 15
+    },
+
+    "// === 安全扫描日志相关查询模板 ===": "注释",
+    "安全扫描总数": {
+      "sql": "SELECT COUNT(*) as count FROM security_scan_logs",
+      "description": "查询安全扫描总数",
+      "table": "security_scan_logs",
+      "response": "安全扫描总数为{count}次",
+      "tokens": 10
+    },
+    "扫描类型统计": {
+      "sql": "SELECT scanType, COUNT(*) as count FROM security_scan_logs GROUP BY scanType ORDER BY count DESC",
+      "description": "统计扫描类型分布",
+      "table": "security_scan_logs",
+      "response": "扫描类型统计完成",
+      "tokens": 20
+    },
+    "扫描状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM security_scan_logs GROUP BY status ORDER BY count DESC",
+      "description": "统计扫描状态分布",
+      "table": "security_scan_logs",
+      "response": "扫描状态统计完成",
+      "tokens": 20
+    },
+    "成功扫描统计": {
+      "sql": "SELECT COUNT(*) as count FROM security_scan_logs WHERE status = 'completed'",
+      "description": "查询成功完成的扫描数量",
+      "table": "security_scan_logs",
+      "response": "成功完成扫描{count}次",
+      "tokens": 15
+    },
+    "扫描耗时分析": {
+      "sql": "SELECT AVG(duration) as avg_duration, MIN(duration) as min_duration, MAX(duration) as max_duration FROM security_scan_logs WHERE duration IS NOT NULL",
+      "description": "分析扫描耗时情况",
+      "table": "security_scan_logs",
+      "response": "扫描耗时分析完成",
+      "tokens": 25
+    },
+    "本月安全扫描": {
+      "sql": "SELECT COUNT(*) as count FROM security_scan_logs WHERE YEAR(startedAt) = YEAR(NOW()) AND MONTH(startedAt) = MONTH(NOW())",
+      "description": "查询本月安全扫描数量",
+      "table": "security_scan_logs",
+      "response": "本月安全扫描{count}次",
+      "tokens": 20
+    },
+    "扫描发现问题统计": {
+      "sql": "SELECT COUNT(*) as count FROM security_scan_logs WHERE issuesFound > 0",
+      "description": "查询发现问题的扫描数量",
+      "table": "security_scan_logs",
+      "response": "发现问题的扫描{count}次",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "安全监控系统概览": {
+      "sql": "SELECT 'security_threats' as category, COUNT(*) as count FROM security_threats UNION ALL SELECT 'security_vulnerabilities' as category, COUNT(*) as count FROM security_vulnerabilities UNION ALL SELECT 'security_scan_logs' as category, COUNT(*) as count FROM security_scan_logs UNION ALL SELECT 'security_configs' as category, COUNT(*) as count FROM security_configs",
+      "description": "安全监控系统数据总览",
+      "table": "multiple",
+      "response": "安全监控系统概览查询完成",
+      "tokens": 35
+    },
+    "安全风险评估": {
+      "sql": "SELECT COUNT(CASE WHEN st.severity IN ('critical', 'high') AND st.status = 'active' THEN 1 END) as high_threats, COUNT(CASE WHEN sv.severity IN ('critical', 'high') AND sv.status IN ('open', 'confirmed') THEN 1 END) as high_vulnerabilities FROM security_threats st, security_vulnerabilities sv",
+      "description": "评估当前安全风险状况",
+      "table": "security_threats",
+      "joins": ["security_vulnerabilities"],
+      "response": "安全风险评估完成",
+      "tokens": 40
+    }
+  }
+}

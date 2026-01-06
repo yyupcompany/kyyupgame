@@ -1,0 +1,136 @@
+{
+  "batch_import_keywords": {
+    "trigger_keywords": [
+      "批量导入",
+      "批量添加", 
+      "批量创建",
+      "导入数据",
+      "导入文件",
+      "上传文件",
+      "批量上传",
+      "Excel导入",
+      "CSV导入",
+      "文件导入",
+      "数据导入",
+      "批量录入",
+      "批量插入"
+    ],
+    "table_keywords": {
+      "users": ["用户", "员工", "人员", "账号", "账户"],
+      "students": ["学生", "学员", "小朋友", "孩子"],
+      "teachers": ["教师", "老师", "教员", "教职工"],
+      "parents": ["家长", "父母", "监护人"],
+      "activities": ["活动", "课程", "项目"],
+      "classes": ["班级", "班", "年级"],
+      "enrollments": ["招生", "报名", "入学"],
+      "todos": ["任务", "待办", "工作"]
+    },
+    "file_type_keywords": {
+      "csv": ["csv", "逗号分隔", "表格"],
+      "excel": ["excel", "xls", "xlsx", "电子表格"],
+      "json": ["json", "数据格式"]
+    },
+    "confirmation_keywords": [
+      "确认导入",
+      "开始导入", 
+      "执行导入",
+      "继续导入",
+      "批准导入",
+      "同意导入"
+    ],
+    "cancel_keywords": [
+      "取消导入",
+      "停止导入",
+      "不导入",
+      "放弃导入"
+    ]
+  },
+  "ai_prompts": {
+    "detect_batch_import": "检测到用户想要进行批量导入操作。请分析用户输入，识别：1) 目标数据表类型 2) 文件类型 3) 是否提供了文件内容。如果信息不完整，请询问用户。",
+    "field_mapping_analysis": "请分析文档字段与数据库字段的映射关系，提供映射建议和置信度评分。",
+    "data_validation_prompt": "请验证批量导入数据的完整性和正确性，识别无效记录和潜在问题。",
+    "confirmation_request": "批量导入分析完成，请用户确认导入操作。显示预览信息包括：记录数量、字段映射、验证结果。"
+  },
+  "ui_instructions": {
+    "show_file_upload_dialog": {
+      "type": "show_dialog",
+      "dialog_type": "file_upload",
+      "title": "选择导入文件",
+      "accept_types": [".csv", ".xlsx", ".xls", ".json"],
+      "max_size": "10MB",
+      "instructions": "请选择要导入的文件（支持CSV、Excel、JSON格式）"
+    },
+    "show_import_preview_dialog": {
+      "type": "show_dialog", 
+      "dialog_type": "import_preview",
+      "title": "批量导入预览",
+      "sections": [
+        "operation_summary",
+        "field_mappings", 
+        "data_preview",
+        "validation_results",
+        "execution_plan"
+      ],
+      "actions": [
+        {
+          "label": "确认导入",
+          "type": "confirm",
+          "style": "primary"
+        },
+        {
+          "label": "取消",
+          "type": "cancel", 
+          "style": "default"
+        },
+        {
+          "label": "调整映射",
+          "type": "adjust_mapping",
+          "style": "secondary"
+        }
+      ]
+    },
+    "show_import_progress": {
+      "type": "show_progress",
+      "title": "正在导入数据",
+      "show_percentage": true,
+      "show_current_batch": true,
+      "show_success_count": true,
+      "show_error_count": true,
+      "allow_cancel": true
+    },
+    "show_import_result": {
+      "type": "show_result",
+      "title": "导入完成",
+      "sections": [
+        "summary_statistics",
+        "success_records",
+        "failed_records", 
+        "next_actions"
+      ]
+    }
+  },
+  "validation_rules": {
+    "max_records": 10000,
+    "max_file_size": "10MB",
+    "required_fields_check": true,
+    "data_type_validation": true,
+    "duplicate_check": false,
+    "custom_validation": true
+  },
+  "error_messages": {
+    "file_too_large": "文件大小超过限制（最大10MB）",
+    "unsupported_format": "不支持的文件格式，请使用CSV、Excel或JSON格式",
+    "no_data_found": "文件中未找到有效数据",
+    "missing_required_fields": "缺少必填字段：{fields}",
+    "invalid_data_format": "数据格式错误：{details}",
+    "api_call_failed": "API调用失败：{error}",
+    "network_error": "网络连接错误，请检查服务器状态"
+  },
+  "success_messages": {
+    "file_parsed": "文件解析成功，共找到 {count} 条记录",
+    "field_mapping_complete": "字段映射完成，{mapped} 个字段已映射",
+    "validation_passed": "数据验证通过，{valid} 条记录有效",
+    "import_started": "批量导入已开始，预计需要 {time}",
+    "import_completed": "导入完成！成功 {success} 条，失败 {failed} 条"
+  }
+}

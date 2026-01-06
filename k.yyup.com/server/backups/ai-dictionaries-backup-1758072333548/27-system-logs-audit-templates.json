@@ -1,0 +1,172 @@
+{
+  "name": "系统日志和审计查询模板字典",
+  "description": "系统变更日志、操作日志、AI模型计费、文件存储、知识库等系统日志和审计相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 系统变更日志相关查询模板 ===": "注释",
+    "系统变更日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM change_log",
+      "description": "查询系统变更日志总数",
+      "table": "change_log",
+      "response": "系统变更日志总数为{count}条",
+      "tokens": 10
+    },
+    "变更类型统计": {
+      "sql": "SELECT change_type, COUNT(*) as count FROM change_log GROUP BY change_type ORDER BY count DESC",
+      "description": "统计系统变更类型分布",
+      "table": "change_log",
+      "response": "系统变更类型统计完成",
+      "tokens": 20
+    },
+    "变更状态统计": {
+      "sql": "SELECT change_status, COUNT(*) as count FROM change_log GROUP BY change_status ORDER BY count DESC",
+      "description": "统计系统变更状态分布",
+      "table": "change_log",
+      "response": "系统变更状态统计完成",
+      "tokens": 20
+    },
+    "本月系统变更": {
+      "sql": "SELECT COUNT(*) as count FROM change_log WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月系统变更数量",
+      "table": "change_log",
+      "response": "本月系统变更{count}条",
+      "tokens": 20
+    },
+    "变更影响级别统计": {
+      "sql": "SELECT impact_level, COUNT(*) as count FROM change_log GROUP BY impact_level ORDER BY FIELD(impact_level, 'HIGH', 'MEDIUM', 'LOW')",
+      "description": "统计变更影响级别分布",
+      "table": "change_log",
+      "response": "变更影响级别统计完成",
+      "tokens": 20
+    },
+
+    "// === 操作日志相关查询模板 ===": "注释",
+    "操作日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM operation_logs",
+      "description": "查询操作日志总数",
+      "table": "operation_logs",
+      "response": "操作日志总数为{count}条",
+      "tokens": 10
+    },
+    "操作类型统计": {
+      "sql": "SELECT operation_type, COUNT(*) as count FROM operation_logs GROUP BY operation_type ORDER BY count DESC",
+      "description": "统计操作类型分布",
+      "table": "operation_logs",
+      "response": "操作类型统计完成",
+      "tokens": 20
+    },
+    "操作结果统计": {
+      "sql": "SELECT operation_result, COUNT(*) as count FROM operation_logs GROUP BY operation_result ORDER BY count DESC",
+      "description": "统计操作结果分布",
+      "table": "operation_logs",
+      "response": "操作结果统计完成",
+      "tokens": 20
+    },
+    "今日操作日志": {
+      "sql": "SELECT COUNT(*) as count FROM operation_logs WHERE DATE(created_at) = CURDATE()",
+      "description": "查询今日操作日志数量",
+      "table": "operation_logs",
+      "response": "今日操作日志{count}条",
+      "tokens": 15
+    },
+
+    "// === AI模型计费相关查询模板 ===": "注释",
+    "AI模型计费记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_model_billing",
+      "description": "查询AI模型计费记录总数",
+      "table": "ai_model_billing",
+      "response": "AI模型计费记录总数为{count}条",
+      "tokens": 10
+    },
+    "计费模型统计": {
+      "sql": "SELECT model_name, COUNT(*) as count, SUM(cost) as total_cost FROM ai_model_billing GROUP BY model_name ORDER BY total_cost DESC",
+      "description": "统计各AI模型计费情况",
+      "table": "ai_model_billing",
+      "response": "AI模型计费统计完成",
+      "tokens": 25
+    },
+    "本月AI计费": {
+      "sql": "SELECT SUM(cost) as total_cost, COUNT(*) as count FROM ai_model_billing WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月AI模型计费总额",
+      "table": "ai_model_billing",
+      "response": "本月AI计费统计完成",
+      "tokens": 25
+    },
+    "计费状态统计": {
+      "sql": "SELECT billing_status, COUNT(*) as count FROM ai_model_billing GROUP BY billing_status ORDER BY count DESC",
+      "description": "统计计费状态分布",
+      "table": "ai_model_billing",
+      "response": "计费状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 文件存储相关查询模板 ===": "注释",
+    "文件存储总数": {
+      "sql": "SELECT COUNT(*) as count FROM file_storages",
+      "description": "查询文件存储总数",
+      "table": "file_storages",
+      "response": "文件存储总数为{count}个",
+      "tokens": 10
+    },
+    "文件类型统计": {
+      "sql": "SELECT file_type, COUNT(*) as count FROM file_storages GROUP BY file_type ORDER BY count DESC",
+      "description": "统计文件类型分布",
+      "table": "file_storages",
+      "response": "文件类型统计完成",
+      "tokens": 20
+    },
+    "文件大小分析": {
+      "sql": "SELECT AVG(file_size) as avg_size, MIN(file_size) as min_size, MAX(file_size) as max_size, SUM(file_size) as total_size FROM file_storages",
+      "description": "分析文件大小分布",
+      "table": "file_storages",
+      "response": "文件大小分析完成",
+      "tokens": 25
+    },
+    "存储状态统计": {
+      "sql": "SELECT storage_status, COUNT(*) as count FROM file_storages GROUP BY storage_status ORDER BY count DESC",
+      "description": "统计文件存储状态分布",
+      "table": "file_storages",
+      "response": "存储状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 知识库相关查询模板 ===": "注释",
+    "知识库条目总数": {
+      "sql": "SELECT COUNT(*) as count FROM knowledge_vault",
+      "description": "查询知识库条目总数",
+      "table": "knowledge_vault",
+      "response": "知识库条目总数为{count}个",
+      "tokens": 10
+    },
+    "知识分类统计": {
+      "sql": "SELECT knowledge_category, COUNT(*) as count FROM knowledge_vault GROUP BY knowledge_category ORDER BY count DESC",
+      "description": "统计知识分类分布",
+      "table": "knowledge_vault",
+      "response": "知识分类统计完成",
+      "tokens": 20
+    },
+    "知识状态统计": {
+      "sql": "SELECT knowledge_status, COUNT(*) as count FROM knowledge_vault GROUP BY knowledge_status ORDER BY count DESC",
+      "description": "统计知识状态分布",
+      "table": "knowledge_vault",
+      "response": "知识状态统计完成",
+      "tokens": 20
+    },
+    "知识访问统计": {
+      "sql": "SELECT AVG(access_count) as avg_access, MAX(access_count) as max_access, COUNT(CASE WHEN access_count > 0 THEN 1 END) as accessed_items FROM knowledge_vault",
+      "description": "统计知识库访问情况",
+      "table": "knowledge_vault",
+      "response": "知识访问统计完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "系统日志审计概览": {
+      "sql": "SELECT 'change_log' as category, COUNT(*) as count FROM change_log UNION ALL SELECT 'operation_logs' as category, COUNT(*) as count FROM operation_logs UNION ALL SELECT 'ai_model_billing' as category, COUNT(*) as count FROM ai_model_billing UNION ALL SELECT 'file_storages' as category, COUNT(*) as count FROM file_storages UNION ALL SELECT 'knowledge_vault' as category, COUNT(*) as count FROM knowledge_vault",
+      "description": "系统日志和审计数据总览",
+      "table": "multiple",
+      "response": "系统日志审计概览查询完成",
+      "tokens": 35
+    }
+  }
+}

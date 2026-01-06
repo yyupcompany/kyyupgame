@@ -1,0 +1,76 @@
+{
+  "verificationInfo": {
+    "timestamp": "2025-12-07T17:48:54.308Z",
+    "browser": "Chromium",
+    "viewport": "1920x1080",
+    "baseUrl": "http://localhost:5173"
+  },
+  "summary": {
+    "totalPages": 5,
+    "successfulPages": 0,
+    "failedPages": 5,
+    "successRate": "0.0"
+  },
+  "results": [
+    {
+      "page": "家长中心工作台",
+      "path": "/parent-center/dashboard",
+      "title": "访问失败",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 0,
+      "is403": false,
+      "hasContent": false,
+      "hasError": true,
+      "success": false,
+      "error": "locator.isVisible: Error: strict mode violation: locator('text=/错误|error|403|权限/i') resolved to 11 elements:\n    1) <div data-v-b6990fbf=\"\" class=\"error-number\">403</div> aka getByText('403', { exact: true })\n    2) <h2 data-v-b6990fbf=\"\" class=\"error-title\">权限不足</h2> aka getByRole('heading', { name: '权限不足' })\n    3) <small data-v-b6990fbf=\"\" class=\"error-note\">💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。</small> aka getByText('💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。')\n    4) <strong data-v-b6990fbf=\"\">权限调试信息：</strong> aka getByText('权限调试信息：')\n    5) <code data-v-b6990fbf=\"\">/403</code> aka getByText('/')\n    6) <p data-v-b6990fbf=\"\">如果您认为应该有权限访问此页面，请联系管理员。</p> aka getByText('如果您认为应该有权限访问此页面，请联系管理员。')\n    7) <h3 data-v-b6990fbf=\"\">权限说明</h3> aka getByRole('heading', { name: '权限说明' })\n    8) <li data-v-b6990fbf=\"\">不同角色用户具有不同的页面访问权限</li> aka getByText('不同角色用户具有不同的页面访问权限')\n    9) <li data-v-b6990fbf=\"\">请确认您当前登录的角色是否有权限访问此页面</li> aka getByText('请确认您当前登录的角色是否有权限访问此页面')\n    10) <li data-v-b6990fbf=\"\">如需申请权限，请联系系统管理员</li> aka getByText('如需申请权限，请联系系统管理员')\n    ...\n\nCall log:\n\u001b[2m    - checking visibility of locator('text=/错误|error|403|权限/i')\u001b[22m\n"
+    },
+    {
+      "page": "孩子管理",
+      "path": "/parent-center/children",
+      "title": "访问失败",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 0,
+      "is403": false,
+      "hasContent": false,
+      "hasError": true,
+      "success": false,
+      "error": "locator.isVisible: Error: strict mode violation: locator('text=/错误|error|403|权限/i') resolved to 11 elements:\n    1) <div data-v-b6990fbf=\"\" class=\"error-number\">403</div> aka getByText('403', { exact: true })\n    2) <h2 data-v-b6990fbf=\"\" class=\"error-title\">权限不足</h2> aka getByRole('heading', { name: '权限不足' })\n    3) <small data-v-b6990fbf=\"\" class=\"error-note\">💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。</small> aka getByText('💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。')\n    4) <strong data-v-b6990fbf=\"\">权限调试信息：</strong> aka getByText('权限调试信息：')\n    5) <code data-v-b6990fbf=\"\">/403</code> aka getByText('/')\n    6) <p data-v-b6990fbf=\"\">如果您认为应该有权限访问此页面，请联系管理员。</p> aka getByText('如果您认为应该有权限访问此页面，请联系管理员。')\n    7) <h3 data-v-b6990fbf=\"\">权限说明</h3> aka getByRole('heading', { name: '权限说明' })\n    8) <li data-v-b6990fbf=\"\">不同角色用户具有不同的页面访问权限</li> aka getByText('不同角色用户具有不同的页面访问权限')\n    9) <li data-v-b6990fbf=\"\">请确认您当前登录的角色是否有权限访问此页面</li> aka getByText('请确认您当前登录的角色是否有权限访问此页面')\n    10) <li data-v-b6990fbf=\"\">如需申请权限，请联系系统管理员</li> aka getByText('如需申请权限，请联系系统管理员')\n    ...\n\nCall log:\n\u001b[2m    - checking visibility of locator('text=/错误|error|403|权限/i')\u001b[22m\n"
+    },
+    {
+      "page": "招生活动",
+      "path": "/parent-center/activities",
+      "title": "访问失败",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 0,
+      "is403": false,
+      "hasContent": false,
+      "hasError": true,
+      "success": false,
+      "error": "locator.isVisible: Error: strict mode violation: locator('text=/错误|error|403|权限/i') resolved to 11 elements:\n    1) <div data-v-b6990fbf=\"\" class=\"error-number\">403</div> aka getByText('403', { exact: true })\n    2) <h2 data-v-b6990fbf=\"\" class=\"error-title\">权限不足</h2> aka getByRole('heading', { name: '权限不足' })\n    3) <small data-v-b6990fbf=\"\" class=\"error-note\">💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。</small> aka getByText('💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。')\n    4) <strong data-v-b6990fbf=\"\">权限调试信息：</strong> aka getByText('权限调试信息：')\n    5) <code data-v-b6990fbf=\"\">/403</code> aka getByText('/')\n    6) <p data-v-b6990fbf=\"\">如果您认为应该有权限访问此页面，请联系管理员。</p> aka getByText('如果您认为应该有权限访问此页面，请联系管理员。')\n    7) <h3 data-v-b6990fbf=\"\">权限说明</h3> aka getByRole('heading', { name: '权限说明' })\n    8) <li data-v-b6990fbf=\"\">不同角色用户具有不同的页面访问权限</li> aka getByText('不同角色用户具有不同的页面访问权限')\n    9) <li data-v-b6990fbf=\"\">请确认您当前登录的角色是否有权限访问此页面</li> aka getByText('请确认您当前登录的角色是否有权限访问此页面')\n    10) <li data-v-b6990fbf=\"\">如需申请权限，请联系系统管理员</li> aka getByText('如需申请权限，请联系系统管理员')\n    ...\n\nCall log:\n\u001b[2m    - checking visibility of locator('text=/错误|error|403|权限/i')\u001b[22m\n"
+    },
+    {
+      "page": "成长评估",
+      "path": "/parent-center/assessment",
+      "title": "访问失败",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 0,
+      "is403": false,
+      "hasContent": false,
+      "hasError": true,
+      "success": false,
+      "error": "locator.isVisible: Error: strict mode violation: locator('text=/错误|error|403|权限/i') resolved to 11 elements:\n    1) <div data-v-b6990fbf=\"\" class=\"error-number\">403</div> aka getByText('403', { exact: true })\n    2) <h2 data-v-b6990fbf=\"\" class=\"error-title\">权限不足</h2> aka getByRole('heading', { name: '权限不足' })\n    3) <small data-v-b6990fbf=\"\" class=\"error-note\">💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。</small> aka getByText('💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。')\n    4) <strong data-v-b6990fbf=\"\">权限调试信息：</strong> aka getByText('权限调试信息：')\n    5) <code data-v-b6990fbf=\"\">/403</code> aka getByText('/')\n    6) <p data-v-b6990fbf=\"\">如果您认为应该有权限访问此页面，请联系管理员。</p> aka getByText('如果您认为应该有权限访问此页面，请联系管理员。')\n    7) <h3 data-v-b6990fbf=\"\">权限说明</h3> aka getByRole('heading', { name: '权限说明' })\n    8) <li data-v-b6990fbf=\"\">不同角色用户具有不同的页面访问权限</li> aka getByText('不同角色用户具有不同的页面访问权限')\n    9) <li data-v-b6990fbf=\"\">请确认您当前登录的角色是否有权限访问此页面</li> aka getByText('请确认您当前登录的角色是否有权限访问此页面')\n    10) <li data-v-b6990fbf=\"\">如需申请权限，请联系系统管理员</li> aka getByText('如需申请权限，请联系系统管理员')\n    ...\n\nCall log:\n\u001b[2m    - checking visibility of locator('text=/错误|error|403|权限/i')\u001b[22m\n"
+    },
+    {
+      "page": "家校沟通",
+      "path": "/parent-center/smart-communication",
+      "title": "访问失败",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 0,
+      "is403": false,
+      "hasContent": false,
+      "hasError": true,
+      "success": false,
+      "error": "locator.isVisible: Error: strict mode violation: locator('text=/错误|error|403|权限/i') resolved to 11 elements:\n    1) <div data-v-b6990fbf=\"\" class=\"error-number\">403</div> aka getByText('403', { exact: true })\n    2) <h2 data-v-b6990fbf=\"\" class=\"error-title\">权限不足</h2> aka getByRole('heading', { name: '权限不足' })\n    3) <small data-v-b6990fbf=\"\" class=\"error-note\">💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。</small> aka getByText('💡 提示：这表示页面路径正确，但您需��更高的权限才能访问。')\n    4) <strong data-v-b6990fbf=\"\">权限调试信息：</strong> aka getByText('权限调试信息：')\n    5) <code data-v-b6990fbf=\"\">/403</code> aka getByText('/')\n    6) <p data-v-b6990fbf=\"\">如果您认为应该有权限访问此页面，请联系管理员。</p> aka getByText('如果您认为应该有权限访问此页面，请联系管理员。')\n    7) <h3 data-v-b6990fbf=\"\">权限说明</h3> aka getByRole('heading', { name: '权限说明' })\n    8) <li data-v-b6990fbf=\"\">不同角色用户具有不同的页面访问权限</li> aka getByText('不同角色用户具有不同的页面访问权限')\n    9) <li data-v-b6990fbf=\"\">请确认您当前登录的角色是否有权限访问此页面</li> aka getByText('请确认您当前登录的角色是否有权限访问此页面')\n    10) <li data-v-b6990fbf=\"\">如需申请权限，请联系系统管理员</li> aka getByText('如需申请权限，请联系系统管理员')\n    ...\n\nCall log:\n\u001b[2m    - checking visibility of locator('text=/错误|error|403|权限/i')\u001b[22m\n"
+    }
+  ]
+}

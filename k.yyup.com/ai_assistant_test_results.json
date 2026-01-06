@@ -1,0 +1,3936 @@
+{
+  "timestamp": "2025-11-21T00:04:14.267Z",
+  "results": [
+    {
+      "query": "园长您好，请查询学生总数",
+      "hasResponse": true,
+      "timestamp": "2025-11-21T00:03:20.621Z"
+    },
+    {
+      "query": "请帮我查询大班A的学生名单",
+      "hasResponse": true,
+      "timestamp": "2025-11-21T00:03:33.484Z"
+    },
+    {
+      "query": "生成一份幼儿园运营报告",
+      "hasResponse": true,
+      "timestamp": "2025-11-21T00:03:46.259Z"
+    },
+    {
+      "query": "查询本月活动情况",
+      "hasResponse": true,
+      "timestamp": "2025-11-21T00:03:58.930Z"
+    },
+    {
+      "query": "帮我创建一个新的待办任务",
+      "hasResponse": true,
+      "timestamp": "2025-11-21T00:04:11.753Z"
+    }
+  ],
+  "consoleErrors": [],
+  "consoleLogs": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "timestamp": "2025-11-21T00:02:05.543Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "timestamp": "2025-11-21T00:02:05.561Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "timestamp": "2025-11-21T00:02:05.905Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "timestamp": "2025-11-21T00:02:05.915Z"
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "timestamp": "2025-11-21T00:02:05.916Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "timestamp": "2025-11-21T00:02:05.918Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "timestamp": "2025-11-21T00:02:05.918Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "timestamp": "2025-11-21T00:02:05.918Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "timestamp": "2025-11-21T00:02:05.919Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "timestamp": "2025-11-21T00:02:05.919Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "timestamp": "2025-11-21T00:02:05.920Z"
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "timestamp": "2025-11-21T00:02:05.920Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "timestamp": "2025-11-21T00:02:05.921Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "timestamp": "2025-11-21T00:02:05.928Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "timestamp": "2025-11-21T00:02:05.928Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "timestamp": "2025-11-21T00:02:05.928Z"
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "timestamp": "2025-11-21T00:02:05.928Z"
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "timestamp": "2025-11-21T00:02:05.928Z"
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "timestamp": "2025-11-21T00:02:05.939Z"
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "timestamp": "2025-11-21T00:02:05.939Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "timestamp": "2025-11-21T00:02:05.939Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /dashboard",
+      "timestamp": "2025-11-21T00:02:05.940Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-21T00:02:05.940Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "timestamp": "2025-11-21T00:02:05.943Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "timestamp": "2025-11-21T00:02:05.943Z"
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "timestamp": "2025-11-21T00:02:05.946Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "timestamp": "2025-11-21T00:02:05.947Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-21T00:02:05.948Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "timestamp": "2025-11-21T00:02:05.948Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 535.50ms, domContentLoaded: 516.10ms, memoryUsage: 23.37MB}",
+      "timestamp": "2025-11-21T00:02:05.972Z"
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "timestamp": "2025-11-21T00:02:05.975Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "timestamp": "2025-11-21T00:02:06.004Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "timestamp": "2025-11-21T00:02:06.040Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "timestamp": "2025-11-21T00:02:06.040Z"
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "timestamp": "2025-11-21T00:02:15.291Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "timestamp": "2025-11-21T00:02:15.323Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "timestamp": "2025-11-21T00:02:15.337Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "timestamp": "2025-11-21T00:02:15.337Z"
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /dashboard}",
+      "timestamp": "2025-11-21T00:02:15.337Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始登录流程...",
+      "timestamp": "2025-11-21T00:02:22.669Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 全局loading状态: 开启",
+      "timestamp": "2025-11-21T00:02:22.669Z"
+    },
+    {
+      "type": "log",
+      "text": "📡 发送登录请求: {username: admin, password: ***}",
+      "timestamp": "2025-11-21T00:02:22.670Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 连接后端进行用户验证",
+      "timestamp": "2025-11-21T00:02:22.670Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17636...",
+      "timestamp": "2025-11-21T00:02:22.672Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /auth/login {username: admin, password: 123456}",
+      "timestamp": "2025-11-21T00:02:22.672Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 登录响应: {success: true, data: Object, message: 登录成功}",
+      "timestamp": "2025-11-21T00:02:22.918Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 登录成功，处理用户数据: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…c0Mn0.GJfglbOov1ypAK8ByflVpxxy4DWWX4R61xwmYCTWXxk, refreshToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…zQyfQ.5iCvUR_LTNFHxBmAf13c7zOo96WQzXuzNiR07pQ0cck, user: Object}",
+      "timestamp": "2025-11-21T00:02:22.918Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 保存用户信息到store: {token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiO…c0Mn0.GJfglbOov1ypAK8ByflVpxxy4DWWX4R61xwmYCTWXxk, username: admin, displayName: admin, role: admin, roles: Array(1)}",
+      "timestamp": "2025-11-21T00:02:22.918Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 登录前带有 redirect 参数: /dashboard",
+      "timestamp": "2025-11-21T00:02:22.928Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 初始化静态权限系统...",
+      "timestamp": "2025-11-21T00:02:22.929Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 用户角色设置: admin",
+      "timestamp": "2025-11-21T00:02:22.929Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 菜单生成成功 (admin): 4 个菜单项",
+      "timestamp": "2025-11-21T00:02:22.929Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 静态权限系统初始化完成",
+      "timestamp": "2025-11-21T00:02:22.931Z"
+    },
+    {
+      "type": "log",
+      "text": "🔀 准备跳转到: /dashboard",
+      "timestamp": "2025-11-21T00:02:22.931Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 登录成功，开始显示系统入场动画",
+      "timestamp": "2025-11-21T00:02:22.932Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 入场动画状态: 开始",
+      "timestamp": "2025-11-21T00:02:22.932Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 EntranceAnimationWrapper: 动画开始，设置超时保护",
+      "timestamp": "2025-11-21T00:02:22.933Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 入场动画状态: 开始",
+      "timestamp": "2025-11-21T00:02:22.934Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 全局loading状态: 关闭",
+      "timestamp": "2025-11-21T00:02:22.935Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "timestamp": "2025-11-21T00:02:22.935Z"
+    },
+    {
+      "type": "log",
+      "text": "🌟 LightRipple: 开始明亮主题光晕波纹动画",
+      "timestamp": "2025-11-21T00:02:22.939Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 动画开始，立即执行路由跳转",
+      "timestamp": "2025-11-21T00:02:23.032Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 全局loading状态: 关闭",
+      "timestamp": "2025-11-21T00:02:23.033Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /dashboard",
+      "timestamp": "2025-11-21T00:02:23.033Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-21T00:02:23.034Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 路由权限验证通过: /dashboard",
+      "timestamp": "2025-11-21T00:02:23.034Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /dashboard",
+      "timestamp": "2025-11-21T00:02:23.669Z"
+    },
+    {
+      "type": "log",
+      "text": "MainLayout mounted",
+      "timestamp": "2025-11-21T00:02:23.806Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 页面跳转完成",
+      "timestamp": "2025-11-21T00:02:23.815Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 入场动画状态: 结束",
+      "timestamp": "2025-11-21T00:02:23.815Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:02:23.815Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /dashboard/stats {_t: 1763683343813}",
+      "timestamp": "2025-11-21T00:02:23.816Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:02:23.816Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /dashboard/todos {page: 1, pageSize: 5, _t: 1763683343814}",
+      "timestamp": "2025-11-21T00:02:23.816Z"
+    },
+    {
+      "type": "log",
+      "text": "✨ LightRipple: 动画完成",
+      "timestamp": "2025-11-21T00:02:27.890Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 EntranceAnimationWrapper: 超时强制完成动画",
+      "timestamp": "2025-11-21T00:02:32.935Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 EntranceAnimationWrapper: 动画完成事件触发",
+      "timestamp": "2025-11-21T00:02:32.936Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 入场动画状态: 结束",
+      "timestamp": "2025-11-21T00:02:32.936Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 EntranceAnimationWrapper: 调用父组件完成回调",
+      "timestamp": "2025-11-21T00:02:32.936Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 登录入场动画完成",
+      "timestamp": "2025-11-21T00:02:32.936Z"
+    },
+    {
+      "type": "log",
+      "text": "🎬 入场动画状态: 结束",
+      "timestamp": "2025-11-21T00:02:32.936Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "timestamp": "2025-11-21T00:03:00.923Z"
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "timestamp": "2025-11-21T00:03:00.945Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "timestamp": "2025-11-21T00:03:01.191Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "timestamp": "2025-11-21T00:03:01.199Z"
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "timestamp": "2025-11-21T00:03:01.199Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "timestamp": "2025-11-21T00:03:01.199Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "timestamp": "2025-11-21T00:03:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "timestamp": "2025-11-21T00:03:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "timestamp": "2025-11-21T00:03:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "timestamp": "2025-11-21T00:03:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "timestamp": "2025-11-21T00:03:01.201Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "timestamp": "2025-11-21T00:03:01.201Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "timestamp": "2025-11-21T00:03:01.202Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "timestamp": "2025-11-21T00:03:01.202Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "timestamp": "2025-11-21T00:03:01.202Z"
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "timestamp": "2025-11-21T00:03:01.202Z"
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "timestamp": "2025-11-21T00:03:01.202Z"
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "timestamp": "2025-11-21T00:03:01.204Z"
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "timestamp": "2025-11-21T00:03:01.205Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "timestamp": "2025-11-21T00:03:01.205Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /ai/assistant",
+      "timestamp": "2025-11-21T00:03:01.206Z"
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /ai/assistant, name: AIAssistantPage, meta: Object, params: Object, query: Object}",
+      "timestamp": "2025-11-21T00:03:01.207Z"
+    },
+    {
+      "type": "log",
+      "text": "🔐 初始化权限系统...",
+      "timestamp": "2025-11-21T00:03:01.207Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 初始化静态权限系统...",
+      "timestamp": "2025-11-21T00:03:01.208Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 用户角色设置: admin",
+      "timestamp": "2025-11-21T00:03:01.208Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 菜单生成成功 (admin): 4 个菜单项",
+      "timestamp": "2025-11-21T00:03:01.208Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 静态权限系统初始化完成",
+      "timestamp": "2025-11-21T00:03:01.208Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 路由权限验证通过: /ai/assistant",
+      "timestamp": "2025-11-21T00:03:01.208Z"
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "timestamp": "2025-11-21T00:03:01.226Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 344.80ms, domContentLoaded: 327.50ms, memoryUsage: 23.37MB}",
+      "timestamp": "2025-11-21T00:03:01.230Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "timestamp": "2025-11-21T00:03:01.230Z"
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "timestamp": "2025-11-21T00:03:01.230Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "timestamp": "2025-11-21T00:03:01.291Z"
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "timestamp": "2025-11-21T00:03:01.827Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /ai/assistant",
+      "timestamp": "2025-11-21T00:03:01.874Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useChatHistory] 创建新的聊天历史实例（单例）",
+      "timestamp": "2025-11-21T00:03:01.945Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useChatHistory] 返回现有聊天历史实例（单例）",
+      "timestamp": "2025-11-21T00:03:01.945Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useChatHistory] 返回现有聊天历史实例（单例）",
+      "timestamp": "2025-11-21T00:03:02.016Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useAIAssistantState] 创建新的状态实例（单例）",
+      "timestamp": "2025-11-21T00:03:02.017Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useMessageHandling] 创建新的消息处理实例（单例）",
+      "timestamp": "2025-11-21T00:03:02.018Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useAIResponse] 创建新的响应实例（单例）",
+      "timestamp": "2025-11-21T00:03:02.019Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [useChatHistory] 返回现有聊天历史实例（单例）",
+      "timestamp": "2025-11-21T00:03:02.022Z"
+    },
+    {
+      "type": "log",
+      "text": "🌤️ [WeatherWidget] 创建全局天气更新定时器",
+      "timestamp": "2025-11-21T00:03:02.033Z"
+    },
+    {
+      "type": "log",
+      "text": "🌤️ [WeatherWidget] 组件挂载，当前定时器引用数: 1",
+      "timestamp": "2025-11-21T00:03:02.033Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [ConversationManager] 开始加载会话列表",
+      "timestamp": "2025-11-21T00:03:02.035Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 页面路径变化: /ai/assistant",
+      "timestamp": "2025-11-21T00:03:02.037Z"
+    },
+    {
+      "type": "log",
+      "text": "📖 开始加载页面说明文档: /ai/assistant",
+      "timestamp": "2025-11-21T00:03:02.037Z"
+    },
+    {
+      "type": "log",
+      "text": "AI助手核心组件已挂载（全屏模式）",
+      "timestamp": "2025-11-21T00:03:02.038Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [ConversationManager] 开始加载会话列表",
+      "timestamp": "2025-11-21T00:03:02.038Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [fullpage模式] Composable 已挂载",
+      "timestamp": "2025-11-21T00:03:02.039Z"
+    },
+    {
+      "type": "log",
+      "text": "MainLayout mounted",
+      "timestamp": "2025-11-21T00:03:02.039Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:02.208Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /ai-conversations {params: undefined, _t: 1763683382206}",
+      "timestamp": "2025-11-21T00:03:02.208Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:02.208Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /ai-conversations {params: undefined, _t: 1763683382206}",
+      "timestamp": "2025-11-21T00:03:02.208Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 从AI知识库获取文档成功",
+      "timestamp": "2025-11-21T00:03:02.314Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 页面说明文档加载成功: /ai/assistant",
+      "timestamp": "2025-11-21T00:03:02.314Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [Token圆圈] 更新用量数据: {used: 0, percentage: 0.0, cost: 0}",
+      "timestamp": "2025-11-21T00:03:02.316Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [ConversationManager] 已加载 20 个会话",
+      "timestamp": "2025-11-21T00:03:02.497Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [ConversationManager] 开始加载会话消息: 936a4565-4616-4591-8304-b0dc5a09e6d6",
+      "timestamp": "2025-11-21T00:03:02.497Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:02.508Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {params: Object, _t: 1763683382506}",
+      "timestamp": "2025-11-21T00:03:02.508Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [ConversationManager] 已加载 1 条消息到会话: 936a4565-4616-4591-8304-b0dc5a09e6d6",
+      "timestamp": "2025-11-21T00:03:02.685Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [ConversationManager] 已加载 20 个会话",
+      "timestamp": "2025-11-21T00:03:02.766Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [ConversationManager] 开始加载会话消息: 936a4565-4616-4591-8304-b0dc5a09e6d6",
+      "timestamp": "2025-11-21T00:03:02.766Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:02.767Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {params: Object, _t: 1763683382765}",
+      "timestamp": "2025-11-21T00:03:02.767Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [ConversationManager] 已加载 1 条消息到会话: 936a4565-4616-4591-8304-b0dc5a09e6d6",
+      "timestamp": "2025-11-21T00:03:02.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🔵 [InputArea] handleSendMessage 被调用 {inputMessage: 园长您好，请查询学生总数, sending: false, inputTrimmed: 园长您好，请查询学生总数, canSend: true}",
+      "timestamp": "2025-11-21T00:03:10.162Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [InputArea] 发出 send 事件",
+      "timestamp": "2025-11-21T00:03:10.162Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantFullPage] 准备添加消息到本地历史: {content: 园长您好，请查询学生总数, contentLength: 12}",
+      "timestamp": "2025-11-21T00:03:10.163Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683390162_co3x5c49t, type: unknown, role: user, timestamp: 2025-11-21T00:03:10.162Z}",
+      "timestamp": "2025-11-21T00:03:10.163Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.167Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [MessageList] currentAIResponse变化",
+      "timestamp": "2025-11-21T00:03:10.167Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [visible]: false",
+      "timestamp": "2025-11-21T00:03:10.167Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [functionCalls.length]: 0",
+      "timestamp": "2025-11-21T00:03:10.168Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [functionCalls]: []",
+      "timestamp": "2025-11-21T00:03:10.169Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.170Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 1",
+      "timestamp": "2025-11-21T00:03:10.170Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object]",
+      "timestamp": "2025-11-21T00:03:10.171Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:10.193Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {conversationId: 936a4565-4616-4591-8304-b0dc5a09e6d6, role: user, content: 园长您好，请查询学生总数, messageType: text, metadata: Object}",
+      "timestamp": "2025-11-21T00:03:10.193Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 [会话管理] 消息已保存到数据库: 7684",
+      "timestamp": "2025-11-21T00:03:10.500Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [AIAssistantFullPage] 消息已保存到后端",
+      "timestamp": "2025-11-21T00:03:10.500Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantFullPage] 调用真正的API逻辑",
+      "timestamp": "2025-11-21T00:03:10.500Z"
+    },
+    {
+      "type": "log",
+      "text": "🟠 [AIAssistantCore] handleMultiRoundToolCalling 被调用 {message: 园长您好，请查询学生总数, messageLength: 12, currentlySending: false, hasMultiRound: true}",
+      "timestamp": "2025-11-21T00:03:10.502Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound",
+      "timestamp": "2025-11-21T00:03:10.502Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [isSearchQuery] 消息: \"园长您好，请查询学生总数...\" → 搜索查询=false",
+      "timestamp": "2025-11-21T00:03:10.503Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantCore] 搜索检测完成: {isSearch: false, message: 园长您好，请查询学生总数}",
+      "timestamp": "2025-11-21T00:03:10.503Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 启动3分钟超时计时器",
+      "timestamp": "2025-11-21T00:03:10.504Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.505Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [多轮调用] 开始执行（带安全监控）",
+      "timestamp": "2025-11-21T00:03:10.505Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [多轮调用] 初始消息: 园长您好，请查询学生总数",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [多轮调用] 最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "👤 [多轮调用] 用户ID: 121",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "💬 [多轮调用] 会话ID: null",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [多轮调用] 上下文: {\n  \"currentPage\": \"/ai/assistant\",\n  \"pageTitle\": \"AI智能助手\",\n  \"userRole\": \"admin\",\n  \"role\": \"admin\",\n  \"enableWebSearch\": false\n}",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ [多轮调用] 安全监控已启用",
+      "timestamp": "2025-11-21T00:03:10.506Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.507Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] start: 开始多轮工具调用，最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:10.509Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [多轮调用] 第 1/20 轮 (无进度轮数: 0)",
+      "timestamp": "2025-11-21T00:03:10.509Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] round_start: 第 1/20 轮",
+      "timestamp": "2025-11-21T00:03:10.510Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] 开始调用统一智能流式接口（使用stream-chat接口）",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 请求数据: {\n  \"message\": \"园长您好，请查询学生总数\",\n  \"userId\": \"121\",\n  \"conversationId\": null,\n  \"context\": {\n    \"currentPage\": \"/ai/assistant\",\n    \"pageTitle\": \"AI智能助手\",\n    \"userRole\": \"admin\",\n    \"role\": \"admin\",\n    \"enableWebSearch\": false,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"园长您好，请查询学生总数\"\n      }\n    ],\n    \"currentRound\": 1,\n    \"maxRounds\": 20\n  }\n}",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [单次调用] 当前轮次: 1",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "📨 [单次调用] 消息历史长度: 1",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.512Z"
+    },
+    {
+      "type": "log",
+      "text": "🔑 [单次调用] Token: 已设置",
+      "timestamp": "2025-11-21T00:03:10.513Z"
+    },
+    {
+      "type": "log",
+      "text": "🌐 [单次调用] API地址: /api/ai/unified/stream-chat",
+      "timestamp": "2025-11-21T00:03:10.513Z"
+    },
+    {
+      "type": "log",
+      "text": "📤 [单次调用] 开始发送 fetch 请求...",
+      "timestamp": "2025-11-21T00:03:10.513Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到响应",
+      "timestamp": "2025-11-21T00:03:10.525Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] 响应状态: 200 OK",
+      "timestamp": "2025-11-21T00:03:10.526Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.527Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T00:03:10.527Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🤔 AI开始思考...\",\"timestamp\":\"2025-11-21T00:03:10.518Z\"}",
+      "timestamp": "2025-11-21T00:03:10.527Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.527Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T00:03:10.528Z"
+    },
+    {
+      "type": "log",
+      "text": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T00:03:10.528Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 加载完成",
+      "timestamp": "2025-11-21T00:03:10.528Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.559Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T00:03:10.560Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\"confidence\":0.9,\"timestamp\":\"2025-11-21T00:03:10.",
+      "timestamp": "2025-11-21T00:03:10.560Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.560Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218",
+      "timestamp": "2025-11-21T00:03:10.560Z"
+    },
+    {
+      "type": "log",
+      "text": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218, confidence: 0.9, timestamp: 2025-11-21T00:03:10.554Z}",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683390558_00bapls1p, type: tool_intent, role: assistant, timestamp: 2025-11-21T00:03:10.558Z}",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具意图] 已添加到聊天历史: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [多轮调用] 工具意图 (第1轮): 🔍 识别到需要使用工具，复杂度: 0.5278260869565218",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T00:03:10.562Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T00:03:10.554Z\"}",
+      "timestamp": "2025-11-21T00:03:10.563Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.563Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T00:03:10.554Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已激活AI响应容器",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具信息]: {toolId: tool-1763683390559-ffrcnsuud, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683390560_brrd9rgu3, type: tool_call_start, role: assistant, timestamp: 2025-11-21T00:03:10.560Z}",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已立即添加到聊天历史: tool-1763683390559-ffrcnsuud ",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加工具到functionCalls列表，当前数量: 1",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加到toolCalls列表",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [toolCalls当前数量]: 1",
+      "timestamp": "2025-11-21T00:03:10.565Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [Thinking内容]: ",
+      "timestamp": "2025-11-21T00:03:10.566Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [toolCalls内容]: [\n  {\n    \"id\": \"tool-1763683390559-ffrcnsuud\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  }\n]",
+      "timestamp": "2025-11-21T00:03:10.566Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:10.566Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 3",
+      "timestamp": "2025-11-21T00:03:10.566Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:10.567Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.053Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_complete",
+      "timestamp": "2025-11-21T00:03:16.054Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"✅ 工具调用执行完成\",\"toolResults\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"mess",
+      "timestamp": "2025-11-21T00:03:16.056Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.056Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_complete: ✅ 工具调用完成: undefined",
+      "timestamp": "2025-11-21T00:03:16.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 创建新的工具调用记录: 未知工具",
+      "timestamp": "2025-11-21T00:03:16.056Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 已触发currentAIResponse响应式更新，当前functionCalls数量: 1",
+      "timestamp": "2025-11-21T00:03:16.056Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具完成] 检查preview_instruction: {hasResult: true, hasUiInstruction: false, instructionType: undefined, resultKeys: Array(0), eventDataKeys: Array(4)}",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tools_complete",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎯 所有工具执行完成，开始生成最终回答\",\"toolsCount\":18,\"totalExecutionTime\":1000,\"timestamp\":\"2025-11-21T",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: final_answer",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"💡 AI回答完成\",\"content\":\"已为您处理查询\\\"园长您好，请查询学生总数\\\"，使用了18个工具。\",\"toolsUsed\":18,\"modelName\":\"dou",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] final_answer: 🎯 最终答案生成完成",
+      "timestamp": "2025-11-21T00:03:16.058Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.059Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: complete",
+      "timestamp": "2025-11-21T00:03:16.059Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎉 对话完成\",\"timestamp\":\"2025-11-21T00:03:16.050Z\",\"totalEvents\":7,\"modelUsed\":\"doubao-ultr",
+      "timestamp": "2025-11-21T00:03:16.059Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:16.059Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到complete事件: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:16.050Z, totalEvents: 7, modelUsed: doubao-ultra-fast-100, complexityScore: 0.5278260869565218}",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: ✅ 单次调用完成",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"园长您好，请查询学生总数\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 立即添加答案消息到聊天历史: {id: answer-1763683396055, role: assistant, type: answer, content: 已为您处理查询\"园长您好，请查询学生总数\"，使用了18个工具。, timestamp: 2025-11-21T00:03:16.055Z}",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [complete事件] 当前聊天历史消息数: 4",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 4",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:16.060Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] SSE流结束，返回结果: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:16.050Z, totalEvents: 7, modelUsed: doubao-ultra-fast-100, complexityScore: 0.5278260869565218}",
+      "timestamp": "2025-11-21T00:03:16.070Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [进度检测] 第1轮有新进度，重置无进度计数",
+      "timestamp": "2025-11-21T00:03:16.070Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token监控] 第1轮使用: 0, 累计: 0",
+      "timestamp": "2025-11-21T00:03:16.070Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token优化] 第1轮 - thinking长度: 0, finalAnswer长度: 7",
+      "timestamp": "2025-11-21T00:03:16.070Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [第二阶段优化] 历史Token估算: 234 tokens",
+      "timestamp": "2025-11-21T00:03:16.071Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [多轮调用] 第 1 轮完成 (累计Token: 0)",
+      "timestamp": "2025-11-21T00:03:16.071Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [多轮调用] 返回结果: {content: 🎉 对话完成, toolCallsCount: 0, needsContinue: undefined, isComplete: undefined}",
+      "timestamp": "2025-11-21T00:03:16.072Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 检测到最终答案且无继续标记，停止循环",
+      "timestamp": "2025-11-21T00:03:16.072Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 任务完成，共执行 1 轮，总Token使用: 0",
+      "timestamp": "2025-11-21T00:03:16.072Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T00:03:16.072Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T00:03:16.073Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T00:03:16.073Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:16.073Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"园长您好，请查询学生总数\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:16.050Z, totalEvents: 7, modelUsed: doubao-ultra-fast-100, complexityScore: 0.5278260869565218}",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T00:03:16.074Z"
+    },
+    {
+      "type": "log",
+      "text": "🔵 [InputArea] handleSendMessage 被调用 {inputMessage: 请帮我查询大班A的学生名单, sending: false, inputTrimmed: 请帮我查询大班A的学生名单, canSend: true}",
+      "timestamp": "2025-11-21T00:03:22.901Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [InputArea] 发出 send 事件",
+      "timestamp": "2025-11-21T00:03:22.901Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantFullPage] 准备添加消息到本地历史: {content: 请帮我查询大班A的学生名单, contentLength: 13}",
+      "timestamp": "2025-11-21T00:03:22.902Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683402901_rpauq5hyh, type: unknown, role: user, timestamp: 2025-11-21T00:03:22.901Z}",
+      "timestamp": "2025-11-21T00:03:22.902Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 5",
+      "timestamp": "2025-11-21T00:03:22.908Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:22.909Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:22.910Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {conversationId: 936a4565-4616-4591-8304-b0dc5a09e6d6, role: user, content: 请帮我查询大班A的学生名单, messageType: text, metadata: Object}",
+      "timestamp": "2025-11-21T00:03:22.910Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 [会话管理] 消息已保存到数据库: 7685",
+      "timestamp": "2025-11-21T00:03:23.141Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [AIAssistantFullPage] 消息已保存到后端",
+      "timestamp": "2025-11-21T00:03:23.141Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantFullPage] 调用真正的API逻辑",
+      "timestamp": "2025-11-21T00:03:23.143Z"
+    },
+    {
+      "type": "log",
+      "text": "🟠 [AIAssistantCore] handleMultiRoundToolCalling 被调用 {message: 请帮我查询大班A的学生名单, messageLength: 13, currentlySending: false, hasMultiRound: true}",
+      "timestamp": "2025-11-21T00:03:23.143Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound",
+      "timestamp": "2025-11-21T00:03:23.143Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [isSearchQuery] 消息: \"请帮我查询大班A的学生名单...\" → 搜索查询=false",
+      "timestamp": "2025-11-21T00:03:23.143Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantCore] 搜索检测完成: {isSearch: false, message: 请帮我查询大班A的学生名单}",
+      "timestamp": "2025-11-21T00:03:23.143Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 启动3分钟超时计时器",
+      "timestamp": "2025-11-21T00:03:23.144Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.144Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [多轮调用] 开始执行（带安全监控）",
+      "timestamp": "2025-11-21T00:03:23.144Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [多轮调用] 初始消息: 请帮我查询大班A的学生名单",
+      "timestamp": "2025-11-21T00:03:23.144Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [多轮调用] 最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "👤 [多轮调用] 用户ID: 121",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "💬 [多轮调用] 会话ID: null",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [多轮调用] 上下文: {\n  \"currentPage\": \"/ai/assistant\",\n  \"pageTitle\": \"AI智能助手\",\n  \"userRole\": \"admin\",\n  \"role\": \"admin\",\n  \"enableWebSearch\": false\n}",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ [多轮调用] 安全监控已启用",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] start: 开始多轮工具调用，最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:23.145Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [多轮调用] 第 1/20 轮 (无进度轮数: 0)",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] round_start: 第 1/20 轮",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] 开始调用统一智能流式接口（使用stream-chat接口）",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 请求数据: {\n  \"message\": \"请帮我查询大班A的学生名单\",\n  \"userId\": \"121\",\n  \"conversationId\": null,\n  \"context\": {\n    \"currentPage\": \"/ai/assistant\",\n    \"pageTitle\": \"AI智能助手\",\n    \"userRole\": \"admin\",\n    \"role\": \"admin\",\n    \"enableWebSearch\": false,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"请帮我查询大班A的学生名单\"\n      }\n    ],\n    \"currentRound\": 1,\n    \"maxRounds\": 20\n  }\n}",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [单次调用] 当前轮次: 1",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "📨 [单次调用] 消息历史长度: 1",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "🔑 [单次调用] Token: 已设置",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "🌐 [单次调用] API地址: /api/ai/unified/stream-chat",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "📤 [单次调用] 开始发送 fetch 请求...",
+      "timestamp": "2025-11-21T00:03:23.147Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到响应",
+      "timestamp": "2025-11-21T00:03:23.156Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] 响应状态: 200 OK",
+      "timestamp": "2025-11-21T00:03:23.156Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.158Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T00:03:23.159Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🤔 AI开始思考...\",\"timestamp\":\"2025-11-21T00:03:23.149Z\"}",
+      "timestamp": "2025-11-21T00:03:23.159Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.159Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T00:03:23.159Z"
+    },
+    {
+      "type": "log",
+      "text": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T00:03:23.159Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 加载完成",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🔍 识别到需要使用工具，复杂度: 0.528695652173913\",\"confidence\":0.9,\"timestamp\":\"2025-11-21T00:03:23.1",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.528695652173913",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.528695652173913, confidence: 0.9, timestamp: 2025-11-21T00:03:23.151Z}",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683403157_zx2zthd05, type: tool_intent, role: assistant, timestamp: 2025-11-21T00:03:23.157Z}",
+      "timestamp": "2025-11-21T00:03:23.161Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具意图] 已添加到聊天历史: 🔍 识别到需要使用工具，复杂度: 0.528695652173913",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [多轮调用] 工具意图 (第1轮): 🔍 识别到需要使用工具，复杂度: 0.528695652173913",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T00:03:23.151Z\"}",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T00:03:23.151Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具信息]: {toolId: tool-1763683403158-6syzekx5t, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.528695652173913, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683403158_5h8k39nda, type: tool_call_start, role: assistant, timestamp: 2025-11-21T00:03:23.158Z}",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已立即添加到聊天历史: tool-1763683403158-6syzekx5t ",
+      "timestamp": "2025-11-21T00:03:23.164Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加工具到functionCalls列表，当前数量: 2",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加到toolCalls列表",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [toolCalls当前数量]: 3",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [Thinking内容]: ",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [toolCalls内容]: [\n  {\n    \"id\": \"tool-1763683390559-ffrcnsuud\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683396052-4o0xms0lp\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683403158-6syzekx5t\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.528695652173913\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  }\n]",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:23.165Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 7",
+      "timestamp": "2025-11-21T00:03:23.166Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:23.166Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.482Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_complete",
+      "timestamp": "2025-11-21T00:03:26.482Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"✅ 工具调用执行完成\",\"toolResults\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"mess",
+      "timestamp": "2025-11-21T00:03:26.482Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.482Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_complete: ✅ 工具调用完成: undefined",
+      "timestamp": "2025-11-21T00:03:26.483Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 创建新的工具调用记录: 未知工具",
+      "timestamp": "2025-11-21T00:03:26.483Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 已触发currentAIResponse响应式更新，当前functionCalls数量: 2",
+      "timestamp": "2025-11-21T00:03:26.483Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具完成] 检查preview_instruction: {hasResult: true, hasUiInstruction: false, instructionType: undefined, resultKeys: Array(0), eventDataKeys: Array(4)}",
+      "timestamp": "2025-11-21T00:03:26.484Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tools_complete",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎯 所有工具执行完成，开始生成最终回答\",\"toolsCount\":18,\"totalExecutionTime\":1000,\"timestamp\":\"2025-11-21T",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: final_answer",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"💡 AI回答完成\",\"content\":\"已为您处理查询\\\"请帮我查询大班A的学生名单\\\"，使用了18个工具。\",\"toolsUsed\":18,\"modelName\":\"do",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] final_answer: 🎯 最终答案生成完成",
+      "timestamp": "2025-11-21T00:03:26.485Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.487Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: complete",
+      "timestamp": "2025-11-21T00:03:26.487Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎉 对话完成\",\"timestamp\":\"2025-11-21T00:03:26.479Z\",\"totalEvents\":7,\"modelUsed\":\"doubao-seed",
+      "timestamp": "2025-11-21T00:03:26.487Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:26.487Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到complete事件: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:26.479Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.528695652173913}",
+      "timestamp": "2025-11-21T00:03:26.487Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: ✅ 单次调用完成",
+      "timestamp": "2025-11-21T00:03:26.488Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:26.488Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"请帮我查询大班A的学生名单\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:26.488Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 立即添加答案消息到聊天历史: {id: answer-1763683406483, role: assistant, type: answer, content: 已为您处理查询\"请帮我查询大班A的学生名单\"，使用了18个工具。, timestamp: 2025-11-21T00:03:26.483Z}",
+      "timestamp": "2025-11-21T00:03:26.488Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [complete事件] 当前聊天历史消息数: 8",
+      "timestamp": "2025-11-21T00:03:26.488Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 8",
+      "timestamp": "2025-11-21T00:03:26.489Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:26.489Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] SSE流结束，返回结果: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:26.479Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.528695652173913}",
+      "timestamp": "2025-11-21T00:03:26.494Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [进度检测] 第1轮有新进度，重置无进度计数",
+      "timestamp": "2025-11-21T00:03:26.494Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token监控] 第1轮使用: 0, 累计: 0",
+      "timestamp": "2025-11-21T00:03:26.494Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token优化] 第1轮 - thinking长度: 0, finalAnswer长度: 7",
+      "timestamp": "2025-11-21T00:03:26.494Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [第二阶段优化] 历史Token估算: 236 tokens",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [多轮调用] 第 1 轮完成 (累计Token: 0)",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [多轮调用] 返回结果: {content: 🎉 对话完成, toolCallsCount: 0, needsContinue: undefined, isComplete: undefined}",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 检测到最终答案且无继续标记，停止循环",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 任务完成，共执行 1 轮，总Token使用: 0",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T00:03:26.495Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T00:03:26.496Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T00:03:26.496Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:26.496Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"请帮我查询大班A的学生名单\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:26.496Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T00:03:26.496Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:26.479Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.528695652173913}",
+      "timestamp": "2025-11-21T00:03:26.497Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T00:03:26.497Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T00:03:26.497Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T00:03:26.497Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [Token圆圈] 更新用量数据: {used: 0, percentage: 0.0, cost: 0}",
+      "timestamp": "2025-11-21T00:03:32.246Z"
+    },
+    {
+      "type": "log",
+      "text": "🔵 [InputArea] handleSendMessage 被调用 {inputMessage: 生成一份幼儿园运营报告, sending: false, inputTrimmed: 生成一份幼儿园运营报告, canSend: true}",
+      "timestamp": "2025-11-21T00:03:35.707Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [InputArea] 发出 send 事件",
+      "timestamp": "2025-11-21T00:03:35.708Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantFullPage] 准备添加消息到本地历史: {content: 生成一份幼儿园运营报告, contentLength: 11}",
+      "timestamp": "2025-11-21T00:03:35.708Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683415707_qalxtpf43, type: unknown, role: user, timestamp: 2025-11-21T00:03:35.707Z}",
+      "timestamp": "2025-11-21T00:03:35.709Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 9",
+      "timestamp": "2025-11-21T00:03:35.713Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:35.713Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:35.716Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {conversationId: 936a4565-4616-4591-8304-b0dc5a09e6d6, role: user, content: 生成一份幼儿园运营报告, messageType: text, metadata: Object}",
+      "timestamp": "2025-11-21T00:03:35.716Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 [会话管理] 消息已保存到数据库: 7686",
+      "timestamp": "2025-11-21T00:03:35.941Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [AIAssistantFullPage] 消息已保存到后端",
+      "timestamp": "2025-11-21T00:03:35.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantFullPage] 调用真正的API逻辑",
+      "timestamp": "2025-11-21T00:03:35.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🟠 [AIAssistantCore] handleMultiRoundToolCalling 被调用 {message: 生成一份幼儿园运营报告, messageLength: 11, currentlySending: false, hasMultiRound: true}",
+      "timestamp": "2025-11-21T00:03:35.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound",
+      "timestamp": "2025-11-21T00:03:35.942Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [isSearchQuery] 消息: \"生成一份幼儿园运营报告...\" → 搜索查询=false",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantCore] 搜索检测完成: {isSearch: false, message: 生成一份幼儿园运营报告}",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 启动3分钟超时计时器",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [多轮调用] 开始执行（带安全监控）",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [多轮调用] 初始消息: 生成一份幼儿园运营报告",
+      "timestamp": "2025-11-21T00:03:35.943Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [多轮调用] 最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "👤 [多轮调用] 用户ID: 121",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "💬 [多轮调用] 会话ID: null",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [多轮调用] 上下文: {\n  \"currentPage\": \"/ai/assistant\",\n  \"pageTitle\": \"AI智能助手\",\n  \"userRole\": \"admin\",\n  \"role\": \"admin\",\n  \"enableWebSearch\": false\n}",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ [多轮调用] 安全监控已启用",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] start: 开始多轮工具调用，最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [多轮调用] 第 1/20 轮 (无进度轮数: 0)",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] round_start: 第 1/20 轮",
+      "timestamp": "2025-11-21T00:03:35.944Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.946Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] 开始调用统一智能流式接口（使用stream-chat接口）",
+      "timestamp": "2025-11-21T00:03:35.946Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 请求数据: {\n  \"message\": \"生成一份幼儿园运营报告\",\n  \"userId\": \"121\",\n  \"conversationId\": null,\n  \"context\": {\n    \"currentPage\": \"/ai/assistant\",\n    \"pageTitle\": \"AI智能助手\",\n    \"userRole\": \"admin\",\n    \"role\": \"admin\",\n    \"enableWebSearch\": false,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"生成一份幼儿园运营报告\"\n      }\n    ],\n    \"currentRound\": 1,\n    \"maxRounds\": 20\n  }\n}",
+      "timestamp": "2025-11-21T00:03:35.946Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [单次调用] 当前轮次: 1",
+      "timestamp": "2025-11-21T00:03:35.946Z"
+    },
+    {
+      "type": "log",
+      "text": "📨 [单次调用] 消息历史长度: 1",
+      "timestamp": "2025-11-21T00:03:35.947Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.947Z"
+    },
+    {
+      "type": "log",
+      "text": "🔑 [单次调用] Token: 已设置",
+      "timestamp": "2025-11-21T00:03:35.947Z"
+    },
+    {
+      "type": "log",
+      "text": "🌐 [单次调用] API地址: /api/ai/unified/stream-chat",
+      "timestamp": "2025-11-21T00:03:35.947Z"
+    },
+    {
+      "type": "log",
+      "text": "📤 [单次调用] 开始发送 fetch 请求...",
+      "timestamp": "2025-11-21T00:03:35.947Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到响应",
+      "timestamp": "2025-11-21T00:03:35.956Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] 响应状态: 200 OK",
+      "timestamp": "2025-11-21T00:03:35.956Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.957Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T00:03:35.957Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🤔 AI开始思考...\",\"timestamp\":\"2025-11-21T00:03:35.949Z\"}",
+      "timestamp": "2025-11-21T00:03:35.957Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.957Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T00:03:35.957Z"
+    },
+    {
+      "type": "log",
+      "text": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T00:03:35.958Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 加载完成",
+      "timestamp": "2025-11-21T00:03:35.958Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.959Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T00:03:35.959Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🔍 识别到需要使用工具，复杂度: 0.48782608695652174\",\"confidence\":0.7,\"timestamp\":\"2025-11-21T00:03:35",
+      "timestamp": "2025-11-21T00:03:35.959Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.959Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.48782608695652174",
+      "timestamp": "2025-11-21T00:03:35.959Z"
+    },
+    {
+      "type": "log",
+      "text": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.48782608695652174, confidence: 0.7, timestamp: 2025-11-21T00:03:35.952Z}",
+      "timestamp": "2025-11-21T00:03:35.960Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683415958_n9j27uvgn, type: tool_intent, role: assistant, timestamp: 2025-11-21T00:03:35.958Z}",
+      "timestamp": "2025-11-21T00:03:35.960Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具意图] 已添加到聊天历史: 🔍 识别到需要使用工具，复杂度: 0.48782608695652174",
+      "timestamp": "2025-11-21T00:03:35.960Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [多轮调用] 工具意图 (第1轮): 🔍 识别到需要使用工具，复杂度: 0.48782608695652174",
+      "timestamp": "2025-11-21T00:03:35.960Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T00:03:35.952Z\"}",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T00:03:35.952Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具信息]: {toolId: tool-1763683415959-m50byqcvh, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.48782608695652174, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T00:03:35.963Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683415959_77u0exwu4, type: tool_call_start, role: assistant, timestamp: 2025-11-21T00:03:35.959Z}",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已立即添加到聊天历史: tool-1763683415959-m50byqcvh ",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加工具到functionCalls列表，当前数量: 3",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加到toolCalls列表",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [toolCalls当前数量]: 5",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [Thinking内容]: ",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [toolCalls内容]: [\n  {\n    \"id\": \"tool-1763683390559-ffrcnsuud\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683396052-4o0xms0lp\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683403158-6syzekx5t\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.528695652173913\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683406481-6i6ecjuz3\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683415959-m50byqcvh\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.48782608695652174\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  }\n]",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 11",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:35.965Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.970Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_complete",
+      "timestamp": "2025-11-21T00:03:45.970Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"✅ 工具调用执行完成\",\"toolResults\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"mess",
+      "timestamp": "2025-11-21T00:03:45.970Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.971Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_complete: ✅ 工具调用完成: undefined",
+      "timestamp": "2025-11-21T00:03:45.971Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 创建新的工具调用记录: 未知工具",
+      "timestamp": "2025-11-21T00:03:45.971Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 已触发currentAIResponse响应式更新，当前functionCalls数量: 3",
+      "timestamp": "2025-11-21T00:03:45.971Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具完成] 检查preview_instruction: {hasResult: true, hasUiInstruction: false, instructionType: undefined, resultKeys: Array(0), eventDataKeys: Array(4)}",
+      "timestamp": "2025-11-21T00:03:45.971Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tools_complete",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎯 所有工具执行完成，开始生成最终回答\",\"toolsCount\":18,\"totalExecutionTime\":1000,\"timestamp\":\"2025-11-21T",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: final_answer",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"💡 AI回答完成\",\"content\":\"已为您处理查询\\\"生成一份幼儿园运营报告\\\"，使用了18个工具。\",\"toolsUsed\":18,\"modelName\":\"doub",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] final_answer: 🎯 最终答案生成完成",
+      "timestamp": "2025-11-21T00:03:45.973Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.974Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: complete",
+      "timestamp": "2025-11-21T00:03:45.974Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎉 对话完成\",\"timestamp\":\"2025-11-21T00:03:45.967Z\",\"totalEvents\":7,\"modelUsed\":\"doubao-seed",
+      "timestamp": "2025-11-21T00:03:45.974Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:45.974Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到complete事件: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:45.967Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48782608695652174}",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: ✅ 单次调用完成",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"生成一份幼儿园运营报告\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 立即添加答案消息到聊天历史: {id: answer-1763683425972, role: assistant, type: answer, content: 已为您处理查询\"生成一份幼儿园运营报告\"，使用了18个工具。, timestamp: 2025-11-21T00:03:45.972Z}",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [complete事件] 当前聊天历史消息数: 12",
+      "timestamp": "2025-11-21T00:03:45.976Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 12",
+      "timestamp": "2025-11-21T00:03:45.977Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:45.977Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] SSE流结束，返回结果: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:45.967Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48782608695652174}",
+      "timestamp": "2025-11-21T00:03:45.981Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [进度检测] 第1轮有新进度，重置无进度计数",
+      "timestamp": "2025-11-21T00:03:45.982Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token监控] 第1轮使用: 0, 累计: 0",
+      "timestamp": "2025-11-21T00:03:45.982Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token优化] 第1轮 - thinking长度: 0, finalAnswer长度: 7",
+      "timestamp": "2025-11-21T00:03:45.982Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [第二阶段优化] 历史Token估算: 234 tokens",
+      "timestamp": "2025-11-21T00:03:45.982Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [多轮调用] 第 1 轮完成 (累计Token: 0)",
+      "timestamp": "2025-11-21T00:03:45.982Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [多轮调用] 返回结果: {content: 🎉 对话完成, toolCallsCount: 0, needsContinue: undefined, isComplete: undefined}",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 检测到最终答案且无继续标记，停止循环",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 任务完成，共执行 1 轮，总Token使用: 0",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T00:03:45.983Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"生成一份幼儿园运营报告\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:45.967Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48782608695652174}",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T00:03:45.984Z"
+    },
+    {
+      "type": "log",
+      "text": "🔵 [InputArea] handleSendMessage 被调用 {inputMessage: 查询本月活动情况, sending: false, inputTrimmed: 查询本月活动情况, canSend: true}",
+      "timestamp": "2025-11-21T00:03:48.523Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [InputArea] 发出 send 事件",
+      "timestamp": "2025-11-21T00:03:48.524Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantFullPage] 准备添加消息到本地历史: {content: 查询本月活动情况, contentLength: 8}",
+      "timestamp": "2025-11-21T00:03:48.524Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683428523_xi331onq8, type: unknown, role: user, timestamp: 2025-11-21T00:03:48.523Z}",
+      "timestamp": "2025-11-21T00:03:48.524Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 13",
+      "timestamp": "2025-11-21T00:03:48.530Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:48.530Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:03:48.532Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {conversationId: 936a4565-4616-4591-8304-b0dc5a09e6d6, role: user, content: 查询本月活动情况, messageType: text, metadata: Object}",
+      "timestamp": "2025-11-21T00:03:48.532Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 [会话管理] 消息已保存到数据库: 7687",
+      "timestamp": "2025-11-21T00:03:48.760Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [AIAssistantFullPage] 消息已保存到后端",
+      "timestamp": "2025-11-21T00:03:48.761Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantFullPage] 调用真正的API逻辑",
+      "timestamp": "2025-11-21T00:03:48.761Z"
+    },
+    {
+      "type": "log",
+      "text": "🟠 [AIAssistantCore] handleMultiRoundToolCalling 被调用 {message: 查询本月活动情况, messageLength: 8, currentlySending: false, hasMultiRound: true}",
+      "timestamp": "2025-11-21T00:03:48.761Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound",
+      "timestamp": "2025-11-21T00:03:48.761Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [isSearchQuery] 消息: \"查询本月活动情况...\" → 搜索查询=true",
+      "timestamp": "2025-11-21T00:03:48.761Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantCore] 搜索检测完成: {isSearch: true, message: 查询本月活动情况}",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 启动3分钟超时计时器",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [多轮调用] 开始执行（带安全监控）",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [多轮调用] 初始消息: 查询本月活动情况",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [多轮调用] 最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "👤 [多轮调用] 用户ID: 121",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "💬 [多轮调用] 会话ID: null",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [多轮调用] 上下文: {\n  \"currentPage\": \"/ai/assistant\",\n  \"pageTitle\": \"AI智能助手\",\n  \"userRole\": \"admin\",\n  \"role\": \"admin\",\n  \"enableWebSearch\": true\n}",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ [多轮调用] 安全监控已启用",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] start: 开始多轮工具调用，最大轮数: 20",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [多轮调用] 第 1/20 轮 (无进度轮数: 0)",
+      "timestamp": "2025-11-21T00:03:48.763Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] round_start: 第 1/20 轮",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] 开始调用统一智能流式接口（使用stream-chat接口）",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 请求数据: {\n  \"message\": \"查询本月活动情况\",\n  \"userId\": \"121\",\n  \"conversationId\": null,\n  \"context\": {\n    \"currentPage\": \"/ai/assistant\",\n    \"pageTitle\": \"AI智能助手\",\n    \"userRole\": \"admin\",\n    \"role\": \"admin\",\n    \"enableWebSearch\": true,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"查询本月活动情况\"\n      }\n    ],\n    \"currentRound\": 1,\n    \"maxRounds\": 20\n  }\n}",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [单次调用] 当前轮次: 1",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "📨 [单次调用] 消息历史长度: 1",
+      "timestamp": "2025-11-21T00:03:48.765Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.766Z"
+    },
+    {
+      "type": "log",
+      "text": "🔑 [单次调用] Token: 已设置",
+      "timestamp": "2025-11-21T00:03:48.766Z"
+    },
+    {
+      "type": "log",
+      "text": "🌐 [单次调用] API地址: /api/ai/unified/stream-chat",
+      "timestamp": "2025-11-21T00:03:48.766Z"
+    },
+    {
+      "type": "log",
+      "text": "📤 [单次调用] 开始发送 fetch 请求...",
+      "timestamp": "2025-11-21T00:03:48.766Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到响应",
+      "timestamp": "2025-11-21T00:03:48.775Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] 响应状态: 200 OK",
+      "timestamp": "2025-11-21T00:03:48.775Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.776Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T00:03:48.776Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🤔 AI开始思考...\",\"timestamp\":\"2025-11-21T00:03:48.768Z\"}",
+      "timestamp": "2025-11-21T00:03:48.777Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.777Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T00:03:48.777Z"
+    },
+    {
+      "type": "log",
+      "text": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 加载完成",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🔍 识别到需要使用工具，复杂度: 0.5243478260869565\",\"confidence\":0.9,\"timestamp\":\"2025-11-21T00:03:48.",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.5243478260869565",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.5243478260869565, confidence: 0.9, timestamp: 2025-11-21T00:03:48.770Z}",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683428775_doj8npb94, type: tool_intent, role: assistant, timestamp: 2025-11-21T00:03:48.775Z}",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具意图] 已添加到聊天历史: 🔍 识别到需要使用工具，复杂度: 0.5243478260869565",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [多轮调用] 工具意图 (第1轮): 🔍 识别到需要使用工具，复杂度: 0.5243478260869565",
+      "timestamp": "2025-11-21T00:03:48.779Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.780Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T00:03:48.780Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T00:03:48.771Z\"}",
+      "timestamp": "2025-11-21T00:03:48.780Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.780Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T00:03:48.780Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.782Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T00:03:48.771Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具信息]: {toolId: tool-1763683428776-iqh5h96d8, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.5243478260869565, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683428777_jo11msvhq, type: tool_call_start, role: assistant, timestamp: 2025-11-21T00:03:48.777Z}",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已立即添加到聊天历史: tool-1763683428776-iqh5h96d8 ",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加工具到functionCalls列表，当前数量: 4",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加到toolCalls列表",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [toolCalls当前数量]: 7",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [Thinking内容]: ",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [toolCalls内容]: [\n  {\n    \"id\": \"tool-1763683390559-ffrcnsuud\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683396052-4o0xms0lp\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683403158-6syzekx5t\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.528695652173913\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683406481-6i6ecjuz3\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683415959-m50byqcvh\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.48782608695652174\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683425969-qz94bm1hx\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683428776-iqh5h96d8\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5243478260869565\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  }\n]",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:48.783Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 15",
+      "timestamp": "2025-11-21T00:03:48.784Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:48.784Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.476Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_complete",
+      "timestamp": "2025-11-21T00:03:52.476Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"✅ 工具调用执行完成\",\"toolResults\":[{\"finish_reason\":\"tool_calls\",\"index\":0,\"logprobs\":null,\"mess",
+      "timestamp": "2025-11-21T00:03:52.476Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.476Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_complete: ✅ 工具调用完成: undefined",
+      "timestamp": "2025-11-21T00:03:52.476Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 创建新的工具调用记录: 未知工具",
+      "timestamp": "2025-11-21T00:03:52.477Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 已触发currentAIResponse响应式更新，当前functionCalls数量: 4",
+      "timestamp": "2025-11-21T00:03:52.477Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具完成] 检查preview_instruction: {hasResult: true, hasUiInstruction: false, instructionType: undefined, resultKeys: Array(0), eventDataKeys: Array(4)}",
+      "timestamp": "2025-11-21T00:03:52.477Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.477Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tools_complete",
+      "timestamp": "2025-11-21T00:03:52.480Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎯 所有工具执行完成，开始生成最终回答\",\"toolsCount\":18,\"totalExecutionTime\":1000,\"timestamp\":\"2025-11-21T",
+      "timestamp": "2025-11-21T00:03:52.480Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.480Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.480Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: final_answer",
+      "timestamp": "2025-11-21T00:03:52.480Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"💡 AI回答完成\",\"content\":\"已为您处理查询\\\"查询本月活动情况\\\"，使用了18个工具。\",\"toolsUsed\":18,\"modelName\":\"doubao-",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] final_answer: 🎯 最终答案生成完成",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: complete",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎉 对话完成\",\"timestamp\":\"2025-11-21T00:03:52.472Z\",\"totalEvents\":7,\"modelUsed\":\"doubao-seed",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到complete事件: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:52.472Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.5243478260869565}",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: ✅ 单次调用完成",
+      "timestamp": "2025-11-21T00:03:52.481Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"查询本月活动情况\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 立即添加答案消息到聊天历史: {id: answer-1763683432477, role: assistant, type: answer, content: 已为您处理查询\"查询本月活动情况\"，使用了18个工具。, timestamp: 2025-11-21T00:03:52.477Z}",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [complete事件] 当前聊天历史消息数: 16",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 16",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:03:52.482Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] SSE流结束，返回结果: {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:52.472Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.5243478260869565}",
+      "timestamp": "2025-11-21T00:03:52.485Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [进度检测] 第1轮有新进度，重置无进度计数",
+      "timestamp": "2025-11-21T00:03:52.485Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token监控] 第1轮使用: 0, 累计: 0",
+      "timestamp": "2025-11-21T00:03:52.485Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token优化] 第1轮 - thinking长度: 0, finalAnswer长度: 7",
+      "timestamp": "2025-11-21T00:03:52.486Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [第二阶段优化] 历史Token估算: 229 tokens",
+      "timestamp": "2025-11-21T00:03:52.486Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [多轮调用] 第 1 轮完成 (累计Token: 0)",
+      "timestamp": "2025-11-21T00:03:52.486Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [多轮调用] 返回结果: {content: 🎉 对话完成, toolCallsCount: 0, needsContinue: undefined, isComplete: undefined}",
+      "timestamp": "2025-11-21T00:03:52.486Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 检测到最终答案且无继续标记，停止循环",
+      "timestamp": "2025-11-21T00:03:52.486Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 任务完成，共执行 1 轮，总Token使用: 0",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 已为您处理查询\"查询本月活动情况\"，使用了18个工具。",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T00:03:52.472Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.5243478260869565}",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T00:03:52.488Z"
+    },
+    {
+      "type": "log",
+      "text": "🔵 [InputArea] handleSendMessage 被调用 {inputMessage: 帮我创建一个新的待办任务, sending: false, inputTrimmed: 帮我创建一个新的待办任务, canSend: true}",
+      "timestamp": "2025-11-21T00:04:01.195Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [InputArea] 发出 send 事件",
+      "timestamp": "2025-11-21T00:04:01.195Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantFullPage] 准备添加消息到本地历史: {content: 帮我创建一个新的待办任务, contentLength: 12}",
+      "timestamp": "2025-11-21T00:04:01.196Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683441194_yw29umbar, type: unknown, role: user, timestamp: 2025-11-21T00:04:01.194Z}",
+      "timestamp": "2025-11-21T00:04:01.196Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 17",
+      "timestamp": "2025-11-21T00:04:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:04:01.200Z"
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: eyJhbGciOiJIUzI1NiIs...",
+      "timestamp": "2025-11-21T00:04:01.203Z"
+    },
+    {
+      "type": "log",
+      "text": "发送请求: POST /ai-conversations/936a4565-4616-4591-8304-b0dc5a09e6d6/messages {conversationId: 936a4565-4616-4591-8304-b0dc5a09e6d6, role: user, content: 帮我创建一个新的待办任务, messageType: text, metadata: Object}",
+      "timestamp": "2025-11-21T00:04:01.203Z"
+    },
+    {
+      "type": "log",
+      "text": "💾 [会话管理] 消息已保存到数据库: 7688",
+      "timestamp": "2025-11-21T00:04:01.443Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [AIAssistantFullPage] 消息已保存到后端",
+      "timestamp": "2025-11-21T00:04:01.444Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantFullPage] 调用真正的API逻辑",
+      "timestamp": "2025-11-21T00:04:01.444Z"
+    },
+    {
+      "type": "log",
+      "text": "🟠 [AIAssistantCore] handleMultiRoundToolCalling 被调用 {message: 帮我创建一个新的待办任务, messageLength: 12, currentlySending: false, hasMultiRound: true}",
+      "timestamp": "2025-11-21T00:04:01.444Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound",
+      "timestamp": "2025-11-21T00:04:01.444Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [isSearchQuery] 消息: \"帮我创建一个新的待办任务...\" → 搜索查询=false",
+      "timestamp": "2025-11-21T00:04:01.444Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [AIAssistantCore] 搜索检测完成: {isSearch: false, message: 帮我创建一个新的待办任务}",
+      "timestamp": "2025-11-21T00:04:01.445Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 启动3分钟超时计时器",
+      "timestamp": "2025-11-21T00:04:01.445Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.445Z"
+    },
+    {
+      "type": "log",
+      "text": "🚀 [多轮调用] 开始执行（带安全监控）",
+      "timestamp": "2025-11-21T00:04:01.445Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [多轮调用] 初始消息: 帮我创建一个新的待办任务",
+      "timestamp": "2025-11-21T00:04:01.445Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [多轮调用] 最大轮数: 20",
+      "timestamp": "2025-11-21T00:04:01.446Z"
+    },
+    {
+      "type": "log",
+      "text": "👤 [多轮调用] 用户ID: 121",
+      "timestamp": "2025-11-21T00:04:01.446Z"
+    },
+    {
+      "type": "log",
+      "text": "💬 [多轮调用] 会话ID: null",
+      "timestamp": "2025-11-21T00:04:01.446Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [多轮调用] 上下文: {\n  \"currentPage\": \"/ai/assistant\",\n  \"pageTitle\": \"AI智能助手\",\n  \"userRole\": \"admin\",\n  \"role\": \"admin\",\n  \"enableWebSearch\": false\n}",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "🛡️ [多轮调用] 安全监控已启用",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] start: 开始多轮工具调用，最大轮数: 20",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "🔄 [多轮调用] 第 1/20 轮 (无进度轮数: 0)",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] round_start: 第 1/20 轮",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] 开始调用统一智能流式接口（使用stream-chat接口）",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 请求数据: {\n  \"message\": \"帮我创建一个新的待办任务\",\n  \"userId\": \"121\",\n  \"conversationId\": null,\n  \"context\": {\n    \"currentPage\": \"/ai/assistant\",\n    \"pageTitle\": \"AI智能助手\",\n    \"userRole\": \"admin\",\n    \"role\": \"admin\",\n    \"enableWebSearch\": false,\n    \"messages\": [\n      {\n        \"role\": \"user\",\n        \"content\": \"帮我创建一个新的待办任务\"\n      }\n    ],\n    \"currentRound\": 1,\n    \"maxRounds\": 20\n  }\n}",
+      "timestamp": "2025-11-21T00:04:01.447Z"
+    },
+    {
+      "type": "log",
+      "text": "🔢 [单次调用] 当前轮次: 1",
+      "timestamp": "2025-11-21T00:04:01.448Z"
+    },
+    {
+      "type": "log",
+      "text": "📨 [单次调用] 消息历史长度: 1",
+      "timestamp": "2025-11-21T00:04:01.448Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.449Z"
+    },
+    {
+      "type": "log",
+      "text": "🔑 [单次调用] Token: 已设置",
+      "timestamp": "2025-11-21T00:04:01.449Z"
+    },
+    {
+      "type": "log",
+      "text": "🌐 [单次调用] API地址: /api/ai/unified/stream-chat",
+      "timestamp": "2025-11-21T00:04:01.449Z"
+    },
+    {
+      "type": "log",
+      "text": "📤 [单次调用] 开始发送 fetch 请求...",
+      "timestamp": "2025-11-21T00:04:01.449Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到响应",
+      "timestamp": "2025-11-21T00:04:01.458Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] 响应状态: 200 OK",
+      "timestamp": "2025-11-21T00:04:01.458Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.459Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T00:04:01.459Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🤔 AI开始思考...\",\"timestamp\":\"2025-11-21T00:04:01.451Z\"}",
+      "timestamp": "2025-11-21T00:04:01.459Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.459Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ 加载完成",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🔍 识别到需要使用工具，复杂度: 0.48869565217391303\",\"confidence\":0.7,\"timestamp\":\"2025-11-21T00:04:01",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.48869565217391303",
+      "timestamp": "2025-11-21T00:04:01.460Z"
+    },
+    {
+      "type": "log",
+      "text": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.48869565217391303, confidence: 0.7, timestamp: 2025-11-21T00:04:01.454Z}",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683441459_kp4csfm1y, type: tool_intent, role: assistant, timestamp: 2025-11-21T00:04:01.459Z}",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具意图] 已添加到聊天历史: 🔍 识别到需要使用工具，复杂度: 0.48869565217391303",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [多轮调用] 工具意图 (第1轮): 🔍 识别到需要使用工具，复杂度: 0.48869565217391303",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T00:04:01.454Z\"}",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T00:04:01.462Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T00:04:01.454Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具信息]: {toolId: tool-1763683441460-qlmj2g6ct, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.48869565217391303, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [ChatHistory] 添加消息: {id: 1763683441460_n2nopcmcb, type: tool_call_start, role: assistant, timestamp: 2025-11-21T00:04:01.460Z}",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已立即添加到聊天历史: tool-1763683441460-qlmj2g6ct ",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加工具到functionCalls列表，当前数量: 5",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具调用] 已添加到toolCalls列表",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [toolCalls当前数量]: 9",
+      "timestamp": "2025-11-21T00:04:01.465Z"
+    },
+    {
+      "type": "log",
+      "text": "💭 [Thinking内容]: ",
+      "timestamp": "2025-11-21T00:04:01.466Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [toolCalls内容]: [\n  {\n    \"id\": \"tool-1763683390559-ffrcnsuud\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5278260869565218\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683396052-4o0xms0lp\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683403158-6syzekx5t\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.528695652173913\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683406481-6i6ecjuz3\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683415959-m50byqcvh\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.48782608695652174\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683425969-qz94bm1hx\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683428776-iqh5h96d8\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.5243478260869565\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  },\n  {\n    \"id\": \"tool-1763683432474-bd3wh8p8w\",\n    \"name\": \"未知工具\",\n    \"intent\": \"\",\n    \"description\": \"✅ 工具调用完成: undefined\",\n    \"status\": \"completed\",\n    \"progress\": 100\n  },\n  {\n    \"id\": \"tool-1763683441460-qlmj2g6ct\",\n    \"name\": \"\",\n    \"intent\": \"🔍 识别到需要使用工具，复杂度: 0.48869565217391303\",\n    \"description\": \"🔧 开始调用工具: undefined\",\n    \"thinking\": \"\",\n    \"status\": \"calling\",\n    \"progress\": 0\n  }\n]",
+      "timestamp": "2025-11-21T00:04:01.466Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:01.466Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 19",
+      "timestamp": "2025-11-21T00:04:01.466Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:04:01.466Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [Token圆圈] 更新用量数据: {used: 0, percentage: 0.0, cost: 0}",
+      "timestamp": "2025-11-21T00:04:02.248Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.036Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tool_call_complete",
+      "timestamp": "2025-11-21T00:04:05.036Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"✅ 工具调用执行完成\",\"toolResults\":[{\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null,\"message\":{",
+      "timestamp": "2025-11-21T00:04:05.037Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.037Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] tool_call_complete: ✅ 工具调用完成: undefined",
+      "timestamp": "2025-11-21T00:04:05.038Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 创建新的工具调用记录: 未知工具",
+      "timestamp": "2025-11-21T00:04:05.038Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [工具完成] 已触发currentAIResponse响应式更新，当前functionCalls数量: 5",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [工具完成] 检查preview_instruction: {hasResult: true, hasUiInstruction: false, instructionType: undefined, resultKeys: Array(0), eventDataKeys: Array(4)}",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: tools_complete",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎯 所有工具执行完成，开始生成最终回答\",\"toolsCount\":18,\"totalExecutionTime\":1000,\"timestamp\":\"2025-11-21T",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: final_answer",
+      "timestamp": "2025-11-21T00:04:05.039Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"💡 AI回答完成\",\"content\":\"请问您需要创建的待办任务标题是什么？是否有具体的任务描述或子任务列表？\",\"toolsUsed\":18,\"modelName\":\"d",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] final_answer: 🎯 最终答案生成完成",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "📥 [单次调用] SSE事件: complete",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "📝 [单次调用] 事件数据: {\"message\":\"🎉 对话完成\",\"timestamp\":\"2025-11-21T00:04:05.033Z\",\"totalEvents\":7,\"modelUsed\":\"doubao-seed",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [单次调用] 收到complete事件: {message: 🎉 对话完成, timestamp: 2025-11-21T00:04:05.033Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48869565217391303}",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: ✅ 单次调用完成",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 请问您需要创建的待办任务标题是什么？是否有具体的任务描述或子任务列表？",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 立即添加答案消息到聊天历史: {id: answer-1763683445037, role: assistant, type: answer, content: 请问您需要创建的待办任务标题是什么？是否有具体的任务描述或子任务列表？, timestamp: 2025-11-21T00:04:05.037Z}",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [complete事件] 当前聊天历史消息数: 20",
+      "timestamp": "2025-11-21T00:04:05.041Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [MessageList] 当前消息数: 20",
+      "timestamp": "2025-11-21T00:04:05.042Z"
+    },
+    {
+      "type": "log",
+      "text": "📋 [MessageList] 消息列表: [Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object]",
+      "timestamp": "2025-11-21T00:04:05.042Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [单次调用] SSE流结束，返回结果: {message: 🎉 对话完成, timestamp: 2025-11-21T00:04:05.033Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48869565217391303}",
+      "timestamp": "2025-11-21T00:04:05.047Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [进度检测] 第1轮有新进度，重置无进度计数",
+      "timestamp": "2025-11-21T00:04:05.047Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token监控] 第1轮使用: 0, 累计: 0",
+      "timestamp": "2025-11-21T00:04:05.047Z"
+    },
+    {
+      "type": "log",
+      "text": "💰 [Token优化] 第1轮 - thinking长度: 0, finalAnswer长度: 7",
+      "timestamp": "2025-11-21T00:04:05.047Z"
+    },
+    {
+      "type": "log",
+      "text": "📊 [第二阶段优化] 历史Token估算: 235 tokens",
+      "timestamp": "2025-11-21T00:04:05.048Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [多轮调用] 第 1 轮完成 (累计Token: 0)",
+      "timestamp": "2025-11-21T00:04:05.048Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [多轮调用] 返回结果: {content: 🎉 对话完成, toolCallsCount: 0, needsContinue: undefined, isComplete: undefined}",
+      "timestamp": "2025-11-21T00:04:05.048Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 检测到最终答案且无继续标记，停止循环",
+      "timestamp": "2025-11-21T00:04:05.048Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [多轮调用] 任务完成，共执行 1 轮，总Token使用: 0",
+      "timestamp": "2025-11-21T00:04:05.049Z"
+    },
+    {
+      "type": "log",
+      "text": "🎉 [多轮调用] 执行完成，共 1 轮",
+      "timestamp": "2025-11-21T00:04:05.049Z"
+    },
+    {
+      "type": "log",
+      "text": "⏱️ [超时控制] 已清理超时计时器",
+      "timestamp": "2025-11-21T00:04:05.050Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用] complete: 多轮调用完成，共执行 1 轮",
+      "timestamp": "2025-11-21T00:04:05.050Z"
+    },
+    {
+      "type": "log",
+      "text": "🎯 [complete事件] 处理完成事件",
+      "timestamp": "2025-11-21T00:04:05.050Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [complete事件] 使用已有答案内容: 请问您需要创建的待办任务标题是什么？是否有具体的任务描述或子任务列表？",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [complete事件] 答案已存在或为空，跳过添加",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    },
+    {
+      "type": "log",
+      "text": "[多轮调用完成] {message: 🎉 对话完成, timestamp: 2025-11-21T00:04:05.033Z, totalEvents: 7, modelUsed: doubao-seed-1-6-flash-250715, complexityScore: 0.48869565217391303}",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    },
+    {
+      "type": "log",
+      "text": "🔍 [onComplete] currentAIResponse.value.answer: Proxy(Object)",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    },
+    {
+      "type": "log",
+      "text": "⚠️ [onComplete] 消息已在 complete 事件处理中添加，跳过重复添加",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    },
+    {
+      "type": "log",
+      "text": "✅ [onComplete] 跳过后端消息刷新，使用本地消息历史",
+      "timestamp": "2025-11-21T00:04:05.051Z"
+    }
+  ],
+  "componentChecks": {
+    "chatBox": true,
+    "messageList": true,
+    "inputArea": true,
+    "buttons": true
+  },
+  "stats": {
+    "totalQueries": 5,
+    "successfulQueries": 5,
+    "failedQueries": 0,
+    "errorCount": 0,
+    "logCount": 778
+  }
+}

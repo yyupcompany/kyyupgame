@@ -1,0 +1,214 @@
+{
+  "name": "活动管理字典",
+  "description": "活动管理相关查询",
+  "version": "1.0.0",
+  "directMatches": {
+    "// === 活动管理模块 ===": "注释",
+    "今日活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "今天的活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "今天有什么活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "今天活动安排": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "本周活动": {
+      "response": "本周活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本周有哪些活动": {
+      "response": "本周活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本周有哪些活动安排": {
+      "response": "本周活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "这周的活动": {
+      "response": "本周活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本周活动安排": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "本月活动": {
+      "response": "本月活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本月有哪些活动": {
+      "response": "本月活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "这个月的活动": {
+      "response": "本月活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本月活动安排": {
+      "response": "本月活动查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "活动列表": {
+      "response": "正在查询活动列表...",
+      "action": "get_activity_list",
+      "tokens": 15
+    },
+    "活动安排": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "活动管理": {
+      "response": "活动管理功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "添加活动": {
+      "response": "活动添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "新增活动": {
+      "response": "活动添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "活动计划": {
+      "response": "活动计划查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "活动统计": {
+      "response": "活动统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+
+
+
+    "// === 课程管理模块 ===": "注释",
+    "课程表": {
+      "response": "课程表查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "今日课程": {
+      "response": "今日课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "今天的课程": {
+      "response": "今日课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "今天有什么课": {
+      "response": "今日课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本周课程": {
+      "response": "本周课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "这周的课程": {
+      "response": "本周课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "本周课表": {
+      "response": "本周课程查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "课程安排": {
+      "response": "课程安排查询功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "课程管理": {
+      "response": "课程管理功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "添加课程": {
+      "response": "课程添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "新增课程": {
+      "response": "课程添加功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "课程列表": {
+      "response": "课程列表功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+    "课程统计": {
+      "response": "课程统计功能暂时没有提供此查询",
+      "action": "show_feature_unavailable",
+      "tokens": 5
+    },
+
+    "// === 活动创建工作流 ===": "注释",
+    "策划一个活动": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "创建活动": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "新建活动": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "活动策划": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "策划活动": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "制定活动计划": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    },
+    "设计活动方案": {
+      "response": "正在启动活动创建工作流...",
+      "action": "create_activity_workflow",
+      "tokens": 50
+    }
+  }
+}

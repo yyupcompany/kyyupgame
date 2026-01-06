@@ -1,0 +1,24 @@
+{
+  "templateDatabase": "template_db",
+  "migrationSettings": {
+    "concurrency": 5,
+    "batchSize": 10,
+    "retryAttempts": 3,
+    "retryDelay": 5000
+  },
+  "backupSettings": {
+    "enabled": true,
+    "compression": true,
+    "retentionDays": 30
+  },
+  "connection": {
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "your_password"
+  },
+  "notification": {
+    "webhook": "https://your-webhook-url.com/notify",
+    "email": ["admin@example.com"]
+  }
+}

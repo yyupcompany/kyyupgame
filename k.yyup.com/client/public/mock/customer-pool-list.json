@@ -1,0 +1,129 @@
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": 1,
+        "name": "张三",
+        "phone": "13800138001",
+        "source": "ACTIVITY",
+        "status": "NEW",
+        "teacher": "王老师",
+        "teacherId": 101,
+        "lastFollowUp": "2023-06-02T08:30:00Z",
+        "createTime": "2023-05-25T10:15:00Z",
+        "remark": "对幼儿园环境很感兴趣"
+      },
+      {
+        "id": 2,
+        "name": "李四",
+        "phone": "13800138002",
+        "source": "REFERRAL",
+        "status": "FOLLOWING",
+        "teacher": "赵老师",
+        "teacherId": 102,
+        "lastFollowUp": "2023-06-01T14:20:00Z",
+        "createTime": "2023-05-20T09:30:00Z",
+        "remark": "朋友介绍，希望详细了解课程"
+      },
+      {
+        "id": 3,
+        "name": "王五",
+        "phone": "13800138003",
+        "source": "ONLINE",
+        "status": "BOOKED",
+        "teacher": "刘老师",
+        "teacherId": 103,
+        "lastFollowUp": "2023-06-03T11:45:00Z",
+        "createTime": "2023-05-28T16:40:00Z",
+        "remark": "已预约6月10日参观幼儿园"
+      },
+      {
+        "id": 4,
+        "name": "赵六",
+        "phone": "13800138004",
+        "source": "ADVERTISEMENT",
+        "status": "VISITED",
+        "teacher": "",
+        "teacherId": null,
+        "lastFollowUp": null,
+        "createTime": "2023-06-01T08:20:00Z",
+        "remark": "看到户外广告前来咨询"
+      },
+      {
+        "id": 5,
+        "name": "钱七",
+        "phone": "13800138005",
+        "source": "VISIT",
+        "status": "APPLIED",
+        "teacher": "陈老师",
+        "teacherId": 104,
+        "lastFollowUp": "2023-06-04T09:00:00Z",
+        "createTime": "2023-05-15T13:50:00Z",
+        "remark": "已提交入学申请，等待审核"
+      },
+      {
+        "id": 6,
+        "name": "孙八",
+        "phone": "13800138006",
+        "source": "ACTIVITY",
+        "status": "REGISTERED",
+        "teacher": "张老师",
+        "teacherId": 105,
+        "lastFollowUp": "2023-06-03T15:30:00Z",
+        "createTime": "2023-05-10T10:20:00Z",
+        "remark": "已完成注册，9月入学"
+      },
+      {
+        "id": 7,
+        "name": "周九",
+        "phone": "13800138007",
+        "source": "REFERRAL",
+        "status": "ABANDONED",
+        "teacher": "李老师",
+        "teacherId": 106,
+        "lastFollowUp": "2023-05-28T16:15:00Z",
+        "createTime": "2023-05-05T09:10:00Z",
+        "remark": "因价格原因放弃"
+      },
+      {
+        "id": 8,
+        "name": "吴十",
+        "phone": "13800138008",
+        "source": "ONLINE",
+        "status": "NEW",
+        "teacher": "",
+        "teacherId": null,
+        "lastFollowUp": null,
+        "createTime": "2023-06-04T11:25:00Z",
+        "remark": "官网咨询，对国际班感兴趣"
+      },
+      {
+        "id": 9,
+        "name": "郑十一",
+        "phone": "13800138009",
+        "source": "OTHER",
+        "status": "FOLLOWING",
+        "teacher": "王老师",
+        "teacherId": 101,
+        "lastFollowUp": "2023-06-02T14:40:00Z",
+        "createTime": "2023-05-22T08:35:00Z",
+        "remark": "亲戚介绍，需要详细了解课程"
+      },
+      {
+        "id": 10,
+        "name": "王十二",
+        "phone": "13800138010",
+        "source": "ADVERTISEMENT",
+        "status": "BOOKED",
+        "teacher": "赵老师",
+        "teacherId": 102,
+        "lastFollowUp": "2023-06-04T10:20:00Z",
+        "createTime": "2023-05-26T13:15:00Z",
+        "remark": "已预约6月12日参观幼儿园"
+      }
+    ],
+    "total": 42
+  },
+  "message": "获取客户池列表成功"
+} 

@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深邃专注仪表盘</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --background: oklch(0.12 0.02 240);
+        --foreground: oklch(0.95 0.01 240);
+        --card: oklch(0.15 0.02 240);
+        --card-foreground: oklch(0.95 0.01 240);
+        --popover: oklch(0.1 0.02 240);
+        --popover-foreground: oklch(0.95 0.01 240);
+        --primary: oklch(0.7 0.2 280);
+        --primary-foreground: oklch(0.98 0 0);
+        --secondary: oklch(0.2 0.02 240);
+        --secondary-foreground: oklch(0.9 0.01 240);
+        --muted: oklch(0.2 0.02 240);
+        --muted-foreground: oklch(0.6 0.01 240);
+        --accent: oklch(0.25 0.05 280);
+        --accent-foreground: oklch(0.9 0.1 280);
+        --destructive: oklch(0.55 0.2 25);
+        --destructive-foreground: oklch(0.98 0 0);
+        --border: oklch(0.25 0.02 240);
+        --input: oklch(0.25 0.02 240);
+        --ring: oklch(0.7 0.2 280);
+        --chart-1: oklch(0.7 0.2 280);
+        --chart-2: oklch(0.6 0.2 300);
+        --chart-3: oklch(0.65 0.25 320);
+        --chart-4: oklch(0.7 0.28 340);
+        --chart-5: oklch(0.75 0.3 20);
+        --sidebar: oklch(0.1 0.02 240);
+        --sidebar-foreground: oklch(0.95 0.01 240);
+        --sidebar-primary: oklch(0.7 0.2 280);
+        --sidebar-primary-foreground: oklch(0.98 0 0);
+        --sidebar-accent: oklch(0.2 0.02 240);
+        --sidebar-accent-foreground: oklch(0.9 0.01 240);
+        --sidebar-border: oklch(0.2 0.02 240);
+        --sidebar-ring: oklch(0.7 0.2 280);
+        --font-sans: 'Geist Mono', monospace;
+        --font-serif: 'Source Serif Pro', serif;
+        --font-mono: 'Geist Mono', monospace;
+        --radius: 0.75rem;
+        --shadow-2xs: 0 1px 0 0px hsl(280 80% 60% / 0.1);
+        --shadow-xs: 0 2px 4px 0px hsl(280 80% 60% / 0.05);
+        --shadow-sm: 0 3px 6px -1px hsl(280 80% 60% / 0.08);
+        --shadow: 0 5px 10px -2px hsl(280 80% 60% / 0.1);
+        --shadow-md: 0 7px 14px -2px hsl(280 80% 60% / 0.12);
+        --shadow-lg: 0 10px 20px -4px hsl(280 80% 60% / 0.15);
+        --shadow-xl: 0 14px 28px -4px hsl(280 80% 60% / 0.18);
+        --shadow-2xl: 0 20px 40px -8px hsl(280 80% 60% / 0.25);
+      }
+      body {
+        background-color: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-sans);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .sidebar {
+        background-color: var(--sidebar);
+        border-right: 1px solid var(--sidebar-border);
+      }
+      .sidebar-link {
+        color: var(--muted-foreground);
+        transition: all 0.2s ease-in-out;
+      }
+      .sidebar-link:hover, .sidebar-link.active {
+        background-color: var(--sidebar-accent);
+        color: var(--sidebar-accent-foreground);
+      }
+      .sidebar-link.active {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+      }
+      .main-header {
+        border-bottom: 1px solid var(--border);
+      }
+      .welcome-banner {
+        background-color: var(--accent);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+      }
+      .stat-card {
+        background-color: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.2s ease-in-out;
+      }
+      .stat-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary);
+      }
+      .btn-primary {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        border-radius: calc(var(--radius) - 4px);
+        transition: all 0.2s ease-in-out;
+        box-shadow: var(--shadow-sm);
+      }
+      .btn-primary:hover {
+        opacity: 0.9;
+        box-shadow: var(--shadow-md);
+      }
+      .btn-secondary {
+        background-color: var(--secondary);
+        color: var(--secondary-foreground);
+        border: 1px solid var(--border);
+        border-radius: calc(var(--radius) - 4px);
+        transition: all 0.2s ease-in-out;
+      }
+      .btn-secondary:hover {
+        background-color: var(--muted);
+        border-color: var(--ring);
+      }
+      .segmented-control a.active {
+        background-color: var(--primary);
+        color: var(--primary-foreground);
+        box-shadow: var(--shadow-sm);
+      }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar w-64 flex-shrink-0 flex flex-col p-4">
+            <div class="flex items-center gap-2 px-2 mb-8">
+                <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                    <i data-lucide="gem" class="text-primary-foreground w-5 h-5"></i>
+                </div>
+                <h1 class="text-xl font-bold">SuperDesign</h1>
+            </div>
+            <nav class="flex flex-col gap-2 flex-1">
+                <a href="#" class="sidebar-link active flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span>工作台</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                    <span>人员中心</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                    <span>活动中心</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    <span>招生中心</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                    <span>营销中心</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                    <span>AI中心</span>
+                </a>
+                <a href="#" class="sidebar-link flex items-center gap-3 px-3 py-2 rounded-lg">
+                    <i data-lucide="settings" class="w-5 h-5"></i>
+                    <span>系统中心</span>
+                </a>
+            </nav>
+            <div class="mt-auto">
+                <div class="p-3 rounded-lg bg-muted flex items-center gap-3">
+                    <img src="https://i.pravatar.cc/40?u=admin" alt="Admin" class="w-10 h-10 rounded-full">
+                    <div>
+                        <p class="font-semibold">Admin</p>
+                        <p class="text-xs text-muted-foreground">系统管理员</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col">
+            <header class="main-header flex items-center justify-between px-8 py-4">
+                <div>
+                    <p class="text-sm text-muted-foreground">首页 / 数据概览</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="btn-secondary p-2 rounded-lg"><i data-lucide="settings-2" class="w-5 h-5"></i></button>
+                    <button class="btn-secondary p-2 rounded-lg"><i data-lucide="moon" class="w-5 h-5"></i></button>
+                    <div class="flex items-center gap-2">
+                        <img src="https://i.pravatar.cc/40?u=admin" alt="Admin" class="w-8 h-8 rounded-full">
+                        <span class="font-medium">Admin</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="flex-1 p-8 overflow-y-auto">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner p-8 mb-8 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-accent-foreground">👋 欢迎回来, Admin!</h2>
+                        <p class="text-muted-foreground mt-1">查看您仪表盘的最新动态。</p>
+                    </div>
+                    <button class="btn-primary px-4 py-2 font-semibold flex items-center gap-2">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>刷新数据</span>
+                    </button>
+                </div>
+
+                <!-- Stats Section -->
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-semibold">业务中心概览</h3>
+                        <div class="segmented-control flex items-center bg-muted p-1 rounded-lg">
+                            <a href="#" class="active px-3 py-1 text-sm font-medium rounded-md">网格视图</a>
+                            <a href="#" class="px-3 py-1 text-sm font-medium rounded-md text-muted-foreground">列表视图</a>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <!-- Stat Card 1 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">仪表板中心</p>
+                                <i data-lucide="shield-check" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">98<span class="text-2xl text-muted-foreground">%</span></p>
+                            <p class="text-xs text-muted-foreground mt-1">系统健康度</p>
+                        </div>
+                        <!-- Stat Card 2 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">人事中心</p>
+                                <i data-lucide="user" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">85</p>
+                            <p class="text-xs text-muted-foreground mt-1">教师总数</p>
+                        </div>
+                        <!-- Stat Card 3 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">活动中心</p>
+                                <i data-lucide="calendar" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">62</p>
+                            <p class="text-xs text-muted-foreground mt-1">本月活动</p>
+                        </div>
+                        <!-- Stat Card 4 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">招生中心</p>
+                                <i data-lucide="graduation-cap" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">1</p>
+                            <p class="text-xs text-muted-foreground mt-1">在读学生</p>
+                        </div>
+                        <!-- Stat Card 5 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">营销中心</p>
+                                <i data-lucide="star" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">0</p>
+                            <p class="text-xs text-muted-foreground mt-1">活跃客户</p>
+                        </div>
+                        <!-- Stat Card 6 -->
+                        <div class="stat-card p-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-muted-foreground">AI中心</p>
+                                <i data-lucide="scan-line" class="w-5 h-5 text-muted-foreground"></i>
+                            </div>
+                            <p class="text-4xl font-bold mt-2">1k</p>
+                            <p class="text-xs text-muted-foreground mt-1">今日调用</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

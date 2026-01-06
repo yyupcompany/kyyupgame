@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  # 数据库服务
+  db:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: kindergarten
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 统一开发环境
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3001:3001"  # 后端端口
+      - "5173:5173"  # 前端开发端口
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: kindergarten
+      JWT_SECRET: test-secret-key
+      VITE_API_URL: http://localhost:3001/api
+      # 避免代理问题
+      NO_PROXY: localhost,127.0.0.1,db,0.0.0.0
+    volumes:
+      # 挂载整个项目目录
+      - .:/workspace
+      # 排除node_modules以避免权限问题
+      - /workspace/node_modules
+      - /workspace/server/node_modules
+      - /workspace/client/node_modules
+    working_dir: /workspace
+    # 保持容器运行
+    stdin_open: true
+    tty: true
+
+volumes:
+  db-data:

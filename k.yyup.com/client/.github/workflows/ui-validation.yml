@@ -1,0 +1,134 @@
+name: UI组件质量验证
+
+on:
+  push:
+    branches: [ master, main, gameaiweb ]
+    paths:
+      - 'src/components/**'
+      - 'src/pages/**'
+      - 'src/styles/**'
+  pull_request:
+    branches: [ master, main, gameaiweb ]
+    paths:
+      - 'src/components/**'
+      - 'src/pages/**'
+      - 'src/styles/**'
+
+jobs:
+  ui-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+
+    - name: 设置Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    - name: 安装依赖
+      run: npm ci
+
+    - name: 运行UI组件验证
+      run: |
+        node validate-ui-components.cjs
+
+    - name: 运行CI验证
+      run: |
+        node ui-validation-ci-tool.cjs --threshold-score 70 --threshold-pass-rate 75
+      continue-on-error: true
+
+    - name: 上传验证报告
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: ui-validation-reports
+        path: |
+          ui-component-validation-report.json
+          ui-validation-report.md
+          ui-validation-github-output.json
+
+    - name: 评论PR（如果是PR）
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const fs = require('fs');
+
+          try {
+            const report = JSON.parse(fs.readFileSync('ui-validation-github-output.json', 'utf8'));
+            const markdown = fs.readFileSync('ui-validation-report.md', 'utf8');
+
+            const { summary, metrics, issues } = report;
+
+            let comment = `## 🎨 UI组件质量验证报告\n\n`;
+            comment += `### 📊 质量概览\n\n`;
+            comment += `- **整体得分**: ${summary.overallScore}/100\n`;
+            comment += `- **通过率**: ${summary.passRate}%\n`;
+            comment += `- **质量评级**: ${summary.qualityGrade}\n`;
+            comment += `- **验证状态**: ${summary.status === 'passed' ? '✅ 通过' : '❌ 失败'}\n\n`;
+
+            comment += `### 📋 分类得分\n\n`;
+            comment += `| 类别 | 得分 |\n`;
+            comment += `|------|------|\n`;
+            comment += `| 中心组件 | ${metrics['center-components-score']}/100 |\n`;
+            comment += `| 系统组件 | ${metrics['system-components-score']}/100 |\n`;
+            comment += `| 活动组件 | ${metrics['activity-components-score']}/100 |\n\n`;
+
+            if (issues.length > 0) {
+              comment += `### ⚠️ 发现的问题\n\n`;
+              issues.forEach((issue, index) => {
+                const icons = { high: '❌', medium: '⚠️', low: 'ℹ️' };
+                comment += `${index + 1}. ${icons[issue.severity]} ${issue.message}\n`;
+              });
+              comment += `\n`;
+            }
+
+            comment += `<details>\n<summary>📄 查看详细报告</summary>\n\n`;
+            comment += markdown;
+            comment += `\n</details>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+          } catch (error) {
+            console.log('无法生成PR评论:', error.message);
+          }
+
+    - name: 设置质量指标
+      if: github.event_name == 'pull_request'
+      run: |
+        echo "UI_COMPONENTS_SCORE=$(node -p "
+          try {
+            const report = JSON.parse(require('fs').readFileSync('ui-validation-github-output.json', 'utf8'));
+            report.metrics['ui-components-score'];
+          } catch {
+            0;
+          }
+        ")" >> $GITHUB_ENV
+
+        echo "UI_COMPONENTS_PASS_RATE=$(node -p "
+          try {
+            const report = JSON.parse(require('fs').readFileSync('ui-validation-github-output.json', 'utf8'));
+            report.metrics['ui-components-pass-rate'];
+          } catch {
+            0;
+          }
+        ")" >> $GITHUB_ENV
+
+    - name: 创建状态检查
+      if: github.event_name == 'pull_request'
+      run: |
+        if [ "${{ env.UI_COMPONENTS_SCORE }}" -ge 70 ] && [ "${{ env.UI_COMPONENTS_PASS_RATE }}" -ge 75 ]; then
+          echo "✅ UI组件质量检查通过"
+          exit 0
+        else
+          echo "❌ UI组件质量检查失败"
+          echo "得分: ${{ env.UI_COMPONENTS_SCORE }}/100, 通过率: ${{ env.UI_COMPONENTS_PASS_RATE }}%"
+          exit 1
+        fi

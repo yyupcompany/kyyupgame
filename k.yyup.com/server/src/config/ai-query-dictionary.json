@@ -1,0 +1,506 @@
+{
+  "directMatches": {
+    "// === 学生管理模块 ===": "注释",
+    "学生总数": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "多少学生": {
+      "response": "正在查询学生总数...",
+      "action": "count_students", 
+      "tokens": 10
+    },
+    "学生数量": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "当前学生": {
+      "response": "正在查询学生总数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "今天有多少学生": {
+      "response": "正在查询今日在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "今天有多少学生在校": {
+      "response": "正在查询今日在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "学生在校": {
+      "response": "正在查询在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "在校学生": {
+      "response": "正在查询在校学生数...",
+      "action": "count_students",
+      "tokens": 10
+    },
+    "学生列表": {
+      "response": "正在跳转到学生列表页面...",
+      "action": "navigate_to_student_list",
+      "tokens": 5
+    },
+    "添加学生": {
+      "response": "正在跳转到学生添加页面...",
+      "action": "navigate_to_student_create",
+      "tokens": 5
+    },
+    "新增学生": {
+      "response": "正在跳转到学生添加页面...",
+      "action": "navigate_to_student_create",
+      "tokens": 5
+    },
+
+    "// === 教师管理模块 ===": "注释",
+    "教师总数": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "多少教师": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "教师数量": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "老师总数": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "多少老师": {
+      "response": "正在查询教师总数...",
+      "action": "count_teachers",
+      "tokens": 10
+    },
+    "教师列表": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+    "老师列表": {
+      "response": "正在跳转到教师列表页面...",
+      "action": "navigate_to_teacher_list",
+      "tokens": 5
+    },
+
+    "// === 班级管理模块 ===": "注释",
+    "班级总数": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+    "多少班级": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+    "班级数量": {
+      "response": "正在查询班级总数...",
+      "action": "count_classes",
+      "tokens": 10
+    },
+
+
+    "// === 活动管理模块 ===": "注释",
+    "今日活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "今天的活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "今天有什么活动": {
+      "response": "正在查询今日活动安排...",
+      "action": "get_today_activities",
+      "tokens": 15
+    },
+    "本周活动": {
+      "response": "正在查询本周活动安排...",
+      "action": "get_week_activities",
+      "tokens": 20
+    },
+    "本周有哪些活动": {
+      "response": "正在查询本周活动安排...",
+      "action": "get_week_activities",
+      "tokens": 20
+    },
+    "本周有哪些活动安排": {
+      "response": "正在查询本周活动安排...",
+      "action": "get_week_activities",
+      "tokens": 20
+    },
+    "这周的活动": {
+      "response": "正在查询本周活动安排...",
+      "action": "get_week_activities",
+      "tokens": 20
+    },
+    "本月活动": {
+      "response": "正在查询本月活动安排...",
+      "action": "get_month_activities",
+      "tokens": 25
+    },
+    "活动列表": {
+      "response": "正在查询活动列表...",
+      "action": "get_activity_list",
+      "tokens": 15
+    },
+    "活动安排": {
+      "response": "正在查询活动安排...",
+      "action": "get_activity_schedule",
+      "tokens": 15
+    },
+
+    "// === 财务管理模块 ===": "注释",
+    "今日收入": {
+      "response": "正在查询今日收入统计...",
+      "action": "get_today_income",
+      "tokens": 15
+    },
+    "今天的收入": {
+      "response": "正在查询今日收入统计...",
+      "action": "get_today_income",
+      "tokens": 15
+    },
+    "本月收入": {
+      "response": "正在查询本月收入统计...",
+      "action": "get_month_income",
+      "tokens": 20
+    },
+    "本月收入是多少": {
+      "response": "正在查询本月收入统计...",
+      "action": "get_month_income",
+      "tokens": 20
+    },
+    "这个月收入": {
+      "response": "正在查询本月收入统计...",
+      "action": "get_month_income",
+      "tokens": 20
+    },
+    "今日支出": {
+      "response": "正在查询今日支出统计...",
+      "action": "get_today_expense",
+      "tokens": 15
+    },
+    "今天的支出": {
+      "response": "正在查询今日支出统计...",
+      "action": "get_today_expense",
+      "tokens": 15
+    },
+    "本月支出": {
+      "response": "正在查询本月支出统计...",
+      "action": "get_month_expense",
+      "tokens": 20
+    },
+    "财务收支": {
+      "response": "正在查询财务收支统计...",
+      "action": "get_financial_summary",
+      "tokens": 25
+    },
+    "今日财务": {
+      "response": "正在查询今日财务统计...",
+      "action": "get_today_financial",
+      "tokens": 20
+    },
+    "今日财务收支": {
+      "response": "正在查询今日财务收支统计...",
+      "action": "get_today_financial",
+      "tokens": 20
+    },
+    "查看今日财务收支明细": {
+      "response": "正在查询今日财务收支明细...",
+      "action": "get_today_financial_detail",
+      "tokens": 25
+    },
+    "今日财务明细": {
+      "response": "正在查询今日财务收支明细...",
+      "action": "get_today_financial_detail",
+      "tokens": 25
+    },
+    "财务明细": {
+      "response": "正在查询财务明细...",
+      "action": "get_financial_detail",
+      "tokens": 20
+    },
+    "费用统计": {
+      "response": "正在查询费用统计数据...",
+      "action": "get_fee_stats",
+      "tokens": 20
+    },
+
+
+
+    "// === 招生管理模块 ===": "注释",
+    "招生统计": {
+      "response": "正在查询招生统计数据...",
+      "action": "get_enrollment_stats",
+      "tokens": 20
+    },
+    "招生情况": {
+      "response": "正在查询招生统计数据...",
+      "action": "get_enrollment_stats",
+      "tokens": 20
+    },
+    "招生计划": {
+      "response": "正在跳转到招生计划页面...",
+      "action": "navigate_to_enrollment_plans",
+      "tokens": 5
+    },
+    "招生申请": {
+      "response": "正在跳转到招生申请页面...",
+      "action": "navigate_to_enrollment_applications",
+      "tokens": 5
+    },
+    "新增学生": {
+      "response": "正在查询新增学生统计...",
+      "action": "get_new_students",
+      "tokens": 15
+    },
+    "本月新增学生": {
+      "response": "正在查询本月新增学生统计...",
+      "action": "get_month_new_students",
+      "tokens": 20
+    },
+    "本月新增学生名单": {
+      "response": "正在查询本月新增学生名单...",
+      "action": "get_month_new_students_list",
+      "tokens": 25
+    },
+
+    "// === 家长管理模块 ===": "注释",
+    "家长总数": {
+      "response": "正在查询家长总数...",
+      "action": "count_parents",
+      "tokens": 10
+    },
+    "多少家长": {
+      "response": "正在查询家长总数...",
+      "action": "count_parents",
+      "tokens": 10
+    },
+    "家长数量": {
+      "response": "正在查询家长总数...",
+      "action": "count_parents",
+      "tokens": 10
+    },
+    "家长列表": {
+      "response": "正在跳转到家长列表页面...",
+      "action": "navigate_to_parent_list",
+      "tokens": 5
+    },
+    "添加家长": {
+      "response": "正在跳转到家长添加页面...",
+      "action": "navigate_to_parent_create",
+      "tokens": 5
+    },
+
+    "// === 系统管理模块 ===": "注释",
+    "用户列表": {
+      "response": "正在跳转到用户管理页面...",
+      "action": "navigate_to_user_list",
+      "tokens": 5
+    },
+    "用户总数": {
+      "response": "正在查询用户总数...",
+      "action": "count_users",
+      "tokens": 10
+    },
+    "角色管理": {
+      "response": "正在跳转到角色管理页面...",
+      "action": "navigate_to_role_management",
+      "tokens": 5
+    },
+    "权限管理": {
+      "response": "正在跳转到权限管理页面...",
+      "action": "navigate_to_permission_management",
+      "tokens": 5
+    },
+    "系统设置": {
+      "response": "正在跳转到系统设置页面...",
+      "action": "navigate_to_system_settings",
+      "tokens": 5
+    },
+
+    "// === 报告分析模块 ===": "注释",
+    "生成报告": {
+      "response": "正在生成综合报告...",
+      "action": "generate_report",
+      "tokens": 30
+    },
+    "月度报告": {
+      "response": "正在生成月度报告...",
+      "action": "generate_monthly_report",
+      "tokens": 35
+    },
+    "招生报告": {
+      "response": "正在生成招生报告...",
+      "action": "generate_enrollment_report",
+      "tokens": 30
+    },
+    "本月招生报告": {
+      "response": "正在生成本月招生报告...",
+      "action": "generate_monthly_enrollment_report",
+      "tokens": 35
+    },
+    "生成本月招生报告": {
+      "response": "正在生成本月招生报告...",
+      "action": "generate_monthly_enrollment_report",
+      "tokens": 35
+    },
+    "财务报告": {
+      "response": "正在生成财务报告...",
+      "action": "generate_financial_report",
+      "tokens": 30
+    },
+
+
+    "// === 数据统计模块 ===": "注释",
+    "统计各班级学生人数": {
+      "response": "正在统计各班级学生人数分布...",
+      "action": "get_class_student_distribution",
+      "tokens": 25
+    },
+    "班级学生分布": {
+      "response": "正在统计各班级学生人数分布...",
+      "action": "get_class_student_distribution",
+      "tokens": 25
+    },
+    "各班级学生人数": {
+      "response": "正在统计各班级学生人数分布...",
+      "action": "get_class_student_distribution",
+      "tokens": 25
+    },
+    "学生年龄分布": {
+      "response": "正在统计学生年龄分布...",
+      "action": "get_student_age_distribution",
+      "tokens": 20
+    },
+    "年龄段分布": {
+      "response": "正在统计学生年龄分布...",
+      "action": "get_student_age_distribution",
+      "tokens": 20
+    },
+    "性别分布": {
+      "response": "正在统计学生性别分布...",
+      "action": "get_student_gender_distribution",
+      "tokens": 15
+    },
+    "男女比例": {
+      "response": "正在统计学生性别分布...",
+      "action": "get_student_gender_distribution",
+      "tokens": 15
+    },
+
+    "// === 快速导航模块 ===": "注释",
+    "学生管理": {
+      "response": "正在跳转到学生管理页面...",
+      "action": "navigate_to_student_management",
+      "tokens": 5
+    },
+    "教师管理": {
+      "response": "正在跳转到教师管理页面...",
+      "action": "navigate_to_teacher_management",
+      "tokens": 5
+    },
+    "活动管理": {
+      "response": "正在跳转到活动管理页面...",
+      "action": "navigate_to_activity_management",
+      "tokens": 5
+    },
+    "财务管理": {
+      "response": "正在跳转到财务管理页面...",
+      "action": "navigate_to_financial_management",
+      "tokens": 5
+    },
+
+    "招生管理": {
+      "response": "正在跳转到招生管理页面...",
+      "action": "navigate_to_enrollment_management",
+      "tokens": 5
+    },
+    "家长管理": {
+      "response": "正在跳转到家长管理页面...",
+      "action": "navigate_to_parent_management",
+      "tokens": 5
+    },
+
+    "// === 健康管理模块 ===": "注释",
+    "健康档案": {
+      "response": "正在跳转到健康档案页面...",
+      "action": "navigate_to_health_records",
+      "tokens": 5
+    },
+    "体检记录": {
+      "response": "正在查询体检记录...",
+      "action": "get_health_checkup_records",
+      "tokens": 15
+    },
+    "疫苗接种": {
+      "response": "正在查询疫苗接种记录...",
+      "action": "get_vaccination_records",
+      "tokens": 15
+    },
+    "身高体重": {
+      "response": "正在查询身高体重统计...",
+      "action": "get_height_weight_stats",
+      "tokens": 15
+    },
+
+    "// === 课程管理模块 ===": "注释",
+    "课程表": {
+      "response": "正在查询课程表...",
+      "action": "get_course_schedule",
+      "tokens": 15
+    },
+    "今日课程": {
+      "response": "正在查询今日课程安排...",
+      "action": "get_today_courses",
+      "tokens": 15
+    },
+    "本周课程": {
+      "response": "正在查询本周课程安排...",
+      "action": "get_week_courses",
+      "tokens": 20
+    },
+    "课程安排": {
+      "response": "正在查询课程安排...",
+      "action": "get_course_arrangement",
+      "tokens": 15
+    },
+
+    "// === 通知公告模块 ===": "注释",
+    "最新通知": {
+      "response": "正在查询最新通知...",
+      "action": "get_latest_notifications",
+      "tokens": 15
+    },
+    "通知列表": {
+      "response": "正在跳转到通知列表页面...",
+      "action": "navigate_to_notification_list",
+      "tokens": 5
+    },
+    "发布通知": {
+      "response": "正在跳转到通知发布页面...",
+      "action": "navigate_to_notification_create",
+      "tokens": 5
+    },
+    "公告管理": {
+      "response": "正在跳转到公告管理页面...",
+      "action": "navigate_to_announcement_management",
+      "tokens": 5
+    }
+  }
+}

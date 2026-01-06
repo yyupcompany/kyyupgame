@@ -1,0 +1,366 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    所有 routes.ts 文件完整清单 - 230 个文件
+═══════════════════════════════════════════════════════════════════════════════
+
+【统计信息】
+  - 总文件数: 230 个
+  - 主目录: 213 个
+  - 子目录: 17 个 (ai/: 14, centers/: 3)
+  - 重复/备份: ~10 个 (可清理)
+
+═══════════════════════════════════════════════════════════════════════════════
+                              【按字母顺序】
+═══════════════════════════════════════════════════════════════════════════════
+
+【A 开头】 48 个文件
+─────────────────────────────────────────────────────────────────────────────
+1. activities.routes.ts
+2. activity-checkin.routes.ts
+3. activity-evaluation.routes.ts
+4. activity-evaluations.routes.ts
+5. activity-plan.routes.ts
+6. activity-plans.routes.ts
+7. activity-poster.routes.ts
+8. activity-registration.routes.ts
+9. activity-registration-page.routes.ts
+10. activity-registrations.routes.ts
+11. activity-template.routes.ts
+12. admin.routes.ts
+13. admission-notification.routes.ts
+14. admission-notifications.routes.ts
+15. admission-result.routes.ts
+16. admission-results.routes.ts
+17. advertisement.routes.ts
+18. advertisements.routes.ts
+19. ai-analysis.routes.ts
+20. ai-assistant-optimized.routes.ts
+21. ai-billing.routes.ts
+22. ai-bridge.routes.ts
+23. ai-cache.routes.ts
+24. ai-conversation.routes.ts
+25. ai-curriculum.routes.ts
+26. ai-knowledge.routes.ts
+27. ai-mock.routes.ts
+28. ai-performance.routes.ts
+29. ai-query.routes.ts
+30. ai-scoring.routes.ts
+31. ai-shortcuts.routes.ts
+32. ai-smart-assign.routes.ts
+33. ai-stats.routes.ts
+34. ai/analytics.routes.ts
+35. ai/auth.routes.ts
+36. ai/conversation.routes.ts
+37. ai/feedback.routes.ts
+38. ai/function-tools.routes.ts
+39. ai/message.routes.ts
+40. ai/model.routes.ts
+41. ai/quota.routes.ts
+42. ai/smart-expert.routes.ts
+43. ai/token-monitor.routes.ts
+44. ai/unified-intelligence.routes.ts
+45. ai/unified-stream.routes.ts
+46. ai/user.routes.ts
+47. ai/video.routes.ts
+48. api.routes.ts
+49. api-list.routes.ts
+50. assessment-admin.routes.ts
+51. assessment.routes.ts
+52. assessment-share.routes.ts
+53. attendance-center.routes.ts
+54. auth-permissions.routes.ts
+55. auth.routes.ts
+56. auto-image.routes.ts
+57. avatar-upload.routes.ts
+
+【B 开头】 3 个文件
+─────────────────────────────────────────────────────────────────────────────
+58. base.routes.ts
+59. batch-import.routes.ts
+60. business-center.routes.ts
+
+【C 开头】 18 个文件
+─────────────────────────────────────────────────────────────────────────────
+61. call-center.routes.ts
+62. center-fixes.routes.ts
+63. centers/activity-center.routes.ts
+64. centers/customer-pool-center.routes.ts
+65. centers/finance-center.routes.ts
+66. change-log.routes.ts
+67. channels.routes.ts
+68. channel-tracking.routes.ts
+69. channel-trackings.routes.ts
+70. chat.routes.ts
+71. classes.routes.ts
+72. conversion-tracking.routes.ts
+73. conversion-trackings.routes.ts
+74. coupons.routes.ts
+75. crud.routes.ts
+76. customer-applications.routes.ts
+77. customer-follow-enhanced.routes.ts
+78. customer-pool.routes.ts
+79. customers.routes.ts
+
+【D 开头】 9 个文件
+─────────────────────────────────────────────────────────────────────────────
+80. dashboard.routes.ts
+81. data-import.routes.ts
+82. database-metadata.routes.ts
+83. debug-env.routes.ts
+84. debug-oss.routes.ts
+85. document-import.routes.ts
+86. document-instance.routes.ts
+87. document-statistics.routes.ts
+88. document-template.routes.ts
+
+【E 开头】 19 个文件
+─────────────────────────────────────────────────────────────────────────────
+89. enrollment.routes.ts
+90. enrollment-ai.routes.ts
+91. enrollment-application.routes.ts
+92. enrollment-applications.routes.ts
+93. enrollment-center.routes.ts
+94. enrollment-consultation.routes.ts
+95. enrollment-consultations.routes.ts
+96. enrollment-finance.routes.ts
+97. enrollment-interview.routes.ts
+98. enrollment-interviews.routes.ts
+99. enrollment-plan.routes.ts
+100. enrollment-plans.routes.ts
+101. enrollment-quota.routes.ts
+102. enrollment-quotas.routes.ts
+103. enrollment-statistics.routes.ts
+104. enrollment-tasks.routes.ts
+105. enterprise-dashboard.routes.ts
+106. errors.routes.ts
+107. example.routes.ts
+
+【F 开头】 4 个文件
+─────────────────────────────────────────────────────────────────────────────
+108. field-template.routes.ts
+109. files.routes.ts
+110. finance.routes.ts
+111. followup-analysis.routes.ts
+
+【G 开头】 3 个文件
+─────────────────────────────────────────────────────────────────────────────
+112. game.routes.ts
+113. game-background.routes.ts
+114. group.routes.ts
+
+【I 开头】 4 个文件
+─────────────────────────────────────────────────────────────────────────────
+115. inspection.routes.ts
+116. inspection-ai.routes.ts
+117. inspection-record.routes.ts
+118. inspection-rectification.routes.ts
+119. interactive-curriculum.routes.ts
+
+【K 开头】 4 个文件
+─────────────────────────────────────────────────────────────────────────────
+120. kindergarten.routes.ts
+121. kindergarten-basic-info.routes.ts
+122. kindergarten-completeness.routes.ts
+123. kindergartens.routes.ts
+
+【L 开头】 2 个文件
+─────────────────────────────────────────────────────────────────────────────
+124. like-collect-config.routes.ts
+125. like-collect-records.routes.ts
+
+【M 开头】 7 个文件
+─────────────────────────────────────────────────────────────────────────────
+126. marketing.routes.ts
+127. marketing-campaign.routes.ts
+128. marketing-campaigns.routes.ts
+129. marketing-center.routes.ts
+130. media-center.routes.ts
+131. message-templates.routes.ts
+132. migration.routes.ts
+
+【N 开头】 2 个文件
+─────────────────────────────────────────────────────────────────────────────
+133. notification-center.routes.ts
+134. notifications.routes.ts
+
+【O 开头】 5 个文件
+─────────────────────────────────────────────────────────────────────────────
+135. operation-logs.routes.ts
+136. organization-status.routes.ts
+137. oss-diagnostics.routes.ts
+138. oss-manager.routes.ts
+139. oss-proxy.routes.ts
+
+【P 开头】 33 个文件
+─────────────────────────────────────────────────────────────────────────────
+140. page-guide.routes.ts
+141. page-guide-section.routes.ts
+142. page-permissions.routes.ts
+143. parent-assistant.routes.ts
+144. parent.routes.ts
+145. parent-student-relation.routes.ts
+146. parent-student-relations.routes.ts
+147. parents.routes.ts
+148. performance.routes.ts
+149. performance-evaluation.routes.ts
+150. performance-evaluations.routes.ts
+151. performance-report.routes.ts
+152. performance-reports.routes.ts
+153. performance-rule.routes.ts
+154. performance-rules.routes.ts
+155. permission.routes.ts
+156. permissions-backup.routes.ts
+157. permissions.routes.ts
+158. personal-posters.routes.ts
+159. personnel-center.routes.ts
+160. photo-album.routes.ts
+161. poster-generation.routes.ts
+162. poster-generations.routes.ts
+163. poster-template.routes.ts
+164. poster-templates.routes.ts
+165. poster-upload.routes.ts
+166. principal.routes.ts
+167. principal-performance.routes.ts
+168. progress.routes.ts
+
+【Q 开头】 1 个文件
+─────────────────────────────────────────────────────────────────────────────
+169. quick-query-groups.routes.ts
+
+【R 开头】 9 个文件
+─────────────────────────────────────────────────────────────────────────────
+170. referral.routes.ts
+171. referral-codes.routes.ts
+172. referral-relationships.routes.ts
+173. referral-rewards.routes.ts
+174. referral-statistics.routes.ts
+175. reminder-log.routes.ts
+176. role.routes.ts
+177. role-permission.routes.ts
+178. role-permissions.routes.ts
+
+【S 开头】 31 个文件
+─────────────────────────────────────────────────────────────────────────────
+179. roles-backup.routes.ts
+180. roles.routes.ts
+181. schedules.routes.ts
+182. script.routes.ts
+183. script-category.routes.ts
+184. script-template.routes.ts
+185. security.routes.ts
+186. sequelize-meta.routes.ts
+187. SequelizeMeta.routes.ts
+188. session.routes.ts
+189. setup-permissions.routes.ts
+190. simple-permissions.routes.ts
+191. simplified-centers.routes.ts
+192. six-dimension-memory.routes.ts
+193. smart-promotion.routes.ts
+194. statistics.routes.ts
+195. statistics-adapter.routes.ts
+196. student.routes.ts
+197. students.routes.ts
+198. system.routes.ts
+199. system-ai-models.routes.ts
+200. system-backup.routes.ts
+201. system-configs.routes.ts
+202. system-logs.routes.ts
+
+【T 开头】 19 个文件
+─────────────────────────────────────────────────────────────────────────────
+203. task.routes.ts
+204. task-attachments.routes.ts
+205. task-comment.routes.ts
+206. tasks.routes.ts
+207. teacher.routes.ts
+208. teacher-attendance.routes.ts
+209. teacher-center-creative-curriculum.routes.ts
+210. teacher-checkin.routes.ts
+211. teacher-customers.routes.ts
+212. teacher-dashboard.routes.ts
+213. teacher-sop.routes.ts
+214. teachers.routes.ts
+215. teaching-center.routes.ts
+216. temp-create-users.routes.ts
+217. text-polish.routes.ts
+218. text-to-speech.routes.ts
+219. todos.routes.ts
+220. token-blacklist.routes.ts
+221. (未列)
+
+【U 开头】 8 个文件
+─────────────────────────────────────────────────────────────────────────────
+222. unified-statistics.routes.ts
+223. usage-center.routes.ts
+224. usage-quota.routes.ts
+225. user.routes.ts
+226. user-profile.routes.ts
+227. user-role.routes.ts
+228. user-roles.routes.ts
+229. users.routes.ts
+
+【V 开头】 2 个文件
+─────────────────────────────────────────────────────────────────────────────
+230. video-creation.routes.ts
+231. voice-config.routes.ts
+
+═══════════════════════════════════════════════════════════════════════════════
+                        【需要合并/删除的文件清单】
+═══════════════════════════════════════════════════════════════════════════════
+
+❌ 明确需要删除的备份文件:
+   - permissions-backup.routes.ts
+   - roles-backup.routes.ts
+   - temp-create-users.routes.ts
+   - sequelize-meta.routes.ts (重复: SequelizeMeta.routes.ts)
+
+⚠️  需要合并的单复数文件 (~30对):
+   - user.routes.ts / users.routes.ts
+   - role.routes.ts / roles.routes.ts
+   - student.routes.ts / students.routes.ts
+   - teacher.routes.ts / teachers.routes.ts
+   - parent.routes.ts / parents.routes.ts
+   - task.routes.ts / tasks.routes.ts
+   - kindergarten.routes.ts / kindergartens.routes.ts
+   - activity-plan.routes.ts / activity-plans.routes.ts
+   - admission-result.routes.ts / admission-results.routes.ts
+   - advertisement.routes.ts / advertisements.routes.ts
+   - channel-tracking.routes.ts / channel-trackings.routes.ts
+   - conversion-tracking.routes.ts / conversion-trackings.routes.ts
+   - enrollment-application.routes.ts / enrollment-applications.routes.ts
+   - enrollment-consultation.routes.ts / enrollment-consultations.routes.ts
+   - enrollment-interview.routes.ts / enrollment-interviews.routes.ts
+   - enrollment-plan.routes.ts / enrollment-plans.routes.ts
+   - enrollment-quota.routes.ts / enrollment-quotas.routes.ts
+   - permission.routes.ts / permissions.routes.ts
+   - poster-generation.routes.ts / poster-generations.routes.ts
+   - poster-template.routes.ts / poster-templates.routes.ts
+   - role-permission.routes.ts / role-permissions.routes.ts
+   - user-role.routes.ts / user-roles.routes.ts
+   - script.routes.ts / script-template.routes.ts
+   - parent-student-relation.routes.ts / parent-student-relations.routes.ts
+   - performance-evaluation.routes.ts / performance-evaluations.routes.ts
+   - performance-report.routes.ts / performance-reports.routes.ts
+   - performance-rule.routes.ts / performance-rules.routes.ts
+   - [还有约3-5对]
+
+💡 可能有功能重复的:
+   - ai-conversation.routes.ts (已在 ai/conversation.routes.ts)
+   - center-fixes.routes.ts 和 simplified-centers.routes.ts
+
+═══════════════════════════════════════════════════════════════════════════════
+                          【优化建议】
+═══════════════════════════════════════════════════════════════════════════════
+
+可以删减的文件: ~22 个
+最终保留的核心文件: 208 个
+
+优化步骤:
+  1. 删除备份文件 (3-5 个)     => 1-2 小时
+  2. 合并单复数文件 (20-30 对)  => 2-3 小时
+  3. 统一 AI 路由到子目录       => 1-2 小时
+  4. 创建模块化子目录结构      => 4-6 小时
+  5. 实现动态路由加载          => 2-4 小时
+
+总计: 12-20 小时
+
+═══════════════════════════════════════════════════════════════════════════════

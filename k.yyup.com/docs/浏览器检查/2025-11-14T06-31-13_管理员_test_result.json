@@ -1,0 +1,124 @@
+{
+  "timestamp": "2025-11-14T06:31:12.411Z",
+  "role": "管理员",
+  "roleName": "管理员",
+  "username": "admin",
+  "login": {
+    "success": true,
+    "data": {
+      "success": true,
+      "data": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMSwidXNlcm5hbWUiOiJhZG1pbiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3NjMxMDE4NzIsImV4cCI6MTc2MzE4ODI3Mn0.O95ppGDPju_JMxtDmfaTnJbXyQ-5kOBfValHwAXaP3Y",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMSwidXNlcm5hbWUiOiJhZG1pbiIsInR5cGUiOiJyZWZyZXNoIiwiaXNSZWZyZXNoVG9rZW4iOnRydWUsImlhdCI6MTc2MzEwMTg3MiwiZXhwIjoxNzY1NjkzODcyfQ.icJE3hR4-Kbl5IHPtkSWFasR65IVnadCHP8XZeK0k7o",
+        "user": {
+          "id": 121,
+          "username": "admin",
+          "email": "admin@test.com",
+          "realName": "沈燕",
+          "role": "admin",
+          "roleName": "Updated Test Role",
+          "isAdmin": true,
+          "kindergartenId": 1,
+          "roles": [
+            {
+              "code": "admin",
+              "name": "Updated Test Role"
+            }
+          ]
+        }
+      },
+      "message": "登录成功"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMSwidXNlcm5hbWUiOiJhZG1pbiIsInR5cGUiOiJhY2Nlc3MiLCJpYXQiOjE3NjMxMDE4NzIsImV4cCI6MTc2MzE4ODI3Mn0.O95ppGDPju_JMxtDmfaTnJbXyQ-5kOBfValHwAXaP3Y"
+  },
+  "permissions": {
+    "success": true,
+    "permissions": [
+      "CENTERS_DIRECTORY",
+      "PARENT_DASHBOARD",
+      "dashboard",
+      "user:student",
+      "enrollment:plan",
+      "system:user",
+      "TEACHER_CENTER_DIRECTORY",
+      "PARENT_STUDENT_INFO",
+      "user:teacher",
+      "enrollment:application",
+      "system:role",
+      "PARENT_CENTER_DIRECTORY",
+      "PARENT_GROWTH_REPORT",
+      "user:parent",
+      "system:permission",
+      "PARENT_ASSESSMENT",
+      "user:class",
+      "PARENT_SCHOOL_READINESS",
+      "PARENT_GAMES",
+      "PARENT_AI_ASSISTANT",
+      "PARENT_ACTIVITIES",
+      "PARENT_PHOTO_ALBUM",
+      "BUSINESS_MANAGEMENT_CATEGORY",
+      "BUSINESS_CENTER",
+      "TEACHING_CENTER",
+      "MARKETING_CENTER",
+      "FINANCE_CENTER",
+      "PERSONNEL_CENTER",
+      "SYSTEM_CENTER",
+      "PARENT_PROFILE",
+      "user",
+      "PARENT_FEEDBACK",
+      "PARENT_SHARE_STATS",
+      "PARENT_KINDERGARTEN_REWARDS",
+      "PARENT_COMMUNICATION",
+      "ENROLLMENT_CENTER",
+      "TEACHING_MANAGEMENT_CATEGORY",
+      "ASSESSMENT_CENTER",
+      "CALL_CENTER",
+      "PERFORMANCE_CENTER",
+      "TASK_CENTER",
+      "DOCUMENT_TEMPLATE_CENTER",
+      "enrollment",
+      "ACTIVITY_CENTER",
+      "INSPECTION_CENTER",
+      "MARKETING_MANAGEMENT_CATEGORY",
+      "CUSTOMER_POOL_CENTER",
+      "ANALYTICS_CENTER",
+      "FEEDBACK_CENTER",
+      "USAGE_CENTER",
+      "activity",
+      "ATTENDANCE_CENTER",
+      "SCRIPT_CENTER",
+      "FINANCE_MANAGEMENT_CATEGORY",
+      "PHOTO_ALBUM_CENTER",
+      "PERSONNEL_MANAGEMENT_CATEGORY",
+      "SYSTEM_MANAGEMENT_CATEGORY",
+      "system",
+      "TEACHER_CENTER",
+      "PARENT_CENTER"
+    ]
+  },
+  "styleCheck": {
+    "pageBasics": {
+      "pageTitle": "幼儿园招生管理系统",
+      "currentUrl": "http://localhost:5173/dashboard",
+      "userRole": "管理员"
+    },
+    "designTokens": {
+      "primaryColor": "#409eff",
+      "successColor": "#67c23a",
+      "warningColor": "#e6a23c",
+      "dangerColor": "#f56c6c"
+    },
+    "components": {
+      "header": "app-header",
+      "sidebar": "app-sidebar",
+      "mainContent": "main-content",
+      "cards": 60,
+      "menus": 0
+    },
+    "layout": {
+      "screenWidth": 1920,
+      "screenHeight": 1080,
+      "responsive": true
+    }
+  }
+}

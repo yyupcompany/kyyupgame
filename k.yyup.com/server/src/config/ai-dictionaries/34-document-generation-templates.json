@@ -1,0 +1,124 @@
+{
+  "name": "文档生成系统查询模板字典",
+  "description": "Excel报表、Word文档、PDF报告、PPT演示文稿等文档生成相关功能的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 文档生成相关查询模板 ===": "注释",
+    "文档生成统计": {
+      "sql": "SELECT document_type, COUNT(*) as count FROM generated_documents WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY document_type",
+      "description": "统计30天内各类型文档生成数量",
+      "table": "generated_documents",
+      "response": "30天内文档生成统计完成",
+      "tokens": 25
+    },
+    "Excel报表生成记录": {
+      "sql": "SELECT COUNT(*) as count FROM generated_documents WHERE document_type = 'excel' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询7天内Excel报表生成数量",
+      "table": "generated_documents", 
+      "response": "7天内生成Excel报表{count}个",
+      "tokens": 15
+    },
+    "Word文档生成记录": {
+      "sql": "SELECT COUNT(*) as count FROM generated_documents WHERE document_type = 'word' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询7天内Word文档生成数量",
+      "table": "generated_documents",
+      "response": "7天内生成Word文档{count}个", 
+      "tokens": 15
+    },
+    "PPT演示文稿生成记录": {
+      "sql": "SELECT COUNT(*) as count FROM generated_documents WHERE document_type = 'ppt' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询7天内PPT演示文稿生成数量",
+      "table": "generated_documents",
+      "response": "7天内生成PPT演示文稿{count}个",
+      "tokens": 15
+    },
+    "PDF报告生成记录": {
+      "sql": "SELECT COUNT(*) as count FROM generated_documents WHERE document_type = 'pdf' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询7天内PDF报告生成数量",
+      "table": "generated_documents",
+      "response": "7天内生成PDF报告{count}个",
+      "tokens": 15
+    },
+    "用户文档生成统计": {
+      "sql": "SELECT user_id, COUNT(*) as count FROM generated_documents WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY user_id ORDER BY count DESC LIMIT 10",
+      "description": "统计30天内用户文档生成数量排行",
+      "table": "generated_documents",
+      "response": "用户文档生成统计完成",
+      "tokens": 30
+    },
+    "文档生成成功率": {
+      "sql": "SELECT document_type, COUNT(*) as total, SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) as success, ROUND(SUM(CASE WHEN status = 'success' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) as success_rate FROM generated_documents WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY document_type",
+      "description": "统计7天内各类型文档生成成功率",
+      "table": "generated_documents",
+      "response": "文档生成成功率统计完成",
+      "tokens": 40
+    },
+    "文档大小统计": {
+      "sql": "SELECT document_type, AVG(file_size) as avg_size, MAX(file_size) as max_size, MIN(file_size) as min_size FROM generated_documents WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) AND file_size > 0 GROUP BY document_type",
+      "description": "统计30天内各类型文档大小分布",
+      "table": "generated_documents",
+      "response": "文档大小统计完成",
+      "tokens": 35
+    },
+    "热门文档模板": {
+      "sql": "SELECT template_name, COUNT(*) as usage_count FROM generated_documents WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY template_name ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计30天内最受欢迎的文档模板",
+      "table": "generated_documents",
+      "response": "热门文档模板统计完成",
+      "tokens": 25
+    },
+    "文档生成错误统计": {
+      "sql": "SELECT error_type, COUNT(*) as count FROM generated_documents WHERE status = 'error' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY) GROUP BY error_type ORDER BY count DESC",
+      "description": "统计7天内文档生成错误类型分布",
+      "table": "generated_documents",
+      "response": "文档生成错误统计完成",
+      "tokens": 30
+    },
+
+    "// === 文档模板相关查询模板 ===": "注释",
+    "文档模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM document_templates WHERE deleted_at IS NULL",
+      "description": "查询文档模板总数",
+      "table": "document_templates",
+      "response": "文档模板总数为{count}个",
+      "tokens": 10
+    },
+    "活跃文档模板": {
+      "sql": "SELECT COUNT(*) as count FROM document_templates WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询活跃文档模板数量",
+      "table": "document_templates",
+      "response": "活跃文档模板{count}个",
+      "tokens": 12
+    },
+    "文档模板分类统计": {
+      "sql": "SELECT template_type, COUNT(*) as count FROM document_templates WHERE deleted_at IS NULL GROUP BY template_type ORDER BY count DESC",
+      "description": "统计文档模板类型分布",
+      "table": "document_templates",
+      "response": "文档模板分类统计完成",
+      "tokens": 20
+    },
+
+    "// === 文档下载相关查询模板 ===": "注释",
+    "文档下载统计": {
+      "sql": "SELECT COUNT(*) as count FROM document_downloads WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询7天内文档下载次数",
+      "table": "document_downloads",
+      "response": "7天内文档下载{count}次",
+      "tokens": 15
+    },
+    "热门下载文档": {
+      "sql": "SELECT document_id, document_name, COUNT(*) as download_count FROM document_downloads WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY document_id, document_name ORDER BY download_count DESC LIMIT 10",
+      "description": "统计30天内下载次数最多的文档",
+      "table": "document_downloads",
+      "response": "热门下载文档统计完成",
+      "tokens": 35
+    },
+    "用户下载行为": {
+      "sql": "SELECT user_id, COUNT(*) as download_count FROM document_downloads WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY) GROUP BY user_id ORDER BY download_count DESC LIMIT 10",
+      "description": "统计30天内用户文档下载行为",
+      "table": "document_downloads",
+      "response": "用户下载行为统计完成",
+      "tokens": 30
+    }
+  }
+}

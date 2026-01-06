@@ -1,0 +1,42 @@
+services:
+  kindergarten-project:
+    build:
+      context: .
+      dockerfile: Dockerfile.simple
+    ports:
+      - "3000:3000"
+      - "5173:5173"
+      - "80:80"
+    volumes:
+      - .:/project  # 整个项目目录映射
+    container_name: kindergarten-project
+    restart: unless-stopped
+
+# 可选：如果需要数据库
+# services:
+#   kindergarten-app:
+#     # ... 上面的配置
+#     depends_on:
+#       - mysql
+#     environment:
+#       - NODE_ENV=production
+#       - PORT=3000
+#       - DB_HOST=mysql
+#       - DB_PORT=3306
+#       - DB_NAME=kindergarten
+#       - DB_USER=root
+#       - DB_PASSWORD=password
+#
+#   mysql:
+#     image: mysql:8.0
+#     environment:
+#       MYSQL_ROOT_PASSWORD: password
+#       MYSQL_DATABASE: kindergarten
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     restart: unless-stopped
+#
+# volumes:
+#   mysql_data:

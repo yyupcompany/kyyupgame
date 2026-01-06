@@ -1,0 +1,297 @@
+/**
+ * SIP配置服务
+ * 
+ * 负责从数据库加载和管理SIP服务器配置
+ */
+
+import { getSequelize } from '../config/database';
+
+export interface SIPConfig {
+  id: number;
+  user_id: number;
+  server_host: string;
+  server_port: number;
+  username: string;
+  password: string;
+  protocol: 'UDP' | 'TCP';
+  is_active: boolean;
+  last_register_time?: Date;
+  register_interval: number;
+  created_at: Date;
+  updated_at: Date;
+}
+
+export class SIPConfigService {
+  private static instance: SIPConfigService;
+  private config: SIPConfig | null = null;
+  private isLoaded: boolean = false;
+
+  private constructor() {}
+
+  /**
+   * 获取单例实例
+   */
+  static getInstance(): SIPConfigService {
+    if (!SIPConfigService.instance) {
+      SIPConfigService.instance = new SIPConfigService();
+    }
+    return SIPConfigService.instance;
+  }
+
+  /**
+   * 从数据库加载SIP配置
+   */
+  async loadConfig(): Promise<void> {
+    try {
+      console.log('📞 正在加载SIP配置...');
+      
+      const sequelize = getSequelize();
+      const [results] = await sequelize.query(`
+        SELECT * FROM sip_configs WHERE is_active = 1 LIMIT 1
+      `);
+      
+      if (results && results.length > 0) {
+        this.config = results[0] as SIPConfig;
+        this.isLoaded = true;
+        
+        console.log('✅ SIP配置加载成功');
+        console.log(`   服务器: ${this.config.server_host}:${this.config.server_port}`);
+        console.log(`   用户名: ${this.config.username}`);
+        console.log(`   协议: ${this.config.protocol}`);
+        console.log(`   注册间隔: ${this.config.register_interval}秒`);
+      } else {
+        console.warn('⚠️  未找到激活的SIP配置');
+        console.log('💡 提示: 请在数据库中添加SIP配置');
+        console.log('   INSERT INTO sip_configs (user_id, server_host, server_port, username, password, protocol, is_active)');
+        console.log('   VALUES (1, \'47.94.82.59\', 5060, \'kanderadmin\', \'Szblade3944\', \'UDP\', TRUE);');
+      }
+    } catch (error) {
+      console.error('❌ 加载SIP配置失败:', error);
+      
+      // 检查表是否存在
+      try {
+        const sequelize = getSequelize();
+        await sequelize.query('SHOW TABLES LIKE "sip_configs"');
+      } catch (tableError) {
+        console.error('❌ sip_configs表不存在，请运行数据库迁移:');
+        console.log('   cd server && npx sequelize-cli db:migrate');
+      }
+    }
+  }
+
+  /**
+   * 重新加载配置
+   */
+  async reloadConfig(): Promise<void> {
+    this.config = null;
+    this.isLoaded = false;
+    await this.loadConfig();
+  }
+
+  /**
+   * 获取当前配置
+   */
+  getConfig(): SIPConfig | null {
+    return this.config;
+  }
+
+  /**
+   * 检查配置是否已加载
+   */
+  isConfigLoaded(): boolean {
+    return this.isLoaded && this.config !== null;
+  }
+
+  /**
+   * 获取SIP服务器地址
+   */
+  getServerAddress(): string | null {
+    if (!this.config) return null;
+    return `${this.config.server_host}:${this.config.server_port}`;
+  }
+
+  /**
+   * 获取SIP认证信息
+   */
+  getAuthInfo(): { username: string; password: string } | null {
+    if (!this.config) return null;
+    return {
+      username: this.config.username,
+      password: this.config.password
+    };
+  }
+
+  /**
+   * 更新最后注册时间
+   */
+  async updateLastRegisterTime(): Promise<void> {
+    if (!this.config) return;
+
+    try {
+      const sequelize = getSequelize();
+      await sequelize.query(`
+        UPDATE sip_configs
+        SET last_register_time = NOW()
+        WHERE id = ?
+      `, {
+        replacements: [this.config.id]
+      });
+
+      console.log('✅ SIP注册时间已更新');
+    } catch (error) {
+      console.error('❌ 更新SIP注册时间失败:', error);
+    }
+  }
+
+  /**
+   * 获取所有SIP配置（用于管理界面）
+   */
+  async getAllConfigs(): Promise<SIPConfig[]> {
+    try {
+      const sequelize = getSequelize();
+      const [results] = await sequelize.query(`
+        SELECT * FROM sip_configs ORDER BY is_active DESC, created_at DESC
+      `);
+
+      return results as SIPConfig[];
+    } catch (error) {
+      console.error('❌ 获取SIP配置列表失败:', error);
+      return [];
+    }
+  }
+
+  /**
+   * 创建新的SIP配置
+   */
+  async createConfig(config: Omit<SIPConfig, 'id' | 'created_at' | 'updated_at'>): Promise<SIPConfig | null> {
+    try {
+      const sequelize = getSequelize();
+      const [result] = await sequelize.query(`
+        INSERT INTO sip_configs (
+          user_id, server_host, server_port, username, password,
+          protocol, is_active, register_interval
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `, {
+        replacements: [
+          config.user_id,
+          config.server_host,
+          config.server_port,
+          config.username,
+          config.password,
+          config.protocol,
+          config.is_active,
+          config.register_interval
+        ]
+      });
+
+      console.log('✅ SIP配置创建成功');
+
+      // 如果是激活的配置，重新加载
+      if (config.is_active) {
+        await this.reloadConfig();
+      }
+
+      return this.config;
+    } catch (error) {
+      console.error('❌ 创建SIP配置失败:', error);
+      return null;
+    }
+  }
+
+  /**
+   * 更新SIP配置
+   */
+  async updateConfig(id: number, updates: Partial<SIPConfig>): Promise<boolean> {
+    try {
+      const fields: string[] = [];
+      const values: any[] = [];
+
+      if (updates.server_host !== undefined) {
+        fields.push('server_host = ?');
+        values.push(updates.server_host);
+      }
+      if (updates.server_port !== undefined) {
+        fields.push('server_port = ?');
+        values.push(updates.server_port);
+      }
+      if (updates.username !== undefined) {
+        fields.push('username = ?');
+        values.push(updates.username);
+      }
+      if (updates.password !== undefined) {
+        fields.push('password = ?');
+        values.push(updates.password);
+      }
+      if (updates.protocol !== undefined) {
+        fields.push('protocol = ?');
+        values.push(updates.protocol);
+      }
+      if (updates.is_active !== undefined) {
+        fields.push('is_active = ?');
+        values.push(updates.is_active);
+      }
+      if (updates.register_interval !== undefined) {
+        fields.push('register_interval = ?');
+        values.push(updates.register_interval);
+      }
+
+      if (fields.length === 0) {
+        console.warn('⚠️  没有需要更新的字段');
+        return false;
+      }
+
+      values.push(id);
+
+      const sequelize = getSequelize();
+      await sequelize.query(`
+        UPDATE sip_configs
+        SET ${fields.join(', ')}, updated_at = NOW()
+        WHERE id = ?
+      `, {
+        replacements: values
+      });
+
+      console.log('✅ SIP配置更新成功');
+
+      // 如果更新的是当前激活的配置，重新加载
+      if (this.config && this.config.id === id) {
+        await this.reloadConfig();
+      }
+
+      return true;
+    } catch (error) {
+      console.error('❌ 更新SIP配置失败:', error);
+      return false;
+    }
+  }
+
+  /**
+   * 删除SIP配置
+   */
+  async deleteConfig(id: number): Promise<boolean> {
+    try {
+      const sequelize = getSequelize();
+      await sequelize.query(`
+        DELETE FROM sip_configs WHERE id = ?
+      `, {
+        replacements: [id]
+      });
+
+      console.log('✅ SIP配置删除成功');
+
+      // 如果删除的是当前配置，重新加载
+      if (this.config && this.config.id === id) {
+        await this.reloadConfig();
+      }
+
+      return true;
+    } catch (error) {
+      console.error('❌ 删除SIP配置失败:', error);
+      return false;
+    }
+  }
+}
+
+// 导出单例
+export const sipConfigService = SIPConfigService.getInstance();
+

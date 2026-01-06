@@ -1,0 +1,228 @@
+{
+  "name": "任务中心查询模板字典",
+  "description": "任务管理、任务模板、任务评论、任务日志、子任务等任务中心相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 任务管理相关查询模板 ===": "注释",
+    "任务总数": {
+      "sql": "SELECT COUNT(*) as count FROM tasks",
+      "description": "查询任务总数",
+      "table": "tasks",
+      "response": "任务总数为{count}个",
+      "tokens": 10
+    },
+    "任务状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM tasks GROUP BY status ORDER BY FIELD(status, 'pending', 'in_progress', 'completed', 'cancelled')",
+      "description": "统计任务状态分布",
+      "table": "tasks",
+      "response": "任务状态统计完成",
+      "tokens": 20
+    },
+    "任务优先级分析": {
+      "sql": "SELECT priority, COUNT(*) as count FROM tasks GROUP BY priority ORDER BY FIELD(priority, 'urgent', 'high', 'medium', 'low')",
+      "description": "分析任务优先级分布",
+      "table": "tasks",
+      "response": "任务优先级分析完成",
+      "tokens": 20
+    },
+    "任务类型统计": {
+      "sql": "SELECT type, COUNT(*) as count FROM tasks GROUP BY type ORDER BY count DESC",
+      "description": "统计任务类型分布",
+      "table": "tasks",
+      "response": "任务类型统计完成",
+      "tokens": 20
+    },
+    "进行中任务": {
+      "sql": "SELECT COUNT(*) as count FROM tasks WHERE status = 'in_progress'",
+      "description": "查询进行中的任务数量",
+      "table": "tasks",
+      "response": "进行中任务{count}个",
+      "tokens": 12
+    },
+    "已完成任务": {
+      "sql": "SELECT COUNT(*) as count FROM tasks WHERE status = 'completed'",
+      "description": "查询已完成的任务数量",
+      "table": "tasks",
+      "response": "已完成任务{count}个",
+      "tokens": 12
+    },
+    "逾期任务": {
+      "sql": "SELECT COUNT(*) as count FROM tasks WHERE due_date < NOW() AND status NOT IN ('completed', 'cancelled')",
+      "description": "查询逾期的任务数量",
+      "table": "tasks",
+      "response": "逾期任务{count}个",
+      "tokens": 20
+    },
+    "本月新增任务": {
+      "sql": "SELECT COUNT(*) as count FROM tasks WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增任务数量",
+      "table": "tasks",
+      "response": "本月新增任务{count}个",
+      "tokens": 20
+    },
+    "本月完成任务": {
+      "sql": "SELECT COUNT(*) as count FROM tasks WHERE status = 'completed' AND YEAR(completed_at) = YEAR(NOW()) AND MONTH(completed_at) = MONTH(NOW())",
+      "description": "查询本月完成的任务数量",
+      "table": "tasks",
+      "response": "本月完成任务{count}个",
+      "tokens": 25
+    },
+
+    "// === 任务模板相关查询模板 ===": "注释",
+    "任务模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM task_templates",
+      "description": "查询任务模板总数",
+      "table": "task_templates",
+      "response": "任务模板总数为{count}个",
+      "tokens": 10
+    },
+    "活跃任务模板": {
+      "sql": "SELECT COUNT(*) as count FROM task_templates WHERE is_active = 1",
+      "description": "查询活跃任务模板数量",
+      "table": "task_templates",
+      "response": "活跃任务模板{count}个",
+      "tokens": 12
+    },
+    "任务模板类型分布": {
+      "sql": "SELECT type, COUNT(*) as count FROM task_templates GROUP BY type ORDER BY count DESC",
+      "description": "统计任务模板类型分布",
+      "table": "task_templates",
+      "response": "任务模板类型分布统计完成",
+      "tokens": 20
+    },
+    "任务模板使用统计": {
+      "sql": "SELECT name, usage_count FROM task_templates WHERE is_active = 1 ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计任务模板使用情况",
+      "table": "task_templates",
+      "response": "任务模板使用统计完成",
+      "tokens": 25
+    },
+    "公共任务模板": {
+      "sql": "SELECT COUNT(*) as count FROM task_templates WHERE is_public = 1 AND is_active = 1",
+      "description": "查询公共任务模板数量",
+      "table": "task_templates",
+      "response": "公共任务模板{count}个",
+      "tokens": 15
+    },
+
+    "// === 任务评论相关查询模板 ===": "注释",
+    "任务评论总数": {
+      "sql": "SELECT COUNT(*) as count FROM task_comments",
+      "description": "查询任务评论总数",
+      "table": "task_comments",
+      "response": "任务评论总数为{count}条",
+      "tokens": 10
+    },
+    "任务评论类型统计": {
+      "sql": "SELECT type, COUNT(*) as count FROM task_comments GROUP BY type ORDER BY count DESC",
+      "description": "统计任务评论类型分布",
+      "table": "task_comments",
+      "response": "任务评论类型统计完成",
+      "tokens": 20
+    },
+    "内部评论统计": {
+      "sql": "SELECT COUNT(*) as internal_count, COUNT(CASE WHEN is_internal = 0 THEN 1 END) as external_count FROM task_comments",
+      "description": "统计内部和外部评论数量",
+      "table": "task_comments",
+      "response": "评论类型统计完成",
+      "tokens": 20
+    },
+    "本月任务评论": {
+      "sql": "SELECT COUNT(*) as count FROM task_comments WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月任务评论数量",
+      "table": "task_comments",
+      "response": "本月任务评论{count}条",
+      "tokens": 20
+    },
+
+    "// === 任务日志相关查询模板 ===": "注释",
+    "任务日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM task_logs",
+      "description": "查询任务日志总数",
+      "table": "task_logs",
+      "response": "任务日志总数为{count}条",
+      "tokens": 10
+    },
+    "任务操作统计": {
+      "sql": "SELECT action, COUNT(*) as count FROM task_logs GROUP BY action ORDER BY count DESC",
+      "description": "统计任务操作类型分布",
+      "table": "task_logs",
+      "response": "任务操作统计完成",
+      "tokens": 20
+    },
+    "今日任务操作": {
+      "sql": "SELECT COUNT(*) as count FROM task_logs WHERE DATE(created_at) = CURDATE()",
+      "description": "查询今日任务操作数量",
+      "table": "task_logs",
+      "response": "今日任务操作{count}次",
+      "tokens": 15
+    },
+    "本月任务日志": {
+      "sql": "SELECT COUNT(*) as count FROM task_logs WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月任务日志数量",
+      "table": "task_logs",
+      "response": "本月任务日志{count}条",
+      "tokens": 20
+    },
+
+    "// === 子任务相关查询模板 ===": "注释",
+    "子任务总数": {
+      "sql": "SELECT COUNT(*) as count FROM task_subtasks",
+      "description": "查询子任务总数",
+      "table": "task_subtasks",
+      "response": "子任务总数为{count}个",
+      "tokens": 10
+    },
+    "子任务状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM task_subtasks GROUP BY status ORDER BY FIELD(status, 'pending', 'in_progress', 'completed', 'cancelled')",
+      "description": "统计子任务状态分布",
+      "table": "task_subtasks",
+      "response": "子任务状态统计完成",
+      "tokens": 20
+    },
+    "已完成子任务": {
+      "sql": "SELECT COUNT(*) as count FROM task_subtasks WHERE status = 'completed'",
+      "description": "查询已完成的子任务数量",
+      "table": "task_subtasks",
+      "response": "已完成子任务{count}个",
+      "tokens": 12
+    },
+    "逾期子任务": {
+      "sql": "SELECT COUNT(*) as count FROM task_subtasks WHERE due_date < NOW() AND status NOT IN ('completed', 'cancelled')",
+      "description": "查询逾期的子任务数量",
+      "table": "task_subtasks",
+      "response": "逾期子任务{count}个",
+      "tokens": 20
+    },
+    "本月完成子任务": {
+      "sql": "SELECT COUNT(*) as count FROM task_subtasks WHERE status = 'completed' AND YEAR(completed_at) = YEAR(NOW()) AND MONTH(completed_at) = MONTH(NOW())",
+      "description": "查询本月完成的子任务数量",
+      "table": "task_subtasks",
+      "response": "本月完成子任务{count}个",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "任务中心数据概览": {
+      "sql": "SELECT 'tasks' as category, COUNT(*) as count FROM tasks UNION ALL SELECT 'task_templates' as category, COUNT(*) as count FROM task_templates UNION ALL SELECT 'task_comments' as category, COUNT(*) as count FROM task_comments UNION ALL SELECT 'task_logs' as category, COUNT(*) as count FROM task_logs UNION ALL SELECT 'task_subtasks' as category, COUNT(*) as count FROM task_subtasks",
+      "description": "任务中心数据总览",
+      "table": "multiple",
+      "response": "任务中心数据概览查询完成",
+      "tokens": 40
+    },
+    "任务完成率分析": {
+      "sql": "SELECT COUNT(*) as total_tasks, COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed_tasks, COUNT(CASE WHEN status = 'completed' THEN 1 END) * 100.0 / COUNT(*) as completion_rate FROM tasks",
+      "description": "分析任务完成率",
+      "table": "tasks",
+      "response": "任务完成率分析完成",
+      "tokens": 30
+    },
+    "任务工作量统计": {
+      "sql": "SELECT SUM(estimated_hours) as total_estimated_hours, AVG(estimated_hours) as avg_estimated_hours, SUM(actual_hours) as total_actual_hours FROM tasks WHERE estimated_hours > 0",
+      "description": "统计任务工作量",
+      "table": "tasks",
+      "response": "任务工作量统计完成",
+      "tokens": 30
+    }
+  }
+}

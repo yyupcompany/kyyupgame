@@ -1,0 +1,483 @@
+/**
+ * 移动端 Centers 页面响应式样式
+ * Mobile Centers Page Responsive Styles
+ *
+ * 定义移动端 centers 页面的响应式布局和断点系统
+ * 与PC端 design-tokens.scss 的断点系统保持一致
+ */
+
+@import './design-tokens.scss';
+
+/* ==================== 响应式网格系统 ==================== */
+
+/* 中心卡片网格 - 自适应布局 */
+.centers-grid {
+  display: grid;
+  gap: var(--spacing-sm);
+
+  /* 小屏手机 (< 480px) - 单列布局 */
+  @media (max-width: 479px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+
+  /* 大屏手机 (480-767px) - 两列布局 */
+  @media (min-width: 480px) and (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 平板竖屏 (768-1023px) - 两列布局，较大间距 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  /* 大屏/平板横屏/桌面 (≥ 1024px) - 三列布局，居中显示 */
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    max-width: var(--breakpoint-lg);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* 统计卡片网格 */
+.stats-grid {
+  display: grid;
+  gap: var(--spacing-sm);
+
+  /* 小屏手机 - 两列布局 */
+  @media (max-width: 479px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 大屏手机及以上 - 三列布局 */
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 大屏设备优化 */
+  @media (min-width: 1024px) {
+    gap: var(--spacing-md);
+  }
+}
+
+/* 分组卡片网格 */
+.sections-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  /* 大屏设备保持单列但限制宽度 */
+  @media (min-width: 1024px) {
+    max-width: var(--breakpoint-lg);
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ==================== 组件响应式调整 ==================== */
+
+/* 中心卡片响应式 */
+.mobile-center-card {
+  /* 小屏设备 - 紧凑布局 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+
+    .center-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .center-info {
+      h4 {
+        font-size: var(--mobile-text-base);
+      }
+
+      p {
+        font-size: var(--mobile-text-xs);
+      }
+    }
+  }
+
+  /* 中等屏幕 - 标准布局 */
+  @media (min-width: 480px) and (max-width: 1023px) {
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+
+    .center-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* 大屏设备 - 宽松布局 */
+  @media (min-width: 1024px) {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-md);
+
+    .center-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .center-info {
+      h4 {
+        font-size: var(--text-lg);
+      }
+
+      p {
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+/* 统计卡片响应式 */
+.mobile-stat-card {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .stat-value {
+      font-size: var(--mobile-text-lg);
+    }
+
+    .stat-label {
+      font-size: var(--mobile-text-xs);
+    }
+  }
+
+  /* 中等及以上屏幕 */
+  @media (min-width: 480px) {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+
+    .stat-icon {
+      width: var(--stat-card-icon-size, 44px);
+      height: var(--stat-card-icon-size, 44px);
+    }
+
+    .stat-value {
+      font-size: var(--text-xl);
+    }
+
+    .stat-label {
+      font-size: var(--text-sm);
+    }
+  }
+}
+
+/* 搜索栏响应式 */
+.mobile-search-bar {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+    font-size: var(--mobile-text-base);
+
+    .search-input {
+      font-size: var(--mobile-text-base);
+    }
+  }
+
+  /* 中等及以上屏幕 */
+  @media (min-width: 480px) {
+    padding: var(--spacing-md);
+    font-size: var(--text-base);
+
+    .search-input {
+      font-size: var(--text-base);
+    }
+  }
+
+  /* 大屏设备 - 限制最大宽度 */
+  @media (min-width: 1024px) {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* 快捷操作响应式 */
+.mobile-quick-actions {
+  /* 小屏设备 - 较小间距 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-xs);
+
+    .quick-action-button {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: var(--mobile-text-xs);
+      min-width: 80px;
+    }
+  }
+
+  /* 中等屏幕 */
+  @media (min-width: 480px) and (max-width: 1023px) {
+    padding: var(--spacing-md);
+    gap: var(--spacing-sm);
+
+    .quick-action-button {
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: var(--mobile-text-sm);
+      min-width: 100px;
+    }
+  }
+
+  /* 大屏设备 - 居中显示 */
+  @media (min-width: 1024px) {
+    justify-content: center;
+    padding: var(--spacing-md);
+    gap: var(--spacing-md);
+    max-width: var(--breakpoint-lg);
+    margin: 0 auto;
+
+    .quick-action-button {
+      padding: var(--spacing-sm) var(--spacing-lg);
+      font-size: var(--text-sm);
+      min-width: 120px;
+    }
+  }
+}
+
+/* ==================== 页面容器响应式 ==================== */
+
+/* 主容器 */
+.mobile-centers-index {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-md);
+  }
+
+  /* 中等屏幕 */
+  @media (min-width: 480px) and (max-width: 1023px) {
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+
+  /* 大屏设备 */
+  @media (min-width: 1024px) {
+    padding: var(--spacing-lg);
+    gap: var(--spacing-xl);
+    max-width: var(--breakpoint-lg);
+    margin: 0 auto;
+  }
+}
+
+/* 概览区域 */
+.overview-section {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* 中等及以上屏幕 */
+  @media (min-width: 480px) {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* 大屏设备 */
+  @media (min-width: 1024px) {
+    margin-bottom: var(--spacing-xl);
+  }
+}
+
+/* ==================== 文字大小响应式 ==================== */
+
+/* 分组标题 */
+.section-title {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    font-size: var(--mobile-text-lg);
+  }
+
+  /* 中等及以上屏幕 */
+  @media (min-width: 480px) {
+    font-size: var(--text-lg);
+  }
+
+  /* 大屏设备 */
+  @media (min-width: 1024px) {
+    font-size: var(--text-xl);
+  }
+}
+
+/* 分组描述 */
+.section-description {
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    font-size: var(--mobile-text-xs);
+    line-height: 1.3;
+  }
+
+  /* 中等及以上屏幕 */
+  @media (min-width: 480px) {
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+
+  /* 大屏设备 */
+  @media (min-width: 1024px) {
+    font-size: var(--text-base);
+    line-height: 1.5;
+  }
+}
+
+/* ==================== 触摸目标响应式 ==================== */
+
+/* 确保触摸目标足够大（最小 44x44px） */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+
+  /* 小屏设备 */
+  @media (max-width: 479px) {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* 大屏设备可以稍微小一些，因为有鼠标 */
+  @media (min-width: 1024px) {
+    min-height: 40px;
+    min-width: 40px;
+  }
+}
+
+/* ==================== 间距调整 ==================== */
+
+/* 卡片内间距 */
+.card-padding {
+  /* 小屏 */
+  @media (max-width: 479px) {
+    padding: var(--spacing-sm);
+  }
+
+  /* 中等 */
+  @media (min-width: 480px) and (max-width: 1023px) {
+    padding: var(--spacing-md);
+  }
+
+  /* 大屏 */
+  @media (min-width: 1024px) {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* 卡片间距 */
+.card-gap {
+  /* 小屏 */
+  @media (max-width: 479px) {
+    gap: var(--spacing-xs);
+  }
+
+  /* 中等 */
+  @media (min-width: 480px) and (max-width: 1023px) {
+    gap: var(--spacing-sm);
+  }
+
+  /* 大屏 */
+  @media (min-width: 1024px) {
+    gap: var(--spacing-md);
+  }
+}
+
+/* ==================== 布局限制 ==================== */
+
+/* 内容容器最大宽度 */
+.content-container {
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    max-width: var(--breakpoint-lg);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+  }
+
+  @media (min-width: 1280px) {
+    max-width: var(--breakpoint-xl);
+  }
+}
+
+/* ==================== 特殊断点处理 ==================== */
+
+/* 超小屏幕（如 iPhone SE） */
+@media (max-width: 374px) {
+  .mobile-centers-index {
+    padding: var(--spacing-xs);
+  }
+
+  .centers-grid {
+    gap: var(--spacing-xs);
+  }
+
+  .mobile-center-card {
+    padding: var(--spacing-xs);
+  }
+}
+
+/* 横屏模式 */
+@media (orientation: landscape) and (max-height: 600px) {
+  .mobile-centers-index {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .overview-section {
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .mobile-quick-actions,
+  .mobile-search-bar {
+    display: none;
+  }
+
+  .mobile-centers-index {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .centers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+/* ==================== 辅助功能增强 ==================== */
+
+/* 高对比度模式下的响应式调整 */
+@media (prefers-contrast: high) {
+  .mobile-center-card,
+  .mobile-stat-card {
+    border-width: 2px;
+
+    @media (min-width: 1024px) {
+      border-width: 3px;
+    }
+  }
+}
+
+/* 减少动画模式下的响应式调整 */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-center-card,
+  .mobile-stat-card,
+  .mobile-search-bar {
+    transition: none;
+
+    @media (hover: hover) {
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+}

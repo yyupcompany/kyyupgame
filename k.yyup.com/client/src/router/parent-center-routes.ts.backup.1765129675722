@@ -1,0 +1,451 @@
+import { RouteRecordRaw } from 'vue-router'
+
+// 使用静态导入Layout
+import MainLayoutComponent from '../layouts/MainLayout.vue'
+const Layout = () => Promise.resolve({ default: MainLayoutComponent })
+
+// 家长中心路由配置 - 统一家长端所有功能
+const parentCenterRoutes: RouteRecordRaw[] = [
+  {
+    path: '/parent-center',
+    name: 'ParentCenter',
+    component: Layout,
+    redirect: '/parent-center/dashboard',
+    meta: {
+      title: '家长中心',
+      requiresAuth: true,
+      roles: ['parent'],
+      icon: 'User'
+    },
+    children: [
+      // ========== 家长首页 ==========
+      {
+        path: 'dashboard',
+        name: 'ParentDashboard',
+        component: () => import('@/pages/parent-center/dashboard/index.vue'),
+        meta: {
+          title: '我的首页',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'HomeFilled'
+        }
+      },
+      
+      // ========== 个人信息 ==========
+      {
+        path: 'profile',
+        name: 'ParentProfile',
+        component: () => import('@/pages/parent-center/profile/index.vue'),
+        meta: {
+          title: '我的信息',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'User'
+        }
+      },
+
+      // ========== 孩子管理 ==========
+      {
+        path: 'children',
+        name: 'ParentChildren',
+        component: () => import('@/pages/parent-center/children/index.vue'),
+        meta: {
+          title: '我的孩子',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'School'
+        }
+      },
+      {
+        path: 'children/growth/:id?',
+        name: 'ParentChildGrowth',
+        component: () => import('@/pages/parent-center/children/Growth.vue'),
+        meta: {
+          title: '孩子成长',
+          requiresAuth: true,
+          roles: ['parent'],
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'child-growth',
+        name: 'ParentChildGrowthReport',
+        component: () => import('@/pages/parent-center/children/Growth.vue'),
+        meta: {
+          title: '成长报告',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'TrendingUp'
+        }
+      },
+      {
+        path: 'follow-up',
+        name: 'ParentFollowUp',
+        component: () => import('@/pages/parent-center/children/FollowUp.vue'),
+        meta: {
+          title: '跟进记录',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Document'
+        }
+      },
+
+      // ========== 综合测评系统 ==========
+      {
+        path: 'assessment/start',
+        name: 'ParentAssessmentStart',
+        component: () => import('@/pages/parent-center/assessment/Start.vue'),
+        meta: {
+          title: '开始测评',
+          requiresAuth: false, // 测评免费开放
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'assessment',
+        name: 'ParentAssessment',
+        component: () => import('@/pages/parent-center/assessment/Layout.vue'),
+        redirect: '/parent-center/assessment/development',
+        meta: {
+          title: '测评中心',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Document'
+        },
+        children: [
+          // 2-6岁儿童发育商测评
+          {
+            path: 'development',
+            name: 'ParentDevelopmentAssessment',
+            component: () => import('@/pages/parent-center/assessment/index.vue'),
+            meta: {
+              title: '2-6岁发育测评',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'TrendCharts'
+            }
+          },
+
+          // 幼小衔接测评
+          {
+            path: 'school-readiness',
+            name: 'ParentSchoolReadinessAssessment',
+            component: () => import('@/pages/parent-center/assessment/SchoolReadiness.vue'),
+            meta: {
+              title: '幼小衔接',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'Notebook'
+            }
+          },
+
+          // 1-6年级学科测评
+          {
+            path: 'academic',
+            name: 'ParentAcademicAssessment',
+            component: () => import('@/pages/parent-center/assessment/Academic.vue'),
+            meta: {
+              title: '学科测评',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'Reading'
+            }
+          },
+
+          {
+            path: 'doing/:recordId',
+            name: 'ParentAssessmentDoing',
+            component: () => import('@/pages/parent-center/assessment/Doing.vue'),
+            meta: {
+              title: '测评进行中',
+              requiresAuth: false,
+              hideInMenu: true
+            }
+          },
+          {
+            path: 'report/:recordId',
+            name: 'ParentAssessmentReport',
+            component: () => import('@/pages/parent-center/assessment/Report.vue'),
+            meta: {
+              title: '测评报告',
+              requiresAuth: false,
+              hideInMenu: true
+            }
+          },
+          {
+            path: 'growth-trajectory',
+            name: 'ParentGrowthTrajectory',
+            component: () => import('@/pages/parent-center/assessment/GrowthTrajectory.vue'),
+            meta: {
+              title: '成长轨迹',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'DataAnalysis'
+            }
+          }
+        ]
+      },
+
+      // ========== AI助手 ==========
+      {
+        path: 'ai-assistant',
+        name: 'ParentAIAssistant',
+        component: () => import('@/pages/parent-center/ai-assistant/index.vue'),
+        meta: {
+          title: 'AI育儿助手',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'ChatDotRound'
+        }
+      },
+
+      // ========== 脑开发游戏 ==========
+      {
+        path: 'games',
+        name: 'ParentGames',
+        component: () => import('@/pages/parent-center/games/index.vue'),
+        meta: {
+          title: '游戏大厅',
+          requiresAuth: false,
+          icon: 'Cpu'
+        }
+      },
+      {
+        path: 'games/play/fruit-sequence',
+        name: 'FruitSequenceGame',
+        component: () => import('@/pages/parent-center/games/play/FruitSequence.vue'),
+        meta: {
+          title: '水果记忆大师',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/princess-garden',
+        name: 'PrincessGardenGame',
+        component: () => import('@/pages/parent-center/games/play/PrincessGarden.vue'),
+        meta: {
+          title: '公主花园找不同',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/space-treasure',
+        name: 'SpaceTreasureGame',
+        component: () => import('@/pages/parent-center/games/play/SpaceTreasure.vue'),
+        meta: {
+          title: '太空寻宝大冒险',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/animal-observer',
+        name: 'AnimalObserverGame',
+        component: () => import('@/pages/parent-center/games/play/AnimalObserver.vue'),
+        meta: {
+          title: '动物观察员',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/princess-memory',
+        name: 'PrincessMemoryGame',
+        component: () => import('@/pages/parent-center/games/play/PrincessMemory.vue'),
+        meta: {
+          title: '公主记忆宝盒',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/dinosaur-memory',
+        name: 'DinosaurMemoryGame',
+        component: () => import('@/pages/parent-center/games/play/DinosaurMemory.vue'),
+        meta: {
+          title: '恐龙记忆挑战',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/color-sorting',
+        name: 'ColorSortingGame',
+        component: () => import('@/pages/parent-center/games/play/ColorSorting.vue'),
+        meta: {
+          title: '颜色分类达人',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/dollhouse-tidy',
+        name: 'DollhouseTidyGame',
+        component: () => import('@/pages/parent-center/games/play/DollhouseTidy.vue'),
+        meta: {
+          title: '娃娃屋整理大师',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/robot-factory',
+        name: 'RobotFactoryGame',
+        component: () => import('@/pages/parent-center/games/play/RobotFactory.vue'),
+        meta: {
+          title: '机器人工厂',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/achievements',
+        name: 'ParentGamesAchievements',
+        component: () => import('@/pages/parent-center/games/achievements.vue'),
+        meta: {
+          title: '我的成就',
+          requiresAuth: true,
+          roles: ['parent'],
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/records',
+        name: 'ParentGamesRecords',
+        component: () => import('@/pages/parent-center/games/records.vue'),
+        meta: {
+          title: '游戏记录',
+          requiresAuth: true,
+          roles: ['parent'],
+          hideInMenu: true
+        }
+      },
+
+      // ========== 活动与通知 ==========
+      {
+        path: 'activities',
+        name: 'ParentActivities',
+        component: () => import('@/pages/parent-center/activities/index.vue'),
+        meta: {
+          title: '活动列表',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Calendar'
+        }
+      },
+      {
+        path: 'activity-registration',
+        name: 'ParentActivityRegistration',
+        component: () => import('@/pages/activity/registration/RegistrationDashboard.vue'),
+        meta: {
+          title: '活动报名',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Tickets'
+        }
+      },
+      {
+        path: 'notifications',
+        name: 'ParentNotifications',
+        component: () => import('@/pages/notifications/index.vue'),
+        meta: {
+          title: '通知公告',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Bell'
+        }
+      },
+
+      // ========== 相册中心 ==========
+      {
+        path: 'photo-album',
+        name: 'ParentPhotoAlbum',
+        component: () => import('@/pages/parent-center/photo-album/index.vue'),
+        meta: {
+          title: '相册中心',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Picture'
+        }
+      },
+
+      // ========== 园所奖励 / 推广中心 ==========
+      {
+        path: 'kindergarten-rewards',
+        name: 'ParentKindergartenRewards',
+        component: () => import('@/pages/parent-center/kindergarten-rewards.vue'),
+        meta: {
+          title: '园所奖励',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Gift'
+        }
+      },
+      {
+        path: 'promotion-center',
+        name: 'ParentPromotionCenter',
+        component: () => import('@/pages/parent-center/promotion-center/index.vue'),
+        meta: {
+          title: '推广中心',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Share'
+        }
+      },
+
+      // ========== 互动沟通 ==========
+      {
+        path: 'chat',
+        name: 'ParentChat',
+        component: () => import('@/pages/chat/index.vue'),
+        meta: {
+          title: '在线聊天',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'ChatLineRound'
+        }
+      },
+      {
+        path: 'smart-communication',
+        name: 'ParentSmartCommunication',
+        component: () => import('@/pages/parent-center/communication/smart-hub.vue'),
+        meta: {
+          title: '智能沟通',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'ChatDotRound'
+        }
+      },
+      {
+        path: 'feedback',
+        name: 'ParentFeedback',
+        component: () => import('@/pages/parent-center/feedback/ParentFeedback.vue'),
+        meta: {
+          title: '意见反馈',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Edit'
+        }
+      },
+
+      // ========== 分享统计 ==========
+      {
+        path: 'share-stats',
+        name: 'ParentShareStats',
+        component: () => import('@/pages/parent-center/share-stats/index.vue'),
+        meta: {
+          title: '分享统计',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Share'
+        }
+      }
+    ]
+  }
+]
+
+export { parentCenterRoutes }
+export default parentCenterRoutes
+

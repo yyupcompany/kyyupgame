@@ -1,0 +1,375 @@
+// 统一表格样式
+.unified-table-styles {
+  // 表格基础样式
+  .el-table {
+    border-radius: var(--el-border-radius-base);
+    overflow: hidden;
+
+    // 表头样式
+    .el-table__header-wrapper {
+      .el-table__header {
+        th {
+          background-color: var(--el-fill-color-light);
+          font-weight: 600;
+          color: var(--el-text-color-primary);
+          border-bottom: 1px solid var(--el-border-color);
+
+          .cell {
+            padding: 0 12px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+
+    // 表体样式
+    .el-table__body-wrapper {
+      .el-table__body {
+        tr {
+          &:hover {
+            td {
+              background-color: var(--el-fill-color-extra-light);
+            }
+          }
+
+          td {
+            border-bottom: 1px solid var(--el-border-color-lighter);
+
+            .cell {
+              padding: 0 12px;
+              line-height: 1.5;
+            }
+          }
+        }
+      }
+    }
+
+    // 操作列样式
+    .table-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      flex-wrap: wrap;
+
+      // 按钮组样式
+      .el-button-group {
+        display: inline-flex;
+
+        .el-button {
+          margin: 0;
+          border-radius: 0;
+
+          &:first-child {
+            border-top-left-radius: var(--el-border-radius-base);
+            border-bottom-left-radius: var(--el-border-radius-base);
+          }
+
+          &:last-child {
+            border-top-right-radius: var(--el-border-radius-base);
+            border-bottom-right-radius: var(--el-border-radius-base);
+          }
+
+          &:not(:first-child) {
+            border-left: none;
+          }
+
+          &:not(:last-child) {
+            border-right: 1px solid var(--el-button-border-color);
+          }
+
+          // 鼠标悬停时的边框处理
+          &:hover {
+            z-index: 1;
+          }
+        }
+      }
+
+      // 分散按钮样式
+      .action-button {
+        margin: 0 4px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        // 小尺寸按钮优化
+        &.el-button--small {
+          padding: 6px 12px;
+          font-size: var(--text-xs);
+        }
+      }
+
+      // 更多操作下拉菜单
+      .more-actions {
+        .el-dropdown-link {
+          cursor: pointer;
+          color: var(--el-color-primary);
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      // 图标样式
+      .action-icon {
+        margin-right: 4px;
+        font-size: var(--text-sm);
+      }
+    }
+
+    // 状态标签样式
+    .el-tag {
+      border-radius: var(--el-border-radius-small);
+
+      &.el-tag--small {
+        height: 20px;
+        line-height: 18px;
+        font-size: 11px;
+        padding: 0 8px;
+      }
+
+      // 状态标签颜色增强
+      &.el-tag--success {
+        background-color: var(--el-color-success-light-9);
+        border-color: var(--el-color-success-light-6);
+        color: var(--el-color-success-dark-2);
+      }
+
+      &.el-tag--warning {
+        background-color: var(--el-color-warning-light-9);
+        border-color: var(--el-color-warning-light-6);
+        color: var(--el-color-warning-dark-2);
+      }
+
+      &.el-tag--danger {
+        background-color: var(--el-color-danger-light-9);
+        border-color: var(--el-color-danger-light-6);
+        color: var(--el-color-danger-dark-2);
+      }
+
+      &.el-tag--info {
+        background-color: var(--el-color-info-light-9);
+        border-color: var(--el-color-info-light-6);
+        color: var(--el-color-info-dark-2);
+      }
+    }
+
+    // 金额显示样式
+    .money-text {
+      color: var(--el-color-success);
+      font-weight: 500;
+      font-family: 'Courier New', monospace;
+    }
+
+    // 时间显示样式
+    .datetime-text {
+      color: var(--el-text-color-secondary);
+      font-size: var(--text-sm);
+    }
+
+    // 链接样式
+    .table-link {
+      color: var(--el-color-primary);
+      text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--el-color-primary-dark-2);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // 分页组件样式
+  .table-pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    padding: var(--spacing-md) 0;
+    border-top: 1px solid var(--el-border-color-lighter);
+
+    .el-pagination {
+      --el-pagination-font-size: var(--text-sm);
+      --el-pagination-button-width: 32px;
+      --el-pagination-button-height: 32px;
+
+      // 总计信息样式
+      .el-pagination__total {
+        margin-right: 16px;
+        color: var(--el-text-color-secondary);
+      }
+
+      // 每页大小选择器
+      .el-pagination__sizes {
+        margin-right: 16px;
+
+        .el-select {
+          .el-input {
+            width: 110px;
+          }
+        }
+      }
+
+      // 页码按钮样式
+      .el-pager {
+        li {
+          &.active {
+            color: var(--el-color-primary);
+            border-color: var(--el-color-primary);
+          }
+        }
+      }
+
+      // 跳转输入框
+      .el-pagination__jump {
+        margin-left: 16px;
+        color: var(--el-text-color-secondary);
+
+        .el-input {
+          width: 50px;
+          margin: 0 8px;
+        }
+      }
+    }
+  }
+}
+
+// 响应式表格样式
+@media (max-width: var(--breakpoint-md)) {
+  .unified-table-styles {
+    .el-table {
+      // 移动端操作列优化
+      .table-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+
+        .el-button-group {
+          .el-button {
+            padding: var(--spacing-xs) 8px;
+            font-size: 11px;
+          }
+        }
+
+        .action-button {
+          padding: var(--spacing-xs) 8px;
+          font-size: 11px;
+          margin: 2px;
+        }
+      }
+
+      // 移动端状态标签
+      .el-tag {
+        &.el-tag--small {
+          height: 18px;
+          line-height: 16px;
+          font-size: 10px;
+          padding: 0 6px;
+        }
+      }
+    }
+
+    // 移动端分页
+    .table-pagination {
+      .el-pagination {
+        --el-pagination-font-size: var(--text-xs);
+        --el-pagination-button-width: 28px;
+        --el-pagination-button-height: 28px;
+
+        .el-pagination__sizes {
+          .el-select {
+            .el-input {
+              width: 90px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 表格加载状态样式
+.table-loading {
+  .el-loading-mask {
+    border-radius: var(--el-border-radius-base);
+  }
+}
+
+// 空数据状态样式
+.table-empty {
+  .el-table__empty-block {
+    .el-table__empty-text {
+      color: var(--el-text-color-placeholder);
+      font-size: var(--text-sm);
+    }
+  }
+}
+
+// 表格工具栏样式
+.table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    .table-title {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+    }
+
+    .table-subtitle {
+      font-size: var(--text-sm);
+      color: var(--el-text-color-secondary);
+    }
+  }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    .el-button {
+      &.el-button--small {
+        padding: 6px 12px;
+      }
+    }
+  }
+}
+
+// 批量操作栏样式
+.table-batch-actions {
+  background-color: var(--el-color-primary-light-9);
+  border: 1px solid var(--el-color-primary-light-6);
+  border-radius: var(--el-border-radius-base);
+  padding: var(--spacing-md) 16px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .batch-info {
+    color: var(--el-color-primary);
+    font-size: var(--text-sm);
+
+    .selected-count {
+      font-weight: 600;
+      margin: 0 4px;
+    }
+  }
+
+  .batch-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+}

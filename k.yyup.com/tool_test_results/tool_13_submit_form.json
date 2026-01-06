@@ -1,0 +1,9 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T23:03:31.082Z"}
+
+event: final_answer
+data: {"message":"💬 AI回答完成","content":"<[PLHD20_never_used_51bce0c785ca2f68081bfa7d91973934]>需要用户填写新生活动报名表，调用fill_form工具\n<[PLHD20_never_used_51bce0c785ca2f68081bfa7d91973934]>[{\"name\":\"fill_form\",\"parameters\":{\"form_type\":\"新生活动报名\"}}]<[PLHD21_never_used_51bce0c785ca2f68081bfa7d91973934]>","toolUsed":0,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T23:03:37.756Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T23:03:37.756Z","totalEvents":3,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.1782608695652174}
+

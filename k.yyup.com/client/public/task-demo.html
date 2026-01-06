@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教师任务中心 - 优化后布局演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #303133;
+            line-height: 1.6;
+        }
+
+        .teacher-tasks {
+            padding: 32px;
+            min-height: 100vh;
+        }
+
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #303133;
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-left p {
+            color: #909399;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #409eff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #66b1ff;
+        }
+
+        .btn-default {
+            background: white;
+            color: #606266;
+            border: 1px solid #dcdfe6;
+        }
+
+        .btn-default:hover {
+            background: #ecf5ff;
+            border-color: #409eff;
+            color: #409eff;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 32px;
+        }
+
+        .card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #ebeef5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #303133;
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .team-item {
+            text-align: center;
+            padding: 24px 20px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            border: 1px solid #e4e7ed;
+            transition: all 0.3s ease;
+        }
+
+        .team-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-color: #409eff;
+        }
+
+        .team-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #303133;
+            margin-bottom: 12px;
+            line-height: 1;
+        }
+
+        .team-label {
+            font-size: 14px;
+            color: #606266;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .team-trend {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 16px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .team-trend.info {
+            background: rgba(64, 158, 255, 0.1);
+            color: #409eff;
+        }
+
+        .team-trend.warning {
+            background: rgba(230, 162, 60, 0.1);
+            color: #e6a23c;
+        }
+
+        .team-trend.danger {
+            background: rgba(245, 108, 108, 0.1);
+            color: #f56c6c;
+        }
+
+        .team-trend.success {
+            background: rgba(103, 194, 58, 0.1);
+            color: #67c23a;
+        }
+
+        .stats-progress-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .stats-grid-compact {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .stat-item-horizontal {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e4e7ed;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item-horizontal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-color: #409eff;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .stat-icon.total {
+            background: rgba(64, 158, 255, 0.1);
+            color: #409eff;
+        }
+
+        .stat-icon.completed {
+            background: rgba(103, 194, 58, 0.1);
+            color: #67c23a;
+        }
+
+        .stat-icon.pending {
+            background: rgba(230, 162, 60, 0.1);
+            color: #e6a23c;
+        }
+
+        .stat-icon.overdue {
+            background: rgba(245, 108, 108, 0.1);
+            color: #f56c6c;
+        }
+
+        .stat-content {
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #303133;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #606266;
+            font-weight: 500;
+        }
+
+        .progress-content-enhanced {
+            padding: 0;
+        }
+
+        .progress-main {
+            margin-bottom: 24px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 16px;
+            background-color: #f0f2f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, #67c23a, #85ce61);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 67%;
+        }
+
+        .progress-stats-enhanced {
+            display: flex;
+            gap: 24px;
+        }
+
+        .progress-item-enhanced {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e4e7ed;
+        }
+
+        .progress-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(64, 158, 255, 0.1);
+            color: #409eff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .progress-info {
+            flex: 1;
+        }
+
+        .progress-label {
+            display: block;
+            font-size: 12px;
+            color: #909399;
+            margin-bottom: 4px;
+        }
+
+        .progress-number {
+            font-size: 20px;
+            font-weight: 600;
+            color: #303133;
+        }
+
+        .progress-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            color: #67c23a;
+        }
+
+        .tag {
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag-primary {
+            background: rgba(64, 158, 255, 0.1);
+            color: #409eff;
+        }
+
+        @media (max-width: 768px) {
+            .teacher-tasks {
+                padding: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            
+            .stats-progress-section {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .progress-stats-enhanced {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="teacher-tasks">
+        <!-- 页面头部 -->
+        <div class="page-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>📋 任务中心</h1>
+                    <p>管理您的日常任务，提高工作效率</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary">➕ 新建任务</button>
+                    <button class="btn btn-default">🔄 刷新</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 团队协作概览 -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">👥 团队协作概览</span>
+                <span class="tag tag-primary">12位成员</span>
+            </div>
+            <div class="card-body">
+                <div class="team-grid">
+                    <div class="team-item">
+                        <div class="team-value">3</div>
+                        <div class="team-label">共享任务</div>
+                        <div class="team-trend info">需要协作完成</div>
+                    </div>
+                    <div class="team-item">
+                        <div class="team-value">2</div>
+                        <div class="team-label">待我审批</div>
+                        <div class="team-trend warning">需要处理</div>
+                    </div>
+                    <div class="team-item">
+                        <div class="team-value">1</div>
+                        <div class="team-label">紧急截止</div>
+                        <div class="team-trend danger">需要关注</div>
+                    </div>
+                    <div class="team-item">
+                        <div class="team-value">#4</div>
+                        <div class="team-label">我的排名</div>
+                        <div class="team-trend success">本月完成度</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计与进度综合区域 -->
+        <div class="stats-progress-section">
+            <!-- 左侧：任务统计 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">📊 任务统计</span>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid-compact">
+                        <div class="stat-item-horizontal">
+                            <div class="stat-icon total">📋</div>
+                            <div class="stat-content">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">全部任务</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item-horizontal">
+                            <div class="stat-icon completed">✅</div>
+                            <div class="stat-content">
+                                <div class="stat-value">10</div>
+                                <div class="stat-label">已完成</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item-horizontal">
+                            <div class="stat-icon pending">⏰</div>
+                            <div class="stat-content">
+                                <div class="stat-value">4</div>
+                                <div class="stat-label">进行中</div>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-item-horizontal">
+                            <div class="stat-icon overdue">⚠️</div>
+                            <div class="stat-content">
+                                <div class="stat-value">1</div>
+                                <div class="stat-label">已逾期</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧：完成率进度 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title">📈 完成进度</span>
+                    <span class="progress-percentage">67%</span>
+                </div>
+                <div class="card-body">
+                    <div class="progress-content-enhanced">
+                        <div class="progress-main">
+                            <div class="progress-bar">
+                                <div class="progress-bar-inner"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-stats-enhanced">
+                            <div class="progress-item-enhanced">
+                                <div class="progress-icon">📅</div>
+                                <div class="progress-info">
+                                    <span class="progress-label">本周完成</span>
+                                    <span class="progress-number">8</span>
+                                </div>
+                            </div>
+                            <div class="progress-item-enhanced">
+                                <div class="progress-icon">📅</div>
+                                <div class="progress-info">
+                                    <span class="progress-label">本月完成</span>
+                                    <span class="progress-number">25</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

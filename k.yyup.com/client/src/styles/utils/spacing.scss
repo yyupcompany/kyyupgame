@@ -1,0 +1,106 @@
+/* 间距工具类 */
+
+// 间距变量
+$spacing-sizes: (
+  'none': 0,
+  'xs': var(--spacing-xs),
+  'sm': var(--spacing-sm),
+  'md': var(--spacing-md),
+  'lg': var(--spacing-lg),
+  'xl': var(--spacing-xl)
+);
+
+// 生成所有间距类
+@each $size, $value in $spacing-sizes {
+  // margin
+  .m-#{$size} { margin: $value; }
+  .mx-#{$size} { margin-left: $value; margin-right: $value; }
+  .my-#{$size} { margin-top: $value; margin-bottom: $value; }
+  .mt-#{$size} { margin-top: $value; }
+  .mr-#{$size} { margin-right: $value; }
+  .mb-#{$size} { margin-bottom: $value; }
+  .ml-#{$size} { margin-left: $value; }
+  
+  // padding
+  .p-#{$size} { padding: $value; }
+  .px-#{$size} { padding-left: $value; padding-right: $value; }
+  .py-#{$size} { padding-top: $value; padding-bottom: $value; }
+  .pt-#{$size} { padding-top: $value; }
+  .pr-#{$size} { padding-right: $value; }
+  .pb-#{$size} { padding-bottom: $value; }
+  .pl-#{$size} { padding-left: $value; }
+}
+
+// 间距自动
+.m-auto { margin: auto; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-auto { margin-top: auto; margin-bottom: auto; }
+.mt-auto { margin-top: auto; }
+.mr-auto { margin-right: auto; }
+.mb-auto { margin-bottom: auto; }
+.ml-auto { margin-left: auto; }
+
+// 间距负值
+.mt-n-sm { margin-top: calc(var(--spacing-sm) * -1); }
+.mr-n-sm { margin-right: calc(var(--spacing-sm) * -1); }
+.mb-n-sm { margin-bottom: calc(var(--spacing-sm) * -1); }
+.ml-n-sm { margin-left: calc(var(--spacing-sm) * -1); }
+
+.mt-n-md { margin-top: calc(var(--spacing-md) * -1); }
+.mr-n-md { margin-right: calc(var(--spacing-md) * -1); }
+.mb-n-md { margin-bottom: calc(var(--spacing-md) * -1); }
+.ml-n-md { margin-left: calc(var(--spacing-md) * -1); }
+
+// 间距响应式
+@media (min-width: 768px) {
+  @each $size, $value in $spacing-sizes {
+    .md\:m-#{$size} { margin: $value; }
+    .md\:mx-#{$size} { margin-left: $value; margin-right: $value; }
+    .md\:my-#{$size} { margin-top: $value; margin-bottom: $value; }
+    .md\:mt-#{$size} { margin-top: $value; }
+    .md\:mr-#{$size} { margin-right: $value; }
+    .md\:mb-#{$size} { margin-bottom: $value; }
+    .md\:ml-#{$size} { margin-left: $value; }
+    
+    .md\:p-#{$size} { padding: $value; }
+    .md\:px-#{$size} { padding-left: $value; padding-right: $value; }
+    .md\:py-#{$size} { padding-top: $value; padding-bottom: $value; }
+    .md\:pt-#{$size} { padding-top: $value; }
+    .md\:pr-#{$size} { padding-right: $value; }
+    .md\:pb-#{$size} { padding-bottom: $value; }
+    .md\:pl-#{$size} { padding-left: $value; }
+  }
+}
+
+@media (min-width: 1024px) {
+  @each $size, $value in $spacing-sizes {
+    .lg\:m-#{$size} { margin: $value; }
+    .lg\:mx-#{$size} { margin-left: $value; margin-right: $value; }
+    .lg\:my-#{$size} { margin-top: $value; margin-bottom: $value; }
+    .lg\:mt-#{$size} { margin-top: $value; }
+    .lg\:mr-#{$size} { margin-right: $value; }
+    .lg\:mb-#{$size} { margin-bottom: $value; }
+    .lg\:ml-#{$size} { margin-left: $value; }
+    
+    .lg\:p-#{$size} { padding: $value; }
+    .lg\:px-#{$size} { padding-left: $value; padding-right: $value; }
+    .lg\:py-#{$size} { padding-top: $value; padding-bottom: $value; }
+    .lg\:pt-#{$size} { padding-top: $value; }
+    .lg\:pr-#{$size} { padding-right: $value; }
+    .lg\:pb-#{$size} { padding-bottom: $value; }
+    .lg\:pl-#{$size} { padding-left: $value; }
+  }
+}
+
+// 间距组合
+.space-x-xs > * + * { margin-left: var(--spacing-xs); }
+.space-x-sm > * + * { margin-left: var(--spacing-sm); }
+.space-x-md > * + * { margin-left: var(--spacing-md); }
+.space-x-lg > * + * { margin-left: var(--spacing-lg); }
+.space-x-xl > * + * { margin-left: var(--spacing-xl); }
+
+.space-y-xs > * + * { margin-top: var(--spacing-xs); }
+.space-y-sm > * + * { margin-top: var(--spacing-sm); }
+.space-y-md > * + * { margin-top: var(--spacing-md); }
+.space-y-lg > * + * { margin-top: var(--spacing-lg); }
+.space-y-xl > * + * { margin-top: var(--spacing-xl); } 

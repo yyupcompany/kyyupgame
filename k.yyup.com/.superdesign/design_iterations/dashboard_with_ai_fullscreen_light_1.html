@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婴婴向上 - 全屏AI助手</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <link rel="stylesheet" href="theme_light_1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: var(--font-sans); background-color: var(--background); color: var(--foreground); }
+        .sidebar { background-color: var(--sidebar); color: var(--sidebar-foreground); border-right: 1px solid var(--sidebar-border); }
+        .header { border-bottom: 1px solid var(--border); }
+        .card { background-color: var(--card); border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: all 300ms ease-in-out; animation: card-load 500ms ease-out backwards; }
+        .card:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lg); }
+        @keyframes card-load { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .number-scroll { animation: number-scroll-anim 1s ease-out forwards; }
+        @property --num { syntax: '<integer>'; initial-value: 0; inherits: false; }
+        @keyframes number-scroll-anim { from { --num: 0; } }
+        .animate-number-1 { --num: 18; } .animate-number-2 { --num: 3; } .animate-number-3 { --num: 131; } .animate-number-4 { --num: 104; } .animate-number-5 { --num: 1250; } .animate-number-6 { --num: 98; } .animate-number-7 { --num: 12; } .animate-number-8 { --num: 0; } .animate-number-9 { --num: 131; } .animate-number-10 { --num: 18; } .animate-number-11 { --num: 3; } .animate-number-12 { --num: 0; }
+        .number-scroll::after { content: counter(num); counter-reset: num var(--num); }
+        .btn-primary { background-color: var(--primary); color: var(--primary-foreground); transition: all 200ms ease; }
+        .btn-primary:hover { opacity: 0.9; transform: scale(1.05); }
+        
+        /* AI Modal Styles */
+        #ai-modal-overlay { transition: opacity 0.3s ease-in-out; }
+        #ai-modal { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 flex-shrink-0 p-4">
+        <div class="flex items-center mb-8">
+            <img src="https://placehold.co/32x32/8A2BE2/FFFFFF?text=logo" alt="Logo" class="rounded-lg mr-3">
+            <h1 class="text-xl font-bold">婴婴向上</h1>
+        </div>
+        <nav class="flex flex-col space-y-2">
+            <a href="#" class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-[--sidebar-accent] group"><i class="el-icon-odometer w-5 h-5 text-[--sidebar-foreground] group-hover:text-[--sidebar-accent-foreground]"></i><span class="ml-3">工作台</span></a>
+            <a href="#" class="flex items-center p-2 text-base font-medium rounded-lg hover:bg-[--sidebar-accent] group"><i class="el-icon-data-line w-5 h-5 text-[--sidebar-foreground] group-hover:text-[--sidebar-accent-foreground]"></i><span class="ml-3">系统概览与数据统计</span></a>
+            <a href="#" class="flex items-center p-2 text-base font-medium rounded-lg bg-[--sidebar-accent] text-[--sidebar-accent-foreground] group"><i class="el-icon-briefcase w-5 h-5 text-[--sidebar-primary]"></i><span class="ml-3 font-semibold">业务中心</span></a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <!-- Header -->
+        <header class="header flex justify-between items-center p-4">
+            <div class="flex items-center">
+                <i class="el-icon-menu w-6 h-6 mr-4 cursor-pointer md:hidden"></i>
+                <i class="el-icon-house w-4 h-4 text-[--muted-foreground]"></i>
+                <span class="text-[--muted-foreground] mx-2">/</span>
+                <span class="font-medium">数据概览</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="open-ai-btn" class="flex items-center text-sm font-medium p-2 rounded-md border border-[--border] hover:bg-[--secondary]">
+                    <i class="el-icon-chat-dot-round w-4 h-4 mr-2 text-blue-500"></i> YY-AI
+                    <i class="el-icon-sort w-4 h-4 ml-2"></i>
+                </button>
+                <div class="w-8 h-8 bg-purple-600 text-white flex items-center justify-center rounded-full font-bold text-sm">A</div>
+                <span>admin (系统管理员)</span>
+                <button class="flex items-center text-sm text-[--muted-foreground] hover:text-[--foreground]">
+                    <i class="el-icon-switch-button w-4 h-4 mr-2"></i>
+                    退出登录
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto p-6">
+            <h2 class="text-2xl font-bold mb-4">业务中心概览</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card p-4"><div class="flex items-center"><i class="el-icon-user w-8 h-8 text-green-500 mr-4"></i><div><h3 class="text-3xl font-bold number-scroll animate-number-1"></h3><p class="text-sm text-[--muted-foreground]">人事中心</p></div></div></div>
+                <div class="card p-4"><div class="flex items-center"><i class="el-icon-calendar w-8 h-8 text-cyan-500 mr-4"></i><div><h3 class="text-3xl font-bold number-scroll animate-number-2"></h3><p class="text-sm text-[--muted-foreground]">活动中心</p></div></div></div>
+                <div class="card p-4"><div class="flex items-center"><i class="el-icon-school w-8 h-8 text-orange-500 mr-4"></i><div><h3 class="text-3xl font-bold number-scroll animate-number-3"></h3><p class="text-sm text-[--muted-foreground]">招生中心</p></div></div></div>
+                <div class="card p-4"><div class="flex items-center"><i class="el-icon-top-right w-8 h-8 text-blue-500 mr-4"></i><div><h3 class="text-3xl font-bold number-scroll animate-number-4"></h3><p class="text-sm text-[--muted-foreground]">营销中心</p></div></div></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Fullscreen AI Modal -->
+    <div id="ai-modal-overlay" class="fixed inset-0 bg-black/50 z-30 hidden items-center justify-center p-4 transition-opacity duration-300 opacity-0">
+        <div id="ai-modal" class="bg-[--card] w-full max-w-4xl h-[90vh] rounded-lg shadow-2xl flex flex-col transform transition-all duration-300 scale-95 opacity-0">
+            <!-- Header -->
+            <div class="flex justify-between items-center p-4 border-b border-[--border] flex-shrink-0">
+                <h2 class="text-lg font-semibold text-[--foreground]">AI 助手</h2>
+                <button id="close-ai-modal" class="text-[--muted-foreground] hover:text-[--foreground]"><i class="el-icon-close w-5 h-5"></i></button>
+            </div>
+            <!-- Chat Area -->
+            <div class="p-6 flex-1 overflow-y-auto space-y-6">
+                <!-- AI Message -->
+                <div class="flex gap-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold flex-shrink-0">AI</div>
+                    <div class="p-4 rounded-lg bg-[--secondary] text-[--secondary-foreground] max-w-xl">
+                        <p class="text-sm">您好！我是您的AI助手，有什么可以帮助您的吗？</p>
+                    </div>
+                </div>
+                <!-- User Message -->
+                <div class="flex justify-end gap-3">
+                    <div class="p-4 rounded-lg bg-[--primary] text-[--primary-foreground] max-w-xl">
+                        <p class="text-sm">你好，请帮我总结一下上个月的活跃客户数据，并与上上个月进行对比。</p>
+                    </div>
+                     <div class="w-8 h-8 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold flex-shrink-0">A</div>
+                </div>
+            </div>
+            <!-- Input Area -->
+            <div class="p-4 bg-[--card] border-t border-[--border] flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <textarea class="flex-1 p-3 rounded-md bg-[--input] border border-[--border] focus:ring-2 focus:ring-[--ring] focus:outline-none text-sm resize-none" placeholder="请输入您的问题..." rows="2"></textarea>
+                    <button class="btn-primary px-6 py-3 rounded-md text-sm font-semibold self-end">发送</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const openAiButton = document.getElementById('open-ai-btn');
+        const aiModalOverlay = document.getElementById('ai-modal-overlay');
+        const aiModal = document.getElementById('ai-modal');
+        const closeAiButton = document.getElementById('close-ai-modal');
+
+        function openModal() {
+            aiModalOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                aiModalOverlay.classList.remove('opacity-0');
+                aiModal.classList.remove('opacity-0');
+                aiModal.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            aiModalOverlay.classList.add('opacity-0');
+            aiModal.classList.add('opacity-0');
+            aiModal.classList.add('scale-95');
+            setTimeout(() => {
+                aiModalOverlay.classList.add('hidden');
+            }, 300);
+        }
+
+        openAiButton.addEventListener('click', openModal);
+        closeAiButton.addEventListener('click', closeModal);
+        aiModalOverlay.addEventListener('click', (event) => {
+            if (event.target === aiModalOverlay) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>移动端家长沟通中心 - 智能沟通中心演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background-color: #f7f8fa;
+            color: #323233;
+        }
+
+        .demo-container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #1989fa, #40a9ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .demo-header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .demo-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .demo-content {
+            padding: 16px;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
+        }
+
+        .demo-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #323233;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-icon {
+            width: 20px;
+            height: 20px;
+            background: #1989fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .demo-card {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #ebedf0;
+        }
+
+        .demo-card-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1989fa;
+            margin-bottom: 4px;
+        }
+
+        .demo-card-label {
+            font-size: 12px;
+            color: #969799;
+        }
+
+        .demo-button {
+            background: linear-gradient(135deg, #1989fa, #40a9ff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .demo-button:active {
+            transform: scale(0.98);
+        }
+
+        .demo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .demo-list-item {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #1989fa;
+        }
+
+        .demo-list-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #323233;
+            margin-bottom: 4px;
+        }
+
+        .demo-list-item-desc {
+            font-size: 12px;
+            color: #969799;
+            line-height: 1.4;
+        }
+
+        .demo-progress {
+            width: 100%;
+            height: 4px;
+            background: #ebedf0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .demo-progress-bar {
+            height: 100%;
+            background: #07c160;
+            transition: width 0.3s ease;
+        }
+
+        .demo-badge {
+            background: #ee0a24;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .demo-container {
+                margin: 20px auto;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>智能沟通中心</h1>
+            <p>AI驱动的个性化家长沟通平台</p>
+        </div>
+
+        <div class="demo-content">
+            <!-- 沟通概览仪表板 -->
+            <div class="demo-section">
+                <div class="demo-section-title">
+                    <div class="demo-icon">📊</div>
+                    沟通概览
+                </div>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div class="demo-card-value">87%</div>
+                        <div class="demo-card-label">整体参与度</div>
+                    </div>
+                    <div class="demo-card">
+                        <div class="demo-card-value">2.3h</div>
+                        <div class="demo-card-label">平均响应时间</div>
+                    </div>
+                    <div class="demo-card">
+                        <div class="demo-card-value">4.6/5</div>
+                        <div class="demo-card-label">家长满意度</div>
+                    </div>
+                    <div class="demo-card">
+                        <div class="demo-card-value">73%</div>
+                        <div class="demo-card-label">AI自动化率</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI内容生成 -->
+            <div class="demo-section">
+                <div class="demo-section-title">
+                    <div class="demo-icon">✨</div>
+                    AI个性化内容
+                    <span class="demo-badge">新</span>
+                </div>
+                <div class="demo-list">
+                    <div class="demo-list-item">
+                        <div class="demo-list-item-title">小明本周学习进展报告</div>
+                        <div class="demo-list-item-desc">基于AI分析生成的个性化学习报告，包含详细的学习数据和改进建议...</div>
+                        <div style="font-size: 12px; color: #1989fa; margin-top: 8px;">
+                            相关度: 92% | 预期参与度: 85%
+                        </div>
+                    </div>
+                    <div class="demo-list-item">
+                        <div class="demo-list-item-title">周末亲子活动推荐</div>
+                        <div class="demo-list-item-desc">根据您孩子的兴趣特点和发展需求，我们为您推荐以下亲子活动...</div>
+                        <div style="font-size: 12px; color: #1989fa; margin-top: 8px;">
+                            相关度: 78% | 预期参与度: 72%
+                        </div>
+                    </div>
+                </div>
+                <button class="demo-button">生成更多内容</button>
+            </div>
+
+            <!-- 智能回复系统 -->
+            <div class="demo-section">
+                <div class="demo-section-title">
+                    <div class="demo-icon">💬</div>
+                    智能回复助手
+                    <span class="demo-badge">智能</span>
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; border: 1px solid #ebedf0;">
+                        <div style="font-size: 12px; color: #969799; margin-bottom: 4px;">模拟家长消息</div>
+                        <div style="font-size: 14px; color: #323233;">孩子最近在学校表现怎么样？</div>
+                    </div>
+                </div>
+                <div class="demo-list">
+                    <div class="demo-list-item">
+                        <div class="demo-list-item-title">专业友好型回复</div>
+                        <div class="demo-list-item-desc">感谢您的关注！小明这周在各方面都有不错的表现...</div>
+                        <div style="font-size: 12px; color: #07c160; margin-top: 8px;">可信度: 92%</div>
+                    </div>
+                    <div class="demo-list-item">
+                        <div class="demo-list-item-title">共情理解型回复</div>
+                        <div class="demo-list-item-desc">我们理解您的关心，每个孩子的发展节奏都不同...</div>
+                        <div style="font-size: 12px; color: #07c160; margin-top: 8px;">可信度: 88%</div>
+                    </div>
+                </div>
+                <button class="demo-button">生成智能回复</button>
+            </div>
+
+            <!-- 话题分析 -->
+            <div class="demo-section">
+                <div class="demo-section-title">
+                    <div class="demo-icon">📈</div>
+                    话题热度分析
+                </div>
+                <div class="demo-list">
+                    <div class="demo-list-item">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 14px; font-weight: 600;">学习进度</span>
+                            <span style="font-size: 12px; color: #969799;">45次</span>
+                        </div>
+                        <div class="demo-progress">
+                            <div class="demo-progress-bar" style="width: 75%; background: #07c160;"></div>
+                        </div>
+                    </div>
+                    <div class="demo-list-item">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 14px; font-weight: 600;">行为表现</span>
+                            <span style="font-size: 12px; color: #969799;">32次</span>
+                        </div>
+                        <div class="demo-progress">
+                            <div class="demo-progress-bar" style="width: 68%; background: #ff976a;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 改进建议 -->
+            <div class="demo-section">
+                <div class="demo-section-title">
+                    <div class="demo-icon">🚀</div>
+                    AI改进建议
+                    <span class="demo-badge">推荐</span>
+                </div>
+                <div class="demo-list">
+                    <div class="demo-list-item">
+                        <div class="demo-list-item-title">个性化内容推送时间优化</div>
+                        <div class="demo-list-item-desc">根据家长的在线活跃时间，优化内容推送时机...</div>
+                        <div style="font-size: 12px; color: #ee0a24; margin-top: 8px;">
+                            高优先级 | 预期提升: 参与度提升30%
+                        </div>
+                    </div>
+                </div>
+                <button class="demo-button">开始实施改进</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有按钮添加点击效果
+            const buttons = document.querySelectorAll('.demo-button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                        alert('这是演示版本，实际功能请使用Vue应用');
+                    }, 100);
+                });
+            });
+
+            // 为卡片添加点击效果
+            const cards = document.querySelectorAll('.demo-card, .demo-list-item');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.backgroundColor = '#e8f4ff';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '#f8f9fa';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

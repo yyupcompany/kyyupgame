@@ -1,0 +1,352 @@
+/**
+ * 人事中心样式修复
+ * Personnel Center Style Fixes
+ * 
+ * 专门修复人事中心页面的样式问题，特别是班级管理标签页的表格样式
+ */
+
+/* ==================== 班级管理表格样式修复 ==================== */
+.classes-content {
+  .classes-layout {
+    .classes-list {
+      // 确保表格容器有足够的高度
+      min-height: 600px;
+      
+      // 修复表格样式
+      :deep(.el-table) {
+        // 确保表格占用全部可用空间
+        height: 100% !important;
+        
+        // 修复表头样式
+        .el-table__header-wrapper {
+          .el-table__header {
+            th {
+              background: linear-gradient(to bottom, #fafbfc 0%, #f4f5f7 100%);
+              border-bottom: 2px solid #e4e7ed;
+              font-weight: 600;
+              color: #303133;
+              
+              .cell {
+                padding: var(--spacing-md) 12px;
+                font-size: var(--text-sm);
+                line-height: 1.4;
+                
+                // 修复操作列样式
+                &.has-gutter {
+                  padding-right: 16px;
+                }
+              }
+            }
+          }
+        }
+        
+        // 修复表格行样式
+        .el-table__body-wrapper {
+          .el-table__body {
+            tr {
+              transition: all 0.2s ease;
+              
+              &:hover {
+                background-color: #f5f7fa !important;
+                
+                td {
+                  background-color: inherit;
+                }
+              }
+              
+              td {
+                padding: var(--spacing-md) 12px;
+                border-bottom: 1px solid #f0f2f5;
+                vertical-align: middle;
+                
+                .cell {
+                  padding: 0;
+                  line-height: 1.5;
+                  color: #606266;
+                  font-size: var(--text-sm);
+                  
+                  // 修复操作按钮样式
+                  .action-buttons {
+                    display: flex;
+                    gap: var(--spacing-sm);
+                    align-items: center;
+                    justify-content: flex-start;
+                    
+                    .el-button {
+                      padding: 6px 12px;
+                      font-size: var(--text-sm);
+                      border-radius: 4px;
+                      min-width: 60px;
+                      height: 32px;
+                      
+                      &--small {
+                        padding: var(--spacing-xs) 10px;
+                        font-size: var(--text-xs);
+                        height: 28px;
+                        min-width: 54px;
+                      }
+                      
+                      // 主要按钮样式
+                      &--primary {
+                        background: #409eff;
+                        border-color: #409eff;
+                        color: #ffffff;
+                        
+                        &:hover {
+                          background: #66b1ff;
+                          border-color: #66b1ff;
+                          transform: none; // 移除悬停时的位移效果
+                        }
+                        
+                        &:active {
+                          background: #3a8ee6;
+                          border-color: #3a8ee6;
+                        }
+                      }
+                      
+                      // 危险按钮样式
+                      &--danger {
+                        background: #f56c6c;
+                        border-color: #f56c6c;
+                        color: #ffffff;
+                        
+                        &:hover {
+                          background: #f78989;
+                          border-color: #f78989;
+                          transform: none;
+                        }
+                        
+                        &:active {
+                          background: #dd6161;
+                          border-color: #dd6161;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        // 修复空状态样式
+        .el-table__empty-block {
+          padding: 60px 0;
+          
+          .el-table__empty-text {
+            color: #909399;
+            font-size: var(--text-sm);
+          }
+        }
+      }
+    }
+    
+    // 修复班级详情面板样式
+    .class-detail {
+      // 确保详情面板正确显示
+      flex-shrink: 0;
+      
+      // 修复详情面板内的样式
+      :deep(.detail-panel) {
+        height: 100%;
+        
+        .detail-content {
+          max-height: calc(100vh - 300px);
+          overflow-y: auto;
+          
+          // 自定义滚动条
+          &::-webkit-scrollbar {
+            width: 6px;
+          }
+          
+          &::-webkit-scrollbar-track {
+            background: #f5f7fa;
+            border-radius: 3px;
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background: #c0c4cc;
+            border-radius: 3px;
+            
+            &:hover {
+              background: #909399;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 容量信息样式优化 ==================== */
+.capacity-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  min-width: 100px; // 确保容量列有足够宽度
+  
+  .capacity-text {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    
+    .capacity-current {
+      font-weight: 600;
+      color: #303133;
+      font-size: var(--text-base);
+    }
+    
+    .capacity-separator {
+      color: #909399;
+      margin: 0 2px;
+    }
+    
+    .capacity-max {
+      color: #606266;
+    }
+    
+    .capacity-label {
+      color: #909399;
+      font-size: var(--text-xs);
+      margin-left: 4px;
+    }
+  }
+  
+  // 优化进度条样式
+  .el-progress {
+    margin-top: 4px;
+    
+    .el-progress-bar {
+      .el-progress-bar__outer {
+        height: 6px;
+        border-radius: 3px;
+        background-color: #ebeef5;
+      }
+      
+      .el-progress-bar__inner {
+        border-radius: 3px;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+}
+
+/* ==================== 状态标签优化 ==================== */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  
+  &--success {
+    background-color: #67c23a;
+  }
+  
+  &--danger {
+    background-color: #f56c6c;
+  }
+  
+  &--warning {
+    background-color: #e6a23c;
+  }
+  
+  &--info {
+    background-color: #909399;
+  }
+}
+
+/* ==================== 响应式修复 ==================== */
+@media (max-width: 1200px) {
+  .classes-content .classes-layout {
+    .classes-list {
+      :deep(.el-table) {
+        .el-table__header-wrapper,
+        .el-table__body-wrapper {
+          .cell {
+            padding: var(--spacing-md) 8px;
+            font-size: var(--text-sm);
+          }
+        }
+        
+        // 在较小屏幕上隐藏一些列
+        .el-table-column--selection {
+          width: 40px;
+        }
+      }
+    }
+    
+    .class-detail {
+      width: 360px;
+    }
+  }
+}
+
+@media (max-width: var(--breakpoint-md)) {
+  .classes-content .classes-layout {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    
+    .classes-list {
+      :deep(.el-table) {
+        .action-buttons {
+          flex-direction: column;
+          gap: var(--spacing-xs);
+          
+          .el-button {
+            width: 100%;
+            margin: 0;
+          }
+        }
+      }
+    }
+    
+    .class-detail {
+      width: 100%;
+    }
+  }
+}
+
+/* ==================== 表格工具栏样式 ==================== */
+.classes-content {
+  :deep(.table-toolbar) {
+    padding: var(--spacing-md);
+    background: #fff;
+    border-bottom: 1px solid #ebeef5;
+    border-radius: 8px 8px 0 0;
+    
+    .toolbar-left {
+      .el-button--primary {
+        background: linear-gradient(135deg, #409eff 0%, #66b1ff 100%);
+        border: none;
+        
+        &:hover {
+          background: linear-gradient(135deg, #66b1ff 0%, #409eff 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+        }
+      }
+    }
+    
+    .toolbar-right {
+      .el-input {
+        .el-input__wrapper {
+          border-radius: 6px;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            border-color: #409eff;
+          }
+          
+          &:focus-within {
+            border-color: #409eff;
+            box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

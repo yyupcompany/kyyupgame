@@ -1,0 +1,427 @@
+/**
+ * 移动端 Centers 页面主题样式
+ * Mobile Centers Page Theme Styles
+ *
+ * 统一移动端 centers 页面的主题变量和样式定义
+ * 与PC端 design-tokens.scss 完全对齐
+ */
+
+@import './design-tokens.scss';
+
+/* ==================== 主题变量扩展 ==================== */
+:root {
+  /* 中心卡片主题变量 */
+  --center-card-bg: var(--bg-card);
+  --center-card-border: var(--border-color-light);
+  --center-card-shadow: var(--shadow-sm);
+  --center-card-hover-shadow: var(--shadow-md);
+  --center-card-active-shadow: var(--shadow-xs);
+  --center-card-transition: var(--transition-duration-base);
+
+  /* 统计卡片变量 */
+  --stat-card-gradient-start: rgba(99, 102, 241, 0.1);
+  --stat-card-gradient-end: rgba(99, 102, 241, 0.05);
+  --stat-card-border-width: 3px;
+  --stat-card-icon-size: 44px;
+
+  /* 搜索栏变量 */
+  --search-bar-bg: var(--bg-color);
+  --search-bar-border: var(--border-color-light);
+  --search-bar-focus-border: var(--primary-color);
+  --search-bar-placeholder: var(--text-placeholder);
+
+  /* 快捷操作变量 */
+  --quick-action-bg: var(--bg-color);
+  --quick-action-hover: var(--bg-hover);
+
+  /* 动画时长 */
+  --center-card-transition: 200ms;
+  --center-animation-stagger: 50ms;
+  --center-animation-fast: 150ms;
+  --center-animation-slow: 300ms;
+
+  /* 间距 */
+  --center-gap-xs: var(--spacing-xs);
+  --center-gap-sm: var(--spacing-sm);
+  --center-gap-md: var(--spacing-md);
+  --center-gap-lg: var(--spacing-lg);
+
+  /* 圆角 */
+  --center-radius-sm: var(--radius-sm);
+  --center-radius-md: var(--radius-md);
+  --center-radius-lg: var(--radius-lg);
+}
+
+/* ==================== 明暗主题适配 ==================== */
+[data-theme="dark"] {
+  --center-card-bg: #1a1625;
+  --center-card-border: rgba(255, 255, 255, 0.08);
+
+  --stat-card-gradient-start: rgba(99, 102, 241, 0.2);
+  --stat-card-gradient-end: rgba(99, 102, 241, 0.1);
+
+  --search-bar-bg: #1a1625;
+  --search-bar-border: rgba(255, 255, 255, 0.08);
+  --search-bar-placeholder: rgba(255, 255, 255, 0.3);
+
+  --quick-action-bg: #1a1625;
+  --quick-action-hover: rgba(255, 255, 255, 0.05);
+}
+
+/* ==================== 中心卡片主题 ==================== */
+.mobile-center-card {
+  background: var(--center-card-bg);
+  border: 1px solid var(--center-card-border);
+  border-radius: var(--center-radius-md);
+  box-shadow: var(--center-card-shadow);
+  transition: all var(--center-card-transition) var(--transition-timing-ease);
+
+  &:hover {
+    box-shadow: var(--center-card-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: var(--center-card-active-shadow);
+    transform: scale(0.98);
+  }
+
+  /* 中心点缀色边框 */
+  &.accent-personnel {
+    border-left: 3px solid var(--accent-personnel);
+  }
+
+  &.accent-enrollment {
+    border-left: 3px solid var(--accent-enrollment);
+  }
+
+  &.accent-activity {
+    border-left: 3px solid var(--accent-activity);
+  }
+
+  &.accent-marketing {
+    border-left: 3px solid var(--accent-marketing);
+  }
+
+  &.accent-system {
+    border-left: 3px solid var(--accent-system);
+  }
+
+  &.accent-ai {
+    border-left: 3px solid var(--accent-ai);
+  }
+}
+
+/* ==================== 统计卡片主题 ==================== */
+.mobile-stat-card {
+  background: var(--bg-card);
+  border-radius: var(--center-radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--center-card-transition) var(--transition-timing-ease);
+
+  /* 渐变变体 */
+  &.variant-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--stat-card-gradient-start) 0%,
+      var(--stat-card-gradient-end) 100%
+    );
+  }
+
+  /* 玻璃态变体 */
+  &.variant-glass {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  [data-theme="dark"] &.variant-glass {
+    background: rgba(26, 22, 37, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* 左侧色条 */
+  &.border-accent {
+    border-left: var(--stat-card-border-width) solid;
+  }
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-xs);
+  }
+}
+
+/* ==================== 搜索栏主题 ==================== */
+.mobile-search-bar {
+  background: var(--search-bar-bg);
+  border: 1px solid var(--search-bar-border);
+  border-radius: var(--center-radius-lg);
+  transition: all var(--center-card-transition) var(--transition-timing-ease);
+
+  &:focus-within {
+    border-color: var(--search-bar-focus-border);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  }
+
+  .search-input {
+    background: transparent;
+    color: var(--text-primary);
+
+    &::placeholder {
+      color: var(--search-bar-placeholder);
+    }
+  }
+
+  .search-icon {
+    color: var(--text-secondary);
+  }
+
+  .clear-button {
+    color: var(--text-tertiary);
+
+    &:hover {
+      color: var(--text-secondary);
+    }
+  }
+}
+
+/* ==================== 快捷操作主题 ==================== */
+.mobile-quick-actions {
+  display: flex;
+  gap: var(--center-gap-sm);
+  padding: var(--center-gap-md);
+  background: var(--quick-action-bg);
+  border-radius: var(--center-radius-lg);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  /* 隐藏滚动条但保持可滚动 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .quick-action-button {
+    flex-shrink: 0;
+    padding: var(--center-gap-sm) var(--center-gap-md);
+    background: var(--bg-color);
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--center-radius-md);
+    color: var(--text-primary);
+    font-size: var(--mobile-text-sm);
+    transition: all var(--center-card-transition) var(--transition-timing-ease);
+
+    &:hover {
+      background: var(--quick-action-hover);
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+/* ==================== 分组卡片主题 ==================== */
+.mobile-section-card {
+  background: var(--bg-card);
+  border-radius: var(--center-radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+
+  .section-header {
+    padding: var(--center-gap-md);
+    border-bottom: 1px solid var(--border-color-light);
+
+    .section-title {
+      color: var(--text-primary);
+      font-size: var(--mobile-text-lg);
+      font-weight: var(--font-semibold);
+    }
+
+    .section-description {
+      color: var(--text-secondary);
+      font-size: var(--mobile-text-sm);
+      margin-top: var(--center-gap-xs);
+    }
+
+    .section-icon {
+      color: var(--primary-color);
+    }
+  }
+
+  .section-content {
+    padding: var(--center-gap-md);
+  }
+
+  /* 折叠/展开动画 */
+  .section-collapse {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--center-animation-slow) var(--transition-timing-ease);
+
+    &.expanded {
+      max-height: 2000px;
+    }
+  }
+}
+
+/* ==================== 中心点缀色应用 ==================== */
+/* 为不同的中心应用对应的点缀色 */
+.center-theme-personnel {
+  --layout-accent: var(--accent-personnel);
+}
+
+.center-theme-enrollment {
+  --layout-accent: var(--accent-enrollment);
+}
+
+.center-theme-activity {
+  --layout-accent: var(--accent-activity);
+}
+
+.center-theme-marketing {
+  --layout-accent: var(--accent-marketing);
+}
+
+.center-theme-system {
+  --layout-accent: var(--accent-system);
+}
+
+.center-theme-ai {
+  --layout-accent: var(--accent-ai);
+}
+
+.center-theme-finance {
+  --layout-accent: var(--success-color);
+}
+
+/* ==================== 特殊效果 ==================== */
+
+/* 脉冲发光效果 */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* 浮动效果 */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.float-effect {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* 涟漪效果 */
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.ripple-effect {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:active::after {
+    animation: ripple 0.6s ease-out;
+  }
+}
+
+/* ==================== 无障碍支持 ==================== */
+
+/* 减少动画 */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-center-card,
+  .mobile-stat-card,
+  .mobile-search-bar,
+  .mobile-quick-actions {
+    transition: none;
+  }
+
+  .pulse-glow,
+  .float-effect {
+    animation: none;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .mobile-center-card {
+    border-width: 2px;
+  }
+
+  .mobile-stat-card {
+    border: 2px solid var(--border-color);
+  }
+}
+
+/* ==================== 响应式优化 ==================== */
+
+/* 大屏设备优化 */
+@media (min-width: 1024px) {
+  :root {
+    --center-card-transition: 150ms;
+    --center-animation-stagger: 30ms;
+  }
+
+  .mobile-quick-actions {
+    justify-content: center;
+  }
+
+  .quick-action-button {
+    flex-shrink: 0;
+  }
+}
+
+/* 小屏设备优化 */
+@media (max-width: 479px) {
+  :root {
+    --center-gap-md: var(--spacing-sm);
+    --center-gap-lg: var(--spacing-md);
+  }
+
+  .mobile-section-card .section-header {
+    padding: var(--center-gap-sm);
+  }
+
+  .mobile-section-card .section-content {
+    padding: var(--center-gap-sm);
+  }
+}

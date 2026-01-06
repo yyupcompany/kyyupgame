@@ -1,0 +1,36 @@
+
+/* 家长中心专用补充变量 */
+:root {
+  /* 图标尺寸 - Icon Sizes */
+  --icon-xs: 16px;
+  --icon-sm: 20px;
+  --icon-md: 40px;
+  --icon-lg: 48px;
+  --icon-xl: 64px;
+
+  /* 边框基础宽度 - Base Border Width */
+  --border-width-base: 1px;
+  --border-width-thin: 1px;
+  --border-width-thick: 2px;
+
+  /* 游戏专用尺寸 - Game Specific Sizes */
+  --game-canvas-small: 300px;
+  --game-canvas-medium: 400px;
+  --game-canvas-large: 600px;
+  --game-piece-small: 50px;
+  --game-piece-medium: 80px;
+  --game-piece-large: 100px;
+}
+
+/* Element Plus 边框变量映射 */
+.el-border {
+  border: var(--border-width-base) solid var(--el-border-color);
+}
+
+.el-border-light {
+  border: var(--border-width-base) solid var(--el-border-color-lighter);
+}
+
+.el-border-thin {
+  border: var(--border-width-thin) solid var(--el-border-color);
+}

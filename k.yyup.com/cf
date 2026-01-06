@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Claude Flow Global Script
+# Usage: cf [command] [arguments...]
+
+# Claude Flow installation directory
+CLAUDE_FLOW_DIR="/home/devbox/project/claude-code-flow"
+
+# Check if Claude Flow directory exists
+if [ ! -d "$CLAUDE_FLOW_DIR" ]; then
+    echo "Error: Claude Flow directory not found at $CLAUDE_FLOW_DIR"
+    exit 1
+fi
+
+# Change to Claude Flow directory and run npx claude-flow with all arguments
+cd "$CLAUDE_FLOW_DIR"
+npx claude-flow "$@"

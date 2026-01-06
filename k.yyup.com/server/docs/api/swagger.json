@@ -1,0 +1,405 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "幼儿园管理系统 API",
+    "version": "1.0.0",
+    "description": "幼儿园管理系统的RESTful API文档，包含用户管理、教育管理、活动管理、AI助手等模块的完整接口。",
+    "contact": {
+      "name": "API支持",
+      "email": "support@kindergarten.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "开发环境"
+    },
+    {
+      "url": "https://api.kindergarten.com",
+      "description": "生产环境"
+    }
+  ],
+  "tags": [
+    {
+      "name": "认证管理",
+      "description": "用户认证相关接口"
+    },
+    {
+      "name": "用户管理",
+      "description": "用户管理相关接口"
+    },
+    {
+      "name": "教师管理",
+      "description": "教师管理相关接口"
+    },
+    {
+      "name": "学生管理",
+      "description": "学生管理相关接口"
+    },
+    {
+      "name": "班级管理",
+      "description": "班级管理相关接口"
+    },
+    {
+      "name": "活动管理",
+      "description": "活动管理相关接口"
+    },
+    {
+      "name": "招生管理",
+      "description": "招生管理相关接口"
+    },
+    {
+      "name": "AI助手",
+      "description": "AI助手相关接口"
+    },
+    {
+      "name": "营销管理",
+      "description": "营销管理相关接口"
+    },
+    {
+      "name": "系统管理",
+      "description": "系统管理相关接口"
+    },
+    {
+      "name": "统计分析",
+      "description": "统计分析相关接口"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT认证Token"
+      }
+    },
+    "schemas": {
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true,
+            "description": "请求是否成功"
+          },
+          "data": {
+            "type": "object",
+            "description": "响应数据"
+          },
+          "message": {
+            "type": "string",
+            "example": "操作成功",
+            "description": "响应消息"
+          },
+          "code": {
+            "type": "number",
+            "example": 0,
+            "description": "响应代码"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false,
+            "description": "请求是否成功"
+          },
+          "error": {
+            "type": "string",
+            "example": "操作失败",
+            "description": "错误信息"
+          },
+          "code": {
+            "type": "number",
+            "example": 500,
+            "description": "错误代码"
+          }
+        }
+      },
+      "PaginationResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object"
+                }
+              },
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "limit": {
+                    "type": "integer",
+                    "example": 20
+                  },
+                  "total": {
+                    "type": "integer",
+                    "example": 100
+                  },
+                  "totalPages": {
+                    "type": "integer",
+                    "example": 5
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1,
+            "description": "用户ID"
+          },
+          "username": {
+            "type": "string",
+            "example": "admin",
+            "description": "用户名"
+          },
+          "email": {
+            "type": "string",
+            "example": "admin@example.com",
+            "description": "邮箱"
+          },
+          "name": {
+            "type": "string",
+            "example": "管理员",
+            "description": "姓名"
+          },
+          "phone": {
+            "type": "string",
+            "example": "13800138000",
+            "description": "电话"
+          },
+          "role": {
+            "type": "string",
+            "example": "admin",
+            "description": "角色"
+          },
+          "status": {
+            "type": "string",
+            "example": "active",
+            "description": "状态"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "更新时间"
+          }
+        }
+      },
+      "Teacher": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "张老师"
+          },
+          "gender": {
+            "type": "string",
+            "example": "female"
+          },
+          "phone": {
+            "type": "string",
+            "example": "13900139000"
+          },
+          "email": {
+            "type": "string",
+            "example": "teacher@example.com"
+          },
+          "subjects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "语文",
+              "数学"
+            ]
+          },
+          "experience": {
+            "type": "integer",
+            "example": 5,
+            "description": "教学经验年数"
+          }
+        }
+      },
+      "Student": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "小明"
+          },
+          "gender": {
+            "type": "string",
+            "example": "male"
+          },
+          "age": {
+            "type": "integer",
+            "example": 5
+          },
+          "classId": {
+            "type": "integer",
+            "example": 1
+          },
+          "parentId": {
+            "type": "integer",
+            "example": 1
+          },
+          "enrollmentDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-09-01"
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "春季运动会"
+          },
+          "description": {
+            "type": "string",
+            "example": "幼儿园春季运动会活动"
+          },
+          "type": {
+            "type": "string",
+            "example": "sports"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "2023-04-15"
+          },
+          "location": {
+            "type": "string",
+            "example": "幼儿园操场"
+          },
+          "maxParticipants": {
+            "type": "integer",
+            "example": 100
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "未授权访问",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "error": "未授权访问",
+              "code": 401
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "权限不足",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "error": "权限不足",
+              "code": 403
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "资源不存在",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "error": "资源不存在",
+              "code": 404
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "请求参数错误",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "error": "请求参数错误",
+              "code": 400
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "服务器内部错误",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "success": false,
+              "error": "服务器内部错误",
+              "code": 500
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {}
+}

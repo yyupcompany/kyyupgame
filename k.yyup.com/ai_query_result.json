@@ -1,0 +1,1 @@
+{"success":true,"data":{"type":"ai_response","response":"数据查询结果: 请帮我查询所有学生信息","metadata":{"executionTime":37,"usedModel":"doubao-seed-1-6-flash-250715","queryType":"data_query","complexity":4,"estimatedTokens":500,"cacheHit":false,"optimizationApplied":["smart_model_routing","caching"],"totalExecutionTime":76,"optimizationLevel":"high"}},"message":"优化AI查询执行成功"}

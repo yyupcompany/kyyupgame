@@ -1,0 +1,21 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T14:29:15.183Z"}
+
+event: tool_intent
+data: {"message":"🔍 识别到需要使用工具，复杂度: 0.4869565217391304","confidence":0.7,"timestamp":"2025-11-20T14:29:15.185Z"}
+
+event: tool_call_start
+data: {"message":"🚀 开始执行工具调用","toolCount":18,"timestamp":"2025-11-20T14:29:15.186Z"}
+
+event: tool_call_complete
+data: {"message":"✅ 工具调用执行完成","toolResults":[{"finish_reason":"tool_calls","index":0,"logprobs":null,"message":{"content":"","reasoning_content":"我现在需要处理用户的请求：“请调用儿童心理学专家”。首先，我要分析用户的意图。用户明确要求“调用儿童心理学专家”，这看起来是一个需要外部专家资源的请求，而不仅仅是系统内部的数据查询或页面操作。\n\n接下来，我需要回顾系统提供的工具库，看看有没有相关的工具可以处理这种外部专家调用的需求。根据提供的工具列表，有几个可能相关的工具：api_search、web_search、create_todo_list等。\n\n首先，api_search工具用于API搜索，可能可以连接到外部专家数据库或咨询服务。web_search则是通用的网络搜索，可能用于查找相关专家资源。create_todo_list可能用于创建一个任务，将调用专家的过程分解为步骤，但用户的请求更直接，可能需要立即处理。\n\n然后，我需要判断是否有依赖关系。用户的请求是直接调用专家，没有提到需要先查询或分析其他信息，所以这可能是一个独立的操作，不需要依赖其他工具的结果。因此，可以考虑直接调用搜索工具来查找儿童心理学专家的信息。\n\n接下来，确定工具选择。api_search可能更适合，因为它可以直接调用内部API来获取专家资源，而web_search可能用于公开网络搜索。但根据系统提示，api_search是用于API搜索，而web_search是通用搜索，可能用户需要的是系统内部的专家资源，所以api_search可能更合适。\n\n另外，检查工具参数。api_search需要参数，比如搜索关键词或API端点。用户的查询是“调用儿童心理学专家”，所以参数可能包括搜索关键词“儿童心理学专家”和可能的筛选条件，如地区、专业领域等。但用户没有提供更多细节，所以可能需要使用默认参数或仅搜索关键词。\n\n然后，考虑是否需要多轮调用。用户的请求比较直接，可能一次调用就能完成，不需要分步骤。因此，可以直接调用api_search工具，参数为搜索关键词“儿童心理学专家”，并可能指定查询类型为专家列表。\n\n最后，确保回复符合格式要求，使用<|FunctionCallBegin|>和<|FunctionCallEnd|>包裹，并且参数正确。因此，正确的工具调用应该是调用api_search，参数为搜索关键词“儿童心理学专家”。","role":"assistant","tool_calls":[{"function":{"arguments":"{\"query\":\"儿童心理学专家\",\"type\":\"expert\",\"filter\":{\"field\":\"specialty\",\"value\":\"child psychology\"}}","name":"api_search"},"id":"call_km2l3w44w9jjfi1ocka9w9u8","type":"function"}]}}],"executionTime":1000,"timestamp":"2025-11-20T14:29:19.483Z"}
+
+event: tools_complete
+data: {"message":"🎯 所有工具执行完成，开始生成最终回答","toolsCount":18,"totalExecutionTime":1000,"timestamp":"2025-11-20T14:29:19.484Z"}
+
+event: final_answer
+data: {"message":"💡 AI回答完成","content":"已为您处理查询\"请调用儿童心理学专家\"，使用了18个工具。","toolsUsed":18,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T14:29:19.484Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T14:29:19.484Z","totalEvents":7,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.4869565217391304}
+

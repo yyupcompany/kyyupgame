@@ -1,0 +1,337 @@
+/**
+ * 卡片样式 Mixins
+ * Card Style Mixins
+ * 
+ * 统一的卡片样式混入，确保所有中心使用相同的视觉标准
+ * Unified card style mixins for consistent visual standards across all centers
+ */
+
+@use '../design-tokens.scss' as *;
+
+/* ==================== 基础卡片样式 ==================== */
+/* Base Card Styles */
+
+@mixin base-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: var(--card-backdrop-filter);
+  transition: var(--card-transition);
+  overflow: hidden;
+}
+
+/* ==================== 卡片动画效果 ==================== */
+/* Card Animation Effects */
+
+@mixin card-hover-effects {
+  // GPU加速优化
+  will-change: transform, box-shadow, border-color;
+
+  &:hover {
+    transform: var(--card-transform-hover);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--card-border-hover);
+  }
+
+  // 移动端优化
+  @media (hover: none) {
+    will-change: auto;
+
+    &:hover {
+      transform: none;
+      box-shadow: var(--card-shadow);
+      border-color: var(--card-border);
+    }
+  }
+}
+
+@mixin card-gradient-border($gradient: var(--card-gradient-primary)) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--card-gradient-border-height);
+    background: $gradient;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--card-transition);
+    z-index: 1;
+    // GPU加速优化
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+  }
+
+  // 移动端优化
+  @media (hover: none) {
+    &::before {
+      will-change: auto;
+    }
+  }
+}
+
+@mixin card-glow-effect {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    width: var(--card-glow-size);
+    height: var(--card-glow-size);
+    background: radial-gradient(circle, var(--card-glow-color) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    // GPU加速优化
+    will-change: opacity, transform;
+    transform: translateX(0);
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(20px);
+  }
+
+  // 移动端优化 - 禁用光效
+  @media (hover: none) {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+/* ==================== 卡片内容动画 ==================== */
+/* Card Content Animations */
+
+@mixin card-icon-animation {
+  .card-icon {
+    transition: var(--card-transition);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  &:hover .card-icon {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  // 移动端优化
+  @media (hover: none) {
+    .card-icon {
+      will-change: auto;
+    }
+
+    &:hover .card-icon {
+      transform: none;
+    }
+  }
+}
+
+@mixin card-value-animation {
+  .card-value .value-number {
+    transition: var(--card-transition);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  &:hover .card-value .value-number {
+    transform: scale(1.05);
+  }
+
+  // 移动端优化
+  @media (hover: none) {
+    .card-value .value-number {
+      will-change: auto;
+    }
+
+    &:hover .card-value .value-number {
+      transform: none;
+    }
+  }
+}
+
+@mixin card-trend-animation {
+  .card-trend {
+    transition: var(--card-transition);
+    will-change: transform;
+  }
+
+  &:hover .card-trend {
+    transform: translateX(4px);
+  }
+
+  // 移动端优化
+  @media (hover: none) {
+    .card-trend {
+      will-change: auto;
+    }
+
+    &:hover .card-trend {
+      transform: none;
+    }
+  }
+}
+
+/* ==================== 完整卡片样式 ==================== */
+/* Complete Card Styles */
+
+@mixin enhanced-card {
+  @include base-card;
+  @include card-hover-effects;
+  @include card-gradient-border;
+  @include card-glow-effect;
+  @include card-icon-animation;
+  @include card-value-animation;
+  @include card-trend-animation;
+}
+
+/* ==================== 卡片类型变体 ==================== */
+/* Card Type Variants */
+
+@mixin card-type-primary {
+  @include enhanced-card;
+  @include card-gradient-border(var(--card-gradient-primary));
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+  }
+}
+
+@mixin card-type-success {
+  @include enhanced-card;
+  @include card-gradient-border(var(--card-gradient-success));
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+  }
+}
+
+@mixin card-type-warning {
+  @include enhanced-card;
+  @include card-gradient-border(var(--card-gradient-warning));
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(245, 158, 11, 0.4);
+  }
+}
+
+@mixin card-type-danger {
+  @include enhanced-card;
+  @include card-gradient-border(var(--card-gradient-danger));
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(239, 68, 68, 0.4);
+  }
+}
+
+@mixin card-type-info {
+  @include enhanced-card;
+  @include card-gradient-border(var(--card-gradient-info));
+  
+  &:hover {
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+  }
+}
+
+/* ==================== 响应式卡片 ==================== */
+/* Responsive Card */
+
+@mixin responsive-card {
+  @include enhanced-card;
+
+  // 平板优化
+  @media (max-width: var(--breakpoint-lg)) and (min-width: 769px) {
+    padding: calc(var(--card-padding) * 0.9);
+  }
+
+  // 移动端优化
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+
+    // 禁用所有hover动画
+    &:hover {
+      transform: none;
+      box-shadow: var(--card-shadow);
+      border-color: var(--card-border);
+    }
+
+    // 禁用伪元素动画
+    &::before,
+    &::after {
+      display: none;
+    }
+
+    // 禁用内容动画
+    .card-icon,
+    .card-value .value-number,
+    .card-trend {
+      will-change: auto;
+    }
+  }
+
+  // 小屏幕优化
+  @media (max-width: var(--breakpoint-xs)) {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ==================== 卡片网格系统 ==================== */
+/* Card Grid System */
+
+@mixin card-grid($min-width: 280px, $gap: var(--spacing-lg)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+  
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+/* ==================== 工具类生成器 ==================== */
+/* Utility Class Generators */
+
+@mixin generate-card-utilities {
+  .card-enhanced {
+    @include enhanced-card;
+  }
+  
+  .card-primary {
+    @include card-type-primary;
+  }
+  
+  .card-success {
+    @include card-type-success;
+  }
+  
+  .card-warning {
+    @include card-type-warning;
+  }
+  
+  .card-danger {
+    @include card-type-danger;
+  }
+  
+  .card-info {
+    @include card-type-info;
+  }
+  
+  .card-responsive {
+    @include responsive-card;
+  }
+  
+  .cards-grid {
+    @include card-grid;
+  }
+}

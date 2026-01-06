@@ -1,0 +1,106 @@
+/* 侧边栏重叠问题修复方案 */
+
+/* 确保子菜单容器正确的布局流 */
+:deep(.el-sub-menu) {
+  /* 重置所有可能影响布局的定位属性 */
+  position: relative !important;
+  
+  /* 子菜单列表容器 - 修复重叠问题的关键 */
+  .el-menu {
+    /* 强制正常文档流布局 */
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    
+    /* 确保容器尺寸正确 */
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    
+    /* 移除可能导致重叠的属性 */
+    overflow: visible !important;
+    z-index: auto !important;
+    
+    /* 确保边距和内边距不干扰布局 */
+    margin: 0 !important;
+    padding: 0 !important;
+    
+    /* 背景和边框 */
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border: none !important;
+    
+    /* 动画过渡 */
+    transition: all 0.3s ease !important;
+  }
+  
+  /* 子菜单展开时的特殊处理 */
+  &.is-opened {
+    /* 确保展开状态下的容器不会脱离文档流 */
+    .el-menu {
+      display: block !important;
+      position: static !important;
+      
+      /* 渐入动画效果 */
+      opacity: 1 !important;
+      max-height: 1000px !important;
+      transition: max-height 0.3s ease, opacity 0.3s ease !important;
+    }
+  }
+  
+  /* 折叠状态 */
+  &:not(.is-opened) {
+    .el-menu {
+      display: none !important;
+      opacity: 0 !important;
+      max-height: 0 !important;
+      overflow: hidden !important;
+    }
+  }
+}
+
+/* 额外的防重叠保护 */
+:deep(.el-menu--inline) {
+  position: static !important;
+}
+
+/* 确保菜单项正确的垂直排列 */
+:deep(.el-menu-item),
+:deep(.el-sub-menu__title) {
+  /* 防止浮动或绝对定位 */
+  position: relative !important;
+  float: none !important;
+  display: block !important;
+  clear: both !important;
+  
+  /* 确保每个菜单项占据完整的垂直空间 */
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+/* Element Plus 菜单组件的重置 */
+:deep(.el-menu) {
+  /* 防止 Element Plus 的动态样式干扰 */
+  &[style*="transform"],
+  &[style*="position: absolute"],
+  &[style*="position: fixed"] {
+    position: static !important;
+    transform: none !important;
+    top: auto !important;
+    left: auto !important;
+  }
+}
+
+/* 侧边栏容器确保正确的滚动行为 */
+.sidebar-menu-container {
+  /* 确保容器能够正确处理内容溢出 */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  
+  /* 防止内容脱离容器 */
+  position: relative !important;
+  contain: layout style !important;
+}

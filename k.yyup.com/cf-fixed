@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Claude Flow Global Script (Fixed Version)
+# Usage: cf [command] [arguments...]
+
+# Detection function to find claude-flow
+find_claude_flow() {
+    # Try global npm installation
+    if command -v claude-flow >/dev/null 2>&1; then
+        echo "claude-flow"
+        return 0
+    fi
+    
+    # Try npx (recommended for latest version)
+    if command -v npx >/dev/null 2>&1; then
+        echo "npx claude-flow"
+        return 0
+    fi
+    
+    # Try local development version if available
+    local dev_path="/home/devbox/project/v2ray-install/claude-code-flow"
+    if [ -d "$dev_path" ] && [ -f "$dev_path/cli.js" ]; then
+        echo "cd '$dev_path' && node cli.js"
+        return 0
+    fi
+    
+    echo "Error: Claude Flow not found. Please install with: npm install -g claude-flow"
+    exit 1
+}
+
+# Get the command to run claude-flow
+CLAUDE_FLOW_CMD=$(find_claude_flow)
+
+# Function to enhance commands with SPARC mode automatically
+enhance_command() {
+    local args=("$@")
+    
+    # If no arguments, show help
+    if [ ${#args[@]} -eq 0 ]; then
+        eval $CLAUDE_FLOW_CMD --help
+        return 0
+    fi
+    
+    # List of known subcommands that should not trigger SPARC mode
+    local known_commands=("start" "agent" "config" "memory" "swarm" "sparc" "repl" "help" "status" "monitor" "ui" "mcp" "session" "workflow" "init" "spawn" "claude" "project" "deploy" "cloud" "security" "analytics")
+    
+    # Check if first argument is a known command or starts with --
+    local is_known_command=false
+    for cmd in "${known_commands[@]}"; do
+        if [[ "${args[0]}" == "$cmd" ]]; then
+            is_known_command=true
+            break
+        fi
+    done
+    
+    # If starts with -- it's also a known option
+    if [[ "${args[0]}" == "--"* ]]; then
+        is_known_command=true
+    fi
+    
+    # If it's not a known command, treat as task description for SPARC
+    if [[ "$is_known_command" == false ]]; then
+        # Automatically use SPARC mode for task descriptions
+        echo "🚀 自动启用SPARC多代理模式..."
+        eval $CLAUDE_FLOW_CMD sparc "\"${args[*]}\""
+    else
+        # Pass through other commands as-is
+        eval $CLAUDE_FLOW_CMD "$@"
+    fi
+}
+
+# Set environment variables for optimal automation
+export CLAUDE_FLOW_NON_INTERACTIVE=true
+export CLAUDE_FLOW_AUTO_CONFIRM=true
+
+# Run the enhanced command
+enhance_command "$@"

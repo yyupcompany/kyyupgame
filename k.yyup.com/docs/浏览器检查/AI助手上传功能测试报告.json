@@ -1,0 +1,109 @@
+{
+  "timestamp": "2025-11-14T11:59:05.394Z",
+  "testResults": {
+    "login": "✅ 登录成功",
+    "aiAssistantPage": "✅ 找到AI助手页面",
+    "documentUploadButton": "✅ 文档上传按钮显示正常",
+    "imageUploadButton": "✅ 图片上传按钮显示正常",
+    "fileDialogTest": "✅ 文件选择对话框正常",
+    "consoleErrors": 10
+  },
+  "consoleErrors": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/auth/login",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "❌ Token刷新失败: Error: 没有找到refresh token\n    at http://localhost:5173/src/utils/request.ts?t=1763121051029:361:19\n    at async Axios.request (http://localhost:5173/node_modules/.vite/deps/axios.js?v=30b497fe:1776:14)\n    at async http://localhost:5173/src/utils/request.ts?t=1763121051029:441:22\n    at async retryRequest (http://localhost:5173/src/utils/request.ts?t=1763121051029:200:12)\n    at async handleLogin (http://localhost:5173/src/pages/Login/index.vue?t=1763121051029:57:26)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts?t=1763121051029",
+        "lineNumber": 363,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts?t=1763121051029",
+        "lineNumber": 202,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "❌ 登录失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue?t=1763121051029",
+        "lineNumber": 67,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue?t=1763121051029",
+        "lineNumber": 150,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "语音识别错误: not-allowed",
+      "location": {
+        "url": "http://localhost:5173/src/composables/useSpeech.ts",
+        "lineNumber": 51,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "🚨 错误捕获 [promise]: 语音识别错误: not-allowed {id: error_1763121280152_ljiewyej8, type: promise, message: 语音识别错误: not-allowed, stack: Error: 语音识别错误: not-allowed\n    at recognition.oner…calhost:5173/src/composables/useSpeech.ts:101:16), timestamp: 1763121280152}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 229,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5173/",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5173/",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_CONNECTION_REFUSED",
+      "location": {
+        "url": "http://localhost:5173/",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    }
+  ],
+  "summary": {
+    "success": true,
+    "issues": [
+      "发现 10 个控制台错误"
+    ]
+  }
+}

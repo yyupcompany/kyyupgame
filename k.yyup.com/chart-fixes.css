@@ -1,0 +1,51 @@
+
+/* 图表容器尺寸修复（改为变量控制，默认自适应） */
+.chart-container {
+  width: 100% !important;
+  min-width: 0 !important;
+  height: var(--chart-height, auto) !important;
+}
+
+.chart-content {
+  width: 100% !important;
+  height: var(--chart-height, auto) !important;
+  min-height: var(--chart-min-height, 300px) !important;
+}
+
+.chart-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: var(--chart-min-height, 300px) !important;
+}
+
+.chart-instance {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: var(--chart-min-height, 300px) !important;
+}
+
+.chart-instance canvas {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: var(--chart-min-height, 300px) !important;
+}
+
+/* 网格系统修复 */
+.cds-col-lg-8 {
+  flex: 0 0 50% !important;
+  max-width: 50% !important;
+}
+
+.charts-section .cds-row {
+  gap: 20px;
+}
+
+.charts-section .cds-col-lg-8:first-child {
+  padding-right: 10px;
+}
+
+.charts-section .cds-col-lg-8:last-child {
+  padding-left: 10px;
+}

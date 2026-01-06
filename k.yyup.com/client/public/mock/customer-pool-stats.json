@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": {
+    "totalCustomers": 128,
+    "newCustomersThisMonth": 15,
+    "unassignedCustomers": 42,
+    "convertedCustomersThisMonth": 8
+  },
+  "message": "获取客户池统计数据成功"
+} 

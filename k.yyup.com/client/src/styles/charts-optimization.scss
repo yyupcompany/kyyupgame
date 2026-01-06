@@ -1,0 +1,324 @@
+// 图表文字排版优化样式
+// 专门用于优化ECharts图表的文字显示和布局
+
+/* ===== 图表容器通用优化 ===== */
+.chart-container {
+  // 图表标题区域优化
+  .chart-header {
+    padding: var(--spacing-lg) 24px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    
+    .chart-title {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: #303133;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      letter-spacing: 0.5px;
+    }
+    
+    .chart-subtitle {
+      font-size: var(--text-sm);
+      color: #909399;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+  
+  // 图表内容区域
+  .chart-content {
+    padding: var(--spacing-lg) 24px 24px;
+    
+    // ECharts 容器样式
+    .echarts {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      
+      // 图例文字优化
+      .echarts-legend {
+        font-size: var(--text-sm);
+        line-height: 1.5;
+        
+        .echarts-legend-item {
+          margin-right: 20px;
+          margin-bottom: 8px;
+        }
+      }
+      
+      // 坐标轴文字优化
+      .echarts-axis-label {
+        font-size: var(--text-xs);
+        color: #666;
+        line-height: 1.4;
+      }
+      
+      // 工具提示文字优化
+      .echarts-tooltip {
+        font-size: var(--text-sm);
+        line-height: 1.6;
+        padding: var(--spacing-md) 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
+
+/* ===== 饼图特殊优化 ===== */
+.pie-chart-container {
+  .chart-content {
+    .echarts {
+      // 饼图标签文字优化
+      .pie-label {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        line-height: 1.4;
+        
+        // 标签线优化
+        .label-line {
+          stroke-width: 1.5px;
+        }
+      }
+      
+      // 饼图图例优化
+      .pie-legend {
+        .legend-item {
+          margin: var(--spacing-sm) 16px 8px 0;
+          
+          .legend-icon {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            margin-right: 8px;
+          }
+          
+          .legend-text {
+            font-size: var(--text-sm);
+            color: #606266;
+            line-height: 1.4;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===== 折线图特殊优化 ===== */
+.line-chart-container {
+  .chart-content {
+    .echarts {
+      // X轴标签优化
+      .x-axis-label {
+        font-size: var(--text-xs);
+        color: #909399;
+        line-height: 1.4;
+        
+        // 标签旋转时的优化
+        &.rotated {
+          text-anchor: end;
+          transform-origin: center;
+        }
+      }
+      
+      // Y轴标签优化
+      .y-axis-label {
+        font-size: var(--text-xs);
+        color: #909399;
+        line-height: 1.4;
+      }
+      
+      // 数据点标签优化
+      .data-label {
+        font-size: 11px;
+        font-weight: 500;
+        fill: #303133;
+        text-anchor: middle;
+      }
+      
+      // 网格线优化
+      .grid-line {
+        stroke: #f0f0f0;
+        stroke-width: 1px;
+        stroke-dasharray: 2,2;
+      }
+    }
+  }
+}
+
+/* ===== 柱状图特殊优化 ===== */
+.bar-chart-container {
+  .chart-content {
+    .echarts {
+      // 柱状图标签优化
+      .bar-label {
+        font-size: var(--text-xs);
+        font-weight: 500;
+        fill: #303133;
+        text-anchor: middle;
+      }
+      
+      // 分类轴标签优化
+      .category-label {
+        font-size: var(--text-xs);
+        color: #909399;
+        line-height: 1.4;
+        max-width: 60px;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+
+/* ===== 响应式图表优化 ===== */
+@media (max-width: var(--breakpoint-md)) {
+  .chart-container {
+    .chart-header {
+      padding: var(--spacing-md) 20px 12px;
+      
+      .chart-title {
+        font-size: var(--text-base);
+      }
+      
+      .chart-subtitle {
+        font-size: var(--text-sm);
+      }
+    }
+    
+    .chart-content {
+      padding: var(--spacing-md) 20px 20px;
+      
+      .echarts {
+        // 移动端图例优化
+        .echarts-legend {
+          font-size: var(--text-sm);
+          
+          .echarts-legend-item {
+            margin-right: 16px;
+            margin-bottom: 6px;
+          }
+        }
+        
+        // 移动端坐标轴文字优化
+        .echarts-axis-label {
+          font-size: 11px;
+        }
+        
+        // 移动端工具提示优化
+        .echarts-tooltip {
+          font-size: var(--text-xs);
+          padding: 10px 14px;
+        }
+      }
+    }
+  }
+  
+  // 移动端饼图优化
+  .pie-chart-container {
+    .chart-content {
+      .echarts {
+        .pie-label {
+          font-size: var(--text-xs);
+        }
+        
+        .pie-legend {
+          .legend-item {
+            margin: 6px 12px 6px 0;
+            
+            .legend-text {
+              font-size: var(--text-sm);
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // 移动端折线图优化
+  .line-chart-container {
+    .chart-content {
+      .echarts {
+        .x-axis-label,
+        .y-axis-label {
+          font-size: 11px;
+        }
+        
+        .data-label {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+/* ===== 图表加载状态优化 ===== */
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #909399;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  
+  .loading-text {
+    margin-left: 12px;
+  }
+}
+
+/* ===== 图表错误状态优化 ===== */
+.chart-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #f56c6c;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  
+  .error-icon {
+    font-size: var(--text-2xl);
+    margin-bottom: 12px;
+  }
+  
+  .error-text {
+    text-align: center;
+  }
+}
+
+/* ===== 图表工具栏优化 ===== */
+.chart-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) 24px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fafafa;
+  
+  .toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    
+    .chart-type-selector {
+      .el-select {
+        width: 120px;
+        
+        .el-input__wrapper {
+          padding: 6px 12px;
+        }
+      }
+    }
+  }
+  
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    .toolbar-button {
+      padding: 6px 12px;
+      font-size: var(--text-sm);
+      border-radius: 4px;
+    }
+  }
+}

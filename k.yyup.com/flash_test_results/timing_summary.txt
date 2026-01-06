@@ -1,0 +1,10 @@
+test_07_duration: .013659118s
+test_02_duration: .015081041s
+test_05_duration: .013597417s
+test_10_duration: .013973022s
+test_01_duration: .015280444s
+test_04_duration: .014323228s
+test_09_duration: .015257243s
+test_03_duration: .013576517s
+test_06_duration: .013413314s
+test_08_duration: .013648617s

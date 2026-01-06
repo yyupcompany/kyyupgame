@@ -1,0 +1,241 @@
+{
+  "name": "系统维护管理查询模板字典",
+  "description": "系统日志、备份记录、维护任务、性能监控、错误跟踪、系统健康检查、数据清理、系统更新等系统维护管理相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 系统日志相关查询模板 ===": "注释",
+    "系统日志总数": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs",
+      "description": "查询系统日志总数",
+      "table": "system_logs",
+      "response": "系统日志总数为{count}条",
+      "tokens": 10
+    },
+    "日志级别统计": {
+      "sql": "SELECT log_level, COUNT(*) as count FROM system_logs GROUP BY log_level ORDER BY FIELD(log_level, 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG')",
+      "description": "统计日志级别分布",
+      "table": "system_logs",
+      "response": "日志级别统计完成",
+      "tokens": 20
+    },
+    "错误日志统计": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs WHERE log_level IN ('ERROR', 'CRITICAL')",
+      "description": "查询错误日志数量",
+      "table": "system_logs",
+      "response": "错误日志{count}条",
+      "tokens": 12
+    },
+    "本月系统日志": {
+      "sql": "SELECT COUNT(*) as count FROM system_logs WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月系统日志数量",
+      "table": "system_logs",
+      "response": "本月系统日志{count}条",
+      "tokens": 20
+    },
+
+    "// === 备份记录相关查询模板 ===": "注释",
+    "备份记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM backup_records",
+      "description": "查询备份记录总数",
+      "table": "backup_records",
+      "response": "备份记录总数为{count}个",
+      "tokens": 10
+    },
+    "备份状态统计": {
+      "sql": "SELECT backup_status, COUNT(*) as count FROM backup_records GROUP BY backup_status ORDER BY count DESC",
+      "description": "统计备份状态分布",
+      "table": "backup_records",
+      "response": "备份状态统计完成",
+      "tokens": 20
+    },
+    "成功备份统计": {
+      "sql": "SELECT COUNT(*) as count FROM backup_records WHERE backup_status = 'success'",
+      "description": "查询成功备份数量",
+      "table": "backup_records",
+      "response": "成功备份{count}个",
+      "tokens": 12
+    },
+    "备份类型统计": {
+      "sql": "SELECT backup_type, COUNT(*) as count FROM backup_records GROUP BY backup_type ORDER BY count DESC",
+      "description": "统计备份类型分布",
+      "table": "backup_records",
+      "response": "备份类型统计完成",
+      "tokens": 20
+    },
+
+    "// === 维护任务相关查询模板 ===": "注释",
+    "维护任务总数": {
+      "sql": "SELECT COUNT(*) as count FROM maintenance_tasks",
+      "description": "查询维护任务总数",
+      "table": "maintenance_tasks",
+      "response": "维护任务总数为{count}个",
+      "tokens": 10
+    },
+    "任务状态统计": {
+      "sql": "SELECT task_status, COUNT(*) as count FROM maintenance_tasks GROUP BY task_status ORDER BY count DESC",
+      "description": "统计维护任务状态分布",
+      "table": "maintenance_tasks",
+      "response": "维护任务状态统计完成",
+      "tokens": 20
+    },
+    "任务类型统计": {
+      "sql": "SELECT task_type, COUNT(*) as count FROM maintenance_tasks GROUP BY task_type ORDER BY count DESC",
+      "description": "统计维护任务类型分布",
+      "table": "maintenance_tasks",
+      "response": "维护任务类型统计完成",
+      "tokens": 20
+    },
+    "待执行任务": {
+      "sql": "SELECT COUNT(*) as count FROM maintenance_tasks WHERE task_status = 'pending'",
+      "description": "查询待执行维护任务数量",
+      "table": "maintenance_tasks",
+      "response": "待执行维护任务{count}个",
+      "tokens": 12
+    },
+
+    "// === 性能监控相关查询模板 ===": "注释",
+    "性能监控记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM performance_monitors",
+      "description": "查询性能监控记录总数",
+      "table": "performance_monitors",
+      "response": "性能监控记录总数为{count}条",
+      "tokens": 10
+    },
+    "性能指标统计": {
+      "sql": "SELECT metric_name, AVG(metric_value) as avg_value, MIN(metric_value) as min_value, MAX(metric_value) as max_value FROM performance_monitors GROUP BY metric_name ORDER BY avg_value DESC",
+      "description": "统计性能指标分布",
+      "table": "performance_monitors",
+      "response": "性能指标统计完成",
+      "tokens": 30
+    },
+    "性能告警统计": {
+      "sql": "SELECT COUNT(*) as count FROM performance_monitors WHERE alert_triggered = 1",
+      "description": "查询性能告警数量",
+      "table": "performance_monitors",
+      "response": "性能告警{count}次",
+      "tokens": 12
+    },
+
+    "// === 错误跟踪相关查询模板 ===": "注释",
+    "错误跟踪记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM error_tracking",
+      "description": "查询错误跟踪记录总数",
+      "table": "error_tracking",
+      "response": "错误跟踪记录总数为{count}条",
+      "tokens": 10
+    },
+    "错误类型统计": {
+      "sql": "SELECT error_type, COUNT(*) as count FROM error_tracking GROUP BY error_type ORDER BY count DESC",
+      "description": "统计错误类型分布",
+      "table": "error_tracking",
+      "response": "错误类型统计完成",
+      "tokens": 20
+    },
+    "错误严重程度统计": {
+      "sql": "SELECT severity_level, COUNT(*) as count FROM error_tracking GROUP BY severity_level ORDER BY FIELD(severity_level, 'CRITICAL', 'HIGH', 'MEDIUM', 'LOW')",
+      "description": "统计错误严重程度分布",
+      "table": "error_tracking",
+      "response": "错误严重程度统计完成",
+      "tokens": 20
+    },
+    "未解决错误": {
+      "sql": "SELECT COUNT(*) as count FROM error_tracking WHERE resolution_status = 'unresolved'",
+      "description": "查询未解决错误数量",
+      "table": "error_tracking",
+      "response": "未解决错误{count}个",
+      "tokens": 12
+    },
+
+    "// === 系统健康检查相关查询模板 ===": "注释",
+    "健康检查记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM system_health_checks",
+      "description": "查询系统健康检查记录总数",
+      "table": "system_health_checks",
+      "response": "系统健康检查记录总数为{count}条",
+      "tokens": 10
+    },
+    "健康状态统计": {
+      "sql": "SELECT health_status, COUNT(*) as count FROM system_health_checks GROUP BY health_status ORDER BY count DESC",
+      "description": "统计系统健康状态分布",
+      "table": "system_health_checks",
+      "response": "系统健康状态统计完成",
+      "tokens": 20
+    },
+    "检查项目统计": {
+      "sql": "SELECT check_item, COUNT(*) as count FROM system_health_checks GROUP BY check_item ORDER BY count DESC",
+      "description": "统计健康检查项目分布",
+      "table": "system_health_checks",
+      "response": "健康检查项目统计完成",
+      "tokens": 20
+    },
+    "健康检查通过率": {
+      "sql": "SELECT (COUNT(CASE WHEN health_status = 'healthy' THEN 1 END) * 100.0 / COUNT(*)) as pass_rate FROM system_health_checks",
+      "description": "计算健康检查通过率",
+      "table": "system_health_checks",
+      "response": "健康检查通过率分析完成",
+      "tokens": 25
+    },
+
+    "// === 数据清理相关查询模板 ===": "注释",
+    "数据清理记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM data_cleanup_logs",
+      "description": "查询数据清理记录总数",
+      "table": "data_cleanup_logs",
+      "response": "数据清理记录总数为{count}条",
+      "tokens": 10
+    },
+    "清理任务状态统计": {
+      "sql": "SELECT cleanup_status, COUNT(*) as count FROM data_cleanup_logs GROUP BY cleanup_status ORDER BY count DESC",
+      "description": "统计数据清理任务状态分布",
+      "table": "data_cleanup_logs",
+      "response": "数据清理任务状态统计完成",
+      "tokens": 20
+    },
+    "清理数据量统计": {
+      "sql": "SELECT SUM(records_cleaned) as total_cleaned, AVG(records_cleaned) as avg_cleaned FROM data_cleanup_logs WHERE cleanup_status = 'completed'",
+      "description": "统计清理数据量",
+      "table": "data_cleanup_logs",
+      "response": "清理数据量统计完成",
+      "tokens": 25
+    },
+
+    "// === 系统更新相关查询模板 ===": "注释",
+    "系统更新记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM system_updates",
+      "description": "查询系统更新记录总数",
+      "table": "system_updates",
+      "response": "系统更新记录总数为{count}个",
+      "tokens": 10
+    },
+    "更新状态统计": {
+      "sql": "SELECT update_status, COUNT(*) as count FROM system_updates GROUP BY update_status ORDER BY count DESC",
+      "description": "统计系统更新状态分布",
+      "table": "system_updates",
+      "response": "系统更新状态统计完成",
+      "tokens": 20
+    },
+    "更新类型统计": {
+      "sql": "SELECT update_type, COUNT(*) as count FROM system_updates GROUP BY update_type ORDER BY count DESC",
+      "description": "统计系统更新类型分布",
+      "table": "system_updates",
+      "response": "系统更新类型统计完成",
+      "tokens": 20
+    },
+    "成功更新统计": {
+      "sql": "SELECT COUNT(*) as count FROM system_updates WHERE update_status = 'success'",
+      "description": "查询成功更新数量",
+      "table": "system_updates",
+      "response": "成功更新{count}个",
+      "tokens": 12
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "系统维护概览": {
+      "sql": "SELECT 'system_logs' as category, COUNT(*) as count FROM system_logs UNION ALL SELECT 'backup_records' as category, COUNT(*) as count FROM backup_records UNION ALL SELECT 'maintenance_tasks' as category, COUNT(*) as count FROM maintenance_tasks UNION ALL SELECT 'performance_monitors' as category, COUNT(*) as count FROM performance_monitors UNION ALL SELECT 'error_tracking' as category, COUNT(*) as count FROM error_tracking UNION ALL SELECT 'system_health_checks' as category, COUNT(*) as count FROM system_health_checks UNION ALL SELECT 'data_cleanup_logs' as category, COUNT(*) as count FROM data_cleanup_logs UNION ALL SELECT 'system_updates' as category, COUNT(*) as count FROM system_updates",
+      "description": "系统维护管理数据总览",
+      "table": "multiple",
+      "response": "系统维护概览查询完成",
+      "tokens": 50
+    }
+  }
+}

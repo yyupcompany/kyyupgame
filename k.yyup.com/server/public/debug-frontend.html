@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端调试工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 前端调试工具</h1>
+        
+        <button onclick="checkLocalStorage()">检查本地存储</button>
+        <button onclick="testFrontendAPI()">测试前端API</button>
+        <button onclick="testCORS()">测试CORS</button>
+        <button onclick="simulateLogin()">模拟登录</button>
+        <button onclick="clearStorage()">清除存储</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const resultDiv = document.getElementById('result');
+            
+            const tokens = {
+                kindergarten_token: localStorage.getItem('kindergarten_token'),
+                token: localStorage.getItem('token'),
+                auth_token: localStorage.getItem('auth_token')
+            };
+            
+            const userInfo = localStorage.getItem('kindergarten_user_info');
+            
+            let result = '📋 本地存储检查结果：\n\n';
+            result += '🔑 Token信息：\n';
+            
+            Object.entries(tokens).forEach(([key, value]) => {
+                if (value) {
+                    result += `  ${key}: ${value.substring(0, 50)}...\n`;
+                } else {
+                    result += `  ${key}: 未找到\n`;
+                }
+            });
+            
+            result += '\n👤 用户信息：\n';
+            if (userInfo) {
+                try {
+                    const parsed = JSON.parse(userInfo);
+                    result += JSON.stringify(parsed, null, 2);
+                } catch (e) {
+                    result += '解析失败: ' + userInfo;
+                }
+            } else {
+                result += '未找到用户信息';
+            }
+            
+            resultDiv.className = 'result';
+            resultDiv.textContent = result;
+        }
+        
+        async function testFrontendAPI() {
+            const resultDiv = document.getElementById('result');
+
+            // 获取token
+            const token = localStorage.getItem('kindergarten_token') ||
+                         localStorage.getItem('token') ||
+                         localStorage.getItem('auth_token');
+
+            if (!token) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '❌ 没有找到认证token，请先登录';
+                return;
+            }
+
+            try {
+                // 测试前端API端点
+                const response = await fetch('http://localhost:5173/api/activities', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.data && data.data.items) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ 前端API测试成功！\n\n状态码: ${response.status}\n总数: ${data.data.total}\n第一个活动:\n${JSON.stringify(data.data.items[0], null, 2)}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ API返回数据异常:\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ 前端API测试失败：${error.message}`;
+            }
+        }
+        
+        async function testCORS() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                // 测试CORS预检请求
+                const response = await fetch('http://localhost:3000/api/health', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ CORS测试成功！\n\n状态码: ${response.status}\n响应: ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ CORS测试失败：${error.message}`;
+            }
+        }
+        
+        async function simulateLogin() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                // 模拟登录
+                const response = await fetch('http://localhost:3000/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: 'admin',
+                        password: 'admin123'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // 保存token到localStorage
+                    localStorage.setItem('kindergarten_token', data.data.token);
+                    localStorage.setItem('token', data.data.token);
+                    localStorage.setItem('kindergarten_user_info', JSON.stringify(data.data.user));
+                    
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ 模拟登录成功！\n\nToken已保存到localStorage\n用户信息: ${JSON.stringify(data.data.user, null, 2)}`;
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = `❌ 模拟登录失败：${data.message}`;
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ 模拟登录失败：${error.message}`;
+            }
+        }
+        
+        function clearStorage() {
+            const resultDiv = document.getElementById('result');
+            
+            localStorage.removeItem('kindergarten_token');
+            localStorage.removeItem('token');
+            localStorage.removeItem('auth_token');
+            localStorage.removeItem('kindergarten_user_info');
+            
+            resultDiv.className = 'result warning';
+            resultDiv.textContent = '⚠️ 本地存储已清除，请重新登录';
+        }
+        
+        // 页面加载时自动检查
+        window.onload = function() {
+            checkLocalStorage();
+        };
+    </script>
+</body>
+</html>

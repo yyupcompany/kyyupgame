@@ -1,0 +1,29 @@
+
+/* 人员分布图表文字重叠修复 */
+.chart-container:has(.chart-title:contains("人员分布")) {
+  overflow: visible !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) .chart-content {
+  padding: 20px !important;
+  overflow: visible !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) .chart-instance {
+  padding: 10px !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) canvas {
+  padding: 10px !important;
+}
+
+/* 确保图表标题有足够间距 */
+.chart-container .chart-header {
+  margin-bottom: 15px !important;
+  padding-bottom: 10px !important;
+}
+
+/* 饼图标签优化 */
+.chart-container:has(.chart-title:contains("人员分布")) .chart-instance {
+  min-height: 400px !important;
+}

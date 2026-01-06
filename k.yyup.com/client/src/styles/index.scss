@@ -1,0 +1,93 @@
+/**
+ * 主样式入口 - 精简版
+ * Main Style Entry - Simplified Version
+ *
+ * 主题变量在 main.ts 中通过 CSS 文件导入
+ * 这里的 @use 只导入布局和组件样式
+ */
+
+/* ==================== 所有 @use 规则必须在最前面 ==================== */
+/* All @use rules must be at the top */
+/* 注意：design-tokens.scss 已在 main.ts 中导入，不要在这里重复导入 */
+@use './layout-system.scss';
+@use './element-plus-unified.scss';
+@use './button-common.scss';  /* ✨ 修复：导入按钮通用样式 */
+@use './tag-styles.scss';  /* ✨ 新增：导入统一标签样式 */
+@use './button-action-styles.scss';  /* ✨ 新增：导入统一按钮操作样式 */
+@use '../components/ai-assistant/styles/ai-assistant-enhanced.scss';  /* ✨ 新增：导入AI助手增强样式 */
+@use './sidebar-color-fix.scss';  /* ✨ 修复：导入侧边栏颜色修复 */
+@use './components/header.scss';
+@use './components/sidebar.scss';
+@use './components/grid.scss';
+@use './components/stat-cards.scss';
+@use './components/cards.scss';
+@use './components/tables.scss';
+@use './components/forms.scss';
+@use './list-components-optimization.scss';
+@use './layout-improvements.scss';
+@use './layout-unified-fix.scss';
+@use './layout-fixes.scss';
+@use './main.scss';
+@use './center-common.scss';
+@use '../pages/mobile/styles/mobile-design-tokens.scss';
+@use '../pages/mobile/styles/mobile-theme-support.scss';
+
+/* ==================== 主题覆盖样式 ==================== */
+/* Theme override styles - 使用主题变量 */
+
+[data-theme="dark"] .full-page-sidebar,
+[data-theme="theme-dark"] .full-page-sidebar {
+  .ai-sidebar-header span {
+    color: #d1d5db;
+  }
+
+  .primary-title {
+    color: #d1d5db;
+  }
+
+  .menu-section-title {
+    color: #d1d5db;
+  }
+
+  .menu-group-label {
+    color: #d1d5db;
+  }
+
+  .el-menu-item {
+    span {
+      color: #d1d5db;
+    }
+  }
+}
+
+/* ==================== AI助手对话框样式 ==================== */
+/* AI Assistant Dialog Styles */
+.el-dialog.ai-dialog {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 80vh !important;
+  max-height: 90vh !important;
+}
+
+.el-dialog.ai-dialog .el-dialog__body {
+  flex: 1 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.el-dialog.ai-dialog .el-dialog__header {
+  flex-shrink: 0 !important;
+}
+
+.el-dialog.ai-dialog .ai-curriculum-assistant {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.el-dialog.ai-dialog .ai-curriculum-assistant .chat-messages {
+  flex: 1 !important;
+  min-height: 300px !important;
+}

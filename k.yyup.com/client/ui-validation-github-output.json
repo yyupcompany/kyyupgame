@@ -1,0 +1,35 @@
+{
+  "summary": {
+    "title": "UI组件验证结果",
+    "overallScore": 67,
+    "passRate": 75,
+    "qualityGrade": "C",
+    "status": "failed"
+  },
+  "metrics": {
+    "ui-components-score": 67,
+    "ui-components-pass-rate": 75,
+    "center-components-score": 54,
+    "system-components-score": 78,
+    "activity-components-score": 65
+  },
+  "issues": [
+    {
+      "type": "score",
+      "severity": "high",
+      "message": "整体得分 67 低于阈值 70"
+    },
+    {
+      "type": "passRate",
+      "severity": "high",
+      "message": "通过率 75% 低于阈值 80%"
+    },
+    {
+      "type": "categoryScore",
+      "severity": "high",
+      "category": "center",
+      "message": "center组件平均得分 54 低于阈值 65"
+    }
+  ],
+  "criticalComponents": []
+}

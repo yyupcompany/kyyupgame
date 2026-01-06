@@ -1,0 +1,11 @@
+{
+  "testName": "with-watermark",
+  "removeWatermark": true,
+  "error": "Request failed with status code 401",
+  "response": {
+    "success": false,
+    "message": "未提供认证令牌",
+    "error": "MISSING_TOKEN"
+  },
+  "timestamp": "2025-12-23T13:49:08.545Z"
+}

@@ -1,0 +1,1017 @@
+/**
+ * 呼叫中心数据模型
+ * 包含SIP配置、通话记录、录音、分析等相关数据模型
+ */
+
+import { DataTypes, Model, Optional } from 'sequelize'
+import { sequelize } from '../config/database'
+
+// SIP配置表
+interface SIPConfigAttributes {
+  id: number
+  name: string
+  server: string
+  port: number
+  username: string
+  password: string
+  extension: string
+  domain: string
+  transport: 'udp' | 'tcp' | 'tls'
+  codecs: string[]
+  registerTimeout: number
+  keepAlive: boolean
+  debug: boolean
+  status: 'active' | 'inactive' | 'error'
+  lastConnected?: Date
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface SIPConfigCreationAttributes extends Optional<SIPConfigAttributes, 'id' | 'createdAt' | 'updatedAt' | 'lastConnected'> {}
+
+export class SIPConfig extends Model<SIPConfigAttributes, SIPConfigCreationAttributes> implements SIPConfigAttributes {
+  public id!: number
+  public name!: string
+  public server!: string
+  public port!: number
+  public username!: string
+  public password!: string
+  public extension!: string
+  public domain!: string
+  public transport!: 'udp' | 'tcp' | 'tls'
+  public codecs!: string[]
+  public registerTimeout!: number
+  public keepAlive!: boolean
+  public debug!: boolean
+  public status!: 'active' | 'inactive' | 'error'
+  public lastConnected?: Date
+  public createdBy!: number
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+SIPConfig.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: '配置名称'
+    },
+    server: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      comment: 'SIP服务器地址'
+    },
+    port: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 5060,
+      comment: 'SIP服务器端口'
+    },
+    username: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: 'SIP用户名'
+    },
+    password: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      comment: 'SIP密码'
+    },
+    extension: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      comment: '分机号'
+    },
+    domain: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      comment: 'SIP域名'
+    },
+    transport: {
+      type: DataTypes.ENUM('udp', 'tcp', 'tls'),
+      allowNull: false,
+      defaultValue: 'udp',
+      comment: '传输协议'
+    },
+    codecs: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: ['pcmu', 'pcma'],
+      comment: '支持的编解码器'
+    },
+    registerTimeout: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 3600,
+      comment: '注册超时时间(秒)'
+    },
+    keepAlive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      comment: '是否保持连接'
+    },
+    debug: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      comment: '是否开启调试模式'
+    },
+    status: {
+      type: DataTypes.ENUM('active', 'inactive', 'error'),
+      allowNull: false,
+      defaultValue: 'inactive',
+      comment: '配置状态'
+    },
+    lastConnected: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: '最后连接时间'
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '创建者ID'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'SIPConfig',
+    tableName: 'sip_configs',
+    timestamps: true,
+    indexes: [
+      { fields: ['extension'] },
+      { fields: ['status'] },
+      { fields: ['createdBy'] }
+    ]
+  }
+)
+
+// 通话记录表
+interface CallRecordAttributes {
+  id: number
+  callId: string
+  phoneNumber: string
+  contactName?: string
+  direction: 'inbound' | 'outbound'
+  status: 'ringing' | 'connected' | 'held' | 'transferred' | 'ended' | 'missed'
+  startTime: Date
+  endTime?: Date
+  duration?: number
+  extension: string
+  transferTarget?: string
+  recordingEnabled: boolean
+  recordingId?: number
+  notes?: string
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface CallRecordCreationAttributes extends Optional<CallRecordAttributes, 'id' | 'createdAt' | 'updatedAt' | 'endTime' | 'duration' | 'transferTarget' | 'recordingId' | 'notes' | 'contactName'> {}
+
+export class CallRecord extends Model<CallRecordAttributes, CallRecordCreationAttributes> implements CallRecordAttributes {
+  public id!: number
+  public callId!: string
+  public phoneNumber!: string
+  public contactName?: string
+  public direction!: 'inbound' | 'outbound'
+  public status!: 'ringing' | 'connected' | 'held' | 'transferred' | 'ended' | 'missed'
+  public startTime!: Date
+  public endTime?: Date
+  public duration?: number
+  public extension!: string
+  public transferTarget?: string
+  public recordingEnabled!: boolean
+  public recordingId?: number
+  public notes?: string
+  public createdBy!: number
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+CallRecord.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    callId: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true,
+      comment: '通话唯一标识'
+    },
+    phoneNumber: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      comment: '电话号码'
+    },
+    contactName: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '联系人姓名'
+    },
+    direction: {
+      type: DataTypes.ENUM('inbound', 'outbound'),
+      allowNull: false,
+      comment: '通话方向'
+    },
+    status: {
+      type: DataTypes.ENUM('ringing', 'connected', 'held', 'transferred', 'ended', 'missed'),
+      allowNull: false,
+      comment: '通话状态'
+    },
+    startTime: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      comment: '通话开始时间'
+    },
+    endTime: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: '通话结束时间'
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: '通话时长(秒)'
+    },
+    extension: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      comment: '使用分机'
+    },
+    transferTarget: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+      comment: '转移目标分机'
+    },
+    recordingEnabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      comment: '是否启用录音'
+    },
+    recordingId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: '录音记录ID'
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: '通话备注'
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '创建者ID'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'CallRecord',
+    tableName: 'call_records',
+    timestamps: true,
+    indexes: [
+      { fields: ['callId'] },
+      { fields: ['phoneNumber'] },
+      { fields: ['extension'] },
+      { fields: ['status'] },
+      { fields: ['startTime'] },
+      { fields: ['createdBy'] }
+    ]
+  }
+)
+
+// 通话录音表
+interface CallRecordingAttributes {
+  id: number
+  callId: number
+  filename: string
+  originalFilename: string
+  filePath: string
+  fileSize: number
+  duration: number
+  format: string
+  quality: 'standard' | 'high' | 'ultra'
+  transcript?: string
+  transcriptLanguage?: string
+  aiAnalysisId?: number
+  status: 'processing' | 'completed' | 'error'
+  errorMessage?: string
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface CallRecordingCreationAttributes extends Optional<CallRecordingAttributes, 'id' | 'createdAt' | 'updatedAt' | 'transcript' | 'transcriptLanguage' | 'aiAnalysisId' | 'errorMessage'> {}
+
+export class CallRecording extends Model<CallRecordingAttributes, CallRecordingCreationAttributes> implements CallRecordingAttributes {
+  public id!: number
+  public callId!: number
+  public filename!: string
+  public originalFilename!: string
+  public filePath!: string
+  public fileSize!: number
+  public duration!: number
+  public format!: string
+  public quality!: 'standard' | 'high' | 'ultra'
+  public transcript?: string
+  public transcriptLanguage?: string
+  public aiAnalysisId?: number
+  public status!: 'processing' | 'completed' | 'error'
+  public errorMessage?: string
+  public createdBy!: number
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+CallRecording.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    callId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: CallRecord,
+        key: 'id'
+      },
+      comment: '通话记录ID'
+    },
+    filename: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      comment: '存储文件名'
+    },
+    originalFilename: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      comment: '原始文件名'
+    },
+    filePath: {
+      type: DataTypes.STRING(500),
+      allowNull: false,
+      comment: '文件存储路径'
+    },
+    fileSize: {
+      type: DataTypes.BIGINT,
+      allowNull: false,
+      comment: '文件大小(字节)'
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '录音时长(秒)'
+    },
+    format: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      defaultValue: 'mp3',
+      comment: '音频格式'
+    },
+    quality: {
+      type: DataTypes.ENUM('standard', 'high', 'ultra'),
+      allowNull: false,
+      defaultValue: 'standard',
+      comment: '录音质量'
+    },
+    transcript: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: '转写文本'
+    },
+    transcriptLanguage: {
+      type: DataTypes.STRING(10),
+      allowNull: true,
+      defaultValue: 'zh-CN',
+      comment: '转写语言'
+    },
+    aiAnalysisId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: 'AI分析结果ID'
+    },
+    status: {
+      type: DataTypes.ENUM('processing', 'completed', 'error'),
+      allowNull: false,
+      defaultValue: 'processing',
+      comment: '处理状态'
+    },
+    errorMessage: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: '错误信息'
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '创建者ID'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'CallRecording',
+    tableName: 'call_recordings',
+    timestamps: true,
+    indexes: [
+      { fields: ['callId'] },
+      { fields: ['status'] },
+      { fields: ['createdAt'] },
+      { fields: ['createdBy'] }
+    ]
+  }
+)
+
+// AI分析结果表
+interface CallAnalysisAttributes {
+  id: number
+  callId: number
+  recordingId: number
+  sentiment: 'positive' | 'neutral' | 'negative'
+  sentimentScore: number
+  keywords: string[]
+  summary: string
+  actionItems: string[]
+  customerSatisfaction: number
+  agentPerformance: {
+    tone: 'professional' | 'friendly' | 'rushed' | 'unclear'
+    clarity: number
+    empathy: number
+    efficiency: number
+  }
+  businessInsights: {
+    category: string
+    priority: 'high' | 'medium' | 'low'
+    followUpRequired: boolean
+  }
+  processingTime: number
+  modelVersion: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface CallAnalysisCreationAttributes extends Optional<CallAnalysisAttributes, 'id' | 'createdAt' | 'updatedAt'> {}
+
+export class CallAnalysis extends Model<CallAnalysisAttributes, CallAnalysisCreationAttributes> implements CallAnalysisAttributes {
+  public id!: number
+  public callId!: number
+  public recordingId!: number
+  public sentiment!: 'positive' | 'neutral' | 'negative'
+  public sentimentScore!: number
+  public keywords!: string[]
+  public summary!: string
+  public actionItems!: string[]
+  public customerSatisfaction!: number
+  public agentPerformance!: {
+    tone: 'professional' | 'friendly' | 'rushed' | 'unclear'
+    clarity: number
+    empathy: number
+    efficiency: number
+  }
+  public businessInsights!: {
+    category: string
+    priority: 'high' | 'medium' | 'low'
+    followUpRequired: boolean
+  }
+  public processingTime!: number
+  public modelVersion!: string
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+CallAnalysis.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    callId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: CallRecord,
+        key: 'id'
+      },
+      comment: '通话记录ID'
+    },
+    recordingId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: CallRecording,
+        key: 'id'
+      },
+      comment: '录音记录ID'
+    },
+    sentiment: {
+      type: DataTypes.ENUM('positive', 'neutral', 'negative'),
+      allowNull: false,
+      comment: '情感倾向'
+    },
+    sentimentScore: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: false,
+      comment: '情感评分(-1到1)'
+    },
+    keywords: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: [],
+      comment: '关键词列表'
+    },
+    summary: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      comment: '通话摘要'
+    },
+    actionItems: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: [],
+      comment: '行动建议'
+    },
+    customerSatisfaction: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 0,
+        max: 100
+      },
+      comment: '客户满意度评分(0-100)'
+    },
+    agentPerformance: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      comment: '坐席表现评估'
+    },
+    businessInsights: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      comment: '业务洞察'
+    },
+    processingTime: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: 'AI处理时间(毫秒)'
+    },
+    modelVersion: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: '1.0.0',
+      comment: 'AI模型版本'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'CallAnalysis',
+    tableName: 'call_analyses',
+    timestamps: true,
+    indexes: [
+      { fields: ['callId'] },
+      { fields: ['recordingId'] },
+      { fields: ['sentiment'] },
+      { fields: ['createdAt'] }
+    ]
+  }
+)
+
+// 分机管理表
+interface ExtensionAttributes {
+  id: number
+  extension: string
+  name: string
+  description?: string
+  status: 'online' | 'offline' | 'busy' | 'away'
+  currentCallId?: number
+  lastActiveTime?: Date
+  capabilities: string[]
+  deviceInfo?: {
+    userAgent: string
+    ipAddress: string
+    deviceType: string
+  }
+  location?: string
+  department?: string
+  assignedUserId?: number
+  isActive: boolean
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface ExtensionCreationAttributes extends Optional<ExtensionAttributes, 'id' | 'createdAt' | 'updatedAt' | 'description' | 'currentCallId' | 'lastActiveTime' | 'deviceInfo' | 'location' | 'department' | 'assignedUserId'> {}
+
+export class Extension extends Model<ExtensionAttributes, ExtensionCreationAttributes> implements ExtensionAttributes {
+  public id!: number
+  public extension!: string
+  public name!: string
+  public description?: string
+  public status!: 'online' | 'offline' | 'busy' | 'away'
+  public currentCallId?: number
+  public lastActiveTime?: Date
+  public capabilities!: string[]
+  public deviceInfo?: {
+    userAgent: string
+    ipAddress: string
+    deviceType: string
+  }
+  public location?: string
+  public department?: string
+  public assignedUserId?: number
+  public isActive!: boolean
+  public createdBy!: number
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+Extension.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    extension: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+      unique: true,
+      comment: '分机号'
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: '分机名称'
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: '分机描述'
+    },
+    status: {
+      type: DataTypes.ENUM('online', 'offline', 'busy', 'away'),
+      allowNull: false,
+      defaultValue: 'offline',
+      comment: '分机状态'
+    },
+    currentCallId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: CallRecord,
+        key: 'id'
+      },
+      comment: '当前通话ID'
+    },
+    lastActiveTime: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: '最后活跃时间'
+    },
+    capabilities: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: ['voice', 'recording', 'transfer'],
+      comment: '分机能力'
+    },
+    deviceInfo: {
+      type: DataTypes.JSON,
+      allowNull: true,
+      comment: '设备信息'
+    },
+    location: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '位置'
+    },
+    department: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '部门'
+    },
+    assignedUserId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      comment: '分配用户ID'
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      comment: '是否激活'
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '创建者ID'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'Extension',
+    tableName: 'extensions',
+    timestamps: true,
+    indexes: [
+      { fields: ['extension'] },
+      { fields: ['status'] },
+      { fields: ['assignedUserId'] },
+      { fields: ['department'] },
+      { fields: ['isActive'] }
+    ]
+  }
+)
+
+// 联系人表
+interface ContactAttributes {
+  id: number
+  name: string
+  phone: string
+  email?: string
+  company?: string
+  position?: string
+  tags: string[]
+  notes?: string
+  lastCallId?: number
+  lastCallTime?: Date
+  totalCalls: number
+  preferences: {
+    preferredLanguage: string
+    timezone: string
+    doNotCall: boolean
+    preferredContactTime?: string
+  }
+  isActive: boolean
+  createdBy: number
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface ContactCreationAttributes extends Optional<ContactAttributes, 'id' | 'createdAt' | 'updatedAt' | 'email' | 'company' | 'position' | 'notes' | 'lastCallId' | 'lastCallTime' | 'preferences' | 'totalCalls'> {}
+
+export class Contact extends Model<ContactAttributes, ContactCreationAttributes> implements ContactAttributes {
+  public id!: number
+  public name!: string
+  public phone!: string
+  public email?: string
+  public company?: string
+  public position?: string
+  public tags!: string[]
+  public notes?: string
+  public lastCallId?: number
+  public lastCallTime?: Date
+  public totalCalls!: number
+  public preferences!: {
+    preferredLanguage: string
+    timezone: string
+    doNotCall: boolean
+    preferredContactTime?: string
+  }
+  public isActive!: boolean
+  public createdBy!: number
+  public createdAt!: Date
+  public updatedAt!: Date
+}
+
+Contact.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      comment: '联系人姓名'
+    },
+    phone: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      comment: '电话号码'
+    },
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '邮箱地址'
+    },
+    company: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '公司名称'
+    },
+    position: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      comment: '职位'
+    },
+    tags: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: [],
+      comment: '标签'
+    },
+    notes: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: '备注'
+    },
+    lastCallId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: CallRecord,
+        key: 'id'
+      },
+      comment: '最后通话ID'
+    },
+    lastCallTime: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      comment: '最后通话时间'
+    },
+    totalCalls: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+      comment: '通话次数'
+    },
+    preferences: {
+      type: DataTypes.JSON,
+      allowNull: false,
+      defaultValue: {
+        preferredLanguage: 'zh-CN',
+        timezone: 'Asia/Shanghai',
+        doNotCall: false
+      },
+      comment: '联系偏好设置'
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+      comment: '是否激活'
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      comment: '创建者ID'
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
+  },
+  {
+    sequelize,
+    modelName: 'Contact',
+    tableName: 'call_center_contacts',
+    timestamps: true,
+    indexes: [
+      { fields: ['phone'] },
+      { fields: ['name'] },
+      { fields: ['email'] },
+      { fields: ['lastCallTime'] },
+      { fields: ['createdBy'] },
+      { fields: ['isActive'] }
+    ]
+  }
+)
+
+// 定义模型关联
+export function defineCallCenterAssociations() {
+  // SIPConfig和User的关联
+  SIPConfig.belongsTo(sequelize.models.User, {
+    foreignKey: 'createdBy',
+    as: 'creator'
+  })
+
+  // CallRecord的关联
+  CallRecord.belongsTo(sequelize.models.User, {
+    foreignKey: 'createdBy',
+    as: 'creator'
+  })
+  CallRecord.belongsTo(Extension, {
+    foreignKey: 'extension',
+    targetKey: 'extension',
+    as: 'extensionInfo'
+  })
+  CallRecord.hasOne(CallRecording, {
+    foreignKey: 'callId',
+    as: 'recording'
+  })
+  CallRecord.hasOne(CallAnalysis, {
+    foreignKey: 'callId',
+    as: 'analysis'
+  })
+
+  // CallRecording的关联
+  CallRecording.belongsTo(CallRecord, {
+    foreignKey: 'callId',
+    as: 'callRecord'
+  })
+  CallRecording.belongsTo(sequelize.models.User, {
+    foreignKey: 'createdBy',
+    as: 'creator'
+  })
+  CallRecording.hasOne(CallAnalysis, {
+    foreignKey: 'recordingId',
+    as: 'analysis'
+  })
+
+  // CallAnalysis的关联
+  CallAnalysis.belongsTo(CallRecord, {
+    foreignKey: 'callId',
+    as: 'callRecord'
+  })
+  CallAnalysis.belongsTo(CallRecording, {
+    foreignKey: 'recordingId',
+    as: 'recording'
+  })
+
+  // Extension的关联
+  Extension.belongsTo(sequelize.models.User, {
+    foreignKey: 'assignedUserId',
+    as: 'assignedUser'
+  })
+  Extension.belongsTo(sequelize.models.User, {
+    foreignKey: 'createdBy',
+    as: 'creator'
+  })
+  Extension.hasMany(CallRecord, {
+    foreignKey: 'currentCallId',
+    as: 'currentCalls'
+  })
+
+  // Contact的关联
+  Contact.belongsTo(sequelize.models.User, {
+    foreignKey: 'createdBy',
+    as: 'creator'
+  })
+  Contact.belongsTo(CallRecord, {
+    foreignKey: 'lastCallId',
+    as: 'lastCall'
+  })
+  Contact.hasMany(CallRecord, {
+    foreignKey: 'phoneNumber',
+    sourceKey: 'phone',
+    as: 'callHistory'
+  })
+}

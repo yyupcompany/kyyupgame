@@ -1,0 +1,135 @@
+{
+  "timestamp": "2025-11-15T01:42:40.237Z",
+  "url": "http://localhost:5173/dashboard",
+  "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/docs/browser-checks/dashboard-icons-verification-2025-11-15T01-42-37-112Z.png",
+  "analysis": {
+    "totalIcons": 24,
+    "svgIcons": 10,
+    "outlineStyleIcons": 7,
+    "filledStyleIcons": 3,
+    "placeholderIcons": 0,
+    "iconDetails": [
+      {
+        "index": 0,
+        "tagName": "div",
+        "className": "logo-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"logo-icon\" data-v-2db145dc=\"\"><img src=\"/src/assets/logo.png\" alt=\"婴婴向上智能招生系统\" class=\"logo-image\" data-v-2db145dc=\"\"></div>"
+      },
+      {
+        "index": 1,
+        "tagName": "div",
+        "className": "value-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"value-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><path d=\"M12 2L2 7L12 12L22 7L12 2Z\" data-v-2db145dc=\"\"></pa"
+      },
+      {
+        "index": 3,
+        "tagName": "div",
+        "className": "value-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"value-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><circle cx=\"12\" cy=\"12\" r=\"10\" data-v-2db145dc=\"\"></circle> "
+      },
+      {
+        "index": 5,
+        "tagName": "div",
+        "className": "value-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"value-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><path d=\"M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h"
+      },
+      {
+        "index": 7,
+        "tagName": "div",
+        "className": "welcome-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"welcome-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><path d=\"M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4\" data-v"
+      },
+      {
+        "index": 9,
+        "tagName": "div",
+        "className": "input-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div data-v-2db145dc=\"\" class=\"input-icon\"><svg data-v-2db145dc=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path data-v-2db145dc=\"\" d=\"M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.7"
+      },
+      {
+        "index": 11,
+        "tagName": "div",
+        "className": "input-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div data-v-2db145dc=\"\" class=\"input-icon\"><svg data-v-2db145dc=\"\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><path data-v-2db145dc=\"\" d=\"M18,8h-1V6c0-2.76-2.24-5-5-5S7,3.24,7,6v2H"
+      },
+      {
+        "index": 14,
+        "tagName": "span",
+        "className": "quick-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<span class=\"quick-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\" data-v-2db145dc=\""
+      },
+      {
+        "index": 16,
+        "tagName": "div",
+        "className": "btn-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"btn-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\" data-v-2db"
+      },
+      {
+        "index": 18,
+        "tagName": "div",
+        "className": "btn-icon",
+        "isSVG": false,
+        "hasOutlineStyle": false,
+        "hasFilledStyle": false,
+        "isPlaceholder": false,
+        "svgAttributes": {},
+        "outerHTML": "<div class=\"btn-icon\" data-v-2db145dc=\"\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" data-v-2db145dc=\"\"><circle cx=\"12\" cy=\"12\" r=\"10\" data-v-2db145dc=\"\"></circle> <c"
+      }
+    ]
+  },
+  "unifiedIconCount": 0,
+  "consoleErrors": [],
+  "summary": {
+    "修复状态": "✅ 修复成功",
+    "图标总数": 24,
+    "SVG图标数": 10,
+    "空心图标数": 7,
+    "实心图标数": 3,
+    "占位符图标数": 0,
+    "控制台错误数": 0
+  }
+}

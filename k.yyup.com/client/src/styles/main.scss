@@ -1,0 +1,201 @@
+/* 主样式文件 - 按组件组织 */
+
+/* 1. 导入主题变量 - 只导入明亮和暗黑主题 */
+@use './themes/dark.scss';
+@use './themes/light.scss';
+
+/* 2. 导入专用样式文件 */
+@use './charts-optimization.scss' as *;
+@use './list-components-optimization.scss' as *;
+
+/* 3. 导入组件样式 */
+@use './components/layout.scss' as *;
+@use './components/element-plus.scss' as *;
+
+/* 4. 统一字体大小系统 */
+@use './font-size-unified.scss' as *;
+
+/* 3. 应用级CSS变量定义 */
+:root {
+  /* 应用级变量 - Application Level Variables */
+  --app-padding: var(--spacing-lg);
+  --header-height: 60px;
+
+  /* 侧边栏变量 - 使用主题中定义的专用变量，不再映射到通用变量 */
+  /* 这些变量在各个主题文件中直接定义，不需要在这里重新映射 */
+}
+
+/* 4. 全局重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--text-sm); /* 从16px调整为14px，提升信息密度 */
+  line-height: 1.6;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 4. 滚动条样式 - 使用全局极细样式 */
+
+
+
+/* 6. 通用工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* 7. 布局工具类 */
+.page-container {
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  background-color: var(--bg-secondary);
+}
+
+/* 8. 卡片工具类 */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+}
+
+.card-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-card);
+  
+  .card-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+}
+
+.card-body {
+  padding: var(--spacing-lg);
+}
+
+/* 9. 按钮工具类 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    
+    &:hover {
+      background: var(--primary-hover);
+    }
+  }
+  
+  &.btn-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    
+    &:hover {
+      background: var(--bg-hover);
+    }
+  }
+}
+
+/* 10. 响应式工具类 */
+@media (max-width: var(--breakpoint-md)) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .page-container {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+}
+
+/* 11. 动画类 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--transition-fast);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+

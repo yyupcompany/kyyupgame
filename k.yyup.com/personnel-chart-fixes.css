@@ -1,0 +1,30 @@
+
+/* 人员分布图表重叠问题修复 */
+.chart-container:has(.chart-title:contains("人员分布")) {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) .chart-title {
+  position: relative !important;
+  z-index: 10 !important;
+  background: var(--bg-card) !important;
+  padding: 8px 12px !important;
+  margin-bottom: 8px !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) .chart-instance {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.chart-container:has(.chart-title:contains("人员分布")) .chart-content {
+  position: relative !important;
+  padding-top: 10px !important;
+}
+
+/* 确保图表内的文本标签不重叠 */
+.chart-container:has(.chart-title:contains("人员分布")) canvas {
+  position: relative !important;
+  z-index: 2 !important;
+}

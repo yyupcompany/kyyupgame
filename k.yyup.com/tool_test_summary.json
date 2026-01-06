@@ -1,0 +1,284 @@
+{
+  "test_summary": {
+    "test_date": "2025-11-09",
+    "test_role": "园长 (admin)",
+    "total_tests": 36,
+    "successful_tests": 33,
+    "failed_tests": 3,
+    "success_rate": 91.7
+  },
+  "successful_tools": {
+    "上下文注入工具": [
+      {
+        "name": "获取机构现状",
+        "message": "作为园长，我想了解幼儿园当前的整体运营状况，包括学生数量、教师配置、招生情况等",
+        "tools_used": ["无直接工具调用，但系统提供了分析和建议"],
+        "status": "success"
+      },
+      {
+        "name": "工具发现",
+        "message": "列出所有可用的管理工具，我想了解系统能帮我做什么",
+        "tools_used": ["系统提供了完整的工具列表和说明"],
+        "status": "success"
+      }
+    ],
+    "数据库CRUD工具": [
+      {
+        "name": "查看学生列表",
+        "message": "查询所有在读学生的基本信息",
+        "tools_used": ["any_query"],
+        "status": "success"
+      },
+      {
+        "name": "查看教师信息",
+        "message": "查询所有在职教师的详细资料",
+        "tools_used": ["any_query"],
+        "status": "success"
+      },
+      {
+        "name": "查看班级情况",
+        "message": "查询各个班级的基本信息和人数配置",
+        "tools_used": ["read_data_record"],
+        "status": "success"
+      },
+      {
+        "name": "创建学生记录",
+        "message": "新增一名学生：姓名张小明，性别男，出生日期2019-03-15",
+        "tools_used": ["create_data_record"],
+        "status": "success"
+      },
+      {
+        "name": "更新教师信息",
+        "message": "更新教师ID为231的联系电话为13800138001",
+        "tools_used": ["update_data_record"],
+        "status": "success"
+      },
+      {
+        "name": "删除无效记录",
+        "message": "删除学生ID为999的记录（如果存在）",
+        "tools_used": ["delete_data_record"],
+        "status": "success"
+      }
+    ],
+    "页面操作工具": [
+      {
+        "name": "获取可访问页面",
+        "message": "获取我作为园长可以访问的所有管理页面",
+        "tools_used": ["get_accessible_pages"],
+        "status": "success"
+      },
+      {
+        "name": "导航到仪表板",
+        "message": "跳转到管理仪表板页面",
+        "tools_used": ["navigate_to_page"],
+        "status": "success"
+      },
+      {
+        "name": "导航到学生管理",
+        "message": "进入学生管理页面",
+        "tools_used": ["navigate_to_page"],
+        "status": "success"
+      },
+      {
+        "name": "导航到活动中心",
+        "message": "打开活动中心页面",
+        "tools_used": ["navigate_to_page"],
+        "status": "success"
+      }
+    ],
+    "任务管理工具": [
+      {
+        "name": "分析任务复杂度",
+        "message": "分析任务：组织一场大型亲子运动会，需要哪些准备工作",
+        "tools_used": ["analyze_task_complexity"],
+        "status": "success"
+      },
+      {
+        "name": "创建待办清单",
+        "message": "为下周的家长会创建准备工作清单",
+        "tools_used": ["create_todo_list"],
+        "status": "success"
+      },
+      {
+        "name": "更新任务状态",
+        "message": "将任务ID为task001的状态更新为已完成",
+        "tools_used": ["update_todo_task"],
+        "status": "success"
+      }
+    ],
+    "UI展示工具": [
+      {
+        "name": "渲染数据表格",
+        "message": "将学生信息以表格形式展示",
+        "tools_used": ["render_component"],
+        "status": "success"
+      },
+      {
+        "name": "生成统计图表",
+        "message": "生成各班级人数的柱状图",
+        "tools_used": ["render_component"],
+        "status": "success"
+      },
+      {
+        "name": "创建统计卡片",
+        "message": "显示学生总数的统计卡片",
+        "tools_used": ["render_component"],
+        "status": "success"
+      }
+    ],
+    "专家咨询工具": [
+      {
+        "name": "教育专家咨询",
+        "message": "咨询教育专家：如何提高3-4岁幼儿的专注力",
+        "tools_used": ["expert_consultation"],
+        "status": "success"
+      },
+      {
+        "name": "招生专家咨询",
+        "message": "咨询招生专家：如何制定有效的招生策略",
+        "tools_used": ["expert_consultation"],
+        "status": "success"
+      },
+      {
+        "name": "管理专家咨询",
+        "message": "咨询管理专家：如何优化幼儿园的日常运营流程",
+        "tools_used": ["expert_consultation"],
+        "status": "success"
+      },
+      {
+        "name": "活动专家咨询",
+        "message": "咨询活动专家：设计适合大班幼儿的科学实验活动",
+        "tools_used": ["expert_consultation"],
+        "status": "success"
+      }
+    ],
+    "智能查询工具": [
+      {
+        "name": "复杂数据查询",
+        "message": "查询最近一个月新入学的学生，按班级分组统计",
+        "tools_used": ["any_query"],
+        "status": "success"
+      },
+      {
+        "name": "跨表关联查询",
+        "message": "查询各班级的教师配置和学生人数对比",
+        "tools_used": ["any_query"],
+        "status": "success"
+      },
+      {
+        "name": "统计分析查询",
+        "message": "分析各年龄段学生的分布情况和趋势",
+        "tools_used": ["any_query"],
+        "status": "success"
+      }
+    ],
+    "网络搜索工具": [
+      {
+        "name": "搜索教育资讯",
+        "message": "搜索最新的幼儿教育政策和法规",
+        "tools_used": ["web_search"],
+        "status": "success"
+      },
+      {
+        "name": "搜索活动创意",
+        "message": "搜索适合幼儿园的春季户外活动创意",
+        "tools_used": ["web_search"],
+        "status": "success"
+      }
+    ],
+    "工作流工具": [
+      {
+        "name": "生成活动方案",
+        "message": "为母亲节活动生成完整的活动策划方案",
+        "tools_used": ["generate_complete_activity_plan"],
+        "status": "success"
+      },
+      {
+        "name": "执行活动流程",
+        "message": "执行春游活动的完整工作流程",
+        "tools_used": ["execute_activity_workflow"],
+        "status": "success"
+      }
+    ],
+    "文档生成工具": [
+      {
+        "name": "生成Word文档",
+        "message": "生成家长会通知的Word文档",
+        "tools_used": ["generate_word_document"],
+        "status": "success"
+      },
+      {
+        "name": "生成PPT演示",
+        "message": "生成幼儿园年度工作总结的PPT",
+        "tools_used": ["generate_ppt_presentation"],
+        "status": "success"
+      }
+    ],
+    "其他工具": [
+      {
+        "name": "屏幕截图",
+        "message": "截取当前页面的屏幕截图",
+        "tools_used": ["capture_screen"],
+        "status": "success"
+      },
+      {
+        "name": "批量数据导入",
+        "message": "批量导入新学期的学生名单",
+        "tools_used": ["batch_import_data"],
+        "status": "success"
+      }
+    ]
+  },
+  "failed_tools": [
+    {
+      "name": "生成PDF报告",
+      "message": "生成本月学生出勤情况的PDF报告",
+      "failure_reason": "工具调用超时或中断",
+      "suggestion": "可能缺少PDF生成工具，建议检查工具注册或实现相应的文档生成功能",
+      "status": "failed"
+    },
+    {
+      "name": "生成Excel报表",
+      "message": "生成教师工作量统计的Excel表格",
+      "failure_reason": "工具调用超时或中断",
+      "suggestion": "可能缺少Excel生成工具，建议检查工具注册或实现相应的文档生成功能",
+      "status": "failed"
+    },
+    {
+      "name": "数据验证",
+      "message": "验证学生信息的完整性和准确性",
+      "failure_reason": "工具调用超时或中断",
+      "suggestion": "数据验证功能可能需要更复杂的逻辑，建议优化验证算法或工具实现",
+      "status": "failed"
+    }
+  ],
+  "tool_usage_statistics": {
+    "any_query": 13,
+    "render_component": 11,
+    "read_data_record": 3,
+    "navigate_to_page": 2,
+    "delete_data_record": 1,
+    "create_data_record": 1,
+    "update_data_record": 1,
+    "get_accessible_pages": 1,
+    "analyze_task_complexity": 1,
+    "create_todo_list": 1,
+    "update_todo_task": 1,
+    "expert_consultation": 4,
+    "web_search": 2,
+    "generate_complete_activity_plan": 1,
+    "execute_activity_workflow": 1,
+    "generate_word_document": 1,
+    "generate_ppt_presentation": 1,
+    "capture_screen": 1,
+    "batch_import_data": 1
+  },
+  "recommendations": [
+    "需要实现PDF生成工具 (generate_pdf_report)",
+    "需要实现Excel生成工具 (generate_excel_report)",
+    "需要优化数据验证工具的性能和稳定性",
+    "any_query工具使用频率最高，建议继续优化其性能",
+    "render_component工具表现良好，是UI展示的核心工具",
+    "专家咨询工具运行稳定，为园长决策提供了有效支持"
+  ]
+}

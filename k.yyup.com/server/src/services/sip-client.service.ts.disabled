@@ -1,0 +1,338 @@
+/**
+ * 真实SIP客户端服务
+ * 
+ * 使用SIP.js实现真实的SIP连接和通话功能
+ */
+
+import { EventEmitter } from 'events';
+import { UserAgent, Inviter, Session, SessionState, URI, Invitation } from 'sip.js';
+import { sipConfigService, SIPConfig } from './sip-config.service';
+
+export interface CallSession {
+  callId: string;
+  phoneNumber: string;
+  session: Session;
+  startTime: Date;
+  status: 'connecting' | 'ringing' | 'answered' | 'ended' | 'failed';
+}
+
+export class SIPClientService extends EventEmitter {
+  private static instance: SIPClientService;
+  private userAgent: UserAgent | null = null;
+  private config: SIPConfig | null = null;
+  private activeCalls: Map<string, CallSession> = new Map();
+  private isConnected: boolean = false;
+
+  private constructor() {
+    super();
+  }
+
+  static getInstance(): SIPClientService {
+    if (!SIPClientService.instance) {
+      SIPClientService.instance = new SIPClientService();
+    }
+    return SIPClientService.instance;
+  }
+
+  /**
+   * 初始化并连接到SIP服务器
+   */
+  async connect(): Promise<boolean> {
+    try {
+      // 加载SIP配置
+      await sipConfigService.loadConfig();
+      this.config = sipConfigService.getConfig();
+
+      if (!this.config) {
+        throw new Error('SIP配置未加载');
+      }
+
+      console.log('📞 初始化SIP客户端...');
+      console.log(`   服务器: ${this.config.server_host}:${this.config.server_port}`);
+      console.log(`   账号: ${this.config.username}`);
+
+      // 构建SIP URI
+      const uriString = `sip:${this.config.username}@${this.config.server_host}`;
+      const uri = UserAgent.makeURI(uriString);
+
+      if (!uri) {
+        throw new Error('无效的SIP URI');
+      }
+
+      // 创建UserAgent配置
+      const userAgentOptions = {
+        uri,
+        transportOptions: {
+          server: `ws://${this.config.server_host}:${this.config.server_port}`
+        },
+        authorizationUsername: this.config.username,
+        authorizationPassword: this.config.password,
+        sessionDescriptionHandlerFactoryOptions: {
+          constraints: {
+            audio: true,
+            video: false
+          }
+        },
+        delegate: {
+          onInvite: (invitation: Invitation) => {
+            console.log('📞 收到来电');
+            this.handleIncomingCall(invitation);
+          }
+        }
+      };
+
+      // 创建UserAgent
+      this.userAgent = new UserAgent(userAgentOptions);
+
+      // 启动UserAgent
+      await this.userAgent.start();
+
+      this.isConnected = true;
+      console.log('✅ SIP客户端连接成功');
+
+      // 更新注册时间
+      await sipConfigService.updateLastRegisterTime();
+
+      return true;
+    } catch (error) {
+      console.error('❌ SIP客户端连接失败:', error);
+      this.isConnected = false;
+      throw error;
+    }
+  }
+
+  /**
+   * 拨打电话
+   */
+  async makeCall(phoneNumber: string): Promise<string> {
+    if (!this.userAgent || !this.config) {
+      throw new Error('SIP客户端未初始化');
+    }
+
+    if (!this.isConnected) {
+      throw new Error('SIP客户端未连接');
+    }
+
+    try {
+      const callId = `call_${Date.now()}`;
+      console.log(`📞 拨打电话: ${phoneNumber}`);
+      console.log(`   Call ID: ${callId}`);
+
+      // 构建目标URI
+      const targetString = `sip:${phoneNumber}@${this.config.server_host}`;
+      const target = UserAgent.makeURI(targetString);
+      if (!target) {
+        throw new Error('无效的电话号码');
+      }
+
+      // 创建Inviter
+      const inviter = new Inviter(this.userAgent, target);
+
+      // 创建通话会话
+      const callSession: CallSession = {
+        callId,
+        phoneNumber,
+        session: inviter,
+        startTime: new Date(),
+        status: 'connecting'
+      };
+
+      this.activeCalls.set(callId, callSession);
+
+      // 设置会话状态监听
+      this.setupSessionListeners(callSession);
+
+      // 发起呼叫
+      await inviter.invite();
+
+      console.log('✅ 呼叫已发起');
+      this.emit('call-initiated', { callId, phoneNumber });
+
+      return callId;
+    } catch (error) {
+      console.error('❌ 拨打电话失败:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 设置会话监听器
+   */
+  private setupSessionListeners(callSession: CallSession): void {
+    const { session, callId, phoneNumber } = callSession;
+
+    // 监听会话状态变化
+    session.stateChange.addListener((state: SessionState) => {
+      console.log(`📞 通话状态变化 (${callId}): ${state}`);
+
+      switch (state) {
+        case SessionState.Establishing:
+          callSession.status = 'ringing';
+          console.log('📞 振铃中...');
+          this.emit('call-ringing', { callId, phoneNumber });
+          break;
+
+        case SessionState.Established:
+          callSession.status = 'answered';
+          console.log('✅ 通话已接通');
+          this.emit('call-answered', { callId, phoneNumber });
+          
+          // 设置音频流处理
+          this.setupAudioStream(callSession);
+          break;
+
+        case SessionState.Terminated:
+          callSession.status = 'ended';
+          console.log('📞 通话已结束');
+          this.emit('call-ended', { callId, phoneNumber });
+          this.activeCalls.delete(callId);
+          break;
+      }
+    });
+
+    // 监听会话错误
+    session.delegate = {
+      onBye: () => {
+        console.log('📞 对方挂断');
+        this.emit('call-hangup', { callId, phoneNumber });
+      }
+    };
+  }
+
+  /**
+   * 设置音频流处理
+   */
+  private setupAudioStream(callSession: CallSession): void {
+    const { session, callId } = callSession;
+
+    try {
+      // 获取SessionDescriptionHandler
+      const sessionDescriptionHandler = session.sessionDescriptionHandler;
+      if (!sessionDescriptionHandler) {
+        console.warn('⚠️  无法获取SessionDescriptionHandler');
+        return;
+      }
+
+      // 获取PeerConnection
+      const peerConnection = (sessionDescriptionHandler as any).peerConnection;
+      if (!peerConnection) {
+        console.warn('⚠️  无法获取PeerConnection');
+        return;
+      }
+
+      // 监听远程音频流
+      peerConnection.ontrack = (event: RTCTrackEvent) => {
+        console.log('🎤 接收到远程音频流');
+        const remoteStream = event.streams[0];
+        
+        // 触发音频流事件
+        this.emit('audio-stream', {
+          callId,
+          stream: remoteStream
+        });
+      };
+
+      console.log('✅ 音频流处理已设置');
+    } catch (error) {
+      console.error('❌ 设置音频流失败:', error);
+    }
+  }
+
+  /**
+   * 处理来电
+   */
+  private handleIncomingCall(invitation: Invitation): void {
+    const callId = `call_${Date.now()}`;
+    const phoneNumber = invitation.remoteIdentity.uri.user || 'unknown';
+
+    console.log(`📞 收到来电: ${phoneNumber}`);
+
+    const callSession: CallSession = {
+      callId,
+      phoneNumber,
+      session: invitation,
+      startTime: new Date(),
+      status: 'ringing'
+    };
+
+    this.activeCalls.set(callId, callSession);
+    this.setupSessionListeners(callSession);
+
+    this.emit('incoming-call', { callId, phoneNumber, invitation });
+  }
+
+  /**
+   * 接听来电
+   */
+  async answerCall(callId: string): Promise<void> {
+    const callSession = this.activeCalls.get(callId);
+    if (!callSession) {
+      throw new Error('通话会话不存在');
+    }
+
+    try {
+      const invitation = callSession.session as Invitation;
+      await invitation.accept();
+      console.log('✅ 已接听来电');
+    } catch (error) {
+      console.error('❌ 接听来电失败:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 挂断电话
+   */
+  async hangup(callId: string): Promise<void> {
+    const callSession = this.activeCalls.get(callId);
+    if (!callSession) {
+      throw new Error('通话会话不存在');
+    }
+
+    try {
+      await callSession.session.bye();
+      console.log('✅ 已挂断电话');
+      this.activeCalls.delete(callId);
+    } catch (error) {
+      console.error('❌ 挂断电话失败:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * 断开SIP连接
+   */
+  async disconnect(): Promise<void> {
+    if (this.userAgent) {
+      await this.userAgent.stop();
+      this.userAgent = null;
+      this.isConnected = false;
+      console.log('✅ SIP客户端已断开');
+    }
+  }
+
+  /**
+   * 获取连接状态
+   */
+  isClientConnected(): boolean {
+    return this.isConnected;
+  }
+
+  /**
+   * 获取活跃通话
+   */
+  getActiveCalls(): CallSession[] {
+    return Array.from(this.activeCalls.values());
+  }
+
+  /**
+   * 获取通话会话
+   */
+  getCallSession(callId: string): CallSession | undefined {
+    return this.activeCalls.get(callId);
+  }
+}
+
+// 导出单例
+export const sipClientService = SIPClientService.getInstance();
+

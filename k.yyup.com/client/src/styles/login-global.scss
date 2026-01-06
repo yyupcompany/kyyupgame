@@ -1,0 +1,185 @@
+/**
+ * 登录页面全局样式
+ * 使用设计令牌系统，主色为紫蓝色 (#6366f1)
+ */
+
+// 导入设计令牌
+@use './base/variables.scss';
+
+// 登录页面根容器
+.modern-login-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+
+  // 背景装饰元素
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
+// 认证面板 - 限制宽度
+.auth-panel {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: var(--breakpoint-lg)) {
+    max-width: 900px;
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    margin: var(--spacing-lg);
+    border-radius: 12px;
+  }
+}
+
+// 左侧品牌区域
+.brand-section {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  position: relative;
+  overflow: hidden;
+
+  // 背景装饰
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    padding: 40px 30px;
+    min-height: 200px;
+  }
+}
+
+// 右侧登录区域
+.login-section {
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: var(--breakpoint-md)) {
+    padding: 40px 30px;
+  }
+}
+
+// 登录卡片
+.login-card {
+  width: 100%;
+}
+
+// 登录表单输入框美化
+.input-container {
+  position: relative;
+  margin-bottom: 20px;
+
+  .el-input {
+    &:hover .el-input__wrapper {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+    }
+
+    &.is-focus .el-input__wrapper {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+  }
+}
+
+// 登录按钮美化
+.login-button {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 44px;
+  border-radius: 8px;
+  font-size: var(--text-base);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// 页脚
+.page-footer {
+  text-align: center;
+  padding: 30px 20px;
+  color: #64748b;
+  font-size: var(--text-sm);
+  position: relative;
+  z-index: 1;
+
+  p {
+    margin: 5px 0;
+  }
+
+  .tech-link {
+    color: #6366f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #4f46e5;
+      text-decoration: underline;
+    }
+  }
+}
+

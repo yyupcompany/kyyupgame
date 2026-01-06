@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function Call 智能测试界面</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-blue': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="h-full bg-gradient-to-br from-deep-blue-50 to-deep-blue-100 font-sans">
+    <div class="min-h-screen p-4">
+        <!-- 标题区域 -->
+        <div class="max-w-7xl mx-auto mb-8">
+            <div class="text-center py-8">
+                <h1 class="text-4xl font-bold text-deep-blue-900 mb-4">🧠 Function Call 智能测试中心</h1>
+                <p class="text-lg text-deep-blue-700">测试幼儿园AI助手的智能理解与工具调用能力</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- 左侧：测试输入区域 -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- 测试输入 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 border border-deep-blue-100">
+                    <h2 class="text-xl font-semibold text-deep-blue-900 mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-deep-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">1</span>
+                        智能查询输入
+                    </h2>
+                    <div class="space-y-4">
+                        <textarea id="queryInput" 
+                                  class="w-full h-32 p-4 border-2 border-deep-blue-200 rounded-xl resize-none focus:border-deep-blue-500 focus:ring-2 focus:ring-deep-blue-200 transition-all" 
+                                  placeholder="输入您的复杂查询，例如：&#10;• 查询最受欢迎的活动类型&#10;• 分析招生趋势和数据&#10;• 统计学生参与活动的情况&#10;• 创建一个春季亲子活动"></textarea>
+                        
+                        <button id="testBtn" 
+                                class="w-full bg-deep-blue-600 hover:bg-deep-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-105 focus:ring-4 focus:ring-deep-blue-300">
+                            🚀 执行智能分析
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 预设测试用例 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 border border-deep-blue-100">
+                    <h2 class="text-xl font-semibold text-deep-blue-900 mb-4 flex items-center">
+                        <span class="w-8 h-8 bg-deep-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">2</span>
+                        智能测试用例
+                    </h2>
+                    <div class="space-y-2">
+                        <button class="test-case w-full text-left p-3 bg-deep-blue-50 hover:bg-deep-blue-100 rounded-xl transition-all text-sm text-deep-blue-800" 
+                                data-query="查询过去3个月最受欢迎的活动">
+                            🎯 简单查询：活动数据分析
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-deep-blue-50 hover:bg-deep-blue-100 rounded-xl transition-all text-sm text-deep-blue-800" 
+                                data-query="帮我分析一下今年的招生情况，包括各个月份的申请数量和录取率">
+                            📊 复杂分析：招生趋势统计
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-deep-blue-50 hover:bg-deep-blue-100 rounded-xl transition-all text-sm text-deep-blue-800" 
+                                data-query="查找参与活动最多的学生，并显示他们的详细信息">
+                            🔍 关联查询：学生活动参与度
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-deep-blue-50 hover:bg-deep-blue-100 rounded-xl transition-all text-sm text-deep-blue-800" 
+                                data-query="我想创建一个母亲节亲子活动，时间在5月12日下午，地点在多功能厅，限50人">
+                            ⚡ 业务操作：智能活动创建
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-deep-blue-50 hover:bg-deep-blue-100 rounded-xl transition-all text-sm text-deep-blue-800" 
+                                data-query="比较不同班级学生的活动参与情况，找出参与度最高的班级">
+                            📈 高级查询：多表关联分析
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-orange-50 hover:bg-orange-100 rounded-xl transition-all text-sm text-orange-800" 
+                                data-query="请先查询最受欢迎的3个活动，然后基于这些数据创建一个新的综合性亲子活动">
+                            🔄 多步骤：查询+创建任务
+                        </button>
+                        <button class="test-case w-full text-left p-3 bg-purple-50 hover:bg-purple-100 rounded-xl transition-all text-sm text-purple-800" 
+                                data-query="帮我分析招生趋势，然后根据分析结果制定下个月的营销策略">
+                            🧠 复杂任务：分析+决策+规划
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：结果显示区域 -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- 响应状态 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 border border-deep-blue-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-deep-blue-900">🎯 AI响应状态</h2>
+                        <div id="statusBadge" class="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600">
+                            等待测试...
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                        <div class="p-4 bg-deep-blue-50 rounded-xl">
+                            <div class="text-2xl font-bold text-deep-blue-900" id="responseTime">--</div>
+                            <div class="text-sm text-deep-blue-600">响应时间(ms)</div>
+                        </div>
+                        <div class="p-4 bg-deep-blue-50 rounded-xl">
+                            <div class="text-2xl font-bold text-deep-blue-900" id="toolsUsed">--</div>
+                            <div class="text-sm text-deep-blue-600">调用工具数</div>
+                        </div>
+                        <div class="p-4 bg-deep-blue-50 rounded-xl">
+                            <div class="text-2xl font-bold text-deep-blue-900" id="dataCount">--</div>
+                            <div class="text-sm text-deep-blue-600">返回数据量</div>
+                        </div>
+                        <div class="p-4 bg-deep-blue-50 rounded-xl">
+                            <div class="text-2xl font-bold text-deep-blue-900" id="modelUsed">--</div>
+                            <div class="text-sm text-deep-blue-600">AI模型</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工具调用分析 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 border border-deep-blue-100">
+                    <h2 class="text-xl font-semibold text-deep-blue-900 mb-4">🔧 Function Tools 调用分析</h2>
+                    <div id="toolAnalysis" class="space-y-4">
+                        <div class="text-center text-gray-500 py-8">
+                            <div class="text-6xl mb-4">🤖</div>
+                            <p>等待AI执行Function Call...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据结果展示 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 border border-deep-blue-100">
+                    <h2 class="text-xl font-semibold text-deep-blue-900 mb-4">📊 查询结果展示</h2>
+                    <div id="dataResults" class="min-h-64">
+                        <div class="text-center text-gray-500 py-12">
+                            <div class="text-6xl mb-4">📈</div>
+                            <p>查询结果将在这里显示</p>
+                            <p class="text-sm mt-2">支持表格、图表、摘要等多种格式</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载状态模态框 -->
+    <div id="loadingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-sm mx-4 text-center">
+            <div class="animate-spin w-12 h-12 border-4 border-deep-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+            <h3 class="text-lg font-semibold text-deep-blue-900 mb-2">AI正在思考...</h3>
+            <p class="text-sm text-deep-blue-600">正在分析您的查询并调用相应工具</p>
+        </div>
+    </div>
+
+    <script>
+        // 全局变量
+        let isLoading = false;
+
+        // DOM 元素
+        const queryInput = document.getElementById('queryInput');
+        const testBtn = document.getElementById('testBtn');
+        const testCases = document.querySelectorAll('.test-case');
+        const loadingModal = document.getElementById('loadingModal');
+        const statusBadge = document.getElementById('statusBadge');
+
+        // 预设测试用例点击事件
+        testCases.forEach(btn => {
+            btn.addEventListener('click', () => {
+                queryInput.value = btn.dataset.query;
+                queryInput.focus();
+            });
+        });
+
+        // 主测试按钮点击事件
+        testBtn.addEventListener('click', async () => {
+            const query = queryInput.value.trim();
+            if (!query) {
+                alert('请输入查询内容');
+                return;
+            }
+            await executeTest(query);
+        });
+
+        // 执行测试函数
+        async function executeTest(query) {
+            if (isLoading) return;
+            
+            isLoading = true;
+            loadingModal.classList.remove('hidden');
+            updateStatus('processing', '🤖 AI分析中...');
+            
+            const startTime = Date.now();
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/ai/function-tools/smart-chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjEsInVzZXJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTQ1NDQzOTksImV4cCI6ODY0MDAwMDAwMDAwMH0.mockSignatureForDevAndTestingPurposesOnly'
+                    },
+                    body: JSON.stringify({
+                        messages: [{
+                            role: 'user',
+                            content: query
+                        }],
+                        conversation_id: Date.now().toString(),
+                        max_iterations: 5
+                    })
+                });
+
+                const endTime = Date.now();
+                const responseTime = endTime - startTime;
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateStatus('success', '✅ 执行成功');
+                    displayResults(data.data, responseTime, query);
+                } else {
+                    throw new Error(data.error || '执行失败');
+                }
+
+            } catch (error) {
+                updateStatus('error', '❌ 执行失败');
+                displayError(error.message, Date.now() - startTime);
+            } finally {
+                isLoading = false;
+                loadingModal.classList.add('hidden');
+            }
+        }
+
+        // 更新状态
+        function updateStatus(status, text) {
+            const colors = {
+                processing: 'bg-yellow-100 text-yellow-800',
+                success: 'bg-green-100 text-green-800', 
+                error: 'bg-red-100 text-red-800'
+            };
+            statusBadge.className = `px-4 py-2 rounded-full text-sm font-medium ${colors[status]}`;
+            statusBadge.textContent = text;
+        }
+
+        // 显示结果
+        function displayResults(data, responseTime, originalQuery) {
+            // 更新统计数据
+            document.getElementById('responseTime').textContent = responseTime;
+            document.getElementById('modelUsed').textContent = data.model_used?.split('-').pop() || 'AI';
+            
+            // 如果有多轮对话历史
+            if (data.conversation_history && data.conversation_history.length > 0) {
+                const totalTools = data.conversation_history.reduce((sum, round) => 
+                    sum + (round.tool_calls?.length || 0), 0);
+                document.getElementById('toolsUsed').textContent = totalTools + ` (${data.iterations}轮)`;
+                
+                displayConversationHistory(data.conversation_history);
+            } else {
+                // 旧格式兼容
+                document.getElementById('toolsUsed').textContent = data.tool_calls?.length || 0;
+                displayToolAnalysis(data.tool_calls, data.tool_results);
+                displayDataResults(data.tool_results, originalQuery);
+            }
+            
+            // 更新数据量
+            let totalRecords = 0;
+            if (data.conversation_history) {
+                data.conversation_history.forEach(round => {
+                    if (round.tool_results) {
+                        round.tool_results.forEach(result => {
+                            const parsedResult = JSON.parse(result.content);
+                            totalRecords += parsedResult.data?.length || parsedResult.summary?.recordCount || 0;
+                        });
+                    }
+                });
+            } else {
+                totalRecords = data.tool_results?.reduce((sum, result) => {
+                    return sum + (result.result?.data?.length || result.result?.summary?.recordCount || 0);
+                }, 0) || 0;
+            }
+            document.getElementById('dataCount').textContent = totalRecords;
+        }
+
+        // 显示多轮对话历史
+        function displayConversationHistory(conversationHistory) {
+            const toolContainer = document.getElementById('toolAnalysis');
+            const dataContainer = document.getElementById('dataResults');
+            
+            let toolHtml = '';
+            let dataHtml = '';
+            
+            conversationHistory.forEach((round, index) => {
+                // 显示每轮的AI回复
+                if (round.ai_response) {
+                    toolHtml += `
+                        <div class="mb-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl">
+                            <h4 class="font-medium text-blue-900 mb-2">🤖 第${round.iteration}轮 AI回复</h4>
+                            <p class="text-sm text-gray-700">${round.ai_response}</p>
+                            <div class="text-xs text-gray-500 mt-2">${new Date(round.timestamp).toLocaleTimeString()}</div>
+                        </div>
+                    `;
+                }
+                
+                // 显示工具调用
+                if (round.tool_calls && round.tool_calls.length > 0) {
+                    round.tool_calls.forEach((toolCall, toolIndex) => {
+                        const toolResult = round.tool_results?.[toolIndex];
+                        const isSuccess = toolResult && !JSON.parse(toolResult.content).error;
+                        
+                        toolHtml += `
+                            <div class="border-l-4 ${isSuccess ? 'border-green-500' : 'border-red-500'} pl-4 py-3 bg-gray-50 rounded-r-xl mb-3">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h4 class="font-semibold text-deep-blue-900">🔧 ${toolCall.function.name}</h4>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs px-2 py-1 rounded-full ${isSuccess ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                            ${isSuccess ? '成功' : '失败'}
+                                        </span>
+                                        <span class="text-xs text-gray-500">第${round.iteration}轮</span>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-700 space-y-2">
+                                    <div><strong>参数:</strong> <code class="bg-gray-200 px-2 py-1 rounded text-xs">${toolCall.function.arguments}</code></div>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // 显示工具执行结果
+                        if (toolResult) {
+                            try {
+                                const resultData = JSON.parse(toolResult.content);
+                                if (resultData.data && Array.isArray(resultData.data)) {
+                                    dataHtml += generateDataTable(resultData, `第${round.iteration}轮 - ${toolCall.function.name}`, index * 10 + toolIndex);
+                                }
+                            } catch (e) {
+                                console.warn('解析工具结果失败:', e);
+                            }
+                        }
+                    });
+                }
+            });
+            
+            // 添加最终总结
+            toolHtml += `
+                <div class="mt-4 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-xl">
+                    <h4 class="font-medium text-green-900 mb-2">✅ 对话完成</h4>
+                    <p class="text-sm text-gray-700">共进行了 ${conversationHistory.length} 轮对话，成功完成任务</p>
+                </div>
+            `;
+            
+            toolContainer.innerHTML = toolHtml;
+            dataContainer.innerHTML = dataHtml || '<div class="text-center text-gray-500 py-4">没有返回数据结果</div>';
+        }
+        
+        // 生成数据表格
+        function generateDataTable(resultData, title, index) {
+            if (!resultData.data || !Array.isArray(resultData.data) || resultData.data.length === 0) {
+                return '';
+            }
+            
+            const data = resultData.data;
+            const headers = Object.keys(data[0]);
+            const rows = data.slice(0, 10);
+            
+            return `
+                <div class="mb-6">
+                    <h3 class="font-semibold text-deep-blue-900 mb-3">📊 ${title}</h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full table-auto border-collapse">
+                            <thead>
+                                <tr class="bg-deep-blue-50">
+                                    ${headers.map(h => `<th class="border border-deep-blue-200 px-4 py-2 text-left text-sm font-medium text-deep-blue-900">${h}</th>`).join('')}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows.map(row => `
+                                    <tr class="hover:bg-deep-blue-25">
+                                        ${headers.map(h => `<td class="border border-deep-blue-100 px-4 py-2 text-sm text-gray-700">${formatValue(row[h])}</td>`).join('')}
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                    ${data.length > 10 ? `<p class="text-sm text-gray-500 mt-2">显示前10条，共${data.length}条记录</p>` : ''}
+                    ${resultData.metadata?.summary ? `
+                        <div class="mt-4 p-4 bg-blue-50 rounded-xl">
+                            <h4 class="font-medium text-deep-blue-900 mb-2">📈 数据摘要</h4>
+                            <pre class="text-sm text-gray-700">${JSON.stringify(resultData.metadata.summary, null, 2)}</pre>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // 显示工具调用分析
+        function displayToolAnalysis(toolCalls, toolResults) {
+            const container = document.getElementById('toolAnalysis');
+            
+            if (!toolCalls || toolCalls.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-500 py-4">
+                        <p>没有调用Function Tools</p>
+                        <p class="text-sm">AI使用了普通回复模式</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = toolCalls.map((call, index) => {
+                const result = toolResults?.[index];
+                const isSuccess = result?.result?.status !== 'error';
+                
+                return `
+                    <div class="border-l-4 ${isSuccess ? 'border-green-500' : 'border-red-500'} pl-4 py-3 bg-gray-50 rounded-r-xl">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="font-semibold text-deep-blue-900">🔧 ${call.function.name}</h3>
+                            <span class="text-xs px-2 py-1 rounded-full ${isSuccess ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                ${isSuccess ? '成功' : '失败'}
+                            </span>
+                        </div>
+                        <div class="text-sm text-gray-700 space-y-2">
+                            <div><strong>参数:</strong> <code class="bg-gray-200 px-2 py-1 rounded text-xs">${call.function.arguments}</code></div>
+                            ${result?.result?.metadata?.explanation ? `<div><strong>说明:</strong> ${result.result.metadata.explanation}</div>` : ''}
+                            ${result?.result?.metadata?.generatedSQL ? `<div><strong>SQL:</strong> <code class="bg-blue-100 px-2 py-1 rounded text-xs">${result.result.metadata.generatedSQL}</code></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+        }
+
+        // 显示数据结果
+        function displayDataResults(toolResults, originalQuery) {
+            const container = document.getElementById('dataResults');
+            
+            if (!toolResults || toolResults.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center text-gray-500 py-8">
+                        <p>没有返回数据结果</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const html = toolResults.map((result, index) => {
+                const data = result.result?.data || result.result?.result;
+                const metadata = result.result?.metadata;
+                
+                if (!data) return '';
+
+                if (Array.isArray(data) && data.length > 0) {
+                    // 表格显示
+                    const headers = Object.keys(data[0]);
+                    const rows = data.slice(0, 10); // 只显示前10条
+
+                    return `
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-deep-blue-900 mb-3">📊 ${metadata?.name || '查询结果'} ${index + 1}</h3>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full table-auto border-collapse">
+                                    <thead>
+                                        <tr class="bg-deep-blue-50">
+                                            ${headers.map(h => `<th class="border border-deep-blue-200 px-4 py-2 text-left text-sm font-medium text-deep-blue-900">${h}</th>`).join('')}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${rows.map(row => `
+                                            <tr class="hover:bg-deep-blue-25">
+                                                ${headers.map(h => `<td class="border border-deep-blue-100 px-4 py-2 text-sm text-gray-700">${formatValue(row[h])}</td>`).join('')}
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                            ${data.length > 10 ? `<p class="text-sm text-gray-500 mt-2">显示前10条，共${data.length}条记录</p>` : ''}
+                            ${metadata?.summary ? `
+                                <div class="mt-4 p-4 bg-blue-50 rounded-xl">
+                                    <h4 class="font-medium text-deep-blue-900 mb-2">📈 数据摘要</h4>
+                                    <pre class="text-sm text-gray-700">${JSON.stringify(metadata.summary, null, 2)}</pre>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                } else if (data.type) {
+                    // 特殊格式显示
+                    return `
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-deep-blue-900 mb-3">📋 ${data.type} 结果</h3>
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <pre class="text-sm text-gray-700 whitespace-pre-wrap">${JSON.stringify(data, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // 默认JSON显示
+                    return `
+                        <div class="mb-6">
+                            <h3 class="font-semibold text-deep-blue-900 mb-3">📄 原始结果</h3>
+                            <div class="bg-gray-50 p-4 rounded-xl">
+                                <pre class="text-sm text-gray-700">${JSON.stringify(result, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join('');
+            
+            container.innerHTML = html || '<div class="text-center text-gray-500 py-4">没有可显示的数据</div>';
+        }
+
+        // 显示错误
+        function displayError(message, responseTime) {
+            document.getElementById('responseTime').textContent = responseTime;
+            document.getElementById('toolsUsed').textContent = 0;
+            document.getElementById('dataCount').textContent = 0;
+            document.getElementById('modelUsed').textContent = 'N/A';
+            
+            document.getElementById('toolAnalysis').innerHTML = `
+                <div class="text-center text-red-500 py-4">
+                    <div class="text-4xl mb-2">❌</div>
+                    <p><strong>执行失败:</strong> ${message}</p>
+                </div>
+            `;
+            
+            document.getElementById('dataResults').innerHTML = `
+                <div class="text-center text-red-500 py-8">
+                    <div class="text-6xl mb-4">💥</div>
+                    <p>查询执行失败</p>
+                    <p class="text-sm mt-2">${message}</p>
+                </div>
+            `;
+        }
+
+        // 格式化值显示
+        function formatValue(value) {
+            if (value === null || value === undefined) return '-';
+            if (typeof value === 'string' && value.length > 50) {
+                return value.substring(0, 50) + '...';
+            }
+            if (typeof value === 'object') {
+                return JSON.stringify(value);
+            }
+            return String(value);
+        }
+
+        // 回车键提交
+        queryInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                testBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,890 @@
+/**
+ * 呼叫中心控制器
+ * 处理所有呼叫中心相关的HTTP请求
+ */
+
+import { Request, Response } from 'express'
+// import callCenterService from '../services/call-center.service'  // 暂时禁用
+import { sipUDPService } from '../services/sip-udp.service'
+import { sipConfigService } from '../services/sip-config.service'
+import { ApiResponse } from '../utils/response'
+import { User } from '../models'
+
+class CallCenterController {
+  /**
+   * 获取概览数据
+   */
+  async getOverview(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+
+      // 获取活跃通话数
+      const activeCallCount = sipUDPService.getActiveCallCount()
+
+      // 获取SIP配置状态
+      const sipConfig = sipConfigService.getConfig()
+
+      const overviewData = {
+        activeCalls: activeCallCount,
+        sipStatus: sipConfig ? 'connected' : 'disconnected',
+        sipServer: sipConfig ? `${sipConfig.server_host}:${sipConfig.server_port}` : null
+      }
+
+      return ApiResponse.success(res, overviewData, '获取概览数据成功')
+    } catch (error) {
+      console.error('❌ 获取概览数据失败:', error)
+      return ApiResponse.error(res, '获取概览数据失败', 'ERROR')
+    }
+  }
+
+  /**
+   * SIP连接管理
+   */
+  async getSIPStatus(req: Request, res: Response) {
+    try {
+      const sipConfig = sipConfigService.getConfig()
+
+      if (!sipConfig) {
+        return ApiResponse.error(res, 'SIP配置未加载', 'NOT_FOUND')
+      }
+
+      const sipStatus = {
+        isConnected: sipConfigService.isConfigLoaded(),
+        server: `${sipConfig.server_host}:${sipConfig.server_port}`,
+        username: sipConfig.username,
+        protocol: sipConfig.protocol,
+        lastRegisterTime: sipConfig.last_register_time,
+        activeCalls: sipUDPService.getActiveCallCount()
+      }
+
+      return ApiResponse.success(res, sipStatus, '获取SIP状态成功')
+    } catch (error) {
+      console.error('❌ 获取SIP状态失败:', error)
+      return ApiResponse.error(res, '获取SIP状态失败', 'ERROR')
+    }
+  }
+
+  async connectSIP(req: Request, res: Response) {
+    try {
+      // 重新加载SIP配置
+      await sipConfigService.reloadConfig()
+
+      // 初始化UDP服务
+      await sipUDPService.initialize()
+
+      return ApiResponse.success(res, {
+        message: 'SIP服务已初始化',
+        config: sipConfigService.getServerAddress()
+      }, 'SIP连接成功')
+    } catch (error) {
+      console.error('❌ SIP连接失败:', error)
+      return ApiResponse.error(res, 'SIP连接失败', 'ERROR')
+    }
+  }
+
+  async disconnectSIP(req: Request, res: Response) {
+    try {
+      // UDP模式下暂不支持断开连接
+      return ApiResponse.success(res, null, 'UDP模式下无需断开连接')
+    } catch (error) {
+      console.error('❌ SIP断开失败:', error)
+      return ApiResponse.error(res, 'SIP断开失败', 'ERROR')
+    }
+  }
+
+  async testSIPConnection(req: Request, res: Response) {
+    try {
+      const sipConfig = sipConfigService.getConfig()
+
+      if (!sipConfig) {
+        return ApiResponse.error(res, 'SIP配置未加载', 'NOT_FOUND')
+      }
+
+      const testResult = {
+        success: true,
+        server: `${sipConfig.server_host}:${sipConfig.server_port}`,
+        protocol: sipConfig.protocol,
+        message: 'SIP配置有效'
+      }
+
+      return ApiResponse.success(res, testResult, 'SIP连接测试完成')
+    } catch (error) {
+      console.error('❌ SIP连接测试失败:', error)
+      return ApiResponse.error(res, 'SIP连接测试失败', 'ERROR')
+    }
+  }
+
+  async updateSIPConfig(req: Request, res: Response) {
+    try {
+      const { id, ...updates } = req.body
+
+      if (!id) {
+        return ApiResponse.error(res, '配置ID不能为空', 'VALIDATION_ERROR')
+      }
+
+      const success = await sipConfigService.updateConfig(id, updates)
+
+      if (success) {
+        return ApiResponse.success(res, null, 'SIP配置更新成功')
+      } else {
+        return ApiResponse.error(res, 'SIP配置更新失败', 'ERROR')
+      }
+    } catch (error) {
+      console.error('❌ 更新SIP配置失败:', error)
+      return ApiResponse.error(res, '更新SIP配置失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 通话管理（旧版WebSocket方式 - 暂时禁用）
+   */
+  async makeCall(req: Request, res: Response) {
+    try {
+      return ApiResponse.error(res, '请使用UDP呼叫接口: POST /api/call-center/call/udp/make', 'DEPRECATED')
+    } catch (error) {
+      console.error('❌ 发起通话失败:', error)
+      return ApiResponse.error(res, '发起通话失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 使用UDP方式发起呼叫（新增）
+   * 基于成功的Python测试脚本
+   */
+  async makeCallUDP(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+      const { phoneNumber, customerId, systemPrompt } = req.body
+
+      // 验证电话号码
+      if (!phoneNumber) {
+        return ApiResponse.error(res, '电话号码不能为空', 'VALIDATION_ERROR')
+      }
+
+      console.log(`📞 用户 ${userId} 发起UDP呼叫: ${phoneNumber}`)
+
+      // 使用UDP SIP服务发起呼叫
+      const callId = await sipUDPService.makeCall(
+        phoneNumber,
+        customerId,
+        systemPrompt
+      )
+
+      return ApiResponse.success(res, {
+        callId,
+        phoneNumber,
+        status: 'connecting',
+        message: '呼叫已发起，等待接通'
+      }, 'UDP呼叫发起成功')
+    } catch (error) {
+      console.error('❌ UDP呼叫失败:', error)
+      return ApiResponse.error(
+        res,
+        error instanceof Error ? error.message : 'UDP呼叫失败',
+        'CALL_ERROR'
+      )
+    }
+  }
+
+  /**
+   * 获取UDP呼叫状态
+   */
+  async getCallStatusUDP(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+
+      const callInfo = sipUDPService.getCallInfo(callId)
+
+      if (!callInfo) {
+        return ApiResponse.error(res, '通话不存在', 'NOT_FOUND')
+      }
+
+      return ApiResponse.success(res, {
+        callId: callInfo.callId,
+        phoneNumber: callInfo.phoneNumber,
+        status: callInfo.status,
+        startTime: callInfo.startTime,
+        duration: Math.floor((Date.now() - callInfo.startTime.getTime()) / 1000)
+      }, '获取通话状态成功')
+    } catch (error) {
+      console.error('❌ 获取通话状态失败:', error)
+      return ApiResponse.error(res, '获取通话状态失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 挂断UDP呼叫
+   */
+  async hangupCallUDP(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      if (!callId) {
+        return ApiResponse.error(res, 'callId不能为空', 'VALIDATION_ERROR')
+      }
+
+      await sipUDPService.hangupCall(callId)
+
+      return ApiResponse.success(res, null, '通话已挂断')
+    } catch (error) {
+      console.error('❌ 挂断通话失败:', error)
+      return ApiResponse.error(
+        res,
+        error instanceof Error ? error.message : '挂断通话失败',
+        'ERROR'
+      )
+    }
+  }
+
+  /**
+   * 获取所有活跃的UDP呼叫
+   */
+  async getActiveCallsUDP(req: Request, res: Response) {
+    try {
+      const activeCalls = sipUDPService.getActiveCalls()
+
+      return ApiResponse.success(res, {
+        total: activeCalls.length,
+        calls: activeCalls.map(call => ({
+          callId: call.callId,
+          phoneNumber: call.phoneNumber,
+          status: call.status,
+          startTime: call.startTime,
+          duration: Math.floor((Date.now() - call.startTime.getTime()) / 1000)
+        }))
+      }, '获取活跃通话成功')
+    } catch (error) {
+      console.error('❌ 获取活跃通话失败:', error)
+      return ApiResponse.error(res, '获取活跃通话失败', 'ERROR')
+    }
+  }
+
+  async answerCall(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+
+      await callCenterService.answerCall(callId)
+
+      return ApiResponse.success(res, null, '接听通话成功')
+    } catch (error) {
+      console.error('❌ 接听通话失败:', error)
+      return ApiResponse.error(res, '接听通话失败', 'ERROR')
+    }
+  }
+
+  async hangupCall(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      await callCenterService.hangupCall(callId)
+
+      return ApiResponse.success(res, null, '挂断通话成功')
+    } catch (error) {
+      console.error('❌ 挂断通话失败:', error)
+      return ApiResponse.error(res, '挂断通话失败', 'ERROR')
+    }
+  }
+
+  async holdCall(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      await callCenterService.holdCall(callId)
+
+      return ApiResponse.success(res, null, '保持通话成功')
+    } catch (error) {
+      console.error('❌ 保持通话失败:', error)
+      return ApiResponse.error(res, '保持通话失败', 'ERROR')
+    }
+  }
+
+  async unholdCall(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      await callCenterService.unholdCall(callId)
+
+      return ApiResponse.success(res, null, '恢复通话成功')
+    } catch (error) {
+      console.error('❌ 恢复通话失败:', error)
+      return ApiResponse.error(res, '恢复通话失败', 'ERROR')
+    }
+  }
+
+  async transferCall(req: Request, res: Response) {
+    try {
+      const { callId, targetExtension } = req.body
+
+      await callCenterService.transferCall(callId, targetExtension)
+
+      return ApiResponse.success(res, null, '转移通话成功')
+    } catch (error) {
+      console.error('❌ 转移通话失败:', error)
+      return ApiResponse.error(res, '转移通话失败', 'ERROR')
+    }
+  }
+
+  async getActiveCalls(req: Request, res: Response) {
+    try {
+      const activeCalls = await callCenterService.getActiveCalls()
+
+      return ApiResponse.success(res, activeCalls, '获取活跃通话成功')
+    } catch (error) {
+      console.error('❌ 获取活跃通话失败:', error)
+      return ApiResponse.error(res, '获取活跃通话失败', 'ERROR')
+    }
+  }
+
+  async getCallHistory(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+      const {
+        page = 1,
+        pageSize = 20,
+        startDate,
+        endDate,
+        status,
+        extension
+      } = req.query
+
+      const historyData = await callCenterService.getRecordings({
+        page: Number(page),
+        pageSize: Number(pageSize),
+        startDate: startDate ? new Date(startDate as string) : undefined,
+        endDate: endDate ? new Date(endDate as string) : undefined,
+        status: status as string,
+        userId
+      })
+
+      return ApiResponse.success(res, historyData, '获取通话历史成功')
+    } catch (error) {
+      console.error('❌ 获取通话历史失败:', error)
+      return ApiResponse.error(res, '获取通话历史失败', 'ERROR')
+    }
+  }
+
+  async getCallStatistics(req: Request, res: Response) {
+    try {
+      const { period = 'today' } = req.query
+
+      const statistics = await callCenterService.getStatistics(period as any)
+
+      return ApiResponse.success(res, statistics, '获取通话统计成功')
+    } catch (error) {
+      console.error('❌ 获取通话统计失败:', error)
+      return ApiResponse.error(res, '获取通话统计失败', 'ERROR')
+    }
+  }
+
+  async sendDTMF(req: Request, res: Response) {
+    try {
+      const { callId, digits } = req.body
+
+      // 这里可以添加DTMF发送逻辑
+      console.log(`🔢 发送DTMF: ${callId} -> ${digits}`)
+
+      return ApiResponse.success(res, null, 'DTMF发送成功')
+    } catch (error) {
+      console.error('❌ DTMF发送失败:', error)
+      return ApiResponse.error(res, 'DTMF发送失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 录音管理
+   */
+  async startRecording(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      await callCenterService.startRecording(callId)
+
+      return ApiResponse.success(res, null, '开始录音成功')
+    } catch (error) {
+      console.error('❌ 开始录音失败:', error)
+      return ApiResponse.error(res, '开始录音失败', 'ERROR')
+    }
+  }
+
+  async stopRecording(req: Request, res: Response) {
+    try {
+      const { callId } = req.body
+
+      const recording = await callCenterService.stopRecording(callId)
+
+      return ApiResponse.success(res, recording, '停止录音成功')
+    } catch (error) {
+      console.error('❌ 停止录音失败:', error)
+      return ApiResponse.error(res, '停止录音失败', 'ERROR')
+    }
+  }
+
+  async getRecordings(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+      const {
+        page = 1,
+        pageSize = 20,
+        phoneNumber,
+        contactName,
+        startDate,
+        endDate,
+        status = 'all'
+      } = req.query
+
+      const recordingsData = await callCenterService.getRecordings({
+        page: Number(page),
+        pageSize: Number(pageSize),
+        phoneNumber: phoneNumber as string,
+        contactName: contactName as string,
+        startDate: startDate ? new Date(startDate as string) : undefined,
+        endDate: endDate ? new Date(endDate as string) : undefined,
+        status: status as string,
+        userId
+      })
+
+      return ApiResponse.success(res, recordingsData, '获取录音列表成功')
+    } catch (error) {
+      console.error('❌ 获取录音列表失败:', error)
+      return ApiResponse.error(res, '获取录音列表失败', 'ERROR')
+    }
+  }
+
+  async getRecording(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加获取录音详情的逻辑
+      const recording = { id, status: 'completed' }
+
+      return ApiResponse.success(res, recording, '获取录音详情成功')
+    } catch (error) {
+      console.error('❌ 获取录音详情失败:', error)
+      return ApiResponse.error(res, '获取录音详情失败', 'ERROR')
+    }
+  }
+
+  async downloadRecording(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 模拟下载URL生成
+      const downloadData = {
+        downloadUrl: `/api/call-center/recordings/${id}/download/file`,
+        expiresAt: new Date(Date.now() + 3600000) // 1小时后过期
+      }
+
+      return ApiResponse.success(res, downloadData, '获取下载链接成功')
+    } catch (error) {
+      console.error('❌ 获取下载链接失败:', error)
+      return ApiResponse.error(res, '获取下载链接失败', 'ERROR')
+    }
+  }
+
+  async deleteRecording(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加删除录音的逻辑
+      console.log(`🗑️ 删除录音: ${id}`)
+
+      return ApiResponse.success(res, null, '删除录音成功')
+    } catch (error) {
+      console.error('❌ 删除录音失败:', error)
+      return ApiResponse.error(res, '删除录音失败', 'ERROR')
+    }
+  }
+
+  async getTranscript(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加获取转写内容的逻辑
+      const transcriptData = {
+        transcript: '这是通话的转写内容...',
+        language: 'zh-CN'
+      }
+
+      return ApiResponse.success(res, transcriptData, '获取转写内容成功')
+    } catch (error) {
+      console.error('❌ 获取转写内容失败:', error)
+      return ApiResponse.error(res, '获取转写内容失败', 'ERROR')
+    }
+  }
+
+  async updateTranscript(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+      const { transcript } = req.body
+
+      // 这里可以添加更新转写内容的逻辑
+      console.log(`📝 更新转写内容: ${id}`)
+
+      return ApiResponse.success(res, null, '更新转写内容成功')
+    } catch (error) {
+      console.error('❌ 更新转写内容失败:', error)
+      return ApiResponse.error(res, '更新转写内容失败', 'ERROR')
+    }
+  }
+
+  async requestTranscription(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+      const { language = 'zh-CN' } = req.body
+
+      // 这里可以添加请求转写的逻辑
+      console.log(`🎯 请求转写: ${id} (${language})`)
+
+      return ApiResponse.success(res, null, '转写请求已提交')
+    } catch (error) {
+      console.error('❌ 转写请求失败:', error)
+      return ApiResponse.error(res, '转写请求失败', 'ERROR')
+    }
+  }
+
+  /**
+   * AI分析功能
+   */
+  async analyzeCall(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+      const { includeTranscript = false } = req.body
+
+      const analysis = await callCenterService.analyzeCall(callId)
+
+      return ApiResponse.success(res, analysis, 'AI分析完成')
+    } catch (error) {
+      console.error('❌ AI分析失败:', error)
+      return ApiResponse.error(res, 'AI分析失败', 'ERROR')
+    }
+  }
+
+  async batchAnalyze(req: Request, res: Response) {
+    try {
+      const { callIds } = req.body
+
+      // 这里可以添加批量分析逻辑
+      const results = []
+      const failed = []
+
+      for (const callId of callIds) {
+        try {
+          const analysis = await callCenterService.analyzeCall(callId)
+          results.push(analysis)
+        } catch (error) {
+          failed.push(callId)
+        }
+      }
+
+      return ApiResponse.success(res, { results, failed }, '批量分析完成')
+    } catch (error) {
+      console.error('❌ 批量分析失败:', error)
+      return ApiResponse.error(res, '批量分析失败', 'ERROR')
+    }
+  }
+
+  async synthesizeVoice(req: Request, res: Response) {
+    try {
+      const synthesisRequest = req.body
+
+      const synthesisResult = await callCenterService.synthesizeVoice(synthesisRequest)
+
+      return ApiResponse.success(res, synthesisResult, '语音合成完成')
+    } catch (error) {
+      console.error('❌ 语音合成失败:', error)
+      return ApiResponse.error(res, '语音合成失败', 'ERROR')
+    }
+  }
+
+  async getSynthesisStatus(req: Request, res: Response) {
+    try {
+      const { taskId } = req.params
+
+      // 这里可以添加获取合成状态的逻辑
+      const statusData = {
+        status: 'completed',
+        progress: 100,
+        result: {
+          id: taskId,
+          audioUrl: `/api/call-center/ai/audio/${taskId}`,
+          duration: 10,
+          fileSize: 50000
+        }
+      }
+
+      return ApiResponse.success(res, statusData, '获取合成状态成功')
+    } catch (error) {
+      console.error('❌ 获取合成状态失败:', error)
+      return ApiResponse.error(res, '获取合成状态失败', 'ERROR')
+    }
+  }
+
+  async startTranscription(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+      const { language = 'zh-CN' } = req.body
+
+      // 这里可以添加开始转写的逻辑
+      console.log(`🎙️ 开始转写: ${callId} (${language})`)
+
+      return ApiResponse.success(res, null, '转写已开始')
+    } catch (error) {
+      console.error('❌ 开始转写失败:', error)
+      return ApiResponse.error(res, '开始转写失败', 'ERROR')
+    }
+  }
+
+  async stopTranscription(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+
+      // 这里可以添加停止转写的逻辑
+      console.log(`⏹️ 停止转写: ${callId}`)
+
+      return ApiResponse.success(res, null, '转写已停止')
+    } catch (error) {
+      console.error('❌ 停止转写失败:', error)
+      return ApiResponse.error(res, '停止转写失败', 'ERROR')
+    }
+  }
+
+  async getTranscriptionResult(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+
+      // 这里可以添加获取转写结果的逻辑
+      const resultData = {
+        transcript: '这是实时的转写内容...',
+        isFinal: false,
+        confidence: 0.95
+      }
+
+      return ApiResponse.success(res, resultData, '获取转写结果成功')
+    } catch (error) {
+      console.error('❌ 获取转写结果失败:', error)
+      return ApiResponse.error(res, '获取转写结果失败', 'ERROR')
+    }
+  }
+
+  async analyzeSentiment(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+
+      // 这里可以添加情感分析的逻辑
+      const sentimentData = {
+        sentiment: 'positive',
+        confidence: 0.85,
+        emotions: {
+          happy: 0.7,
+          neutral: 0.2,
+          sad: 0.05,
+          angry: 0.05
+        }
+      }
+
+      return ApiResponse.success(res, sentimentData, '情感分析完成')
+    } catch (error) {
+      console.error('❌ 情感分析失败:', error)
+      return ApiResponse.error(res, '情感分析失败', 'ERROR')
+    }
+  }
+
+  async generateResponse(req: Request, res: Response) {
+    try {
+      const { callId } = req.params
+      const { lastMessage, intent } = req.body
+
+      // 这里可以添加生成智能回复的逻辑
+      const responseData = {
+        response: '根据客户的问题，我建议您...',
+        confidence: 0.9,
+        suggestions: [
+          '提供详细的产品信息',
+          '预约实地参观',
+          '发送课程资料'
+        ]
+      }
+
+      return ApiResponse.success(res, responseData, '生成智能回复成功')
+    } catch (error) {
+      console.error('❌ 生成智能回复失败:', error)
+      return ApiResponse.error(res, '生成智能回复失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 分机管理
+   */
+  async getExtensions(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+
+      const extensions = await callCenterService.getExtensions(userId)
+
+      return ApiResponse.success(res, extensions, '获取分机列表成功')
+    } catch (error) {
+      console.error('❌ 获取分机列表失败:', error)
+      return ApiResponse.error(res, '获取分机列表失败', 'ERROR')
+    }
+  }
+
+  async getExtension(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加获取分机详情的逻辑
+      const extension = {
+        id,
+        extension: '1001',
+        name: '主坐席',
+        status: 'online'
+      }
+
+      return ApiResponse.success(res, extension, '获取分机详情成功')
+    } catch (error) {
+      console.error('❌ 获取分机详情失败:', error)
+      return ApiResponse.error(res, '获取分机详情失败', 'ERROR')
+    }
+  }
+
+  async updateExtensionStatus(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+      const { status } = req.body
+
+      await callCenterService.updateExtensionStatus(id, status)
+
+      return ApiResponse.success(res, null, '更新分机状态成功')
+    } catch (error) {
+      console.error('❌ 更新分机状态失败:', error)
+      return ApiResponse.error(res, '更新分机状态失败', 'ERROR')
+    }
+  }
+
+  async resetExtension(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加重置分机的逻辑
+      console.log(`🔄 重置分机: ${id}`)
+
+      return ApiResponse.success(res, null, '重置分机成功')
+    } catch (error) {
+      console.error('❌ 重置分机失败:', error)
+      return ApiResponse.error(res, '重置分机失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 联系人管理
+   */
+  async getContacts(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+      const {
+        page = 1,
+        pageSize = 20,
+        search,
+        tags
+      } = req.query
+
+      const contactsData = await callCenterService.getContacts({
+        page: Number(page),
+        pageSize: Number(pageSize),
+        search: search as string,
+        tags: tags ? (tags as string).split(',') : undefined,
+        userId
+      })
+
+      return ApiResponse.success(res, contactsData, '获取联系人列表成功')
+    } catch (error) {
+      console.error('❌ 获取联系人列表失败:', error)
+      return ApiResponse.error(res, '获取联系人列表失败', 'ERROR')
+    }
+  }
+
+  async createContact(req: Request, res: Response) {
+    try {
+      const userId = (req as any).user.id
+      const contactData = req.body
+
+      // 这里可以添加创建联系人的逻辑
+      const contact = {
+        id: Date.now(),
+        ...contactData,
+        createdBy: userId
+      }
+
+      return ApiResponse.success(res, contact, '创建联系人成功')
+    } catch (error) {
+      console.error('❌ 创建联系人失败:', error)
+      return ApiResponse.error(res, '创建联系人失败', 'ERROR')
+    }
+  }
+
+  async updateContact(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+      const updateData = req.body
+
+      // 这里可以添加更新联系人的逻辑
+      console.log(`✏️ 更新联系人: ${id}`)
+
+      return ApiResponse.success(res, null, '更新联系人成功')
+    } catch (error) {
+      console.error('❌ 更新联系人失败:', error)
+      return ApiResponse.error(res, '更新联系人失败', 'ERROR')
+    }
+  }
+
+  async deleteContact(req: Request, res: Response) {
+    try {
+      const { id } = req.params
+
+      // 这里可以添加删除联系人的逻辑
+      console.log(`🗑️ 删除联系人: ${id}`)
+
+      return ApiResponse.success(res, null, '删除联系人成功')
+    } catch (error) {
+      console.error('❌ 删除联系人失败:', error)
+      return ApiResponse.error(res, '删除联系人失败', 'ERROR')
+    }
+  }
+
+  async searchContacts(req: Request, res: Response) {
+    try {
+      const { q } = req.query
+
+      // 这里可以添加搜索联系人的逻辑
+      const contacts = []
+
+      return ApiResponse.success(res, contacts, '搜索联系人成功')
+    } catch (error) {
+      console.error('❌ 搜索联系人失败:', error)
+      return ApiResponse.error(res, '搜索联系人失败', 'ERROR')
+    }
+  }
+
+  /**
+   * 实时状态
+   */
+  async getRealTimeStatus(req: Request, res: Response) {
+    try {
+      // 这里可以添加获取实时状态的逻辑
+      const realTimeData = {
+        activeCalls: 3,
+        availableExtensions: 5,
+        queueLength: 0,
+        averageWaitTime: 0,
+        systemLoad: 0.3
+      }
+
+      return ApiResponse.success(res, realTimeData, '获取实时状态成功')
+    } catch (error) {
+      console.error('❌ 获取实时状态失败:', error)
+      return ApiResponse.error(res, '获取实时状态失败', 'ERROR')
+    }
+  }
+}
+
+export default new CallCenterController()

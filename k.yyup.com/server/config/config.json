@@ -1,0 +1,54 @@
+{
+  "development": {
+    "username": "root",
+    "password": "pwk5l57j",
+    "database": "kindergarten_db",
+    "host": "dbconn.sealoshzh.site",
+    "port": 43906,
+    "dialect": "mysql",
+    "timezone": "+08:00",
+    "dialectOptions": {
+      "dateStrings": true,
+      "typeCast": true
+    },
+    "define": {
+      "timestamps": true,
+      "underscored": true,
+      "freezeTableName": true
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": "pwk5l57j",
+    "database": "kindergarten_db_test",
+    "host": "dbconn.sealoshzh.site",
+    "port": 43906,
+    "dialect": "mysql",
+    "timezone": "+08:00",
+    "logging": false,
+    "define": {
+      "timestamps": true,
+      "underscored": true,
+      "freezeTableName": true
+    }
+  },
+  "production": {
+    "username": "root",
+    "password": "pwk5l57j",
+    "database": "kindergarten_db",
+    "host": "dbconn.sealoshzh.site",
+    "port": 43906,
+    "dialect": "mysql",
+    "timezone": "+08:00",
+    "logging": false,
+    "dialectOptions": {
+      "dateStrings": true,
+      "typeCast": true
+    },
+    "define": {
+      "timestamps": true,
+      "underscored": true,
+      "freezeTableName": true
+    }
+  }
+} 

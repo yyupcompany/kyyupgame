@@ -1,0 +1,171 @@
+{
+  "auditInfo": {
+    "timestamp": "2025-12-07T17:47:15.556Z",
+    "auditor": "AI Assistant",
+    "browser": "Chromium",
+    "viewport": "1920x1080",
+    "baseUrl": "http://localhost:5173"
+  },
+  "summary": {
+    "totalPages": 5,
+    "successfulPages": 0,
+    "pagesWithErrors": 5,
+    "pagesWithEmptyContent": 0,
+    "pagesWithFailedAccess": 0,
+    "pagesWithParentNav": 0,
+    "pagesWithCompleteLayout": 0,
+    "pagesWithInteractiveElements": 5
+  },
+  "pages": [
+    {
+      "page": "家长中心工作台",
+      "path": "/parent-center/dashboard",
+      "title": "幼儿园招生管理系统",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 200,
+      "isErrorPage": true,
+      "hasContent": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "contentChecks": {
+        "hasWelcome": false,
+        "hasStats": false,
+        "hasQuickActions": false
+      },
+      "hasParentNav": false,
+      "hasInteractive": {
+        "buttons": true,
+        "forms": false,
+        "links": false
+      },
+      "errorMessages": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/comprehensive-parent-center-report/01-dashboard-2025-12-07T17-46-43.png",
+      "status": "错误页面",
+      "timestamp": "2025-12-07T17:46:57.624Z"
+    },
+    {
+      "page": "孩子管理",
+      "path": "/parent-center/children",
+      "title": "幼儿园招生管理系统",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 200,
+      "isErrorPage": true,
+      "hasContent": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "contentChecks": {
+        "hasChildList": false,
+        "hasAddButton": false,
+        "hasSearch": false
+      },
+      "hasParentNav": false,
+      "hasInteractive": {
+        "buttons": true,
+        "forms": false,
+        "links": false
+      },
+      "errorMessages": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/comprehensive-parent-center-report/02-children-2025-12-07T17-46-43.png",
+      "status": "错误页面",
+      "timestamp": "2025-12-07T17:47:02.118Z"
+    },
+    {
+      "page": "招生活动",
+      "path": "/parent-center/activities",
+      "title": "幼儿园招生管理系统",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 200,
+      "isErrorPage": true,
+      "hasContent": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "contentChecks": {
+        "hasActivityList": false,
+        "hasCategories": false,
+        "hasRegistration": false
+      },
+      "hasParentNav": false,
+      "hasInteractive": {
+        "buttons": true,
+        "forms": false,
+        "links": false
+      },
+      "errorMessages": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/comprehensive-parent-center-report/03-activities-2025-12-07T17-46-43.png",
+      "status": "错误页面",
+      "timestamp": "2025-12-07T17:47:06.601Z"
+    },
+    {
+      "page": "成长评估",
+      "path": "/parent-center/assessment",
+      "title": "幼儿园招生管理系统",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 200,
+      "isErrorPage": true,
+      "hasContent": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "contentChecks": {
+        "hasAssessmentTypes": false,
+        "hasReports": false,
+        "hasCharts": false
+      },
+      "hasParentNav": false,
+      "hasInteractive": {
+        "buttons": true,
+        "forms": false,
+        "links": false
+      },
+      "errorMessages": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/comprehensive-parent-center-report/04-assessment-2025-12-07T17-46-43.png",
+      "status": "错误页面",
+      "timestamp": "2025-12-07T17:47:11.087Z"
+    },
+    {
+      "page": "家校沟通",
+      "path": "/parent-center/smart-communication",
+      "title": "幼儿园招生管理系统",
+      "url": "http://localhost:5173/403",
+      "httpStatus": 200,
+      "isErrorPage": true,
+      "hasContent": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "contentChecks": {
+        "hasChat": false,
+        "hasTeachers": false,
+        "hasMessages": false
+      },
+      "hasParentNav": false,
+      "hasInteractive": {
+        "buttons": true,
+        "forms": false,
+        "links": false
+      },
+      "errorMessages": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/comprehensive-parent-center-report/05-communication-2025-12-07T17-46-43.png",
+      "status": "错误页面",
+      "timestamp": "2025-12-07T17:47:15.556Z"
+    }
+  ]
+}

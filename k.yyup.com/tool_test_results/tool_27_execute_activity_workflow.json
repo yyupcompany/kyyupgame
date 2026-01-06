@@ -1,0 +1,21 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T14:29:30.738Z"}
+
+event: tool_intent
+data: {"message":"🔍 识别到需要使用工具，复杂度: 0.18","confidence":0.7,"timestamp":"2025-11-20T14:29:30.740Z"}
+
+event: tool_call_start
+data: {"message":"🚀 开始执行工具调用","toolCount":18,"timestamp":"2025-11-20T14:29:30.740Z"}
+
+event: tool_call_complete
+data: {"message":"✅ 工具调用执行完成","toolResults":[{"finish_reason":"tool_calls","index":0,"logprobs":null,"message":{"content":"","reasoning_content":"我需要处理用户的请求：\"请按照活动方案执行工作流\"。首先，我要分析用户的意图。用户提到\"按照活动方案执行工作流\"，这看起来是一个复杂的任务，需要执行多个步骤来完成活动的创建和配置。\n\n根据系统提示的工具选择决策树，当用户意图是任务管理或工作流时，应该使用工作流工具。具体来说，\"生成方案\"、\"创建活动\"等步骤属于工作流工具的范畴。系统中提供的工作流工具是execute_activity_workflow，它可以自动完成活动创建的全流程，包括生成方案、创建记录、生成海报等步骤。\n\n接下来，我需要检查是否有依赖关系。用户的请求是\"按照活动方案执行工作流\"，这意味着用户已经有了一个活动方案，现在需要执行工作流来完成整个流程。这里没有提到需要先查询或生成活动方案，而是直接要求执行工作流，因此没有依赖关系，可以直接调用execute_activity_workflow工具。\n\n然后，我需要确定参数需求。execute_activity_workflow工具需要用户的输入作为参数，即用户的完整需求描述。在这个案例中，用户的请求是\"请按照活动方案执行工作流\"，但可能缺少具体的活动方案内容。不过，根据系统提示，当调用工作流工具时，只需传入用户的自然语言描述即可，工具会自动处理后续步骤。\n\n另外，我需要检查是否需要分多轮调用。由于这是一个单一的工作流执行请求，没有依赖关系，因此可以在一轮中完成调用，不需要分多轮。\n\n最后，我需要确保工具调用的格式正确。根据系统要求，工具调用必须以<|FunctionCallBegin|>开始，中间是JSON数组，以<|FunctionCallEnd|>结束。这里应该调用execute_activity_workflow工具，并传入用户的输入作为参数。\n\n总结一下，用户的请求需要执行活动工作流，因此应该调用execute_activity_workflow工具，参数为用户的请求内容。不需要其他工具，也没有依赖关系，因此可以直接调用，无需分多轮。","role":"assistant","tool_calls":[{"function":{"arguments":"{\"userInput\":\"请按照活动方案执行工作流\"}","name":"execute_activity_workflow"},"id":"call_67gr7qwcwgq93y6pisps5hyk","type":"function"}]}}],"executionTime":1000,"timestamp":"2025-11-20T14:29:35.245Z"}
+
+event: tools_complete
+data: {"message":"🎯 所有工具执行完成，开始生成最终回答","toolsCount":18,"totalExecutionTime":1000,"timestamp":"2025-11-20T14:29:35.246Z"}
+
+event: final_answer
+data: {"message":"💡 AI回答完成","content":"已为您处理查询\"请按照活动方案执行工作流\"，使用了18个工具。","toolsUsed":18,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T14:29:35.246Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T14:29:35.246Z","totalEvents":7,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.18}
+

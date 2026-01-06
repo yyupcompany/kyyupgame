@@ -1,0 +1,939 @@
+/**
+ * 呼叫中心服务层
+ * 处理SIP连接、通话管理、录音处理、AI分析等业务逻辑
+ */
+
+import { Op } from 'sequelize'
+import {
+  SIPConfig,
+  CallRecord,
+  CallRecording,
+  CallAnalysis,
+  Extension,
+  Contact
+} from '../models/CallCenter'
+import { User } from '../models'
+import { AIBridgeService } from './ai-bridge.service'
+import { WebSocketManager } from '../utils/websocket'
+import fs from 'fs/promises'
+import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
+
+// 定义服务接口
+export interface SIPConnectionStatus {
+  connected: boolean
+  server: string
+  extension: string
+  registeredTime?: Date
+  lastHeartbeat?: Date
+}
+
+export interface CallStatistics {
+  totalCalls: number
+  connectedCalls: number
+  missedCalls: number
+  averageDuration: number
+  totalDuration: number
+  todayCalls: number
+  weekCalls: number
+  monthCalls: number
+}
+
+export interface VoiceSynthesisRequest {
+  text: string
+  model: 'doubao' | 'azure' | 'google'
+  voice: 'male' | 'female' | 'child'
+  speed?: number
+  pitch?: number
+  volume?: number
+  format?: 'mp3' | 'wav'
+}
+
+export interface VoiceSynthesisResponse {
+  id: string
+  audioUrl: string
+  duration: number
+  fileSize: number
+  model: string
+  voice: string
+}
+
+class CallCenterService {
+  private wsManager: WebSocketManager
+  private sipConnections: Map<string, any> = new Map()
+  private activeCalls: Map<string, any> = new Map()
+
+  constructor() {
+    this.wsManager = new WebSocketManager()
+    this.initializeWebSocket()
+  }
+
+  /**
+   * 初始化WebSocket连接
+   */
+  private initializeWebSocket() {
+    this.wsManager.on('connection', (ws: any, userId: number) => {
+      console.log(`✅ 呼叫中心WebSocket连接建立: 用户${userId}`)
+    })
+
+    this.wsManager.on('disconnect', (userId: number) => {
+      console.log(`❌ 呼叫中心WebSocket连接断开: 用户${userId}`)
+    })
+  }
+
+  /**
+   * SIP连接管理
+   */
+  async getSIPStatus(userId: number): Promise<SIPConnectionStatus> {
+    try {
+      const config = await SIPConfig.findOne({
+        where: { createdBy: userId, status: 'active' },
+        order: [['lastConnected', 'DESC']]
+      })
+
+      if (!config) {
+        return {
+          connected: false,
+          server: '',
+          extension: ''
+        }
+      }
+
+      const connection = this.sipConnections.get(config.extension)
+      return {
+        connected: !!connection?.connected,
+        server: `${config.server}:${config.port}`,
+        extension: config.extension,
+        registeredTime: config.lastConnected || undefined,
+        lastHeartbeat: connection?.lastHeartbeat
+      }
+    } catch (error) {
+      console.error('❌ 获取SIP状态失败:', error)
+      throw error
+    }
+  }
+
+  async connectSIP(config: any, userId: number): Promise<SIPConnectionStatus> {
+    try {
+      // 查找或创建SIP配置
+      let sipConfig = await SIPConfig.findOne({
+        where: {
+          extension: config.extension,
+          createdBy: userId
+        }
+      })
+
+      if (sipConfig) {
+        await sipConfig.update({
+          ...config,
+          status: 'active',
+          lastConnected: new Date()
+        })
+      } else {
+        sipConfig = await SIPConfig.create({
+          ...config,
+          name: `SIP配置-${config.extension}`,
+          createdBy: userId,
+          status: 'active',
+          lastConnected: new Date()
+        })
+      }
+
+      // 模拟SIP连接
+      const connection = {
+        connected: true,
+        server: `${config.server}:${config.port}`,
+        extension: config.extension,
+        lastHeartbeat: new Date(),
+        config: sipConfig
+      }
+
+      this.sipConnections.set(config.extension, connection)
+
+      // 更新分机状态
+      await this.updateExtensionStatus(config.extension, 'online')
+
+      console.log(`✅ SIP连接成功: ${config.extension}@${config.server}`)
+
+      return {
+        connected: true,
+        server: connection.server,
+        extension: connection.extension,
+        registeredTime: sipConfig.lastConnected,
+        lastHeartbeat: connection.lastHeartbeat
+      }
+    } catch (error) {
+      console.error('❌ SIP连接失败:', error)
+      throw error
+    }
+  }
+
+  async disconnectSIP(extension: string): Promise<void> {
+    try {
+      const connection = this.sipConnections.get(extension)
+      if (connection) {
+        connection.connected = false
+        this.sipConnections.delete(extension)
+      }
+
+      // 更新SIP配置状态
+      await SIPConfig.update(
+        { status: 'inactive' },
+        { where: { extension } }
+      )
+
+      // 更新分机状态
+      await this.updateExtensionStatus(extension, 'offline')
+
+      console.log(`✅ SIP连接断开: ${extension}`)
+    } catch (error) {
+      console.error('❌ SIP断开失败:', error)
+      throw error
+    }
+  }
+
+  async testSIPConnection(config: any): Promise<{ success: boolean; message: string; latency: number }> {
+    try {
+      const startTime = Date.now()
+
+      // 模拟连接测试
+      await new Promise(resolve => setTimeout(resolve, 100 + Math.random() * 200))
+
+      const latency = Date.now() - startTime
+      const success = Math.random() > 0.1 // 90%成功率
+
+      return {
+        success,
+        message: success ? '连接测试成功' : '连接测试失败',
+        latency
+      }
+    } catch (error) {
+      console.error('❌ SIP连接测试失败:', error)
+      return {
+        success: false,
+        message: '连接测试失败',
+        latency: 0
+      }
+    }
+  }
+
+  /**
+   * 通话管理
+   */
+  async makeCall(data: {
+    phoneNumber: string
+    contactName?: string
+    extension: string
+    countryCode?: string
+    userId: number
+  }) {
+    try {
+      const callId = uuidv4()
+      const startTime = new Date()
+
+      // 创建通话记录
+      const callRecord = await CallRecord.create({
+        callId,
+        phoneNumber: data.phoneNumber,
+        contactName: data.contactName,
+        direction: 'outbound',
+        status: 'ringing',
+        startTime,
+        extension: data.extension,
+        recordingEnabled: true,
+        createdBy: data.userId
+      })
+
+      // 更新分机状态为忙碌
+      await this.updateExtensionStatus(data.extension, 'busy', callRecord.id)
+
+      // 添加到活跃通话列表
+      this.activeCalls.set(callId, {
+        ...callRecord.toJSON(),
+        connection: this.sipConnections.get(data.extension)
+      })
+
+      // 通过WebSocket通知
+      this.wsManager.broadcast('call:initiated', {
+        callId,
+        phoneNumber: data.phoneNumber,
+        contactName: data.contactName,
+        extension: data.extension,
+        status: 'ringing'
+      })
+
+      console.log(`📞 发起通话: ${data.phoneNumber} (分机: ${data.extension})`)
+
+      return callRecord
+    } catch (error) {
+      console.error('❌ 发起通话失败:', error)
+      throw error
+    }
+  }
+
+  async answerCall(callId: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      await call.update({ status: 'connected' })
+
+      // 更新活跃通话状态
+      const activeCall = this.activeCalls.get(callId)
+      if (activeCall) {
+        activeCall.status = 'connected'
+      }
+
+      // WebSocket通知
+      this.wsManager.broadcast('call:answered', { callId, status: 'connected' })
+
+      console.log(`✅ 通话接听: ${callId}`)
+    } catch (error) {
+      console.error('❌ 接听通话失败:', error)
+      throw error
+    }
+  }
+
+  async hangupCall(callId: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      const endTime = new Date()
+      const duration = Math.floor((endTime.getTime() - call.startTime.getTime()) / 1000)
+
+      await call.update({
+        status: 'ended',
+        endTime,
+        duration
+      })
+
+      // 更新分机状态
+      await this.updateExtensionStatus(call.extension, 'online')
+
+      // 从活跃通话列表移除
+      this.activeCalls.delete(callId)
+
+      // WebSocket通知
+      this.wsManager.broadcast('call:ended', {
+        callId,
+        status: 'ended',
+        duration
+      })
+
+      console.log(`📞 通话结束: ${callId}, 时长: ${duration}秒`)
+    } catch (error) {
+      console.error('❌ 挂断通话失败:', error)
+      throw error
+    }
+  }
+
+  async holdCall(callId: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      await call.update({ status: 'held' })
+
+      // 更新活跃通话状态
+      const activeCall = this.activeCalls.get(callId)
+      if (activeCall) {
+        activeCall.status = 'held'
+      }
+
+      // WebSocket通知
+      this.wsManager.broadcast('call:held', { callId, status: 'held' })
+
+      console.log(`⏸️ 通话保持: ${callId}`)
+    } catch (error) {
+      console.error('❌ 保持通话失败:', error)
+      throw error
+    }
+  }
+
+  async unholdCall(callId: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      await call.update({ status: 'connected' })
+
+      // 更新活跃通话状态
+      const activeCall = this.activeCalls.get(callId)
+      if (activeCall) {
+        activeCall.status = 'connected'
+      }
+
+      // WebSocket通知
+      this.wsManager.broadcast('call:unheld', { callId, status: 'connected' })
+
+      console.log(`▶️ 通话恢复: ${callId}`)
+    } catch (error) {
+      console.error('❌ 恢复通话失败:', error)
+      throw error
+    }
+  }
+
+  async transferCall(callId: string, targetExtension: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      await call.update({
+        status: 'transferred',
+        transferTarget: targetExtension
+      })
+
+      // 更新分机状态
+      await this.updateExtensionStatus(targetExtension, 'busy', call.id)
+
+      // WebSocket通知
+      this.wsManager.broadcast('call:transferred', {
+        callId,
+        targetExtension,
+        status: 'transferred'
+      })
+
+      console.log(`🔄 通话转移: ${callId} -> ${targetExtension}`)
+    } catch (error) {
+      console.error('❌ 转移通话失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 录音管理
+   */
+  async startRecording(callId: string): Promise<void> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      await call.update({ recordingEnabled: true })
+
+      // WebSocket通知
+      this.wsManager.broadcast('recording:started', { callId })
+
+      console.log(`🎙️ 开始录音: ${callId}`)
+    } catch (error) {
+      console.error('❌ 开始录音失败:', error)
+      throw error
+    }
+  }
+
+  async stopRecording(callId: string): Promise<CallRecording> {
+    try {
+      const call = await CallRecord.findOne({ where: { callId } })
+      if (!call) {
+        throw new Error('通话记录不存在')
+      }
+
+      // 模拟录音文件创建
+      const recordingId = uuidv4()
+      const filename = `recording_${recordingId}.mp3`
+      const filePath = path.join(process.env.RECORDING_PATH || './recordings', filename)
+
+      // 确保目录存在
+      await fs.mkdir(path.dirname(filePath), { recursive: true })
+
+      // 创建空文件（实际应用中这里会保存真实的录音数据）
+      await fs.writeFile(filePath, Buffer.alloc(0))
+
+      const recording = await CallRecording.create({
+        callId: call.id,
+        filename,
+        originalFilename: `通话录音_${call.phoneNumber}_${new Date().toISOString()}.mp3`,
+        filePath,
+        fileSize: 1024 * 100, // 模拟100KB
+        duration: call.duration || 0,
+        format: 'mp3',
+        quality: 'standard',
+        status: 'completed',
+        createdBy: call.createdBy
+      })
+
+      // 更新通话记录
+      await call.update({ recordingId: recording.id })
+
+      // WebSocket通知
+      this.wsManager.broadcast('recording:stopped', {
+        callId,
+        recordingId: recording.id,
+        duration: recording.duration
+      })
+
+      console.log(`⏹️ 停止录音: ${callId}, 录音ID: ${recording.id}`)
+
+      return recording
+    } catch (error) {
+      console.error('❌ 停止录音失败:', error)
+      throw error
+    }
+  }
+
+  async getRecordings(params: {
+    page?: number
+    pageSize?: number
+    phoneNumber?: string
+    contactName?: string
+    startDate?: Date
+    endDate?: Date
+    status?: string
+    userId: number
+  }) {
+    try {
+      const { page = 1, pageSize = 20, userId, ...filters } = params
+      const offset = (page - 1) * pageSize
+
+      const whereClause: any = { createdBy: userId }
+
+      if (filters.phoneNumber) {
+        whereClause.phoneNumber = { [Op.like]: `%${filters.phoneNumber}%` }
+      }
+
+      if (filters.contactName) {
+        whereClause.contactName = { [Op.like]: `%${filters.contactName}%` }
+      }
+
+      if (filters.startDate || filters.endDate) {
+        whereClause.startTime = {}
+        if (filters.startDate) {
+          whereClause.startTime[Op.gte] = filters.startDate
+        }
+        if (filters.endDate) {
+          whereClause.startTime[Op.lte] = filters.endDate
+        }
+      }
+
+      if (filters.status && filters.status !== 'all') {
+        whereClause.status = filters.status
+      }
+
+      const { count, rows } = await CallRecord.findAndCountAll({
+        where: whereClause,
+        include: [
+          {
+            model: CallRecording,
+            as: 'recording',
+            required: false
+          }
+        ],
+        order: [['startTime', 'DESC']],
+        limit: pageSize,
+        offset
+      })
+
+      return {
+        list: rows,
+        total: count,
+        page,
+        pageSize,
+        totalPages: Math.ceil(count / pageSize)
+      }
+    } catch (error) {
+      console.error('❌ 获取录音列表失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * AI分析功能
+   */
+  async analyzeCall(callId: string): Promise<any> {
+    try {
+      const call = await CallRecord.findOne({
+        where: { callId },
+        include: [
+          {
+            model: CallRecording,
+            as: 'recording'
+          }
+        ]
+      })
+
+      const recording = (call as any).recording;
+      if (!call || !recording) {
+        throw new Error('通话录音不存在')
+      }
+
+      // 使用AIBridge进行AI分析
+      const aiBridge = new AIBridgeService()
+
+      // 模拟分析过程
+      const analysisData = {
+        sentiment: (Math.random() > 0.5 ? 'positive' : 'neutral') as 'positive' | 'neutral' | 'negative',
+        sentimentScore: Math.random() * 0.8 + 0.2,
+        keywords: ['咨询', '报名', '课程', '时间', '费用'],
+        summary: '客户咨询了幼儿园的课程信息和费用情况，对教学质量比较关注，表示会进一步考虑。',
+        actionItems: [
+          '发送详细课程资料',
+          '预约实地参观',
+          '提供试听课程安排'
+        ],
+        customerSatisfaction: Math.floor(Math.random() * 30 + 70), // 70-100
+        agentPerformance: {
+          tone: 'professional' as 'professional' | 'friendly' | 'rushed' | 'unclear',
+          clarity: Math.floor(Math.random() * 30 + 70),
+          empathy: Math.floor(Math.random() * 30 + 70),
+          efficiency: Math.floor(Math.random() * 30 + 70)
+        },
+        businessInsights: {
+          category: '招生咨询',
+          priority: 'high' as 'high' | 'medium' | 'low',
+          followUpRequired: true
+        },
+        processingTime: Math.floor(Math.random() * 2000 + 1000),
+        modelVersion: '1.0.0'
+      }
+
+      const analysis = await CallAnalysis.create({
+        callId: call.id,
+        recordingId: recording.id,
+        ...analysisData
+      })
+
+      // 更新录音记录的分析ID
+      await recording.update({ aiAnalysisId: analysis.id })
+
+      console.log(`🧠 AI分析完成: ${callId}`)
+
+      return analysis
+    } catch (error) {
+      console.error('❌ AI分析失败:', error)
+      throw error
+    }
+  }
+
+  async synthesizeVoice(request: VoiceSynthesisRequest): Promise<VoiceSynthesisResponse> {
+    try {
+      // 使用AIBridge进行语音合成
+      const aiBridge = new AIBridgeService()
+
+      // 模拟语音合成
+      const synthesisId = uuidv4()
+      const audioData = await aiBridge.textToSpeech(request.text, {
+        voice: request.voice,
+        model: request.model,
+        speed: request.speed || 1.0,
+        pitch: request.pitch || 1.0
+      })
+
+      const response: VoiceSynthesisResponse = {
+        id: synthesisId,
+        audioUrl: `/api/call-center/ai/audio/${synthesisId}`,
+        duration: Math.floor(request.text.length * 0.1), // 估算时长
+        fileSize: audioData.length,
+        model: request.model,
+        voice: request.voice
+      }
+
+      console.log(`🔊 语音合成完成: ${synthesisId}`)
+
+      return response
+    } catch (error) {
+      console.error('❌ 语音合成失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 分机管理
+   */
+  async getExtensions(userId: number): Promise<Extension[]> {
+    try {
+      const extensions = await Extension.findAll({
+        where: { isActive: true },
+        order: [['extension', 'ASC']]
+      })
+
+      return extensions
+    } catch (error) {
+      console.error('❌ 获取分机列表失败:', error)
+      throw error
+    }
+  }
+
+  async updateExtensionStatus(
+    extension: string,
+    status: 'online' | 'offline' | 'busy' | 'away',
+    currentCallId?: number
+  ): Promise<void> {
+    try {
+      const updateData: any = {
+        status,
+        lastActiveTime: new Date()
+      }
+
+      if (currentCallId) {
+        updateData.currentCallId = currentCallId
+      } else if (status === 'online') {
+        updateData.currentCallId = null
+      }
+
+      await Extension.update(updateData, {
+        where: { extension }
+      })
+
+      // WebSocket通知分机状态更新
+      this.wsManager.broadcast('extension:status', {
+        extension,
+        status,
+        currentCallId
+      })
+
+      console.log(`📱 分机状态更新: ${extension} -> ${status}`)
+    } catch (error) {
+      console.error('❌ 更新分机状态失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 联系人管理
+   */
+  async getContacts(params: {
+    page?: number
+    pageSize?: number
+    search?: string
+    tags?: string[]
+    userId: number
+  }) {
+    try {
+      const { page = 1, pageSize = 20, userId, search, tags } = params
+      const offset = (page - 1) * pageSize
+
+      const whereClause: any = { createdBy: userId, isActive: true }
+
+      if (search) {
+        whereClause[Op.or] = [
+          { name: { [Op.like]: `%${search}%` } },
+          { phone: { [Op.like]: `%${search}%` } },
+          { company: { [Op.like]: `%${search}%` } }
+        ]
+      }
+
+      if (tags && tags.length > 0) {
+        whereClause.tags = { [Op.overlap]: tags }
+      }
+
+      const { count, rows } = await Contact.findAndCountAll({
+        where: whereClause,
+        order: [['lastCallTime', 'DESC']],
+        limit: pageSize,
+        offset
+      })
+
+      return {
+        list: rows,
+        total: count,
+        page,
+        pageSize,
+        totalPages: Math.ceil(count / pageSize)
+      }
+    } catch (error) {
+      console.error('❌ 获取联系人列表失败:', error)
+      throw error
+    }
+  }
+
+  /**
+   * 统计数据
+   */
+  async getStatistics(period: 'today' | 'week' | 'month' = 'today'): Promise<CallStatistics> {
+    try {
+      const now = new Date()
+      let startDate: Date
+
+      switch (period) {
+        case 'today':
+          startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+          break
+        case 'week':
+          startDate = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+          break
+        case 'month':
+          startDate = new Date(now.getFullYear(), now.getMonth(), 1)
+          break
+      }
+
+      const records = await CallRecord.findAll({
+        where: {
+          startTime: { [Op.gte]: startDate }
+        }
+      })
+
+      const totalCalls = records.length
+      const connectedCalls = records.filter(r => r.status === 'connected' || r.status === 'ended').length
+      const missedCalls = records.filter(r => r.status === 'missed').length
+      const totalDuration = records.reduce((sum, r) => sum + (r.duration || 0), 0)
+      const averageDuration = connectedCalls > 0 ? Math.floor(totalDuration / connectedCalls) : 0
+
+      return {
+        totalCalls,
+        connectedCalls,
+        missedCalls,
+        averageDuration,
+        totalDuration,
+        todayCalls: period === 'today' ? totalCalls : await this.getTodayCalls(),
+        weekCalls: period === 'week' ? totalCalls : await this.getWeekCalls(),
+        monthCalls: period === 'month' ? totalCalls : await this.getMonthCalls()
+      }
+    } catch (error) {
+      console.error('❌ 获取统计数据失败:', error)
+      throw error
+    }
+  }
+
+  private async getTodayCalls(): Promise<number> {
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    return await CallRecord.count({
+      where: {
+        startTime: { [Op.gte]: today }
+      }
+    })
+  }
+
+  private async getWeekCalls(): Promise<number> {
+    const weekAgo = new Date()
+    weekAgo.setDate(weekAgo.getDate() - 7)
+
+    return await CallRecord.count({
+      where: {
+        startTime: { [Op.gte]: weekAgo }
+      }
+    })
+  }
+
+  private async getMonthCalls(): Promise<number> {
+    const monthAgo = new Date()
+    monthAgo.setMonth(monthAgo.getMonth() - 1)
+
+    return await CallRecord.count({
+      where: {
+        startTime: { [Op.gte]: monthAgo }
+      }
+    })
+  }
+
+  /**
+   * 概览数据
+   */
+  async getOverview(userId: number) {
+    try {
+      const [
+        sipStatus,
+        activeCallsData,
+        callHistoryData,
+        statistics,
+        extensionsData,
+        recentRecordings
+      ] = await Promise.all([
+        this.getSIPStatus(userId),
+        this.getActiveCalls(),
+        this.getCallHistory(userId),
+        this.getStatistics('today'),
+        this.getExtensions(userId),
+        this.getRecentRecordings(userId)
+      ])
+
+      return {
+        sipStatus,
+        activeCalls: activeCallsData,
+        callHistory: callHistoryData,
+        statistics,
+        extensions: extensionsData,
+        recentRecordings
+      }
+    } catch (error) {
+      console.error('❌ 获取概览数据失败:', error)
+      throw error
+    }
+  }
+
+  async getActiveCalls(): Promise<any[]> {
+    return Array.from(this.activeCalls.values()).map(call => ({
+      id: call.callId,
+      phoneNumber: call.phoneNumber,
+      contactName: call.contactName,
+      status: call.status,
+      startTime: call.startTime,
+      duration: call.duration || 0,
+      recording: call.recordingEnabled,
+      extension: call.extension,
+      direction: call.direction
+    }))
+  }
+
+  private async getCallHistory(userId: number): Promise<any[]> {
+    const records = await CallRecord.findAll({
+      where: { createdBy: userId },
+      include: [
+        {
+          model: CallRecording,
+          as: 'recording',
+          required: false
+        }
+      ],
+      order: [['startTime', 'DESC']],
+      limit: 10
+    })
+
+    return records.map(record => ({
+      id: record.callId,
+      phoneNumber: record.phoneNumber,
+      contactName: record.contactName,
+      status: record.status,
+      startTime: record.startTime,
+      duration: record.duration,
+      recording: !!(record as any).recording,
+      extension: record.extension,
+      direction: record.direction
+    }))
+  }
+
+  private async getRecentRecordings(userId: number): Promise<any[]> {
+    const recordings = await CallRecording.findAll({
+      where: { createdBy: userId },
+      include: [
+        {
+          model: CallRecord,
+          as: 'callRecord',
+          required: true
+        }
+      ],
+      order: [['createdAt', 'DESC']],
+      limit: 5
+    })
+
+    return recordings.map(recording => {
+      const callRecord = (recording as any).callRecord;
+      return {
+        id: recording.id,
+        callId: callRecord?.callId || '',
+        phoneNumber: callRecord?.phoneNumber || '',
+        contactName: callRecord?.contactName || '',
+        startTime: callRecord?.startTime || new Date(),
+        duration: recording.duration,
+        fileSize: recording.fileSize,
+        transcript: recording.transcript,
+        analysisId: recording.aiAnalysisId
+      };
+    })
+  }
+}
+
+export default new CallCenterService()

@@ -1,0 +1,74 @@
+{
+  "timestamp": "2025-07-11T20:36:33.599380",
+  "dns_resolution": [
+    {
+      "domain": "www.baidu.com",
+      "ip": "180.101.49.44",
+      "is_china_ip": true,
+      "expected_route": "direct"
+    },
+    {
+      "domain": "www.qq.com",
+      "ip": "101.91.22.57",
+      "is_china_ip": true,
+      "expected_route": "direct"
+    },
+    {
+      "domain": "www.taobao.com",
+      "ip": "220.185.168.236",
+      "is_china_ip": true,
+      "expected_route": "direct"
+    },
+    {
+      "domain": "www.google.com",
+      "ip": "31.13.88.169",
+      "is_china_ip": false,
+      "expected_route": "proxy"
+    },
+    {
+      "domain": "www.youtube.com",
+      "ip": "31.13.94.41",
+      "is_china_ip": false,
+      "expected_route": "proxy"
+    },
+    {
+      "domain": "www.facebook.com",
+      "ip": "108.160.163.112",
+      "is_china_ip": false,
+      "expected_route": "proxy"
+    },
+    {
+      "domain": "www.github.com",
+      "ip": "20.205.243.166",
+      "is_china_ip": false,
+      "expected_route": "proxy"
+    }
+  ],
+  "config_check": true,
+  "trace_results": [
+    {
+      "target": "www.baidu.com",
+      "type": "国内",
+      "success": true,
+      "hops": [
+        "  1 timeout",
+        "  2 timeout",
+        "  3 timeout",
+        "  4 timeout",
+        "  5 timeout"
+      ]
+    },
+    {
+      "target": "www.google.com",
+      "type": "国外",
+      "success": true,
+      "hops": [
+        "  1 timeout",
+        "  2 timeout",
+        "  3 timeout",
+        "  4 timeout",
+        "  5 timeout"
+      ]
+    }
+  ]
+}

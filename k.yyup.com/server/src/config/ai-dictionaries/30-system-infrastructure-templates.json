@@ -1,0 +1,124 @@
+{
+  "name": "系统基础设施查询模板字典",
+  "description": "Sequelize元数据、数据库迁移、性能规则等系统基础设施相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === Sequelize元数据相关查询模板 ===": "注释",
+    "迁移文件统计": {
+      "sql": "SELECT name FROM SequelizeMeta ORDER BY name",
+      "description": "查询已执行的迁移文件列表",
+      "table": "SequelizeMeta",
+      "response": "迁移文件统计完成",
+      "tokens": 15
+    },
+    "最新迁移文件": {
+      "sql": "SELECT name FROM SequelizeMeta ORDER BY name DESC LIMIT 1",
+      "description": "查询最新执行的迁移文件",
+      "table": "SequelizeMeta",
+      "response": "最新迁移文件查询完成",
+      "tokens": 15
+    },
+    "迁移文件按日期统计": {
+      "sql": "SELECT SUBSTRING(name, 1, 8) as migration_date, COUNT(*) as count FROM SequelizeMeta GROUP BY SUBSTRING(name, 1, 8) ORDER BY migration_date DESC",
+      "description": "按日期统计迁移文件数量",
+      "table": "SequelizeMeta",
+      "response": "迁移文件按日期统计完成",
+      "tokens": 25
+    },
+    "// === 数据库迁移相关查询模板 ===": "注释",
+    "数据库迁移总数": {
+      "sql": "SELECT COUNT(*) as count FROM migrations",
+      "description": "查询数据库迁移总数",
+      "table": "migrations",
+      "response": "数据库迁移总数为{count}条",
+      "tokens": 10
+    },
+    "迁移状态统计": {
+      "sql": "SELECT migration_status, COUNT(*) as count FROM migrations GROUP BY migration_status ORDER BY count DESC",
+      "description": "统计数据库迁移状态分布",
+      "table": "migrations",
+      "response": "迁移状态统计完成",
+      "tokens": 20
+    },
+    "迁移类型统计": {
+      "sql": "SELECT migration_type, COUNT(*) as count FROM migrations GROUP BY migration_type ORDER BY count DESC",
+      "description": "统计数据库迁移类型分布",
+      "table": "migrations",
+      "response": "迁移类型统计完成",
+      "tokens": 20
+    },
+    "成功迁移统计": {
+      "sql": "SELECT COUNT(*) as count FROM migrations WHERE migration_status = 'success'",
+      "description": "查询成功迁移数量",
+      "table": "migrations",
+      "response": "成功迁移{count}个",
+      "tokens": 12
+    },
+    "迁移执行时间分析": {
+      "sql": "SELECT AVG(execution_time) as avg_time, MIN(execution_time) as min_time, MAX(execution_time) as max_time FROM migrations WHERE execution_time IS NOT NULL",
+      "description": "分析迁移执行时间",
+      "table": "migrations",
+      "response": "迁移执行时间分析完成",
+      "tokens": 25
+    },
+    "// === 性能规则相关查询模板 ===": "注释",
+    "规则类型统计": {
+      "sql": "SELECT rule_type, COUNT(*) as count FROM performance_rules GROUP BY rule_type ORDER BY count DESC",
+      "description": "统计性能规则类型分布",
+      "table": "performance_rules",
+      "response": "规则类型统计完成",
+      "tokens": 20
+    },
+    "规则状态统计": {
+      "sql": "SELECT rule_status, COUNT(*) as count FROM performance_rules GROUP BY rule_status ORDER BY count DESC",
+      "description": "统计性能规则状态分布",
+      "table": "performance_rules",
+      "response": "规则状态统计完成",
+      "tokens": 20
+    },
+    "规则优先级统计": {
+      "sql": "SELECT priority_level, COUNT(*) as count FROM performance_rules GROUP BY priority_level ORDER BY priority_level DESC",
+      "description": "统计性能规则优先级分布",
+      "table": "performance_rules",
+      "response": "规则优先级统计完成",
+      "tokens": 20
+    },
+    "规则触发统计": {
+      "sql": "SELECT AVG(trigger_count) as avg_triggers, MAX(trigger_count) as max_triggers FROM performance_rules WHERE trigger_count IS NOT NULL",
+      "description": "统计性能规则触发情况",
+      "table": "performance_rules",
+      "response": "规则触发统计完成",
+      "tokens": 20
+    },
+    "// === 活动备份相关查询模板 ===": "注释",
+    "活动备份总数": {
+      "sql": "SELECT COUNT(*) as count FROM activities_backup_1751799168",
+      "description": "查询活动备份总数",
+      "table": "activities_backup_1751799168",
+      "response": "活动备份总数为{count}个",
+      "tokens": 10
+    },
+    "备份活动类型统计": {
+      "sql": "SELECT activity_type, COUNT(*) as count FROM activities_backup_1751799168 GROUP BY activity_type ORDER BY count DESC",
+      "description": "统计备份活动类型分布",
+      "table": "activities_backup_1751799168",
+      "response": "备份活动类型统计完成",
+      "tokens": 20
+    },
+    "备份活动状态统计": {
+      "sql": "SELECT activity_status, COUNT(*) as count FROM activities_backup_1751799168 GROUP BY activity_status ORDER BY count DESC",
+      "description": "统计备份活动状态分布",
+      "table": "activities_backup_1751799168",
+      "response": "备份活动状态统计完成",
+      "tokens": 20
+    },
+    "// === 综合统计查询模板 ===": "注释",
+    "系统基础设施概览": {
+      "sql": "SELECT 'SequelizeMeta' as category, COUNT(*) as count FROM SequelizeMeta UNION ALL SELECT 'migrations' as category, COUNT(*) as count FROM migrations UNION ALL SELECT 'performance_rules' as category, COUNT(*) as count FROM performance_rules UNION ALL SELECT 'activities_backup_1751799168' as category, COUNT(*) as count FROM activities_backup_1751799168 UNION ALL SELECT 'file_storages' as category, COUNT(*) as count FROM file_storages UNION ALL SELECT 'knowledge_vault' as category, COUNT(*) as count FROM knowledge_vault",
+      "description": "系统基础设施数据总览",
+      "table": "multiple",
+      "response": "系统基础设施概览查询完成",
+      "tokens": 40
+    }
+  }
+}

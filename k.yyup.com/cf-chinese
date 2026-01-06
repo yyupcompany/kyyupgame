@@ -1,0 +1,204 @@
+#!/bin/bash
+
+# Claude Flow 中文汉化版全局脚本
+# 使用方法: cf [命令] [参数...]
+
+# 检测函数来查找claude-flow
+find_claude_flow() {
+    # 尝试全局npm安装
+    if command -v claude-flow >/dev/null 2>&1; then
+        echo "claude-flow"
+        return 0
+    fi
+    
+    # 尝试npx (推荐获取最新版本)
+    if command -v npx >/dev/null 2>&1; then
+        echo "npx claude-flow"
+        return 0
+    fi
+    
+    # 尝试本地开发版本(如果可用)
+    local dev_path="/home/devbox/project/v2ray-install/claude-code-flow"
+    if [ -d "$dev_path" ] && [ -f "$dev_path/cli.js" ]; then
+        echo "cd '$dev_path' && node cli.js"
+        return 0
+    fi
+    
+    echo "错误: 找不到Claude Flow。请使用以下命令安装: npm install -g claude-flow"
+    exit 1
+}
+
+# 获取运行claude-flow的命令
+CLAUDE_FLOW_CMD=$(find_claude_flow)
+
+# 中文翻译函数
+translate_output() {
+    sed -e 's/Claude-Flow System Status:/Claude-Flow 系统状态:/g' \
+        -e 's/Status: Partially Running/状态: 部分运行/g' \
+        -e 's/Status: Running/状态: 运行中/g' \
+        -e 's/Status: Stopped/状态: 已停止/g' \
+        -e 's/Agents: \([0-9]*\) active/代理: \1 个活跃/g' \
+        -e 's/Tasks: \([0-9]*\) in queue/任务: \1 个排队中/g' \
+        -e 's/Memory: \([0-9]*\) entries/内存: \1 个条目/g' \
+        -e 's/Terminal Pool: Stopped/终端池: 已停止/g' \
+        -e 's/Terminal Pool: Running/终端池: 运行中/g' \
+        -e 's/MCP Server: Stopped/MCP服务器: 已停止/g' \
+        -e 's/MCP Server: Running/MCP服务器: 运行中/g' \
+        -e 's/Launching SPARC orchestrator mode.../启动SPARC编排器模式.../g' \
+        -e 's/Task:/任务:/g' \
+        -e 's/Mode:/模式:/g' \
+        -e 's/Timeout: \([0-9]*\) minutes/超时时间: \1 分钟/g' \
+        -e 's/Starting Claude Code.../正在启动Claude Code.../g' \
+        -e 's/No entries found/未找到任何条目/g' \
+        -e 's/Initializing Advanced Memory Manager/正在初始化高级内存管理器/g' \
+        -e 's/Memory Manager initialized successfully/内存管理器初始化成功/g' \
+        -e 's/Shutting down Advanced Memory Manager/正在关闭高级内存管理器/g' \
+        -e 's/SPARC Development Modes - Complete Collection/SPARC开发模式 - 完整集合/g' \
+        -e 's/Core Orchestration/核心编排/g' \
+        -e 's/Development Modes/开发模式/g' \
+        -e 's/Analysis & Research/分析与研究/g' \
+        -e 's/Creative & Support/创意与支持/g' \
+        -e 's/Testing & Quality/测试与质量/g' \
+        -e 's/Usage Examples:/使用示例:/g' \
+        -e 's/Advanced Features:/高级功能:/g' \
+        -e 's/Detailed Information:/详细信息:/g' \
+        -e 's/orchestrator - Multi-agent task orchestration/编排器 - 多代理任务编排/g' \
+        -e 's/coder - Autonomous code generation/编码器 - 自主代码生成/g' \
+        -e 's/researcher - Deep research with parallel/研究员 - 并行深度研究/g' \
+        -e 's/architect - System design with Memory/架构师 - 基于内存的系统设计/g' \
+        -e 's/reviewer - Code review using batch/审查员 - 批量代码审查/g' \
+        -e 's/tdd - Test-driven development/TDD - 测试驱动开发/g' \
+        -e 's/analyzer - Code and data analysis/分析师 - 代码和数据分析/g' \
+        -e 's/optimizer - Performance optimization/优化器 - 性能优化/g' \
+        -e 's/designer - UI\/UX design/设计师 - UI\/UX设计/g' \
+        -e 's/innovator - Creative problem solving/创新者 - 创意问题解决/g' \
+        -e 's/documenter - Documentation with batch/文档员 - 批量文档编写/g' \
+        -e 's/debugger - Systematic debugging/调试器 - 系统化调试/g' \
+        -e 's/tester - Comprehensive testing/测试员 - 综合测试/g' \
+        -e 's/memory-manager - Knowledge management/内存管理器 - 知识管理/g' \
+        -e 's/swarm-coordinator - Advanced swarm management/群体协调器 - 高级群体管理/g' \
+        -e 's/workflow-manager - Process automation/工作流管理器 - 流程自动化/g' \
+        -e 's/batch-executor - Parallel task execution/批处理执行器 - 并行任务执行/g' \
+        -e 's/Enable parallel agent execution/启用并行代理执行/g' \
+        -e 's/Use batch operations for file handling/使用批量操作处理文件/g' \
+        -e 's/Store results in specific memory key/将结果存储到指定内存键/g' \
+        -e 's/Enable real-time monitoring/启用实时监控/g' \
+        -e 's/Set execution timeout/设置执行超时时间/g' \
+        -e 's/Show full descriptions/显示完整描述/g' \
+        -e 's/View mode documentation/查看模式文档/g'
+}
+
+# 自动增强命令的函数，增加中文输出
+enhance_command() {
+    local args=("$@")
+    
+    # 如果没有参数，显示帮助
+    if [ ${#args[@]} -eq 0 ]; then
+        echo "🇨🇳 Claude Flow 中文汉化版 - 高级AI代理编排系统"
+        echo ""
+        echo "📋 常用命令:"
+        echo "  cf 状态                    # 查看系统状态"
+        echo "  cf sparc 模式              # 列出所有SPARC开发模式"
+        echo "  cf 内存 列表               # 查看内存中的数据"
+        echo "  cf \"检查我的代码质量\"     # 自动启用多代理模式检查代码"
+        echo "  cf \"优化项目性能\"         # 自动启用多代理模式优化性能"
+        echo ""
+        echo "💡 提示: 直接输入任务描述会自动启用SPARC多代理模式"
+        echo ""
+        eval $CLAUDE_FLOW_CMD --help | translate_output
+        return 0
+    fi
+    
+    # 中文命令映射
+    case "${args[0]}" in
+        "状态"|"系统状态")
+            args[0]="status"
+            ;;
+        "内存")
+            args[0]="memory"
+            if [ "${args[1]}" == "列表" ]; then
+                args[1]="list"
+            elif [ "${args[1]}" == "存储" ]; then
+                args[1]="store"
+            elif [ "${args[1]}" == "获取" ]; then
+                args[1]="get"
+            elif [ "${args[1]}" == "统计" ]; then
+                args[1]="stats"
+            fi
+            ;;
+        "sparc")
+            if [ "${args[1]}" == "模式" ]; then
+                args[1]="modes"
+            elif [ "${args[1]}" == "运行" ]; then
+                args[1]="run"
+            fi
+            ;;
+        "代理")
+            args[0]="agent"
+            if [ "${args[1]}" == "列表" ]; then
+                args[1]="list"
+            elif [ "${args[1]}" == "生成" ]; then
+                args[1]="spawn"
+            fi
+            ;;
+        "帮助")
+            args[0]="help"
+            ;;
+        "开始"|"启动")
+            args[0]="start"
+            ;;
+        "配置")
+            args[0]="config"
+            ;;
+        "监控")
+            args[0]="monitor"
+            ;;
+        "群体"|"蜂群")
+            args[0]="swarm"
+            ;;
+    esac
+    
+    # 已知命令列表
+    local known_commands=("start" "agent" "config" "memory" "swarm" "sparc" "repl" "help" "status" "monitor" "ui" "mcp" "session" "workflow" "init" "spawn" "claude" "project" "deploy" "cloud" "security" "analytics")
+    
+    # 检查第一个参数是否为已知命令或以--开头
+    local is_known_command=false
+    for cmd in "${known_commands[@]}"; do
+        if [[ "${args[0]}" == "$cmd" ]]; then
+            is_known_command=true
+            break
+        fi
+    done
+    
+    # 如果以--开头也是已知选项
+    if [[ "${args[0]}" == "--"* ]]; then
+        is_known_command=true
+    fi
+    
+    # 如果不是已知命令，作为SPARC任务描述处理
+    if [[ "$is_known_command" == false ]]; then
+        # 自动使用SPARC模式处理任务描述
+        echo "🚀 自动启用SPARC多代理模式..."
+        echo "📝 任务描述: ${args[*]}"
+        echo "🎯 正在分析任务并分配给最适合的代理..."
+        echo ""
+        eval $CLAUDE_FLOW_CMD sparc "\"${args[*]}\"" 2>&1 | translate_output
+    else
+        # 传递其他命令并翻译输出
+        eval $CLAUDE_FLOW_CMD "${args[@]}" 2>&1 | translate_output
+    fi
+}
+
+# 设置最佳自动化环境变量
+export CLAUDE_FLOW_NON_INTERACTIVE=true
+export CLAUDE_FLOW_AUTO_CONFIRM=true
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
+
+# 显示启动信息
+if [ "$1" != "status" ] && [ "$1" != "help" ] && [ "$1" != "状态" ] && [ "$1" != "帮助" ]; then
+    echo "🇨🇳 Claude Flow 中文版启动中..."
+fi
+
+# 运行增强命令
+enhance_command "$@"

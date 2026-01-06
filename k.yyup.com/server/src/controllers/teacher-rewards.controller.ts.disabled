@@ -1,0 +1,319 @@
+import { Request, Response } from 'express'
+import { TeacherRewardsService } from '../services/teacher-rewards.service'
+import { ApiResponse } from '../types/response'
+import { AuthenticatedRequest } from '../middleware/auth.middleware'
+
+export class TeacherRewardsController {
+  private teacherRewardsService: TeacherRewardsService
+
+  constructor() {
+    this.teacherRewardsService = new TeacherRewardsService()
+  }
+
+  /**
+   * 获取教师奖励列表
+   */
+  getRewardsList = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const {
+        status,
+        type,
+        page = 1,
+        pageSize = 20,
+        sortBy = 'createdAt',
+        sortOrder = 'desc'
+      } = req.query
+
+      const params = {
+        teacherId,
+        status: status as string,
+        type: type as string,
+        page: parseInt(page as string),
+        pageSize: parseInt(pageSize as string),
+        sortBy: sortBy as string,
+        sortOrder: sortOrder as 'asc' | 'desc'
+      }
+
+      const result = await this.teacherRewardsService.getRewardsList(params)
+
+      res.json({
+        success: true,
+        data: result,
+        message: '获取奖励列表成功'
+      })
+    } catch (error: any) {
+      console.error('获取教师奖励列表失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取奖励列表失败'
+      })
+    }
+  }
+
+  /**
+   * 获取奖励统计信息
+   */
+  getRewardStats = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const stats = await this.teacherRewardsService.getRewardStats(teacherId)
+
+      res.json({
+        success: true,
+        data: stats,
+        message: '获取奖励统计成功'
+      })
+    } catch (error: any) {
+      console.error('获取奖励统计失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取奖励统计失败'
+      })
+    }
+  }
+
+  /**
+   * 获取单个奖励详情
+   */
+  getRewardDetail = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const { id } = req.params
+      const reward = await this.teacherRewardsService.getRewardDetail(
+        parseInt(id),
+        teacherId
+      )
+
+      if (!reward) {
+        return res.status(404).json({
+          success: false,
+          message: '奖励不存在'
+        })
+      }
+
+      res.json({
+        success: true,
+        data: reward,
+        message: '获取奖励详情成功'
+      })
+    } catch (error: any) {
+      console.error('获取奖励详情失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取奖励详情失败'
+      })
+    }
+  }
+
+  /**
+   * 使用代金券
+   */
+  useVoucher = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const { id } = req.params
+      const { useLocation, notes } = req.body
+
+      const result = await this.teacherRewardsService.useVoucher(
+        parseInt(id),
+        teacherId,
+        {
+          useLocation,
+          notes,
+          usedBy: teacherId
+        }
+      )
+
+      res.json({
+        success: true,
+        data: result,
+        message: '代金券使用成功'
+      })
+    } catch (error: any) {
+      console.error('使用代金券失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '使用代金券失败'
+      })
+    }
+  }
+
+  /**
+   * 获取转介绍分享带来的线索信息
+   */
+  getReferralLeads = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const { id } = req.params
+      const leads = await this.teacherRewardsService.getReferralLeads(
+        parseInt(id),
+        teacherId
+      )
+
+      res.json({
+        success: true,
+        data: leads,
+        message: '获取转介绍线索成功'
+      })
+    } catch (error: any) {
+      console.error('获取转介绍线索失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取转介绍线索失败'
+      })
+    }
+  }
+
+  /**
+   * 获取教师转介绍统计数据
+   */
+  getReferralStats = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const stats = await this.teacherRewardsService.getReferralStats(teacherId)
+
+      res.json({
+        success: true,
+        data: stats,
+        message: '获取转介绍统计成功'
+      })
+    } catch (error: any) {
+      console.error('获取转介绍统计失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取转介绍统计失败'
+      })
+    }
+  }
+
+  /**
+   * 创建转介绍记录
+   */
+  createReferral = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const referralData = {
+        ...req.body,
+        teacherId,
+        referralCode: await this.generateReferralCode(teacherId)
+      }
+
+      const result = await this.teacherRewardsService.createReferral(referralData)
+
+      res.json({
+        success: true,
+        data: result,
+        message: '创建转介绍记录成功'
+      })
+    } catch (error: any) {
+      console.error('创建转介绍记录失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '创建转介绍记录失败'
+      })
+    }
+  }
+
+  /**
+   * 获取转介绍记录列表
+   */
+  getReferralList = async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const teacherId = req.user?.id
+      if (!teacherId) {
+        return res.status(401).json({
+          success: false,
+          message: '用户认证失败'
+        })
+      }
+
+      const {
+        status,
+        page = 1,
+        pageSize = 20
+      } = req.query
+
+      const params = {
+        teacherId,
+        status: status as string,
+        page: parseInt(page as string),
+        pageSize: parseInt(pageSize as string)
+      }
+
+      const result = await this.teacherRewardsService.getReferralList(params)
+
+      res.json({
+        success: true,
+        data: result,
+        message: '获取转介绍记录成功'
+      })
+    } catch (error: any) {
+      console.error('获取转介绍记录失败:', error)
+      res.status(500).json({
+        success: false,
+        message: error.message || '获取转介绍记录失败'
+      })
+    }
+  }
+
+  /**
+   * 生成转介绍码
+   */
+  private async generateReferralCode(teacherId: number): Promise<string> {
+    const timestamp = Date.now()
+    const random = Math.floor(Math.random() * 1000)
+    return `T${teacherId}${timestamp}${random}`
+  }
+}
+
+export const teacherRewardsController = new TeacherRewardsController()

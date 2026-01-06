@@ -1,0 +1,68 @@
+/* Workbench Theme (Light/Dark) - in-app copy to ensure loading */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root { --font-sans: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji'; --radius: 10px; }
+
+.theme-light {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.15 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: #666666;  /* 修复：使用Builder.io风格的浅灰色 */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0 0);
+  --primary: oklch(0.28 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+  --accent: oklch(0.75 0.12 155);
+  --accent-contrast: oklch(0.15 0 0);
+  --accent-2: oklch(0.82 0.13 80);
+  --accent-2-contrast: oklch(0.15 0 0);
+  --success: oklch(0.78 0.12 155);
+  --warning: oklch(0.86 0.12 80);
+  --danger: oklch(0.62 0.18 25);
+  --surface-1: oklch(0.98 0 0);
+  --surface-2: oklch(0.96 0 0);
+  --surface-3: oklch(0.93 0 0);
+  --border: oklch(0.92 0 0);
+  --ring: oklch(0.71 0 0);
+
+  /* 添加Builder.io风格的侧边栏变量 */
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #dee2e6;
+  --sidebar-text: #666666;
+  --sidebar-text-hover: #333333;
+  --sidebar-item-hover: #f8f9fa;
+  --sidebar-item-active: var(--primary-color);
+  --sidebar-item-active-text: #ffffff;
+  --sidebar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.theme-dark {
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.96 0 0);
+  --muted: oklch(0.22 0 0);
+  --muted-foreground: oklch(0.74 0 0);
+  --card: oklch(0.18 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.28 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+  --accent: oklch(0.70 0.12 155);
+  --accent-contrast: oklch(0.12 0 0);
+  --accent-2: oklch(0.75 0.12 80);
+  --accent-2-contrast: oklch(0.12 0 0);
+  --success: oklch(0.70 0.12 155);
+  --warning: oklch(0.78 0.12 80);
+  --danger: oklch(0.58 0.18 25);
+  --surface-1: oklch(0.20 0 0);
+  --surface-2: oklch(0.18 0 0);
+  --surface-3: oklch(0.16 0 0);
+  --border: oklch(0.30 0 0);
+  --ring: oklch(0.45 0 0);
+}
+
+/* Base application surfaces */
+body.theme-workbench { background: var(--background) !important; color: var(--foreground) !important; font-family: var(--font-sans) !important; }
+h1,h2,h3,h4 { color: var(--foreground) !important; }

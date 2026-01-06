@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00
+
+; 注释：自动运行项已被禁用，不再设置 Claude 环境变量
+; [HKEY_CURRENT_USER\Software\Microsoft\Command Processor]
+; "AutoRun"="C:\\Users\\15098\\Desktop\\trae\\kyyup730\\setup-claude-env.bat"

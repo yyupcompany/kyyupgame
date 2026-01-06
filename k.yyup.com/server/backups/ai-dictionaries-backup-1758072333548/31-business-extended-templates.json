@@ -1,0 +1,181 @@
+{
+  "name": "业务扩展功能查询模板字典",
+  "description": "行动计划、活动分享、优惠券、点赞收藏记录、个人海报、语义关系等业务扩展功能相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 行动计划相关查询模板 ===": "注释",
+    "行动计划总数": {
+      "sql": "SELECT COUNT(*) as count FROM action_plans",
+      "description": "查询行动计划总数",
+      "table": "action_plans",
+      "response": "行动计划总数为{count}个",
+      "tokens": 10
+    },
+    "计划类型统计": {
+      "sql": "SELECT plan_type, COUNT(*) as count FROM action_plans GROUP BY plan_type ORDER BY count DESC",
+      "description": "统计行动计划类型分布",
+      "table": "action_plans",
+      "response": "计划类型统计完成",
+      "tokens": 20
+    },
+    "计划状态统计": {
+      "sql": "SELECT plan_status, COUNT(*) as count FROM action_plans GROUP BY plan_status ORDER BY count DESC",
+      "description": "统计行动计划状态分布",
+      "table": "action_plans",
+      "response": "计划状态统计完成",
+      "tokens": 20
+    },
+    "进行中计划": {
+      "sql": "SELECT COUNT(*) as count FROM action_plans WHERE plan_status = 'in_progress'",
+      "description": "查询进行中的行动计划数量",
+      "table": "action_plans",
+      "response": "进行中计划{count}个",
+      "tokens": 12
+    },
+
+    "// === 活动分享相关查询模板 ===": "注释",
+    "活动分享总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_shares",
+      "description": "查询活动分享总数",
+      "table": "activity_shares",
+      "response": "活动分享总数为{count}次",
+      "tokens": 10
+    },
+    "分享平台统计": {
+      "sql": "SELECT share_platform, COUNT(*) as count FROM activity_shares GROUP BY share_platform ORDER BY count DESC",
+      "description": "统计活动分享平台分布",
+      "table": "activity_shares",
+      "response": "分享平台统计完成",
+      "tokens": 20
+    },
+    "分享状态统计": {
+      "sql": "SELECT share_status, COUNT(*) as count FROM activity_shares GROUP BY share_status ORDER BY count DESC",
+      "description": "统计活动分享状态分布",
+      "table": "activity_shares",
+      "response": "分享状态统计完成",
+      "tokens": 20
+    },
+    "本月活动分享": {
+      "sql": "SELECT COUNT(*) as count FROM activity_shares WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月活动分享数量",
+      "table": "activity_shares",
+      "response": "本月活动分享{count}次",
+      "tokens": 20
+    },
+
+    "// === 优惠券相关查询模板 ===": "注释",
+    "优惠券总数": {
+      "sql": "SELECT COUNT(*) as count FROM coupons",
+      "description": "查询优惠券总数",
+      "table": "coupons",
+      "response": "优惠券总数为{count}张",
+      "tokens": 10
+    },
+    "优惠券类型统计": {
+      "sql": "SELECT coupon_type, COUNT(*) as count FROM coupons GROUP BY coupon_type ORDER BY count DESC",
+      "description": "统计优惠券类型分布",
+      "table": "coupons",
+      "response": "优惠券类型统计完成",
+      "tokens": 20
+    },
+    "优惠券状态统计": {
+      "sql": "SELECT coupon_status, COUNT(*) as count FROM coupons GROUP BY coupon_status ORDER BY count DESC",
+      "description": "统计优惠券状态分布",
+      "table": "coupons",
+      "response": "优惠券状态统计完成",
+      "tokens": 20
+    },
+    "有效优惠券": {
+      "sql": "SELECT COUNT(*) as count FROM coupons WHERE coupon_status = 'active' AND expiry_date > NOW()",
+      "description": "查询有效优惠券数量",
+      "table": "coupons",
+      "response": "有效优惠券{count}张",
+      "tokens": 15
+    },
+
+    "// === 点赞收藏记录相关查询模板 ===": "注释",
+    "点赞收藏记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM like_collect_records",
+      "description": "查询点赞收藏记录总数",
+      "table": "like_collect_records",
+      "response": "点赞收藏记录总数为{count}条",
+      "tokens": 10
+    },
+    "操作类型统计": {
+      "sql": "SELECT action_type, COUNT(*) as count FROM like_collect_records GROUP BY action_type ORDER BY count DESC",
+      "description": "统计点赞收藏操作类型分布",
+      "table": "like_collect_records",
+      "response": "操作类型统计完成",
+      "tokens": 20
+    },
+    "目标类型统计": {
+      "sql": "SELECT target_type, COUNT(*) as count FROM like_collect_records GROUP BY target_type ORDER BY count DESC",
+      "description": "统计点赞收藏目标类型分布",
+      "table": "like_collect_records",
+      "response": "目标类型统计完成",
+      "tokens": 20
+    },
+    "今日点赞收藏": {
+      "sql": "SELECT COUNT(*) as count FROM like_collect_records WHERE DATE(created_at) = CURDATE()",
+      "description": "查询今日点赞收藏数量",
+      "table": "like_collect_records",
+      "response": "今日点赞收藏{count}次",
+      "tokens": 15
+    },
+
+    "// === 个人海报相关查询模板 ===": "注释",
+    "个人海报总数": {
+      "sql": "SELECT COUNT(*) as count FROM personal_posters",
+      "description": "查询个人海报总数",
+      "table": "personal_posters",
+      "response": "个人海报总数为{count}张",
+      "tokens": 10
+    },
+    "海报模板统计": {
+      "sql": "SELECT template_id, COUNT(*) as count FROM personal_posters GROUP BY template_id ORDER BY count DESC",
+      "description": "统计个人海报模板使用分布",
+      "table": "personal_posters",
+      "response": "海报模板统计完成",
+      "tokens": 20
+    },
+    "海报状态统计": {
+      "sql": "SELECT poster_status, COUNT(*) as count FROM personal_posters GROUP BY poster_status ORDER BY count DESC",
+      "description": "统计个人海报状态分布",
+      "table": "personal_posters",
+      "response": "海报状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 语义关系相关查询模板 ===": "注释",
+    "语义关系总数": {
+      "sql": "SELECT COUNT(*) as count FROM semantic_relationships",
+      "description": "查询语义关系总数",
+      "table": "semantic_relationships",
+      "response": "语义关系总数为{count}个",
+      "tokens": 10
+    },
+    "关系类型统计": {
+      "sql": "SELECT relationship_type, COUNT(*) as count FROM semantic_relationships GROUP BY relationship_type ORDER BY count DESC",
+      "description": "统计语义关系类型分布",
+      "table": "semantic_relationships",
+      "response": "关系类型统计完成",
+      "tokens": 20
+    },
+    "关系强度分析": {
+      "sql": "SELECT AVG(relationship_strength) as avg_strength, MIN(relationship_strength) as min_strength, MAX(relationship_strength) as max_strength FROM semantic_relationships WHERE relationship_strength IS NOT NULL",
+      "description": "分析语义关系强度分布",
+      "table": "semantic_relationships",
+      "response": "关系强度分析完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "业务扩展功能概览": {
+      "sql": "SELECT 'action_plans' as category, COUNT(*) as count FROM action_plans UNION ALL SELECT 'activity_shares' as category, COUNT(*) as count FROM activity_shares UNION ALL SELECT 'coupons' as category, COUNT(*) as count FROM coupons UNION ALL SELECT 'like_collect_records' as category, COUNT(*) as count FROM like_collect_records UNION ALL SELECT 'personal_posters' as category, COUNT(*) as count FROM personal_posters UNION ALL SELECT 'semantic_relationships' as category, COUNT(*) as count FROM semantic_relationships",
+      "description": "业务扩展功能数据总览",
+      "table": "multiple",
+      "response": "业务扩展功能概览查询完成",
+      "tokens": 40
+    }
+  }
+}

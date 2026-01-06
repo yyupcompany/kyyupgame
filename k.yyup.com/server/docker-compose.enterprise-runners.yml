@@ -1,0 +1,113 @@
+version: '3.8'
+
+services:
+  # GitHub Enterprise Runner 1
+  github-enterprise-runner-1:
+    image: sumologic/docker-github-actions-runner:latest
+    container_name: github-enterprise-runner-1
+    restart: unless-stopped
+    environment:
+      # 企业级 URL（请根据实际企业名称修改）
+      - GITHUB_REPOSITORY_URL=https://github.com/enterprises/yyup-enterprise
+      # 企业级注册 token（通过环境变量或 .env 文件设置）
+      - GITHUB_TOKEN=${ENTERPRISE_REGISTRATION_TOKEN}
+      - GITHUB_RUNNER_NAME=enterprise-docker-runner-1
+      - GITHUB_RUNNER_LABELS=enterprise,docker,self-hosted,linux,runner-1,team-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/runner-cache-1:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Enterprise Runner 2
+  github-enterprise-runner-2:
+    image: sumologic/docker-github-actions-runner:latest
+    container_name: github-enterprise-runner-2
+    restart: unless-stopped
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/enterprises/yyup-enterprise
+      - GITHUB_TOKEN=${ENTERPRISE_REGISTRATION_TOKEN}
+      - GITHUB_RUNNER_NAME=enterprise-docker-runner-2
+      - GITHUB_RUNNER_LABELS=enterprise,docker,self-hosted,linux,runner-2,team-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/runner-cache-2:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Enterprise Runner 3
+  github-enterprise-runner-3:
+    image: sumologic/docker-github-actions-runner:latest
+    container_name: github-enterprise-runner-3
+    restart: unless-stopped
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/enterprises/yyup-enterprise
+      - GITHUB_TOKEN=${ENTERPRISE_REGISTRATION_TOKEN}
+      - GITHUB_RUNNER_NAME=enterprise-docker-runner-3
+      - GITHUB_RUNNER_LABELS=enterprise,docker,self-hosted,linux,runner-3,team-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/runner-cache-3:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # GitHub Enterprise Runner 4
+  github-enterprise-runner-4:
+    image: sumologic/docker-github-actions-runner:latest
+    container_name: github-enterprise-runner-4
+    restart: unless-stopped
+    environment:
+      - GITHUB_REPOSITORY_URL=https://github.com/enterprises/yyup-enterprise
+      - GITHUB_TOKEN=${ENTERPRISE_REGISTRATION_TOKEN}
+      - GITHUB_RUNNER_NAME=enterprise-docker-runner-4
+      - GITHUB_RUNNER_LABELS=enterprise,docker,self-hosted,linux,runner-4,team-licensed
+      - GITHUB_RUNNER_GROUP=Default
+      - DISABLE_WAIT_FOR_DOCKER=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../github-runners/runner-cache-4:/runner-cache
+      - ../github-runners/logs:/var/log/runner
+    networks:
+      - github-runners-network
+    healthcheck:
+      test: ["CMD", "pgrep", "-f", "Runner.Worker"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  github-runners-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  runner-cache-1:
+  runner-cache-2:
+  runner-cache-3:
+  runner-cache-4:

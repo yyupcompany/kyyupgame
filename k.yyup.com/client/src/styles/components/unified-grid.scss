@@ -1,0 +1,329 @@
+/**
+ * 统一网格系统
+ * Unified Grid System
+ * 
+ * 为所有中心页面提供统一的网格布局样式
+ * Unified grid layout styles for all center pages
+ */
+
+@use '../design-tokens.scss' as *;
+@use '../mixins/grid-mixins.scss' as *;
+@use '../mixins/card-mixins.scss' as *;
+
+/* ==================== 基础网格容器 ==================== */
+/* Base Grid Containers */
+
+.unified-grid-container {
+  @include grid-container;
+}
+
+.unified-section-container {
+  @include section-container;
+}
+
+/* ==================== 统计卡片网格 ==================== */
+/* Statistics Card Grids */
+
+.stats-grid-unified {
+  @include stats-card-grid;
+  
+  .stat-card {
+    @include enhanced-card;
+    
+    &.stat-card--clickable {
+      cursor: pointer;
+    }
+    
+    // 类型变体
+    &.stat-card--primary {
+      @include card-type-primary;
+    }
+    
+    &.stat-card--success {
+      @include card-type-success;
+    }
+    
+    &.stat-card--warning {
+      @include card-type-warning;
+    }
+    
+    &.stat-card--danger {
+      @include card-type-danger;
+    }
+    
+    &.stat-card--info {
+      @include card-type-info;
+    }
+  }
+}
+
+/* ==================== 图表卡片网格 ==================== */
+/* Chart Card Grids */
+
+.charts-grid-unified {
+  @include chart-card-grid;
+  
+  .chart-card {
+    @include enhanced-card;
+    min-height: 400px;
+    
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid var(--border-color);
+      
+      .chart-title {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+      
+      .chart-actions {
+        display: flex;
+        gap: var(--spacing-sm);
+      }
+    }
+    
+    .chart-content {
+      flex: 1;
+      min-height: 300px;
+    }
+  }
+}
+
+/* ==================== 操作卡片网格 ==================== */
+/* Action Card Grids */
+
+.actions-grid-unified {
+  @include action-card-grid;
+  
+  .action-card {
+    @include enhanced-card;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    
+    &:hover {
+      .action-icon {
+        transform: scale(1.2) rotate(5deg);
+      }
+      
+      .action-text {
+        color: var(--primary-color);
+      }
+    }
+    
+    .action-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+      
+      .action-icon {
+        font-size: var(--text-2xl);
+        color: var(--primary-color);
+        transition: var(--card-transition);
+      }
+      
+      .action-text {
+        font-size: var(--text-sm);
+        font-weight: 500;
+        color: var(--text-primary);
+        transition: var(--card-transition);
+      }
+    }
+  }
+}
+
+/* ==================== 仪表板专用网格 ==================== */
+/* Dashboard Specific Grids */
+
+.dashboard-grid-unified {
+  @include dashboard-grid;
+  
+  .dashboard-card {
+    @include enhanced-card;
+    
+    &.business-center-card {
+      min-height: 160px;
+      cursor: pointer;
+      
+      .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--spacing-md);
+        
+        .center-icon {
+          font-size: var(--text-4xl);
+          color: var(--primary-color);
+          transition: var(--card-transition);
+        }
+        
+        .center-info {
+          .center-title {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+          }
+          
+          .center-description {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+          }
+        }
+      }
+      
+      &:hover .center-icon {
+        transform: scale(1.15) rotate(5deg);
+      }
+    }
+  }
+}
+
+/* ==================== 中心概览网格 ==================== */
+/* Center Overview Grids */
+
+.center-overview-grid-unified {
+  @include center-overview-grid;
+  
+  .overview-card {
+    @include enhanced-card;
+  }
+}
+
+/* ==================== 响应式工具类 ==================== */
+/* Responsive Utilities */
+
+.grid-responsive {
+  @include responsive-grid;
+}
+
+.grid-responsive-sm {
+  @include responsive-grid(240px, var(--spacing-md));
+}
+
+.grid-responsive-lg {
+  @include responsive-grid(320px, var(--spacing-xl));
+}
+
+/* ==================== 特殊布局 ==================== */
+/* Special Layouts */
+
+.grid-equal-height {
+  @include equal-height-grid;
+}
+
+.grid-masonry {
+  @include masonry-grid;
+}
+
+/* ==================== 网格项目工具类 ==================== */
+/* Grid Item Utilities */
+
+.grid-item-full {
+  grid-column: 1 / -1;
+}
+
+.grid-item-half {
+  @media (min-width: 768px) {
+    grid-column: span 2;
+  }
+}
+
+.grid-item-third {
+  @media (min-width: 1024px) {
+    grid-column: span 1;
+  }
+}
+
+/* ==================== 间距工具类 ==================== */
+/* Spacing Utilities */
+
+.grid-gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.grid-gap-md {
+  gap: var(--spacing-md);
+}
+
+.grid-gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.grid-gap-xl {
+  gap: var(--spacing-xl);
+}
+
+/* ==================== 对齐工具类 ==================== */
+/* Alignment Utilities */
+
+.grid-items-start {
+  align-items: start;
+}
+
+.grid-items-center {
+  align-items: center;
+}
+
+.grid-items-end {
+  align-items: end;
+}
+
+.grid-items-stretch {
+  align-items: stretch;
+}
+
+.grid-content-start {
+  justify-content: start;
+}
+
+.grid-content-center {
+  justify-content: center;
+}
+
+.grid-content-end {
+  justify-content: end;
+}
+
+.grid-content-between {
+  justify-content: space-between;
+}
+
+/* ==================== 移动端优化 ==================== */
+/* Mobile Optimizations */
+
+@media (max-width: var(--breakpoint-md)) {
+  .stats-grid-unified,
+  .charts-grid-unified,
+  .actions-grid-unified,
+  .dashboard-grid-unified,
+  .center-overview-grid-unified {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .unified-grid-container,
+  .unified-section-container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  // 移动端禁用hover效果
+  .stat-card,
+  .chart-card,
+  .action-card,
+  .dashboard-card,
+  .overview-card {
+    &:hover {
+      transform: none;
+    }
+  }
+}

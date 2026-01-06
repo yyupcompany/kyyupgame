@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端AI助手 - 底部输入框风格</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .chat-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .ai-gradient {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+
+        .user-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .bubble-shadow {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 448px;
+            z-index: 50;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-container {
+            padding-bottom: 140px;
+        }
+
+        .message-enter {
+            animation: messageEnter 0.4s ease-out;
+        }
+
+        @keyframes messageEnter {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .typing-indicator {
+            animation: typing 1.5s ease-in-out infinite;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* 模态功能面板样式 */
+        .modal-backdrop {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* 状态指示器 */
+        .status-dot {
+            position: relative;
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            width: 6px;
+            height: 6px;
+            background: #10b981;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+
+        /* 自定义滚动条 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+        }
+
+        /* 语音波形动画 */
+        .voice-wave {
+            display: inline-flex;
+            align-items: center;
+            height: 16px;
+        }
+
+        .voice-wave span {
+            display: block;
+            width: 2px;
+            height: 4px;
+            background: currentColor;
+            margin: 0 1px;
+            animation: voiceWave 1s ease-in-out infinite;
+        }
+
+        .voice-wave span:nth-child(2) { animation-delay: 0.1s; }
+        .voice-wave span:nth-child(3) { animation-delay: 0.2s; }
+        .voice-wave span:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes voiceWave {
+            0%, 100% { height: 4px; }
+            50% { height: 12px; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- 主容器 -->
+    <div class="max-w-md mx-auto bg-white shadow-xl min-h-screen relative">
+        
+        <!-- 顶部状态栏 -->
+        <div class="chat-gradient text-white px-4 py-2 text-xs flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="status-dot w-2 h-2 bg-green-400 rounded-full"></div>
+                <span>AI助手 • 在线</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i data-lucide="wifi" class="w-3 h-3"></i>
+                <i data-lucide="battery" class="w-3 h-3"></i>
+                <span>9:41</span>
+            </div>
+        </div>
+
+        <!-- 头部信息区 -->
+        <div class="bg-white px-4 py-4 border-b border-gray-100">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 ai-gradient rounded-full flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-gray-700"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-gray-900">幼儿园AI助手</h2>
+                        <p class="text-sm text-gray-500">专业、智能、贴心</p>
+                    </div>
+                </div>
+                
+                <!-- 用户角色切换 -->
+                <div class="text-right">
+                    <button class="flex items-center space-x-2 bg-blue-50 px-3 py-2 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i data-lucide="user" class="w-3 h-3 text-white"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-xs text-blue-800 font-medium">管理员</div>
+                            <div class="text-xs text-blue-600">全权限</div>
+                        </div>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-blue-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI功能快速入口 -->
+        <div class="px-4 py-3 bg-gradient-to-r from-blue-50 to-purple-50">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-sm font-semibold text-gray-800">AI功能中心</h3>
+                <button class="text-xs text-blue-600 font-medium">展开全部</button>
+            </div>
+            <div class="grid grid-cols-3 gap-3">
+                <!-- 智能体 -->
+                <button class="p-3 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all active:scale-95">
+                    <i data-lucide="brain" class="w-5 h-5 text-blue-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-gray-700 font-medium">智能体</div>
+                </button>
+                
+                <!-- 工具集 -->
+                <button class="p-3 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all active:scale-95">
+                    <i data-lucide="wrench" class="w-5 h-5 text-purple-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-gray-700 font-medium">工具集</div>
+                </button>
+                
+                <!-- 工作流 -->
+                <button class="p-3 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all active:scale-95">
+                    <i data-lucide="zap" class="w-5 h-5 text-emerald-600 mx-auto mb-1"></i>
+                    <div class="text-xs text-gray-700 font-medium">工作流</div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 数据看板（可折叠） -->
+        <div class="border-b border-gray-100">
+            <button id="dashboardToggle" class="w-full px-4 py-3 bg-gray-50 flex items-center justify-between hover:bg-gray-100 transition-colors">
+                <div class="flex items-center space-x-2">
+                    <i data-lucide="pie-chart" class="w-4 h-4 text-gray-600"></i>
+                    <span class="text-sm font-medium text-gray-800">实时数据看板</span>
+                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">实时</span>
+                </div>
+                <i id="dashboardArrow" data-lucide="chevron-down" class="w-4 h-4 text-gray-600 transition-transform"></i>
+            </button>
+            <div id="dashboardContent" class="px-4 py-3 bg-white">
+                <div class="grid grid-cols-2 gap-3 mb-3">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-xl text-white">
+                        <div class="flex items-center justify-between mb-2">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span class="text-xs bg-white/20 px-2 py-1 rounded-full">+15%</span>
+                        </div>
+                        <div class="text-xl font-bold">324</div>
+                        <div class="text-xs opacity-90">今日对话数</div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 p-3 rounded-xl text-white">
+                        <div class="flex items-center justify-between mb-2">
+                            <i data-lucide="users" class="w-4 h-4"></i>
+                            <span class="text-xs bg-white/20 px-2 py-1 rounded-full">在线</span>
+                        </div>
+                        <div class="text-xl font-bold">189</div>
+                        <div class="text-xs opacity-90">活跃用户</div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="text-center p-2 bg-purple-50 rounded-lg">
+                        <div class="text-sm font-bold text-purple-700">95%</div>
+                        <div class="text-xs text-purple-600">处理效率</div>
+                    </div>
+                    <div class="text-center p-2 bg-orange-50 rounded-lg">
+                        <div class="text-sm font-bold text-orange-700">4.8★</div>
+                        <div class="text-xs text-orange-600">满意度</div>
+                    </div>
+                    <div class="text-center p-2 bg-indigo-50 rounded-lg">
+                        <div class="text-sm font-bold text-indigo-700">2.1s</div>
+                        <div class="text-xs text-indigo-600">响应时间</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 聊天对话区域 -->
+        <div class="chat-container px-4 py-4 space-y-4 overflow-y-auto custom-scrollbar" style="max-height: calc(100vh - 400px);">
+            
+            <!-- AI欢迎消息 -->
+            <div class="flex items-start space-x-3 message-enter">
+                <div class="w-10 h-10 ai-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-gray-700"></i>
+                </div>
+                <div class="flex-1 max-w-xs">
+                    <div class="bg-gray-100 rounded-2xl rounded-tl-md px-4 py-3 bubble-shadow">
+                        <p class="text-sm text-gray-800">👋 您好！我是您的专属AI助手，专门为幼儿园管理量身定制。</p>
+                        <div class="mt-2 p-2 bg-white rounded-lg border border-gray-200">
+                            <p class="text-xs text-gray-600 mb-2">我可以帮您：</p>
+                            <div class="space-y-1 text-xs text-gray-700">
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-1 h-1 bg-blue-500 rounded-full"></span>
+                                    <span>📊 分析招生数据和趋势</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-1 h-1 bg-emerald-500 rounded-full"></span>
+                                    <span>📋 安排课程和教务管理</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="w-1 h-1 bg-purple-500 rounded-full"></span>
+                                    <span>👨‍👩‍👧‍👦 处理家长沟通事务</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1 px-2">AI助手 • 刚刚</div>
+                </div>
+            </div>
+
+            <!-- 用户消息 -->
+            <div class="flex items-start space-x-3 justify-end message-enter">
+                <div class="flex-1 text-right max-w-xs">
+                    <div class="user-gradient text-white rounded-2xl rounded-tr-md px-4 py-3 bubble-shadow inline-block">
+                        <p class="text-sm">帮我分析一下这个月的家长满意度调查结果</p>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1 px-2">您 • 3分钟前</div>
+                </div>
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="user" class="w-5 h-5 text-white"></i>
+                </div>
+            </div>
+
+            <!-- AI回复中 -->
+            <div class="flex items-start space-x-3 message-enter">
+                <div class="w-10 h-10 ai-gradient rounded-full flex items-center justify-center flex-shrink-0">
+                    <div class="voice-wave">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="flex-1 max-w-xs">
+                    <div class="bg-gray-100 rounded-2xl rounded-tl-md px-4 py-3 bubble-shadow">
+                        <p class="text-sm text-gray-800">正在为您分析家长满意度数据...</p>
+                        <div class="mt-3 space-y-2">
+                            <div class="w-full bg-gray-200 rounded-full h-1">
+                                <div class="bg-blue-500 h-1 rounded-full animate-pulse" style="width: 65%"></div>
+                            </div>
+                            <p class="text-xs text-gray-600">已处理 324 份调查问卷 • 分析中...</p>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-1 px-2">AI助手 • 正在输入...</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 多模态输入区域 -->
+        <div class="input-container">
+            <div class="p-4">
+                <!-- 快捷操作 -->
+                <div id="quickActions" class="mb-3 opacity-0 transition-all duration-300" style="transform: translateY(10px);">
+                    <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+                        <button class="px-3 py-2 bg-blue-50 text-blue-700 rounded-full text-xs whitespace-nowrap border border-blue-200 hover:bg-blue-100 transition-colors">
+                            📊 查看数据报告
+                        </button>
+                        <button class="px-3 py-2 bg-emerald-50 text-emerald-700 rounded-full text-xs whitespace-nowrap border border-emerald-200 hover:bg-emerald-100 transition-colors">
+                            👥 学生管理
+                        </button>
+                        <button class="px-3 py-2 bg-purple-50 text-purple-700 rounded-full text-xs whitespace-nowrap border border-purple-200 hover:bg-purple-100 transition-colors">
+                            📝 课程安排
+                        </button>
+                        <button class="px-3 py-2 bg-orange-50 text-orange-700 rounded-full text-xs whitespace-nowrap border border-orange-200 hover:bg-orange-100 transition-colors">
+                            📞 家长沟通
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 多模态功能按钮 -->
+                <div class="flex items-center space-x-3 mb-3">
+                    <button id="voiceBtn" class="p-3 bg-blue-500 rounded-full text-white shadow-lg hover:bg-blue-600 transition-all active:scale-95">
+                        <i data-lucide="mic" class="w-5 h-5"></i>
+                    </button>
+                    <button id="cameraBtn" class="p-3 bg-purple-500 rounded-full text-white shadow-lg hover:bg-purple-600 transition-all active:scale-95">
+                        <i data-lucide="camera" class="w-5 h-5"></i>
+                    </button>
+                    <button id="fileBtn" class="p-3 bg-emerald-500 rounded-full text-white shadow-lg hover:bg-emerald-600 transition-all active:scale-95">
+                        <i data-lucide="paperclip" class="w-5 h-5"></i>
+                    </button>
+                    <button id="expandBtn" class="p-3 bg-gray-500 rounded-full text-white shadow-lg hover:bg-gray-600 transition-all active:scale-95">
+                        <i data-lucide="plus" class="w-5 h-5"></i>
+                    </button>
+                </div>
+
+                <!-- 文本输入区 -->
+                <div class="flex items-center space-x-3">
+                    <div class="flex-1 relative">
+                        <input id="messageInput" 
+                               type="text" 
+                               placeholder="输入您的问题或指令..." 
+                               class="w-full px-4 py-3 bg-gray-100 rounded-2xl border-2 border-transparent focus:border-blue-500 focus:bg-white outline-none text-sm transition-all">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <i data-lucide="smile" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <button id="sendBtn" class="p-3 bg-blue-500 rounded-2xl text-white shadow-lg hover:bg-blue-600 transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i data-lucide="send" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 功能面板模态框 -->
+        <div id="featureModal" class="fixed inset-0 modal-backdrop hidden z-50">
+            <div class="flex items-end justify-center min-h-screen">
+                <div class="bg-white rounded-t-2xl p-6 w-full max-w-md modal-slide-up">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">AI功能面板</h3>
+                        <button id="closeModal" class="p-2 hover:bg-gray-100 rounded-full">
+                            <i data-lucide="x" class="w-5 h-5 text-gray-500"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl text-white text-left">
+                            <i data-lucide="brain" class="w-8 h-8 mb-2"></i>
+                            <div class="font-medium">智能对话</div>
+                            <div class="text-xs opacity-80">AI助手对话</div>
+                        </button>
+                        
+                        <button class="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl text-white text-left">
+                            <i data-lucide="wrench" class="w-8 h-8 mb-2"></i>
+                            <div class="font-medium">实用工具</div>
+                            <div class="text-xs opacity-80">管理工具集</div>
+                        </button>
+                        
+                        <button class="p-4 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl text-white text-left">
+                            <i data-lucide="zap" class="w-8 h-8 mb-2"></i>
+                            <div class="font-medium">智能工作流</div>
+                            <div class="text-xs opacity-80">自动化流程</div>
+                        </button>
+                        
+                        <button class="p-4 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl text-white text-left">
+                            <i data-lucide="bar-chart" class="w-8 h-8 mb-2"></i>
+                            <div class="font-medium">数据分析</div>
+                            <div class="text-xs opacity-80">智能分析</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 初始化Lucide图标
+        lucide.createIcons();
+
+        // DOM元素
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const quickActions = document.getElementById('quickActions');
+        const dashboardToggle = document.getElementById('dashboardToggle');
+        const dashboardContent = document.getElementById('dashboardContent');
+        const dashboardArrow = document.getElementById('dashboardArrow');
+        const featureModal = document.getElementById('featureModal');
+        const expandBtn = document.getElementById('expandBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        // 输入框焦点管理
+        messageInput.addEventListener('focus', function() {
+            quickActions.style.opacity = '1';
+            quickActions.style.transform = 'translateY(0)';
+        });
+
+        messageInput.addEventListener('blur', function() {
+            setTimeout(() => {
+                if (!messageInput.value.trim()) {
+                    quickActions.style.opacity = '0';
+                    quickActions.style.transform = 'translateY(10px)';
+                }
+            }, 200);
+        });
+
+        // 发送按钮状态
+        messageInput.addEventListener('input', function() {
+            sendBtn.disabled = !this.value.trim();
+            sendBtn.style.opacity = this.value.trim() ? '1' : '0.5';
+        });
+
+        // 数据看板折叠
+        dashboardToggle.addEventListener('click', function() {
+            const isHidden = dashboardContent.style.display === 'none';
+            dashboardContent.style.display = isHidden ? 'block' : 'none';
+            dashboardArrow.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(-90deg)';
+        });
+
+        // 功能面板模态框
+        expandBtn.addEventListener('click', function() {
+            featureModal.classList.remove('hidden');
+        });
+
+        closeModal.addEventListener('click', function() {
+            featureModal.classList.add('hidden');
+        });
+
+        featureModal.addEventListener('click', function(e) {
+            if (e.target === featureModal) {
+                featureModal.classList.add('hidden');
+            }
+        });
+
+        // 多模态按钮效果
+        document.querySelectorAll('[id$="Btn"]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 添加点击反馈
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 100);
+            });
+        });
+
+        // 语音输入模拟
+        document.getElementById('voiceBtn').addEventListener('click', function() {
+            if (this.classList.contains('recording')) {
+                // 停止录音
+                this.classList.remove('recording');
+                this.style.background = '#3b82f6';
+                this.innerHTML = '<i data-lucide="mic" class="w-5 h-5"></i>';
+            } else {
+                // 开始录音
+                this.classList.add('recording');
+                this.style.background = '#ef4444';
+                this.innerHTML = '<i data-lucide="mic-off" class="w-5 h-5"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        // 发送消息
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                // 这里可以添加发送消息的逻辑
+                console.log('发送消息:', message);
+                messageInput.value = '';
+                sendBtn.disabled = true;
+                sendBtn.style.opacity = '0.5';
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // 快捷指令点击
+        document.querySelectorAll('#quickActions button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                messageInput.value = this.textContent.trim();
+                messageInput.focus();
+                sendBtn.disabled = false;
+                sendBtn.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>

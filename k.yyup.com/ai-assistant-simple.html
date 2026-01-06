@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI助手 - 幼儿园管理系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 主题定义 - 明亮模式 */
+        :root {
+            /* 主色调 - #4f46e5 (indigo) */
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #818cf8;
+            --primary-lighter: #c7d2fe;
+
+            /* 背景颜色 */
+            --bg-primary: #ffffff;           /* 主背景 */
+            --bg-secondary: #f8fafc;         /* 辅助背景 */
+            --bg-card: rgba(255, 255, 255, 0.98); /* 卡片背景 */
+
+            /* 文本颜色 */
+            --text-primary: #111827;         /* 主要文本 */
+            --text-secondary: #4b5563;       /* 次要文本 */
+            --text-muted: #9ca3af;           /* 提示文本 */
+
+            /* 边框颜色 */
+            --border-color: #e5e7eb;         /* 边框 */
+
+            /* 阴影 */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+            /* 圆角 */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-full: 9999px;
+
+            /* 间距 */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+
+            /* 字体 */
+            --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-sm: 14px;
+            --font-base: 16px;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* 主容器 */
+        .ai-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            height: 100vh;
+            background-color: var(--bg-primary);
+        }
+
+        /* 侧边栏 */
+        .ai-sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            margin-bottom: var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-item:hover {
+            background-color: var(--primary-lighter);
+            color: var(--primary-color);
+        }
+
+        .sidebar-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* 聊天区域 */
+        .ai-chat {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 顶部栏 */
+        .chat-topbar {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-md) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 聊天消息 */
+        .chat-messages {
+            flex: 1;
+            padding: var(--spacing-xl);
+            overflow-y: auto;
+            background-color: var(--bg-secondary);
+        }
+
+        .message {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .message-ai {
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+        }
+
+        .message-ai .message-content {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .message.user .message-content {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: var(--spacing-xs);
+        }
+
+        .message-ai .message-time {
+            text-align: left;
+        }
+
+        .message.user .message-time {
+            text-align: right;
+        }
+
+        /* 提示建议 */
+        .chat-suggestions {
+            background-color: var(--bg-card);
+            padding: 0 var(--spacing-lg) var(--spacing-md);
+        }
+
+        .suggestions-title {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .suggestions-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .suggestion-tag {
+            background-color: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-full);
+            font-size: var(--font-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .suggestion-tag:hover {
+            background-color: var(--primary-lighter);
+            color: var(--primary-color);
+        }
+
+        /* 输入区域 */
+        .chat-input {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-md) var(--spacing-lg);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .input-field {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
+            resize: none;
+            min-height: 60px;
+            font-family: var(--font-family);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .input-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--spacing-sm);
+        }
+
+        .btn {
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .ai-container {
+                flex-direction: column;
+            }
+
+            .ai-sidebar {
+                width: 100%;
+                height: 200px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .chat-messages {
+                padding: var(--spacing-md);
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-container">
+        <!-- 侧边栏 -->
+        <div class="ai-sidebar">
+            <div class="sidebar-section">
+                <div class="section-title">AI功能</div>
+                <div class="sidebar-item active">
+                    <i class="fas fa-comments"></i>
+                    <span>聊天</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-history"></i>
+                    <span>历史记录</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-bookmark"></i>
+                    <span>保存的提示词</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-cog"></i>
+                    <span>设置</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-title">快速操作</div>
+                <div class="sidebar-item">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>创建活动</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>检查考勤</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>生成报告</span>
+                </div>
+                <div class="sidebar-item">
+                    <i class="fas fa-user-friends"></i>
+                    <span>查询学生</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 聊天区域 -->
+        <div class="ai-chat">
+            <div class="chat-topbar">
+                <div>
+                    <h2 class="chat-title">AI助手</h2>
+                    <div class="chat-status">
+                        <div class="status-dot"></div>
+                        <span>在线</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+
+            <div class="chat-messages">
+                <div class="message message-ai">
+                    <div class="message-content">
+                        <p>您好！我是您的幼儿园管理AI助手，有什么可以帮您的？</p>
+                        <div class="message-time">14:25</div>
+                    </div>
+                </div>
+
+                <div class="message user">
+                    <div class="message-content">
+                        <p>我想创建一个新的亲子活动</p>
+                        <div class="message-time">14:26</div>
+                    </div>
+                </div>
+
+                <div class="message message-ai">
+                    <div class="message-content">
+                        <p>好的！请告诉我活动的名称、时间和地点</p>
+                        <div class="message-time">14:26</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-suggestions">
+                <div class="suggestions-title">快速操作</div>
+                <div class="suggestions-list">
+                    <div class="suggestion-tag">创建活动</div>
+                    <div class="suggestion-tag">检查考勤</div>
+                    <div class="suggestion-tag">生成报告</div>
+                    <div class="suggestion-tag">查询学生信息</div>
+                    <div class="suggestion-tag">发送通知</div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <div class="input-wrapper">
+                    <textarea
+                        class="input-field"
+                        placeholder="输入您的问题..."
+                        rows="1"
+                    ></textarea>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                </div>
+                <div class="input-buttons">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> 发送
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 自动调整文本区域高度
+        const textarea = document.querySelector('.input-field');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // 快速操作点击事件
+        document.querySelectorAll('.suggestion-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                textarea.value = this.textContent;
+                textarea.style.height = 'auto';
+                textarea.style.height = textarea.scrollHeight + 'px';
+            });
+        });
+    </script>
+</body>
+</html>

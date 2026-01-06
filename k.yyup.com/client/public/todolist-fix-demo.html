@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地存储修复演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 40px;
+            background: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 { color: #333; }
+        .success { background: #d4edda; color: #155724; padding: 15px; border-radius: 6px; margin: 10px 0; }
+        .info { background: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 6px; margin: 10px 0; }
+        button {
+            background: #007AFF;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+        button:hover { background: #0056CC; }
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .todolist-display {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .task-item:last-child { border-bottom: none; }
+        .task-checkbox {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+        }
+        .task-content { flex: 1; }
+        .task-title { font-weight: 500; color: #2d3748; }
+        .task-desc { font-size: 0.9em; color: #666; margin-top: 4px; }
+        .priority-high { border-left: 4px solid #e53e3e; }
+        .priority-medium { border-left: 4px solid #f6ad55; }
+        .priority-low { border-left: 4px solid #68d391; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ 本地存储问题修复演示</h1>
+        
+        <div class="success">
+            <strong>✅ 修复完成！</strong> AI助手的TodoList本地存储功能已经修复并升级。
+        </div>
+
+        <div class="demo-section">
+            <h2>🎯 问题解决方案</h2>
+            <div class="info">
+                <strong>问题原因：</strong> AI调用工具时参数格式不匹配
+                <br><strong>解决方案：</strong> 增强后端参数兼容性，支持多种参数格式
+            </div>
+            
+            <h3>📋 修复内容：</h3>
+            <ul>
+                <li>✅ 修复 <code>analyze_task_complexity</code> 工具的参数解析</li>
+                <li>✅ 修复 <code>create_todo_list</code> 工具的参数处理</li>
+                <li>✅ 添加智能任务分解算法</li>
+                <li>✅ 增强本地存储集成</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2>🧪 功能测试</h2>
+            <button onclick="simulateAITodoCreation()">模拟AI创建TodoList</button>
+            <button onclick="showStoredTodoLists()">查看本地存储</button>
+            <button onclick="updateTaskStatus()">更新任务状态</button>
+            <button onclick="clearAllTodos()">清空测试数据</button>
+            
+            <div id="demo-output"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2>📖 使用说明</h2>
+            <div class="info">
+                <strong>AI助手现在支持：</strong>
+                <ul>
+                    <li>🎯 智能识别复杂任务（如"帮我创建教师节活动待办清单"）</li>
+                    <li>📋 自动生成结构化TodoList</li>
+                    <li>💾 本地浏览器存储（24小时自动过期）</li>
+                    <li>✅ 任务状态更新和进度跟踪</li>
+                    <li>🔄 自动清理过期数据</li>
+                </ul>
+                
+                <strong>测试方法：</strong>
+                <ol>
+                    <li>在AI助手中输入复杂任务（如"策划一个亲子运动会"）</li>
+                    <li>AI会自动分析复杂度并创建TodoList</li>
+                    <li>访问 <a href="/ai-todolist-demo.html" target="_blank">TodoList管理页面</a> 查看结果</li>
+                    <li>可以通过"XX已完成"来更新任务状态</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟AI创建TodoList的过程
+        function simulateAITodoCreation() {
+            const output = document.getElementById('demo-output');
+            
+            // 模拟后端返回的storage_instruction
+            const storageInstruction = {
+                key: 'ai_todolist_demo_' + Date.now(),
+                action: 'save_to_localStorage',
+                data: {
+                    id: 'demo_' + Date.now(),
+                    title: '教师节感谢活动筹备',
+                    description: '为教师节活动制定详细的执行计划',
+                    category: '活动策划',
+                    status: 'active',
+                    createdAt: new Date().toISOString(),
+                    tasks: [
+                        {
+                            id: 'task_1',
+                            title: '活动策划',
+                            description: '确定活动主题、形式、时间、地点',
+                            priority: 'high',
+                            status: 'pending',
+                            estimatedTime: '120分钟'
+                        },
+                        {
+                            id: 'task_2',
+                            title: '物料准备',
+                            description: '采购所需材料和装饰用品',
+                            priority: 'medium',
+                            status: 'pending',
+                            estimatedTime: '90分钟'
+                        },
+                        {
+                            id: 'task_3',
+                            title: '人员协调',
+                            description: '联系相关人员，安排分工',
+                            priority: 'medium',
+                            status: 'pending',
+                            estimatedTime: '60分钟'
+                        },
+                        {
+                            id: 'task_4',
+                            title: '宣传通知',
+                            description: '发布活动通知，邀请参与者',
+                            priority: 'medium',
+                            status: 'pending',
+                            estimatedTime: '45分钟'
+                        },
+                        {
+                            id: 'task_5',
+                            title: '活动执行',
+                            description: '现场布置和活动开展',
+                            priority: 'high',
+                            status: 'pending',
+                            estimatedTime: '180分钟'
+                        },
+                        {
+                            id: 'task_6',
+                            title: '后续跟进',
+                            description: '活动总结和反馈收集',
+                            priority: 'low',
+                            status: 'pending',
+                            estimatedTime: '30分钟'
+                        }
+                    ]
+                },
+                expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+            };
+
+            // 模拟handleLocalStorage函数
+            try {
+                const storageData = {
+                    ...storageInstruction.data,
+                    createdAt: new Date().toISOString(),
+                    expiresAt: storageInstruction.expires
+                };
+                
+                localStorage.setItem(storageInstruction.key, JSON.stringify(storageData));
+                
+                output.innerHTML = `
+                    <div class="success">
+                        ✅ <strong>TodoList创建成功！</strong><br>
+                        📋 标题: ${storageData.title}<br>
+                        📊 任务数量: ${storageData.tasks.length}<br>
+                        💾 存储键: ${storageInstruction.key}<br>
+                        ⏰ 过期时间: 24小时后
+                    </div>
+                    ${renderTodoList(storageData)}
+                `;
+            } catch (error) {
+                output.innerHTML = `<div style="color: red;">❌ 创建失败: ${error.message}</div>`;
+            }
+        }
+
+        // 显示本地存储的TodoList
+        function showStoredTodoLists() {
+            const output = document.getElementById('demo-output');
+            const keys = Object.keys(localStorage).filter(key => key.startsWith('ai_todolist_'));
+            
+            if (keys.length === 0) {
+                output.innerHTML = '<div class="info">📭 本地存储中没有TodoList</div>';
+                return;
+            }
+
+            let html = `<div class="success">📊 找到 ${keys.length} 个TodoList</div>`;
+            
+            keys.forEach((key, index) => {
+                try {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    html += `
+                        <div class="todolist-display">
+                            <h3>${index + 1}. ${data.title}</h3>
+                            <p><strong>存储键:</strong> ${key}</p>
+                            <p><strong>创建时间:</strong> ${new Date(data.createdAt).toLocaleString()}</p>
+                            ${renderTodoList(data)}
+                        </div>
+                    `;
+                } catch (e) {
+                    html += `<div style="color: red;">解析TodoList失败: ${key}</div>`;
+                }
+            });
+            
+            output.innerHTML = html;
+        }
+
+        // 渲染TodoList
+        function renderTodoList(todoData) {
+            if (!todoData.tasks || todoData.tasks.length === 0) {
+                return '<p>无任务</p>';
+            }
+
+            let html = '<div>';
+            todoData.tasks.forEach(task => {
+                const priorityClass = `priority-${task.priority}`;
+                const checked = task.status === 'completed' ? 'checked' : '';
+                html += `
+                    <div class="task-item ${priorityClass}">
+                        <input type="checkbox" class="task-checkbox" ${checked} 
+                               onchange="toggleTaskStatus('${todoData.id}', '${task.id}', this.checked)">
+                        <div class="task-content">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-desc">${task.description}</div>
+                            <small>🏷️ ${task.priority} 优先级 | ⏱️ ${task.estimatedTime}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // 切换任务状态
+        function toggleTaskStatus(todoId, taskId, completed) {
+            const keys = Object.keys(localStorage).filter(key => key.startsWith('ai_todolist_'));
+            
+            keys.forEach(key => {
+                try {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    if (data.id === todoId) {
+                        const task = data.tasks.find(t => t.id === taskId);
+                        if (task) {
+                            task.status = completed ? 'completed' : 'pending';
+                            task.completedAt = completed ? new Date().toISOString() : null;
+                            data.updatedAt = new Date().toISOString();
+                            localStorage.setItem(key, JSON.stringify(data));
+                            console.log(`✅ 任务状态已更新: ${task.title} -> ${task.status}`);
+                        }
+                    }
+                } catch (e) {
+                    console.error('更新任务状态失败:', e);
+                }
+            });
+        }
+
+        // 更新任务状态（示例）
+        function updateTaskStatus() {
+            const keys = Object.keys(localStorage).filter(key => key.startsWith('ai_todolist_'));
+            
+            if (keys.length === 0) {
+                document.getElementById('demo-output').innerHTML = 
+                    '<div class="info">⚠️ 请先创建TodoList</div>';
+                return;
+            }
+
+            // 更新第一个TodoList的第一个任务为已完成
+            const key = keys[0];
+            try {
+                const data = JSON.parse(localStorage.getItem(key));
+                if (data.tasks && data.tasks.length > 0) {
+                    data.tasks[0].status = 'completed';
+                    data.tasks[0].completedAt = new Date().toISOString();
+                    data.updatedAt = new Date().toISOString();
+                    localStorage.setItem(key, JSON.stringify(data));
+                    
+                    document.getElementById('demo-output').innerHTML = `
+                        <div class="success">
+                            ✅ 任务状态已更新: "${data.tasks[0].title}" -> 已完成
+                        </div>
+                        ${renderTodoList(data)}
+                    `;
+                }
+            } catch (e) {
+                document.getElementById('demo-output').innerHTML = 
+                    `<div style="color: red;">❌ 更新失败: ${e.message}</div>`;
+            }
+        }
+
+        // 清空所有测试数据
+        function clearAllTodos() {
+            const keys = Object.keys(localStorage).filter(key => key.startsWith('ai_todolist_'));
+            keys.forEach(key => localStorage.removeItem(key));
+            
+            document.getElementById('demo-output').innerHTML = `
+                <div class="success">🗑️ 已清空 ${keys.length} 个TodoList</div>
+            `;
+        }
+
+        // 页面加载时显示当前状态
+        window.onload = function() {
+            showStoredTodoLists();
+        };
+    </script>
+</body>
+</html>
+
+

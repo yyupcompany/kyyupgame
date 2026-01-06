@@ -1,0 +1,24 @@
+{
+  "name": "component-repair-validator",
+  "version": "1.0.0",
+  "description": "UI组件修复验证工具",
+  "main": "validate-component-repair.js",
+  "scripts": {
+    "validate": "node validate-component-repair.js",
+    "validate:specific": "node validate-component-repair.js",
+    "help": "node validate-component-repair.js --help"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "vue",
+    "ui",
+    "validation",
+    "component",
+    "repair"
+  ],
+  "author": "Claude",
+  "license": "MIT"
+}

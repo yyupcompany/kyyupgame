@@ -1,0 +1,33 @@
+{
+  "testTime": "2025/11/15 17:52:28",
+  "features": {
+    "儿童发育商测评": {
+      "path": "/parent-center/assessment/development",
+      "title": "页面不存在 - 幼儿园招生管理系统",
+      "accessible": false,
+      "interactiveElements": 0
+    },
+    "开始测评页面": {
+      "path": "/parent-center/assessment/start",
+      "title": "开始测评 - 幼儿园招生管理系统",
+      "accessible": true,
+      "interactiveElements": 6
+    },
+    "幼小衔接测评": {
+      "path": "/parent-center/assessment/school-readiness",
+      "title": "页面不存在 - 幼儿园招生管理系统",
+      "accessible": false,
+      "interactiveElements": 0
+    },
+    "学科测评": {
+      "path": "/parent-center/assessment/academic",
+      "title": "页面不存在 - 幼儿园招生管理系统",
+      "accessible": false,
+      "interactiveElements": 0
+    }
+  },
+  "summary": {
+    "success": 1,
+    "failed": 3
+  }
+}

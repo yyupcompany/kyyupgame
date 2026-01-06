@@ -1,0 +1,217 @@
+{
+  "name": "AI对话系统查询模板字典",
+  "description": "AI对话、消息、反馈、知识库、记忆、快捷指令等AI对话系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === AI对话相关查询模板 ===": "注释",
+    "AI对话总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_conversations",
+      "description": "查询AI对话总数",
+      "table": "ai_conversations",
+      "response": "AI对话总数为{count}个",
+      "tokens": 10
+    },
+    "活跃AI对话": {
+      "sql": "SELECT COUNT(*) as count FROM ai_conversations WHERE is_archived = 0",
+      "description": "查询活跃AI对话数量",
+      "table": "ai_conversations",
+      "response": "活跃AI对话{count}个",
+      "tokens": 12
+    },
+    "今日AI对话": {
+      "sql": "SELECT COUNT(*) as count FROM ai_conversations WHERE DATE(created_at) = CURDATE()",
+      "description": "查询今日新增AI对话数量",
+      "table": "ai_conversations",
+      "response": "今日新增AI对话{count}个",
+      "tokens": 15
+    },
+    "本月AI对话": {
+      "sql": "SELECT COUNT(*) as count FROM ai_conversations WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增AI对话数量",
+      "table": "ai_conversations",
+      "response": "本月新增AI对话{count}个",
+      "tokens": 20
+    },
+    "AI对话消息统计": {
+      "sql": "SELECT COUNT(*) as total_conversations, SUM(message_count) as total_messages, AVG(message_count) as avg_messages_per_conversation FROM ai_conversations",
+      "description": "统计AI对话和消息数量",
+      "table": "ai_conversations",
+      "response": "AI对话消息统计完成",
+      "tokens": 25
+    },
+    "最近活跃对话": {
+      "sql": "SELECT COUNT(*) as count FROM ai_conversations WHERE last_message_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询最近7天有活动的对话数量",
+      "table": "ai_conversations",
+      "response": "最近7天活跃对话{count}个",
+      "tokens": 20
+    },
+    "// === AI消息相关查询模板 ===": "注释",
+    "AI消息总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_messages WHERE is_deleted = 0",
+      "description": "查询AI消息总数",
+      "table": "ai_messages",
+      "response": "AI消息总数为{count}条",
+      "tokens": 10
+    },
+    "AI消息角色分布": {
+      "sql": "SELECT role, COUNT(*) as count FROM ai_messages WHERE is_deleted = 0 GROUP BY role ORDER BY count DESC",
+      "description": "统计AI消息角色分布",
+      "table": "ai_messages",
+      "response": "AI消息角色分布统计完成",
+      "tokens": 20
+    },
+    "今日AI消息": {
+      "sql": "SELECT COUNT(*) as count FROM ai_messages WHERE DATE(created_at) = CURDATE() AND is_deleted = 0",
+      "description": "查询今日AI消息数量",
+      "table": "ai_messages",
+      "response": "今日AI消息{count}条",
+      "tokens": 15
+    },
+    "本月AI消息": {
+      "sql": "SELECT COUNT(*) as count FROM ai_messages WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND is_deleted = 0",
+      "description": "查询本月AI消息数量",
+      "table": "ai_messages",
+      "response": "本月AI消息{count}条",
+      "tokens": 20
+    },
+    "AI消息类型统计": {
+      "sql": "SELECT message_type, COUNT(*) as count FROM ai_messages WHERE is_deleted = 0 GROUP BY message_type ORDER BY count DESC",
+      "description": "统计AI消息类型分布",
+      "table": "ai_messages",
+      "response": "AI消息类型统计完成",
+      "tokens": 20
+    },
+    "AI消息状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM ai_messages WHERE is_deleted = 0 GROUP BY status ORDER BY count DESC",
+      "description": "统计AI消息状态分布",
+      "table": "ai_messages",
+      "response": "AI消息状态统计完成",
+      "tokens": 20
+    },
+    "// === AI反馈相关查询模板 ===": "注释",
+    "AI反馈总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_feedbacks",
+      "description": "查询AI反馈总数",
+      "table": "ai_feedbacks",
+      "response": "AI反馈总数为{count}条",
+      "tokens": 10
+    },
+    "AI反馈类型统计": {
+      "sql": "SELECT feedback_type, COUNT(*) as count FROM ai_feedbacks GROUP BY feedback_type ORDER BY count DESC",
+      "description": "统计AI反馈类型分布",
+      "table": "ai_feedbacks",
+      "response": "AI反馈类型统计完成",
+      "tokens": 20
+    },
+    "AI反馈状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM ai_feedbacks GROUP BY status ORDER BY count DESC",
+      "description": "统计AI反馈处理状态",
+      "table": "ai_feedbacks",
+      "response": "AI反馈状态统计完成",
+      "tokens": 20
+    },
+    "AI反馈评分统计": {
+      "sql": "SELECT AVG(rating) as avg_rating, COUNT(CASE WHEN rating IS NOT NULL THEN 1 END) as rated_count FROM ai_feedbacks",
+      "description": "统计AI反馈平均评分",
+      "table": "ai_feedbacks",
+      "response": "AI反馈评分统计完成",
+      "tokens": 25
+    },
+    "本月AI反馈": {
+      "sql": "SELECT COUNT(*) as count FROM ai_feedbacks WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月AI反馈数量",
+      "table": "ai_feedbacks",
+      "response": "本月AI反馈{count}条",
+      "tokens": 20
+    },
+    "// === AI知识库相关查询模板 ===": "注释",
+    "本月新增知识": {
+      "sql": "SELECT COUNT(*) as count FROM ai_knowledge_base WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增知识库条目",
+      "table": "ai_knowledge_base",
+      "response": "本月新增知识库条目{count}条",
+      "tokens": 20
+    },
+    "最近更新知识": {
+      "sql": "SELECT COUNT(*) as count FROM ai_knowledge_base WHERE updated_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)",
+      "description": "查询最近7天更新的知识库条目",
+      "table": "ai_knowledge_base",
+      "response": "最近7天更新知识库条目{count}条",
+      "tokens": 25
+    },
+    "// === AI记忆相关查询模板 ===": "注释",
+    "AI记忆总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_memories",
+      "description": "查询AI记忆总数",
+      "table": "ai_memories",
+      "response": "AI记忆总数为{count}条",
+      "tokens": 10
+    },
+    "AI记忆类型统计": {
+      "sql": "SELECT memory_type, COUNT(*) as count FROM ai_memories GROUP BY memory_type ORDER BY count DESC",
+      "description": "统计AI记忆类型分布",
+      "table": "ai_memories",
+      "response": "AI记忆类型统计完成",
+      "tokens": 20
+    },
+    "AI记忆重要性分析": {
+      "sql": "SELECT AVG(importance) as avg_importance, MIN(importance) as min_importance, MAX(importance) as max_importance FROM ai_memories",
+      "description": "分析AI记忆重要性分布",
+      "table": "ai_memories",
+      "response": "AI记忆重要性分析完成",
+      "tokens": 25
+    },
+    "本月AI记忆": {
+      "sql": "SELECT COUNT(*) as count FROM ai_memories WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增AI记忆数量",
+      "table": "ai_memories",
+      "response": "本月新增AI记忆{count}条",
+      "tokens": 20
+    },
+    "有效AI记忆": {
+      "sql": "SELECT COUNT(*) as count FROM ai_memories WHERE expires_at IS NULL OR expires_at > NOW()",
+      "description": "查询有效AI记忆数量",
+      "table": "ai_memories",
+      "response": "有效AI记忆{count}条",
+      "tokens": 15
+    },
+    "// === AI快捷指令相关查询模板 ===": "注释",
+    "AI快捷指令总数": {
+      "sql": "SELECT COUNT(*) as count FROM ai_shortcuts",
+      "description": "查询AI快捷指令总数",
+      "table": "ai_shortcuts",
+      "response": "AI快捷指令总数为{count}个",
+      "tokens": 10
+    },
+    "活跃快捷指令": {
+      "sql": "SELECT COUNT(*) as count FROM ai_shortcuts WHERE is_active = 1",
+      "description": "查询活跃AI快捷指令数量",
+      "table": "ai_shortcuts",
+      "response": "活跃AI快捷指令{count}个",
+      "tokens": 12
+    },
+    "快捷指令分类统计": {
+      "sql": "SELECT category, COUNT(*) as count FROM ai_shortcuts GROUP BY category ORDER BY count DESC",
+      "description": "统计AI快捷指令分类分布",
+      "table": "ai_shortcuts",
+      "response": "快捷指令分类统计完成",
+      "tokens": 20
+    },
+    "快捷指令角色统计": {
+      "sql": "SELECT role, COUNT(*) as count FROM ai_shortcuts GROUP BY role ORDER BY count DESC",
+      "description": "统计AI快捷指令角色分布",
+      "table": "ai_shortcuts",
+      "response": "快捷指令角色统计完成",
+      "tokens": 20
+    },
+    "// === 综合统计查询模板 ===": "注释",
+    "AI系统数据概览": {
+      "sql": "SELECT 'conversations' as category, COUNT(*) as count FROM ai_conversations UNION ALL SELECT 'messages' as category, COUNT(*) as count FROM ai_messages WHERE is_deleted = 0 UNION ALL SELECT 'feedbacks' as category, COUNT(*) as count FROM ai_feedbacks UNION ALL SELECT 'knowledge_base' as category, COUNT(*) as count FROM ai_knowledge_base UNION ALL SELECT 'memories' as category, COUNT(*) as count FROM ai_memories UNION ALL SELECT 'shortcuts' as category, COUNT(*) as count FROM ai_shortcuts",
+      "description": "AI系统数据总览",
+      "table": "multiple",
+      "response": "AI系统数据概览查询完成",
+      "tokens": 50
+    }
+  }
+}

@@ -1,0 +1,500 @@
+<style lang="scss" scoped>
+@import '@/styles/mobile-base.scss';
+
+.mobile-analytics-center {
+  padding: var(--app-gap);
+  background: var(--van-background-color-light);
+  min-height: 100vh;
+
+// 欢迎词样式
+.welcome-section {
+  margin-bottom: var(--van-padding-lg);
+}
+
+// 统计卡片样式
+.stats-section {
+  margin-bottom: var(--van-padding-lg);
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--van-padding-md);
+
+    .stat-card-mobile {
+      background: var(--card-bg);
+      border-radius: var(--van-radius-lg);
+      padding: var(--van-padding-md);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: var(--van-padding-sm);
+      transition: all 0.3s ease;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .stat-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--van-radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--van-background-color-light);
+      }
+
+      .stat-content {
+        flex: 1;
+
+        .stat-value {
+          font-size: var(--text-lg);
+          font-weight: 600;
+          color: var(--van-text-color);
+          margin-bottom: 2px;
+        }
+
+        .stat-title {
+          font-size: var(--text-xs);
+          color: var(--van-text-color-2);
+          margin-bottom: 4px;
+        }
+
+        .stat-trend {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+          font-size: 11px;
+
+          .trend-up {
+            color: #07c160;
+          }
+
+          .trend-down {
+            color: #ee0a24;
+          }
+        }
+      }
+
+      &.stat-card--primary .stat-icon {
+        background: rgba(64, 158, 255, 0.1);
+        color: var(--primary-color);
+      }
+
+      &.stat-card--success .stat-icon {
+        background: rgba(103, 194, 58, 0.1);
+        color: var(--success-color);
+      }
+
+      &.stat-card--warning .stat-icon {
+        background: rgba(230, 162, 60, 0.1);
+        color: var(--warning-color);
+      }
+
+      &.stat-card--info .stat-icon {
+        background: rgba(144, 147, 153, 0.1);
+        color: var(--info-color);
+      }
+    }
+  }
+}
+
+// 区域标题样式
+.section-header {
+  margin-bottom: var(--van-padding-lg);
+  text-align: left;
+
+  .section-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--van-text-color);
+    margin: 0 0 var(--van-padding-xs) 0;
+    line-height: 1.3;
+  }
+
+  .section-subtitle {
+    font-size: var(--text-sm);
+    color: var(--van-text-color-2);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// 分析功能样式
+.analytics-features {
+  margin-bottom: var(--van-padding-lg);
+
+  .feature-card-mobile {
+    background: var(--card-bg);
+    border-radius: var(--van-radius-lg);
+    padding: var(--van-padding-md);
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+      transform: scale(0.98);
+    }
+
+    .feature-icon {
+      font-size: var(--text-4xl);
+      margin-bottom: var(--van-padding-xs);
+    }
+
+    .feature-title {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--van-text-color);
+      margin: 0 0 var(--van-padding-xs) 0;
+      line-height: 1.2;
+    }
+  }
+}
+
+// 时间筛选器
+.time-filter {
+  background: var(--card-bg);
+  border-radius: var(--van-radius-lg);
+  padding: var(--van-padding-sm);
+  margin-bottom: var(--van-padding-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  :deep(.van-tabs__wrap) {
+    border-radius: var(--van-radius-md);
+  }
+
+  :deep(.van-tabs__nav) {
+    background: transparent;
+  }
+
+  :deep(.van-tab) {
+    font-size: var(--text-sm);
+  }
+}
+
+// 图表区域样式
+.charts-section {
+  margin-bottom: var(--van-padding-lg);
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--van-padding-md);
+
+    .chart-card {
+      background: var(--card-bg);
+      border-radius: var(--van-radius-lg);
+      padding: var(--van-padding-md);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+      .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--van-padding-md);
+
+        .chart-title {
+          font-size: var(--text-base);
+          font-weight: 600;
+          color: var(--van-text-color);
+          margin: 0;
+        }
+      }
+
+      .chart-placeholder {
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        .trend-chart {
+          width: 100%;
+          height: 80px;
+          position: relative;
+          margin-bottom: var(--van-padding-md);
+
+          .chart-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #409eff 0%, #67c23a 50%, #e6a23c 100%);
+            border-radius: 2px;
+          }
+
+          .chart-dots {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+
+            .dot {
+              position: absolute;
+              width: 8px;
+              height: 8px;
+              background: var(--primary-color);
+              border-radius: 50%;
+              transform: translateY(-50%);
+              box-shadow: 0 2px 4px rgba(64, 158, 255, 0.3);
+            }
+          }
+        }
+
+        .pie-chart {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: var(--van-padding-md);
+
+          .pie-slice {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+
+            &.slice-1 {
+              background: var(--primary-color);
+              transform: rotate(0deg);
+            }
+
+            &.slice-2 {
+              background: var(--success-color);
+              transform: rotate(90deg);
+            }
+
+            &.slice-3 {
+              background: var(--warning-color);
+              transform: rotate(180deg);
+            }
+
+            &.slice-4 {
+              background: var(--danger-color);
+              transform: rotate(270deg);
+            }
+          }
+        }
+
+        .chart-info {
+          width: 100%;
+
+          .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--van-padding-md);
+
+            .legend-item {
+              display: flex;
+              align-items: center;
+              gap: var(--spacing-xs);
+              font-size: var(--text-xs);
+              color: var(--van-text-color-2);
+
+              .legend-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+
+                &.primary {
+                  background: var(--primary-color);
+                }
+
+                &.success {
+                  background: var(--success-color);
+                }
+              }
+            }
+          }
+
+          .pie-legend {
+            .legend-row {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 2px 0;
+              font-size: var(--text-xs);
+
+              .legend-label {
+                color: var(--van-text-color-2);
+              }
+
+              .legend-value {
+                font-weight: 600;
+                color: var(--van-text-color);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// 报表导出样式
+.reports-section {
+  margin-bottom: var(--van-padding-lg);
+
+  .reports-grid {
+    .report-card-mobile {
+      background: var(--card-bg);
+      border-radius: var(--van-radius-lg);
+      padding: var(--van-padding-md);
+      margin-bottom: var(--van-padding-md);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      gap: var(--van-padding-md);
+      transition: all 0.3s ease;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .report-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--van-radius-md);
+        background: rgba(64, 158, 255, 0.1);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .report-content {
+        flex: 1;
+
+        .report-title {
+          font-size: var(--text-base);
+          font-weight: 600;
+          color: var(--van-text-color);
+          margin: 0 0 var(--van-padding-xs) 0;
+          line-height: 1.3;
+        }
+
+        .report-description {
+          font-size: var(--text-sm);
+          color: var(--van-text-color-2);
+          margin: 0;
+          line-height: 1.4;
+        }
+      }
+
+      .report-action {
+        color: var(--van-text-color-3);
+      }
+    }
+  }
+}
+
+// 数据质量监控样式
+.quality-section {
+  margin-bottom: var(--van-padding-lg);
+
+  .quality-cards {
+    .quality-card {
+      background: var(--card-bg);
+      border-radius: var(--van-radius-lg);
+      padding: var(--van-padding-md);
+      margin-bottom: var(--van-padding-md);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+      .quality-header {
+        display: flex;
+        align-items: center;
+        gap: var(--van-padding-md);
+        margin-bottom: var(--van-padding-md);
+
+        .quality-icon {
+          width: 40px;
+          height: 40px;
+          font-size: var(--text-xl);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--van-background-color-light);
+          border-radius: var(--van-radius-md);
+        }
+
+        .quality-info {
+          flex: 1;
+
+          .quality-title {
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--van-text-color);
+            margin: 0 0 var(--van-padding-xs) 0;
+          }
+
+          .quality-score {
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--van-text-color);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 导出弹窗样式
+.export-dialog {
+  padding: var(--van-padding-lg);
+
+  .dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--van-padding-lg);
+
+    h3 {
+      margin: 0;
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--van-text-color);
+    }
+  }
+
+  .dialog-content {
+    .export-form {
+      margin-bottom: var(--van-padding-xl);
+    }
+
+    .export-actions {
+      .van-button {
+        margin-bottom: var(--van-padding-md);
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 375px) {
+  .mobile-analytics-center {
+    padding: var(--van-padding-sm);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .analytics-features {
+    :deep(.van-grid) {
+      .van-grid-item {
+        flex-basis: 100% !important;
+      }
+    }
+  }
+}
+</style>

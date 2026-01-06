@@ -1,0 +1,102 @@
+{
+  "timestamp": "2025-11-21T08:59:59.395Z",
+  "summary": {
+    "totalLogs": 131,
+    "sseEvents": 32,
+    "thinkingEvents": 6,
+    "toolEvents": 34,
+    "completeEvents": 31,
+    "errors": 0,
+    "apiCalls": 1
+  },
+  "eventSequence": [
+    {
+      "type": "log",
+      "message": "📥 [单次调用] SSE事件: thinking_start",
+      "timestamp": "2025-11-21T08:59:47.711Z"
+    },
+    {
+      "type": "log",
+      "message": "[多轮调用] thinking_start: 🤔 AI开始思考...",
+      "timestamp": "2025-11-21T08:59:47.713Z"
+    },
+    {
+      "type": "log",
+      "message": "🤔 [AIAssistantCore] thinking_start 事件触发，关闭加载状态",
+      "timestamp": "2025-11-21T08:59:47.713Z"
+    },
+    {
+      "type": "log",
+      "message": "📥 [单次调用] SSE事件: tool_intent",
+      "timestamp": "2025-11-21T08:59:47.713Z"
+    },
+    {
+      "type": "log",
+      "message": "[多轮调用] tool_intent: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218",
+      "timestamp": "2025-11-21T08:59:47.713Z"
+    },
+    {
+      "type": "log",
+      "message": "💡 [工具意图] tool_intent 事件: {message: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218, confidence: 0.9, timestamp: 2025-11-21T08:59:47.705Z}",
+      "timestamp": "2025-11-21T08:59:47.715Z"
+    },
+    {
+      "type": "log",
+      "message": "📝 [ChatHistory] 添加消息: {id: 1763715587711_innov1cfj, type: tool_intent, role: assistant, timestamp: 2025-11-21T08:59:47.711Z}",
+      "timestamp": "2025-11-21T08:59:47.715Z"
+    },
+    {
+      "type": "log",
+      "message": "📥 [单次调用] SSE事件: tool_call_start",
+      "timestamp": "2025-11-21T08:59:47.715Z"
+    },
+    {
+      "type": "log",
+      "message": "📝 [单次调用] 事件数据: {\"message\":\"🚀 开始执行工具调用\",\"toolCount\":18,\"timestamp\":\"2025-11-21T08:59:47.706Z\"}",
+      "timestamp": "2025-11-21T08:59:47.716Z"
+    },
+    {
+      "type": "log",
+      "message": "[多轮调用] tool_call_start: 🔧 开始调用工具: undefined",
+      "timestamp": "2025-11-21T08:59:47.716Z"
+    },
+    {
+      "type": "log",
+      "message": "🔧 [工具调用开始] tool_call_start 事件触发",
+      "timestamp": "2025-11-21T08:59:47.716Z"
+    },
+    {
+      "type": "log",
+      "message": "📊 [事件数据]: {\n  \"type\": \"tool_call_start\",\n  \"data\": {\n    \"message\": \"🚀 开始执行工具调用\",\n    \"toolCount\": 18,\n    \"timestamp\": \"2025-11-21T08:59:47.706Z\"\n  },\n  \"message\": \"🔧 开始调用工具: undefined\",\n  \"round\": 1\n}",
+      "timestamp": "2025-11-21T08:59:47.716Z"
+    },
+    {
+      "type": "log",
+      "message": "🔍 [工具信息]: {toolId: tool-1763715587712-7ew6yxltn, toolDisplayName: , toolIntent: 🔍 识别到需要使用工具，复杂度: 0.5278260869565218, toolDescription: 🔧 开始调用工具: undefined}",
+      "timestamp": "2025-11-21T08:59:47.717Z"
+    },
+    {
+      "type": "log",
+      "message": "📝 [ChatHistory] 添加消息: {id: 1763715587713_e4bfzlcxp, type: tool_call_start, role: assistant, timestamp: 2025-11-21T08:59:47.713Z}",
+      "timestamp": "2025-11-21T08:59:47.718Z"
+    },
+    {
+      "type": "log",
+      "message": "✅ [工具调用] 已立即添加到聊天历史: tool-1763715587712-7ew6yxltn ",
+      "timestamp": "2025-11-21T08:59:47.718Z"
+    }
+  ],
+  "networkLogs": [
+    {
+      "url": "http://localhost:5173/api/ai/unified/stream-chat",
+      "status": 200,
+      "timestamp": "2025-11-21T08:59:47.710Z"
+    }
+  ],
+  "errors": [],
+  "conclusion": {
+    "eventFlowComplete": true,
+    "noErrors": true,
+    "apiWorking": true
+  }
+}

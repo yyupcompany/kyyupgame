@@ -1,0 +1,525 @@
+// 导入全局样式变量
+@use './design-tokens.scss' as *;
+
+// ============================================
+// 统一标签样式系统
+// ============================================
+// 用途：提供可复用的标签样式类，用于需要自定义标签的场景
+// 设计原则：浅色背景 + 深色文字 + 边框，4px小圆角
+// ============================================
+
+.unified-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: var(--radius-sm); // 4px小圆角
+  border: 1px solid;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+
+  // Hover效果 - 轻微上移 + 阴影
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  // Active状态
+  &:active {
+    transform: translateY(0);
+  }
+
+  // ============================================
+  // 优先级变体 - Priority Variants
+  // ============================================
+
+  &.unified-tag--urgent {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+
+    &:hover {
+      background: #fecaca;
+      box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+    }
+  }
+
+  &.unified-tag--high {
+    background: #fef3c7;
+    color: #d97706;
+    border-color: #fde68a;
+
+    &:hover {
+      background: #fde68a;
+      box-shadow: 0 2px 4px rgba(217, 119, 6, 0.2);
+    }
+  }
+
+  &.unified-tag--medium {
+    background: #dbeafe;
+    color: #2563eb;
+    border-color: #bfdbfe;
+
+    &:hover {
+      background: #bfdbfe;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+  }
+
+  &.unified-tag--low {
+    background: #f3f4f6;
+    color: #6b7280;
+    border-color: #e5e7eb;
+
+    &:hover {
+      background: #e5e7eb;
+      box-shadow: 0 2px 4px rgba(107, 114, 128, 0.2);
+    }
+  }
+
+  // ============================================
+  // 状态变体 - Status Variants
+  // ============================================
+
+  &.unified-tag--pending {
+    background: #fef3c7;
+    color: #d97706;
+    border-color: #fde68a;
+
+    &:hover {
+      background: #fde68a;
+      box-shadow: 0 2px 4px rgba(217, 119, 6, 0.2);
+    }
+  }
+
+  &.unified-tag--in-progress {
+    background: #dbeafe;
+    color: #2563eb;
+    border-color: #bfdbfe;
+
+    &:hover {
+      background: #bfdbfe;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+  }
+
+  &.unified-tag--completed {
+    background: #d1fae5;
+    color: #059669;
+    border-color: #a7f3d0;
+
+    &:hover {
+      background: #a7f3d0;
+      box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2);
+    }
+  }
+
+  &.unified-tag--cancelled {
+    background: #f3f4f6;
+    color: #9ca3af;
+    border-color: #e5e7eb;
+
+    &:hover {
+      background: #e5e7eb;
+      box-shadow: 0 2px 4px rgba(156, 163, 175, 0.2);
+    }
+  }
+
+  &.unified-tag--active {
+    background: #dcfce7;
+    color: #16a34a;
+    border-color: #bbf7d0;
+
+    &:hover {
+      background: #bbf7d0;
+      box-shadow: 0 2px 4px rgba(22, 163, 74, 0.2);
+    }
+  }
+
+  &.unified-tag--inactive {
+    background: #f3f4f6;
+    color: #6b7280;
+    border-color: #e5e7eb;
+
+    &:hover {
+      background: #e5e7eb;
+      box-shadow: 0 2px 4px rgba(107, 114, 128, 0.2);
+    }
+  }
+
+  &.unified-tag--blocked {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+
+    &:hover {
+      background: #fecaca;
+      box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
+    }
+  }
+
+  // ============================================
+  // 尺寸变体 - Size Variants
+  // ============================================
+
+  &.unified-tag--sm {
+    padding: 2px 6px;
+    font-size: 11px;
+  }
+
+  &.unified-tag--md {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--text-xs);
+  }
+
+  &.unified-tag--lg {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--text-sm);
+  }
+
+  // ============================================
+  // 可移除标签 - Removable Tag
+  // ============================================
+
+  &.unified-tag--removable {
+    padding-right: var(--spacing-xs);
+
+    .unified-tag__close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      margin-left: var(--spacing-xs);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  // ============================================
+  // 可点击标签 - Clickable Tag
+  // ============================================
+
+  &.unified-tag--clickable {
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // ============================================
+  // 带图标的标签 - Tag with Icon
+  // ============================================
+
+  .unified-tag__icon {
+    display: inline-flex;
+    align-items: center;
+    margin-right: var(--spacing-xs);
+    font-size: 1em;
+  }
+
+  // ============================================
+  // 圆形标签 - Rounded Tag (pill shape)
+  // ============================================
+
+  &.unified-tag--rounded {
+    border-radius: 9999px;
+  }
+}
+
+// ============================================
+// 暗色主题适配 - Dark Theme Support
+// ============================================
+
+@media (prefers-color-scheme: dark) {
+  .unified-tag {
+    // 优先级变体 - 暗色主题
+    &.unified-tag--urgent {
+      background: rgba(220, 38, 38, 0.2);
+      color: #fca5a5;
+      border-color: rgba(220, 38, 38, 0.3);
+
+      &:hover {
+        background: rgba(220, 38, 38, 0.3);
+      }
+    }
+
+    &.unified-tag--high {
+      background: rgba(217, 119, 6, 0.2);
+      color: #fbbf24;
+      border-color: rgba(217, 119, 6, 0.3);
+
+      &:hover {
+        background: rgba(217, 119, 6, 0.3);
+      }
+    }
+
+    &.unified-tag--medium {
+      background: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+      border-color: rgba(37, 99, 235, 0.3);
+
+      &:hover {
+        background: rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    &.unified-tag--low {
+      background: rgba(107, 114, 128, 0.2);
+      color: #9ca3af;
+      border-color: rgba(107, 114, 128, 0.3);
+
+      &:hover {
+        background: rgba(107, 114, 128, 0.3);
+      }
+    }
+
+    // 状态变体 - 暗色主题
+    &.unified-tag--pending {
+      background: rgba(217, 119, 6, 0.2);
+      color: #fbbf24;
+      border-color: rgba(217, 119, 6, 0.3);
+
+      &:hover {
+        background: rgba(217, 119, 6, 0.3);
+      }
+    }
+
+    &.unified-tag--in-progress {
+      background: rgba(37, 99, 235, 0.2);
+      color: #60a5fa;
+      border-color: rgba(37, 99, 235, 0.3);
+
+      &:hover {
+        background: rgba(37, 99, 235, 0.3);
+      }
+    }
+
+    &.unified-tag--completed {
+      background: rgba(5, 150, 105, 0.2);
+      color: #34d399;
+      border-color: rgba(5, 150, 105, 0.3);
+
+      &:hover {
+        background: rgba(5, 150, 105, 0.3);
+      }
+    }
+
+    &.unified-tag--cancelled {
+      background: rgba(156, 163, 175, 0.2);
+      color: #9ca3af;
+      border-color: rgba(156, 163, 175, 0.3);
+
+      &:hover {
+        background: rgba(156, 163, 175, 0.3);
+      }
+    }
+
+    &.unified-tag--active {
+      background: rgba(22, 163, 74, 0.2);
+      color: #4ade80;
+      border-color: rgba(22, 163, 74, 0.3);
+
+      &:hover {
+        background: rgba(22, 163, 74, 0.3);
+      }
+    }
+
+    &.unified-tag--inactive {
+      background: rgba(107, 114, 128, 0.2);
+      color: #9ca3af;
+      border-color: rgba(107, 114, 128, 0.3);
+
+      &:hover {
+        background: rgba(107, 114, 128, 0.3);
+      }
+    }
+
+    &.unified-tag--blocked {
+      background: rgba(220, 38, 38, 0.2);
+      color: #fca5a5;
+      border-color: rgba(220, 38, 38, 0.3);
+
+      &:hover {
+        background: rgba(220, 38, 38, 0.3);
+      }
+    }
+  }
+}
+
+// ============================================
+// 主题类适配 - Theme Class Support (.theme-dark)
+// ============================================
+
+.theme-dark,
+[data-theme="dark"] {
+  .unified-tag {
+    // 优先级变体 - 暗色主题
+    &.unified-tag--urgent {
+      background: rgba(248, 113, 113, 0.2);
+      color: #fca5a5;
+      border-color: rgba(248, 113, 113, 0.3);
+
+      &:hover {
+        background: rgba(248, 113, 113, 0.3);
+      }
+    }
+
+    &.unified-tag--high {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.3);
+
+      &:hover {
+        background: rgba(251, 191, 36, 0.3);
+      }
+    }
+
+    &.unified-tag--medium {
+      background: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+      border-color: rgba(139, 92, 246, 0.3);
+
+      &:hover {
+        background: rgba(139, 92, 246, 0.3);
+      }
+    }
+
+    &.unified-tag--low {
+      background: rgba(156, 163, 175, 0.2);
+      color: #9ca3af;
+      border-color: rgba(156, 163, 175, 0.3);
+
+      &:hover {
+        background: rgba(156, 163, 175, 0.3);
+      }
+    }
+
+    // 状态变体 - 暗色主题
+    &.unified-tag--pending {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.3);
+
+      &:hover {
+        background: rgba(251, 191, 36, 0.3);
+      }
+    }
+
+    &.unified-tag--in-progress {
+      background: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+      border-color: rgba(139, 92, 246, 0.3);
+
+      &:hover {
+        background: rgba(139, 92, 246, 0.3);
+      }
+    }
+
+    &.unified-tag--completed {
+      background: rgba(74, 222, 128, 0.2);
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.3);
+
+      &:hover {
+        background: rgba(74, 222, 128, 0.3);
+      }
+    }
+
+    &.unified-tag--cancelled {
+      background: rgba(156, 163, 175, 0.2);
+      color: #9ca3af;
+      border-color: rgba(156, 163, 175, 0.3);
+
+      &:hover {
+        background: rgba(156, 163, 175, 0.3);
+      }
+    }
+
+    &.unified-tag--active {
+      background: rgba(74, 222, 128, 0.2);
+      color: #4ade80;
+      border-color: rgba(74, 222, 128, 0.3);
+
+      &:hover {
+        background: rgba(74, 222, 128, 0.3);
+      }
+    }
+
+    &.unified-tag--inactive {
+      background: rgba(156, 163, 175, 0.2);
+      color: #9ca3af;
+      border-color: rgba(156, 163, 175, 0.3);
+
+      &:hover {
+        background: rgba(156, 163, 175, 0.3);
+      }
+    }
+
+    &.unified-tag--blocked {
+      background: rgba(248, 113, 113, 0.2);
+      color: #fca5a5;
+      border-color: rgba(248, 113, 113, 0.3);
+
+      &:hover {
+        background: rgba(248, 113, 113, 0.3);
+      }
+    }
+  }
+}
+
+// ============================================
+// 使用示例 - Usage Examples
+// ============================================
+
+// 基础标签
+// <span class="unified-tag">默认标签</span>
+
+// 优先级标签
+// <span class="unified-tag unified-tag--urgent">紧急</span>
+// <span class="unified-tag unified-tag--high">高</span>
+// <span class="unified-tag unified-tag--medium">中</span>
+// <span class="unified-tag unified-tag--low">低</span>
+
+// 状态标签
+// <span class="unified-tag unified-tag--pending">待处理</span>
+// <span class="unified-tag unified-tag--in-progress">进行中</span>
+// <span class="unified-tag unified-tag--completed">已完成</span>
+// <span class="unified-tag unified-tag--cancelled">已取消</span>
+
+// 尺寸变体
+// <span class="unified-tag unified-tag--sm">小标签</span>
+// <span class="unified-tag unified-tag--md">中标签</span>
+// <span class="unified-tag unified-tag--lg">大标签</span>
+
+// 可移除标签
+// <span class="unified-tag unified-tag--removable">
+//   标签文本
+//   <span class="unified-tag__close">×</span>
+// </span>
+
+// 可点击标签
+// <span class="unified-tag unified-tag--clickable">点击我</span>
+
+// 带图标的标签
+// <span class="unified-tag">
+//   <span class="unified-tag__icon">★</span>
+//   标签文本
+// </span>
+
+// 圆形标签
+// <span class="unified-tag unified-tag--rounded">Pill Shape</span>

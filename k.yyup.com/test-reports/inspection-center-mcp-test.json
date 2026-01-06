@@ -1,0 +1,173 @@
+{
+  "timestamp": "2025-10-10T01:35:08.879Z",
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "warnings": 0
+  },
+  "tests": [
+    {
+      "name": "检查中心时间轴",
+      "status": "passed",
+      "details": "统计卡片: 4, 时间轴卡片: 42",
+      "timestamp": "2025-10-10T01:35:29.764Z"
+    },
+    {
+      "name": "视图模式切换",
+      "status": "passed",
+      "details": "成功切换视图模式",
+      "timestamp": "2025-10-10T01:35:34.325Z"
+    },
+    {
+      "name": "统计卡片",
+      "status": "passed",
+      "details": "找到 15 个统计卡片",
+      "timestamp": "2025-10-10T01:35:35.095Z"
+    },
+    {
+      "name": "API: 获取模板列表",
+      "status": "passed",
+      "details": "状态码: 200",
+      "timestamp": "2025-10-10T01:35:35.297Z"
+    },
+    {
+      "name": "API: 获取实例列表",
+      "status": "passed",
+      "details": "状态码: 200",
+      "timestamp": "2025-10-10T01:35:35.468Z"
+    },
+    {
+      "name": "API: 获取统计概览",
+      "status": "passed",
+      "details": "状态码: 200",
+      "timestamp": "2025-10-10T01:35:35.811Z"
+    },
+    {
+      "name": "API: 获取趋势数据",
+      "status": "passed",
+      "details": "状态码: 200",
+      "timestamp": "2025-10-10T01:35:35.968Z"
+    },
+    {
+      "name": "API: 获取模板排行",
+      "status": "passed",
+      "details": "状态码: 200",
+      "timestamp": "2025-10-10T01:35:36.128Z"
+    }
+  ],
+  "errors": [
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "timestamp": "2025-10-10T01:35:15.581Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "timestamp": "2025-10-10T01:35:15.776Z"
+    },
+    {
+      "type": "console",
+      "message": "Response error: AxiosError",
+      "timestamp": "2025-10-10T01:35:15.780Z"
+    },
+    {
+      "type": "console",
+      "message": "Error details: {code: UNKNOWN_ERROR, message: 获取基本资料失败, detail: Object, statusCode: 500}",
+      "timestamp": "2025-10-10T01:35:15.780Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "timestamp": "2025-10-10T01:35:16.018Z"
+    },
+    {
+      "type": "console",
+      "message": "Response error: AxiosError",
+      "timestamp": "2025-10-10T01:35:16.020Z"
+    },
+    {
+      "type": "console",
+      "message": "Error details: {code: UNKNOWN_ERROR, message: 获取基本资料失败, detail: Object, statusCode: 500}",
+      "timestamp": "2025-10-10T01:35:16.028Z"
+    },
+    {
+      "type": "console",
+      "message": "请求失败，已重试1次: Request failed with status code 500",
+      "timestamp": "2025-10-10T01:35:16.029Z"
+    },
+    {
+      "type": "console",
+      "message": "加载基本信息失败: AxiosError",
+      "timestamp": "2025-10-10T01:35:16.029Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "timestamp": "2025-10-10T01:35:22.189Z"
+    },
+    {
+      "type": "console",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "timestamp": "2025-10-10T01:35:22.576Z"
+    },
+    {
+      "type": "console",
+      "message": "Response error: AxiosError",
+      "timestamp": "2025-10-10T01:35:22.576Z"
+    },
+    {
+      "type": "console",
+      "message": "Error details: {code: NOT_FOUND, message: 未找到该页面的说明文档, detail: Object, statusCode: 404}",
+      "timestamp": "2025-10-10T01:35:22.578Z"
+    },
+    {
+      "type": "console",
+      "message": "请求失败，已重试0次: Request failed with status code 404",
+      "timestamp": "2025-10-10T01:35:22.579Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "01-login-page",
+      "filepath": "test-screenshots/inspection-center/1760060111473-01-login-page.png",
+      "timestamp": "2025-10-10T01:35:12.845Z"
+    },
+    {
+      "name": "02-login-filled",
+      "filepath": "test-screenshots/inspection-center/1760060112903-02-login-filled.png",
+      "timestamp": "2025-10-10T01:35:14.024Z"
+    },
+    {
+      "name": "03-login-success",
+      "filepath": "test-screenshots/inspection-center/1760060117215-03-login-success.png",
+      "timestamp": "2025-10-10T01:35:17.861Z"
+    },
+    {
+      "name": "04-inspection-center-loaded",
+      "filepath": "test-screenshots/inspection-center/1760060126096-04-inspection-center-loaded.png",
+      "timestamp": "2025-10-10T01:35:27.127Z"
+    },
+    {
+      "name": "05-inspection-timeline",
+      "filepath": "test-screenshots/inspection-center/1760060129182-05-inspection-timeline.png",
+      "timestamp": "2025-10-10T01:35:29.764Z"
+    },
+    {
+      "name": "06-list-view",
+      "filepath": "test-screenshots/inspection-center/1760060131605-06-list-view.png",
+      "timestamp": "2025-10-10T01:35:32.276Z"
+    },
+    {
+      "name": "07-month-view",
+      "filepath": "test-screenshots/inspection-center/1760060133617-07-month-view.png",
+      "timestamp": "2025-10-10T01:35:34.320Z"
+    },
+    {
+      "name": "08-statistics-cards",
+      "filepath": "test-screenshots/inspection-center/1760060134332-08-statistics-cards.png",
+      "timestamp": "2025-10-10T01:35:35.095Z"
+    }
+  ]
+}

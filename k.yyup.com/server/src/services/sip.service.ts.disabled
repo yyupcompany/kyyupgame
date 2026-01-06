@@ -1,0 +1,506 @@
+/**
+ * SIP协议服务
+ * 处理SIP连接、通话和信令
+ */
+
+import { EventEmitter } from 'events'
+import * as SIP from 'sip.js'
+
+export interface SIPConfig {
+  server: string
+  port: number
+  username: string
+  password: string
+  extension: string
+  domain?: string
+}
+
+export interface SIPCall {
+  id: string
+  direction: 'incoming' | 'outgoing'
+  remoteNumber: string
+  remoteName?: string
+  status: 'ringing' | 'answered' | 'ended' | 'held' | 'transferring'
+  startTime: Date
+  answerTime?: Date
+  endTime?: Date
+  session?: any
+}
+
+export interface SIPRegistrationStatus {
+  registered: boolean
+  expires?: number
+  server?: string
+  reason?: string
+}
+
+class SIPService extends EventEmitter {
+  private userAgent: any = null
+  private config: SIPConfig | null = null
+  private sessions: Map<string, any> = new Map()
+  private calls: Map<string, SIPCall> = new Map()
+  private registrationStatus: SIPRegistrationStatus = {
+    registered: false
+  }
+
+  /**
+   * 初始化SIP用户代理
+   */
+  async initialize(config: SIPConfig): Promise<boolean> {
+    try {
+      this.config = config
+      const domain = config.domain || `${config.server}:${config.port}`
+
+      // 创建SIP用户代理配置
+      const uri = `sip:${config.username}@${domain}`
+      const wsServers = [`wss://${config.server}:${config.port + 1}`] // WebSocket端口通常是SIP端口+1
+
+      const userAgentConfig = {
+        uri,
+        wsServers,
+        authorizationUser: config.username,
+        password: config.password,
+        displayName: config.extension,
+        register: true,
+        registerExpires: 600,
+        userAgentString: 'Kindergarten-CallCenter/1.0.0',
+        sessionDescriptionHandlerFactoryOptions: {
+          constraints: {
+            audio: true,
+            video: false
+          },
+          iceGatheringTimeout: 2000
+        }
+      }
+
+      // 创建SIP用户代理
+      this.userAgent = new SIP.SimpleUser(new SIP.WebSocketInterface(`wss://${config.server}:${config.port + 1}`), userAgentConfig)
+
+      // 绑定事件处理器
+      this.bindEventHandlers()
+
+      // 连接到SIP服务器
+      await this.userAgent.connect()
+
+      console.log('🔗 SIP用户代理初始化成功')
+      return true
+    } catch (error) {
+      console.error('❌ SIP用户代理初始化失败:', error)
+      this.emit('error', { type: 'initialization_failed', error })
+      return false
+    }
+  }
+
+  /**
+   * 绑定SIP事件处理器
+   */
+  private bindEventHandlers(): void {
+    if (!this.userAgent) return
+
+    // 注册事件
+    this.userAgent.delegate = {
+      onConnect: () => {
+        console.log('📞 SIP服务器连接成功')
+        this.registrationStatus.registered = true
+        this.emit('registered', this.registrationStatus)
+      },
+
+      onDisconnect: (error?: Error) => {
+        console.log('📞 SIP服务器连接断开:', error?.message)
+        this.registrationStatus.registered = false
+        this.registrationStatus.reason = error?.message
+        this.emit('unregistered', this.registrationStatus)
+      },
+
+      onRegistered: () => {
+        console.log('✅ SIP注册成功')
+        this.registrationStatus.registered = true
+        this.emit('registered', this.registrationStatus)
+      },
+
+      onUnregistered: (response?: any) => {
+        console.log('❌ SIP注册失败:', response?.message)
+        this.registrationStatus.registered = false
+        this.registrationStatus.reason = response?.message
+        this.emit('unregistered', this.registrationStatus)
+      },
+
+      onInvite: (invitation: any) => {
+        console.log('🔔 收到来电邀请:', invitation.remoteIdentity.uri)
+        this.handleIncomingCall(invitation)
+      }
+    }
+  }
+
+  /**
+   * 处理来电邀请
+   */
+  private async handleIncomingCall(invitation: any): Promise<void> {
+    try {
+      const callId = invitation.request.callId
+      const remoteNumber = invitation.remoteIdentity.uri.user
+      const remoteName = invitation.remoteIdentity.displayName || remoteNumber
+
+      const call: SIPCall = {
+        id: callId,
+        direction: 'incoming',
+        remoteNumber,
+        remoteName,
+        status: 'ringing',
+        startTime: new Date(),
+        session: invitation
+      }
+
+      this.calls.set(callId, call)
+      this.sessions.set(callId, invitation)
+
+      // 发出来电事件
+      this.emit('incoming_call', call)
+
+      // 设置通话事件处理器
+      this.setupCallHandlers(invitation, callId)
+
+      console.log('📞 来电处理完成:', callId)
+    } catch (error) {
+      console.error('❌ 来电处理失败:', error)
+      invitation.reject()
+    }
+  }
+
+  /**
+   * 设置通话事件处理器
+   */
+  private setupCallHandlers(session: any, callId: string): void {
+    // 通话状态变化
+    session.stateChange.addListener((state: any) => {
+      const call = this.calls.get(callId)
+      if (!call) return
+
+      switch (state) {
+        case 'initial':
+          call.status = 'ringing'
+          break
+        case 'inviting':
+        case 'provisional':
+          call.status = 'ringing'
+          break
+        case 'accepted':
+          call.status = 'answered'
+          call.answerTime = new Date()
+          this.emit('call_answered', call)
+          break
+        case 'terminated':
+          call.status = 'ended'
+          call.endTime = new Date()
+          this.emit('call_ended', call)
+          this.calls.delete(callId)
+          this.sessions.delete(callId)
+          break
+      }
+
+      this.emit('call_state_changed', { callId, state, call })
+    })
+
+    // DTMF事件
+    session.on('dtmf', (tone: string) => {
+      this.emit('dtmf', { callId, tone })
+    })
+
+    // 音频轨道
+    session.on('track', (track: MediaStreamTrack) => {
+      if (track.kind === 'audio') {
+        this.emit('audio_track', { callId, track })
+      }
+    })
+  }
+
+  /**
+   * 发起通话
+   */
+  async makeCall(targetNumber: string, options: any = {}): Promise<SIPCall | null> {
+    try {
+      if (!this.userAgent || !this.config) {
+        throw new Error('SIP用户代理未初始化')
+      }
+
+      if (!this.registrationStatus.registered) {
+        throw new Error('SIP未注册到服务器')
+      }
+
+      const targetUri = `sip:${targetNumber}@${this.config.server}`
+      const callId = `outgoing_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+
+      const call: SIPCall = {
+        id: callId,
+        direction: 'outgoing',
+        remoteNumber: targetNumber,
+        status: 'ringing',
+        startTime: new Date()
+      }
+
+      this.calls.set(callId, call)
+
+      // 发起通话
+      const session = await this.userAgent.call(targetUri, {
+        sessionDescriptionHandlerOptions: {
+          constraints: {
+            audio: true,
+            video: false
+          }
+        }
+      })
+
+      call.session = session
+      this.sessions.set(callId, session)
+
+      // 设置事件处理器
+      this.setupCallHandlers(session, callId)
+
+      this.emit('outgoing_call', call)
+      console.log('📞 发起通话成功:', targetNumber)
+
+      return call
+    } catch (error) {
+      console.error('❌ 发起通话失败:', error)
+      this.emit('error', { type: 'call_failed', targetNumber, error })
+      return null
+    }
+  }
+
+  /**
+   * 接听通话
+   */
+  async answerCall(callId: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      await session.accept()
+
+      const call = this.calls.get(callId)
+      if (call) {
+        call.status = 'answered'
+        call.answerTime = new Date()
+      }
+
+      this.emit('call_answered', this.calls.get(callId))
+      console.log('✅ 接听通话成功:', callId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 接听通话失败:', error)
+      this.emit('error', { type: 'answer_failed', callId, error })
+      return false
+    }
+  }
+
+  /**
+   * 挂断通话
+   */
+  async hangupCall(callId: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      await session.hangup()
+
+      const call = this.calls.get(callId)
+      if (call) {
+        call.status = 'ended'
+        call.endTime = new Date()
+      }
+
+      this.emit('call_ended', this.calls.get(callId))
+      console.log('📞 挂断通话成功:', callId)
+
+      // 清理会话
+      this.sessions.delete(callId)
+      this.calls.delete(callId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 挂断通话失败:', error)
+      this.emit('error', { type: 'hangup_failed', callId, error })
+      return false
+    }
+  }
+
+  /**
+   * 保持通话
+   */
+  async holdCall(callId: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      // SIP保持通话的实现
+      await session.hold()
+
+      const call = this.calls.get(callId)
+      if (call) {
+        call.status = 'held'
+      }
+
+      this.emit('call_held', this.calls.get(callId))
+      console.log('⏸️ 保持通话成功:', callId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 保持通话失败:', error)
+      this.emit('error', { type: 'hold_failed', callId, error })
+      return false
+    }
+  }
+
+  /**
+   * 恢复通话
+   */
+  async unholdCall(callId: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      await session.unhold()
+
+      const call = this.calls.get(callId)
+      if (call) {
+        call.status = 'answered'
+      }
+
+      this.emit('call_unheld', this.calls.get(callId))
+      console.log('▶️ 恢复通话成功:', callId)
+
+      return true
+    } catch (error) {
+      console.error('❌ 恢复通话失败:', error)
+      this.emit('error', { type: 'unhold_failed', callId, error })
+      return false
+    }
+  }
+
+  /**
+   * 转移通话
+   */
+  async transferCall(callId: string, targetNumber: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      const call = this.calls.get(callId)
+      if (call) {
+        call.status = 'transferring'
+      }
+
+      // 执行转移
+      await session.refer(`sip:${targetNumber}@${this.config?.server}`)
+
+      this.emit('call_transferred', { callId, targetNumber })
+      console.log('🔄 转移通话成功:', callId, '->', targetNumber)
+
+      return true
+    } catch (error) {
+      console.error('❌ 转移通话失败:', error)
+      this.emit('error', { type: 'transfer_failed', callId, targetNumber, error })
+      return false
+    }
+  }
+
+  /**
+   * 发送DTMF
+   */
+  async sendDTMF(callId: string, digits: string): Promise<boolean> {
+    try {
+      const session = this.sessions.get(callId)
+      if (!session) {
+        throw new Error('通话会话不存在')
+      }
+
+      // 发送DTMF按键
+      for (const digit of digits) {
+        await session.dtmf(digit)
+      }
+
+      this.emit('dtmf_sent', { callId, digits })
+      console.log('🔢 DTMF发送成功:', callId, digits)
+
+      return true
+    } catch (error) {
+      console.error('❌ DTMF发送失败:', error)
+      this.emit('error', { type: 'dtmf_failed', callId, digits, error })
+      return false
+    }
+  }
+
+  /**
+   * 断开SIP连接
+   */
+  async disconnect(): Promise<void> {
+    try {
+      // 挂断所有通话
+      const activeCalls = Array.from(this.calls.keys())
+      for (const callId of activeCalls) {
+        await this.hangupCall(callId)
+      }
+
+      // 断开SIP连接
+      if (this.userAgent) {
+        await this.userAgent.disconnect()
+        this.userAgent = null
+      }
+
+      this.config = null
+      this.registrationStatus = { registered: false }
+
+      this.emit('disconnected')
+      console.log('📞 SIP连接已断开')
+    } catch (error) {
+      console.error('❌ 断开SIP连接失败:', error)
+      this.emit('error', { type: 'disconnect_failed', error })
+    }
+  }
+
+  /**
+   * 获取当前状态
+   */
+  getStatus(): any {
+    return {
+      connected: this.userAgent !== null,
+      registered: this.registrationStatus.registered,
+      activeCalls: Array.from(this.calls.values()),
+      callCount: this.calls.size,
+      config: this.config ? {
+        server: this.config.server,
+        extension: this.config.extension,
+        username: this.config.username
+      } : null
+    }
+  }
+
+  /**
+   * 获取通话信息
+   */
+  getCall(callId: string): SIPCall | null {
+    return this.calls.get(callId) || null
+  }
+
+  /**
+   * 获取所有活跃通话
+   */
+  getActiveCalls(): SIPCall[] {
+    return Array.from(this.calls.values()).filter(call =>
+      call.status !== 'ended' && call.status !== 'terminated'
+    )
+  }
+}
+
+export default new SIPService()

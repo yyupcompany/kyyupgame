@@ -1,0 +1,180 @@
+{
+  "name": "活动扩展系统查询模板字典",
+  "description": "活动安排、活动海报、活动资源、活动人员、活动模板等活动扩展系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 活动安排相关查询模板 ===": "注释",
+    "活动安排总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_arrangements",
+      "description": "查询活动安排总数",
+      "table": "activity_arrangements",
+      "response": "活动安排总数为{count}个",
+      "tokens": 10
+    },
+    "安排状态统计": {
+      "sql": "SELECT arrangement_status, COUNT(*) as count FROM activity_arrangements GROUP BY arrangement_status ORDER BY count DESC",
+      "description": "统计活动安排状态分布",
+      "table": "activity_arrangements",
+      "response": "活动安排状态统计完成",
+      "tokens": 20
+    },
+    "本月活动安排": {
+      "sql": "SELECT COUNT(*) as count FROM activity_arrangements WHERE YEAR(arrangement_date) = YEAR(NOW()) AND MONTH(arrangement_date) = MONTH(NOW())",
+      "description": "查询本月活动安排数量",
+      "table": "activity_arrangements",
+      "response": "本月活动安排{count}个",
+      "tokens": 20
+    },
+    "活动类型安排统计": {
+      "sql": "SELECT activity_type, COUNT(*) as count FROM activity_arrangements GROUP BY activity_type ORDER BY count DESC",
+      "description": "统计活动类型安排分布",
+      "table": "activity_arrangements",
+      "response": "活动类型安排统计完成",
+      "tokens": 20
+    },
+
+    "// === 活动海报相关查询模板 ===": "注释",
+    "活动海报总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_posters",
+      "description": "查询活动海报总数",
+      "table": "activity_posters",
+      "response": "活动海报总数为{count}个",
+      "tokens": 10
+    },
+    "海报状态统计": {
+      "sql": "SELECT poster_status, COUNT(*) as count FROM activity_posters GROUP BY poster_status ORDER BY count DESC",
+      "description": "统计海报状态分布",
+      "table": "activity_posters",
+      "response": "海报状态统计完成",
+      "tokens": 20
+    },
+    "海报类型统计": {
+      "sql": "SELECT poster_type, COUNT(*) as count FROM activity_posters GROUP BY poster_type ORDER BY count DESC",
+      "description": "统计海报类型分布",
+      "table": "activity_posters",
+      "response": "海报类型统计完成",
+      "tokens": 20
+    },
+    "本月新增海报": {
+      "sql": "SELECT COUNT(*) as count FROM activity_posters WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增海报数量",
+      "table": "activity_posters",
+      "response": "本月新增海报{count}个",
+      "tokens": 20
+    },
+
+    "// === 活动资源相关查询模板 ===": "注释",
+    "活动资源总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_resources",
+      "description": "查询活动资源总数",
+      "table": "activity_resources",
+      "response": "活动资源总数为{count}个",
+      "tokens": 10
+    },
+    "资源类型统计": {
+      "sql": "SELECT resource_type, COUNT(*) as count FROM activity_resources GROUP BY resource_type ORDER BY count DESC",
+      "description": "统计资源类型分布",
+      "table": "activity_resources",
+      "response": "资源类型统计完成",
+      "tokens": 20
+    },
+    "资源状态统计": {
+      "sql": "SELECT resource_status, COUNT(*) as count FROM activity_resources GROUP BY resource_status ORDER BY count DESC",
+      "description": "统计资源状态分布",
+      "table": "activity_resources",
+      "response": "资源状态统计完成",
+      "tokens": 20
+    },
+    "可用资源统计": {
+      "sql": "SELECT COUNT(*) as count FROM activity_resources WHERE resource_status = 'available'",
+      "description": "查询可用资源数量",
+      "table": "activity_resources",
+      "response": "可用资源{count}个",
+      "tokens": 12
+    },
+
+    "// === 活动人员相关查询模板 ===": "注释",
+    "活动人员总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_staffs",
+      "description": "查询活动人员总数",
+      "table": "activity_staffs",
+      "response": "活动人员总数为{count}个",
+      "tokens": 10
+    },
+    "人员角色统计": {
+      "sql": "SELECT staff_role, COUNT(*) as count FROM activity_staffs GROUP BY staff_role ORDER BY count DESC",
+      "description": "统计人员角色分布",
+      "table": "activity_staffs",
+      "response": "人员角色统计完成",
+      "tokens": 20
+    },
+    "人员状态统计": {
+      "sql": "SELECT staff_status, COUNT(*) as count FROM activity_staffs GROUP BY staff_status ORDER BY count DESC",
+      "description": "统计人员状态分布",
+      "table": "activity_staffs",
+      "response": "人员状态统计完成",
+      "tokens": 20
+    },
+    "确认参与人员": {
+      "sql": "SELECT COUNT(*) as count FROM activity_staffs WHERE staff_status = 'confirmed'",
+      "description": "查询确认参与人员数量",
+      "table": "activity_staffs",
+      "response": "确认参与人员{count}个",
+      "tokens": 12
+    },
+
+    "// === 活动模板相关查询模板 ===": "注释",
+    "活动模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM activity_templates",
+      "description": "查询活动模板总数",
+      "table": "activity_templates",
+      "response": "活动模板总数为{count}个",
+      "tokens": 10
+    },
+    "模板分类统计": {
+      "sql": "SELECT template_category, COUNT(*) as count FROM activity_templates GROUP BY template_category ORDER BY count DESC",
+      "description": "统计模板分类分布",
+      "table": "activity_templates",
+      "response": "模板分类统计完成",
+      "tokens": 20
+    },
+    "模板状态统计": {
+      "sql": "SELECT template_status, COUNT(*) as count FROM activity_templates GROUP BY template_status ORDER BY count DESC",
+      "description": "统计模板状态分布",
+      "table": "activity_templates",
+      "response": "模板状态统计完成",
+      "tokens": 20
+    },
+    "活跃模板统计": {
+      "sql": "SELECT COUNT(*) as count FROM activity_templates WHERE template_status = 'active'",
+      "description": "查询活跃模板数量",
+      "table": "activity_templates",
+      "response": "活跃模板{count}个",
+      "tokens": 12
+    },
+    "模板使用统计": {
+      "sql": "SELECT template_name, usage_count FROM activity_templates ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计模板使用情况",
+      "table": "activity_templates",
+      "response": "模板使用统计完成",
+      "tokens": 25
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "活动扩展系统概览": {
+      "sql": "SELECT 'activity_arrangements' as category, COUNT(*) as count FROM activity_arrangements UNION ALL SELECT 'activity_posters' as category, COUNT(*) as count FROM activity_posters UNION ALL SELECT 'activity_resources' as category, COUNT(*) as count FROM activity_resources UNION ALL SELECT 'activity_staffs' as category, COUNT(*) as count FROM activity_staffs UNION ALL SELECT 'activity_templates' as category, COUNT(*) as count FROM activity_templates",
+      "description": "活动扩展系统数据总览",
+      "table": "multiple",
+      "response": "活动扩展系统概览查询完成",
+      "tokens": 35
+    },
+    "活动资源配置分析": {
+      "sql": "SELECT aa.activity_type, COUNT(ar.id) as resource_count, COUNT(as.id) as staff_count FROM activity_arrangements aa LEFT JOIN activity_resources ar ON aa.activity_id = ar.activity_id LEFT JOIN activity_staffs as ON aa.activity_id = as.activity_id GROUP BY aa.activity_type ORDER BY resource_count DESC",
+      "description": "分析活动资源配置情况",
+      "table": "activity_arrangements",
+      "joins": ["activity_resources", "activity_staffs"],
+      "response": "活动资源配置分析完成",
+      "tokens": 40
+    }
+  }
+}

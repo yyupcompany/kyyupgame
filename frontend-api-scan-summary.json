@@ -1,0 +1,49 @@
+{
+  "summary": {
+    "totalFiles": 1579,
+    "totalApiCalls": 724,
+    "uniqueEndpoints": 565,
+    "absoluteUrls": 3,
+    "relativeUrls": 562,
+    "missingApiPrefix": 225
+  },
+  "issuesCount": 228,
+  "topEndpoints": [
+    {
+      "endpoint": "/api/ai/unified/stream-chat",
+      "count": 7
+    },
+    {
+      "endpoint": "/api/auth/login",
+      "count": 5
+    },
+    {
+      "endpoint": "${this.baseURL}${url}",
+      "count": 5
+    },
+    {
+      "endpoint": "/api/quick-query-groups/overview",
+      "count": 5
+    },
+    {
+      "endpoint": "/api/system-configs",
+      "count": 4
+    },
+    {
+      "endpoint": "tasks/${id}",
+      "count": 4
+    },
+    {
+      "endpoint": "/ai/text-to-speech",
+      "count": 4
+    },
+    {
+      "endpoint": "/kindergarten/basic-info",
+      "count": 4
+    },
+    {
+      "endpoint": "/statistics",
+      "count": 4
+    }
+  ]
+}

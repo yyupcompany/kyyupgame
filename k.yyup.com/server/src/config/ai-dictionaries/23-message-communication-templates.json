@@ -1,0 +1,192 @@
+{
+  "name": "消息通信系统查询模板字典",
+  "description": "消息记录、消息模板、通知、短信等消息通信系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 消息记录相关查询模板 ===": "注释",
+    "消息记录总数": {
+      "sql": "SELECT COUNT(*) as count FROM message_records",
+      "description": "查询消息记录总数",
+      "table": "message_records",
+      "response": "消息记录总数为{count}条",
+      "tokens": 10
+    },
+    "消息类型统计": {
+      "sql": "SELECT message_type, COUNT(*) as count FROM message_records GROUP BY message_type ORDER BY count DESC",
+      "description": "统计消息类型分布",
+      "table": "message_records",
+      "response": "消息类型统计完成",
+      "tokens": 20
+    },
+    "消息状态统计": {
+      "sql": "SELECT message_status, COUNT(*) as count FROM message_records GROUP BY message_status ORDER BY count DESC",
+      "description": "统计消息状态分布",
+      "table": "message_records",
+      "response": "消息状态统计完成",
+      "tokens": 20
+    },
+    "已发送消息": {
+      "sql": "SELECT COUNT(*) as count FROM message_records WHERE message_status = 'sent'",
+      "description": "查询已发送消息数量",
+      "table": "message_records",
+      "response": "已发送消息{count}条",
+      "tokens": 12
+    },
+    "本月消息记录": {
+      "sql": "SELECT COUNT(*) as count FROM message_records WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月消息记录数量",
+      "table": "message_records",
+      "response": "本月消息记录{count}条",
+      "tokens": 20
+    },
+    "消息发送成功率": {
+      "sql": "SELECT (COUNT(CASE WHEN message_status = 'sent' THEN 1 END) * 100.0 / COUNT(*)) as success_rate FROM message_records",
+      "description": "计算消息发送成功率",
+      "table": "message_records",
+      "response": "消息发送成功率分析完成",
+      "tokens": 25
+    },
+
+    "// === 消息模板相关查询模板 ===": "注释",
+    "消息模板总数": {
+      "sql": "SELECT COUNT(*) as count FROM message_templates",
+      "description": "查询消息模板总数",
+      "table": "message_templates",
+      "response": "消息模板总数为{count}个",
+      "tokens": 10
+    },
+    "模板类型统计": {
+      "sql": "SELECT template_type, COUNT(*) as count FROM message_templates GROUP BY template_type ORDER BY count DESC",
+      "description": "统计模板类型分布",
+      "table": "message_templates",
+      "response": "模板类型统计完成",
+      "tokens": 20
+    },
+    "模板状态统计": {
+      "sql": "SELECT template_status, COUNT(*) as count FROM message_templates GROUP BY template_status ORDER BY count DESC",
+      "description": "统计模板状态分布",
+      "table": "message_templates",
+      "response": "模板状态统计完成",
+      "tokens": 20
+    },
+    "活跃消息模板": {
+      "sql": "SELECT COUNT(*) as count FROM message_templates WHERE template_status = 'active'",
+      "description": "查询活跃消息模板数量",
+      "table": "message_templates",
+      "response": "活跃消息模板{count}个",
+      "tokens": 12
+    },
+    "模板使用统计": {
+      "sql": "SELECT template_name, usage_count FROM message_templates ORDER BY usage_count DESC LIMIT 10",
+      "description": "统计模板使用情况",
+      "table": "message_templates",
+      "response": "模板使用统计完成",
+      "tokens": 25
+    },
+    "本月新增模板": {
+      "sql": "SELECT COUNT(*) as count FROM message_templates WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月新增模板数量",
+      "table": "message_templates",
+      "response": "本月新增模板{count}个",
+      "tokens": 20
+    },
+
+    "// === 通知相关查询模板 ===": "注释",
+    "通知总数": {
+      "sql": "SELECT COUNT(*) as count FROM notifications",
+      "description": "查询通知总数",
+      "table": "notifications",
+      "response": "通知总数为{count}条",
+      "tokens": 10
+    },
+    "通知类型统计": {
+      "sql": "SELECT notification_type, COUNT(*) as count FROM notifications GROUP BY notification_type ORDER BY count DESC",
+      "description": "统计通知类型分布",
+      "table": "notifications",
+      "response": "通知类型统计完成",
+      "tokens": 20
+    },
+    "通知状态统计": {
+      "sql": "SELECT notification_status, COUNT(*) as count FROM notifications GROUP BY notification_status ORDER BY count DESC",
+      "description": "统计通知状态分布",
+      "table": "notifications",
+      "response": "通知状态统计完成",
+      "tokens": 20
+    },
+    "未读通知": {
+      "sql": "SELECT COUNT(*) as count FROM notifications WHERE is_read = 0",
+      "description": "查询未读通知数量",
+      "table": "notifications",
+      "response": "未读通知{count}条",
+      "tokens": 12
+    },
+    "本月通知": {
+      "sql": "SELECT COUNT(*) as count FROM notifications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月通知数量",
+      "table": "notifications",
+      "response": "本月通知{count}条",
+      "tokens": 20
+    },
+    "通知阅读率": {
+      "sql": "SELECT (COUNT(CASE WHEN is_read = 1 THEN 1 END) * 100.0 / COUNT(*)) as read_rate FROM notifications",
+      "description": "计算通知阅读率",
+      "table": "notifications",
+      "response": "通知阅读率分析完成",
+      "tokens": 25
+    },
+    "紧急通知统计": {
+      "sql": "SELECT COUNT(*) as count FROM notifications WHERE priority = 'urgent' OR priority = 'high'",
+      "description": "查询紧急通知数量",
+      "table": "notifications",
+      "response": "紧急通知{count}条",
+      "tokens": 15
+    },
+
+    "// === 入学通知相关查询模板 ===": "注释",
+    "入学通知总数": {
+      "sql": "SELECT COUNT(*) as count FROM admission_notifications",
+      "description": "查询入学通知总数",
+      "table": "admission_notifications",
+      "response": "入学通知总数为{count}条",
+      "tokens": 10
+    },
+    "入学通知状态统计": {
+      "sql": "SELECT notification_status, COUNT(*) as count FROM admission_notifications GROUP BY notification_status ORDER BY count DESC",
+      "description": "统计入学通知状态分布",
+      "table": "admission_notifications",
+      "response": "入学通知状态统计完成",
+      "tokens": 20
+    },
+    "入学通知类型统计": {
+      "sql": "SELECT notification_type, COUNT(*) as count FROM admission_notifications GROUP BY notification_type ORDER BY count DESC",
+      "description": "统计入学通知类型分布",
+      "table": "admission_notifications",
+      "response": "入学通知类型统计完成",
+      "tokens": 20
+    },
+    "本月入学通知": {
+      "sql": "SELECT COUNT(*) as count FROM admission_notifications WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月入学通知数量",
+      "table": "admission_notifications",
+      "response": "本月入学通知{count}条",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "消息通信系统概览": {
+      "sql": "SELECT 'message_records' as category, COUNT(*) as count FROM message_records UNION ALL SELECT 'message_templates' as category, COUNT(*) as count FROM message_templates UNION ALL SELECT 'notifications' as category, COUNT(*) as count FROM notifications UNION ALL SELECT 'admission_notifications' as category, COUNT(*) as count FROM admission_notifications",
+      "description": "消息通信系统数据总览",
+      "table": "multiple",
+      "response": "消息通信系统概览查询完成",
+      "tokens": 35
+    },
+    "消息发送效果分析": {
+      "sql": "SELECT mt.template_type, COUNT(mr.id) as sent_count, AVG(CASE WHEN mr.message_status = 'sent' THEN 1.0 ELSE 0.0 END) as success_rate FROM message_templates mt LEFT JOIN message_records mr ON mt.id = mr.template_id GROUP BY mt.template_type ORDER BY sent_count DESC",
+      "description": "分析消息发送效果",
+      "table": "message_templates",
+      "joins": ["message_records"],
+      "response": "消息发送效果分析完成",
+      "tokens": 40
+    }
+  }
+}

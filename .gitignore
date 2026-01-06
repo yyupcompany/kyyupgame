@@ -55,3 +55,19 @@ Thumbs.db
 # Reports
 reports/
 *.md.bak
+
+# Sensitive files with credentials
+k.yyup.com/backend_restart_fix.patch
+k.yyup.com/server/docs/OSS-配置指南.md
+k.yyup.com/双因素认证和密钥管理实施总结.md
+k.yyup.com/等保3级KMS密钥隔离实施完成报告.md
+k.yyup.com/等保3级KMS密钥隔离实施方案.md
+k.yyup.com/complete_backend_fix.patch
+k.yyup.com/server/generate-one-background.js
+k.yyup.com/server/upload-backgrounds-to-oss.js
+k.yyup.com/server/test-kms.js
+k.yyup.com/server/test-oss-signature.cjs
+k.yyup.com/test-oss-signature.cjs
+k.yyup.com/OSS配置指南.md
+k.yyup.com/oss-resource-test-report.md
+*.patch

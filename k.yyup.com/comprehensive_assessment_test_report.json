@@ -1,0 +1,40 @@
+{
+  "testTime": "2025/11/15 17:50:55",
+  "testUrl": "http://localhost:5173",
+  "loginStatus": "success",
+  "assessmentFeatures": {
+    "儿童发育商测评": {
+      "status": "found",
+      "details": [
+        "找到测评页面"
+      ],
+      "issues": [
+        "未找到开始测评按钮"
+      ]
+    },
+    "幼小衔接测评": {
+      "status": "pending",
+      "details": [],
+      "issues": [
+        "幼小衔接测评页面未正确加载"
+      ]
+    },
+    "学科测评": {
+      "status": "pending",
+      "details": [],
+      "issues": [
+        "学科测评页面未正确加载"
+      ]
+    }
+  },
+  "navigationIssues": [
+    "页面不存在: /parent-center/assessment/index",
+    "页面不存在: /parent-center/assessment/school-readiness",
+    "页面不存在: /parent-center/assessment/academic"
+  ],
+  "technicalIssues": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "networkErrors": []
+  }
+}

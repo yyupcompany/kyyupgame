@@ -1,0 +1,147 @@
+{
+  "name": "营销推广查询模板字典",
+  "description": "营销活动、推荐码、推荐关系等营销推广相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 营销活动相关查询模板 ===": "注释",
+    "营销活动总数": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "查询营销活动总数",
+      "table": "marketing_campaigns",
+      "response": "营销活动总数为{count}个",
+      "tokens": 10
+    },
+    "活跃营销活动": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询活跃营销活动数量",
+      "table": "marketing_campaigns",
+      "response": "活跃营销活动{count}个",
+      "tokens": 12
+    },
+    "营销活动类型分布": {
+      "sql": "SELECT campaign_type, COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL GROUP BY campaign_type ORDER BY count DESC",
+      "description": "统计营销活动类型分布",
+      "table": "marketing_campaigns",
+      "response": "营销活动类型分布统计完成",
+      "tokens": 20
+    },
+    "营销活动效果统计": {
+      "sql": "SELECT COUNT(*) as total_campaigns, SUM(participant_count) as total_participants, SUM(conversion_count) as total_conversions, AVG(conversion_count * 100.0 / NULLIF(participant_count, 0)) as avg_conversion_rate FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "统计营销活动整体效果",
+      "table": "marketing_campaigns",
+      "response": "营销活动效果统计完成",
+      "tokens": 35
+    },
+    "营销活动预算分析": {
+      "sql": "SELECT COUNT(*) as total_campaigns, SUM(budget) as total_budget, AVG(budget) as avg_budget, SUM(total_revenue) as total_revenue FROM marketing_campaigns WHERE deleted_at IS NULL AND budget > 0",
+      "description": "分析营销活动预算和收益",
+      "table": "marketing_campaigns",
+      "response": "营销活动预算分析完成",
+      "tokens": 30
+    },
+    "本月营销活动": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月创建的营销活动数量",
+      "table": "marketing_campaigns",
+      "response": "本月创建营销活动{count}个",
+      "tokens": 20
+    },
+    "营销活动状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL GROUP BY status ORDER BY count DESC",
+      "description": "统计营销活动状态分布",
+      "table": "marketing_campaigns",
+      "response": "营销活动状态统计完成",
+      "tokens": 20
+    },
+
+    "// === 推荐码相关查询模板 ===": "注释",
+    "推荐码总数": {
+      "sql": "SELECT COUNT(*) as count FROM referral_codes",
+      "description": "查询推荐码总数",
+      "table": "referral_codes",
+      "response": "推荐码总数为{count}个",
+      "tokens": 10
+    },
+    "活跃推荐码": {
+      "sql": "SELECT COUNT(*) as count FROM referral_codes WHERE is_active = 1",
+      "description": "查询活跃推荐码数量",
+      "table": "referral_codes",
+      "response": "活跃推荐码{count}个",
+      "tokens": 12
+    },
+    "推荐码使用统计": {
+      "sql": "SELECT COUNT(*) as total_codes, SUM(usage_count) as total_usage, SUM(success_count) as total_success, AVG(success_count * 100.0 / NULLIF(usage_count, 0)) as avg_success_rate FROM referral_codes",
+      "description": "统计推荐码使用情况",
+      "table": "referral_codes",
+      "response": "推荐码使用统计完成",
+      "tokens": 30
+    },
+    "过期推荐码统计": {
+      "sql": "SELECT COUNT(*) as expired_count, COUNT(CASE WHEN expires_at > NOW() THEN 1 END) as valid_count FROM referral_codes",
+      "description": "统计过期和有效推荐码数量",
+      "table": "referral_codes",
+      "response": "推荐码有效性统计完成",
+      "tokens": 20
+    },
+
+    "// === 推荐关系相关查询模板 ===": "注释",
+    "推荐关系总数": {
+      "sql": "SELECT COUNT(*) as count FROM referrals",
+      "description": "查询推荐关系总数",
+      "table": "referrals",
+      "response": "推荐关系总数为{count}个",
+      "tokens": 10
+    },
+    "推荐人类型分布": {
+      "sql": "SELECT referrer_type, COUNT(*) as count FROM referrals GROUP BY referrer_type ORDER BY count DESC",
+      "description": "统计推荐人类型分布",
+      "table": "referrals",
+      "response": "推荐人类型分布统计完成",
+      "tokens": 20
+    },
+    "推荐状态统计": {
+      "sql": "SELECT status, COUNT(*) as count FROM referrals GROUP BY status ORDER BY count DESC",
+      "description": "统计推荐状态分布",
+      "table": "referrals",
+      "response": "推荐状态统计完成",
+      "tokens": 20
+    },
+    "推荐奖励统计": {
+      "sql": "SELECT reward_status, COUNT(*) as count, SUM(reward) as total_reward FROM referrals WHERE reward > 0 GROUP BY reward_status ORDER BY count DESC",
+      "description": "统计推荐奖励发放情况",
+      "table": "referrals",
+      "response": "推荐奖励统计完成",
+      "tokens": 25
+    },
+    "推荐转化率分析": {
+      "sql": "SELECT COUNT(*) as total_referrals, COUNT(CASE WHEN status = 'converted' THEN 1 END) as converted_count, COUNT(CASE WHEN status = 'converted' THEN 1 END) * 100.0 / COUNT(*) as conversion_rate FROM referrals",
+      "description": "分析推荐转化率",
+      "table": "referrals",
+      "response": "推荐转化率分析完成",
+      "tokens": 30
+    },
+    "本月推荐情况": {
+      "sql": "SELECT COUNT(*) as count FROM referrals WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW())",
+      "description": "查询本月推荐情况",
+      "table": "referrals",
+      "response": "本月推荐{count}个",
+      "tokens": 20
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "营销数据概览": {
+      "sql": "SELECT 'campaigns' as category, COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL UNION ALL SELECT 'referral_codes' as category, COUNT(*) as count FROM referral_codes UNION ALL SELECT 'referrals' as category, COUNT(*) as count FROM referrals",
+      "description": "营销推广数据总览",
+      "table": "multiple",
+      "response": "营销数据概览查询完成",
+      "tokens": 30
+    },
+    "营销ROI分析": {
+      "sql": "SELECT SUM(budget) as total_investment, SUM(total_revenue) as total_revenue, (SUM(total_revenue) - SUM(budget)) as profit, (SUM(total_revenue) - SUM(budget)) * 100.0 / NULLIF(SUM(budget), 0) as roi_percentage FROM marketing_campaigns WHERE deleted_at IS NULL AND budget > 0",
+      "description": "分析营销活动投资回报率",
+      "table": "marketing_campaigns",
+      "response": "营销ROI分析完成",
+      "tokens": 35
+    }
+  }
+}

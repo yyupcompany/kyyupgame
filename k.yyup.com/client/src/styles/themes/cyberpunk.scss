@@ -1,0 +1,67 @@
+// 赛博朋克主题
+:root,
+:root.theme-cyberpunk {
+  // 赛博朋克色彩
+  --primary-color: #ff006e;
+  --primary-hover: #e6005a;
+  --primary-light: #ff4d94;
+  --secondary-color: #8338ec;
+  --accent-color: #3a86ff;
+  --danger-color: #ff4757;
+  --warning-color: #ffa502;
+  --info-color: #3742fa;
+  --success-color: #26de81;
+
+  // 文字在主色背景上的颜色
+  --text-on-primary: #ffffff;
+  --text-on-primary-secondary: rgba(0, 0, 0, 0.9);
+
+  // 按钮在主色背景上的样式
+  --button-on-primary-bg: rgba(0, 0, 0, 0.2);
+  --button-on-primary-border: rgba(0, 0, 0, 0.3);
+  --button-on-primary-hover-bg: rgba(0, 0, 0, 0.3);
+  --button-on-primary-hover-border: rgba(0, 0, 0, 0.5);
+
+  // 背景色
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --bg-card: #1a1a1a;
+  --bg-hover: #2a2a2a;
+
+  // 文字色
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --text-disabled: #666666;
+  --text-tertiary: #999999;
+
+  // 边框色
+  --border-color: rgba(255, 0, 110, 0.3);
+  --border-light: rgba(255, 0, 110, 0.5);
+  --border-focus: rgba(255, 0, 110, 0.8);
+
+  // 霓虹光效
+  --neon-glow: 0 0 20px rgba(255, 0, 110, 0.5);
+  --neon-glow-hover: 0 0 30px rgba(255, 0, 110, 0.8);
+
+  // 阴影
+  --shadow-sm: 0 1px 3px 0 rgba(255, 0, 110, 0.3);
+  --shadow-md: 0 4px 8px -2px rgba(255, 0, 110, 0.4);
+  --shadow-lg: 0 12px 20px -4px rgba(255, 0, 110, 0.5);
+  --shadow-xl: 0 24px 32px -8px rgba(255, 0, 110, 0.6);
+
+  // 侧边栏
+  --sidebar-bg: #0a0a0a;
+  --sidebar-border: rgba(255, 0, 110, 0.3);
+  --sidebar-text: #cccccc;
+  --sidebar-text-hover: #ffffff;
+  --sidebar-item-hover: rgba(255, 0, 110, 0.2);
+  --sidebar-item-active: var(--primary-color);
+  --sidebar-item-active-text: #ffffff;
+
+  // 过渡动画
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 1, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 1, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 1, 1);
+}

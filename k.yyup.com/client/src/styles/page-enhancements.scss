@@ -1,0 +1,281 @@
+/**
+ * 页面美化增强样式
+ * Page Enhancement Styles for Light Theme
+ */
+
+// 明亮主题页面美化
+:root.theme-light,
+.theme-light {
+  
+  // ==================== 页面容器美化 ====================
+  .teacher-notifications,
+  .teacher-tasks,
+  .teacher-enrollment,
+  .teacher-activities,
+  .teacher-teaching,
+  .teacher-customer-tracking {
+    // 美丽的渐变背景
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    
+    // 添加微妙的纹理效果
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    // 确保内容在背景之上
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+  
+  // ==================== 卡片美化 ====================
+  .el-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .el-card__header {
+      background: rgba(255, 255, 255, 0.5) !important;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5) !important;
+      border-radius: 16px 16px 0 0 !important;
+      padding: var(--spacing-lg) 24px !important;
+    }
+    
+    .el-card__body {
+      padding: var(--spacing-lg) !important;
+    }
+  }
+  
+  // ==================== 统计卡片美化 ====================
+  .stat-card,
+  .overview-item,
+  .team-item {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    overflow: hidden;
+    position: relative;
+    
+    // 添加光泽效果
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12) !important;
+      border-color: rgba(99, 102, 241, 0.3) !important;
+      
+      &::before {
+        left: 100%;
+      }
+    }
+  }
+  
+  // ==================== 按钮美化 ====================
+  .el-button {
+    border-radius: 12px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &.el-button--primary {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%) !important;
+      border: none !important;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4) !important;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6) !important;
+      }
+    }
+    
+    &.el-button--success {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
+      border: none !important;
+      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4) !important;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6) !important;
+      }
+    }
+    
+    &.el-button--warning {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
+      border: none !important;
+      box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4) !important;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(67, 233, 123, 0.6) !important;
+      }
+    }
+    
+    &.el-button--danger {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+      border: none !important;
+      box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4) !important;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(240, 147, 251, 0.6) !important;
+      }
+    }
+  }
+  
+  // ==================== 输入框美化 ====================
+  .el-input__wrapper {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(226, 232, 240, 0.6) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    
+    &:hover {
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    &.is-focus {
+      border-color: rgba(99, 102, 241, 0.6) !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+    }
+  }
+  
+  // ==================== 标签美化 ====================
+  .el-tag {
+    border-radius: 20px !important;
+    font-weight: 500 !important;
+    backdrop-filter: blur(10px);
+    
+    &.el-tag--primary {
+      background: rgba(99, 102, 241, 0.1) !important;
+      border-color: rgba(99, 102, 241, 0.3) !important;
+      color: #4338ca !important;
+    }
+    
+    &.el-tag--success {
+      background: rgba(16, 185, 129, 0.1) !important;
+      border-color: rgba(16, 185, 129, 0.3) !important;
+      color: #059669 !important;
+    }
+    
+    &.el-tag--warning {
+      background: rgba(245, 158, 11, 0.1) !important;
+      border-color: rgba(245, 158, 11, 0.3) !important;
+      color: #d97706 !important;
+    }
+    
+    &.el-tag--danger {
+      background: rgba(239, 68, 68, 0.1) !important;
+      border-color: rgba(239, 68, 68, 0.3) !important;
+      color: #dc2626 !important;
+    }
+    
+    &.el-tag--info {
+      background: rgba(6, 182, 212, 0.1) !important;
+      border-color: rgba(6, 182, 212, 0.3) !important;
+      color: #0891b2 !important;
+    }
+  }
+  
+  // ==================== 表格美化 ====================
+  .el-table {
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 16px !important;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+    
+    .el-table__header {
+      background: rgba(248, 250, 252, 0.8) !important;
+      
+      th {
+        background: transparent !important;
+        border-bottom: 1px solid rgba(226, 232, 240, 0.5) !important;
+        font-weight: 600 !important;
+        color: #374151 !important;
+      }
+    }
+    
+    .el-table__body {
+      tr {
+        &:hover {
+          background: rgba(99, 102, 241, 0.05) !important;
+        }
+        
+        td {
+          border-bottom: 1px solid rgba(226, 232, 240, 0.3) !important;
+        }
+      }
+    }
+  }
+  
+  // ==================== 分页美化 ====================
+  .el-pagination {
+    .el-pager li {
+      background: rgba(255, 255, 255, 0.8) !important;
+      border: 1px solid rgba(226, 232, 240, 0.5) !important;
+      border-radius: 8px !important;
+      margin: 0 4px !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      
+      &:hover {
+        background: rgba(99, 102, 241, 0.1) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important;
+        transform: translateY(-1px);
+      }
+      
+      &.is-active {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%) !important;
+        border-color: transparent !important;
+        color: white !important;
+      }
+    }
+    
+    .btn-prev,
+    .btn-next {
+      background: rgba(255, 255, 255, 0.8) !important;
+      border: 1px solid rgba(226, 232, 240, 0.5) !important;
+      border-radius: 8px !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      
+      &:hover {
+        background: rgba(99, 102, 241, 0.1) !important;
+        border-color: rgba(99, 102, 241, 0.3) !important;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://i.tauri.app/config/1.5.0",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:5173",
+    "distDir": "./dist"
+  },
+  "package": {
+    "productName": "Kindergarten Management System",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "window": {
+        "all": false,
+        "create": true,
+        "show": true,
+        "hide": true,
+        "close": true,
+        "maximize": true,
+        "minimize": true,
+        "unmaximize": true,
+        "unminimize": true,
+        "focus": true,
+        "setSize": true,
+        "setMinSize": true,
+        "setMaxSize": true,
+        "setPosition": true,
+        "setTitle": true,
+        "setFullscreen": true
+      },
+      "path": {
+        "all": false,
+        "join": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.yourcompany.kindergarten",
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ]
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "title": "Kindergarten Management System",
+        "width": 1280,
+        "height": 720,
+        "minWidth": 800,
+        "minHeight": 600
+      }
+    ]
+  }
+}

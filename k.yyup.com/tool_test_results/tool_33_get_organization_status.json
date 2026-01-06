@@ -1,0 +1,9 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T14:30:33.624Z"}
+
+event: final_answer
+data: {"message":"💬 AI回答完成","content":"<[PLHD20_never_used_51bce0c785ca2f68081bfa7d91973934]>[{\"name\":\"any_query\",\"parameters\":{\"userQuery\":\"提供幼儿园当前运营状况\",\"queryType\":\"comprehensive_stats\"}}]<[PLHD21_never_used_51bce0c785ca2f68081bfa7d91973934]>","toolUsed":0,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T14:30:37.355Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T14:30:37.355Z","totalEvents":3,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.1408695652173913}
+

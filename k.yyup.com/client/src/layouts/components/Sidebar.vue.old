@@ -1,0 +1,510 @@
+<template>
+  <div 
+    class="sidebar" 
+    :class="{ 'sidebar-collapsed': collapsed }"
+  >
+    <!-- Logo区域 -->
+    <div class="sidebar-logo">
+      <div class="logo-content">
+        <div class="logo-icon cls-performance-fix">
+          <img 
+            src="@/assets/logo.png" 
+            alt="幼儿园管理系统" 
+            class="logo-image"
+            width="40"
+            height="40"
+            loading="eager"
+            @error="handleImageError"
+            style="width: 40px !important; height: 40px !important; object-fit: cover !important;"
+          />
+        </div>
+        <div class="logo-text" v-show="!collapsed">幼儿园管理</div>
+      </div>
+    </div>
+
+    <!-- 导航菜单 -->
+    <div class="sidebar-menu-container cls-final-fix-2025">
+      <el-menu
+        :default-active="$route.path"
+        :collapse="collapsed"
+        :unique-opened="true"
+        router
+        class="sidebar-menu cls-menu-static-stable"
+      >
+      <!-- 工作台 -->
+      <el-sub-menu index="dashboard" class="cls-menu-always-visible cls-menu-absolute-stable">
+        <template #title>
+          <el-icon><House /></el-icon>
+          <span>工作台</span>
+        </template>
+        <el-menu-item index="/dashboard">数据概览</el-menu-item>
+        <el-menu-item index="/dashboard/schedule">日程管理</el-menu-item>
+        <el-menu-item index="/dashboard/important-notices">消息通知</el-menu-item>
+        <el-menu-item index="/dashboard/campus-overview">园区概览</el-menu-item>
+        <el-menu-item index="/dashboard/data-statistics">数据统计</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 招生管理 -->
+      <el-sub-menu index="enrollment" class="cls-menu-always-visible cls-menu-absolute-stable">
+        <template #title>
+          <el-icon><UserFilled /></el-icon>
+          <span>招生管理</span>
+        </template>
+        <el-menu-item index="/enrollment-plan">招生计划</el-menu-item>
+        <el-menu-item index="/enrollment">招生活动</el-menu-item>
+        <el-menu-item index="/enrollment-plan/statistics">招生统计</el-menu-item>
+        <el-menu-item index="/enrollment-plan/quota-manage">名额管理</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 客户管理 -->
+      <el-sub-menu index="customer" class="cls-menu-always-visible cls-menu-absolute-stable">
+        <template #title>
+          <el-icon><User /></el-icon>
+          <span>客户管理</span>
+        </template>
+        <el-menu-item index="/customer">客户列表</el-menu-item>
+        <el-menu-item index="/principal/customer-pool">客户池</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 学生管理 -->
+      <el-sub-menu index="student">
+        <template #title>
+          <el-icon><Avatar /></el-icon>
+          <span>学生管理</span>
+        </template>
+        <el-menu-item index="/class">班级管理</el-menu-item>
+        <el-menu-item index="/application">入园申请</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 活动管理 -->
+      <el-sub-menu index="activity">
+        <template #title>
+          <el-icon><Calendar /></el-icon>
+          <span>活动管理</span>
+        </template>
+        <el-menu-item index="/activity">活动列表</el-menu-item>
+        <el-menu-item index="/activity/create">创建活动</el-menu-item>
+        <el-menu-item index="/principal/activities">园长活动</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 家长服务 -->
+      <el-sub-menu index="parent">
+        <template #title>
+          <el-icon><User /></el-icon>
+          <span>家长服务</span>
+        </template>
+        <el-menu-item index="/parent">家长列表</el-menu-item>
+        <el-menu-item index="/parent/children">孩子列表</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 教师管理 -->
+      <el-sub-menu index="teacher">
+        <template #title>
+          <el-icon><Avatar /></el-icon>
+          <span>教师管理</span>
+        </template>
+        <el-menu-item index="/teacher">教师列表</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 营销工具 -->
+      <el-sub-menu index="marketing">
+        <template #title>
+          <el-icon><Promotion /></el-icon>
+          <span>营销工具</span>
+        </template>
+        <el-menu-item index="/principal/poster-editor">海报编辑</el-menu-item>
+        <el-menu-item index="/principal/poster-generator">海报生成器</el-menu-item>
+        <el-menu-item index="/chat">在线咨询</el-menu-item>
+        <el-menu-item index="/ai">AI助手</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 数据分析 -->
+      <el-sub-menu index="analytics">
+        <template #title>
+          <el-icon><TrendCharts /></el-icon>
+          <span>数据分析</span>
+        </template>
+        <el-menu-item index="/statistics">统计报表</el-menu-item>
+        <el-menu-item index="/principal/performance">绩效管理</el-menu-item>
+        <el-menu-item index="/principal/marketing-analysis">经营分析</el-menu-item>
+        <el-menu-item index="/principal/dashboard">园长仪表盘</el-menu-item>
+      </el-sub-menu>
+
+      <!-- 系统管理 -->
+      <el-sub-menu index="system">
+        <template #title>
+          <el-icon><Setting /></el-icon>
+          <span>系统管理</span>
+        </template>
+        <el-menu-item index="/system/users">用户管理</el-menu-item>
+        <el-menu-item index="/system/roles">角色管理</el-menu-item>
+        <el-menu-item index="/system/permissions">权限管理</el-menu-item>
+        <el-menu-item index="/system/logs">系统日志</el-menu-item>
+        <el-menu-item index="/system/backup">数据备份</el-menu-item>
+        <el-menu-item index="/system/settings">系统配置</el-menu-item>
+        <el-menu-item index="/system/ai-model-config">AI模型配置</el-menu-item>
+      </el-sub-menu>
+    </el-menu>
+    
+    <!-- 主题选择部分 -->
+    <div class="theme-section" v-if="!collapsed">
+      <div class="theme-section-title">主题选择</div>
+      <div class="theme-grid">
+        <button 
+          v-for="(theme, index) in availableThemes" 
+          :key="theme.key"
+          class="theme-preview" 
+          :class="{ 
+            active: currentTheme === theme.key,
+            'span-two': index === 6
+          }"
+          @click="switchTheme(theme.key)"
+          :title="theme.name"
+        >
+          <div class="theme-preview-bg" :style="{ background: theme.preview }"></div>
+        </button>
+      </div>
+    </div>
+    </div>
+
+    <!-- 收起/展开按钮 -->
+    <div class="sidebar-toggle" @click="handleToggle">
+      <el-icon>
+        <component :is="collapsed ? 'Expand' : 'Fold'" />
+      </el-icon>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed, onMounted, nextTick } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useUserStore } from '../../stores/user'
+import { PERMISSIONS, ROLES } from '../../utils/permission'
+import { 
+  House, User, Calendar, TrendCharts, Avatar, Setting, 
+  Expand, Fold, SwitchButton, Sunny, FullScreen, Aim,
+  UserFilled, Promotion
+} from '@element-plus/icons-vue'
+
+// Props
+interface Props {
+  collapsed?: boolean
+  isMobile?: boolean
+  currentTheme?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  collapsed: false,
+  isMobile: false,
+  currentTheme: 'glass-light'
+})
+
+// Emits
+const emit = defineEmits<{
+  toggle: []
+  menuClick: []
+  themeChange: [theme: string]
+}>()
+
+// 路由和状态
+const router = useRouter()
+const route = useRoute()
+const userStore = useUserStore()
+
+// 当前主题
+const currentTheme = computed(() => props.currentTheme)
+
+// 可用主题 - 与preview.html和MainLayout完全一致
+const availableThemes = [
+  { 
+    key: 'glass-light', 
+    name: '浅色玻璃',
+    preview: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+  },
+  { 
+    key: 'glass-dark', 
+    name: '深色玻璃',
+    preview: 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
+  },
+  { 
+    key: 'neon-glass', 
+    name: '霓虹玻璃',
+    preview: 'linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a0a1a 100%)'
+  },
+  { 
+    key: 'gradient-glass', 
+    name: '渐变玻璃',
+    preview: 'linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 20%, #45b7d1 40%, #f9ca24 60%, #f0932b 80%, #ee5a24 100%)'
+  },
+  { 
+    key: 'bright-summer', 
+    name: '明亮夏日',
+    preview: 'linear-gradient(135deg, #ffeaa7 0%, #fab1a0 25%, #fd79a8 50%, #e17055 75%, #fdcb6e 100%)'
+  },
+  { 
+    key: 'bright-nature', 
+    name: '清新自然',
+    preview: 'linear-gradient(135deg, #a8e6cf 0%, #dcedc1 25%, #c7f2c3 50%, #7fcdcd 75%, #87ceeb 100%)'
+  },
+  { 
+    key: 'bright-minimalist', 
+    name: '简约明亮',
+    preview: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #f1f5f9 75%, #ffffff 100%)'
+  }
+]
+
+// 主题切换方法
+const switchTheme = (theme: string) => {
+  console.log('Sidebar switching theme to:', theme)
+  emit('themeChange', theme)
+}
+
+// 图片错误处理
+const handleImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement
+  if (target) {
+    target.style.display = 'none'
+    const parent = target.parentElement
+    if (parent) {
+      parent.innerHTML = '<div class="logo-fallback">🏫</div>'
+    }
+  }
+}
+
+// 处理切换
+const handleToggle = () => {
+  emit('toggle')
+}
+
+// 处理菜单点击
+const handleMenuClick = () => {
+  emit('menuClick')
+}
+
+// 添加debug日志
+onMounted(() => {
+  console.log('Sidebar mounted')
+  console.log('Available themes in sidebar:', availableThemes.length)
+  console.log('Themes:', availableThemes.map(t => t.name))
+  console.log('Current theme prop:', props.currentTheme)
+})
+</script>
+
+<style lang="scss" scoped>
+@import '@/styles/index.scss';
+
+/* 侧边栏样式 */
+.sidebar {
+  width: 200px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 1000;
+  border-right: 1px solid var(--sidebar-border);
+  height: 100%;
+
+  &.sidebar-collapsed {
+    width: 64px;
+  }
+}
+
+.sidebar-logo {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--sidebar-border);
+  padding: 0 16px;
+  background-color: var(--sidebar-bg);
+}
+
+.logo-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  color: var(--sidebar-text-hover);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  
+  .logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .logo-fallback {
+    font-size: 20px;
+    color: var(--sidebar-text-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logo-text {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--sidebar-text-hover);
+}
+
+.sidebar-menu-container {
+  flex: 1;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 8px 0;
+  position: relative !important;
+  contain: layout style !important;
+}
+
+.sidebar-menu {
+  background-color: transparent !important;
+  border: none !important;
+  width: 100%;
+  
+  /* 使用全局极细滚动条样式 */
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 2px;
+    
+    &:hover {
+      background: var(--border-color);
+    }
+  }
+}
+
+/* 基础菜单样式 - 只保留必要的样式，让Element Plus使用默认行为 */
+.sidebar-menu {
+  background-color: transparent;
+  border: none;
+  width: 100%;
+}
+
+.sidebar-toggle {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-top: 1px solid var(--sidebar-border);
+  color: var(--sidebar-text);
+  transition: all 0.3s;
+  background-color: var(--sidebar-bg);
+  
+  &:hover {
+    background-color: var(--sidebar-item-hover);
+    color: var(--sidebar-text-hover);
+  }
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    
+    &:not(.sidebar-collapsed) {
+      transform: translateX(0);
+    }
+  }
+  
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    
+    .logo-image {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logo-text {
+    font-size: 14px;
+  }
+}
+
+/* 主题选择部分样式 */
+.theme-section {
+  padding: 16px;
+  border-top: 1px solid var(--sidebar-border);
+  margin-top: auto;
+}
+
+.theme-section-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sidebar-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.theme-preview {
+  width: 100%;
+  height: 32px;
+  border: 2px solid var(--sidebar-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+  background: none;
+  padding: 0;
+  
+  &:hover {
+    transform: scale(1.05);
+    border-color: var(--sidebar-text);
+  }
+  
+  &.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+  }
+  
+  &.span-two {
+    grid-column: span 2;
+  }
+}
+
+.theme-preview-bg {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+}
+</style> 

@@ -1,0 +1,300 @@
+/* 表单组件样式 */
+
+.form {
+  margin-bottom: var(--spacing-lg);
+  
+  // 表单项
+  .form-item {
+    margin-bottom: var(--spacing-md);
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  // 表单标签
+  .form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+  }
+  
+  // 必填标记
+  .form-required {
+    color: var(--danger-color);
+    margin-left: var(--spacing-xs);
+  }
+  
+  // 表单控件
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+    line-height: 1.5;
+    color: var(--text-regular);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition-time) var(--transition-timing),
+                box-shadow var(--transition-time) var(--transition-timing);
+    
+    &:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb, 36, 99, 235), 0.1);
+    }
+    
+    &:disabled,
+    &[readonly] {
+      background-color: var(--bg-secondary);
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+    
+    &::placeholder {
+      color: var(--text-placeholder);
+    }
+  }
+  
+  // 表单帮助文本
+  .form-help {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+  }
+  
+  // 表单错误
+  .form-error {
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--danger-color);
+  }
+  
+  // 验证状态
+  &.is-valid .form-control {
+    border-color: var(--success-color);
+  }
+  
+  &.is-invalid .form-control {
+    border-color: var(--danger-color);
+  }
+  
+  // 表单布局
+  &.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    
+    .form-item {
+      margin-right: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+  }
+  
+  // 表单组
+  .form-group {
+    margin-bottom: var(--spacing-lg);
+    
+    .form-group-title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-xs);
+      border-bottom: 1px solid var(--border-color-light);
+    }
+  }
+  
+  // 表单操作区
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color-light);
+    gap: var(--spacing-sm);
+  }
+}
+
+// 复选框和单选框
+.checkbox,
+.radio {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+  cursor: pointer;
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    
+    &:checked ~ .checkmark {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    &:checked ~ .checkmark:after {
+      display: block;
+    }
+    
+    &:disabled ~ .checkmark {
+      background-color: var(--bg-secondary);
+      border-color: var(--border-color);
+      cursor: not-allowed;
+    }
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 0.2rem;
+    left: 0;
+    height: 1rem;
+    width: 1rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-time) var(--transition-timing);
+    
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  }
+  
+  &:hover input ~ .checkmark {
+    border-color: var(--primary-color);
+  }
+}
+
+.checkbox .checkmark {
+  border-radius: var(--border-radius-sm);
+  
+  &:after {
+    left: 0.3rem;
+    top: 0.1rem;
+    width: 0.3rem;
+    height: 0.6rem;
+    border: solid var(--border-color);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+}
+
+.radio .checkmark {
+  border-radius: 50%;
+  
+  &:after {
+    top: 0.3rem;
+    left: 0.3rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: white;
+  }
+}
+
+/* ==================== 扩展表单样式 ==================== */
+/* Extended Form Styles */
+
+// 设置表单特殊样式
+.settings-form {
+  .form-section {
+    background: var(--bg-tertiary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color-light);
+    margin-bottom: var(--spacing-lg);
+    
+    &:hover {
+      border-color: var(--border-color);
+    }
+    
+    .section-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 2px solid var(--border-color-light);
+      
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 4px;
+        height: 20px;
+        background: var(--gradient-primary);
+        border-radius: 2px;
+        margin-right: var(--spacing-sm);
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+// 搜索表单
+.search-form {
+  background: var(--bg-card);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color-light);
+  margin-bottom: var(--spacing-xl);
+  
+  .search-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    
+    @media (max-width: var(--breakpoint-md)) {
+      width: 100%;
+      
+      .el-button {
+        flex: 1;
+      }
+    }
+  }
+}
+
+// 表单骨架屏
+.form-skeleton {
+  .skeleton-section {
+    padding: var(--spacing-lg);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    
+    .skeleton-title {
+      width: 30%;
+      height: 20px;
+      margin-bottom: var(--spacing-md);
+      border-radius: var(--radius-sm);
+      background: var(--bg-hover);
+    }
+    
+    .skeleton-field {
+      margin-bottom: var(--spacing-lg);
+      
+      .skeleton-label {
+        width: 25%;
+        height: 16px;
+        margin-bottom: var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        background: var(--bg-hover);
+      }
+      
+      .skeleton-input {
+        width: 70%;
+        height: 40px;
+        border-radius: var(--radius-md);
+        background: var(--bg-hover);
+      }
+    }
+  }
+} 

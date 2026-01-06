@@ -1,0 +1,375 @@
+/**
+ * WebSocket服务
+ * 处理呼叫中心的实时通信
+ */
+
+import { Server as SocketIOServer, Socket } from 'socket.io'
+import { Server as HTTPServer } from 'http'
+import jwt from 'jsonwebtoken'
+import sipService from './sip.service'
+import recordingService from './recording.service'
+
+interface AuthenticatedSocket extends Socket {
+  userId?: number
+  userRole?: string
+}
+
+class WebSocketService {
+  private io: SocketIOServer | null = null
+  private connectedUsers: Map<number, Set<string>> = new Map()
+  private userSockets: Map<string, number> = new Map()
+
+  /**
+   * 初始化WebSocket服务
+   */
+  initialize(server: HTTPServer): void {
+    this.io = new SocketIOServer(server, {
+      cors: {
+        origin: process.env.FRONTEND_URL || "http://localhost:5173",
+        methods: ["GET", "POST"],
+        credentials: true
+      },
+      path: '/socket.io/call-center'
+    })
+
+    // 认证中间件
+    this.io.use(this.authenticateSocket.bind(this))
+
+    // 连接处理
+    this.io.on('connection', this.handleConnection.bind(this))
+
+    console.log('🔌 呼叫中心WebSocket服务已启动')
+  }
+
+  /**
+   * Socket认证
+   */
+  private async authenticateSocket(socket: any, next: any): Promise<void> {
+    try {
+      const token = socket.handshake.auth.token || socket.handshake.headers.authorization?.replace('Bearer ', '')
+
+      if (!token) {
+        return next(new Error('认证失败：缺少token'))
+      }
+
+      // 验证JWT token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any
+      socket.userId = decoded.id
+      socket.userRole = decoded.role
+
+      console.log(`🔐 用户 ${socket.userId} (${socket.userRole}) WebSocket认证成功`)
+      next()
+    } catch (error) {
+      console.error('❌ WebSocket认证失败:', error)
+      next(new Error('认证失败：无效token'))
+    }
+  }
+
+  /**
+   * 处理连接
+   */
+  private handleConnection(socket: AuthenticatedSocket): void {
+    const userId = socket.userId!
+    const socketId = socket.id
+
+    console.log(`👤 用户 ${userId} 已连接到呼叫中心`)
+
+    // 记录用户连接
+    if (!this.connectedUsers.has(userId)) {
+      this.connectedUsers.set(userId, new Set())
+    }
+    this.connectedUsers.get(userId)!.add(socketId)
+    this.userSockets.set(socketId, userId)
+
+    // 加入用户专属房间
+    socket.join(`user_${userId}`)
+
+    // 根据角色加入相应房间
+    if (socket.userRole) {
+      socket.join(`role_${socket.userRole}`)
+    }
+
+    // 发送连接成功消息
+    socket.emit('connected', {
+      message: '已连接到呼叫中心',
+      userId,
+      socketId,
+      timestamp: new Date().toISOString()
+    })
+
+    // 绑定事件处理器
+    this.bindEventHandlers(socket)
+
+    // 处理断开连接
+    socket.on('disconnect', () => {
+      this.handleDisconnect(socket)
+    })
+  }
+
+  /**
+   * 绑定事件处理器
+   */
+  private bindEventHandlers(socket: AuthenticatedSocket): void {
+    const userId = socket.userId!
+
+    // SIP相关事件
+    socket.on('sip:connect', async (config) => {
+      try {
+        const success = await sipService.initialize(config)
+        socket.emit('sip:connected', { success, config })
+
+        if (success) {
+          // 通知其他用户SIP状态变化
+          socket.to(`role_${socket.userRole}`).emit('sip:status_changed', {
+            userId,
+            status: 'online'
+          })
+        }
+      } catch (error) {
+        socket.emit('sip:error', { error: error.message })
+      }
+    })
+
+    socket.on('sip:disconnect', async () => {
+      try {
+        await sipService.disconnect()
+        socket.emit('sip:disconnected', { success: true })
+
+        // 通知其他用户SIP状态变化
+        socket.to(`role_${socket.userRole}`).emit('sip:status_changed', {
+          userId,
+          status: 'offline'
+        })
+      } catch (error) {
+        socket.emit('sip:error', { error: error.message })
+      }
+    })
+
+    socket.on('sip:make_call', async (data) => {
+      try {
+        const call = await sipService.makeCall(data.targetNumber, data.options)
+        socket.emit('call:initiated', { call })
+
+        // 通知相关用户有新通话
+        this.broadcastToRole('call:initiated', {
+          call,
+          initiatedBy: userId
+        }, socket.userRole!)
+      } catch (error) {
+        socket.emit('call:error', { error: error.message })
+      }
+    })
+
+    socket.on('sip:answer_call', async (data) => {
+      try {
+        const success = await sipService.answerCall(data.callId)
+        socket.emit('call:answered', { callId: data.callId, success })
+
+        if (success) {
+          this.broadcastToRole('call:answered', {
+            callId: data.callId,
+            answeredBy: userId
+          }, socket.userRole!)
+        }
+      } catch (error) {
+        socket.emit('call:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    socket.on('sip:hangup_call', async (data) => {
+      try {
+        const success = await sipService.hangupCall(data.callId)
+        socket.emit('call:ended', { callId: data.callId, success })
+
+        if (success) {
+          this.broadcastToRole('call:ended', {
+            callId: data.callId,
+            endedBy: userId
+          }, socket.userRole!)
+        }
+      } catch (error) {
+        socket.emit('call:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    socket.on('sip:hold_call', async (data) => {
+      try {
+        const success = await sipService.holdCall(data.callId)
+        socket.emit('call:held', { callId: data.callId, success })
+      } catch (error) {
+        socket.emit('call:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    socket.on('sip:unhold_call', async (data) => {
+      try {
+        const success = await sipService.unholdCall(data.callId)
+        socket.emit('call:unheld', { callId: data.callId, success })
+      } catch (error) {
+        socket.emit('call:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    socket.on('sip:transfer_call', async (data) => {
+      try {
+        const success = await sipService.transferCall(data.callId, data.targetNumber)
+        socket.emit('call:transferred', { callId: data.callId, targetNumber: data.targetNumber, success })
+      } catch (error) {
+        socket.emit('call:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    socket.on('sip:send_dtmf', async (data) => {
+      try {
+        const success = await sipService.sendDTMF(data.callId, data.digits)
+        socket.emit('dtmf:sent', { callId: data.callId, digits: data.digits, success })
+      } catch (error) {
+        socket.emit('dtmf:error', { callId: data.callId, error: error.message })
+      }
+    })
+
+    // 录音相关事件
+    socket.on('recording:start', async (data) => {
+      try {
+        const recording = await recordingService.startRecording(data.callId, data.audioStream)
+        socket.emit('recording:started', { recording })
+      } catch (error) {
+        socket.emit('recording:error', { error: error.message })
+      }
+    })
+
+    socket.on('recording:stop', async (data) => {
+      try {
+        const recording = await recordingService.stopRecording(data.callId)
+        socket.emit('recording:stopped', { recording })
+      } catch (error) {
+        socket.emit('recording:error', { error: error.message })
+      }
+    })
+
+    socket.on('recording:transcribe', async (data) => {
+      try {
+        const success = await recordingService.requestTranscription(data.recordingId, data.language)
+        socket.emit('recording:transcribe_requested', { recordingId: data.recordingId, success })
+      } catch (error) {
+        socket.emit('recording:error', { error: error.message })
+      }
+    })
+
+    socket.on('recording:update_transcript', async (data) => {
+      try {
+        const success = await recordingService.updateTranscript(data.recordingId, data.transcript)
+        socket.emit('recording:transcript_updated', { recordingId: data.recordingId, success })
+      } catch (error) {
+        socket.emit('recording:error', { error: error.message })
+      }
+    })
+
+    // 状态查询
+    socket.on('status:get_sip', () => {
+      const status = sipService.getStatus()
+      socket.emit('status:sip', status)
+    })
+
+    socket.on('status:get_recordings', () => {
+      const status = recordingService.getStatus()
+      socket.emit('status:recordings', status)
+    })
+
+    socket.on('status:get_active_calls', () => {
+      const calls = sipService.getActiveCalls()
+      socket.emit('status:active_calls', calls)
+    })
+  }
+
+  /**
+   * 处理断开连接
+   */
+  private handleDisconnect(socket: AuthenticatedSocket): void {
+    const userId = socket.userId!
+    const socketId = socket.id
+
+    console.log(`👤 用户 ${userId} 已断开呼叫中心连接`)
+
+    // 清理连接记录
+    const userSockets = this.connectedUsers.get(userId)
+    if (userSockets) {
+      userSockets.delete(socketId)
+      if (userSockets.size === 0) {
+        this.connectedUsers.delete(userId)
+      }
+    }
+
+    this.userSockets.delete(socketId)
+
+    // 通知其他用户该用户已离线
+    socket.to(`role_${socket.userRole}`).emit('user:offline', { userId })
+  }
+
+  /**
+   * 向指定角色广播消息
+   */
+  private broadcastToRole(event: string, data: any, role: string): void {
+    this.io?.to(`role_${role}`).emit(event, data)
+  }
+
+  /**
+   * 向指定用户发送消息
+   */
+  sendToUser(userId: number, event: string, data: any): void {
+    this.io?.to(`user_${userId}`).emit(event, data)
+  }
+
+  /**
+   * 向所有连接的用户广播消息
+   */
+  broadcast(event: string, data: any): void {
+    this.io?.emit(event, data)
+  }
+
+  /**
+   * 获取在线用户数
+   */
+  getOnlineUserCount(): number {
+    return this.connectedUsers.size
+  }
+
+  /**
+   * 获取指定角色的在线用户
+   */
+  getOnlineUsersByRole(role: string): number[] {
+    const users: number[] = []
+    for (const [userId, sockets] of this.connectedUsers.entries()) {
+      // 这里需要通过其他方式获取用户角色，暂时返回所有用户
+      users.push(userId)
+    }
+    return users
+  }
+
+  /**
+   * 获取连接统计
+   */
+  getStats(): any {
+    return {
+      totalConnections: this.userSockets.size,
+      uniqueUsers: this.connectedUsers.size,
+      connectionsByUser: Array.from(this.connectedUsers.entries()).map(([userId, sockets]) => ({
+        userId,
+        connectionCount: sockets.size
+      }))
+    }
+  }
+
+  /**
+   * 关闭服务
+   */
+  close(): void {
+    if (this.io) {
+      this.io.close()
+      this.io = null
+      console.log('🔌 呼叫中心WebSocket服务已关闭')
+    }
+  }
+}
+
+export default new WebSocketService()

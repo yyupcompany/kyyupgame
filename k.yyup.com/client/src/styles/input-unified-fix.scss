@@ -1,0 +1,207 @@
+/**
+ * 输入框统一样式优化
+ * 1. 统一 placeholder 颜色为淡灰色
+ * 2. 焦点时 placeholder 行为
+ * 3. 红色错误提示的行距优化
+ */
+
+/* ==================== Placeholder 统一样式 ==================== */
+
+// Element Plus 输入框
+.el-input__inner,
+.el-textarea__inner,
+.el-select .el-input__inner {
+  &::placeholder {
+    color: #c0c4cc !important; // 淡灰色
+    opacity: 1 !important;
+  }
+  
+  &:focus::placeholder {
+    color: transparent !important; // 焦点时透明
+  }
+}
+
+// 原生输入框
+input,
+textarea {
+  &::placeholder {
+    color: #c0c4cc; // 淡灰色
+    opacity: 1;
+  }
+  
+  &::-webkit-input-placeholder {
+    color: #c0c4cc;
+    opacity: 1;
+  }
+  
+  &::-moz-placeholder {
+    color: #c0c4cc;
+    opacity: 1;
+  }
+  
+  &:-ms-input-placeholder {
+    color: #c0c4cc;
+    opacity: 1;
+  }
+  
+  // 焦点时隐藏 placeholder
+  &:focus::placeholder {
+    color: transparent;
+  }
+  
+  &:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+  
+  &:focus::-moz-placeholder {
+    color: transparent;
+  }
+  
+  &:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+}
+
+/* ==================== 错误提示行距优化 ==================== */
+
+.el-form-item {
+  // 错误提示增加上边距，避免和输入框贴太紧
+  .el-form-item__error {
+    margin-top: 6px !important; // 增加行距
+    padding-top: 2px !important;
+    line-height: 1.5 !important; // 改善可读性
+    font-size: var(--text-sm) !important; // 稍微大一点，更易读
+  }
+  
+  // 确保错误状态下输入框下方有足够空间
+  &.is-error {
+    margin-bottom: calc(var(--spacing-lg) + 4px) !important;
+    
+    .el-input__inner,
+    .el-textarea__inner {
+      border-color: var(--danger-color) !important;
+    }
+  }
+}
+
+// 表单项之间的间距
+.el-form {
+  .el-form-item {
+    margin-bottom: 22px; // 增加表单项间距，为错误提示留空间
+    
+    // 紧凑模式
+    &.el-form-item--small {
+      margin-bottom: 18px;
+    }
+  }
+}
+
+/* ==================== 特殊场景优化 ==================== */
+
+// 对话框中的表单
+.el-dialog {
+  .el-form-item {
+    margin-bottom: 20px;
+    
+    .el-form-item__error {
+      margin-top: 6px !important;
+    }
+  }
+}
+
+// 抽屉中的表单
+.el-drawer {
+  .el-form-item {
+    margin-bottom: 20px;
+    
+    .el-form-item__error {
+      margin-top: 6px !important;
+    }
+  }
+}
+
+// 搜索表单中的输入框
+.search-form,
+.filter-form {
+  .el-input__inner::placeholder,
+  .el-textarea__inner::placeholder {
+    color: #c0c4cc !important;
+  }
+  
+  .el-input__inner:focus::placeholder,
+  .el-textarea__inner:focus::placeholder {
+    color: transparent !important;
+  }
+}
+
+/* ==================== 深色主题适配 ==================== */
+
+html.dark {
+  .el-input__inner,
+  .el-textarea__inner {
+    &::placeholder {
+      color: #909399 !important; // 深色模式下稍微亮一点
+    }
+    
+    &:focus::placeholder {
+      color: transparent !important;
+    }
+  }
+  
+  input,
+  textarea {
+    &::placeholder,
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder {
+      color: #909399;
+    }
+    
+    &:focus::placeholder,
+    &:focus::-webkit-input-placeholder,
+    &:focus::-moz-placeholder,
+    &:focus:-ms-input-placeholder {
+      color: transparent;
+    }
+  }
+}
+
+/* ==================== 多行文本域特殊处理 ==================== */
+
+.el-textarea {
+  .el-textarea__inner {
+    &::placeholder {
+      color: #c0c4cc !important;
+      line-height: 1.5;
+    }
+    
+    &:focus::placeholder {
+      color: transparent !important;
+    }
+  }
+}
+
+/* ==================== 选择器 Placeholder ==================== */
+
+.el-select {
+  .el-input__inner::placeholder {
+    color: #c0c4cc !important;
+  }
+  
+  .el-input.is-focus .el-input__inner::placeholder {
+    color: transparent !important;
+  }
+}
+
+/* ==================== 日期选择器 Placeholder ==================== */
+
+.el-date-editor {
+  .el-input__inner::placeholder {
+    color: #c0c4cc !important;
+  }
+  
+  &.is-focus .el-input__inner::placeholder {
+    color: transparent !important;
+  }
+}
+

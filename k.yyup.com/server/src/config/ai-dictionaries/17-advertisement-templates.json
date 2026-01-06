@@ -1,0 +1,176 @@
+{
+  "name": "广告营销系统查询模板字典",
+  "description": "广告投放、营销渠道、营销活动等广告营销系统相关表的查询模板",
+  "version": "1.0.0",
+  "queryTemplates": {
+    "// === 广告投放相关查询模板 ===": "注释",
+    "广告总数": {
+      "sql": "SELECT COUNT(*) as count FROM advertisements WHERE deleted_at IS NULL",
+      "description": "查询广告总数",
+      "table": "advertisements",
+      "response": "广告总数为{count}个",
+      "tokens": 10
+    },
+    "活跃广告": {
+      "sql": "SELECT COUNT(*) as count FROM advertisements WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询活跃广告数量",
+      "table": "advertisements",
+      "response": "活跃广告{count}个",
+      "tokens": 12
+    },
+    "广告类型统计": {
+      "sql": "SELECT ad_type, COUNT(*) as count FROM advertisements WHERE deleted_at IS NULL GROUP BY ad_type ORDER BY count DESC",
+      "description": "统计广告类型分布",
+      "table": "advertisements",
+      "response": "广告类型统计完成",
+      "tokens": 20
+    },
+    "广告平台分析": {
+      "sql": "SELECT platform, COUNT(*) as count FROM advertisements WHERE deleted_at IS NULL GROUP BY platform ORDER BY count DESC",
+      "description": "分析广告平台分布",
+      "table": "advertisements",
+      "response": "广告平台分析完成",
+      "tokens": 20
+    },
+    "广告预算统计": {
+      "sql": "SELECT SUM(budget) as total_budget, AVG(budget) as avg_budget, SUM(spent) as total_spent FROM advertisements WHERE deleted_at IS NULL",
+      "description": "统计广告预算和花费",
+      "table": "advertisements",
+      "response": "广告预算统计完成",
+      "tokens": 25
+    },
+    "广告效果分析": {
+      "sql": "SELECT SUM(impressions) as total_impressions, SUM(clicks) as total_clicks, AVG(ctr) as avg_ctr, SUM(conversions) as total_conversions FROM advertisements WHERE deleted_at IS NULL",
+      "description": "分析广告效果数据",
+      "table": "advertisements",
+      "response": "广告效果分析完成",
+      "tokens": 30
+    },
+    "广告ROI分析": {
+      "sql": "SELECT AVG(roi) as avg_roi, MIN(roi) as min_roi, MAX(roi) as max_roi, COUNT(CASE WHEN roi > 0 THEN 1 END) as positive_roi_count FROM advertisements WHERE deleted_at IS NULL AND roi IS NOT NULL",
+      "description": "分析广告投资回报率",
+      "table": "advertisements",
+      "response": "广告ROI分析完成",
+      "tokens": 30
+    },
+    "本月新增广告": {
+      "sql": "SELECT COUNT(*) as count FROM advertisements WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月新增广告数量",
+      "table": "advertisements",
+      "response": "本月新增广告{count}个",
+      "tokens": 20
+    },
+    "高效广告统计": {
+      "sql": "SELECT COUNT(*) as count FROM advertisements WHERE ctr > 0.05 AND conversion_rate > 0.02 AND deleted_at IS NULL",
+      "description": "查询高效广告数量",
+      "table": "advertisements",
+      "response": "高效广告{count}个",
+      "tokens": 20
+    },
+
+    "// === 营销渠道相关查询模板 ===": "注释",
+    "营销渠道总数": {
+      "sql": "SELECT COUNT(*) as count FROM channels WHERE deleted_at IS NULL",
+      "description": "查询营销渠道总数",
+      "table": "channels",
+      "response": "营销渠道总数为{count}个",
+      "tokens": 10
+    },
+    "渠道类型统计": {
+      "sql": "SELECT type, COUNT(*) as count FROM channels WHERE deleted_at IS NULL GROUP BY type ORDER BY count DESC",
+      "description": "统计渠道类型分布",
+      "table": "channels",
+      "response": "渠道类型统计完成",
+      "tokens": 20
+    },
+    "本月新增渠道": {
+      "sql": "SELECT COUNT(*) as count FROM channels WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月新增渠道数量",
+      "table": "channels",
+      "response": "本月新增渠道{count}个",
+      "tokens": 20
+    },
+
+    "// === 营销活动相关查询模板 ===": "注释",
+    "营销活动总数": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "查询营销活动总数",
+      "table": "marketing_campaigns",
+      "response": "营销活动总数为{count}个",
+      "tokens": 10
+    },
+    "活跃营销活动": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE status = 1 AND deleted_at IS NULL",
+      "description": "查询活跃营销活动数量",
+      "table": "marketing_campaigns",
+      "response": "活跃营销活动{count}个",
+      "tokens": 12
+    },
+    "营销活动类型统计": {
+      "sql": "SELECT campaign_type, COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL GROUP BY campaign_type ORDER BY count DESC",
+      "description": "统计营销活动类型分布",
+      "table": "marketing_campaigns",
+      "response": "营销活动类型统计完成",
+      "tokens": 20
+    },
+    "营销活动预算分析": {
+      "sql": "SELECT SUM(budget) as total_budget, AVG(budget) as avg_budget, COUNT(CASE WHEN budget > 0 THEN 1 END) as budgeted_campaigns FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "分析营销活动预算",
+      "table": "marketing_campaigns",
+      "response": "营销活动预算分析完成",
+      "tokens": 25
+    },
+    "营销活动参与统计": {
+      "sql": "SELECT SUM(participant_count) as total_participants, AVG(participant_count) as avg_participants, SUM(conversion_count) as total_conversions FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "统计营销活动参与情况",
+      "table": "marketing_campaigns",
+      "response": "营销活动参与统计完成",
+      "tokens": 30
+    },
+    "营销活动收益分析": {
+      "sql": "SELECT SUM(total_revenue) as total_revenue, AVG(total_revenue) as avg_revenue, COUNT(CASE WHEN total_revenue > 0 THEN 1 END) as profitable_campaigns FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "分析营销活动收益",
+      "table": "marketing_campaigns",
+      "response": "营销活动收益分析完成",
+      "tokens": 30
+    },
+    "本月营销活动": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE YEAR(created_at) = YEAR(NOW()) AND MONTH(created_at) = MONTH(NOW()) AND deleted_at IS NULL",
+      "description": "查询本月营销活动数量",
+      "table": "marketing_campaigns",
+      "response": "本月营销活动{count}个",
+      "tokens": 20
+    },
+    "进行中的活动": {
+      "sql": "SELECT COUNT(*) as count FROM marketing_campaigns WHERE start_date <= NOW() AND end_date >= NOW() AND status = 1 AND deleted_at IS NULL",
+      "description": "查询正在进行的营销活动",
+      "table": "marketing_campaigns",
+      "response": "进行中的营销活动{count}个",
+      "tokens": 20
+    },
+    "营销活动转化率": {
+      "sql": "SELECT AVG(CASE WHEN participant_count > 0 THEN (conversion_count * 100.0 / participant_count) ELSE 0 END) as avg_conversion_rate FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "计算营销活动平均转化率",
+      "table": "marketing_campaigns",
+      "response": "营销活动平均转化率分析完成",
+      "tokens": 30
+    },
+
+    "// === 综合统计查询模板 ===": "注释",
+    "广告营销系统概览": {
+      "sql": "SELECT 'advertisements' as category, COUNT(*) as count FROM advertisements WHERE deleted_at IS NULL UNION ALL SELECT 'channels' as category, COUNT(*) as count FROM channels WHERE deleted_at IS NULL UNION ALL SELECT 'marketing_campaigns' as category, COUNT(*) as count FROM marketing_campaigns WHERE deleted_at IS NULL",
+      "description": "广告营销系统数据总览",
+      "table": "multiple",
+      "response": "广告营销系统概览查询完成",
+      "tokens": 30
+    },
+    "营销投入产出分析": {
+      "sql": "SELECT SUM(a.budget) as ad_budget, SUM(a.spent) as ad_spent, SUM(mc.budget) as campaign_budget, SUM(mc.total_revenue) as campaign_revenue FROM advertisements a, marketing_campaigns mc WHERE a.deleted_at IS NULL AND mc.deleted_at IS NULL",
+      "description": "分析营销投入产出情况",
+      "table": "advertisements",
+      "joins": ["marketing_campaigns"],
+      "response": "营销投入产出分析完成",
+      "tokens": 35
+    }
+  }
+}

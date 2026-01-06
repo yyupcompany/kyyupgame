@@ -1,0 +1,3947 @@
+/**
+ * 优化的路由配置 - 实现代码分割和懒加载
+ * 目标: 将页面加载时间从3684ms优化到2秒以内
+ */
+
+import { RouteRecordRaw } from 'vue-router'
+
+// 使用静态导入避免动态导入问题
+import MainLayoutComponent from '../layouts/MainLayout.vue'
+const Layout = () => Promise.resolve({ default: MainLayoutComponent })
+
+// 核心模块 - 关键路径
+const Login = () => import('@/pages/Login/index.vue')
+const Register = () => import('@/pages/Register.vue')
+const Profile = () => import('@/pages/Profile.vue')
+const ProfileSettings = () => import('@/pages/ProfileSettings.vue')
+const Notifications = () => import('@/pages/Notifications.vue')
+const Messages = () => import('@/pages/Messages.vue')
+const Error = () => import('@/pages/Error.vue')
+const Finance = () => import('@/pages/Finance.vue')
+
+const FeeManagement = () => import('@/pages/finance/FeeManagement.vue')
+const StudentStatistics = () => import('@/pages/student/StudentStatistics.vue')
+const TeacherStatistics = () => import('@/pages/teacher/TeacherStatistics.vue')
+const ParentStatistics = () => import('@/pages/parent/ParentStatistics.vue')
+const CustomerStatistics = () => import('@/pages/customer/CustomerStatistics.vue')
+const AdvancedAnalytics = () => import('@/pages/ai/analytics/AdvancedAnalytics.vue')
+const Contact = () => import('@/pages/Contact.vue')
+const About = () => import('@/pages/About.vue')
+const StudentSearch = () => import('@/pages/student/StudentSearch.vue')
+const CustomerSearch = () => import('@/pages/customer/CustomerSearch.vue')
+const ExperienceSchedule = () => import('@/pages/experience/ExperienceSchedule.vue')
+const Search = () => import('@/pages/Search.vue')
+const Help = () => import('@/pages/Help.vue')
+
+// 系统管理模块 - 按需加载
+const SystemUsers = () => import('@/pages/system/User.vue')
+const SystemRoles = () => import('@/pages/system/Role.vue')
+const SystemPermissions = () => import('@/pages/system/Permission.vue')
+const SystemLogs = () => import('@/pages/system/Log.vue')
+const SystemSecurity = () => import('@/pages/system/Security.vue')
+
+const SystemBackup = () => import('@/pages/system/Backup.vue')
+
+const SystemSettings = () => import('@/pages/system/settings/index.vue')
+
+const AIModelConfig = () => import('@/pages/system/AIModelConfig.vue')
+
+// AI图片管理模块
+const ImageReplacementManager = () => import('@/pages/admin/ImageReplacementManager.vue')
+
+// 测试模块
+const PageOperationToolsTest = () => import('@/views/test/PageOperationToolsTest.vue')
+
+// 幼儿园AI演示模块
+const KindergartenAIDemo = () => import('@/pages/demo/KindergartenAIDemo.vue')
+
+// Markdown图文混排演示模块
+const MarkdownDemo = () => import('@/pages/demo/MarkdownDemo.vue')
+// 分屏登录页 Demo
+const LoginDemo = () => import('@/pages/demo/LoginSplitDemo.vue')
+// 快捷查询演示模块
+const QuickQueryDemo = () => import('@/views/demo/QuickQueryDemo.vue')
+// API测试模块
+const ApiTest = () => import('@/views/debug/ApiTest.vue')
+// 简单快捷查询测试
+const SimpleQuickQueryTest = () => import('@/views/debug/SimpleQuickQueryTest.vue')
+// 直接API测试
+const DirectApiTest = () => import('@/views/debug/DirectApiTest.vue')
+// 最小化测试
+const MinimalTest = () => import('@/views/debug/MinimalTest.vue')
+
+// AI查询模块
+const AIQueryInterface = () => import('@/pages/ai/AIQueryInterface.vue')
+
+// AI模块页面
+const AIAnalytics = () => import('@/pages/ai/analytics/index.vue')
+const AIModels = () => import('@/pages/ai/models/index.vue')
+const AIPredictions = () => import('@/pages/ai/predictions/index.vue')
+const AIPerformanceMonitor = () => import('@/pages/ai/monitoring/AIPerformanceMonitor.vue')
+
+// 测试模块 - 组件测试页面
+const ComponentTest = () => import('@/views/test/ComponentTest.vue')
+
+// 中心化页面模块
+const CentersIndex = () => import('@/pages/centers/index.vue')
+const EnrollmentCenter = () => import('@/pages/centers/EnrollmentCenter.vue')
+const PersonnelCenter = () => import('@/pages/centers/PersonnelCenter.vue')
+const ActivityCenter = () => import('@/pages/centers/ActivityCenter.vue')
+const TaskCenter = () => import('@/pages/centers/TaskCenter.vue')
+const TaskForm = () => import('@/pages/centers/TaskForm.vue')
+// const DashboardCenter = () => import('@/pages/centers/DashboardCenter.vue') // 文件已删除
+const MarketingCenter = () => import('@/pages/centers/MarketingCenter.vue')
+const AICenter = () => import('@/pages/centers/AICenter.vue')
+const SystemCenter = () => import('@/pages/centers/SystemCenter.vue')
+const CustomerPoolCenter = () => import('@/pages/centers/CustomerPoolCenter.vue')
+const AnalyticsCenter = () => import('@/pages/centers/AnalyticsCenter.vue')
+const InspectionCenter = () => import('@/pages/centers/InspectionCenter.vue')
+const ScriptCenter = () => import('@/pages/centers/ScriptCenter.vue')
+
+// 添加缺失的中心组件导入
+const BusinessCenter = () => import('@/pages/centers/BusinessCenter.vue')
+const FinanceCenter = () => import('@/pages/centers/FinanceCenter.vue')
+const CallCenter = () => import('@/pages/centers/CallCenter.vue')
+const TeachingCenter = () => import('@/pages/centers/TeachingCenter.vue')
+const MediaCenter = () => import('@/pages/centers/MediaCenter.vue')
+const AttendanceCenter = () => import('@/pages/centers/AttendanceCenter.vue')
+const AssessmentCenter = () => import('@/pages/centers/AssessmentCenter.vue')
+const DocumentCollaboration = () => import('@/pages/centers/DocumentCollaboration.vue')
+const DocumentEditor = () => import('@/pages/centers/DocumentEditor.vue')
+const DocumentCenter = () => import('@/pages/centers/DocumentCenter.vue')
+const DocumentTemplateCenter = () => import('@/pages/centers/DocumentTemplateCenter.vue')
+const DocumentInstanceList = () => import('@/pages/centers/DocumentInstanceList.vue')
+const DocumentStatistics = () => import('@/pages/centers/DocumentStatistics.vue')
+
+// 学生管理模块
+const ClassManagement = () => import('@/pages/class/index.vue')
+const ClassStatistics = () => import('@/pages/class/ClassStatistics.vue')
+
+// 教师管理模块
+const TeacherList = () => import('@/pages/teacher/TeacherList.vue')
+
+const TeacherDetail = () => import('@/pages/teacher/TeacherDetail.vue')
+
+const TeacherEdit = () => import('@/pages/teacher/TeacherEdit.vue')
+
+// 招生管理模块
+const EnrollmentPlanList = () => import('@/pages/enrollment-plan/PlanList.vue')
+
+const EnrollmentIndex = () => import('@/pages/enrollment/index.vue')
+
+const QuotaManage = () => import('@/pages/enrollment-plan/QuotaManage.vue')
+
+// AI招生功能模块
+const SmartPlanning = () => import('@/pages/enrollment-plan/smart-planning/smart-planning.vue')
+
+const EnrollmentForecast = () => import('@/pages/enrollment-plan/forecast/enrollment-forecast.vue')
+
+const EnrollmentStrategy = () => import('@/pages/enrollment-plan/EnrollmentStrategy.vue')
+
+const CapacityOptimization = () => import('@/pages/enrollment-plan/optimization/capacity-optimization.vue')
+
+const TrendAnalysis = () => import('@/pages/enrollment-plan/trends/trend-analysis.vue')
+
+const EnrollmentSimulation = () => import('@/pages/enrollment-plan/simulation/enrollment-simulation.vue')
+
+const PlanEvaluation = () => import('@/pages/enrollment-plan/evaluation/plan-evaluation.vue')
+
+const EnrollmentAnalytics = () => import('@/pages/enrollment-plan/analytics/enrollment-analytics.vue')
+
+// 活动管理模块
+const ActivityList = () => import(
+  '@/pages/activity/ActivityList.vue'
+)
+
+const ActivityDetail = () => import(
+  '@/pages/activity/ActivityDetail.vue'
+)
+
+// 家长管理模块
+const ParentList = () => import(
+  '@/pages/parent/ParentList.vue'
+)
+
+const ParentDetail = () => import(
+  '@/pages/parent/ParentDetail.vue'
+)
+
+// 园长功能模块
+const PrincipalDashboard = () => import(
+  '@/pages/principal/Dashboard.vue'
+)
+
+const PrincipalReports = () => import(
+  '@/pages/principal/PrincipalReports.vue'
+)
+
+// AI助手模块 - 使用页面包装组件
+const AIAssistantPage = () => import('@/pages/ai/index.vue')
+
+// 测评数据中心模块 - Admin/园长
+const AssessmentOverview = () => import('@/pages/assessment-analytics/overview.vue')
+const AssessmentRecords = () => import('@/pages/assessment-analytics/records.vue')
+const AssessmentReports = () => import('@/pages/assessment-analytics/reports.vue')
+const AssessmentTrends = () => import('@/pages/assessment-analytics/trends.vue')
+
+// 教师学生测评管理模块
+const TeacherStudentAssessment = () => import('@/pages/teacher-center/student-assessment/index.vue')
+const TeacherStudentDetail = () => import('@/pages/teacher-center/student-assessment/student-detail.vue')
+
+// 统计分析
+const Statistics = () => import(
+  '@/pages/statistics/index.vue'
+)
+
+// 申请管理
+const ApplicationList = () => import(
+  '@/pages/application/ApplicationList.vue'
+)
+
+const ApplicationDetail = () => import(
+  '@/pages/application/ApplicationDetail.vue'
+)
+
+// 仪表板子页面 - 懒加载
+const ImportantNotices = () => import(
+  '@/pages/dashboard/ImportantNotices.vue'
+)
+
+// 注释掉不存在的文件，避免动态导入失败
+// const ScheduleCalendar = () => import(
+//   '@/pages/dashboard/schedule/Calendar.vue'
+// )
+
+// const ScheduleTodo = () => import(
+//   '@/pages/dashboard/schedule/Todo.vue'
+// )
+
+// 广告管理
+const AdvertisementList = () => import(
+  '@/pages/advertisement/index.vue'
+)
+
+// 错误页面
+const NotFound = () => import('@/pages/404.vue')
+
+// AI功能模块 - 新增缺失的组件
+const ExpertConsultationPage = () => import('@/pages/ai/ExpertConsultationPage.vue')
+const MaintenanceOptimizer = () => import('@/pages/ai/predictive/maintenance-optimizer.vue')
+
+// 优化的路由配置
+export const optimizedRoutes: Array<RouteRecordRaw> = [
+  // 登录页面（不需要Layout包裹）
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: '用户登录',
+      requiresAuth: false,
+      hideInMenu: true,
+      preload: true
+    }
+  },
+
+  // 登录Demo页面（不需要Layout包裹）
+  {
+    path: '/login-demo',
+    name: 'LoginDemo',
+    component: LoginDemo,
+    meta: {
+      title: '登录页Demo',
+      requiresAuth: false,
+      hideInMenu: true,
+      preload: false
+    }
+  },
+
+  // 注册页面（不需要Layout包裹）
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    meta: {
+      title: '用户注册',
+      requiresAuth: false,
+      hideInMenu: true,
+      preload: true
+    }
+  },
+
+  // 🎯 AI助手页面（独立全屏页面，不使用Layout包裹）
+  {
+    path: '/aiassistant',
+    name: 'AIAssistant',
+    component: () => import('@/components/ai-assistant/AIAssistantFullPage.vue'),
+    meta: {
+      title: 'AI助手',
+      icon: 'ChatDotRound',
+      requiresAuth: true,
+      // 🔧 移除权限要求，允许所有已登录用户访问
+      // permission: 'AI_ASSISTANT_USE',
+      hideInMenu: false,
+      priority: 'medium',
+      preload: false
+    }
+  },
+
+  // 主应用路由（使用Layout包裹）
+  {
+    path: '/',
+    name: 'MainLayout',
+    component: Layout,
+    redirect: '/dashboard',  // 重定向到仪表板页面
+    meta: {
+      preload: true
+    },
+    children: [
+      // 仪表板模块 - 核心页面，高优先级
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('@/pages/dashboard/index.vue'),
+        meta: {
+          title: '仪表板',
+          icon: 'Dashboard',
+          requiresAuth: true,
+          preload: true,
+          priority: 'high'
+        }
+      },
+
+      // 中心目录索引页 - 统一导航入口
+      {
+        path: 'centers/index',
+        name: 'CentersIndex',
+        component: CentersIndex,
+        meta: {
+          title: '中心目录',
+          icon: 'Grid',
+          requiresAuth: true,
+          preload: false,
+          priority: 'high',
+          centerKey: 'grid'
+        }
+      },
+
+      // 用户档案页面
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: Profile,
+        meta: {
+          title: '个人档案',
+          icon: 'User',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 个人设置页面
+      {
+        path: 'profile/settings',
+        name: 'ProfileSettings',
+        component: ProfileSettings,
+        meta: {
+          title: '个人设置',
+          icon: 'Setting',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 系统设置重定向 - 修复404问题
+      {
+        path: 'settings',
+        redirect: '/system/settings',
+        meta: {
+          hideInMenu: true
+        }
+      },
+
+      // 通知管理页面
+      {
+        path: 'notifications',
+        name: 'Notifications',
+        component: Notifications,
+        meta: {
+          title: '通知管理',
+          icon: 'Bell',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 消息中心页面
+      {
+        path: 'messages',
+        name: 'Messages',
+        component: Messages,
+        meta: {
+          title: '消息中心',
+          icon: 'Message',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 错误页面
+      {
+        path: 'error',
+        name: 'Error',
+        component: Error,
+        meta: {
+          title: '错误页面',
+          icon: 'Warning',
+          requiresAuth: false,
+          priority: 'low',
+          hideInMenu: true
+        }
+      },
+
+      // 财务管理主页
+      {
+        path: 'finance',
+        name: 'Finance',
+        component: Finance,
+        meta: {
+          title: '财务管理',
+          icon: 'Money',
+          requiresAuth: true,
+          priority: 'high'
+        }
+      },
+
+
+
+      // 收费管理页面
+      {
+        path: 'finance/fee-management',
+        name: 'FeeManagement',
+        component: FeeManagement,
+        meta: {
+          title: '收费管理',
+          icon: 'Money',
+          requiresAuth: true,
+          priority: 'high'
+        }
+      },
+
+      // 个人设置页面
+      {
+        path: 'profile/settings',
+        name: 'ProfileSettings',
+        component: ProfileSettings,
+        meta: {
+          title: '个人设置',
+          icon: 'Setting',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 全局搜索页面
+      {
+        path: 'search',
+        name: 'Search',
+        component: Search,
+        meta: {
+          title: '全局搜索',
+          icon: 'Search',
+          requiresAuth: true,
+          priority: 'medium'
+        }
+      },
+
+      // 帮助中心页面
+      {
+        path: 'help',
+        name: 'Help',
+        component: Help,
+        meta: {
+          title: '帮助中心',
+          icon: 'QuestionFilled',
+          requiresAuth: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/campus-overview',
+        name: 'CampusOverview',
+        component: () => import('@/pages/dashboard/CampusOverview.vue'),
+        meta: {
+          title: '校园概览',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/data-statistics',
+        name: 'DataStatistics',
+        component: () => import('@/pages/dashboard/index.vue'),
+        meta: {
+          title: '数据统计',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/important-notices',
+        name: 'ImportantNotices',
+        component: () => import('@/pages/dashboard/ImportantNotices.vue'),
+        meta: {
+          title: '重要通知',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/schedule',
+        name: 'Schedule',
+        component: () => import('@/pages/dashboard/Schedule.vue'),
+        meta: {
+          title: '日程安排',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/schedule/calendar',
+        name: 'ScheduleCalendar',
+        component: () => import('@/pages/dashboard/Schedule.vue'),
+        meta: {
+          title: '日历视图',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/schedule/todo',
+        name: 'ScheduleTodo',
+        component: () => import('@/pages/dashboard/Schedule.vue'),
+        meta: {
+          title: '待办事项',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/schedule-weekly-view',
+        name: 'ScheduleWeeklyView',
+        component: () => import('@/pages/dashboard/Schedule.vue'),
+        meta: {
+          title: '周视图日程',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low'
+        }
+      },
+      {
+        path: 'dashboard/notification-center',
+        name: 'NotificationCenter',
+        component: ImportantNotices,
+        meta: {
+          title: '通知中心',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/analytics/enrollment-trends',
+        name: 'EnrollmentTrends',
+        component: () => import('@/pages/dashboard/analytics/EnrollmentTrends.vue'),
+        meta: {
+          title: '招生趋势分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/analytics/financial-analysis',
+        name: 'FinancialAnalysis',
+        component: () => import('@/pages/dashboard/analytics/FinancialAnalysis.vue'),
+        meta: {
+          title: '财务分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/analytics/student-performance',
+        name: 'StudentPerformanceAnalysis',
+        component: () => import('@/pages/principal/Performance.vue'),
+        meta: {
+          title: '学生表现分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/analytics/teacher-effectiveness',
+        name: 'TeacherEffectivenessAnalysis',
+        component: () => import('@/pages/dashboard/analytics/TeacherEffectiveness.vue'),
+        meta: {
+          title: '教师效果分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/performance/kpi-dashboard',
+        name: 'KPIDashboard',
+        component: () => import('@/pages/class/students/id.vue'),
+        meta: {
+          title: 'KPI仪表板',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/performance/performance-overview',
+        name: 'PerformanceOverview',
+        component: () => import('@/pages/principal/Performance.vue'),
+        meta: {
+          title: '绩效概览',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/analytics',
+        name: 'DashboardAnalytics',
+        component: () => import('@/pages/dashboard/Analytics.vue'),
+        meta: {
+          title: '仪表板分析',
+          requiresAuth: true,
+          permission: 'DASHBOARD_ANALYTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/performance',
+        name: 'DashboardPerformance',
+        component: () => import('@/pages/dashboard/Performance.vue'),
+        meta: {
+          title: '仪表板绩效',
+          requiresAuth: true,
+          permission: 'DASHBOARD_PERFORMANCE_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/class-list',
+        name: 'DashboardClassList',
+        component: () => import('@/pages/dashboard/ClassList.vue'),
+        meta: {
+          title: '班级列表',
+          requiresAuth: true,
+          permission: 'DASHBOARD_CLASSLIST',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'dashboard/ClassList',
+        redirect: { name: 'DashboardClassList' },
+        meta: {
+          hideInMenu: true
+        }
+      },
+
+      // 班级管理模块 - 高频使用
+      {
+        path: 'class',
+        name: 'ClassManagement',
+        component: ClassManagement,
+        meta: {
+          title: '班级管理',
+          icon: 'School',
+          requiresAuth: true,
+          permission: 'CLASS_VIEW',
+          preload: true,
+          priority: 'high'
+        }
+      },
+      {
+        path: 'class/statistics',
+        name: 'ClassStatistics',
+        component: ClassStatistics,
+        meta: {
+          title: '班级统计',
+          requiresAuth: true,
+          permission: 'CLASS_STATISTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/teachers/id',
+        name: 'ClassTeacherDetail',
+        component: () => import('@/pages/class/teachers/id.vue'),
+        meta: {
+          title: '教师详情',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'TEACHER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/students/id',
+        name: 'ClassStudentDetail',
+        component: () => import('@/pages/class/students/id.vue'),
+        meta: {
+          title: '班级学生管理',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'STUDENT_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/analytics/class-analytics',
+        name: 'ClassAnalytics',
+        component: () => import('@/pages/class/analytics/ClassAnalytics.vue'),
+        meta: {
+          title: '班级分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'CLASS_ANALYTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/optimization/class-optimization',
+        name: 'ClassOptimization',
+        component: () => import('@/pages/class/optimization/ClassOptimization.vue'),
+        meta: {
+          title: '班级优化',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'CLASS_OPTIMIZATION_USE',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/detail/:id',
+        name: 'ClassDetail',
+        component: () => import('@/pages/class/detail/ClassDetail.vue'),
+        meta: {
+          title: '班级详情',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'CLASS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'class/smart-management/:id',
+        name: 'ClassSmartManagement',
+        component: () => import('@/pages/class/smart-management/SmartManagement.vue'),
+        meta: {
+          title: '班级智能管理',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'CLASS_SMART_MANAGEMENT',
+          priority: 'medium'
+        }
+      },
+
+      // 学生管理模块
+      {
+        path: 'student',
+        name: 'StudentManagement',
+        component: () => import('@/pages/student/index.vue'),
+        meta: {
+          title: '学生管理',
+          icon: 'User',
+          requiresAuth: true,
+          permission: 'STUDENT_VIEW',
+          priority: 'high'
+        }
+      },
+
+      // 学生统计页面
+      {
+        path: 'student/statistics',
+        name: 'StudentStatistics',
+        component: StudentStatistics,
+        meta: {
+          title: '学生统计',
+          icon: 'DataAnalysis',
+          requiresAuth: true,
+          permission: 'STUDENT_STATISTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+
+      // 学生搜索页面
+      {
+        path: 'student/search',
+        name: 'StudentSearch',
+        component: StudentSearch,
+        meta: {
+          title: '学生搜索',
+          icon: 'Search',
+          requiresAuth: true,
+          permission: 'STUDENT_SEARCH_VIEW',
+          priority: 'medium'
+        }
+      },
+
+      // 学生搜索页面
+      {
+        path: 'student/search',
+        name: 'StudentSearch',
+        component: StudentSearch,
+        meta: {
+          title: '学生搜索',
+          icon: 'Search',
+          requiresAuth: true,
+          permission: 'STUDENT_SEARCH_VIEW',
+          priority: 'medium'
+        }
+      },
+      
+      // 学生详细页面 - 独立路由
+      {
+        path: 'student/detail/:id',
+        name: 'StudentDetail',
+        component: () => import('@/pages/student/detail/StudentDetail.vue'),
+        meta: {
+          title: '学生详情',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'STUDENT_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'student/analytics/:id',
+        name: 'StudentAnalytics',
+        component: () => import('@/pages/student/analytics/[id].vue'),
+        meta: {
+          title: '学生分析',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'STUDENT_ANALYTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'student/growth/:id',
+        name: 'StudentGrowth',
+        component: () => import('@/pages/student/growth/StudentGrowth.vue'),
+        meta: {
+          title: '学生成长',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'STUDENT_GROWTH_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'student/assessment',
+        name: 'StudentAssessment',
+        component: () => import('@/pages/student/assessment/StudentAssessment.vue'),
+        meta: {
+          title: '学生评估',
+          requiresAuth: true,
+          hideInMenu: true,
+          permission: 'STUDENT_ASSESSMENT_VIEW',
+          priority: 'medium'
+        }
+      },
+
+      // 教师管理模块
+      {
+        path: 'teacher',
+        name: 'TeacherManagement',
+        redirect: { name: 'TeacherList' },
+        meta: {
+          title: '教师管理',
+          icon: 'UserFilled',
+          requiresAuth: true,
+          permission: 'TEACHER_VIEW',
+          priority: 'high'
+        },
+        children: [
+          {
+            path: '',
+            name: 'TeacherList',
+            component: TeacherList,
+            meta: {
+              title: '教师列表',
+              requiresAuth: true,
+              permission: 'TEACHER_VIEW',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'detail/:id',
+            name: 'TeacherDetail',
+            component: TeacherDetail,
+            meta: {
+              title: '教师详情',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'TEACHER_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'edit/:id',
+            name: 'TeacherEdit',
+            component: TeacherEdit,
+            meta: {
+              title: '编辑教师',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'TEACHER_EDIT',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'add',
+            name: 'TeacherAdd',
+            component: () => import('@/pages/teacher/add.vue'),
+            meta: {
+              title: '添加教师',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'TEACHER_CREATE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'performance/:id',
+            name: 'TeacherPerformance',
+            component: () => import('@/pages/teacher/performance/TeacherPerformance.vue'),
+            meta: {
+              title: '教师绩效',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'TEACHER_PERFORMANCE_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'development/teacher-development',
+            name: 'TeacherDevelopment',
+            component: () => import('@/pages/teacher/development/TeacherDevelopment.vue'),
+            meta: {
+              title: '教师发展',
+              requiresAuth: true,
+              permission: 'TEACHER_DEVELOPMENT_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'evaluation/teacher-evaluation',
+            name: 'TeacherEvaluation',
+            component: () => import('@/pages/teacher/evaluation/TeacherEvaluation.vue'),
+            meta: {
+              title: '教师评估',
+              requiresAuth: true,
+              permission: 'TEACHER_EVALUATION_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'customers',
+            name: 'TeacherCustomers',
+            component: () => import('@/pages/teacher/customers.vue'),
+            meta: {
+              title: '我的客户',
+              requiresAuth: true,
+              permission: 'TEACHER_CUSTOMERS_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'statistics',
+            name: 'TeacherStatistics',
+            component: TeacherStatistics,
+            meta: {
+              title: '教师统计',
+              requiresAuth: true,
+              permission: 'TEACHER_STATISTICS_VIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 家长管理模块
+      {
+        path: 'parent',
+        name: 'ParentManagement',
+        redirect: { name: 'ParentList' },
+        meta: {
+          title: '家长管理',
+          icon: 'Avatar',
+          requiresAuth: true,
+          permission: 'PARENT_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: '',
+            name: 'ParentList',
+            component: ParentList,
+            meta: {
+              title: '家长列表',
+              requiresAuth: true,
+              permission: 'PARENT_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'detail/:id',
+            name: 'ParentDetail',
+            component: ParentDetail,
+            meta: {
+              title: '家长详情',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'PARENT_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'children',
+            name: 'ChildrenList',
+            component: () => import('@/pages/parent/ChildrenList.vue'),
+            meta: {
+              title: '儿童列表',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'PARENT_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'create',
+            name: 'ParentCreate',
+            component: () => import('@/pages/parent/ParentEdit.vue'),
+            meta: {
+              title: '添加家长',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'PARENT_CREATE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'edit/:id',
+            name: 'ParentEdit',
+            component: () => import('@/pages/parent/ParentEdit.vue'),
+            meta: {
+              title: '编辑家长',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'PARENT_EDIT',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'FollowUp',
+            name: 'ParentFollowUp',
+            component: () => import('@/pages/parent/FollowUp.vue'),
+            meta: {
+              title: '家长跟进',
+              requiresAuth: true,
+              permission: 'PARENT_FOLLOWUP',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'communication/smart-hub',
+            name: 'ParentCommunicationHub',
+            component: () => import('@/pages/parent/communication/SmartHub.vue'),
+            meta: {
+              title: '家长沟通中心',
+              requiresAuth: true,
+              permission: 'PARENT_COMMUNICATION',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'ChildGrowth',
+            name: 'ParentChildGrowth',
+            component: () => import('@/pages/parent/ChildGrowth.vue'),
+            meta: {
+              title: '儿童成长',
+              requiresAuth: true,
+              permission: 'PARENT_CHILD_GROWTH',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'AssignActivity',
+            name: 'ParentAssignActivity',
+            component: () => import('@/pages/parent/AssignActivity.vue'),
+            meta: {
+              title: '分配活动',
+              requiresAuth: true,
+              permission: 'PARENT_ASSIGN_ACTIVITY',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'feedback/parent-feedback',
+            name: 'ParentFeedback',
+            component: () => import('@/pages/parent/feedback/ParentFeedback.vue'),
+            meta: {
+              title: '家长反馈',
+              requiresAuth: true,
+              permission: 'PARENT_FEEDBACK',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'statistics',
+            name: 'ParentStatistics',
+            component: ParentStatistics,
+            meta: {
+              title: '家长统计',
+              requiresAuth: true,
+              permission: 'PARENT_STATISTICS_VIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 招生计划模块
+      {
+        path: 'enrollment-plan',
+        name: 'EnrollmentPlan',
+        redirect: { name: 'PlanList' },
+        meta: {
+          title: '招生计划',
+          icon: 'Calendar',
+          requiresAuth: true,
+          permission: 'ENROLLMENT_PLAN_VIEW',
+          priority: 'high'
+        },
+        children: [
+          {
+            path: '',
+            name: 'PlanList',
+            component: EnrollmentPlanList,
+            meta: {
+              title: '计划列表',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_VIEW',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'create',
+            name: 'EnrollmentPlanCreate',
+            component: () => import('@/pages/enrollment-plan/PlanEdit.vue'),
+            meta: {
+              title: '创建计划',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_CREATE',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'quota-manage',
+            name: 'QuotaManage',
+            component: QuotaManage,
+            meta: {
+              title: '名额管理',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_QUOTA_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'quota/:id',
+            name: 'EnrollmentQuotaManage',
+            component: QuotaManage,
+            meta: {
+              title: '名额管理',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_QUOTA_MANAGE',
+              priority: 'medium',
+              hidden: true
+            },
+            props: (route) => ({ 
+              planId: route.params.id && !isNaN(Number(route.params.id)) ? Number(route.params.id) : 1 
+            })
+          },
+          {
+            path: 'statistics',
+            name: 'EnrollmentStatistics',
+            component: () => import('@/pages/enrollment-plan/Statistics.vue'),
+            meta: {
+              title: '招生统计',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_STATISTICS_VIEW',
+              priority: 'medium'
+            }
+          },
+          // AI招生功能路由
+          {
+            path: 'smart-planning/smart-planning',
+            name: 'SmartPlanning',
+            component: SmartPlanning,
+            meta: {
+              title: '智能规划',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'forecast/enrollment-forecast',
+            name: 'EnrollmentForecast',
+            component: EnrollmentForecast,
+            meta: {
+              title: '招生预测',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'strategy/enrollment-strategy',
+            name: 'EnrollmentStrategy',
+            component: EnrollmentStrategy,
+            meta: {
+              title: '招生策略',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'optimization/capacity-optimization',
+            name: 'CapacityOptimization',
+            component: CapacityOptimization,
+            meta: {
+              title: '容量优化',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'trends/trend-analysis',
+            name: 'TrendAnalysis',
+            component: TrendAnalysis,
+            meta: {
+              title: '趋势分析',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'simulation/enrollment-simulation',
+            name: 'EnrollmentSimulation',
+            component: EnrollmentSimulation,
+            meta: {
+              title: '招生仿真',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'evaluation/plan-evaluation',
+            name: 'PlanEvaluation',
+            component: PlanEvaluation,
+            meta: {
+              title: '计划评估',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics/enrollment-analytics',
+            name: 'EnrollmentAnalytics',
+            component: EnrollmentAnalytics,
+            meta: {
+              title: '招生分析',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'management/plan-management',
+            name: 'PlanManagement',
+            component: () => import('@/pages/enrollment-plan/management/PlanManagement.vue'),
+            meta: {
+              title: '计划管理',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_PLAN_MANAGE',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 招生管理
+      {
+        path: 'enrollment',
+        name: 'Enrollment',
+        redirect: { name: 'EnrollmentIndex' },
+        meta: {
+          title: '招生管理',
+          icon: 'Promotion',
+          requiresAuth: true,
+          permission: 'ENROLLMENT_VIEW',
+          priority: 'high'
+        },
+        children: [
+          {
+            path: '',
+            name: 'EnrollmentIndex',
+            component: EnrollmentIndex,
+            meta: {
+              title: '招生管理',
+              requiresAuth: true,
+              permission: 'ENROLLMENT_VIEW',
+              priority: 'high'
+            }
+          }
+        ]
+      },
+
+      // 活动管理模块
+      {
+        path: 'activity',
+        name: 'ActivityManagement',
+        redirect: { name: 'ActivityList' },
+        meta: {
+          title: '活动管理',
+          icon: 'Trophy',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: '',
+            name: 'ActivityList',
+            component: ActivityList,
+            meta: {
+              title: '活动列表',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'publish',
+            name: 'ActivityPublish',
+            component: () => import('@/pages/activity/ActivityPublish.vue'),
+            meta: {
+              title: '活动发布',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'create',
+            name: 'ActivityCreate',
+            component: () => import('@/pages/activity/ActivityCreate.vue'),
+            meta: {
+              title: '创建活动',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'ACTIVITY_CREATE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'detail/:id',
+            name: 'ActivityDetail',
+            component: ActivityDetail,
+            meta: {
+              title: '活动详情',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'edit/:id',
+            name: 'ActivityEdit',
+            component: () => import('@/pages/activity/ActivityEdit.vue'),
+            meta: {
+              title: '编辑活动',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'ACTIVITY_UPDATE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'plan/activity-planner',
+            name: 'ActivityPlanner',
+            component: () => import('@/pages/activity/plan/ActivityPlanner.vue'),
+            meta: {
+              title: '活动策划',
+              requiresAuth: true,
+              permission: 'ACTIVITY_CREATE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'ActivityTemplate',
+            name: 'ActivityTemplate',
+            component: () => import('@/pages/activity/ActivityTemplate.vue'),
+            meta: {
+              title: '活动模板',
+              requiresAuth: true,
+              permission: 'ACTIVITY_TEMPLATE_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics/activity-analytics',
+            name: 'ActivityAnalytics',
+            component: () => import('@/pages/activity/analytics/ActivityAnalytics.vue'),
+            meta: {
+              title: '活动分析',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'ActivityStatistics',
+            name: 'ActivityStatisticsRedirect',
+            redirect: { name: 'ActivityAnalytics' },
+            meta: {
+              title: '活动统计',
+              requiresAuth: true,
+              hideInMenu: true
+            }
+          },
+          {
+            path: 'optimization/activity-optimizer',
+            name: 'ActivityOptimizer',
+            component: () => import('@/pages/activity/optimization/ActivityOptimizer.vue'),
+            meta: {
+              title: '活动优化',
+              requiresAuth: true,
+              permission: 'ACTIVITY_UPDATE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'registration/registration-dashboard',
+            name: 'RegistrationDashboard',
+            component: () => import('@/pages/activity/registration/RegistrationDashboard.vue'),
+            meta: {
+              title: '报名仪表板',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'ActivityRegistration',
+            name: 'ActivityRegistrationRedirect',
+            redirect: { name: 'RegistrationDashboard' },
+            meta: {
+              title: '活动报名',
+              requiresAuth: true,
+              hideInMenu: true
+            }
+          },
+          {
+            path: 'ActivityManagement',
+            name: 'ActivityManagementRedirect',
+            redirect: { name: 'ActivityList' },
+            meta: {
+              title: '活动管理',
+              requiresAuth: true,
+              hideInMenu: true
+            }
+          },
+          {
+            path: 'evaluation/activity-evaluation',
+            name: 'ActivityEvaluation',
+            component: () => import('@/pages/activity/evaluation/ActivityEvaluation.vue'),
+            meta: {
+              title: '活动评估',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics/intelligent-analysis',
+            name: 'IntelligentAnalysis',
+            component: () => import('@/pages/activity/analytics/intelligent-analysis.vue'),
+            meta: {
+              title: '智能分析',
+              requiresAuth: true,
+              permission: 'ACTIVITY_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'experience/schedule',
+            name: 'ExperienceSchedule',
+            component: ExperienceSchedule,
+            meta: {
+              title: '体验课表',
+              requiresAuth: true,
+              permission: 'EXPERIENCE_VIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 申请管理模块
+      {
+        path: 'application',
+        name: 'ApplicationManagement',
+        redirect: { name: 'ApplicationList' },
+        meta: {
+          title: '申请管理',
+          icon: 'Document',
+          requiresAuth: true,
+          permission: 'APPLICATION_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: '',
+            name: 'ApplicationList',
+            component: ApplicationList,
+            meta: {
+              title: '申请列表',
+              requiresAuth: true,
+              permission: 'APPLICATION_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'detail/:id',
+            name: 'ApplicationDetail',
+            component: ApplicationDetail,
+            meta: {
+              title: '申请详情',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'APPLICATION_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'review',
+            name: 'ApplicationReview',
+            component: () => import('@/pages/application/review/ApplicationReview.vue'),
+            meta: {
+              title: '申请审核',
+              requiresAuth: true,
+              permission: 'APPLICATION_REVIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'interview',
+            name: 'ApplicationInterview',
+            component: () => import('@/pages/application/interview/ApplicationInterview.vue'),
+            meta: {
+              title: '申请面试',
+              requiresAuth: true,
+              permission: 'APPLICATION_INTERVIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 客户管理
+      {
+        path: 'customer',
+        name: 'CustomerManagement',
+        redirect: { name: 'CustomerList' },
+        meta: {
+          title: '客户管理',
+          icon: 'Postcard',
+          requiresAuth: true,
+          permission: 'CUSTOMER_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: '',
+            name: 'CustomerList',
+            component: () => import('@/pages/customer/index.vue'),
+            meta: {
+              title: '客户列表',
+              requiresAuth: true,
+              permission: 'CUSTOMER_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: ':id',
+            name: 'CustomerDetail',
+            component: () => import('@/pages/customer/detail/CustomerDetail.vue'),
+            meta: {
+              title: '客户详情',
+              requiresAuth: true,
+              hideInMenu: true,
+              permission: 'CUSTOMER_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics/customer-analytics',
+            name: 'CustomerAnalytics',
+            component: () => import('@/pages/customer/analytics/CustomerAnalytics.vue'),
+            meta: {
+              title: '客户分析',
+              requiresAuth: true,
+              permission: 'CUSTOMER_ANALYTICS_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'statistics',
+            name: 'CustomerStatistics',
+            component: CustomerStatistics,
+            meta: {
+              title: '客户统计',
+              requiresAuth: true,
+              permission: 'CUSTOMER_STATISTICS_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'search',
+            name: 'CustomerSearch',
+            component: CustomerSearch,
+            meta: {
+              title: '客户搜索',
+              requiresAuth: true,
+              permission: 'CUSTOMER_SEARCH_VIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 统计分析
+      {
+        path: 'statistics',
+        name: 'Statistics',
+        component: Statistics,
+        meta: {
+          title: '统计分析',
+          icon: 'DataAnalysis',
+          requiresAuth: true,
+          permission: 'STATISTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+
+      // 园长功能模块
+      {
+        path: 'principal',
+        name: 'PrincipalManagement',
+        redirect: { name: 'PrincipalDashboard' },
+        meta: {
+          title: '园长功能',
+          icon: 'Crown',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: 'dashboard',
+            name: 'PrincipalDashboard',
+            component: PrincipalDashboard,
+            meta: {
+              title: '园长仪表板',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'activities',
+            name: 'PrincipalActivities',
+            component: () => import('@/pages/principal/Activities.vue'),
+            meta: {
+              title: '活动管理',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_ACTIVITY_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'customer-pool',
+            name: 'CustomerPool',
+            component: () => import('@/pages/principal/CustomerPool.vue'),
+            meta: {
+              title: '客户池管理',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_CUSTOMER_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'marketing-analysis',
+            name: 'MarketingAnalysis',
+            component: () => import('@/pages/principal/MarketingAnalysis.vue'),
+            meta: {
+              title: '营销分析',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_MARKETING_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'performance',
+            name: 'Performance',
+            component: () => import('@/pages/principal/Performance.vue'),
+            meta: {
+              title: '绩效管理',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_PERFORMANCE_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'poster-editor/:templateId?',
+            name: 'PosterEditor',
+            component: () => import('@/pages/principal/PosterEditor.vue'),
+            meta: {
+              title: '海报编辑器',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'poster-generator/:templateId?',
+            name: 'PosterGenerator',
+            component: () => import('@/pages/principal/PosterGenerator.vue'),
+            meta: {
+              title: '海报生成器',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'performance-rules',
+            name: 'PerformanceRules',
+            component: () => import('@/pages/principal/PerformanceRules.vue'),
+            meta: {
+              title: '绩效规则配置',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_PERFORMANCE_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'poster-templates',
+            name: 'PosterTemplates',
+            component: () => import('@/pages/principal/PosterTemplates.vue'),
+            meta: {
+              title: '海报模板管理',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'media-center',
+            name: 'MediaCenter',
+            component: () => import('@/pages/principal/MediaCenter.vue'),
+            meta: {
+              title: '新媒体中心',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_MEDIA_MANAGE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'PerformanceRules',
+            name: 'PrincipalPerformanceRules',
+            component: () => import('@/pages/principal/PerformanceRules.vue'),
+            meta: {
+              title: '绩效规则',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_PERFORMANCE_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'PosterTemplates',
+            name: 'PrincipalPosterTemplates',
+            component: () => import('@/pages/principal/PosterTemplates.vue'),
+            meta: {
+              title: '海报模板',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'PosterEditor',
+            name: 'PrincipalPosterEditor',
+            component: () => import('@/pages/principal/PosterEditor.vue'),
+            meta: {
+              title: '海报编辑',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'PosterGenerator',
+            name: 'PrincipalPosterGenerator',
+            component: () => import('@/pages/principal/PosterGenerator.vue'),
+            meta: {
+              title: '海报生成',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_POSTER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'decision-support/intelligent-dashboard',
+            name: 'IntelligentDashboard',
+            component: () => import('@/pages/principal/decision-support/intelligent-dashboard.vue'),
+            meta: {
+              title: '智能决策仪表板',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_DASHBOARD_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'reports',
+            name: 'PrincipalReports',
+            component: PrincipalReports,
+            meta: {
+              title: '园长报告',
+              requiresAuth: true,
+              permission: 'PRINCIPAL_REPORT_VIEW',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 系统管理模块 - 低频使用，懒加载
+      {
+        path: 'system',
+        name: 'SystemManagement',
+        redirect: { name: 'UserManagement' },
+        meta: {
+          title: '系统管理',
+          icon: 'Setting',
+          requiresAuth: true,
+          permission: 'SYSTEM_MANAGE',
+          priority: 'low'
+        },
+        children: [
+          {
+            path: 'users',
+            name: 'UserManagement',
+            component: SystemUsers,
+            meta: {
+              title: '用户管理',
+              requiresAuth: true,
+              permission: 'USER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'roles',
+            name: 'RoleManagement',
+            component: SystemRoles,
+            meta: {
+              title: '角色管理',
+              requiresAuth: true,
+              permission: 'ROLE_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'permissions',
+            name: 'PermissionManagement',
+            component: SystemPermissions,
+            meta: {
+              title: '权限管理',
+              requiresAuth: true,
+              permission: 'PERMISSION_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'logs',
+            name: 'SystemLogs',
+            component: SystemLogs,
+            meta: {
+              title: '系统日志',
+              requiresAuth: true,
+              permission: 'SYSTEM_LOG_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'security',
+            name: 'SecurityMonitoring',
+            component: SystemSecurity,
+            meta: {
+              title: '安全监控',
+              requiresAuth: true,
+              permission: 'SECURITY_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'backup',
+            name: 'SystemBackup',
+            component: SystemBackup,
+            meta: {
+              title: '系统备份',
+              requiresAuth: true,
+              permission: 'SYSTEM_BACKUP_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'settings',
+            name: 'SystemSettings',
+            component: SystemSettings,
+            meta: {
+              title: '系统设置',
+              requiresAuth: true,
+              permission: 'SYSTEM_CONFIG_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'ai-model-config',
+            name: 'AIModelConfig',
+            component: AIModelConfig,
+            meta: {
+              title: 'AI模型配置',
+              requiresAuth: true,
+              permission: 'AI_MODEL_CONFIG_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'users/user-management',
+            name: 'SystemUserManagement',
+            component: () => import('@/pages/system/users/index.vue'),
+            meta: {
+              title: '系统用户管理',
+              requiresAuth: true,
+              permission: 'USER_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'roles/role-management',
+            name: 'SystemRoleManagement',
+            component: () => import('@/pages/system/roles/RoleManagement.vue'),
+            meta: {
+              title: '系统角色管理',
+              requiresAuth: true,
+              permission: 'ROLE_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'logs/system-logs',
+            name: 'SystemLogsManagement',
+            component: () => import('@/pages/system/Log.vue'),
+            meta: {
+              title: '系统日志管理',
+              requiresAuth: true,
+              permission: 'SYSTEM_LOG_VIEW',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'backup/backup-management',
+            name: 'SystemBackupManagement',
+            component: () => import('@/pages/system/backup/BackupManagement.vue'),
+            meta: {
+              title: '系统备份管理',
+              requiresAuth: true,
+              permission: 'SYSTEM_BACKUP_MANAGE',
+              priority: 'low'
+            }
+          },
+
+
+
+          {
+            path: 'notifications/notification-settings',
+            name: 'NotificationSettings',
+            component: () => import('@/pages/system/notifications/NotificationSettings.vue'),
+            meta: {
+              title: '通知设置',
+              requiresAuth: true,
+              permission: 'NOTIFICATION_CONFIG_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'maintenance/maintenance-scheduler',
+            name: 'MaintenanceScheduler',
+            component: () => import('@/pages/system/maintenance/MaintenanceScheduler.vue'),
+            meta: {
+              title: '维护调度器',
+              requiresAuth: true,
+              permission: 'MAINTENANCE_SCHEDULE_MANAGE',
+              priority: 'low'
+            }
+          },
+
+
+        ]
+      },
+
+      // 🔧 AI助手子路由（保留子功能路由，但移除主路由）
+      {
+        path: 'ai',
+        name: 'AIAssistantRoutes',
+        meta: {
+          title: 'AI助手',
+          requiresAuth: true
+        },
+        children: [
+          {
+            path: 'query',
+            name: 'AIQueryInterface',
+            component: AIQueryInterface,
+            meta: {
+              title: 'AI智能查询',
+              requiresAuth: true,
+              permission: 'AI_QUERY_EXECUTE',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'model',
+            name: 'AIModelManagement',
+            component: () => import('@/pages/ai/ModelManagementPage.vue'),
+            meta: {
+              title: 'AI模型管理',
+              requiresAuth: true,
+              permission: 'AI_MODEL_CONFIG_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'ModelManagementPage',
+            name: 'AIModelManagementPage',
+            component: () => import('@/pages/ai/ModelManagementPage.vue'),
+            meta: {
+              title: 'AI模型管理页面',
+              requiresAuth: true,
+              permission: 'AI_MODEL_CONFIG_MANAGE',
+              priority: 'low'
+            }
+          },
+          {
+            path: 'ExpertConsultationPage',
+            name: 'AIExpertConsultationPage',
+            component: () => import('@/pages/ai/ExpertConsultationPage.vue'),
+            meta: {
+              title: 'AI专家咨询页面',
+              requiresAuth: true,
+              permission: 'AI_EXPERT_CONSULTATION',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'memory',
+            name: 'AIMemoryManagementPage',
+            component: () => import('@/pages/ai/MemoryManagementPage.vue'),
+            meta: {
+              title: 'AI记忆管理',
+              requiresAuth: true,
+              permission: 'AI_MEMORY_MANAGEMENT',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'conversation/nlp-analytics',
+            name: 'NLPAnalytics',
+            component: () => import('@/pages/ai/conversation/nlp-analytics.vue'),
+            meta: {
+              title: 'NLP分析',
+              requiresAuth: true,
+              permission: 'AI_NLP_ANALYTICS',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'nlp/text-analysis',
+            name: 'TextAnalysis',
+            component: () => import('@/pages/ai/nlp/TextAnalysis.vue'),
+            meta: {
+              title: 'AI文本分析',
+              requiresAuth: true,
+              permission: 'AI_TEXT_ANALYSIS',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'machine-learning/model-training',
+            name: 'ModelTraining',
+            component: () => import('@/pages/ai/machine-learning/ModelTraining.vue'),
+            meta: {
+              title: 'AI模型训练',
+              requiresAuth: true,
+              permission: 'AI_MODEL_TRAINING',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'deep-learning/prediction-engine',
+            name: 'PredictionEngine',
+            component: () => import('@/pages/ai/deep-learning/prediction-engine.vue'),
+            meta: {
+              title: '预测引擎',
+              requiresAuth: true,
+              permission: 'AI_PREDICTION_ENGINE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'predictive/maintenance-optimizer',
+            name: 'AIPredictiveMaintenanceOptimizer',
+            component: () => import('@/pages/ai/predictive/maintenance-optimizer.vue'),
+            meta: {
+              title: 'AI预测维护优化器',
+              requiresAuth: true,
+              permission: 'AI_PREDICTIVE_MAINTENANCE',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'visualization/3d-analytics',
+            name: 'ThreeDAnalytics',
+            component: () => import('@/pages/ai/visualization/3d-analytics.vue'),
+            meta: {
+              title: '3D分析',
+              requiresAuth: true,
+              permission: 'AI_3D_ANALYTICS',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics/advanced-analytics',
+            name: 'AdvancedAnalytics',
+            component: AdvancedAnalytics,
+            meta: {
+              title: 'AI高级分析系统',
+              requiresAuth: true,
+              permission: 'AI_ADVANCED_ANALYTICS',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'analytics',
+            name: 'AIAnalytics',
+            component: AIAnalytics,
+            meta: {
+              title: 'AI数据分析',
+              requiresAuth: true,
+              permission: 'AI_ANALYTICS',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'models',
+            name: 'AIModels',
+            component: AIModels,
+            meta: {
+              title: 'AI模型管理',
+              requiresAuth: true,
+              permission: 'AI_MODELS',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'predictions',
+            name: 'AIPredictions',
+            component: AIPredictions,
+            meta: {
+              title: 'AI预测分析',
+              requiresAuth: true,
+              permission: 'AI_PREDICTIONS',
+              priority: 'high'
+            }
+          },
+          {
+            path: 'monitoring/AIPerformanceMonitor',
+            name: 'AIPerformanceMonitor',
+            component: AIPerformanceMonitor,
+            meta: {
+              title: 'AI性能监控',
+              requiresAuth: true,
+              permission: 'AI_PERFORMANCE_MONITOR_ACCESS',
+              priority: 'high'
+            }
+          }
+        ]
+      },
+
+      // 聊天模块 - 使用AI助手页面
+      {
+        path: 'chat',
+        name: 'Chat',
+        component: () => import('@/components/ai-assistant/BrightModeAIAssistant.vue'),
+        meta: {
+          title: '聊天',
+          icon: 'ChatLineRound',
+          requiresAuth: true,
+          permission: 'CHAT_USE',
+          priority: 'medium'
+        }
+      },
+
+      // AI专家咨询模块
+      {
+        path: 'ai-services',
+        name: 'AIServices',
+        redirect: { name: 'ExpertConsultationPage' },
+        meta: {
+          title: 'AI服务',
+          icon: 'Service',
+          requiresAuth: true,
+          permission: 'AI_SERVICES_USE',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: 'ExpertConsultationPage',
+            name: 'ExpertConsultationPage',
+            component: ExpertConsultationPage,
+            meta: {
+              title: '专家咨询',
+              requiresAuth: true,
+              permission: 'AI_EXPERT_CONSULTATION',
+              priority: 'medium'
+            }
+          },
+
+          {
+            path: 'predictive/maintenance-optimizer',
+            name: 'MaintenanceOptimizer',
+            component: MaintenanceOptimizer,
+            meta: {
+              title: '维护优化器',
+              requiresAuth: true,
+              permission: 'AI_PREDICTIVE_MAINTENANCE',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+
+
+      // 广告管理模块
+      {
+        path: 'advertisement',
+        name: 'AdvertisementManagement',
+        redirect: { name: 'AdvertisementList' },
+        meta: {
+          title: '广告管理',
+          icon: 'Picture',
+          requiresAuth: true,
+          permission: 'ADVERTISEMENT_MANAGE',
+          priority: 'low'
+        },
+        children: [
+          {
+            path: '',
+            name: 'AdvertisementList',
+            component: AdvertisementList,
+            meta: {
+              title: '广告列表',
+              requiresAuth: true,
+              permission: 'ADVERTISEMENT_MANAGE',
+              priority: 'low'
+            }
+          }
+        ]
+      },
+
+      // 营销管理模块 - 重复路由，已删除避免嵌套
+
+      // 分析报告模块
+      {
+        path: 'analytics',
+        name: 'AnalyticsManagement',
+        redirect: { name: 'AnalyticsDashboard' },
+        meta: {
+          title: '分析报告',
+          icon: 'DataLine',
+          requiresAuth: true,
+          permission: 'ANALYTICS_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: '',
+            name: 'AnalyticsDashboard',
+            component: () => import('@/pages/analytics/index.vue'),
+            meta: {
+              title: '分析仪表板',
+              requiresAuth: true,
+              permission: 'ANALYTICS_VIEW',
+              priority: 'medium'
+            }
+          },
+          {
+            path: 'ReportBuilder',
+            name: 'ReportBuilder',
+            component: () => import('@/pages/analytics/ReportBuilder.vue'),
+            meta: {
+              title: '报告构建器',
+              requiresAuth: true,
+              permission: 'ANALYTICS_REPORT_BUILD',
+              priority: 'medium'
+            }
+          }
+        ]
+      },
+
+      // 教师首页
+      {
+        path: 'teacher/index',
+        name: 'TeacherIndex',
+        component: () => import('@/pages/teacher/index.vue'),
+        meta: {
+          title: '教师首页',
+          requiresAuth: true,
+          permission: 'TEACHER_VIEW',
+          hideInMenu: true,
+        }
+      },
+
+      // 家长首页
+      {
+        path: 'parent/index',
+        name: 'ParentIndex',
+        component: () => import('@/pages/parent/index.vue'),
+        meta: {
+          title: '家长首页',
+          requiresAuth: true,
+          permission: 'PARENT_VIEW',
+          hideInMenu: true,
+        }
+      },
+
+      // 活动首页
+      {
+        path: 'activity/index',
+        name: 'ActivityIndex',
+        component: () => import('@/pages/activity/index.vue'),
+        meta: {
+          title: '活动首页',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          hideInMenu: true,
+        }
+      },
+
+      // 活动管理主页面路由
+      {
+        path: 'activities',
+        name: 'Activities',
+        component: () => import('@/pages/activity/index.vue'),
+        meta: {
+          title: '活动管理',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+
+      // 异步加载演示页面 - 开发工具
+      {
+        path: 'examples/async-loading-demo',
+        name: 'AsyncLoadingDemo',
+        component: () => import('@/pages/examples/AsyncLoadingDemo.vue'),
+        meta: {
+          title: '异步加载演示',
+          requiresAuth: true,
+          permission: 'SYSTEM_MANAGE',
+          priority: 'low',
+          hideInMenu: true
+        }
+      },
+
+      // 中心化页面 - 招生中心
+      {
+        path: 'centers/enrollment',
+        name: 'EnrollmentCenter',
+        component: EnrollmentCenter,
+        meta: {
+          title: '招生中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'School',
+          description: '统一的招生管理工作台，包含计划管理、申请管理、咨询管理等功能'
+        }
+      },
+
+      // 中心化页面 - 人员中心
+      {
+        path: 'centers/personnel',
+        name: 'PersonnelCenter',
+        component: PersonnelCenter,
+        meta: {
+          title: '人员中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'UserFilled',
+          description: '统一的人员管理工作台，包含学生管理、家长管理、教师管理、班级管理等功能'
+        }
+      },
+
+      // 中心化页面 - 活动中心
+      {
+        path: 'centers/activity',
+        name: 'ActivityCenter',
+        component: ActivityCenter,
+        meta: {
+          title: '活动中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Calendar',
+          description: '统一的活动管理工作台，包含活动管理、报名管理、活动分析、通知管理等功能'
+        }
+      },
+
+      // 修复 /dashboard/activities 路由404问题 - 重定向到活动中心
+      {
+        path: 'dashboard/activities',
+        redirect: '/centers/activity',
+        meta: {
+          hideInMenu: true
+        }
+      },
+
+      // 测评数据中心 - Admin/园长
+      {
+        path: 'assessment-analytics',
+        name: 'AssessmentAnalytics',
+        redirect: '/assessment-analytics/overview',
+        meta: {
+          title: '测评数据中心',
+          requiresAuth: true,
+          roles: ['admin', 'principal'],
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'DataAnalysis',
+          description: '全园测评数据统计、分析和报告管理'
+        },
+        children: [
+          {
+            path: '/assessment-analytics/overview',
+            name: 'AssessmentOverview',
+            component: AssessmentOverview,
+            meta: {
+              title: '测评总览',
+              requiresAuth: true,
+              roles: ['admin', 'principal'],
+              priority: 'high'
+            }
+          },
+          {
+            path: '/assessment-analytics/records',
+            name: 'AssessmentRecords',
+            component: AssessmentRecords,
+            meta: {
+              title: '测评记录',
+              requiresAuth: true,
+              roles: ['admin', 'principal'],
+              priority: 'high'
+            }
+          },
+          {
+            path: '/assessment-analytics/reports',
+            name: 'AssessmentReports',
+            component: AssessmentReports,
+            meta: {
+              title: '测评报告',
+              requiresAuth: true,
+              roles: ['admin', 'principal'],
+              priority: 'high'
+            }
+          },
+          {
+            path: '/assessment-analytics/trends',
+            name: 'AssessmentTrends',
+            component: AssessmentTrends,
+            meta: {
+              title: '数据趋势',
+              requiresAuth: true,
+              roles: ['admin', 'principal'],
+              priority: 'high'
+            }
+          }
+        ]
+      },
+
+      // 中心化页面 - 任务中心
+      {
+        path: 'centers/task',
+        name: 'TaskCenter',
+        component: TaskCenter,
+        meta: {
+          title: '任务中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'List',
+          description: '统一的任务管理工作台，包含任务创建、分配、跟踪、分析等功能'
+        }
+      },
+
+      // 任务表单页面
+      {
+        path: 'centers/task/form',
+        name: 'TaskForm',
+        component: TaskForm,
+        meta: {
+          title: '任务表单',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'high',
+          description: '新建或编辑任务的表单页面'
+        }
+      },
+
+      // 中心化页面 - 检查中心
+      {
+        path: 'centers/inspection',
+        name: 'InspectionCenter',
+        component: InspectionCenter,
+        meta: {
+          title: '检查中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'DocumentChecked',
+          description: '统一的检查管理工作台，包含检查计划、文档模板、任务管理、提醒设置等功能'
+        }
+      },
+
+      // 中心化页面 - 招商中心
+      {
+        path: 'centers/business',
+        name: 'BusinessCenter',
+        component: BusinessCenter,
+        meta: {
+          title: '招商中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'TrendCharts',
+          description: '管理合作伙伴、渠道推广和商业机会'
+        }
+      },
+
+      // 中心化页面 - 财务中心
+      {
+        path: 'centers/finance',
+        name: 'FinanceCenter',
+        component: FinanceCenter,
+        meta: {
+          title: '财务中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Money',
+          description: '统一的财务管理工作台，包含收费管理、财务报表、费用统计、财务分析等功能'
+        }
+      },
+
+      // 中心化页面 - 通话中心
+      {
+        path: 'centers/call-center',
+        name: 'CallCenter',
+        component: CallCenter,
+        meta: {
+          title: '通话中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Phone',
+          description: '统一的通话管理工作台，包含通话记录、客户跟进、通话分析、沟通管理等功能'
+        }
+      },
+
+      // 中心化页面 - 客户中心
+      {
+        path: 'centers/customer',
+        name: 'CustomerCenter',
+        component: CustomerPoolCenter,
+        meta: {
+          title: '客户中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'User',
+          description: '统一的客户管理工作台，包含客户信息、跟进记录、客户分析、客户服务等功能'
+        }
+      },
+
+      // 中心化页面 - 教学中心
+      {
+        path: 'centers/teaching',
+        name: 'TeachingCenter',
+        component: TeachingCenter,
+        meta: {
+          title: '教学中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Reading',
+          description: '统一的教学管理工作台，包含课程管理、教学记录、教学评估、教学资源等功能'
+        }
+      },
+
+      // 中心化页面 - 文档管理中心（统一的模板和实例管理）
+      {
+        path: 'centers/document-center',
+        name: 'DocumentCenter',
+        component: DocumentCenter,
+        meta: {
+          title: '文档管理中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'medium',
+          icon: 'FolderOpened',
+          description: '统一的文档模板和实例管理平台，支持模板创建、实例管理、版本控制'
+        }
+      },
+
+      // 中心化页面 - 文档协作
+      {
+        path: 'centers/document-collaboration',
+        name: 'DocumentCollaboration',
+        component: DocumentCollaboration,
+        meta: {
+          title: '文档协作',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'medium',
+          icon: 'Document',
+          description: '文档协作平台，支持多人实时编辑、版本管理和文档共享'
+        }
+      },
+
+      // 中心化页面 - 文档编辑器
+      {
+        path: 'centers/document-editor',
+        name: 'DocumentEditor',
+        component: DocumentEditor,
+        meta: {
+          title: '文档编辑器',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low',
+          icon: 'Edit',
+          description: '富文本文档编辑器'
+        }
+      },
+
+      // 中心化页面 - 文档模板中心
+      {
+        path: 'centers/document-template',
+        name: 'DocumentTemplateCenter',
+        component: DocumentTemplateCenter,
+        meta: {
+          title: '文档模板中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'medium',
+          icon: 'Grid',
+          description: '文档模板管理，提供各类文档模板'
+        }
+      },
+
+      // 中心化页面 - 文档实例列表
+      {
+        path: 'centers/document-instances',
+        name: 'DocumentInstanceList',
+        component: DocumentInstanceList,
+        meta: {
+          title: '文档实例列表',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low',
+          icon: 'List',
+          description: '文档实例管理'
+        }
+      },
+
+      // 中心化页面 - 文档统计
+      {
+        path: 'centers/document-statistics',
+        name: 'DocumentStatistics',
+        component: DocumentStatistics,
+        meta: {
+          title: '文档统计',
+          requiresAuth: true,
+          hideInMenu: true,
+          priority: 'low',
+          icon: 'TrendCharts',
+          description: '文档使用统计分析'
+        }
+      },
+
+      // 中心化页面 - 相册中心（原媒体中心）
+      {
+        path: 'centers/media',
+        name: 'MediaCenter',
+        component: MediaCenter,
+        meta: {
+          title: '相册中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Picture',
+          description: '统一的媒体管理工作台，包含媒体资源、素材管理、媒体发布、媒体分析等功能'
+        }
+      },
+
+      // 中心化页面 - 考勤中心
+      {
+        path: 'centers/attendance',
+        name: 'AttendanceCenter',
+        component: AttendanceCenter,
+        meta: {
+          title: '考勤中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'Clock',
+          description: '统一的考勤管理工作台，包含考勤记录、考勤统计、异常处理、考勤报表等功能'
+        }
+      },
+
+      // 中心化页面 - 评估中心
+      {
+        path: 'centers/assessment',
+        name: 'AssessmentCenter',
+        component: AssessmentCenter,
+        meta: {
+          title: '评估中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'DocumentChecked',
+          description: '统一的评估管理工作台，包含评估任务、评估记录、评估分析、评估报表等功能'
+        }
+      }
+
+    ]
+  },
+
+  // 403权限不足页面
+  // 联系我们页面
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
+    meta: {
+      title: '联系我们',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low'
+    }
+  },
+
+  // 移动端默认路由
+  {
+    path: '/mobile',
+    name: 'MobileHome',
+    redirect: '/mobile/login',
+    meta: {
+      title: '移动端',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+
+  // 移动端登录页面
+  {
+    path: '/mobile/login',
+    name: 'MobileLogin',
+    component: () => import('@/pages/Login/index.vue'),
+    meta: {
+      title: '移动端登录',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+
+  // 移动端路由
+  {
+    path: '/mobile/activity-plan/:id',
+    name: 'MobileActivityDetail',
+    component: () => import('@/pages/activity/ActivityDetail.vue'),
+    meta: {
+      title: '活动详情',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+
+  // 移动端路由 - 修复路径
+  {
+    path: '/mobile/activity-detail/:id',
+    name: 'MobileActivityDetail',
+    component: () => import('@/pages/activity/ActivityDetail.vue'),
+    meta: {
+      title: '活动详情',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+
+  // 移动端AI聊天路由
+  {
+    path: '/mobile/ai-chat',
+    name: 'MobileAIChat',
+    component: () => import('../../aimobile/pages/MobileAIChat.vue'),
+    meta: {
+      title: 'AI智能助手',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+
+  // 关于我们页面
+  {
+    path: '/about',
+    name: 'About',
+    component: About,
+    meta: {
+      title: '关于我们',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low'
+    }
+  },
+
+  {
+    path: '/403',
+    name: 'Forbidden',
+    component: () => import('@/pages/403.vue'),
+    meta: {
+      title: '权限不足',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // 测试页面 - 组件测试
+  {
+    path: '/test/components',
+    name: 'ComponentTest',
+    component: ComponentTest,
+    meta: {
+      title: '组件测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // AI图片管理页面
+  {
+    path: '/admin/image-replacement',
+    name: 'ImageReplacementManager',
+    component: ImageReplacementManager,
+    meta: {
+      title: 'AI自动配图管理',
+      requiresAuth: true,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 幼儿园AI演示页面
+  {
+    path: '/demo/kindergarten-ai',
+    name: 'KindergartenAIDemo',
+    component: KindergartenAIDemo,
+    meta: {
+      title: '幼儿园AI配图演示',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 快捷查询演示页面
+  {
+    path: '/demo/quick-query',
+    name: 'QuickQueryDemo',
+    component: QuickQueryDemo,
+    meta: {
+      title: '快捷查询分组演示',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // API测试页面
+  {
+    path: '/debug/api-test',
+    name: 'ApiTest',
+    component: ApiTest,
+    meta: {
+      title: 'API测试',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low'
+    }
+  },
+
+  // 简单快捷查询测试页面
+  {
+    path: '/debug/simple-test',
+    name: 'SimpleQuickQueryTest',
+    component: SimpleQuickQueryTest,
+    meta: {
+      title: '简单快捷查询测试',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low'
+    }
+  },
+
+  // 直接API测试页面
+  {
+    path: '/debug/direct-test',
+    name: 'DirectApiTest',
+    component: DirectApiTest,
+    meta: {
+      title: '直接API测试',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low'
+    }
+  },
+
+  // 最小化测试页面
+  {
+    path: '/debug/minimal-test',
+    name: 'MinimalTest',
+    component: MinimalTest,
+    meta: {
+      title: '最小化快捷查询测试',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'low',
+      public: true
+    }
+  },
+
+  // 演示中心首页
+  {
+    path: '/demo',
+    name: 'DemoIndex',
+    component: () => import('@/pages/demo/index.vue'),
+    meta: {
+      title: '演示中心',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 物理电路学习演示页面
+  {
+    path: '/demo/circuit',
+    name: 'CircuitDemo',
+    component: () => import('@/pages/demo/CircuitDemo.vue'),
+    meta: {
+      title: '物理电路学习',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 动态专家团队演示页面
+  {
+    path: '/demo/expert-team',
+    name: 'ExpertTeamDemo',
+    component: () => import('@/pages/demo/ExpertTeamDemo.vue'),
+    meta: {
+      title: '动态专家团队演示',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 智能专家调度系统演示页面
+  {
+    path: '/demo/smart-expert',
+    name: 'SmartExpertDemo',
+    component: () => import('@/pages/demo/SmartExpertDemo.vue'),
+    meta: {
+      title: '智能专家调度系统',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // Markdown图文混排演示页面
+  {
+    path: '/demo/markdown',
+    name: 'MarkdownDemo',
+    component: MarkdownDemo,
+    meta: {
+      title: '📝 图文混排演示',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 中心页面路由 - 修复404问题
+  {
+    path: '/centers',
+    component: Layout,
+    redirect: '/centers/dashboard',
+    meta: {
+      title: '中心管理',
+      requiresAuth: true
+    },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'DashboardCenter',
+        component: () => import('@/pages/dashboard/index.vue'),
+        meta: {
+          title: '仪表板中心',
+          requiresAuth: true,
+          permission: 'DASHBOARD_CENTER_VIEW',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'personnel',
+        name: 'PersonnelCenter',
+        component: PersonnelCenter,
+        meta: {
+          title: '人事中心',
+          requiresAuth: true,
+          permission: 'PERSONNEL_CENTER',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'activity',
+        name: 'ActivityCenter',
+        component: ActivityCenter,
+        meta: {
+          title: '活动中心',
+          requiresAuth: true,
+          permission: 'ACTIVITY_CENTER_VIEW',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'enrollment',
+        name: 'EnrollmentCenter',
+        component: EnrollmentCenter,
+        meta: {
+          title: '招生中心',
+          requiresAuth: true,
+          permission: 'ENROLLMENT_CENTER',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'marketing',
+        name: 'MarketingCenter',
+        component: MarketingCenter,
+        meta: {
+          title: '营销中心',
+          requiresAuth: true,
+          permission: 'MARKETING_CENTER_VIEW',
+          priority: 'medium'
+        },
+        children: [
+          {
+            path: 'channels',
+            name: 'MarketingChannels',
+            component: () => import('@/pages/marketing/channels/index.vue'),
+            meta: { title: '渠道管理', requiresAuth: true, permission: 'MARKETING_CHANNELS_MANAGE' }
+          },
+          {
+            path: 'referrals',
+            name: 'MarketingReferrals',
+            component: () => import('@/pages/marketing/referrals/index.vue'),
+            meta: { title: '老带新', requiresAuth: true, permission: 'MARKETING_REFERRALS_MANAGE' }
+          },
+          {
+            path: 'conversions',
+            name: 'MarketingConversions',
+            component: () => import('@/pages/marketing/conversions/index.vue'),
+            meta: { title: '转换统计', requiresAuth: true, permission: 'MARKETING_STATS_VIEW' }
+          },
+          {
+            path: 'funnel',
+            name: 'MarketingFunnel',
+            component: () => import('@/pages/marketing/funnel/index.vue'),
+            meta: { title: '销售漏斗', requiresAuth: true, permission: 'MARKETING_FUNNEL_VIEW' }
+          }
+        ]
+      },
+      {
+        path: 'script',
+        name: 'ScriptCenter',
+        component: ScriptCenter,
+        meta: {
+          title: '文案中心',
+          requiresAuth: true,
+          permission: 'SCRIPT_CENTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'ai',
+        name: 'AICenter',
+        component: AICenter,
+        meta: {
+          title: 'AI中心',
+          requiresAuth: true,
+          permission: 'AI_CENTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'system',
+        name: 'SystemCenter',
+        component: SystemCenter,
+        meta: {
+          title: '系统管理',
+          requiresAuth: true,
+          permission: 'SYSTEM_CENTER_VIEW',
+          priority: 'low'
+        }
+      },
+      {
+        path: 'task',
+        name: 'TaskCenter',
+        component: TaskCenter,
+        meta: {
+          title: '任务中心',
+          requiresAuth: true,
+          permission: 'TASK_CENTER_VIEW',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'customer-pool',
+        name: 'CustomerPoolCenter',
+        component: CustomerPoolCenter,
+        meta: {
+          title: '客户池中心',
+          requiresAuth: true,
+          permission: 'CUSTOMER_POOL_CENTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'analytics',
+        name: 'AnalyticsCenter',
+        component: AnalyticsCenter,
+        meta: {
+          title: '数据分析中心',
+          requiresAuth: true,
+          permission: 'ANALYTICS_CENTER_VIEW',
+          priority: 'medium'
+        }
+      }
+    ]
+  },
+
+  // 测试页面路由 - 用于调试组件问题
+  {
+    path: '/test/simple-form-modal-test',
+    name: 'SimpleFormModalTest',
+    component: () => import('@/pages/test/SimpleFormModalTest.vue'),
+    meta: {
+      title: 'SimpleFormModal测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // 页面操作工具测试页面
+  {
+    path: '/test/page-operation-tools',
+    name: 'PageOperationToolsTest',
+    component: PageOperationToolsTest,
+    meta: {
+      title: '页面操作工具测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+  {
+    path: '/test/form-modal-test',
+    name: 'FormModalTest',
+    component: () => import('@/pages/test/FormModalTest.vue'),
+    meta: {
+      title: 'FormModal测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // 学生管理测试页面
+  {
+    path: '/test/student-management',
+    name: 'StudentManagementTest',
+    component: () => Promise.resolve({
+      default: {
+        name: 'StudentManagementTest',
+        template: `
+          <div style="padding: 20px;">
+            <h1>学生管理功能测试</h1>
+            <p>这是一个简单的学生管理功能演示页面</p>
+            <button @click="loadStudents" :disabled="loading" style="padding: 8px 16px; margin: 10px 0; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+              {{ loading ? '加载中...' : '加载学生列表' }}
+            </button>
+            <div v-if="error" style="color: red; margin: 10px 0; padding: 10px; background: #f8d7da; border-radius: 4px;">
+              错误：{{ error }}
+            </div>
+            <div v-if="students.length > 0" style="margin-top: 20px;">
+              <h2>学生列表 (共 {{ total }} 人)</h2>
+              <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+                <thead>
+                  <tr style="background: #f8f9fa;">
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">学号</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">姓名</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">性别</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">年龄</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">班级</th>
+                    <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">状态</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="student in students" :key="student.id">
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.studentId }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.name }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.gender }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.age }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.className }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">{{ student.status }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div v-else-if="!loading && !error" style="margin-top: 20px; color: #666;">
+              暂无学生数据，请点击"加载学生列表"按钮
+            </div>
+          </div>
+        `,
+        data() {
+          return {
+            students: [],
+            total: 0,
+            loading: false,
+            error: ''
+          }
+        },
+        methods: {
+          async loadStudents() {
+            (this as any).loading = true;
+            (this as any).error = '';
+
+            try {
+              const response = await fetch('http://localhost:3000/api/students/by-class?classId=1&page=1&pageSize=20', {
+                method: 'GET',
+                headers: {
+                  'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTczNDI1NzUzOSwiZXhwIjoxNzM0MzQzOTM5fQ.Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8Ej8',
+                  'Content-Type': 'application/json'
+                }
+              })
+
+              const data = await response.json()
+
+              if (data.success) {
+                (this as any).students = data.data.list;
+                (this as any).total = data.data.total;
+              } else {
+                (this as any).error = data.message || '加载失败';
+              }
+            } catch (err) {
+              (this as any).error = '网络错误：' + (err as Error).message;
+            } finally {
+              (this as any).loading = false;
+            }
+          }
+        },
+        mounted() {
+          (this as any).loadStudents()
+        }
+      }
+    }),
+    meta: {
+      title: '学生管理测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // 教师中心路由
+  {
+    path: '/teacher-center',
+    component: Layout,
+    name: 'TeacherCenter',
+    redirect: '/teacher-center/dashboard',
+    meta: {
+      title: '教师中心',
+      requiresAuth: true,
+      roles: ['teacher'],
+      icon: 'User',
+      priority: 'high'
+    },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'TeacherDashboard',
+        component: () => import('@/pages/teacher-center/dashboard/index.vue'),
+        meta: {
+          title: '教师工作台',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Monitor',
+          priority: 'high'
+        }
+      },
+      {
+        path: 'notifications',
+        name: 'TeacherNotifications',
+        component: () => import('@/pages/teacher-center/notifications/index.vue'),
+        meta: {
+          title: '通知中心',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Bell',
+          priority: 'medium'
+        }
+      },
+
+      {
+        path: 'activities',
+        name: 'TeacherActivities',
+        component: () => import('@/pages/teacher-center/activities/index.vue'),
+        meta: {
+          title: '活动',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Trophy',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'teaching',
+        name: 'TeacherTeaching',
+        component: () => import('@/pages/teacher-center/teaching/index.vue'),
+        meta: {
+          title: '课程',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'School',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'tasks',
+        name: 'TeacherTasks',
+        component: () => import('@/pages/teacher-center/tasks/index.vue'),
+        meta: {
+          title: '任务',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'List',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'enrollment',
+        name: 'TeacherEnrollment',
+        component: () => import('@/pages/teacher-center/enrollment/index.vue'),
+        meta: {
+          title: '客户池',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'UserPlus',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'customer-tracking',
+        name: 'TeacherCustomerTracking',
+        component: () => import('@/pages/teacher-center/customer-tracking/index.vue'),
+        meta: {
+          title: '客户跟踪',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Connection',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'student-assessment',
+        name: 'TeacherStudentAssessment',
+        component: TeacherStudentAssessment,
+        meta: {
+          title: '学生测评',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'DataAnalysis',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'student-assessment/detail/:id',
+        name: 'TeacherStudentAssessmentDetail',
+        component: TeacherStudentDetail,
+        meta: {
+          title: '学生测评详情',
+          requiresAuth: true,
+          roles: ['teacher'],
+          hideInMenu: true,
+          priority: 'medium'
+        }
+      }
+    ]
+  },
+
+  // AI中心专家咨询路由
+  {
+    path: '/ai-center',
+    component: Layout,
+    name: 'AICenterRoot',
+    redirect: '/centers/ai',
+    children: [
+      {
+        path: 'expert-consultation',
+        name: 'ExpertConsultation',
+        component: () => import('@/pages/ai/ExpertConsultationPage.vue'),
+        meta: {
+          title: 'AI专家咨询',
+          requiresAuth: true,
+          permission: 'AI_EXPERT_CONSULTATION',
+          priority: 'medium'
+        }
+      }
+    ]
+  },
+
+  // 主题测试页面路由
+  {
+    path: '/theme-test',
+    name: 'ThemeTest',
+    component: () => import('@/pages/ThemeTest.vue'),
+    meta: {
+      title: '主题测试',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  },
+
+  // 增强样式演示页面路由
+  {
+    path: '/demo/enhanced',
+    name: 'EnhancedDemo',
+    component: () => import('@/demo/EnhancedDemoPage.vue'),
+    meta: {
+      title: '增强样式演示',
+      requiresAuth: false,
+      hideInMenu: false,
+      priority: 'medium'
+    }
+  },
+
+  // 家长中心路由
+  {
+    path: '/parent-center',
+    name: 'ParentCenter',
+    component: Layout,
+    redirect: '/parent-center/dashboard',
+    meta: {
+      title: '家长中心',
+      requiresAuth: true,
+      roles: ['parent'],
+      icon: 'User'
+    },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'ParentDashboard',
+        component: () => import('@/pages/parent-center/dashboard/index.vue'),
+        meta: {
+          title: '我的首页',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'HomeFilled'
+        }
+      },
+      {
+        path: 'children',
+        name: 'ParentChildren',
+        component: () => import('@/pages/parent-center/children/index.vue'),
+        meta: {
+          title: '我的孩子',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'School'
+        }
+      },
+      {
+        path: 'child-growth',
+        name: 'ParentChildGrowthReport',
+        component: () => import('@/pages/parent-center/children/Growth.vue'),
+        meta: {
+          title: '成长报告',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'TrendCharts'
+        }
+      },
+      {
+        path: 'assessment/start',
+        name: 'ParentAssessmentStart',
+        component: () => import('@/pages/parent-center/assessment/Start.vue'),
+        meta: {
+          title: '开始测评',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'assessment',
+        name: 'ParentAssessment',
+        component: () => import('@/pages/parent-center/assessment/Layout.vue'),
+        redirect: '/parent-center/assessment/development',
+        meta: {
+          title: '测评中心',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Document'
+      },
+        children: [
+      {
+            path: 'development',
+            name: 'ParentDevelopmentAssessment',
+            component: () => import('@/pages/parent-center/assessment/index.vue'),
+            meta: {
+              title: '2-6岁发育测评',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'TrendCharts'
+            }
+          },
+          {
+            path: 'school-readiness',
+            name: 'ParentSchoolReadinessAssessment',
+            component: () => import('@/pages/parent-center/assessment/SchoolReadiness.vue'),
+        meta: {
+              title: '幼小衔接',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'Notebook'
+        }
+      },
+      {
+            path: 'academic',
+            name: 'ParentAcademicAssessment',
+            component: () => import('@/pages/parent-center/assessment/Academic.vue'),
+            meta: {
+              title: '学科测评',
+              requiresAuth: true,
+              roles: ['parent'],
+              icon: 'Reading'
+            }
+          },
+          {
+            path: 'doing/:recordId',
+        name: 'ParentAssessmentDoing',
+        component: () => import('@/pages/parent-center/assessment/Doing.vue'),
+        meta: {
+          title: '测评进行中',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+            path: 'report/:recordId',
+        name: 'ParentAssessmentReport',
+        component: () => import('@/pages/parent-center/assessment/Report.vue'),
+        meta: {
+          title: '测评报告',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+          },
+          {
+            path: 'growth-trajectory',
+            name: 'ParentGrowthTrajectory',
+            component: () => import('@/pages/parent-center/assessment/GrowthTrajectory.vue'),
+            meta: {
+              title: '成长轨迹',
+              requiresAuth: true,
+              roles: ['parent'],
+              hideInMenu: true
+            }
+          }
+        ]
+      },
+      {
+        path: 'games',
+        name: 'ParentGames',
+        component: () => import('@/pages/parent-center/games/index.vue'),
+        meta: {
+          title: '游戏大厅',
+          requiresAuth: false,
+          icon: 'Cpu'
+        }
+      },
+      {
+        path: 'games/play/fruit-sequence',
+        name: 'FruitSequenceGame',
+        component: () => import('@/pages/parent-center/games/play/FruitSequence.vue'),
+        meta: {
+          title: '水果记忆大师',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/princess-garden',
+        name: 'PrincessGardenGame',
+        component: () => import('@/pages/parent-center/games/play/PrincessGarden.vue'),
+        meta: {
+          title: '公主花园找不同',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/space-treasure',
+        name: 'SpaceTreasureGame',
+        component: () => import('@/pages/parent-center/games/play/SpaceTreasure.vue'),
+        meta: {
+          title: '太空寻宝大冒险',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/animal-observer',
+        name: 'AnimalObserverGame',
+        component: () => import('@/pages/parent-center/games/play/AnimalObserver.vue'),
+        meta: {
+          title: '动物观察员',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/princess-memory',
+        name: 'PrincessMemoryGame',
+        component: () => import('@/pages/parent-center/games/play/PrincessMemory.vue'),
+        meta: {
+          title: '公主记忆宝盒',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/dinosaur-memory',
+        name: 'DinosaurMemoryGame',
+        component: () => import('@/pages/parent-center/games/play/DinosaurMemory.vue'),
+        meta: {
+          title: '恐龙记忆挑战',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/color-sorting',
+        name: 'ColorSortingGame',
+        component: () => import('@/pages/parent-center/games/play/ColorSorting.vue'),
+        meta: {
+          title: '颜色分类达人',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/dollhouse-tidy',
+        name: 'DollhouseTidyGame',
+        component: () => import('@/pages/parent-center/games/play/DollhouseTidy.vue'),
+        meta: {
+          title: '娃娃屋整理大师',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'games/play/robot-factory',
+        name: 'RobotFactoryGame',
+        component: () => import('@/pages/parent-center/games/play/RobotFactory.vue'),
+        meta: {
+          title: '机器人工厂',
+          requiresAuth: false,
+          hideInMenu: true
+        }
+      },
+      {
+        path: 'ai-assistant',
+        name: 'ParentAIAssistant',
+        component: () => import('@/pages/parent-center/ai-assistant/index.vue'),
+        meta: {
+          title: 'AI育儿助手',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'ChatDotRound'
+        }
+      },
+      {
+        path: 'activities',
+        name: 'ParentActivities',
+        component: () => import('@/pages/parent-center/activities/index.vue'),
+        meta: {
+          title: '活动列表',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Calendar'
+        }
+      },
+      {
+        path: 'communication',
+        name: 'ParentCommunication',
+        component: () => import('@/pages/parent-center/communication/smart-hub.vue'),
+        meta: {
+          title: '智能沟通',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Chat'
+        }
+      },
+      {
+        path: 'feedback',
+        name: 'ParentFeedback',
+        component: () => import('@/pages/parent-center/feedback/ParentFeedback.vue'),
+        meta: {
+          title: '意见反馈',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'Edit'
+        }
+      },
+      {
+        path: 'photo-album',
+        name: 'ParentPhotoAlbum',
+        component: () => import('@/pages/parent-center/photo-album/index.vue'),
+        meta: {
+          title: '相册中心',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'picture'
+        }
+      },
+      {
+        path: 'kindergarten-rewards',
+        name: 'ParentKindergartenRewards',
+        component: () => import('@/pages/parent-center/kindergarten-rewards.vue'),
+        meta: {
+          title: '园所奖励',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'gift'
+        }
+      },
+      {
+        path: 'profile',
+        name: 'ParentProfile',
+        component: () => import('@/pages/parent-center/profile/index.vue'),
+        meta: {
+          title: '我的信息',
+          requiresAuth: true,
+          roles: ['parent'],
+          icon: 'User'
+        }
+      }
+    ]
+  },
+
+  // 404页面 - 临时禁用以暴露真实错误
+  /*{
+    path: '/404',
+    name: 'NotFound',
+    component: () => import('@/pages/NotFound.vue'),
+    meta: {
+      title: '404',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  }
+
+  // 404页面 - 临时禁用以暴露真实错误
+  /*{
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '页面不存在',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
+  }*/
+
+  // 集团管理模块
+  {
+    path: '/group',
+    name: 'GroupManagement',
+    component: () => import('@/pages/group/group-list.vue'),
+    meta: {
+      title: '集团中心',
+      icon: 'OfficeBuilding',
+      requiresAuth: true,
+      permission: 'GROUP_MANAGEMENT_VIEW',
+      priority: 'high'
+    }
+  },
+  {
+    path: '/group/create',
+    name: 'GroupCreate',
+    component: () => import('@/pages/group/group-form.vue'),
+    meta: {
+      title: '创建集团',
+      requiresAuth: true,
+      permission: 'GROUP_MANAGEMENT_CREATE',
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+  {
+    path: '/group/:id/edit',
+    name: 'GroupEdit',
+    component: () => import('@/pages/group/group-form.vue'),
+    meta: {
+      title: '编辑集团',
+      requiresAuth: true,
+      permission: 'GROUP_MANAGEMENT_EDIT',
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+  {
+    path: '/group/:id',
+    name: 'GroupDetail',
+    component: () => import('@/pages/group/group-detail.vue'),
+    meta: {
+      title: '集团详情',
+      requiresAuth: true,
+      permission: 'GROUP_MANAGEMENT_VIEW',
+      hideInMenu: true,
+      priority: 'high'
+    }
+  },
+  {
+    path: '/group/:id/upgrade',
+    name: 'GroupUpgrade',
+    component: () => import('@/pages/group/group-upgrade.vue'),
+    meta: {
+      title: '集团升级',
+      requiresAuth: true,
+      permission: 'GROUP_MANAGEMENT_UPGRADE',
+      hideInMenu: true,
+      priority: 'high'
+    }
+  }
+]
+
+// 路由优先级配置
+export const routePriorities = {
+  critical: ['/login', '/register', '/dashboard', '/'],
+  high: ['/class', '/teacher', '/teacher-center', '/enrollment-plan', '/enrollment', '/group'],
+  medium: ['/profile', '/search', '/parent', '/customer', '/statistics', '/ai', '/chat'],
+  low: ['/help', '/system', '/advertisement', '/activity', '/principal']
+}
+
+// 路由预加载配置
+export const preloadConfig = {
+  // 立即预加载的路由
+  immediate: ['/dashboard', '/class', '/teacher', '/teacher-center'],
+
+  // 空闲时预加载的路由
+  idle: ['/enrollment-plan', '/enrollment', '/parent'],
+
+  // 按需预加载的路由
+  ondemand: ['/system', '/ai', '/statistics']
+};

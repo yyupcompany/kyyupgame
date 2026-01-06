@@ -1,0 +1,9 @@
+event: thinking_start
+data: {"message":"🤔 AI开始思考...","timestamp":"2025-11-20T23:03:03.467Z"}
+
+event: final_answer
+data: {"message":"💬 AI回答完成","content":"请问您需要为哪个学生的评估表输入评语？请提供学生姓名或ID，以及具体的评语内容。","toolUsed":0,"modelName":"doubao-seed-1-6-flash-250715","timestamp":"2025-11-20T23:03:08.235Z"}
+
+event: complete
+data: {"message":"🎉 对话完成","timestamp":"2025-11-20T23:03:08.235Z","totalEvents":3,"modelUsed":"doubao-seed-1-6-flash-250715","complexityScore":0.24956521739130436}
+

@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "url": "http://localhost:9090/mcp"
+    }
+  },
+  "tools": {
+    "playwright": {
+      "type": "mcp",
+      "server": "playwright",
+      "name": "playwright",
+      "description": "Playwright MCP for browser automation"
+    }
+  }
+}

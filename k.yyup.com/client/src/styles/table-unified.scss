@@ -1,0 +1,148 @@
+/* 统一表格组件样式 */
+
+/* 操作列按钮容器 */
+.table-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  .el-button-group {
+    .el-button {
+      padding: 5px 12px;
+      font-size: var(--text-xs);
+
+      .el-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  /* 单个按钮样式 */
+  > .el-button {
+    padding: 5px 12px;
+    font-size: var(--text-xs);
+
+    .el-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+/* 表格列宽度标准化 */
+.el-table {
+  /* ID列标准宽度 */
+  .el-table-column--selection {
+    width: 55px !important;
+  }
+
+  /* 状态列标准宽度 */
+  .el-table__cell {
+    &[data-label*="状态"] {
+      width: 100px;
+    }
+
+    &[data-label*="操作"] {
+      text-align: center;
+
+      /* 单按钮操作列 */
+      &[width="100"] {
+        width: 100px;
+      }
+
+      /* 双按钮操作列 */
+      &[width="160"] {
+        width: 160px;
+      }
+
+      /* 三按钮操作列 */
+      &[width="200"], &[width="220"] {
+        width: 220px;
+      }
+    }
+
+    /* 时间列标准宽度 */
+    &[data-label*="时间"] {
+      width: 180px;
+    }
+
+    /* 金额列标准宽度 */
+    &[data-label*="金额"], &[data-label*="费用"], &[data-label*="价格"] {
+      width: 120px;
+      text-align: right;
+    }
+  }
+}
+
+/* 状态标签统一样式 */
+.el-tag {
+  &.el-tag--small {
+    font-size: var(--text-xs);
+    height: 20px;
+    line-height: 18px;
+    padding: 0 6px;
+  }
+}
+
+/* 强调文字统一样式 */
+.table-highlight {
+  font-weight: 600;
+  color: var(--el-color-primary);
+}
+
+.table-secondary {
+  color: var(--el-text-color-secondary);
+  font-size: var(--text-xs);
+}
+
+/* 表格响应式优化 */
+@media (max-width: var(--breakpoint-md)) {
+  .table-actions {
+    .el-button-group .el-button,
+    > .el-button {
+      padding: var(--spacing-xs) 8px;
+      font-size: 11px;
+
+      .el-icon {
+        margin-right: 2px;
+      }
+
+      /* 移动端隐藏按钮文字，只显示图标 */
+      span:not(.el-icon) {
+        display: none;
+      }
+    }
+  }
+
+  .el-table {
+    .el-table__cell[data-label*="操作"] {
+      width: 80px !important;
+    }
+  }
+}
+
+/* 表格加载状态优化 */
+.el-table .el-table__empty-block {
+  min-height: 60px;
+
+  .el-table__empty-text {
+    color: var(--el-text-color-secondary);
+  }
+}
+
+/* 表格边框和分割线优化 */
+.el-table {
+  --el-table-border-color: var(--el-border-color-lighter);
+
+  .el-table__header-wrapper th {
+    background-color: var(--el-bg-color-page);
+    color: var(--el-text-color-primary);
+    font-weight: 600;
+  }
+
+  .el-table__row {
+    &:hover {
+      background-color: var(--el-bg-color-page);
+    }
+  }
+}

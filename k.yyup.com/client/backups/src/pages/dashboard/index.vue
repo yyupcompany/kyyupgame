@@ -1,0 +1,832 @@
+<template>
+  <UnifiedCenterLayout
+    title="综合工作台"
+    description="这里是幼儿园管理系统的核心枢纽，您可以快速总览各业务中心数据与入口，掌握园区运营状况"
+  >
+    <template #header-actions>
+      <el-button type="primary" size="large" @click="refreshAllData" :loading="refreshing">
+        <el-icon><Refresh /></el-icon>
+        刷新数据
+      </el-button>
+      <el-dropdown @command="handleQuickAction">
+        <el-button type="default" size="large">
+          快捷操作<el-icon class="el-icon--right"><arrow-down /></el-icon>
+        </el-button>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="add-student">新增学生</el-dropdown-item>
+            <el-dropdown-item command="add-teacher">新增教师</el-dropdown-item>
+            <el-dropdown-item command="create-activity">创建活动</el-dropdown-item>
+            <el-dropdown-item command="send-notice">发布通知</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </template>
+
+    <div class="center-container dashboard-center">
+      <!-- 主要内容区域 -->
+      <div class="main-content">
+        <!-- 欢迎横幅 -->
+        <div class="welcome-banner">
+          <div class="welcome-content">
+            <h2>{{ getCurrentTimeGreeting() }}，{{ currentUser.name || '管理员' }}</h2>
+            <p>欢迎回到幼儿园管理系统！这里可快速总览各业务中心数据与入口。</p>
+          </div>
+          <div class="welcome-stats">
+            <div class="stat-item">
+              <div class="stat-value">{{ dashboardStats.studentCount || 0 }}</div>
+              <div class="stat-label">在读学生</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ dashboardStats.teacherCount || 0 }}</div>
+              <div class="stat-label">教职员工</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ dashboardStats.classCount || 0 }}</div>
+              <div class="stat-label">班级数量</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 核心统计卡片 -->
+        <div class="stats-section">
+          <div class="stats-grid-unified">
+            <StatCard
+              title="在读学生"
+              :value="dashboardStats.studentCount || 0"
+              unit="人"
+              :trend="trends.studentTrend"
+              trend-text="较上月"
+              icon-name="user"
+              type="primary"
+              :loading="loading"
+              clickable
+              @click="navigateToCenter('/student')"
+            />
+            <StatCard
+              title="教职员工"
+              :value="dashboardStats.teacherCount || 0"
+              unit="人"
+              :trend="trends.teacherTrend"
+              trend-text="较上月"
+              icon-name="users"
+              type="success"
+              :loading="loading"
+              clickable
+              @click="navigateToCenter('/teacher')"
+            />
+            <StatCard
+              title="班级总数"
+              :value="dashboardStats.classCount || 0"
+              unit="个"
+              :trend="trends.classTrend"
+              trend-text="较上月"
+              icon-name="home"
+              type="warning"
+              :loading="loading"
+              clickable
+              @click="navigateToCenter('/class')"
+            />
+            <StatCard
+              title="活动数量"
+              :value="dashboardStats.activityCount || 0"
+              unit="个"
+              :trend="trends.activityTrend"
+              trend-text="较上月"
+              icon-name="calendar"
+              type="info"
+              :loading="loading"
+              clickable
+              @click="navigateToCenter('/activity')"
+            />
+          </div>
+        </div>
+
+        <!-- 业务中心入口 -->
+        <div class="centers-section">
+          <div class="section-header">
+            <h3>业务中心</h3>
+            <p>快速访问各业务功能模块</p>
+          </div>
+          <div class="centers-grid">
+            <div class="center-card" @click="navigateToCenter('/centers/enrollment')">
+              <div class="center-icon enrollment">
+                <el-icon><User /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>招生中心</h4>
+                <p>管理招生计划、处理入学申请</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+
+            <div class="center-card" @click="navigateToCenter('/centers/teaching')">
+              <div class="center-icon teaching">
+                <el-icon><Reading /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>教学中心</h4>
+                <p>课程管理、教学安排</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+
+            <div class="center-card" @click="navigateToCenter('/centers/activity')">
+              <div class="center-icon activity">
+                <el-icon><Calendar /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>活动中心</h4>
+                <p>活动策划、组织执行</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+
+            <div class="center-card" @click="navigateToCenter('/centers/finance')">
+              <div class="center-icon finance">
+                <el-icon><Money /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>财务中心</h4>
+                <p>收费管理、财务统计</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+
+            <div class="center-card" @click="navigateToCenter('/centers/marketing')">
+              <div class="center-icon marketing">
+                <el-icon><Promotion /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>营销中心</h4>
+                <p>推广活动、客户关系</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+
+            <div class="center-card" @click="navigateToCenter('/centers/ai')">
+              <div class="center-icon ai">
+                <el-icon><Cpu /></el-icon>
+              </div>
+              <div class="center-info">
+                <h4>AI中心</h4>
+                <p>智能助手、数据分析</p>
+              </div>
+              <div class="center-arrow">
+                <el-icon><ArrowRight /></el-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 快速操作和待办事项 -->
+        <div class="quick-todo-section">
+          <div class="quick-actions">
+            <div class="section-header">
+              <h3>快速操作</h3>
+            </div>
+            <div class="actions-grid">
+              <div class="action-item" @click="handleQuickAction('add-student')">
+                <div class="action-icon">
+                  <el-icon><Plus /></el-icon>
+                </div>
+                <span>新增学生</span>
+              </div>
+              <div class="action-item" @click="handleQuickAction('add-teacher')">
+                <div class="action-icon">
+                  <el-icon><Plus /></el-icon>
+                </div>
+                <span>新增教师</span>
+              </div>
+              <div class="action-item" @click="handleQuickAction('create-activity')">
+                <div class="action-icon">
+                  <el-icon><Calendar /></el-icon>
+                </div>
+                <span>创建活动</span>
+              </div>
+              <div class="action-item" @click="handleQuickAction('send-notice')">
+                <div class="action-icon">
+                  <el-icon><Bell /></el-icon>
+                </div>
+                <span>发布通知</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="todo-section">
+            <div class="section-header">
+              <h3>待办事项</h3>
+              <el-link type="primary" @click="viewAllTodos">查看全部</el-link>
+            </div>
+            <div class="todo-list">
+              <div v-if="loading" class="loading-placeholder">
+                <el-skeleton :rows="3" animated />
+              </div>
+              <div v-else-if="todoList.length === 0" class="empty-todo">
+                <el-empty description="暂无待办事项" :image-size="80" />
+              </div>
+              <div v-else>
+                <div
+                  v-for="todo in todoList.slice(0, 5)"
+                  :key="todo.id"
+                  class="todo-item"
+                  @click="handleTodoClick(todo)"
+                >
+                  <div class="todo-content">
+                    <div class="todo-title">{{ todo.title }}</div>
+                    <div class="todo-time">{{ formatTime(todo.dueDate) }}</div>
+                  </div>
+                  <div class="todo-status" :class="todo.status">
+                    <el-tag :type="getTodoStatusType(todo.status)" size="small">
+                      {{ getTodoStatusText(todo.status) }}
+                    </el-tag>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </UnifiedCenterLayout>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import {
+  Refresh, Plus, ArrowDown, User, Users, Home, Calendar,
+  ArrowRight, Reading, Money, Promotion, Cpu, Bell
+} from '@element-plus/icons-vue'
+
+// 组件导入
+import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import StatCard from '@/components/centers/StatCard.vue'
+
+// API导入
+import * as dashboardApi from '@/api/modules/dashboard'
+import type { DashboardStats, Todo } from '@/api/modules/dashboard'
+
+// 状态管理
+import { useUserStore } from '@/stores/user'
+
+// 路由
+const router = useRouter()
+const userStore = useUserStore()
+
+// 响应式数据
+const loading = ref(false)
+const refreshing = ref(false)
+const dashboardStats = ref<DashboardStats>({
+  userCount: 0,
+  kindergartenCount: 0,
+  studentCount: 0,
+  enrollmentCount: 0,
+  activityCount: 0,
+  teacherCount: 0,
+  classCount: 0
+})
+const todoList = ref<Todo[]>([])
+
+// 趋势数据
+const trends = ref({
+  studentTrend: { value: 0, direction: 'up' },
+  teacherTrend: { value: 0, direction: 'up' },
+  classTrend: { value: 0, direction: 'up' },
+  activityTrend: { value: 0, direction: 'up' }
+})
+
+// 计算属性
+const currentUser = computed(() => userStore.user || { name: '管理员', role: 'admin' })
+
+// 获取时间问候语
+const getCurrentTimeGreeting = () => {
+  const hour = new Date().getHours()
+  if (hour < 12) return '早上好'
+  if (hour < 18) return '下午好'
+  return '晚上好'
+}
+
+// 格式化时间
+const formatTime = (date?: Date) => {
+  if (!date) return '无截止时间'
+  return new Date(date).toLocaleDateString('zh-CN', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+}
+
+// 获取待办事项状态类型
+const getTodoStatusType = (status: string) => {
+  const statusMap: Record<string, string> = {
+    'pending': 'warning',
+    'in_progress': 'primary',
+    'completed': 'success',
+    'cancelled': 'info'
+  }
+  return statusMap[status] || 'info'
+}
+
+// 获取待办事项状态文本
+const getTodoStatusText = (status: string) => {
+  const statusMap: Record<string, string> = {
+    'pending': '待处理',
+    'in_progress': '进行中',
+    'completed': '已完成',
+    'cancelled': '已取消'
+  }
+  return statusMap[status] || '未知'
+}
+
+// 获取仪表盘数据
+const fetchDashboardData = async () => {
+  try {
+    loading.value = true
+
+    // 并行获取数据
+    const [statsRes, todoRes] = await Promise.all([
+      dashboardApi.getDashboardStats(),
+      dashboardApi.getTodos({ page: 1, pageSize: 5 })
+    ])
+
+    if (statsRes.success && statsRes.data) {
+      dashboardStats.value = statsRes.data
+    }
+
+    if (todoRes.success && todoRes.data) {
+      todoList.value = todoRes.data.items || []
+    }
+
+  } catch (error) {
+    console.error('获取仪表盘数据失败:', error)
+    ElMessage.error('获取仪表盘数据失败')
+  } finally {
+    loading.value = false
+  }
+}
+
+// 刷新所有数据
+const refreshAllData = async () => {
+  refreshing.value = true
+  try {
+    await fetchDashboardData()
+    ElMessage.success('数据刷新成功')
+  } catch (error) {
+    ElMessage.error('数据刷新失败')
+  } finally {
+    refreshing.value = false
+  }
+}
+
+// 导航到中心
+const navigateToCenter = (path: string) => {
+  router.push(path)
+}
+
+// 处理快速操作
+const handleQuickAction = (command: string) => {
+  switch (command) {
+    case 'add-student':
+      router.push('/student/create')
+      break
+    case 'add-teacher':
+      router.push('/teacher/create')
+      break
+    case 'create-activity':
+      router.push('/activity/create')
+      break
+    case 'send-notice':
+      router.push('/notice/create')
+      break
+  }
+}
+
+// 处理待办事项点击
+const handleTodoClick = (todo: Todo) => {
+  // 根据待办事项类型跳转到相应页面
+  console.log('点击待办事项:', todo)
+}
+
+// 查看所有待办事项
+const viewAllTodos = () => {
+  router.push('/todo')
+}
+
+// 组件挂载
+onMounted(() => {
+  fetchDashboardData()
+})
+</script>
+
+<style scoped lang="scss">
+@import '@/styles/index.scss';
+
+.dashboard-center {
+  .welcome-banner {
+    background: var(--gradient-primary, linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%));
+    border-radius: var(--text-lg);
+    color: var(--bg-white);
+    padding: var(--spacing-3xl);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .welcome-content {
+      h2 {
+        margin: 0 0 var(--spacing-sm) 0;
+        font-size: var(--text-2xl);
+        font-weight: 600;
+      }
+
+      p {
+        margin: 0;
+        opacity: 0.9;
+        font-size: var(--text-base);
+      }
+    }
+
+    .welcome-stats {
+      display: flex;
+      gap: var(--spacing-xl);
+
+      .stat-item {
+        text-align: center;
+
+        .stat-value {
+          font-size: var(--text-3xl);
+          font-weight: 700;
+          margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-label {
+          font-size: var(--text-sm);
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  .centers-section {
+    margin-bottom: var(--spacing-xl);
+
+    .centers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+
+      .center-card {
+        background: var(--bg-primary);
+        border: var(--border-width-base) solid var(--border-light);
+        border-radius: var(--text-sm);
+        padding: var(--spacing-lg);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-md);
+
+        &:hover {
+          border-color: var(--primary-color);
+          box-shadow: var(--shadow-md);
+          transform: translateY(-2px);
+        }
+
+        .center-icon {
+          width: var(--icon-size); height: var(--icon-size);
+          border-radius: var(--text-sm);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: var(--text-3xl);
+
+          &.enrollment {
+            background: var(--color-primary-light);
+            color: var(--primary-color);
+          }
+
+          &.teaching {
+            background: var(--color-success-light);
+            color: var(--success-color);
+          }
+
+          &.activity {
+            background: var(--color-warning-light);
+            color: var(--warning-color);
+          }
+
+          &.finance {
+            background: var(--color-info-light);
+            color: var(--info-color);
+          }
+
+          &.marketing {
+            background: var(--color-danger-light);
+            color: var(--danger-color);
+          }
+
+          &.ai {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
+            color: var(--bg-white);
+          }
+        }
+
+        .center-info {
+          flex: 1;
+
+          h4 {
+            margin: 0 0 var(--spacing-xs) 0;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+          }
+
+          p {
+            margin: 0;
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+          }
+        }
+
+        .center-arrow {
+          color: var(--text-tertiary);
+          transition: transform 0.3s ease;
+        }
+
+        &:hover .center-arrow {
+          transform: translateX(var(--spacing-xs));
+        }
+      }
+    }
+  }
+
+  .quick-todo-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+
+    .quick-actions {
+      .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+
+        .action-item {
+          background: var(--bg-primary);
+          border: var(--border-width-base) solid var(--border-light);
+          border-radius: var(--spacing-sm);
+          padding: var(--spacing-md);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--spacing-sm);
+          text-align: center;
+
+          &:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-sm);
+          }
+
+          .action-icon {
+            width: var(--icon-size); height: var(--icon-size);
+            border-radius: var(--spacing-sm);
+            background: var(--color-primary-light);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-2xl);
+          }
+
+          span {
+            font-size: var(--text-sm);
+            color: var(--text-primary);
+          }
+        }
+      }
+    }
+
+    .todo-section {
+      .todo-list {
+        background: var(--bg-primary);
+        border: var(--border-width-base) solid var(--border-light);
+        border-radius: var(--spacing-sm);
+        padding: var(--spacing-md);
+
+        .todo-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: var(--spacing-sm) 0;
+          cursor: pointer;
+          border-bottom: var(--border-width-base) solid var(--border-lighter);
+          transition: background-color 0.3s ease;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &:hover {
+            background: var(--bg-secondary);
+            margin: 0 calc(-1 * var(--spacing-md));
+            padding-left: var(--spacing-md);
+            padding-right: var(--spacing-md);
+            border-radius: var(--spacing-xs);
+          }
+
+          .todo-content {
+            .todo-title {
+              font-size: var(--text-sm);
+              color: var(--text-primary);
+              margin-bottom: var(--spacing-xs);
+            }
+
+            .todo-time {
+              font-size: var(--text-xs);
+              color: var(--text-tertiary);
+            }
+          }
+        }
+
+        .empty-todo, .loading-placeholder {
+          padding: var(--spacing-lg);
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// 🎯 增强的响应式设计
+@media (max-width: var(--breakpoint-2xl)) {
+  .dashboard-center {
+    .centers-section .centers-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+  }
+}
+
+@media (max-width: var(--breakpoint-xl)) {
+  .dashboard-center {
+    .quick-todo-section {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .welcome-banner {
+      .welcome-stats {
+        gap: var(--spacing-lg);
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .dashboard-center {
+    .welcome-banner {
+      padding: var(--spacing-xl);
+
+      .welcome-stats {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+      }
+    }
+
+    .centers-section {
+      .centers-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-md);
+      }
+    }
+  }
+}
+
+@media (max-width: var(--breakpoint-md)) {
+  .dashboard-center {
+    .welcome-banner {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--spacing-lg);
+      gap: var(--spacing-lg);
+
+      .welcome-content {
+        h2 {
+          font-size: var(--text-xl);
+        }
+      }
+
+      .welcome-stats {
+        width: 100%;
+        justify-content: space-around;
+
+        .stat-item {
+          .stat-value {
+            font-size: var(--text-2xl);
+          }
+        }
+      }
+    }
+
+    .centers-section {
+      .centers-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+    }
+
+    .quick-todo-section {
+      .quick-actions {
+        .actions-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: var(--breakpoint-sm)) {
+  .dashboard-center {
+    .welcome-banner {
+      padding: var(--spacing-md);
+
+      .welcome-content {
+        h2 {
+          font-size: var(--text-lg);
+        }
+
+        p {
+          font-size: var(--text-sm);
+        }
+      }
+
+      .welcome-stats {
+        .stat-item {
+          .stat-value {
+            font-size: var(--text-xl);
+          }
+
+          .stat-label {
+            font-size: var(--text-xs);
+          }
+        }
+      }
+    }
+
+    .centers-section {
+      .center-card {
+        padding: var(--spacing-md);
+
+        .center-icon {
+          width: var(--icon-size); height: var(--icon-size);
+          font-size: var(--text-2xl);
+        }
+
+        .center-info h4 {
+          font-size: var(--text-base);
+        }
+
+        .center-info p {
+          font-size: var(--text-sm);
+        }
+      }
+    }
+
+    .quick-todo-section {
+      .quick-actions {
+        .actions-grid {
+          gap: var(--spacing-sm);
+
+          .action-item {
+            padding: var(--spacing-sm);
+
+            .action-icon {
+              width: var(--icon-size); height: var(--icon-size);
+              font-size: var(--text-xl);
+            }
+
+            span {
+              font-size: var(--text-xs);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>

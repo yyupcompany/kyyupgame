@@ -1,0 +1,387 @@
+/**
+ * 按钮统一样式
+ * 解决按钮错位问题，提供统一的按钮布局规范
+ */
+
+/* ===== 表格操作按钮 ===== */
+.table-action-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  
+  .el-button {
+    margin: 0 !important;
+    padding: 5px 12px;
+    font-size: var(--text-sm);
+    
+    &:not(:last-child) {
+      margin-right: 0 !important;
+    }
+  }
+  
+  // 确保在表格单元格中垂直居中
+  &.cell-buttons {
+    min-height: 32px;
+  }
+}
+
+/* ===== 表单底部按钮 ===== */
+.form-footer-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+  margin-top: 24px;
+  border-top: 1px solid #e5e7eb;
+  
+  .el-button {
+    min-width: 100px;
+    padding: 10px 24px;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    margin: 0 !important;
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    
+    .el-button {
+      width: 100%;
+    }
+  }
+}
+
+/* ===== 卡片头部按钮 ===== */
+.card-header-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  flex-wrap: wrap;
+  
+  .el-button {
+    margin: 0 !important;
+    
+    &:not(:last-child) {
+      margin-right: 0 !important;
+    }
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* ===== 列表顶部操作区 ===== */
+.list-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  
+  .left-actions,
+  .right-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    flex-wrap: wrap;
+    
+    .el-button {
+      margin: 0 !important;
+    }
+  }
+  
+  .left-actions {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .right-actions {
+    flex-shrink: 0;
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .left-actions,
+    .right-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+}
+
+/* ===== 搜索栏按钮组 ===== */
+.search-bar-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+  flex-wrap: wrap;
+  
+  .el-button {
+    margin: 0 !important;
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    width: 100%;
+    
+    .el-button {
+      flex: 1;
+    }
+  }
+}
+
+/* ===== 对话框底部按钮 ===== */
+.dialog-footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0 0 0;
+  
+  .el-button {
+    min-width: 80px;
+    margin: 0 !important;
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    justify-content: center;
+    
+    .el-button {
+      flex: 1;
+      max-width: 150px;
+    }
+  }
+}
+
+/* ===== 抽屉底部按钮 ===== */
+.drawer-footer-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 24px;
+  border-top: 1px solid #e5e7eb;
+  background: #fafbfc;
+  
+  .el-button {
+    min-width: 80px;
+    margin: 0 !important;
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    justify-content: center;
+    
+    .el-button {
+      flex: 1;
+    }
+  }
+}
+
+/* ===== 按钮组 ===== */
+.button-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  
+  .el-button {
+    margin: 0 !important;
+  }
+  
+  &.button-group-vertical {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .el-button {
+      width: 100%;
+    }
+  }
+}
+
+/* ===== 浮动操作按钮 ===== */
+.floating-action-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  
+  .el-button {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+    .el-icon {
+      font-size: var(--text-2xl);
+    }
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    right: 16px;
+    bottom: 16px;
+    
+    .el-button {
+      width: 48px;
+      height: 48px;
+      
+      .el-icon {
+        font-size: var(--text-xl);
+      }
+    }
+  }
+}
+
+/* ===== 分页按钮优化 ===== */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+  
+  :deep(.el-pagination) {
+    .el-pager li {
+      margin: 0 4px;
+      min-width: 32px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 6px;
+      
+      &.is-active {
+        background: var(--primary-color);
+        color: white;
+      }
+    }
+    
+    .btn-prev,
+    .btn-next {
+      min-width: 32px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 6px;
+    }
+  }
+  
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-md) 0;
+    
+    :deep(.el-pagination) {
+      .el-pagination__sizes,
+      .el-pagination__jump {
+        display: none;
+      }
+    }
+  }
+}
+
+/* ===== 工具栏按钮 ===== */
+.toolbar-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  flex-wrap: wrap;
+  
+  .el-button {
+    margin: 0 !important;
+  }
+  
+  .toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: #e5e7eb;
+    margin: 0 4px;
+  }
+}
+
+/* ===== 修复Element Plus默认按钮间距 ===== */
+.el-button + .el-button {
+  margin-left: 0 !important;
+}
+
+.el-form-item__content > .el-button {
+  margin-left: 0 !important;
+}
+
+/* ===== 响应式按钮 ===== */
+@media (max-width: var(--breakpoint-md)) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .full-width-on-mobile {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: var(--breakpoint-xs)) {
+  .hide-on-small-mobile {
+    display: none !important;
+  }
+}
+
+/* ===== ✨ 按钮颜色优化 ===== */
+/* 使用主题系统变量，确保按钮文字为白色 */
+.el-button--primary {
+  color: #ffffff;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.el-button--success {
+  color: #ffffff;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.el-button--warning {
+  color: #ffffff;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.el-button--danger {
+  color: #ffffff;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}
+
+.el-button--info {
+  color: #ffffff;
+  
+  &:hover,
+  &:focus,
+  &:active {
+    color: #ffffff;
+  }
+}
+

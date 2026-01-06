@@ -1,0 +1,840 @@
+/**
+ * 阶段4: 全局布局和样式修复
+ * 统一按钮尺寸、响应式设计和布局规范
+ */
+
+// 1. 按钮尺寸标准化 - 使用!important确保优先级
+button, .el-button, [role="button"], input[type="button"], input[type="submit"] {
+  // 确保最小点击区域 (移动端友好)
+  min-height: 36px !important;
+  min-width: 64px !important;
+
+  // 小尺寸按钮的最小尺寸
+  &.el-button--small {
+    min-height: 32px !important;
+    min-width: 56px !important;
+  }
+
+  // 大尺寸按钮
+  &.el-button--large {
+    min-height: 40px !important;
+    min-width: 80px !important;
+  }
+
+  // 移动端优化
+  @media (max-width: var(--breakpoint-md)) {
+    min-height: 44px !important; // 移动端推荐最小点击区域
+    padding: var(--spacing-sm) 16px !important;
+
+    &.el-button--small {
+      min-height: 40px !important;
+      padding: 6px 12px !important;
+    }
+  }
+}
+
+// 特别针对登录按钮和导航按钮
+.login-button,
+.nav-button,
+.header-button,
+.user-dropdown button,
+.sidebar-button,
+[class*="login"],
+[class*="nav"] button {
+  min-height: 36px !important;
+  min-width: 64px !important;
+
+  @media (max-width: var(--breakpoint-md)) {
+    min-height: 44px !important;
+    padding: var(--spacing-sm) 16px !important;
+  }
+}
+
+// 2. 响应式容器标准化
+.page-container {
+  width: 100%;
+  max-width: none;
+  overflow-x: hidden;
+  padding: var(--app-padding, 20px);
+
+  // 确保内容不会水平溢出
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  // 移动端适配
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--app-padding-mobile, 16px);
+  }
+}
+
+// 3. 表格响应式优化
+.el-table {
+  width: 100%;
+
+  // 表格容器
+  .el-table__body-wrapper {
+    overflow-x: auto;
+    max-width: 100%;
+
+    // 移动端滚动优化
+    @media (max-width: var(--breakpoint-md)) {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  // 移动端表格优化
+  @media (max-width: var(--breakpoint-md)) {
+    font-size: var(--text-sm);
+
+    .el-table__cell {
+      padding: var(--spacing-sm) 4px;
+    }
+
+    // 隐藏次要列以节省空间
+    .el-table__column--hidden-mobile {
+      display: none;
+    }
+  }
+}
+
+// 4. 卡片组件响应式
+.el-card {
+  width: 100%;
+  margin-bottom: var(--app-gap, 16px);
+
+  .el-card__body {
+    padding: var(--app-padding, 20px);
+
+    @media (max-width: var(--breakpoint-md)) {
+      padding: var(--app-padding-mobile, 16px);
+    }
+  }
+}
+
+// 5. 栅格系统优化
+.el-row {
+  width: 100%;
+  margin: 0;
+
+  .el-col {
+    // 移动端列布局优化
+    @media (max-width: var(--breakpoint-md)) {
+      &[class*="el-col-"] {
+        width: 100% !important;
+        margin-bottom: var(--app-gap, 16px);
+      }
+    }
+  }
+}
+
+// 6. 图片容器标准化
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius, 8px);
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  // 响应式图片
+  &.responsive-image {
+    max-width: 100%;
+    height: auto;
+
+    img {
+      height: auto;
+    }
+  }
+}
+
+// 7. 导航和侧边栏响应式
+.layout-sidebar {
+  @media (max-width: var(--breakpoint-md)) {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &.mobile-open {
+      transform: translateX(0);
+    }
+  }
+}
+
+// 8. 表单响应式优化
+.el-form {
+  width: 100%;
+
+  .el-form-item {
+    margin-bottom: var(--app-gap, 16px);
+
+    // 移动端表单优化
+    @media (max-width: var(--breakpoint-md)) {
+      .el-form-item__label {
+        width: 100% !important;
+        text-align: left !important;
+        margin-bottom: 8px;
+        padding: 0 !important;
+      }
+
+      .el-form-item__content {
+        margin-left: 0 !important;
+        width: 100%;
+      }
+    }
+  }
+
+  // 行内表单移动端适配
+  &.el-form--inline {
+    @media (max-width: var(--breakpoint-md)) {
+      .el-form-item {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 16px;
+
+        .el-form-item__content {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// 9. 对话框响应式
+.el-dialog {
+  @media (max-width: var(--breakpoint-md)) {
+    width: 95% !important;
+    margin: 5vh auto !important;
+
+    .el-dialog__body {
+      padding: var(--spacing-md);
+    }
+  }
+}
+
+// 10. 固定元素移动端优化
+[style*="position: fixed"] {
+  @media (max-width: var(--breakpoint-md)) {
+    // 确保固定元素不会超出视窗
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
+}
+
+// 11. 文字可读性优化
+body {
+  // 使用统一字体大小系统
+  font-size: var(--unified-font-size, 14px);
+  line-height: var(--unified-line-height, 1.5);
+
+  @media (max-width: var(--breakpoint-md)) {
+    font-size: var(--unified-font-size, 16px); // 移动端使用统一字体大小
+  }
+}
+
+// 12. 滚动条优化 - 使用全局极细样式
+
+// 13. 防止内容溢出的安全网
+* {
+  // 防止内容超出容器
+  max-width: 100%;
+
+  // 文字换行
+  word-wrap: break-word;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+// 🔧 AI助手对话框完整例外规则
+// 允许AI助手对话框及其所有子元素不受全局 max-width: 100% 限制
+.ai-assistant-panel,
+.ai-assistant-panel *,
+.center-main,
+.center-main *,
+.chat-container,
+.chat-container *,
+.chat-messages,
+.chat-messages *,
+.message-content,
+.message-item,
+.message-item * {
+  max-width: none !important;
+}
+
+// 然后让特定元素使用CSS变量控制宽度
+.message-content.welcome-card,
+.welcome-card {
+  max-width: var(--ai-content-max-width) !important;
+  // 保持居中
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 回滚：移除强制固定900px以及overflow可见，避免页面出现横向滚动条 */
+
+
+// 14. 通用间距变量 (如果还没有定义)
+:root {
+  --app-padding: var(--spacing-lg);
+  --app-padding-mobile: 16px;
+  --app-gap: var(--spacing-md);
+  --app-gap-sm: 8px;
+  --app-gap-lg: 24px;
+  --app-margin: var(--spacing-md);
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+}
+
+// 15. 打印样式优化
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .page-container {
+    padding: 0;
+  }
+
+  .el-button,
+  .el-pagination {
+    display: none !important;
+  }
+}
+
+// ==================== 教师中心页面专用布局修复 ====================
+
+// 教师中心页面容器布局修复
+.teacher-notifications,
+.teacher-tasks,
+.teacher-enrollment,
+.teacher-activities,
+.teacher-teaching,
+.teacher-customer-tracking {
+  // 确保容器充分利用空间
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: calc(100vh - 120px);
+  padding: var(--spacing-lg) !important;
+  box-sizing: border-box;
+
+  // 使用flex布局确保内容区域充分利用空间
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: var(--spacing-lg);
+
+  // 页面头部区域优化
+  .page-header {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+
+      .header-left {
+        flex: 1 1 auto;
+        min-width: 200px;
+
+        h1 {
+          margin: 0 0 8px 0;
+          font-size: var(--text-3xl);
+          font-weight: 600;
+          color: var(--el-text-color-primary);
+          line-height: 1.2;
+        }
+
+        p {
+          margin: 0;
+          color: var(--el-text-color-secondary);
+          font-size: var(--text-sm);
+          line-height: 1.4;
+        }
+      }
+
+      .header-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        flex-wrap: wrap;
+
+        .el-button {
+          min-width: 100px;
+        }
+      }
+    }
+  }
+
+  // 统计卡片区域布局修复
+  .stats-section,
+  .overview-section,
+  .team-collaboration,
+  .school-overview {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+
+    .el-card {
+      width: 100%;
+      max-width: 100%;
+
+      .el-card__body {
+        padding: var(--spacing-lg) !important;
+      }
+    }
+
+    // 统计卡片网格布局
+    .stats-grid,
+    .overview-grid,
+    .team-grid {
+      .el-row {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 -12px !important;
+
+        .el-col {
+          padding: 0 12px !important;
+          margin-bottom: 24px;
+
+          // 统计卡片内容
+          .stat-card,
+          .overview-item,
+          .team-item {
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-lg);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            background: var(--el-bg-color);
+            border: 1px solid var(--border-color);
+
+            &:hover {
+              transform: translateY(-4px);
+              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            }
+
+            .stat-value,
+            .overview-value,
+            .team-value {
+              font-size: var(--text-4xl);
+              font-weight: 700;
+              line-height: 1;
+              margin-bottom: 8px;
+              color: var(--el-color-primary);
+            }
+
+            .stat-label,
+            .overview-label,
+            .team-label {
+              font-size: var(--text-sm);
+              color: var(--el-text-color-secondary);
+              margin-bottom: 4px;
+              font-weight: 500;
+            }
+
+            .stat-trend,
+            .overview-trend,
+            .team-trend {
+              font-size: var(--text-xs);
+              padding: 2px 8px;
+              border-radius: 12px;
+              font-weight: 500;
+
+              &.success {
+                background: rgba(16, 185, 129, 0.1);
+                color: #059669;
+              }
+
+              &.warning {
+                background: rgba(245, 158, 11, 0.1);
+                color: #d97706;
+              }
+
+              &.danger {
+                background: rgba(239, 68, 68, 0.1);
+                color: #dc2626;
+              }
+
+              &.info {
+                background: rgba(6, 182, 212, 0.1);
+                color: #0891b2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 主要内容区域布局修复
+  .main-content {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+
+    .el-card {
+      width: 100%;
+      max-width: 100%;
+      flex: 1 1 auto;
+
+      .el-card__header {
+        padding: var(--spacing-lg) 24px !important;
+        border-bottom: 1px solid var(--border-color);
+
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .card-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: var(--text-lg);
+            font-weight: 600;
+            color: var(--el-text-color-primary);
+
+            .el-icon {
+              font-size: var(--text-xl);
+            }
+          }
+
+          .card-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+          }
+        }
+      }
+
+      .el-card__body {
+        padding: var(--spacing-lg) !important;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  // 筛选区域布局修复
+  .filter-section {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+
+    .el-card__body {
+      padding: var(--spacing-lg) 24px !important;
+    }
+
+    .filter-form {
+      .el-row {
+        width: 100% !important;
+        margin: 0 -8px !important;
+
+        .el-col {
+          padding: 0 8px !important;
+          margin-bottom: 16px;
+
+          .el-form-item {
+            margin-bottom: 0;
+
+            .el-form-item__label {
+              font-weight: 500;
+              color: var(--el-text-color-primary);
+              margin-bottom: 8px;
+            }
+
+            .el-form-item__content {
+              .el-input,
+              .el-select {
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+
+      .filter-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        justify-content: flex-end;
+        margin-top: 16px;
+        flex-wrap: wrap;
+
+        .el-button {
+          min-width: 80px;
+        }
+      }
+    }
+  }
+
+  // 表格区域布局修复
+  .table-section {
+    width: 100%;
+    max-width: 100%;
+    flex: 1 1 auto;
+
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+
+      .table-title {
+        font-size: var(--text-base);
+        font-weight: 600;
+        color: var(--el-text-color-primary);
+      }
+
+      .table-actions {
+        display: flex;
+        gap: var(--spacing-md);
+        flex-wrap: wrap;
+      }
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+
+      .el-table {
+        width: 100% !important;
+
+        .el-table__header-wrapper,
+        .el-table__body-wrapper {
+          width: 100% !important;
+        }
+
+        .el-table__header {
+          th {
+            background: var(--el-fill-color-light) !important;
+            font-weight: 600;
+            color: var(--el-text-color-primary);
+            border-bottom: 2px solid var(--el-border-color);
+            padding: var(--spacing-md) 8px !important;
+          }
+        }
+
+        .el-table__body {
+          tr {
+            &:hover {
+              background: var(--el-fill-color-lighter) !important;
+            }
+
+            td {
+              border-bottom: 1px solid var(--border-color);
+              vertical-align: middle;
+              padding: var(--spacing-md) 8px !important;
+
+              .cell {
+                padding: var(--spacing-sm) 0;
+                line-height: 1.5;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 分页区域
+    .pagination-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding: var(--spacing-md) 0;
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
+
+      .pagination-info {
+        color: var(--el-text-color-secondary);
+        font-size: var(--text-sm);
+      }
+
+      .el-pagination {
+        .el-pager {
+          li {
+            min-width: 32px;
+            height: 32px;
+            line-height: 30px;
+            margin: 0 4px;
+            border-radius: 6px;
+
+            &.is-active {
+              background: var(--el-color-primary);
+              color: white;
+            }
+          }
+        }
+
+        .btn-prev,
+        .btn-next {
+          width: 32px;
+          height: 32px;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+
+  // 响应式布局优化
+  @media (max-width: 1200px) {
+    padding: var(--spacing-lg) !important;
+    gap: var(--spacing-lg);
+
+    .stats-grid,
+    .overview-grid,
+    .team-grid {
+      .el-row {
+        .el-col {
+          &.el-col-lg-6,
+          &.el-col-xl-6 {
+            width: 50% !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    padding: var(--spacing-md) !important;
+    gap: var(--spacing-md);
+
+    .page-header {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+
+        .header-left {
+          width: 100%;
+
+          h1 {
+            font-size: var(--text-2xl);
+          }
+        }
+
+        .header-actions {
+          width: 100%;
+          justify-content: flex-start;
+        }
+      }
+    }
+
+    .stats-grid,
+    .overview-grid,
+    .team-grid {
+      .el-row {
+        .el-col {
+          &.el-col-md-8,
+          &.el-col-lg-6,
+          &.el-col-xl-6 {
+            width: 50% !important;
+          }
+        }
+      }
+    }
+
+    .filter-form {
+      .el-row {
+        .el-col {
+          &.el-col-md-6,
+          &.el-col-lg-4 {
+            width: 50% !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-md) !important;
+    gap: var(--spacing-md);
+
+    .stats-grid,
+    .overview-grid,
+    .team-grid {
+      .el-row {
+        .el-col {
+          width: 100% !important;
+          margin-bottom: 12px;
+
+          .stat-card,
+          .overview-item,
+          .team-item {
+            height: 100px;
+            padding: var(--spacing-md);
+
+            .stat-value,
+            .overview-value,
+            .team-value {
+              font-size: var(--text-2xl);
+            }
+          }
+        }
+      }
+    }
+
+    .filter-form {
+      .el-row {
+        .el-col {
+          width: 100% !important;
+          margin-bottom: 12px;
+        }
+      }
+
+      .filter-actions {
+        justify-content: center;
+
+        .el-button {
+          flex: 1;
+          max-width: 120px;
+        }
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+
+      .el-table {
+        min-width: 800px;
+      }
+    }
+
+    .pagination-container {
+      flex-direction: column;
+      gap: var(--spacing-md);
+
+      .pagination-info {
+        order: 2;
+      }
+
+      .el-pagination {
+        order: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,3243 @@
+{
+  "auditInfo": {
+    "timestamp": "2025-12-07T17:45:44.783Z",
+    "auditor": "AI Assistant",
+    "browser": "Chromium",
+    "viewport": "1920x1080",
+    "baseUrl": "http://localhost:5173"
+  },
+  "summary": {
+    "totalPages": 5,
+    "successfulPages": 0,
+    "pagesNeedingAuth": 0,
+    "pagesWith404": 0,
+    "pagesWithPermissionError": 0,
+    "pagesWithErrors": 5,
+    "pagesWithContentIssues": 0,
+    "pagesWithParentNav": 0
+  },
+  "pages": [
+    {
+      "page": "家长中心工作台",
+      "path": "/parent-center/dashboard",
+      "title": "访问失败",
+      "url": "http://localhost:5173/login",
+      "httpStatus": 0,
+      "is404": false,
+      "hasPermissionError": false,
+      "needsAuth": false,
+      "hasContent": false,
+      "hasParentNav": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "error": "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n",
+      "status": "访问失败",
+      "timestamp": "2025-12-07T17:43:58.818Z"
+    },
+    {
+      "page": "孩子管理",
+      "path": "/parent-center/children",
+      "title": "访问失败",
+      "url": "http://localhost:5173/login",
+      "httpStatus": 0,
+      "is404": false,
+      "hasPermissionError": false,
+      "needsAuth": false,
+      "hasContent": false,
+      "hasParentNav": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "error": "page.screenshot: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n",
+      "status": "访问失败",
+      "timestamp": "2025-12-07T17:45:04.872Z"
+    },
+    {
+      "page": "招生活动",
+      "path": "/parent-center/activities",
+      "title": "访问失败",
+      "url": "http://localhost:5173/login",
+      "httpStatus": 0,
+      "is404": false,
+      "hasPermissionError": false,
+      "needsAuth": false,
+      "hasContent": false,
+      "hasParentNav": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "error": "page.screenshot: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n",
+      "status": "访问失败",
+      "timestamp": "2025-12-07T17:45:44.781Z"
+    },
+    {
+      "page": "成长评估",
+      "path": "/parent-center/assessment",
+      "title": "访问失败",
+      "url": "http://localhost:5173/login",
+      "httpStatus": 0,
+      "is404": false,
+      "hasPermissionError": false,
+      "needsAuth": false,
+      "hasContent": false,
+      "hasParentNav": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "error": "page.goto: Target page, context or browser has been closed",
+      "status": "访问失败",
+      "timestamp": "2025-12-07T17:45:44.782Z"
+    },
+    {
+      "page": "家校沟通",
+      "path": "/parent-center/smart-communication",
+      "title": "访问失败",
+      "url": "http://localhost:5173/login",
+      "httpStatus": 0,
+      "is404": false,
+      "hasPermissionError": false,
+      "needsAuth": false,
+      "hasContent": false,
+      "hasParentNav": false,
+      "layout": {
+        "header": false,
+        "sidebar": false,
+        "mainContent": false,
+        "footer": false
+      },
+      "error": "page.goto: Target page, context or browser has been closed",
+      "status": "访问失败",
+      "timestamp": "2025-12-07T17:45:44.782Z"
+    }
+  ],
+  "consoleMessages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 228,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 324,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/config/environment.ts",
+        "lineNumber": 111,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "location": {
+        "url": "http://localhost:5173/src/env.ts",
+        "lineNumber": 33,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 71,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 4,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 7,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 22,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 23,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 54,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 71,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 73,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 129,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 172,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+        "lineNumber": 6,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vant 4组件已注册",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/vant.ts",
+        "lineNumber": 79,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 137,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 187,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 198,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 200,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 206,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 208,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /dashboard",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /dashboard, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 8,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 26,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 167,
+        "columnNumber": 22
+      }
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 97/100 {pageLoadTime: 1754.50ms, domContentLoaded: 1536.40ms, memoryUsage: 59.30MB}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+        "lineNumber": 334,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/visual-debugger.js",
+        "lineNumber": 385,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 66,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "location": {
+        "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+        "lineNumber": 46,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "location": {
+        "url": "http://localhost:5173/src/components/animations/EntranceAnimations.vue",
+        "lineNumber": 28,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 402,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /dashboard}",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 403,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔍 检查统一认证回调...",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 431,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "👤 用户已登录，自动跳转",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 439,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 传统认证状态: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 440,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证状态: true",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 441,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证模式: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 442,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17651...",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 269,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /kindergartens {params: undefined, _t: 1765129362657}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 279,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /dashboard",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /dashboard, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/kindergartens?_t=1765129362657",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "🔐 检测到401错误，可能是会话超时或token过期",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 354,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Response error: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 455,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: {code: UNAUTHORIZED, message: Token验证失败, detail: Object, statusCode: 401}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/errorHandler.ts",
+        "lineNumber": 101,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 230,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "加载幼儿园失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+        "lineNumber": 82,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 228,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 324,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/config/environment.ts",
+        "lineNumber": 111,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "location": {
+        "url": "http://localhost:5173/src/env.ts",
+        "lineNumber": 33,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 71,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 4,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 7,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 22,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 23,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 54,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 71,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 73,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 129,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 172,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+        "lineNumber": 6,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vant 4组件已注册",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/vant.ts",
+        "lineNumber": 79,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 137,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 187,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 198,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 200,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 206,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 208,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 8,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 26,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 167,
+        "columnNumber": 22
+      }
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 1363.70ms, domContentLoaded: 1154.60ms, memoryUsage: 68.54MB}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+        "lineNumber": 334,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "location": {
+        "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+        "lineNumber": 46,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/visual-debugger.js",
+        "lineNumber": 385,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 66,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "location": {
+        "url": "http://localhost:5173/src/components/animations/EntranceAnimations.vue",
+        "lineNumber": 28,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 402,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: undefined}",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 403,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔍 检查统一认证回调...",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 431,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "👤 用户已登录，自动跳转",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 439,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 传统认证状态: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 440,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证状态: true",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 441,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证模式: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 442,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 检测到已登录用户角色: admin",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 446,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17651...",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 269,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /kindergartens {params: undefined, _t: 1765129370548}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 279,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /dashboard",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /dashboard, name: Dashboard, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /dashboard, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/kindergartens?_t=1765129370548",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "🔐 检测到401错误，可能是会话超时或token过期",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 354,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Response error: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 455,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: {code: UNAUTHORIZED, message: Token验证失败, detail: Object, statusCode: 401}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/errorHandler.ts",
+        "lineNumber": 101,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 230,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "加载幼儿园失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+        "lineNumber": 82,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 228,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 324,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/config/environment.ts",
+        "lineNumber": 111,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "location": {
+        "url": "http://localhost:5173/src/env.ts",
+        "lineNumber": 33,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 71,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 4,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 7,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 22,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 23,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 54,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 71,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 73,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 129,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 172,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+        "lineNumber": 6,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vant 4组件已注册",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/vant.ts",
+        "lineNumber": 79,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 137,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 187,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 198,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 200,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 206,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 208,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /parent-center/dashboard",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/dashboard, name: ParentDashboard, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/dashboard, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 8,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 26,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 167,
+        "columnNumber": 22
+      }
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 1400.60ms, domContentLoaded: 1180.80ms, memoryUsage: 79.50MB}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+        "lineNumber": 334,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "location": {
+        "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+        "lineNumber": 46,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/visual-debugger.js",
+        "lineNumber": 385,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 66,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "location": {
+        "url": "http://localhost:5173/src/components/animations/EntranceAnimations.vue",
+        "lineNumber": 28,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 402,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /parent-center/dashboard}",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 403,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔍 检查统一认证回调...",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 431,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "👤 用户已登录，自动跳转",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 439,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 传统认证状态: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 440,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证状态: true",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 441,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证模式: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 442,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17651...",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 269,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /kindergartens {params: undefined, _t: 1765129374478}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 279,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /parent-center/dashboard",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/dashboard, name: ParentDashboard, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/dashboard, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/kindergartens?_t=1765129374478",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "🔐 检测到401错误，可能是会话超时或token过期",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 354,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Response error: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 455,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: {code: UNAUTHORIZED, message: Token验证失败, detail: Object, statusCode: 401}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/errorHandler.ts",
+        "lineNumber": 101,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 230,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "加载幼儿园失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+        "lineNumber": 82,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 228,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 324,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/config/environment.ts",
+        "lineNumber": 111,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "location": {
+        "url": "http://localhost:5173/src/env.ts",
+        "lineNumber": 33,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 71,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 4,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 7,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 22,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 23,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 54,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 71,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 73,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 129,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 172,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+        "lineNumber": 6,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vant 4组件已注册",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/vant.ts",
+        "lineNumber": 79,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 137,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 187,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 198,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 200,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 206,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 208,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /parent-center/children",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/children, name: ParentChildren, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/children, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 8,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 26,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 1497.10ms, domContentLoaded: 1491.80ms, memoryUsage: 69.47MB}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+        "lineNumber": 334,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 167,
+        "columnNumber": 22
+      }
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "location": {
+        "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+        "lineNumber": 46,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/visual-debugger.js",
+        "lineNumber": 385,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 66,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "location": {
+        "url": "http://localhost:5173/src/components/animations/EntranceAnimations.vue",
+        "lineNumber": 28,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 402,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /parent-center/children}",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 403,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔍 检查统一认证回调...",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 431,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "👤 用户已登录，自动跳转",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 439,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 传统认证状态: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 440,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证状态: true",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 441,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证模式: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 442,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17651...",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 269,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /kindergartens {params: undefined, _t: 1765129440602}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 279,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /parent-center/children",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/children, name: ParentChildren, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/children, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/kindergartens?_t=1765129440602",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "🔐 检测到401错误，可能是会话超时或token过期",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 354,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Response error: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 455,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: {code: UNAUTHORIZED, message: Token验证失败, detail: Object, statusCode: 401}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/errorHandler.ts",
+        "lineNumber": 101,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 230,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "加载幼儿园失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+        "lineNumber": 82,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 228,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://localhost:5173/@vite/client",
+        "lineNumber": 324,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 环境配置: {environment: development, config: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/config/environment.ts",
+        "lineNumber": 111,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境配置: {apiBaseUrl: /api, apiDomains: Array(2), apiTimeout: 10000, useMockData: false, tokenExpireTime: 86400}",
+      "location": {
+        "url": "http://localhost:5173/src/env.ts",
+        "lineNumber": 33,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🛡️ 增强错误处理器已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 71,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚨 紧急修复：localhost导航超时问题",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 4,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 需要真实认证token",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 7,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过fetch拦截，使用温和的修复方式",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 22,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 紧急修复：跳过Promise拦截，避免干扰应用正常运行",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 23,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 紧急修复：localhost导航超时修复已启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/navigation-timeout-emergency-fix.ts",
+        "lineNumber": 54,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 开始创建应用...",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 71,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 使用真实认证流程",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 73,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📦 Vue应用创建成功",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 129,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 关键图标注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 172,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 智能路由插件已安装",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/smart-router.plugin.ts",
+        "lineNumber": 6,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vant 4组件已注册",
+      "location": {
+        "url": "http://localhost:5173/src/plugins/vant.ts",
+        "lineNumber": 79,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 Level 4: 注册权限指令...",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Level 4: 权限指令注册完成",
+      "location": {
+        "url": "http://localhost:5173/src/directives/permission.ts",
+        "lineNumber": 137,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "插件添加完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 187,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "开始挂载应用",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 198,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "应用挂载完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 200,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "Vue应用配置已暴露到全局",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 206,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 应用启动完成",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 208,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /parent-center/activities",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/activities, name: ParentActivities, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/activities, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 [前端Store] 开发环境启用模拟认证",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 8,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ [前端Store] 模拟用户信息已设置: admin",
+      "location": {
+        "url": "http://localhost:5173/src/stores/user.ts",
+        "lineNumber": 26,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "📊 性能评分: 100/100 {pageLoadTime: 1424.20ms, domContentLoaded: 1419.40ms, memoryUsage: 69.09MB}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/performance-monitor.ts",
+        "lineNumber": 334,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ Vue错误处理器设置成功",
+      "location": {
+        "url": "http://localhost:5173/src/utils/enhanced-error-handler.ts",
+        "lineNumber": 167,
+        "columnNumber": 22
+      }
+    },
+    {
+      "type": "log",
+      "text": "高级缓存系统初始化完成",
+      "location": {
+        "url": "http://localhost:5173/src/utils/advanced-cache-manager.ts",
+        "lineNumber": 46,
+        "columnNumber": 18
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 Visual Debugger 可用，使用 window.visualDebugger.init() 启动",
+      "location": {
+        "url": "http://localhost:5173/src/utils/visual-debugger.js",
+        "lineNumber": 385,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 视觉调试工具已加载",
+      "location": {
+        "url": "http://localhost:5173/src/main.ts",
+        "lineNumber": 66,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: / -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎨 检测到当前主题: light",
+      "location": {
+        "url": "http://localhost:5173/src/components/animations/EntranceAnimations.vue",
+        "lineNumber": 28,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔧 登录页面初始化",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 402,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "环境信息: {mode: development, dev: true, redirectUrl: /parent-center/activities}",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 403,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔍 检查统一认证回调...",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 431,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "👤 用户已登录，自动跳转",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 439,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 传统认证状态: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 440,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证状态: true",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 441,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "  - 统一认证模式: false",
+      "location": {
+        "url": "http://localhost:5173/src/pages/Login/index.vue",
+        "lineNumber": 442,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "请求头中的认证token: mock_dev_token_17651...",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 269,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "发送请求: GET /kindergartens {params: undefined, _t: 1765129506833}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 279,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /parent-center/activities",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /parent-center/activities, name: ParentActivities, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /parent-center/activities, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "🔒 用户未登录，重定向到登录页",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 99,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "location": {
+        "url": "http://localhost:5173/api/kindergartens?_t=1765129506833",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "🔐 检测到401错误，可能是会话超时或token过期",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 354,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "Response error: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 455,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "error",
+      "text": "Error details: {code: UNAUTHORIZED, message: Token验证失败, detail: Object, statusCode: 401}",
+      "location": {
+        "url": "http://localhost:5173/src/utils/errorHandler.ts",
+        "lineNumber": 101,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "请求失败，已重试0次: Request failed with status code 401",
+      "location": {
+        "url": "http://localhost:5173/src/utils/request.ts",
+        "lineNumber": 230,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "error",
+      "text": "加载幼儿园失败: AxiosError",
+      "location": {
+        "url": "http://localhost:5173/src/components/auth/RoleSelectionModal.vue",
+        "lineNumber": 82,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "🚀 路由导航: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 37,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📍 目标路由信息: {path: /login, name: Login, meta: Object, params: Object, query: Object}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 38,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 检测到设备类型: pc (宽度: 1920px, UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWeb...)",
+      "location": {
+        "url": "http://localhost:5173/src/utils/device-detect.ts",
+        "lineNumber": 61,
+        "columnNumber": 10
+      }
+    },
+    {
+      "type": "log",
+      "text": "📱 设备检测: {deviceType: pc, currentPath: /login, isOnMobile: false, needRedirect: false}",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 49,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "✅ 白名单路由，直接通过: /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 95,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "🎯 路由导航完成: /login -> /login",
+      "location": {
+        "url": "http://localhost:5173/src/router/index.ts",
+        "lineNumber": 133,
+        "columnNumber": 10
+      }
+    }
+  ],
+  "pageErrors": []
+}

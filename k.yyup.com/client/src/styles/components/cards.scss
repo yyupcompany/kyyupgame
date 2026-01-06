@@ -1,0 +1,494 @@
+/**
+ * 卡片组件样式
+ * Cards Component Styles
+ * 
+ * 通用卡片样式，适用于所有页面的卡片元素
+ * Universal card styles for all card elements across pages
+ */
+
+@use '../design-tokens.scss' as *;
+@use '../mixins/responsive.scss' as *;
+
+/* ==================== 基础卡片样式 ==================== */
+/* Base Card Styles */
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border-color);
+  }
+  
+  /* 卡片头部 */
+  .card-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color-lighter);
+    background: var(--bg-tertiary);
+    
+    @include flex-between;
+    
+    .card-title {
+      margin: 0;
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      line-height: var(--leading-tight);
+      
+      /* 带图标的标题 */
+      &.with-icon {
+        @include flex-center-y;
+        gap: var(--spacing-sm);
+        
+        .card-icon {
+          @include flex-center;
+          width: 24px;
+          height: 24px;
+          color: var(--primary-color);
+        }
+      }
+    }
+    
+    .card-subtitle {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-top: var(--spacing-xs);
+      line-height: var(--leading-normal);
+    }
+    
+    .card-actions {
+      @include flex-center-y;
+      gap: var(--spacing-sm);
+    }
+    
+    @include mobile {
+      padding: var(--spacing-md);
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-sm);
+      
+      .card-actions {
+        justify-content: flex-end;
+      }
+    }
+  }
+  
+  /* 卡片内容 */
+  .card-body {
+    padding: var(--spacing-lg);
+    
+    @include mobile {
+      padding: var(--spacing-md);
+    }
+  }
+  
+  /* 卡片底部 */
+  .card-footer {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--border-color-lighter);
+    background: var(--bg-tertiary);
+    
+    @include flex-between;
+    
+    @include mobile {
+      padding: var(--spacing-md);
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--spacing-sm);
+    }
+  }
+  
+  /* 响应式调整 */
+  @include mobile {
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-md);
+    
+    /* 移动端触摸优化 */
+    &:hover {
+      transform: none; /* 禁用hover动画，避免移动端误触 */
+    }
+    
+    /* 确保卡片在移动端有足够的内边距 */
+    .card-header,
+    .card-body,
+    .card-footer {
+      padding: var(--spacing-md) var(--spacing-sm);
+    }
+  }
+}
+
+/* ==================== 卡片变体 ==================== */
+/* Card Variants */
+
+/* 主题色卡片 */
+.card--primary {
+  border-left: 4px solid var(--primary-color);
+  
+  .card-header {
+    background: linear-gradient(135deg, var(--primary-extra-light), transparent);
+  }
+}
+
+.card--success {
+  border-left: 4px solid var(--success-color);
+  
+  .card-header {
+    background: linear-gradient(135deg, var(--success-extra-light), transparent);
+  }
+}
+
+.card--warning {
+  border-left: 4px solid var(--warning-color);
+  
+  .card-header {
+    background: linear-gradient(135deg, var(--warning-extra-light), transparent);
+  }
+}
+
+.card--danger {
+  border-left: 4px solid var(--danger-color);
+  
+  .card-header {
+    background: linear-gradient(135deg, var(--danger-extra-light), transparent);
+  }
+}
+
+.card--info {
+  border-left: 4px solid var(--info-color);
+  
+  .card-header {
+    background: linear-gradient(135deg, var(--info-extra-light), transparent);
+  }
+}
+
+/* 无边框卡片 */
+.card--borderless {
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+/* 无阴影卡片 */
+.card--flat {
+  box-shadow: none;
+  border: 1px solid var(--border-color-light);
+}
+
+/* 紧凑型卡片 */
+.card--compact {
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: var(--spacing-md);
+    
+    @include mobile {
+      padding: var(--spacing-sm);
+    }
+  }
+}
+
+/* 大型卡片 */
+.card--large {
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: var(--spacing-xl);
+    
+    @include mobile {
+      padding: var(--spacing-lg);
+    }
+  }
+}
+
+/* ==================== 概览卡片 ==================== */
+/* Overview Cards */
+
+.overview-card {
+  @extend .card;
+  
+  .card-header {
+    .header-content {
+      @include flex-center-y;
+      gap: var(--spacing-md);
+      
+      .header-icon {
+        @include flex-center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        background: var(--primary-extra-light);
+        color: var(--primary-color);
+      }
+      
+      .header-info {
+        h3 {
+          margin: 0;
+          font-size: var(--text-lg);
+          font-weight: var(--font-semibold);
+          color: var(--text-primary);
+          line-height: var(--leading-tight);
+        }
+        
+        .header-subtitle {
+          font-size: var(--text-sm);
+          color: var(--text-secondary);
+          margin-top: 2px;
+          display: block;
+        }
+      }
+    }
+  }
+  
+  /* 招生概览卡片 */
+  &.enrollment-overview .header-icon {
+    background: linear-gradient(135deg, var(--success-extra-light), var(--success-light));
+    color: var(--success-color);
+  }
+  
+  /* 活动概览卡片 */
+  &.activity-overview .header-icon {
+    background: linear-gradient(135deg, var(--info-extra-light), var(--info-light));
+    color: var(--info-color);
+  }
+}
+
+/* ==================== 筛选卡片 ==================== */
+/* Filter Cards */
+
+.filter-card {
+  @extend .card;
+  margin-bottom: var(--spacing-xl);
+  
+  .filter-form {
+    gap: var(--spacing-md);
+    align-items: flex-end;
+    @include responsive-flex(column, row);
+    
+    .filter-group {
+      @include flexible-grid(200px, var(--spacing-sm));
+      flex: 1;
+    }
+    
+    .filter-actions {
+      @include flex-center-y;
+      gap: var(--spacing-sm);
+      flex-shrink: 0;
+      
+      @include mobile {
+        width: 100%;
+        justify-content: stretch;
+        
+        .el-button {
+          flex: 1;
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 数据卡片 ==================== */
+/* Data Cards */
+
+.data-card {
+  @extend .card;
+  
+  .data-content {
+    padding: var(--spacing-lg);
+    
+    .data-header {
+      @include flex-between;
+      margin-bottom: var(--spacing-md);
+      
+      .data-title {
+        font-size: var(--text-lg);
+        font-weight: var(--font-semibold);
+        color: var(--text-primary);
+        margin: 0;
+      }
+      
+      .data-actions {
+        @include flex-center-y;
+        gap: var(--spacing-sm);
+      }
+    }
+    
+    .data-body {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .data-footer {
+      padding-top: var(--spacing-md);
+      border-top: 1px solid var(--border-color-lighter);
+      
+      @include flex-between;
+      
+      .data-meta {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+      }
+    }
+  }
+}
+
+/* ==================== 图表卡片 ==================== */
+/* Chart Cards */
+
+.chart-card {
+  @extend .card;
+  
+  .chart-container {
+    min-height: 320px;
+    position: relative;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    
+    .chart {
+      width: 100%;
+      height: 320px;
+      border-radius: var(--radius-sm);
+    }
+    
+    .chart-loading {
+      @include flex-center;
+      min-height: 320px;
+      
+      .el-skeleton {
+        width: 100%;
+      }
+    }
+    
+    .chart-content {
+      height: 100%;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    
+    @include mobile {
+      min-height: 280px;
+      padding: var(--spacing-sm);
+      
+      .chart {
+        height: 280px;
+      }
+      
+      .chart-loading {
+        min-height: 280px;
+      }
+    }
+  }
+}
+
+/* ==================== 表格卡片 ==================== */
+/* Table Cards */
+
+.table-card {
+  @extend .card;
+  
+  .table-content {
+    .table-header {
+      @include flex-between;
+      padding: var(--spacing-lg);
+      border-bottom: 1px solid var(--border-color-lighter);
+      
+      .table-title {
+        font-size: var(--text-lg);
+        font-weight: var(--font-semibold);
+        color: var(--text-primary);
+        margin: 0;
+        
+        @include flex-center-y;
+        gap: var(--spacing-sm);
+        
+        &::before {
+          content: '';
+          width: 4px;
+          height: 20px;
+          background: var(--gradient-primary);
+          border-radius: 2px;
+        }
+      }
+      
+      .table-actions {
+        @include flex-center-y;
+        gap: var(--spacing-sm);
+      }
+    }
+    
+    .table-body {
+      padding: 0;
+      
+      .el-table {
+        border-radius: 0;
+        
+        &:deep(.el-table__header) {
+          background: var(--bg-tertiary);
+        }
+        
+        &:deep(.el-table__row) {
+          transition: background-color var(--transition-base);
+          
+          &:hover {
+            background: var(--bg-tertiary);
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 活动卡片 ==================== */
+/* Activity Cards */
+
+.activities-card {
+  @extend .table-card;
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+  }
+}
+
+/* ==================== 无障碍支持 ==================== */
+/* Accessibility Support */
+
+.card {
+  /* 焦点状态 */
+  &[tabindex]:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+  
+  &[tabindex]:focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+    border-color: var(--text-primary);
+    
+    &:hover {
+      border-color: var(--primary-color);
+    }
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+} 

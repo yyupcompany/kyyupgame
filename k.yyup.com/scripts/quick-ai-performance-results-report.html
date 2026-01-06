@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI模型性能对比测试报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .content {
+            padding: 30px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        .stat-card h3 {
+            margin: 0 0 10px 0;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+        .recommendation {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .recommendation h3 {
+            color: #2e7d32;
+            margin: 0 0 10px 0;
+        }
+        .improvement {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .degradation {
+            color: #f44336;
+            font-weight: bold;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 AI模型性能对比测试报告</h1>
+            <p>豆包 Thinking vs Flash 模式性能分析</p>
+            <p>测试时间: 2025/10/9 04:56:05</p>
+        </div>
+        
+        <div class="content">
+            
+    <div class="section">
+        <h2>📊 测试概览</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>测试模型</h3>
+                <div class="stat-value">2</div>
+                <div class="stat-label">Thinking + Flash</div>
+            </div>
+            <div class="stat-card">
+                <h3>测试用例</h3>
+                <div class="stat-value">9</div>
+                <div class="stat-label">简单 + 中等 + 复杂</div>
+            </div>
+            <div class="stat-card">
+                <h3>测试轮数</h3>
+                <div class="stat-value">1</div>
+                <div class="stat-label">每个用例</div>
+            </div>
+            <div class="stat-card">
+                <h3>总测试次数</h3>
+                <div class="stat-value">6</div>
+                <div class="stat-label">API调用次数</div>
+            </div>
+        </div>
+    </div>
+            
+    <div class="section">
+        <h2>🏆 性能对比</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>查询类型</th>
+                    <th>Thinking模式 (ms)</th>
+                    <th>Flash模式 (ms)</th>
+                    <th>性能提升</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>简单查询</td>
+                    <td>11037</td>
+                    <td>5429</td>
+                    <td class="improvement">
+                        50.8%
+                    </td>
+                </tr>
+                <tr>
+                    <td>中等查询</td>
+                    <td>10607</td>
+                    <td>4244</td>
+                    <td class="improvement">
+                        60.0%
+                    </td>
+                </tr>
+                <tr>
+                    <td>复杂查询</td>
+                    <td>11494</td>
+                    <td>12090</td>
+                    <td class="degradation">
+                        -5.2%
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Thinking 平均响应</h3>
+                <div class="stat-value">11046ms</div>
+                <div class="stat-label">成功率: 100.0%</div>
+            </div>
+            <div class="stat-card">
+                <h3>Flash 平均响应</h3>
+                <div class="stat-value">7254ms</div>
+                <div class="stat-label">成功率: 100.0%</div>
+            </div>
+            <div class="stat-card">
+                <h3>总体速度提升</h3>
+                <div class="stat-value improvement">
+                    34.3%
+                </div>
+                <div class="stat-label">Flash vs Thinking</div>
+            </div>
+        </div>
+    </div>
+            
+    <div class="section">
+        <h2>📋 详细测试结果</h2>
+        
+    <h3>Thinking模式 - Doubao 1.6 Thinking (推理增强版)</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>简单查询</h3>
+            <div class="stat-value">11037ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>中等查询</h3>
+            <div class="stat-value">10607ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>复杂查询</h3>
+            <div class="stat-value">11494ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>总体成功率</h3>
+            <div class="stat-value">100.0%</div>
+            <div class="stat-label">3/3 成功</div>
+        </div>
+    </div>
+        
+    <h3>Flash模式 - 豆包Flash-1.6（快速推理版）</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>简单查询</h3>
+            <div class="stat-value">5429ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>中等查询</h3>
+            <div class="stat-value">4244ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>复杂查询</h3>
+            <div class="stat-value">12090ms</div>
+            <div class="stat-label">平均响应时间</div>
+        </div>
+        <div class="stat-card">
+            <h3>总体成功率</h3>
+            <div class="stat-value">100.0%</div>
+            <div class="stat-label">3/3 成功</div>
+        </div>
+    </div>
+    </div>
+            
+    <div class="section">
+        <h2>📈 可视化分析</h2>
+        <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+        </div>
+    </div>
+            
+    <div class="section">
+        <div class="recommendation">
+            <h3>💡 使用建议</h3>
+            <p>Flash模式在速度上有显著优势，且准确性相当，建议优先使用Flash模式</p>
+        </div>
+    </div>
+        </div>
+        
+        <div class="footer">
+            <p>报告生成时间: 2025/10/9 04:57:35</p>
+            <p>测试配置: 1 轮测试，超时 60 秒</p>
+        </div>
+    </div>
+
+    <script>
+        
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['简单查询', '中等查询', '复杂查询'],
+            datasets: [{
+                label: 'Thinking模式 (ms)',
+                data: [11037, 10607, 11494],
+                backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                borderColor: 'rgba(102, 126, 234, 1)',
+                borderWidth: 1
+            }, {
+                label: 'Flash模式 (ms)',
+                data: [5429, 4244, 12090],
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: '响应时间 (毫秒)'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'AI模型响应时间对比'
+                },
+                legend: {
+                    display: true,
+                    position: 'top'
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>

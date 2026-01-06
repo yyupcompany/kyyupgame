@@ -1,0 +1,283 @@
+{
+  "metadata": {
+    "timestamp": "2025-11-25T16:53:24.701Z",
+    "projectName": "幼儿园管理系统",
+    "version": "1.0.0",
+    "environment": "development",
+    "generatedBy": "DemoCoverageReporter"
+  },
+  "summary": {
+    "coverage": {
+      "totalComponents": 267,
+      "coveredComponents": 214,
+      "uncoveredComponents": 53,
+      "coverageRate": "80.1%"
+    },
+    "quality": {
+      "grade": "B+",
+      "score": 82,
+      "description": "良好 - 接近目标"
+    },
+    "health": {
+      "score": 75,
+      "status": "good",
+      "recommendation": "测试覆盖状态良好，可继续优化"
+    },
+    "risk": {
+      "highRiskUncovered": 8,
+      "mediumRiskUncovered": 23,
+      "lowRiskUncovered": 22
+    },
+    "categories": {
+      "system": {
+        "total": 32,
+        "covered": 28,
+        "uncovered": 4
+      },
+      "teacher-center": {
+        "total": 45,
+        "covered": 38,
+        "uncovered": 7
+      },
+      "admin": {
+        "total": 28,
+        "covered": 25,
+        "uncovered": 3
+      },
+      "marketing": {
+        "total": 38,
+        "covered": 30,
+        "uncovered": 8
+      },
+      "activity": {
+        "total": 25,
+        "covered": 18,
+        "uncovered": 7
+      },
+      "ai": {
+        "total": 22,
+        "covered": 15,
+        "uncovered": 7
+      },
+      "finance": {
+        "total": 18,
+        "covered": 16,
+        "uncovered": 2
+      },
+      "other": {
+        "total": 59,
+        "covered": 44,
+        "uncovered": 15
+      }
+    }
+  },
+  "detailed": {
+    "analysis": {
+      "coverageComplexity": {
+        "level": "medium",
+        "categoryDiversity": 8,
+        "coverageVariance": "0.0832",
+        "avgCoverage": "80.1%"
+      },
+      "riskDistribution": {
+        "status": "fair",
+        "score": 67,
+        "distribution": {
+          "high": "15.1%",
+          "medium": "43.4%",
+          "low": "41.5%"
+        }
+      },
+      "categoryPerformance": {
+        "categories": [
+          {
+            "category": "system",
+            "coverage": "87.5%",
+            "grade": "B+",
+            "total": 32,
+            "covered": 28,
+            "uncovered": 4
+          },
+          {
+            "category": "admin",
+            "coverage": "89.3%",
+            "grade": "B+",
+            "total": 28,
+            "covered": 25,
+            "uncovered": 3
+          },
+          {
+            "category": "finance",
+            "coverage": "88.9%",
+            "grade": "B+",
+            "total": 18,
+            "covered": 16,
+            "uncovered": 2
+          },
+          {
+            "category": "teacher-center",
+            "coverage": "84.4%",
+            "grade": "B",
+            "total": 45,
+            "covered": 38,
+            "uncovered": 7
+          },
+          {
+            "category": "marketing",
+            "coverage": "78.9%",
+            "grade": "C+",
+            "total": 38,
+            "covered": 30,
+            "uncovered": 8
+          },
+          {
+            "category": "activity",
+            "coverage": "72.0%",
+            "grade": "C",
+            "total": 25,
+            "covered": 18,
+            "uncovered": 7
+          },
+          {
+            "category": "ai",
+            "coverage": "68.2%",
+            "grade": "C",
+            "total": 22,
+            "covered": 15,
+            "uncovered": 7
+          },
+          {
+            "category": "other",
+            "coverage": "74.6%",
+            "grade": "C",
+            "total": 59,
+            "covered": 44,
+            "uncovered": 15
+          }
+        ],
+        "average": "80.1%"
+      },
+      "testDebtAnalysis": {
+        "total": 142,
+        "level": "high",
+        "breakdown": {
+          "critical": 12,
+          "high": 31,
+          "medium": 54,
+          "low": 45
+        },
+        "estimatedDays": 47
+      },
+      "qualityMetrics": {
+        "reliability": 81,
+        "maintainability": 76,
+        "testability": 73,
+        "security": 79,
+        "overallQuality": 77
+      }
+    },
+    "uncoveredComponents": [
+      {
+        "name": "UserPermissionDialog",
+        "path": "src/components/system/UserPermissionDialog.vue",
+        "category": "system",
+        "riskLevel": "high",
+        "suggestions": [
+          "基础渲染测试",
+          "权限验证测试",
+          "表单提交测试"
+        ]
+      },
+      {
+        "name": "TeacherDashboard",
+        "path": "src/pages/teacher-center/dashboard/index.vue",
+        "category": "teacher-center",
+        "riskLevel": "medium",
+        "suggestions": [
+          "仪表板加载测试",
+          "数据显示测试",
+          "交互功能测试"
+        ]
+      },
+      {
+        "name": "MarketingCampaignForm",
+        "path": "src/pages/marketing/campaigns/Form.vue",
+        "category": "marketing",
+        "riskLevel": "medium",
+        "suggestions": [
+          "表单验证测试",
+          "数据提交测试",
+          "错误处理测试"
+        ]
+      }
+    ]
+  },
+  "recommendations": [
+    {
+      "title": "优先处理高风险组件",
+      "priority": "critical",
+      "description": "8个高风险组件需要立即测试覆盖，这些是核心业务组件",
+      "impact": "保护核心业务功能",
+      "effort": "高"
+    },
+    {
+      "title": "提升整体覆盖率",
+      "priority": "high",
+      "description": "当前覆盖率80.1%，建议提升到90%的目标",
+      "impact": "降低系统风险",
+      "effort": "中等"
+    },
+    {
+      "title": "改善测试债务",
+      "priority": "medium",
+      "description": "当前测试债务142，建议逐步偿还",
+      "impact": "提升代码质量",
+      "effort": "长期"
+    },
+    {
+      "title": "建立持续监控机制",
+      "priority": "medium",
+      "description": "建立自动化的测试覆盖监控和报告机制",
+      "impact": "持续改进测试质量",
+      "effort": "一次性投入"
+    }
+  ],
+  "actionPlans": [
+    {
+      "title": "立即创建高风险组件测试",
+      "priority": "P0",
+      "steps": [
+        "识别高风险组件",
+        "创建单元测试",
+        "验证覆盖率提升"
+      ],
+      "estimatedTime": "2-3天",
+      "assignee": "测试工程师",
+      "successMetrics": "高风险组件数量降为0"
+    },
+    {
+      "title": "提升覆盖率到目标值",
+      "priority": "P1",
+      "steps": [
+        "分析未覆盖组件",
+        "制定测试计划",
+        "逐步实现"
+      ],
+      "estimatedTime": "1-2周",
+      "assignee": "开发团队",
+      "successMetrics": "覆盖率达到90%以上"
+    },
+    {
+      "title": "建立测试文化",
+      "priority": "P2",
+      "steps": [
+        "培训团队",
+        "建立规范",
+        "持续改进"
+      ],
+      "estimatedTime": "长期",
+      "assignee": "技术负责人",
+      "successMetrics": "测试覆盖率稳定在目标水平"
+    }
+  ]
+}

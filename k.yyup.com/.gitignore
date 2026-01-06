@@ -1,0 +1,322 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+*.lcov
+.nyc_output
+test-results/
+playwright-report/
+screenshots/
+*screenshots/
+*-screenshots/
+
+# Test files and data (exclude temp test files but keep actual test suites)
+*.test.html
+*-test.html
+test-*.html
+*test*.png
+*test*.jpg
+*test*.jpeg
+*test*.gif
+
+# Allow test files (.test.ts, .test.js, .spec.ts, .spec.js)
+# Only exclude temporary test files and test output files
+# *.test.js
+# *.test.ts
+# *.test.mjs
+# *.test.cjs
+# *-test.js
+# *-test.ts
+# *-test.mjs
+# *-test.cjs
+# test_*.js
+# test_*.py
+# test-*.js
+# test-*.py
+api-test-*.json
+api-test-*.md
+test-*.json
+test-*.md
+*-test-*.json
+*-test-*.md
+
+# Production
+build/
+dist/
+out/
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment variables - NEVER commit to repository
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# Logs
+logs/
+*.log
+server.log
+client.log
+v2ray.log
+v2ray-monitor.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+v2ray.pid
+
+# Temporary files
+.temp/
+.tmp/
+temp/
+tmp/
+uploads/
+
+# Cache
+.cache/
+.eslintcache
+.parcel-cache
+.turbo
+
+# Jest cache
+.jest-cache/
+*/.jest-cache/
+
+# Output
+*.tsbuildinfo
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+database.sqlite
+
+# Backup files
+*.bak
+*.backup
+
+# Python virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+claude-env/
+
+# Archives and binaries
+*.zip
+*.tar.gz
+*.tar
+*.rar
+*.7z
+*.exe
+*.dll
+*.dylib
+
+# Specific archive files (exclude from repo)
+v2ray-linux-64.zip
+kyyup74.zip
+kindergarten-source-code-*.tar.gz
+project-*.tar.gz
+lazy-ai-substitute-project-*.tar.gz
+
+# Large media files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.ico
+*.mp4
+*.avi
+*.mov
+
+# Report and analysis files
+*-report.json
+*-report.md
+*-analysis.json
+*-analysis.md
+*-results.json
+comprehensive_test_results/
+comprehensive-test-screenshots/
+
+# Configuration backups
+*.conf.backup
+config.json.backup*
+*.json.backup*
+*.backup-*
+
+# Development tools
+v2ray-install/
+.claude/
+
+# Rust
+target/
+
+# Go
+vendor/
+
+# Ruby
+*.gem
+*.rbc
+.bundle/
+.config
+InstalledFiles
+lib/bundler/man/
+pkg/
+rdoc/
+spec/reports/
+
+# PHP
+vendor/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+.mtj.tmp/
+
+# C/C++
+*.o
+*.obj
+*.out
+*.app
+*.dSYM/
+
+# .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+
+# Flutter
+flutter/
+mobileflutter/
+*.flutter-plugins
+*.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+pubspec.lock
+
+# Flutter build outputs
+build/
+.dart_tool/
+.packages
+.pub/
+
+# Flutter specific
+*.g.dart
+*.freezed.dart
+*.gr.dart
+
+# Video files and test media
+videos/
+test-videos/
+*.webm
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+
+# Large test files
+test-documents/
+test-images/
+test-media/
+
+# Screenshots and test images
+screenshots/
+test-screenshots/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.tiff
+*.svg
+
+# Test results and logs
+test-results/
+logs/
+*.log
+
+# Build outputs
+dist/
+build/
+
+# Android emulator and tools
+genymotion/
+android-sdk/
+*.apk
+*.aab
+
+# Binary files
+*.so
+*.dll
+*.dylib
+*.exe
+
+# Swagger documentation backups
+swagger-backup-*.json
+swagger-new.json
+*-backup-*.json
+
+# Large generated files
+create-route-tests-fixed.js
+*-fixed.js
+
+# Test reports and scan results
+*-report-*.json
+*-scan*.json
+*-results*.json
+*-export-*.json
+api_scan_results_*.json
+backend_routes_scan.json
+batch_test_results_*.json
+claude_proxy_test_*.json
+permissions-export-*.json
+database-structure.json
+
+# Test result directories
+test-results/
+reports/
+test-logs/
+coverage/
+
+server/test-volcengine-tts.js
