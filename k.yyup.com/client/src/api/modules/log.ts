@@ -197,7 +197,7 @@ export function getLogDetail(id: number): Promise<ApiResponse<SystemLogType>> {
  * @returns 操作结果
  */
 export function deleteLog(id: number): Promise<ApiResponse<null>> {
-  return request.del(`/system-logs/${id}`) as unknown as Promise<ApiResponse<null>>;
+  return request.del(`/api/system-logs/${id}`) as unknown as Promise<ApiResponse<null>>;
 }
 
 /**

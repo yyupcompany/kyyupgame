@@ -14,6 +14,13 @@ import { useUserStore } from '@/stores/user'
 import { permissionApi, apiCache } from '@/api/unified-api'
 import { ElMessage } from 'element-plus'
 
+// 前端日志工具
+const frontendLogger = {
+  log: (...args: any[]) => console.log('[Permission]', ...args),
+  error: (...args: any[]) => console.error('[Permission]', ...args),
+  warn: (...args: any[]) => console.warn('[Permission]', ...args)
+};
+
 // 权限类型定义
 export type Permission = string
 export type Role = string
@@ -135,7 +142,7 @@ export class PermissionManager {
       const mockDynamicPermissions: UserPermission[] = [
         {
           id: '1',
-          userId: this.userStore.userInfo?.id || '',
+          userId: this.userStore.userInfo?.id ? String(this.userStore.userInfo.id) : '',
           resource: ResourceType.CHILD,
           resourceId: '1',
           permissions: [PermissionLevel.READ, PermissionLevel.WRITE],
@@ -143,7 +150,7 @@ export class PermissionManager {
         },
         {
           id: '2',
-          userId: this.userStore.userInfo?.id || '',
+          userId: this.userStore.userInfo?.id ? String(this.userStore.userInfo.id) : '',
           resource: ResourceType.ACTIVITY,
           permissions: [PermissionLevel.READ, PermissionLevel.WRITE],
           conditions: { canEnroll: true }
@@ -363,15 +370,21 @@ export function RequirePermission(permission: string) {
 export function RequireResourcePermission(
   resource: ResourceType,
   permission: PermissionLevel,
-  resourceIdParam?: string
+  resourceIdParam?: string | number
 ) {
   return function (target: any, propertyName: string, descriptor: PropertyDescriptor) {
     const method = descriptor.value
 
     descriptor.value = async function (...args: any[]) {
-      const resourceId = resourceIdParam ? args[resourceIdParam] : undefined
+      let resourceId: string | number | undefined
+      if (typeof resourceIdParam === 'number') {
+        resourceId = args[resourceIdParam]
+      } else if (typeof resourceIdParam === 'string') {
+        resourceId = (args[0] as any)?.[resourceIdParam]
+      }
 
-      if (!permissionManager.hasResourcePermission(resource, permission, resourceId)) {
+      const normalizedResourceId = resourceId !== undefined ? String(resourceId) : undefined
+      if (!permissionManager.hasResourcePermission(resource, permission, normalizedResourceId)) {
         ElMessage.error('您没有权限执行此操作')
         return false
       }

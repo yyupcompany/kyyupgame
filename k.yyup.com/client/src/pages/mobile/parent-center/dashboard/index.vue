@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="家长工作台"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="家长工作台" back-path="/mobile/parent-center">
     <!-- 欢迎信息 -->
     <div class="welcome-section">
       <div class="welcome-content">
@@ -13,13 +8,16 @@
           :src="parentAvatar"
           fit="cover"
           round
+          width="60"
+          height="60"
         >
           <template #error>
             <van-icon name="contact" size="40" />
           </template>
         </van-image>
         <div class="welcome-text">
-          <div class="greeting">欢迎回来，{{ parentName }}</div>
+          <div class="greeting" v-if="parentName">欢迎回来，{{ parentName }}</div>
+          <div class="greeting" v-else>欢迎回来</div>
           <div class="subtitle">孩子的成长，我们一起守护</div>
         </div>
       </div>
@@ -27,7 +25,7 @@
 
     <!-- 统计概览 -->
     <div class="stats-section">
-      <van-grid :column-num="4" :gutter="12" class="stats-grid">
+      <van-grid :column-num="4" :gutter="12" class="stats-grid" v-if="!loading">
         <van-grid-item @click="goToChildren">
           <van-icon name="contact" size="24" color="#409EFF" />
           <div class="stat-value">{{ childrenCount }}</div>
@@ -73,6 +71,7 @@
                 round
                 width="60"
                 height="60"
+                lazy-load
               >
                 <template #error>
                   <van-icon name="contact" size="30" />
@@ -228,16 +227,17 @@
 
     <!-- 错误提示 -->
     <van-notify v-model:show="showError" type="danger" :message="errorMessage" />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import parentApi from '@/api/modules/parent'
 import activityApi from '@/api/modules/activity'
 import notificationApi from '@/api/modules/notification'
+import request from '@/utils/request'
 
 const router = useRouter()
 
@@ -289,56 +289,90 @@ const loadDashboardData = async () => {
     parentName.value = localStorage.getItem('user_name') || '家长'
     parentAvatar.value = localStorage.getItem('user_avatar') || ''
 
-    // TODO: 替换为实际的API调用
-    // 模拟数据加载
-    await new Promise(resolve => setTimeout(resolve, 500))
+    // ✅ 使用真实的API调用，与PC端保持一致
+    console.log('🔄 开始加载家长中心数据...')
 
-    // 统计数据
-    childrenCount.value = 2
-    assessmentCount.value = 5
-    activityCount.value = 3
-    messageCount.value = 2
-
-    // 孩子信息
-    children.value = [
-      { id: 1, name: '张小明', className: '大班一班', avatar: '' },
-      { id: 2, name: '张小红', className: '中班二班', avatar: '' }
-    ]
-
-    // 最近活动
-    recentActivities.value = [
-      { id: 1, title: '秋游活动', time: '2024-11-05 09:00' },
-      { id: 2, title: '亲子运动会', time: '2024-11-10 14:00' }
-    ]
-
-    // 最新通知
-    recentNotifications.value = [
-      { id: 1, title: '明天停课通知', time: '2024-10-30 10:00' },
-      { id: 2, title: '家长会通知', time: '2024-10-28 15:30' }
-    ]
-
-    // AI助手建议
-    aiSuggestions.value = [
-      {
-        id: 1,
-        icon: 'bulb-o',
-        title: '关注孩子情绪变化',
-        description: '建议多与孩子沟通，了解其在园所的生活情况'
-      },
-      {
-        id: 2,
-        icon: 'clock-o',
-        title: '合理安排作息时间',
-        description: '保证孩子充足的睡眠，有助于身体发育'
+    // 1. 获取孩子列表
+    try {
+      const childrenResponse = await request.get('/api/parents/children')
+      if (childrenResponse.data && Array.isArray(childrenResponse.data.items)) {
+        children.value = childrenResponse.data.items.map((child: any) => ({
+          id: child.id,
+          name: child.name || '未命名',
+          avatar: child.avatar || '',
+          className: child.className || '未分班'
+        }))
+        childrenCount.value = children.value.length
+        console.log('👨‍👩‍👧‍👦 孩子数量:', childrenCount.value)
       }
+    } catch (error) {
+      console.warn('⚠️ 获取孩子列表失败:', error)
+      children.value = []
+      childrenCount.value = 0
+    }
+
+    // 2. 获取统计数据
+    try {
+      const statsResponse = await request.get('/api/parents/stats')
+      if (statsResponse.data) {
+        assessmentCount.value = statsResponse.data.assessmentCount || 0
+        activityCount.value = statsResponse.data.activityCount || 0
+        messageCount.value = statsResponse.data.messageCount || 0
+        console.log('📊 统计数据:', statsResponse.data)
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取统计数据失败:', error)
+      assessmentCount.value = 0
+      activityCount.value = 0
+      messageCount.value = 0
+    }
+
+    // 3. 获取最近活动
+    try {
+      const activitiesResponse = await request.get('/api/activities', {
+        params: { limit: 5, sortBy: 'startDate', sortOrder: 'desc' }
+      })
+      if (activitiesResponse.data && Array.isArray(activitiesResponse.data.items)) {
+        recentActivities.value = activitiesResponse.data.items.slice(0, 5).map((activity: any) => ({
+          id: activity.id,
+          title: activity.title || '未命名活动',
+          time: activity.startDate || ''
+        }))
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取最近活动失败:', error)
+      recentActivities.value = []
+    }
+
+    // 4. 获取最新通知
+    try {
+      const notificationsResponse = await request.get('/api/notifications', {
+        params: { limit: 5, isRead: false }
+      })
+      if (notificationsResponse.data && Array.isArray(notificationsResponse.data.items)) {
+        recentNotifications.value = notificationsResponse.data.items.slice(0, 5).map((notification: any) => ({
+          id: notification.id,
+          title: notification.title || '无标题',
+          time: notification.createdAt || '',
+          isRead: notification.isRead || false
+        }))
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取最新通知失败:', error)
+      recentNotifications.value = []
+    }
+
+    // 5. AI助手建议（静态数据）
+    aiSuggestions.value = [
+      { id: 1, icon: 'bulb-o', title: '关注孩子情绪变化', description: '建议多与孩子沟通，了解其在园所的生活情况' },
+      { id: 2, icon: 'clock-o', title: '合理安排作息时间', description: '保证孩子充足的睡眠，有助于身体发育' }
     ]
 
-    // 社区互动统计
-    communityStats.value = {
-      posts: 12,
-      likes: 58,
-      comments: 23
-    }
+    console.log('✅ 家长中心数据加载完成')
+    console.log('- 孩子数量:', childrenCount.value)
+    console.log('- 测评记录:', assessmentCount.value)
+    console.log('- 活动报名:', activityCount.value)
+    console.log('- 未读消息:', messageCount.value)
 
   } catch (error) {
     handleError(error, '加载数据失败，请稍后重试')
@@ -348,16 +382,43 @@ const loadDashboardData = async () => {
 }
 
 // 导航方法
-const goToChildren = () => router.push('/mobile/parent-center/children')
-const goToActivities = () => router.push('/mobile/parent-center/activities')
-const goToNotifications = () => router.push('/mobile/parent-center/notifications')
-const goToAIAssistant = () => router.push('/mobile/parent-center/ai-assistant')
-const viewChildGrowth = (childId: number) => router.push(`/mobile/parent-center/children/growth/${childId}`)
-const goToActivityDetail = (activityId: number) => router.push(`/mobile/parent-center/activities/${activityId}`)
-const goToNotificationDetail = (notificationId: number) => router.push(`/mobile/parent-center/notifications/${notificationId}`)
+const goToChildren = () => {
+  showToast('正在跳转到孩子管理...')
+  router.push('/mobile/parent-center/children')
+}
+const goToActivities = () => {
+  showToast('正在跳转到活动中心...')
+  router.push('/mobile/parent-center/activities')
+}
+const goToNotifications = () => {
+  showToast('正在跳转到通知中心...')
+  router.push('/mobile/parent-center/notifications')
+}
+const goToAIAssistant = () => {
+  showToast('正在打开AI助手...')
+  router.push('/mobile/parent-center/ai-assistant')
+}
+const viewChildGrowth = (childId: number) => {
+  showToast('正在查看成长档案...')
+  router.push(`/mobile/parent-center/children/growth/${childId}`)
+}
+const goToActivityDetail = (activityId: number) => {
+  showToast('正在查看活动详情...')
+  router.push(`/mobile/parent-center/activities/${activityId}`)
+}
+const goToNotificationDetail = (notificationId: number) => {
+  showToast('正在查看通知详情...')
+  router.push(`/mobile/parent-center/notifications/${notificationId}`)
+}
 
 // 页面加载时获取数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadDashboardData()
 })
 </script>

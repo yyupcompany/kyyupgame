@@ -1871,7 +1871,8 @@ export const centersRoutes: Array<RouteRecordRaw> = [
       {
         path: 'system-center-unified',
         name: 'MobileSystemCenterUnifiedRoot',
-        redirect: '/mobile/centers/system-center-unified/index',
+        // NOTE: 临时重定向到system-center，system-center-unified组件有加载问题
+        redirect: '/mobile/centers/system-center',
         meta: {
           title: '系统中心统一',
           icon: 'Setting',

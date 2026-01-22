@@ -144,7 +144,7 @@ router.use(applyDataScope);
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/dashboard',
-  requireRole(['teacher', 'admin']),  // 允许教师和管理员访问
+  requireRole(['teacher', 'admin', 'principal']),  // 允许教师、管理员和园长访问
   TeacherDashboardController.getDashboardData
 );
 
@@ -165,7 +165,7 @@ router.get('/dashboard',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/statistics',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getStatistics
 );
 
@@ -186,7 +186,7 @@ router.get('/statistics',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/activity-statistics',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getActivityStatistics
 );
 
@@ -207,7 +207,7 @@ router.get('/activity-statistics',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/activity-checkin-overview',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getActivityCheckinOverview
 );
 
@@ -228,7 +228,7 @@ router.get('/activity-checkin-overview',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/today-tasks',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTodayTasks
 );
 
@@ -249,7 +249,7 @@ router.get('/today-tasks',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/today-courses',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTodayCourses
 );
 
@@ -270,7 +270,7 @@ router.get('/today-courses',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/recent-notifications',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getRecentNotifications
 );
 
@@ -310,7 +310,7 @@ router.get('/recent-notifications',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.put('/tasks/:taskId/status',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.updateTaskStatus
 );
 
@@ -344,7 +344,7 @@ router.put('/tasks/:taskId/status',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.post('/clock-in',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.clockIn
 );
 
@@ -365,7 +365,7 @@ router.post('/clock-in',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/tasks/stats',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTaskStats
 );
 
@@ -402,7 +402,7 @@ router.get('/tasks/stats',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/tasks',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTaskList
 );
 
@@ -445,7 +445,7 @@ router.get('/tasks',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.post('/tasks',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.createTask
 );
 
@@ -488,7 +488,7 @@ router.post('/tasks',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.put('/tasks/:id',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.updateTask
 );
 
@@ -522,7 +522,7 @@ router.put('/tasks/:id',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.post('/tasks/batch-complete',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.batchCompleteTask
 );
 
@@ -556,7 +556,7 @@ router.post('/tasks/batch-complete',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.delete('/tasks/batch-delete',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.batchDeleteTask
 );
 
@@ -577,7 +577,7 @@ router.delete('/tasks/batch-delete',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/stats',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTeachingStats
 );
 
@@ -609,7 +609,7 @@ router.get('/teaching/stats',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/classes',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getClassList
 );
 
@@ -637,7 +637,7 @@ router.get('/teaching/classes',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/classes/:id',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getClassDetail
 );
 
@@ -664,7 +664,7 @@ router.get('/teaching/classes/:id',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/progress',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getProgressData
 );
 
@@ -715,7 +715,7 @@ router.get('/teaching/progress',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/records',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getTeachingRecords
 );
 
@@ -757,7 +757,7 @@ router.get('/teaching/records',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.post('/teaching/records',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.createTeachingRecord
 );
 
@@ -807,7 +807,7 @@ router.post('/teaching/records',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/students',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getStudentsList
 );
 
@@ -835,7 +835,7 @@ router.get('/teaching/students',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.get('/teaching/students/:id',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.getStudentDetail
 );
 
@@ -874,7 +874,7 @@ router.get('/teaching/students/:id',
  *         $ref: '#/components/responses/UnauthorizedError'
 */
 router.put('/teaching/progress/:id',
-  requireRole(['teacher', 'admin']),
+  requireRole(['teacher', 'admin', 'principal']),
   TeacherDashboardController.updateProgress
 );
 

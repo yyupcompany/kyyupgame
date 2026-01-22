@@ -3,7 +3,7 @@
  * @description 用户信息、密码修改、头像上传等API
  */
 
-import { request } from '@/utils/request';
+import { request, type ApiResponse } from '@/utils/request';
 
 /**
  * 用户信息接口
@@ -40,16 +40,6 @@ export interface ChangePasswordParams {
 }
 
 /**
- * API响应接口
- */
-export interface ApiResponse<T = any> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  error?: string;
-}
-
-/**
  * 获取当前用户信息
  */
 export const getUserProfile = (): Promise<ApiResponse<UserProfile>> => {
@@ -77,10 +67,6 @@ export const uploadAvatar = (file: File): Promise<ApiResponse<{ avatar: string }
   const formData = new FormData();
   formData.append('avatar', file);
 
-  return request.post<{ avatar: string }>('/user/upload-avatar', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
-  });
+  return request.post<{ avatar: string }>('/user/upload-avatar', formData);
 };
 

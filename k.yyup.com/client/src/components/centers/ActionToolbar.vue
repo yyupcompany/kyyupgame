@@ -303,16 +303,41 @@ const handleMoreCommand = (command: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+
 .action-toolbar {
   display: flex;
   align-items: center;
-  gap: var(--text-lg);
-  padding: var(--text-lg);
-  background: var(--bg-color, var(--bg-white));
-  border-bottom: var(--z-index-dropdown) solid var(--border-color);
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color-light);
+  }
 
   .search-input {
-    max-width: 240px; width: 100%;
+    max-width: 240px;
+    width: 100%;
+    
+    :deep(.el-input__wrapper) {
+      border-radius: var(--radius-lg);
+      box-shadow: 0 0 0 1px var(--border-color-light) inset;
+      
+      &:hover {
+        box-shadow: 0 0 0 1px var(--primary-color) inset;
+      }
+      
+      &.is-focus {
+        box-shadow: 0 0 0 1px var(--primary-color) inset, 0 0 0 3px var(--glow-primary);
+      }
+    }
   }
 
   &--left {
@@ -332,12 +357,12 @@ const handleMoreCommand = (command: string) => {
   }
 
   &--small {
-    padding: var(--text-sm);
-    gap: var(--text-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-sm);
   }
 
   &--large {
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg) var(--spacing-2xl);
     gap: var(--spacing-xl);
   }
 }
@@ -345,7 +370,7 @@ const handleMoreCommand = (command: string) => {
 .toolbar-left {
   display: flex;
   align-items: center;
-  gap: var(--text-lg);
+  gap: var(--spacing-lg);
   flex: 1;
 
   .primary-actions {
@@ -356,19 +381,20 @@ const handleMoreCommand = (command: string) => {
   .batch-actions {
     display: flex;
     align-items: center;
-    gap: var(--text-sm);
-    padding: var(--spacing-sm) var(--text-sm);
+    gap: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
     background: var(--primary-light-bg);
-    border: var(--border-width-thin) solid var(--primary-300);
-    border-radius: var(--radius-md);
+    border: 1px solid var(--primary-200);
+    border-radius: var(--radius-lg);
+    animation: slideInLeft 0.3s ease;
 
     .selection-info {
       display: flex;
       align-items: center;
-      gap: var(--spacing-lg);
-      font-size: var(--text-base);
+      gap: var(--spacing-sm);
+      font-size: var(--text-sm);
       color: var(--primary-color);
-      font-weight: 500;
+      font-weight: 700;
     }
   }
 }
@@ -376,7 +402,7 @@ const handleMoreCommand = (command: string) => {
 .toolbar-right {
   display: flex;
   align-items: center;
-  gap: var(--text-sm);
+  gap: var(--spacing-md);
   flex-shrink: 0;
 
   .search-box,
@@ -394,6 +420,29 @@ const handleMoreCommand = (command: string) => {
   }
 }
 
+:deep(.el-button) {
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast) cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover:not(.is-disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  &:active:not(.is-disabled) {
+    transform: translateY(0);
+  }
+
+  &.el-button--primary {
+    box-shadow: 0 2px 8px var(--glow-primary);
+    
+    &:hover:not(.is-disabled) {
+      box-shadow: 0 4px 12px var(--glow-primary);
+    }
+  }
+}
+
 :deep(.el-dropdown-menu__item) {
   &.is-active {
     color: var(--primary-color);
@@ -405,11 +454,22 @@ const handleMoreCommand = (command: string) => {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 // 响应式设计
 @media (max-width: var(--breakpoint-xl)) {
   .action-toolbar {
     flex-wrap: wrap;
-    gap: var(--text-sm);
+    gap: var(--spacing-md);
 
     .toolbar-left,
     .toolbar-right {
@@ -427,15 +487,16 @@ const handleMoreCommand = (command: string) => {
   .action-toolbar {
     flex-direction: column;
     align-items: stretch;
-    gap: var(--text-sm);
+    gap: var(--spacing-md);
 
     .toolbar-left {
       flex-direction: column;
       align-items: stretch;
-      gap: var(--text-sm);
+      gap: var(--spacing-md);
 
       .primary-actions {
         justify-content: center;
+        flex-wrap: wrap;
       }
 
       .batch-actions {
@@ -445,13 +506,14 @@ const handleMoreCommand = (command: string) => {
 
     .toolbar-right {
       flex-direction: column;
-      gap: var(--text-sm);
+      gap: var(--spacing-md);
 
       .search-box {
         width: 100%;
 
         .el-input {
           width: 100% !important;
+          max-width: none;
         }
       }
 
@@ -459,7 +521,12 @@ const handleMoreCommand = (command: string) => {
       .sort-box,
       .secondary-actions,
       .more-actions {
+        width: 100%;
         justify-content: center;
+        
+        .el-dropdown, .el-button {
+          width: 100%;
+        }
       }
     }
   }

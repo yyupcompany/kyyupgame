@@ -70,7 +70,7 @@
         <template #title>
           <div class="section-header">
             <span class="section-title">体温异常记录</span>
-            <van-tag type="danger" size="small">
+            <van-tag type="danger" size="medium">
               {{ healthData.abnormalTemperature.length }}条
             </van-tag>
           </div>
@@ -107,7 +107,7 @@
         <template #title>
           <div class="section-header">
             <span class="section-title">病假统计</span>
-            <van-tag type="warning" size="small">
+            <van-tag type="warning" size="medium">
               {{ healthData.sickLeaveStats.length }}人
             </van-tag>
           </div>
@@ -216,7 +216,7 @@
               <template #right-icon>
                 <van-tag
                   :type="getTemperatureTagType(selectedTemperatureRecord.temperature)"
-                  size="small"
+                  size="medium"
                 >
                   {{ getTemperatureStatus(selectedTemperatureRecord.temperature) }}
                 </van-tag>

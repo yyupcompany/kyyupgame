@@ -11,6 +11,11 @@ export class DocumentInstanceController {
   /**
    * 获取文档实例列表
    * GET /api/document-instances
+   * 
+   * 权限逻辑：
+   * - admin/ADMIN：可以查看所有文档实例
+   * - 园长/principal：只能查看自己创建或分配给自己的文档（因为有集团划分）
+   * - 普通用户：只能查看自己创建或分配给自己的文档
    */
   static async getInstances(req: Request, res: Response) {
     try {
@@ -19,7 +24,7 @@ export class DocumentInstanceController {
         pageSize = 20,
         status,
         templateId,
-        createdBy,  // 改为 createdBy
+        createdBy,
         assignedTo,
         keyword,
         sortBy = 'createdAt',
@@ -27,9 +32,26 @@ export class DocumentInstanceController {
       } = req.query;
 
       const userId = (req as any).user?.id;
+      const userRole = (req as any).user?.role;
 
-      // 构建查询条件（移除 kindergartenId）
+      // 构建查询条件
       const where: any = {};
+
+      // 权限控制：
+      // - admin/ADMIN：可以查看所有文档
+      // - 园长/principal：只能看自己相关的（因为有集团划分）
+      // - 普通用户：只能看自己相关的
+      const isAdmin = ['admin', 'ADMIN'].includes(userRole);
+      const isPrincipal = ['principal', 'PRINCIPAL', '园长'].includes(userRole);
+      
+      if (!isAdmin && userId) {
+        // 非admin用户（包括园长）：只能看自己创建或分配给自己的
+        where[Op.or] = [
+          { createdBy: userId },
+          { assignedTo: userId }
+        ];
+      }
+      // admin 角色不添加用户限制，可以查看所有文档
 
       if (status) {
         where.status = status;
@@ -39,20 +61,36 @@ export class DocumentInstanceController {
         where.templateId = templateId;
       }
 
-      if (createdBy) {
+      // 如果明确指定了 createdBy 参数，则覆盖权限控制（仅admin可用）
+      if (createdBy && isAdmin) {
         where.createdBy = createdBy;
       }
 
+      // 如果明确指定了 assignedTo 参数
       if (assignedTo) {
         where.assignedTo = assignedTo;
       }
 
       // 关键词搜索
       if (keyword) {
-        where[Op.or] = [
-          { title: { [Op.like]: `%${keyword}%` } },
-          { content: { [Op.like]: `%${keyword}%` } }
-        ];
+        // 如果已经有 Op.or 条件，需要用 Op.and 组合
+        const keywordCondition = {
+          [Op.or]: [
+            { title: { [Op.like]: `%${keyword}%` } },
+            { content: { [Op.like]: `%${keyword}%` } }
+          ]
+        };
+        
+        if (where[Op.or]) {
+          const existingOrCondition = where[Op.or];
+          delete where[Op.or];
+          where[Op.and] = [
+            { [Op.or]: existingOrCondition },
+            keywordCondition
+          ];
+        } else {
+          Object.assign(where, keywordCondition);
+        }
       }
 
       // 分页
@@ -60,30 +98,19 @@ export class DocumentInstanceController {
       const limit = Number(pageSize);
 
       // 查询
-      // 暂时移除 include 关联，避免关联问题导致查询失败
-      // 如果关联未正确设置，会导致查询失败
       const { count, rows } = await DocumentInstance.findAndCountAll({
         where,
         offset,
         limit,
         order: [[sortBy as string, sortOrder as string]]
-        // 暂时注释掉 include，等关联问题解决后再启用
-        // include: [
-        //   {
-        //     model: DocumentTemplate,
-        //     as: 'template',
-        //     attributes: ['id', 'code', 'name', 'category'],
-        //     required: false
-        //   }
-        // ]
       });
 
       console.log('📋 文档实例查询结果:', {
+        userRole,
+        isAdmin,
+        isPrincipal,
         count,
         rowsCount: rows.length,
-        where,
-        offset,
-        limit,
         page: Number(page),
         pageSize: Number(pageSize)
       });

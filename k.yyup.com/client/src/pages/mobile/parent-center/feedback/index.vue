@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="家长反馈"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="家长反馈" back-path="/mobile/parent-center">
     <div class="parent-feedback-page">
       <!-- 统计卡片 -->
       <div class="stats-section">
@@ -200,13 +195,13 @@
 
       <van-back-top right="20" bottom="80" />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showSuccessToast, showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
 
@@ -534,6 +529,12 @@ const viewFeedback = (record: FeedbackRecord) => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadFeedbackRecords()
 })
 </script>

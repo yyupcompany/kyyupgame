@@ -1,0 +1,1426 @@
+{
+  "timestamp": "2026-01-20T15:59:48.133Z",
+  "summary": {
+    "mobileCenters": 52,
+    "mobileTeacher": 20,
+    "mobileParent": 51,
+    "pcCenters": 31,
+    "totalMobile": 123,
+    "totalPC": 31,
+    "pagesWithIssues": 120,
+    "missingMobilePages": 5
+  },
+  "layoutUsage": {
+    "mobile": {
+      "MobileCenterLayout": 45,
+      "UnifiedMobileLayout": 1,
+      "MobileMainLayout": 0,
+      "RoleBasedMobileLayout": 0,
+      "none": 73,
+      "MobileLayout": 5
+    },
+    "pc": {
+      "UnifiedCenterLayout": 29,
+      "CentersSidebar": 0,
+      "MainLayout": 0,
+      "none": 2,
+      "CenterLayout": 29
+    }
+  },
+  "comparison": {
+    "mobileCenters": [
+      "activity-center",
+      "ai-billing-center",
+      "ai-center",
+      "analytics-center",
+      "analytics-hub",
+      "assessment-center",
+      "attendance-center",
+      "business-center",
+      "business-hub",
+      "call-center",
+      "components",
+      "customer-pool-center",
+      "document-center",
+      "document-collaboration",
+      "document-editor",
+      "document-instance-list",
+      "document-statistics",
+      "document-template-center",
+      "enrollment-center",
+      "finance-center",
+      "group-center",
+      "inspection-center",
+      "marketing-center",
+      "media-center",
+      "my-task-center",
+      "new-media-center",
+      "notification-center",
+      "permission-center",
+      "personnel-center",
+      "photo-album-center",
+      "principal-center",
+      "schedule-center",
+      "script-templates",
+      "settings-center",
+      "student-center",
+      "student-management",
+      "system-center",
+      "system-center-unified",
+      "system-log-center",
+      "task-center",
+      "task-form",
+      "teacher-center",
+      "teaching-center",
+      "template-detail",
+      "usage-center",
+      "user-center"
+    ],
+    "pcCenterFiles": [
+      "AIBillingCenter",
+      "AICenter",
+      "ActivityCenter",
+      "AnalyticsCenter",
+      "AssessmentCenter",
+      "AttendanceCenter",
+      "BusinessCenter",
+      "CallCenter",
+      "CustomerPoolCenter",
+      "DocumentCenter",
+      "DocumentCollaboration",
+      "DocumentEditor",
+      "DocumentInstanceList",
+      "DocumentStatistics",
+      "DocumentTemplateCenter",
+      "EnrollmentCenter",
+      "FinanceCenter",
+      "GrowthRecordsCenter",
+      "InspectionCenter",
+      "MarketingCenter",
+      "PersonnelCenter",
+      "PhotoAlbumCenter",
+      "SystemCenter-Unified",
+      "SystemCenter",
+      "TaskCenter",
+      "TaskForm",
+      "TeachingCenter",
+      "TemplateDetail",
+      "UsageCenter",
+      "index"
+    ],
+    "missingMobilePages": [
+      {
+        "pcPage": "AIBillingCenter",
+        "expectedMobilePage": "a-i-billing-center"
+      },
+      {
+        "pcPage": "AICenter",
+        "expectedMobilePage": "a-i-center"
+      },
+      {
+        "pcPage": "GrowthRecordsCenter",
+        "expectedMobilePage": "growth-records-center"
+      },
+      {
+        "pcPage": "SystemCenter-Unified",
+        "expectedMobilePage": "system-center--unified"
+      },
+      {
+        "pcPage": "index",
+        "expectedMobilePage": "index"
+      }
+    ]
+  },
+  "issues": [
+    {
+      "path": "mobile/centers/CentersContent.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/Placeholder.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/activity-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/ai-billing-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/ai-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/analytics-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/analytics-hub/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/assessment-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/attendance-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/business-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/business-hub/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/call-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/customer-pool-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-collaboration/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-editor/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-instance-list/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-statistics/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-template-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/document-template-center/use.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/enrollment-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/finance-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/group-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/inspection-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/marketing-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/media-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/my-task-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/new-media-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/notification-center/NotificationCenter.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/notification-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/permission-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/personnel-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/personnel-center/teacher-detail.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/photo-album-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/principal-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/schedule-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/script-templates/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/settings-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/student-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/student-management/detail.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/student-management/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/system-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/system-center-unified/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/system-log-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/task-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/task-form/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/teacher-center/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/teaching-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/template-detail/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/usage-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/centers/user-center/index.vue",
+      "layouts": [
+        "MobileCenterLayout"
+      ],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "移动端页面使用了PC端布局: CenterLayout"
+      ],
+      "category": "mobile-center"
+    },
+    {
+      "path": "mobile/teacher-center/activities/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/appointment-management/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/attendance/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/class-contacts/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/creative-curriculum/create.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/creative-curriculum/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/creative-curriculum/preview.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/customer-pool/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/customer-tracking/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/dashboard/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/enrollment/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/notifications/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/performance-rewards/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/task-detail/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/tasks/create.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/tasks/detail.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/tasks/edit.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/tasks/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/teacher-center/teaching/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-teacher"
+    },
+    {
+      "path": "mobile/parent-center/AIAssistant.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/activities/detail.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/activities/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/activities/registration.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/ai-assistant/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/Academic.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/DevelopmentAssessment.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/GameComponent.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/GrowthTrajectory.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/Layout.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/Report.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/SchoolReadiness.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/development-assessment.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/doing.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/games/AttentionGame.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/games/LogicGame.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/games/MemoryGame.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/growth-trajectory.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/report.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/assessment/start.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/child-growth/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/children/add.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/children/edit.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/children/followup.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/children/growth.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/children/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/communication/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/communication/smart-hub.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/dashboard/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/feedback/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/achievements.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/play/FruitSequence.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/play/PrincessGarden.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/play/PrincessMemory.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/play/RobotFactory.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/play/SpaceTreasure.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/games/records.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/kindergarten-rewards.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/notifications/detail.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/notifications/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/photo-album/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/profile/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/promotion-center/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "mobile/parent-center/share-stats/index.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "mobile-parent"
+    },
+    {
+      "path": "centers/DocumentCenter.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": true,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "pc-center"
+    },
+    {
+      "path": "centers/GrowthRecordsCenter.vue",
+      "layouts": [],
+      "hasSidebar": false,
+      "hasResponsive": false,
+      "issues": [
+        "未使用任何标准布局组件"
+      ],
+      "category": "pc-center"
+    }
+  ]
+}

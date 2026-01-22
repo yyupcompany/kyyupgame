@@ -261,7 +261,7 @@ function getProbabilityText(probability: number): string {
         align-items: center;
         gap: var(--spacing-sm);
         padding: var(--spacing-md) var(--spacing-lg);
-        background: var(--bg-color);
+        background: var(--bg-card);
         border-bottom: 1px solid var(--border-color-lighter);
         font-weight: 600;
         color: var(--text-primary);
@@ -325,7 +325,7 @@ function getProbabilityText(probability: number): string {
             color: var(--text-regular);
             line-height: 1.6;
             padding: var(--spacing-sm);
-            background: var(--bg-color);
+            background: var(--bg-card);
             border-radius: var(--border-radius-base);
           }
 
@@ -333,7 +333,7 @@ function getProbabilityText(probability: number): string {
             .core-script-item {
               padding: var(--spacing-sm);
               margin-bottom: var(--spacing-sm);
-              background: var(--bg-color);
+              background: var(--bg-card);
               border-radius: var(--border-radius-base);
               color: var(--text-regular);
               line-height: 1.5;

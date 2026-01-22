@@ -653,7 +653,7 @@ onMounted(() => {
   align-items: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-lg);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
 
@@ -719,7 +719,7 @@ onMounted(() => {
 
   .dimension-item {
     padding: var(--spacing-lg);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--radius-md);
     border-left: var(--spacing-xs) solid var(--primary-color);
 
@@ -753,7 +753,7 @@ onMounted(() => {
 
 /* Element Plus 组件样式覆盖 */
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 
@@ -762,7 +762,7 @@ onMounted(() => {
 }
 
 :deep(.el-table th) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -771,7 +771,7 @@ onMounted(() => {
 }
 
 :deep(.el-progress-bar__outer) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-tag) {
@@ -779,14 +779,14 @@ onMounted(() => {
 }
 
 :deep(.el-dialog__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom: var(--z-index-dropdown) solid var(--border-color);
 }
 
 :deep(.el-descriptions__label) {
   color: var(--text-primary);
   font-weight: 500;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-descriptions__content) {

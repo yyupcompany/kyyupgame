@@ -3,7 +3,7 @@
  * @description 用量统计、费用查询等API
  */
 
-import { request } from '@/utils/request';
+import { request, type ApiResponse } from '@/utils/request';
 
 /**
  * 用量类型
@@ -78,16 +78,6 @@ export interface UsageQueryParams {
   endDate?: string;
   page?: number;
   pageSize?: number;
-}
-
-/**
- * API响应接口
- */
-export interface ApiResponse<T = any> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  error?: string;
 }
 
 /**

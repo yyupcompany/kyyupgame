@@ -5,10 +5,17 @@
  * @update 2026-01-03: 使用统一AI Bridge进行环境检测和路由
  */
 
-import { aiRequest } from '../../../../../../../utils/request';
-import { useUserStore } from '../../../../../../../stores/user';
-import { AI_ENDPOINTS } from '../../../../../../../api/endpoints';
-import { mobileAIBridge } from '../../../../../../../utils/mobile-ai-bridge';
+import { aiRequest } from '@/utils/request';
+import { useUserStore } from '@/stores/user';
+import { AI_ENDPOINTS } from '@/api/endpoints';
+import { mobileAIBridge } from '@/utils/mobile-ai-bridge';
+
+// 前端日志工具
+const frontendLogger = {
+  log: (...args: any[]) => console.log('[AI课程服务]', ...args),
+  error: (...args: any[]) => console.error('[AI课程服务]', ...args),
+  warn: (...args: any[]) => console.warn('[AI课程服务]', ...args)
+};
 
 export interface AICurriculumRequest {
   prompt: string;

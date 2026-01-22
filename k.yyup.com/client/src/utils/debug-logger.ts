@@ -54,9 +54,12 @@ const logColors = {
 /**
  * 截断长字符串
  */
-function truncate(str: string | unknown, maxLength: number): string {
-  if (typeof str !== 'string') {
-    str = JSON.stringify(str);
+function truncate(input: string | unknown, maxLength: number): string {
+  let str: string;
+  if (typeof input !== 'string') {
+    str = JSON.stringify(input) || '';
+  } else {
+    str = input as string;
   }
   if (str.length > maxLength) {
     return str.substring(0, maxLength) + '...';
@@ -272,11 +275,6 @@ export const groupEnd = logger.groupEnd.bind(logger);
 export const table = logger.table.bind(logger);
 export const time = logger.time.bind(logger);
 export const timeEnd = logger.timeEnd.bind(logger);
-
-/**
- * 导出日志级别枚举
- */
-export { LogLevel };
 
 /**
  * 导出默认

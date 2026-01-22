@@ -1,72 +1,60 @@
 <template>
   <UnifiedCenterLayout
-    title="页面标题"
-    description="页面描述"
+    title="客户跟踪"
+    description="管理我的客户跟进记录"
     icon="User"
   >
-    <div class="center-container teacher-customer-tracking">
-    <!-- 页面头部 -->
-    <div class="page-header">
-      <div class="header-content">
-        <h1 class="page-title">
-          <UnifiedIcon name="default" />
-          客户跟踪
-        </h1>
-        <p class="page-subtitle">管理我的客户跟进记录</p>
-      </div>
-      <div class="header-actions">
-        <el-button type="primary" @click="showAddCustomerDialog = true">
-          <UnifiedIcon name="Plus" />
-          新增客户
-        </el-button>
-        <el-button @click="refreshData">
-          <UnifiedIcon name="Refresh" />
-          刷新
-        </el-button>
-      </div>
-    </div>
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button type="primary" @click="showAddCustomerDialog = true">
+        <UnifiedIcon name="plus" :size="16" />
+        新增客户
+      </el-button>
+      <el-button @click="refreshData">
+        <UnifiedIcon name="refresh" :size="16" />
+        刷新
+      </el-button>
+    </template>
 
-    <!-- 统计卡片 -->
-    <div class="stats-section">
-      <el-row :gutter="20">
-        <el-col :xs="24" :sm="12" :md="6">
-          <TrackingStatCard
-            title="我的客户"
-            :value="stats.totalCustomers"
-            icon="User"
-            color="var(--el-color-primary)"
-            description="总客户数"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <TrackingStatCard
-            title="今日跟进"
-            :value="stats.todayFollows"
-            icon="ChatDotRound"
-            color="var(--el-color-success)"
-            description="已跟进"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <TrackingStatCard
-            title="待跟进"
-            :value="stats.pendingFollows"
-            icon="Clock"
-            color="var(--el-color-warning)"
-            description="需要跟进"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <TrackingStatCard
-            title="成功率"
-            :value="stats.successRate"
-            icon="SuccessFilled"
-            color="var(--el-color-danger)"
-            description="转化成功率"
-          />
-        </el-col>
-      </el-row>
-    </div>
+    <!-- 统计卡片 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        icon-name="User"
+        title="我的客户"
+        :value="stats.totalCustomers"
+        subtitle="总客户数"
+        type="primary"
+        :trend="stats.totalCustomers > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon-name="Message"
+        title="今日跟进"
+        :value="stats.todayFollows"
+        subtitle="已跟进"
+        type="success"
+        :trend="stats.todayFollows > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon-name="Clock"
+        title="待跟进"
+        :value="stats.pendingFollows"
+        subtitle="需要跟进"
+        type="warning"
+        :trend="stats.pendingFollows > 0 ? 'down' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon-name="TrendingUp"
+        title="成功率"
+        :value="`${stats.successRate}%`"
+        subtitle="转化成功率"
+        type="danger"
+        :trend="stats.successRate >= 50 ? 'up' : 'stable'"
+        clickable
+      />
+    </template>
 
     <!-- 主要内容区域 -->
     <el-tabs v-model="activeTab" type="card" class="main-tabs">
@@ -151,20 +139,121 @@
         </el-button>
       </template>
     </el-dialog>
-    </div>
+
+    <!-- SOP流程对话框 -->
+    <el-dialog
+      v-model="showSOPDialog"
+      title="客户跟进SOP流程"
+      width="700px"
+      :close-on-click-modal="false"
+    >
+      <div class="sop-content">
+        <div class="sop-header">
+          <h3>客户信息</h3>
+          <p v-if="selectedCustomer">
+            <strong>姓名：</strong>{{ selectedCustomer.name }} | 
+            <strong>电话：</strong>{{ selectedCustomer.phone }} | 
+            <strong>孩子：</strong>{{ selectedCustomer.childName }}({{ selectedCustomer.childAge }}岁)
+          </p>
+        </div>
+
+        <el-divider />
+
+        <div class="sop-steps">
+          <h3>跟进SOP流程【点击更新进度】</h3>
+          <el-steps direction="vertical" :active="currentSOPStep" finish-status="success">
+            <el-step 
+              v-for="(step, index) in sopSteps" 
+              :key="index"
+              :title="step.title" 
+              :description="step.description"
+              class="clickable-step"
+              @click="handleStepClick(index)"
+            >
+              <template #icon>
+                <div class="step-icon" :class="{ 'active': index <= currentSOPStep }">
+                  <el-icon v-if="index < currentSOPStep"><Check /></el-icon>
+                  <span v-else>{{ index + 1 }}</span>
+                </div>
+              </template>
+            </el-step>
+          </el-steps>
+        </div>
+
+        <el-divider />
+
+        <div class="sop-actions">
+          <el-alert
+            type="info"
+            :closable="false"
+            show-icon
+          >
+            <template #title>
+              <strong>当前进度：</strong>{{ sopSteps[currentSOPStep]?.title }}
+            </template>
+          </el-alert>
+
+          <div class="progress-buttons">
+            <el-button 
+              v-if="currentSOPStep > 0"
+              @click="currentSOPStep--"
+              :icon="ArrowLeft"
+            >
+              上一步
+            </el-button>
+            <el-button 
+              v-if="currentSOPStep < sopSteps.length - 1"
+              type="primary"
+              @click="handleNextStep"
+              :icon="ArrowRight"
+            >
+              下一步
+            </el-button>
+            <el-button 
+              v-if="currentSOPStep === sopSteps.length - 1"
+              type="success"
+              @click="handleComplete"
+              :icon="Check"
+            >
+              完成签约
+            </el-button>
+          </div>
+        </div>
+
+        <el-divider />
+
+        <div class="sop-notes">
+          <h3>注意事项</h3>
+          <ul>
+            <li>每次沟通后记录跟进内容</li>
+            <li>根据客户意向调整沟通策略</li>
+            <li>及时处理客户疑问和需求</li>
+            <li>保持良好沟通频率，避免客户流失</li>
+          </ul>
+        </div>
+      </div>
+      <template #footer>
+        <el-button @click="handleSOPCancel">取消</el-button>
+        <el-button type="primary" @click="handleSOPSave" :loading="submitting">
+          保存进度
+        </el-button>
+      </template>
+    </el-dialog>
   </UnifiedCenterLayout>
 </template>
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import StatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { Check, ArrowLeft, ArrowRight } from '@element-plus/icons-vue'
 import CustomerList from './components/CustomerList.vue'
 import FollowRecord from './components/FollowRecord.vue'
 import ConversionFunnel from './components/ConversionFunnel.vue'
-import TrackingStatCard from './components/TrackingStatCard.vue'
 
 // 导入API
 import {
@@ -189,6 +278,19 @@ const recordsLoading = ref(false)
 const funnelLoading = ref(false)
 const submitting = ref(false)
 const showAddCustomerDialog = ref(false)
+const showSOPDialog = ref(false)
+const selectedCustomer = ref<any>(null)
+const currentSOPStep = ref(0)
+const originalSOPStep = ref(0) // 保存原始进度，用于取消时恢复
+
+// SOP流程步骤定义
+const sopSteps = [
+  { title: '初次联系', description: '了解客户基本情况、需求和意向' },
+  { title: '预约参观', description: '邀请客户到园参观，介绍园区环境和课程' },
+  { title: '试听体验', description: '安排孩子试听体验课，收集反馈' },
+  { title: '方案讲解', description: '根据客户需求讲解报名方案和优惠政策' },
+  { title: '签约成交', description: '确认意向，办理报名签约手续' }
+]
 const activeTab = ref('customers')
 const selectedCustomerId = ref('')
 const total = ref(0)
@@ -327,8 +429,74 @@ const viewCustomer = (customer: any) => {
 }
 
 const viewSOP = (customer: any) => {
-  // 跳转到SOP详情页（与查看相同）
-  router.push(`/teacher-center/customer-tracking/${customer.id}`)
+  selectedCustomer.value = customer
+  // 根据客户状态设置SOP步骤
+  const statusMap: Record<string, number> = {
+    'new': 0,
+    'following': 2,
+    'success': 5,
+    'lost': 0
+  }
+  currentSOPStep.value = statusMap[customer.status] || 0
+  originalSOPStep.value = currentSOPStep.value // 保存原始进度
+  showSOPDialog.value = true
+}
+
+// SOP步骤点击处理
+const handleStepClick = (index: number) => {
+  currentSOPStep.value = index
+}
+
+// 下一步
+const handleNextStep = () => {
+  if (currentSOPStep.value < sopSteps.length - 1) {
+    currentSOPStep.value++
+  }
+}
+
+// 完成签约
+const handleComplete = async () => {
+  try {
+    await ElMessageBox.confirm('确认客户已签约成功？', '提示', {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'success'
+    })
+    
+    // TODO: 调用API更新客户状态为“已成交”
+    ElMessage.success('恭喜！客户签约成功')
+    showSOPDialog.value = false
+    refreshData()
+  } catch (error) {
+    // 用户取消
+  }
+}
+
+// 取消SOP编辑
+const handleSOPCancel = () => {
+  // 恢复原始进度
+  currentSOPStep.value = originalSOPStep.value
+  showSOPDialog.value = false
+}
+
+// 保存SOP进度
+const handleSOPSave = async () => {
+  try {
+    submitting.value = true
+    
+    // TODO: 调用API保存SOP进度
+    // await updateCustomerSOPProgress(selectedCustomer.value.id, currentSOPStep.value)
+    
+    ElMessage.success(`已更新跟进进度为：${sopSteps[currentSOPStep.value].title}`)
+    originalSOPStep.value = currentSOPStep.value // 更新原始进度
+    showSOPDialog.value = false
+    refreshData()
+  } catch (error) {
+    console.error('保存SOP进度失败:', error)
+    ElMessage.error('保存失败，请重试')
+  } finally {
+    submitting.value = false
+  }
 }
 
 const addFollow = (customer: any) => {
@@ -461,106 +629,222 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+<style lang="scss" scoped>
+@use "@/styles/design-tokens.scss" as *;
 
-.teacher-customer-tracking {
-  padding: var(--spacing-lg);
-  background-color: var(--el-bg-color-page);
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  flex: 1 1 auto;
-}
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: var(--spacing-lg);
-  padding-bottom: var(--spacing-lg);
-  border-bottom: var(--z-index-dropdown) solid var(--el-border-color-light);
-}
-
-.header-content h1 {
-  margin: 0;
-  font-size: var(--text-2xl);
-  color: var(--el-text-color-primary);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.header-content p {
-  margin: var(--spacing-xs) 0 0 0;
-  color: var(--el-text-color-secondary);
-  font-size: var(--text-sm);
-}
-
-.header-actions {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-.stats-section {
-  margin-bottom: var(--spacing-2xl);
-}
-
-.stat-card {
-  background: var(--el-bg-color);
-  border-radius: var(--spacing-sm);
-  padding: var(--text-2xl);
-  box-shadow: var(--el-box-shadow-light);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4xl);
-}
-
-.stat-icon {
-  width: auto;
-  min-height: 60px; height: auto;
-  border-radius: var(--radius-full);
-  background: var(--el-color-primary-light-9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--el-color-primary);
-  font-size: var(--text-3xl);
-}
-
-.stat-number {
-  font-size: var(--text-3xl);
-  font-weight: bold;
-  color: var(--el-text-color-primary);
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: var(--text-base);
-  color: var(--el-text-color-secondary);
-  margin-top: var(--spacing-xs);
-}
-
+/* ==================== 主选项卡 ==================== */
 .main-tabs {
-  background: white;
-  border-radius: var(--spacing-sm);
-  box-shadow: 0 2px var(--spacing-xs) var(--shadow-light);
   width: 100%;
   max-width: 100%;
   flex: 1 1 auto;
+
+  :deep(.el-tabs) {
+    .el-tabs__header {
+      margin: 0;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .el-tabs__nav-wrap {
+      padding: 0 var(--spacing-lg);
+
+      &::after {
+        display: none;
+      }
+    }
+
+    .el-tabs__item {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      padding: 0 var(--spacing-lg);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      &.is-active {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+    }
+
+    .el-tabs__active-bar {
+      background-color: var(--primary-color);
+      height: var(--spacing-xs);
+    }
+
+    .el-tabs__content {
+      padding: var(--spacing-lg);
+      background-color: var(--bg-card);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+  }
 }
 
-:deep(.el-tabs__content) {
-  padding: var(--text-2xl);
+/* ==================== 对话框样式 ==================== */
+:deep(.el-dialog) {
+  border-radius: var(--radius-lg);
+
+  .el-dialog__header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .el-dialog__body {
+    padding: var(--spacing-xl);
+  }
+
+  .el-dialog__footer {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+  }
 }
 
-:deep(.el-tabs__header) {
-  margin: 0;
-  background: var(--el-fill-color-light);
-  border-radius: var(--spacing-sm) var(--spacing-sm) 0 0;
+/* ==================== SOP对话框样式 ==================== */
+.sop-content {
+  .sop-header {
+    margin-bottom: var(--spacing-lg);
+
+    h3 {
+      font-size: var(--text-lg);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+
+      strong {
+        color: var(--text-primary);
+        margin-right: var(--spacing-xs);
+      }
+    }
+  }
+
+  .sop-steps {
+    margin: var(--spacing-lg) 0;
+
+    h3 {
+      font-size: var(--text-lg);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    :deep(.el-steps) {
+      .el-step__title {
+        font-size: var(--text-base);
+        font-weight: 600;
+      }
+
+      .el-step__description {
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+      }
+      
+      // 可点击步骤样式
+      .clickable-step {
+        cursor: pointer;
+        transition: all var(--transition-base);
+        
+        &:hover {
+          .el-step__head {
+            transform: scale(1.1);
+          }
+          
+          .el-step__title {
+            color: var(--primary-color);
+          }
+        }
+      }
+      
+      // 自定义步骤图标
+      .step-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+        font-weight: 600;
+        transition: all var(--transition-base);
+        
+        &.active {
+          background: var(--primary-color);
+          color: white;
+          box-shadow: 0 0 0 4px var(--primary-light-bg);
+        }
+      }
+    }
+  }
+  
+  .sop-actions {
+    margin: var(--spacing-lg) 0;
+    
+    .el-alert {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .progress-buttons {
+      display: flex;
+      gap: var(--spacing-md);
+      justify-content: center;
+    }
+  }
+
+  .sop-notes {
+    margin-top: var(--spacing-lg);
+
+    h3 {
+      font-size: var(--text-lg);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: var(--spacing-sm) 0;
+        padding-left: var(--spacing-lg);
+        position: relative;
+        color: var(--text-secondary);
+        line-height: 1.6;
+
+        &::before {
+          content: '•';
+          position: absolute;
+          left: 0;
+          color: var(--primary-color);
+          font-weight: bold;
+          font-size: var(--text-lg);
+        }
+      }
+    }
+  }
 }
 
-:deep(.el-tabs__nav-wrap) {
-  padding: 0 var(--text-2xl);
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-md)) {
+  .main-tabs {
+    :deep(.el-tabs) {
+      .el-tabs__nav-wrap {
+        padding: 0 var(--spacing-md);
+      }
+
+      .el-tabs__item {
+        padding: 0 var(--spacing-md);
+      }
+
+      .el-tabs__content {
+        padding: var(--spacing-md);
+      }
+    }
+  }
 }
 </style>

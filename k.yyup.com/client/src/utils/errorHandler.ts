@@ -28,13 +28,26 @@ interface ErrorInfo {
   statusCode?: number;
 }
 
+// 防止重复提示和跳转的标志
+let isHandlingAuthError = false;
+let authErrorTimer: NodeJS.Timeout | null = null;
+
 export class ErrorHandler {
   static handle(error: any, showMessage = true): ErrorInfo {
     const errorInfo = this.parseError(error);
-    
+
     switch (errorInfo.code) {
       case ErrorCode.UNAUTHORIZED:
       case ErrorCode.TOKEN_EXPIRED:
+        // 防止并发401请求重复处理
+        if (isHandlingAuthError) {
+          // 如果已经在处理401错误，静默返回
+          return errorInfo;
+        }
+
+        // 设置标志，防止重复处理
+        isHandlingAuthError = true;
+
         // 使用userStore统一清除用户信息
         const userStore = useUserStore();
         userStore.clearUserInfo();
@@ -54,9 +67,19 @@ export class ErrorHandler {
           });
         }
 
-        // 延迟跳转到登录页
-        setTimeout(() => {
-          router.push("/login");
+        // 清除之前的定时器
+        if (authErrorTimer) {
+          clearTimeout(authErrorTimer);
+        }
+
+        // 延迟跳转到登录页，并重置标志
+        authErrorTimer = setTimeout(() => {
+          router.push("/login").finally(() => {
+            // 跳转完成后重置标志
+            setTimeout(() => {
+              isHandlingAuthError = false;
+            }, 1000);
+          });
         }, 500);
         break;
       

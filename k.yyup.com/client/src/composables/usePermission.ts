@@ -24,11 +24,11 @@ export function usePermission() {
   
   // 监听用户信息变化，更新权限管理器
   watch(
-    () => [userStore.userPermissions, userStore.userInfo?.role],
-    ([permissions, role]: [any, any]) => {
+    [() => userStore.userPermissions, () => userStore.userInfo?.role],
+    ([permissions, role]) => {
       permissionManager.value.updatePermissions(
-        permissions as string[] || [],
-        role as string || ROLES.USER
+        (permissions as string[]) || [],
+        (role as string) || ROLES.USER
       );
     },
     { immediate: true }
@@ -111,10 +111,11 @@ export function usePermission() {
     path?: string;
     children?: T[] 
   }>(menus: T[]): T[] => {
-    return permissionManager.value.filterMenusByPermission(menus.map(menu => ({
+    const normalizedMenus = menus.map(menu => ({
       ...menu,
       permission: menu.permission || (menu.path ? ROUTE_PERMISSIONS[menu.path] : undefined)
-    })));
+    })) as T[];
+    return permissionManager.value.filterMenusByPermission(normalizedMenus);
   };
   
   /**

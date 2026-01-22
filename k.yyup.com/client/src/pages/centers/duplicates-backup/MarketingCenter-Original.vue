@@ -275,7 +275,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .marketing-center {
   padding: var(--text-2xl);
-  background: var(--bg-primary);
+  background: var(--bg-page);
   min-height: 100vh;
 }
 
@@ -327,7 +327,7 @@ onMounted(() => {
 .stat-item {
   text-align: center;
   padding: var(--text-2xl);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--radius-md);
   border: var(--border-width-base) solid var(--border-color);
 }
@@ -373,7 +373,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   padding: var(--text-2xl);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--spacing-sm);
   border: var(--border-width-base) solid var(--border-color);
   cursor: pointer;
@@ -415,7 +415,7 @@ onMounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: var(--text-2xl);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--spacing-sm);
   border: var(--border-width-base) solid var(--border-color);
 }
@@ -493,7 +493,7 @@ onMounted(() => {
 
 .channel-item {
   padding: var(--text-2xl);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--spacing-sm);
   border: var(--border-width-base) solid var(--border-color);
 }

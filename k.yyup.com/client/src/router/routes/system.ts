@@ -26,6 +26,7 @@ const SystemSecurity = () => import('@/pages/system/Security.vue')
 const SystemBackup = () => import('@/pages/system/Backup.vue')
 const SystemSettings = () => import('@/pages/system/settings/index.vue')
 const AIModelConfig = () => import('@/pages/system/AIModelConfig.vue')
+const MessageTemplate = () => import('@/pages/system/MessageTemplate.vue')
 
 export const systemRoutes: RouteRecordRaw[] = [
   // 🔧 修复：所有系统管理路由都应该嵌套在 MainLayout 中
@@ -124,6 +125,17 @@ export const systemRoutes: RouteRecordRaw[] = [
           title: 'AI模型配置',
           requiresAuth: true,
           permission: 'AI_MODEL_CONFIG_MANAGE',
+          priority: 'low'
+        }
+      },
+      {
+        path: 'message-template',
+        name: 'MessageTemplate',
+        component: MessageTemplate,
+        meta: {
+          title: '消息模板',
+          requiresAuth: true,
+          permission: 'MESSAGE_TEMPLATE_MANAGE',
           priority: 'low'
         }
       },

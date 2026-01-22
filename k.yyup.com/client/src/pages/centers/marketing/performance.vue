@@ -3,13 +3,6 @@
     title="绩效中心"
     description="员工绩效管理，转介绍奖励分配，团队业绩分析，个人贡献度统计"
   >
-    <template #header-actions>
-      <el-button type="success" @click="exportData">
-        <el-icon><Download /></el-icon>
-        导出报表
-      </el-button>
-    </template>
-
     <div class="performance-center">
       <!-- 时间筛选工具栏 -->
       <div class="toolbar">
@@ -282,7 +275,7 @@ onMounted(() => {
 .performance-center {
   // 继承全局中心样式
   min-height: 100vh;
-  background: var(--bg-primary, #f9fafb);
+  background: var(--bg-page);
   padding: var(--text-2xl);
 }
 
@@ -293,7 +286,7 @@ onMounted(() => {
   align-items: center;
   margin-bottom: var(--spacing-3xl);
   padding: var(--text-xl);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--text-lg);
   box-shadow: var(--shadow-sm);
   border: var(--border-width-default) solid var(--border-primary, var(--border-color));
@@ -319,7 +312,7 @@ onMounted(() => {
 
 // 绩效标签页
 .performance-tabs {
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--text-lg);
   box-shadow: var(--shadow-md);
   border: var(--border-width-default) solid var(--border-primary, var(--border-color));

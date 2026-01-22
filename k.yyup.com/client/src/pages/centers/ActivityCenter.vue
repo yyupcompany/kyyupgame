@@ -2,58 +2,38 @@
   <UnifiedCenterLayout
     title="活动中心"
     description="清晰展示活动管理的完整流程，方便园长一目了然地掌握活动进展"
+    :full-width="true"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreateActivity">
-        <UnifiedIcon name="Plus" :size="18" />
-        新建活动
-      </el-button>
-    </template>
-
     <div class="center-container activity-center-timeline">
     <!-- Tab切换 -->
     <el-tabs v-model="activeTab" class="activity-tabs" @tab-change="handleTabChange">
       <el-tab-pane label="活动列表" name="list">
         <div class="activity-list-container" v-loading="loading">
-          <div class="list-header">
-            <h3>所有活动</h3>
-            <el-input
-              v-model="searchKeyword"
-              placeholder="搜索活动..."
-              style="width: 300px"
-              clearable
-              @input="handleSearch"
-            >
-              <template #prefix>
-                <UnifiedIcon name="Search" :size="16" />
-              </template>
-            </el-input>
-          </div>
+          <DataTable
+            :data="filteredActivities"
+            :columns="activityColumns"
+            :loading="loading"
+            :show-pagination="false"
+            :show-toolbar="false"
+            @row-click="handleActivityClick"
+          >
+            <template #column-title="{ row }">
+              <div class="activity-name-cell">
+                <UnifiedIcon :name="getActivityIcon(row.status)" :size="18" />
+                <span>{{ row.title }}</span>
+              </div>
+            </template>
 
-          <el-table :data="filteredActivities" stripe @row-click="handleActivityClick" style="cursor: pointer;">
-            <el-table-column prop="title" label="活动名称" min-width="200">
-              <template #default="{ row }">
-                <div class="activity-name-cell">
-                  <UnifiedIcon :name="getActivityIcon(row.status)" :size="18" />
-                  <span>{{ row.title }}</span>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column prop="description" label="描述" min-width="250" show-overflow-tooltip />
-            <el-table-column prop="startDate" label="开始时间" width="180" />
-            <el-table-column prop="status" label="状态" width="100">
-              <template #default="{ row }">
-                <el-tag :type="getStatusType(row.status)">
-                  {{ getStatusText(row.status) }}
-                </el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column prop="registrations" label="报名数" width="100" align="center">
-              <template #default="{ row }">
-                <el-badge :value="row.registrations || 0" :max="999" />
-              </template>
-            </el-table-column>
-          </el-table>
+            <template #column-status="{ row }">
+              <el-tag :type="getStatusType(row.status)">
+                {{ getStatusText(row.status) }}
+              </el-tag>
+            </template>
+
+            <template #column-registrations="{ row }">
+              <el-badge :value="row.registrations || 0" :max="999" />
+            </template>
+          </DataTable>
 
           <el-empty v-if="filteredActivities.length === 0" description="暂无活动数据" />
         </div>
@@ -104,13 +84,14 @@
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
 
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import TimelineItem from '@/components/activity/TimelineItem.vue'
 import DetailPanel from '@/components/activity/DetailPanel.vue'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import PageHelpButton from '@/components/common/PageHelpButton.vue'
+import { DataTable } from '@/components/centers'
 import { request } from '@/utils/request'
 import { centersAPI } from '@/api/modules/centers'
 
@@ -138,6 +119,15 @@ const timelineItems = ref<TimelineItemData[]>([])
 const selectedItem = ref<TimelineItemData | null>(null)
 const searchKeyword = ref('')
 const activities = ref<any[]>([])
+
+// 活动列表列配置
+const activityColumns = [
+  { prop: 'title', label: '活动名称', minWidth: 200 },
+  { prop: 'description', label: '描述', minWidth: 250, showOverflowTooltip: true },
+  { prop: 'startDate', label: '开始时间', width: 180 },
+  { prop: 'status', label: '状态', width: 100 },
+  { prop: 'registrations', label: '报名数', width: 100, align: 'center' as const }
+]
 
 // 过滤后的活动列表
 const filteredActivities = computed(() => {
@@ -254,6 +244,17 @@ const getStatusType = (status: string) => {
     'cancelled': 'danger'
   }
   return typeMap[status] || 'info'
+}
+
+// 获取状态文本
+const getStatusText = (status: string) => {
+  const textMap: Record<string, string> = {
+    'draft': '草稿',
+    'ongoing': '进行中',
+    'completed': '已完成',
+    'cancelled': '已取消'
+  }
+  return textMap[status] || status
 }
 
 // 加载Timeline数据 - 优化版本使用集合API
@@ -472,14 +473,14 @@ const handleAction = (actionKey: string) => {
   const actionRoutes: Record<string, string> = {
     // 活动策划阶段
     'create-activity': '/activity/create',
-    'view-templates': '/activity/ActivityTemplate',
-    'activity-planner': '/activity/create',
+    'view-templates': '/activity/template',
+    'activity-planner': '/activity/plan/activity-planner',
     'view-activities': '/activity',
 
     // 海报设计阶段
-    'design-poster': '/activity/ActivityPosterPreview',
-    'ai-poster': '/activity/ActivityPosterPreview?mode=ai',
-    'upload-poster': '/activity/ActivityPosterPreview?mode=upload',
+    'design-poster': '/activity/poster-preview',
+    'ai-poster': '/activity/poster-preview?mode=ai',
+    'upload-poster': '/activity/poster-preview?mode=upload',
 
     // 营销配置阶段
     'config-marketing': '/centers/marketing',
@@ -487,24 +488,24 @@ const handleAction = (actionKey: string) => {
     'promotion-settings': '/centers/marketing',
 
     // 报名页面阶段
-    'generate-page': '/activity/RegistrationPageGenerator',
-    'registration-dashboard': '/activity/registrations',
-    'page-templates': '/activity/RegistrationPageGenerator?tab=templates',
+    'generate-page': '/activity/registration-page-generator',
+    'registration-dashboard': '/activity/registration/registration-dashboard',
+    'page-templates': '/activity/registration-page-generator?tab=templates',
 
     // 活动发布阶段
-    'publish': '/activity/ActivityPublish',
-    'publish-channels': '/activity/ActivityPublish?tab=channels',
-    'share-management': '/activity/ActivityPublish?tab=share',
+    'publish': '/activity/publish',
+    'publish-channels': '/activity/publish?tab=channels',
+    'share-management': '/activity/publish?tab=share',
 
     // 报名审核阶段
-    'approve-registrations': '/activity/ActivityRegistrations',
-    'registration-list': '/activity/ActivityRegistrations',
-    'approval-workflow': '/activity/ActivityRegistrations?tab=approval',
+    'approve-registrations': '/activity/registrations',
+    'registration-list': '/activity/registrations',
+    'approval-workflow': '/activity/registrations?tab=approval',
 
     // 活动签到阶段
-    'checkin': '/activity/ActivityCheckin',
-    'checkin-management': '/activity/ActivityCheckin',
-    'attendance-stats': '/activity/ActivityCheckin?tab=stats',
+    'checkin': '/activity/checkin',
+    'checkin-management': '/activity/checkin',
+    'attendance-stats': '/activity/checkin?tab=stats',
 
     // 效果评估阶段
     'create-survey': '/activity/evaluation/ActivityEvaluation',
@@ -558,8 +559,8 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-2xl);
-  background: var(--bg-primary);
+  padding: var(--spacing-lg) var(--spacing-xl); /* ✨ 优化：稍微增加边距，使页面更透气 */
+  background: var(--bg-page);
   overflow-x: hidden;
 }
 
@@ -569,37 +570,47 @@ onMounted(() => {
 .timeline-container {
   flex: 1;
   display: flex;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-lg); /* ✨ 优化：减小间距 */
   min-height: 0;
   max-width: 100%;
   overflow: hidden;
 }
 
 .timeline-section {
-  flex: 0 0 400px;
+  flex: 0 0 360px; /* ✨ 优化：稍微减小左侧宽度 */
   min-width: 0;
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
+  background: var(--glass-bg, rgba(255, 255, 255, 0.8)); /* ✨ 优化：使用毛玻璃背景 */
+  backdrop-filter: blur(15px); /* ✨ 优化：毛玻璃效果 */
   border-radius: var(--radius-xl);
-  padding: var(--spacing-3xl);
+  padding: var(--spacing-lg); /* ✨ 优化：减小内边距 */
   box-shadow: var(--shadow-md);
-  border: var(--border-width-thin) solid var(--border-color);
+  border: 1px solid var(--white-alpha-20); /* ✨ 优化：半透明边框 */
   overflow: hidden;
+  transition: all var(--transition-normal) ease;
+
+  &:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
+  }
 
   .timeline-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-2xl);
-    padding-bottom: var(--spacing-lg);
-    border-bottom: var(--border-width-thin) solid var(--border-color);
+    margin-bottom: var(--spacing-lg); /* ✨ 优化：减小间距 */
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
 
     h2 {
-      font-size: var(--text-xl);
-      font-weight: var(--font-semibold);
+      font-size: var(--text-lg); /* ✨ 优化：稍微减小标题字号 */
+      font-weight: var(--font-bold); /* ✨ 优化：增加字重 */
       color: var(--text-primary);
       margin: 0;
+      letter-spacing: 0.5px;
     }
   }
 
@@ -607,18 +618,19 @@ onMounted(() => {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-right: var(--spacing-sm);
+    padding: var(--spacing-sm); /* ✨ 优化：增加内边距 */
+    margin: 0 -var(--spacing-sm); /* ✨ 优化：负边距抵消，允许滚动条贴边 */
 
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 5px;
     }
 
     &::-webkit-scrollbar-thumb {
       background: var(--border-color);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-full);
 
       &:hover {
-        background: var(--text-secondary);
+        background: var(--text-muted);
       }
     }
   }
@@ -630,8 +642,15 @@ onMounted(() => {
   background: var(--bg-card);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-md);
-  border: var(--border-width-thin) solid var(--border-color);
+  border: 1px solid var(--border-color);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal) ease;
+
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
 }
 
 // 响应式设计 - 平板
@@ -671,30 +690,26 @@ onMounted(() => {
 .dark,
 html.dark {
   .activity-center-timeline {
-    background: var(--bg-primary);
+    background: var(--bg-page);
   }
 
-  .timeline-section,
+  .timeline-section {
+    background: var(--glass-bg-dark, rgba(30, 41, 59, 0.7));
+    backdrop-filter: blur(20px);
+    border-color: var(--white-alpha-10);
+  }
+
   .detail-section {
     background: var(--bg-card);
     border-color: var(--border-color);
   }
 
   .timeline-header {
-    border-bottom-color: var(--border-color);
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
 
     h2 {
       color: var(--text-primary);
-    }
-  }
-
-  .timeline-list {
-    &::-webkit-scrollbar-thumb {
-      background: var(--border-color);
-
-      &:hover {
-        background: var(--text-secondary);
-      }
     }
   }
 }
@@ -704,12 +719,18 @@ html.dark {
   flex: 1;
   display: flex;
   flex-direction: column;
+  background: transparent; /* ✨ 优化：保持透明，由父级控制 */
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
 
   :deep(.el-tabs__header) {
     margin: 0 0 var(--spacing-xl) 0;
+    padding: var(--spacing-sm) var(--spacing-md);
     background: var(--bg-card);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-sm) var(--spacing-xl);
+    border: 1px solid var(--border-color);
     box-shadow: var(--shadow-sm);
   }
 
@@ -719,33 +740,56 @@ html.dark {
 
   :deep(.el-tabs__item) {
     font-size: var(--text-base);
-    font-weight: var(--font-medium);
-    padding: 0 var(--spacing-lg);
-    height: 44px;
-    line-height: 44px;
+    font-weight: var(--font-bold);
+    padding: 0 var(--spacing-2xl) !important; /* ✨ 核心修复：增加水平内边距，确保长文字不溢出 */
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all var(--transition-normal);
+    border-radius: var(--radius-lg);
+    margin: 4px 8px;
+    border: 1px solid transparent;
+    white-space: nowrap; /* ✨ 核心修复：防止文字换行 */
+    min-width: 100px; /* ✨ 核心修复：确保按钮有最小宽度 */
+
+    &:hover {
+      color: var(--primary-color);
+      background: var(--primary-light-bg);
+    }
 
     &.is-active {
-      color: var(--primary-color);
-      font-weight: var(--font-semibold);
+      color: white !important;
+      background: var(--primary-color) !important;
+      box-shadow: 0 4px 12px var(--glow-primary);
+      border-color: var(--primary-color);
     }
   }
 
   :deep(.el-tabs__active-bar) {
-    height: 3px;
-    border-radius: var(--radius-sm);
+    display: none; /* ✨ 优化：使用背景色表示激活状态，不再需要底边条 */
   }
 
   :deep(.el-tabs__content) {
     flex: 1;
-    overflow: auto;
+    overflow: visible; /* ✨ 优化：允许阴影显示 */
+    padding: 0;
   }
 }
 
 .activity-list-container {
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-2xl);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl); /* ✨ 优化：增加内边距 */
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  }
 
   .list-header {
     display: flex;

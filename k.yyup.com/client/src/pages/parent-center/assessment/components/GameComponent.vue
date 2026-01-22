@@ -86,7 +86,7 @@ const handleAnswer = (answer: any) => {
     align-items: center;
     justify-content: center;
     padding: var(--spacing-5xl);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--radius-md);
     border: var(--spacing-xs) solid var(--border-color-light);
   }

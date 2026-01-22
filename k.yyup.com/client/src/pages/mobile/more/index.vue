@@ -1,10 +1,14 @@
 <template>
-  <div class="more-page">
+  <div class="more-page" :class="{ 'theme-dark': isDark }">
     <!-- 页面标题 -->
     <van-nav-bar
       title="更多功能"
       left-arrow
       @click-left="$router.back()"
+      :style="{
+        background: isDark ? '#1e293b' : 'var(--bg-card)',
+        borderBottom: `1px solid ${isDark ? '#334155' : '#e4e7ed'}`
+      }"
     />
 
     <!-- 搜索框 -->
@@ -13,7 +17,7 @@
         v-model="searchText"
         placeholder="搜索功能"
         shape="round"
-        background="var(--bg-color)"
+        background="var(--bg-card)"
       />
     </div>
 
@@ -58,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import type { DrawerMenuItem } from '@/config/mobile-navigation.types'
 import { getMobileNavigationConfig } from '@/config/mobile-navigation.config'
@@ -66,6 +70,28 @@ import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
 const userStore = useUserStore()
+
+// 主题状态
+const isDark = ref(false)
+
+const detectTheme = () => {
+  isDark.value = document.documentElement.getAttribute('data-theme') === 'dark'
+}
+
+let observer: MutationObserver | null = null
+
+onMounted(() => {
+  detectTheme()
+  observer = new MutationObserver(detectTheme)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
+})
 
 // 搜索文本
 const searchText = ref('')
@@ -156,40 +182,45 @@ const navigateTo = (path: string) => {
 
 .more-page {
   min-height: 100vh;
-  background: var(--bg-color-page);
+  background: var(--bg-page);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
 // 搜索区域
 .search-section {
-  background: var(--bg-color);
-  padding: var(--app-gap-sm) var(--app-gap);
+  background: var(--bg-card);
+  padding: 8px 16px;
   position: sticky;
-  top: 0;
+  top: 46px;
   z-index: 10;
 }
 
 // 分类Tab
 .category-tabs {
-  background: var(--bg-color);
+  background: var(--bg-card);
 
   :deep(.van-tabs__nav) {
-    padding: 0 var(--app-gap);
+    padding: 0 16px;
   }
 
   :deep(.van-tab) {
     flex: none;
-    padding: 0 var(--app-gap);
+    padding: 0 16px;
+    color: #666;
+  }
+  
+  :deep(.van-tab--active) {
+    color: var(--text-primary);
   }
 
   :deep(.van-tabs__content) {
-    background: var(--bg-color-page);
+    background: var(--bg-page);
   }
 }
 
 // 分类内容
 .category-content {
-  padding: var(--app-gap);
+  padding: var(--spacing-lg);
   min-height: calc(100vh - 200px);
 }
 
@@ -197,19 +228,20 @@ const navigateTo = (path: string) => {
 .function-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--app-gap);
+  gap: var(--spacing-md);
 }
 
 .function-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--app-gap-xs);
-  padding: var(--app-gap);
-  background: var(--bg-color);
-  border-radius: var(--border-radius-lg);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border-radius: var(--spacing-md);
   cursor: pointer;
-  transition: all var(--transition-duration-fast) var(--transition-timing-ease);
+  transition: all 0.2s ease;
+  border: 1px solid #e4e7ed;
 
   &:active {
     transform: scale(0.95);
@@ -222,12 +254,12 @@ const navigateTo = (path: string) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+    border-radius: var(--spacing-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   .function-label {
-    font-size: var(--text-xs);
+    font-size: var(--spacing-md);
     color: var(--text-primary);
     text-align: center;
     line-height: 1.3;
@@ -240,19 +272,43 @@ const navigateTo = (path: string) => {
 }
 
 // 暗黑模式适配
-:global([data-theme="dark"]) {
-  .more-page {
-    background: var(--bg-color-page-dark);
+.theme-dark {
+  background: #0f172a !important;
+  
+  .search-section {
+    background: #1e293b;
+  }
+  
+  .category-tabs {
+    background: #1e293b;
+    
+    :deep(.van-tabs__content) {
+      background: #0f172a;
+    }
+    
+    :deep(.van-tab) {
+      color: #94a3b8;
+    }
+    
+    :deep(.van-tab--active) {
+      color: #f1f5f9;
+    }
   }
 
   .function-item {
-    background: var(--bg-color-light-dark);
-  }
+    background: #1e293b;
+    border-color: #334155;
 
-  .category-tabs {
-    :deep(.van-tabs__content) {
-      background: var(--bg-color-page-dark);
+    .function-label {
+      color: #f1f5f9;
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

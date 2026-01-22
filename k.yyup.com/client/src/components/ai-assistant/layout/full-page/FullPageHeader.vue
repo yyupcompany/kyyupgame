@@ -156,30 +156,26 @@ const currentTheme = ref(globalTheme.value)
 // 延迟计时器
 let expandTimer: number | null = null
 
-// 处理鼠标进入 - 延迟2秒展开
+// 处理鼠标进入 - 延迟500ms展开（原2秒太慢）
 const handleMouseEnter = () => {
-  // 清除可能存在的缩小计时器
   if (expandTimer !== null) {
     clearTimeout(expandTimer)
   }
 
-  // 设置2秒后展开
   expandTimer = window.setTimeout(() => {
     isExpanded.value = true
-  }, 2000)
+  }, 500)
 }
 
-// 处理鼠标离开 - 延迟2秒缩小
+// 处理鼠标离开 - 延迟800ms缩小（原2秒太慢）
 const handleMouseLeave = () => {
-  // 清除展开计时器
   if (expandTimer !== null) {
     clearTimeout(expandTimer)
   }
 
-  // 设置2秒后缩小
   expandTimer = window.setTimeout(() => {
     isExpanded.value = false
-  }, 2000)
+  }, 800)
 }
 
 // 处理关闭按钮点击
@@ -271,9 +267,7 @@ onUnmounted(() => {
   background: var(--bg-card);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  /* ✨ 优化：添加玻璃态效果 */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  /* 移除模糊效果，确保暗黑主题下清晰 */
   border: 1px solid var(--border-color-light);
 
   // 未展开时高度20px，展开后自动扩展
@@ -290,9 +284,12 @@ onUnmounted(() => {
   // 展开状态
   &.is-expanded {
     :deep(.el-card__body) {
-      padding: var(--spacing-lg) var(--spacing-xl);
-      min-height: 72px;
+      padding: var(--spacing-md) var(--spacing-xl);
+      min-height: 80px;
+      background: var(--bg-card);
     }
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-light);
   }
 }
 
@@ -441,43 +438,22 @@ onUnmounted(() => {
 }
 
 .action-btn {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border: 1px solid var(--border-color-light);
   background: var(--bg-secondary);
   color: var(--text-secondary);
-  /* ✨ 优化：增强过渡动画 */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s var(--ai-transition-bounce);
   cursor: pointer;
   position: relative;
   overflow: hidden;
 
-  /* ✨ 新增：涟漪效果 */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(99, 102, 241, 0.1);
-    transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s;
-  }
-
-  &:hover::after {
-    width: 100%;
-    height: 100%;
-  }
-
   &:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-    /* ✨ 优化：轻微上浮和阴影 */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: var(--bg-hover);
+    border-color: var(--primary-light);
+    color: var(--primary-color);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px var(--ai-primary-glow);
   }
 
   &:active {
@@ -603,6 +579,11 @@ onUnmounted(() => {
 
 /* 响应式 */
 @media (max-width: var(--breakpoint-md)) {
+  :global([data-theme="dark"]) .full-page-header,
+  :global(.theme-dark) .full-page-header {
+    background: var(--bg-card-dark);
+  }
+
   .header-content {
     flex-wrap: wrap;
     gap: var(--spacing-sm);

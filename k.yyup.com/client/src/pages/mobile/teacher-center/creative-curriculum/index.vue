@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="创意课程"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="创意课程" back-path="/mobile/teacher-center">
     <div class="creative-curriculum-page">
       <van-search v-model="searchQuery" placeholder="搜索课程" />
       <van-grid :column-num="2" :gutter="10">
@@ -12,15 +7,14 @@
       </van-grid>
       <van-floating-bubble axis="xy" icon="plus" @click="createCourse" />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
-import { teachingCenterApi } from '@/api/endpoints/teaching-center'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -30,7 +24,10 @@ interface Course {
   name: string
   icon: string
   description?: string
-  studentCount?: number
+  domain?: string
+  ageGroup?: string
+  status?: string
+  thumbnail?: string
 }
 
 const searchQuery = ref('')
@@ -43,23 +40,33 @@ const iconMap: Record<string, string> = {
   '科学': 'experiment-o',
   '阅读': 'reading',
   '体育': 'guide-o',
-  '数学': 'calculator-o'
+  '数学': 'calculator-o',
+  'health': 'flower-o',
+  'language': 'chat-o',
+  'social': 'friends-o'
 }
 
 const loadCourses = async () => {
   try {
     loading.value = true
     showLoadingToast({ message: '加载中...', forbidClick: true })
-    
-    const response = await teachingCenterApi.getCourseProgressStats()
-    
+
+    // 调用正确的创意课程API端点
+    const response = await request.get('/api/teacher-center-creative-curriculum', {
+      page: 1,
+      limit: 50
+    })
+
     if (response.success && response.data) {
-      courses.value = (response.data.courses || []).map((course: any) => ({
+      courses.value = (response.data.rows || []).map((course: any) => ({
         id: course.id,
         name: course.name,
-        icon: getIconForCourse(course.name),
+        icon: getIconForCourse(course.domain || course.name),
         description: course.description,
-        studentCount: course.studentCount
+        domain: course.domain,
+        ageGroup: course.ageGroup,
+        status: course.status,
+        thumbnail: course.thumbnail
       }))
     }
   } catch (error) {
@@ -79,19 +86,28 @@ const getIconForCourse = (name: string): string => {
 }
 
 const viewCourse = (course: Course) => {
-  router.push(`/mobile/teacher-center/course/${course.id}`)
+  router.push(`/mobile/teacher-center/creative-curriculum/preview?id=${course.id}`)
 }
 
 const createCourse = () => {
-  router.push('/mobile/teacher-center/course/create')
+  router.push('/mobile/teacher-center/creative-curriculum/create')
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadCourses()
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 .creative-curriculum-page {
   min-height: 100vh;

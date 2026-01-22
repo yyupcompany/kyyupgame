@@ -115,7 +115,7 @@ const validateForm = async (values: Record<string, any>): Promise<boolean> => {
 .mobile-form {
   .form-header {
     padding: var(--spacing-md);
-    background-color: var(--bg-color);
+    background-color: var(--bg-card);
     border-bottom: 1px solid #ebedf0;
   }
 
@@ -129,7 +129,7 @@ const validateForm = async (values: Record<string, any>): Promise<boolean> => {
     display: flex;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--bg-color);
+    background-color: var(--bg-card);
     border-top: 1px solid #ebedf0;
 
     .btn-cancel,

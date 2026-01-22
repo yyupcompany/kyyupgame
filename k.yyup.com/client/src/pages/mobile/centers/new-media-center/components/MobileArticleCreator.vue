@@ -615,7 +615,7 @@ const saveContent = async () => {
         gap: var(--app-gap);
 
         .image-item {
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-md);
           padding: var(--app-gap);
           text-align: center;

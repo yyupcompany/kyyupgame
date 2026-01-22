@@ -41,6 +41,8 @@ function createChatHistory() {
 
     const newMessage: ChatMessage = {
       ...message,
+      role: message.role,
+      content: message.content,
       id: uniqueId,
       timestamp: timestamp,
       conversationId: currentSessionId.value

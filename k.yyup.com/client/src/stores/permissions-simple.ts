@@ -5,14 +5,14 @@
 
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import { STATIC_MENU_CONFIG, ROLE_PERMISSIONS, filterMenuByRole, hasPermission } from '../config/static-menu';
+import { STATIC_MENU_CONFIG, ROLE_PERMISSIONS, filterMenuByRole, hasPermission as checkStaticPermission } from '../config/static-menu';
 
 export const usePermissionsStore = defineStore('permissions-simple', () => {
   // 核心状态
-  const menuItems = ref([]);
+  const menuItems = ref<any[]>([]);
   const userRole = ref('');
   const loading = ref(false);
-  const error = ref(null);
+  const error = ref<string | null>(null);
   const initialized = ref(false);
 
   // 计算属性
@@ -68,7 +68,7 @@ export const usePermissionsStore = defineStore('permissions-simple', () => {
       return false;
     }
 
-    return hasPermission(userRole.value, permission);
+    return checkStaticPermission(userRole.value, permission);
   };
 
   /**
@@ -97,13 +97,20 @@ export const usePermissionsStore = defineStore('permissions-simple', () => {
    * 检查菜单访问权限
    *
    * 权限检查策略：
-   * 1. 首先检查静态菜单配置中的权限（精确匹配和前缀匹配）
-   * 2. 如果菜单项不存在，则允许访问（因为可能是动态路由或其他路由）
-   * 3. 如果菜单项存在但没有定义 roles，则允许访问
-   * 4. 如果菜单项存在且定义了 roles，则检查用户角色
+   * 1. 特殊处理移动端路由，自动允许访问
+   * 2. 检查静态菜单配置中的权限（精确匹配和前缀匹配）
+   * 3. 如果菜单项不存在，则允许访问（因为可能是动态路由或其他路由）
+   * 4. 如果菜单项存在但没有定义 roles，则允许访问
+   * 5. 如果菜单项存在且定义了 roles，则检查用户角色
    */
   const canAccessMenu = (menuPath: string): boolean => {
     if (!userRole.value) return false;
+
+    // ✅ 特殊处理移动端路由：自动允许访问
+    // 移动端路由有独立的布局和权限系统，不需要在静态菜单中配置
+    if (menuPath.startsWith('/mobile/')) {
+      return true;
+    }
 
     // 在静态菜单配置中查找对应的菜单项
     // 支持精确匹配和前缀匹配（例如 /parent-center/dashboard 匹配 /parent-center）
@@ -184,6 +191,27 @@ export const usePermissionsStore = defineStore('permissions-simple', () => {
     console.log('🗑️ 权限数据已清除');
   };
 
+  /**
+   * 同步权限检查（供指令使用）
+   */
+  const hasPermissionSync = (permission: string): boolean => {
+    return checkPermission(permission);
+  };
+
+  /**
+   * 异步权限检查（供指令使用）
+   */
+  const hasPermission = async (permission: string): Promise<boolean> => {
+    return checkPermission(permission);
+  };
+
+  /**
+   * 批量异步权限检查（供指令使用）
+   */
+  const hasPermissions = async (permissions: string[]): Promise<{[key: string]: boolean}> => {
+    return checkPermissions(permissions);
+  };
+
   return {
     // 状态
     menuItems,
@@ -204,6 +232,11 @@ export const usePermissionsStore = defineStore('permissions-simple', () => {
     checkPermissions,     // 批量权限验证
     hasRole,             // 角色检查
     canAccessMenu,       // 菜单访问权限检查
+    
+    // 指令兼容方法
+    hasPermissionSync,    // 同步权限检查
+    hasPermission,        // 异步权限检查
+    hasPermissions,       // 批量异步权限检查
 
     // 管理方法
     setUserRole,

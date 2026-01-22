@@ -442,7 +442,7 @@ cd server && npm run db:migrate
 ### 质量门控
 CI/CD流程包含以下质量检查：
 - ✅ TypeScript类型检查
-- ✅ ESLint代码检查  
+- ✅ ESLint代码检查
 - ✅ 所有测试通过
 - ✅ 测试覆盖率达到阈值
 - ✅ 安全漏洞扫描
@@ -452,3 +452,116 @@ CI/CD流程包含以下质量检查：
 - 环境特定配置管理
 - 支持回滚机制
 - 完整CI脚本: `npm run ci:full` (安装+验证+测试+构建)
+
+## 🔑 快捷登录配置
+
+系统内置了四个角色的快捷登录，用于开发和测试：
+
+| 角色 | 用户名 | 密码 |
+|------|--------|------|
+| 管理员 | test_admin | 123456 |
+| 园长 | principal | 123456 |
+| 教师 | teacher | 123456 |
+| 家长 | test_parent | 123456 |
+
+### 快捷登录位置
+
+**PC端**: 访问 `http://localhost:5173/login` 页面，点击对应角色的快捷登录按钮
+
+**移动端**: 访问 `http://localhost:5173/mobile/login` 页面，点击对应角色的快捷登录按钮
+
+---
+
+## 🔐 数据库配置说明
+
+### 远程数据库信息
+| 配置项 | 值 |
+|--------|-----|
+| 主机 | `dbconn.sealoshzh.site` |
+| 端口 | `43906` |
+| 数据库名 | `kargerdensales` |
+| 用户名 | `root` |
+| **密码** | `pwk5ls7j` |
+
+### 配置位置
+数据库密码配置在 `server/.env` 文件中：
+```bash
+DB_HOST=dbconn.sealoshzh.site
+DB_PORT=43906
+DB_USER=root
+DB_PASSWORD=pwk5ls7j  # ← 数据库密码
+DB_NAME=kargerdensales
+```
+
+### 安全说明
+- ⚠️ **密码已暴露在 .env 文件中**，如需提高安全性，请考虑：
+  1. 使用环境变量代替明文密码
+  2. 使用密钥管理服务 (KMS)
+  3. 在生产环境中使用 .env.local 文件并添加到 .gitignore
+
+### 连接测试
+```bash
+# 测试数据库连接
+mysql -h dbconn.sealoshzh.site -P 43906 -u root -ppwk5ls7j kargerdensales -e "SELECT 1;"
+```
+## 🚀 远端服务器部署
+
+### 服务器信息
+- **服务器IP**: `47.94.82.59`
+- **SSH用户**: `root`
+- **SSH密钥**: `~/.ssh/yyup_server_key`
+- **部署目录**: `/var/www/kyyup/k.yyup.com/`
+- **域名**: `https://k.yyup.cc`
+
+### 常见问题排查
+
+#### 1. API URL重复 `/api/api/`
+**症状**: 浏览器控制台显示请求 `https://k.yyup.cc/api/api/auth/login`
+
+**原因**: `.env.production` 中 `VITE_API_BASE_URL` 设置为 `https://k.yyup.cc/api`，而 endpoints 已经包含 `/api` 前缀
+
+**解决方案**:
+```bash
+# 修改 client/.env.production
+VITE_API_BASE_URL=https://k.yyup.cc  # 去掉 /api 后缀
+```
+
+#### 2. Nginx返回旧版本前端文件
+**症状**: 浏览器加载旧的JS文件，但远端dist目录已是新版本
+
+**原因**: Nginx的root配置指向 `/var/www/kyyup/k.yyup.com/client`，而不是 `client/dist`
+
+**解决方案**:
+```bash
+# 修改 /etc/nginx/sites-enabled/kyyup.cc
+sed -i 's|root /var/www/kyyup/k.yyup.com/client;|root /var/www/kyyup/k.yyup.com/client/dist;|g' /etc/nginx/sites-enabled/kyyup.cc
+nginx -t && systemctl reload nginx
+```
+
+#### 3. 加密phone字段登录失败
+**症状**: 使用手机号登录时返回"用户不存在"
+
+**原因**: 数据库phone字段被加密存储（等保要求）
+
+**解决方案**: ✅ 已修复 - 支持username直接查询和phone解密匹配
+
+### 部署流程
+```bash
+# 1. 本地编译
+cd /home/zhgue/kyyupgame/k.yyup.com
+npm run build
+
+# 2. 同步前端
+rsync -avz --delete -e "ssh -i ~/.ssh/yyup_server_key" \
+  client/dist/ root@47.94.82.59:/var/www/kyyup/k.yyup.com/client/dist/
+
+# 3. 同步后端
+rsync -avz --delete -e "ssh -i ~/.ssh/yyup_server_key" \
+  server/dist/ root@47.94.82.59:/var/www/kyyup/k.yyup.com/server/dist/
+
+# 4. 重启服务
+ssh -i ~/.ssh/yyup_server_key root@47.94.82.59 "pm2 restart k-yyup-backend && systemctl reload nginx"
+
+# 5. 验证部署
+curl -s https://k.yyup.cc/ | grep -o 'index-[a-f0-9]*\.js'
+```

@@ -443,7 +443,7 @@ export default defineComponent({
 .activity-form-container :deep(.el-textarea__inner),
 }
 .activity-form-container :deep(.el-select__wrapper) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   border-color: var(--border-color);
   color: var(--text-primary);
   border-radius: var(--radius-md);
@@ -461,11 +461,11 @@ export default defineComponent({
 /* Date picker styles */
 .activity-form-container :deep(.el-date-editor) {
   width: 100%;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
 }
 
 .activity-form-container :deep(.el-date-editor .el-input__inner) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -520,7 +520,7 @@ export default defineComponent({
 
 /* Upload image component styles */
 .activity-form-container :deep([class*="upload"]) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border: var(--border-width-base) dashed var(--border-color);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
@@ -579,7 +579,7 @@ export default defineComponent({
 
 /* Textarea count styles */
 .activity-form-container :deep(.el-textarea__inner) + .el-input__count {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-sm);
   padding: 0 var(--spacing-xs);
 }
@@ -617,7 +617,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 .avatar-uploader:hover {

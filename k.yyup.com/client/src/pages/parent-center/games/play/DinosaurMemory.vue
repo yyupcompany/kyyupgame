@@ -665,7 +665,7 @@ const playVoice = (type: string) => {
   }
 
   .card-front {
-    background: linear-gradient(135deg, var(--bg-color), var(--warning-light-bg));
+    background: linear-gradient(135deg, var(--bg-card), var(--warning-light-bg));
     border: var(--border-width-lg) solid var(--warning-color);
     transform: rotateY(180deg);
 

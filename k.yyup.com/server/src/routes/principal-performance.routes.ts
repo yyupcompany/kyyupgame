@@ -184,7 +184,7 @@ router.use(verifyToken); // 已注释：全局认证中间件已移除，每个�
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/', checkPermission('principal:performance'), async (req, res) => {
+router.get('/', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     // 模拟园长绩效概览数据
     const overview = {
@@ -304,7 +304,7 @@ router.get('/', checkPermission('principal:performance'), async (req, res) => {
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/stats', checkPermission('principal:performance'), async (req, res) => {
+router.get('/stats', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     // 模拟园长绩效统计数据
     const stats = {
@@ -430,7 +430,7 @@ router.get('/stats', checkPermission('principal:performance'), async (req, res) 
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/rankings', checkPermission('principal:performance'), async (req, res) => {
+router.get('/rankings', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     // 模拟园长绩效排名数据
     const rankings = [
@@ -632,7 +632,7 @@ router.get('/rankings', checkPermission('principal:performance'), async (req, re
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/details', checkPermission('principal:performance'), async (req, res) => {
+router.get('/details', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     const { principalId, period } = req.query;
     
@@ -770,7 +770,7 @@ router.get('/details', checkPermission('principal:performance'), async (req, res
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/export', checkPermission('principal:performance'), async (req, res) => {
+router.get('/export', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     const { format = 'excel', period } = req.query;
     
@@ -875,7 +875,7 @@ router.get('/export', checkPermission('principal:performance'), async (req, res)
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/goals', checkPermission('principal:performance'), async (req, res) => {
+router.get('/goals', checkPermission('principal:performance:view'), async (req, res) => {
   try {
     // 模拟园长绩效目标数据
     const goals = {

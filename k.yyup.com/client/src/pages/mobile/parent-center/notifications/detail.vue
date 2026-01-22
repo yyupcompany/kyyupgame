@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="通知详情"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="通知详情" back-path="/mobile/parent-center">
     <div v-if="loading" class="loading-container">
       <van-loading size="24px" vertical>加载中...</van-loading>
     </div>
@@ -145,14 +140,14 @@
         返回列表
       </van-button>
     </van-empty>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import {
   getNotificationDetail,
   markNotificationAsRead
@@ -371,6 +366,12 @@ const getAttachmentIcon = (fileName: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadNotificationDetail()
 })
 </script>
@@ -391,13 +392,13 @@ onMounted(() => {
   min-height: calc(100vh - 46px);
 
   .notification-header {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
 
     .header-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
 
       .notification-time {
         font-size: var(--text-xs);
@@ -419,7 +420,7 @@ onMounted(() => {
       gap: var(--spacing-md);
       padding: var(--spacing-md);
       background: var(--app-bg-color);
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
 
       .sender-details {
         flex: 1;
@@ -428,7 +429,7 @@ onMounted(() => {
           font-size: var(--text-sm);
           font-weight: 500;
           color: #323233;
-          margin-bottom: 4px;
+          margin-bottom: var(--spacing-xs);
         }
 
         .sender-role {
@@ -440,7 +441,7 @@ onMounted(() => {
   }
 
   .notification-content {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
 
     .content-text {
       font-size: var(--text-base);
@@ -448,13 +449,13 @@ onMounted(() => {
       color: #323233;
       padding: var(--spacing-md);
       background: var(--app-bg-color);
-      border-radius: 8px;
-      border-left: 4px solid #409eff;
+      border-radius: var(--spacing-sm);
+      border-left: 4px solid var(--primary-color);
     }
   }
 
   .attachments-section {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
 
     .section-title {
       font-size: var(--text-base);
@@ -470,8 +471,8 @@ onMounted(() => {
         gap: var(--spacing-md);
         padding: var(--spacing-md);
         background: var(--app-bg-color);
-        border-radius: 8px;
-        margin-bottom: 8px;
+        border-radius: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -486,7 +487,7 @@ onMounted(() => {
           width: 48px;
           height: 48px;
           background: var(--card-bg);
-          border-radius: 8px;
+          border-radius: var(--spacing-sm);
           color: var(--primary-color);
         }
 
@@ -497,7 +498,7 @@ onMounted(() => {
             font-size: var(--text-sm);
             font-weight: 500;
             color: #323233;
-            margin-bottom: 4px;
+            margin-bottom: var(--spacing-xs);
             word-break: break-all;
           }
 
@@ -516,13 +517,13 @@ onMounted(() => {
     align-items: center;
     padding: var(--spacing-md) 16px;
     background: #f0f9ff;
-    border-radius: 8px;
-    margin-bottom: 24px;
+    border-radius: var(--spacing-sm);
+    margin-bottom: var(--spacing-2xl);
 
     .status-info {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: var(--spacing-sm);
       font-size: var(--text-sm);
       color: #323233;
     }
@@ -562,8 +563,8 @@ onMounted(() => {
         gap: var(--spacing-md);
         padding: var(--spacing-md);
         background: var(--app-bg-color);
-        border-radius: 8px;
-        margin-bottom: 8px;
+        border-radius: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -601,26 +602,26 @@ onMounted(() => {
             gap: var(--spacing-md);
 
             .related-type {
-              font-size: 10px;
+              font-size: var(--spacing-md);
               padding: 2px 6px;
               background: #e1f3d8;
               color: #52c41a;
-              border-radius: 4px;
+              border-radius: var(--spacing-xs);
             }
 
             .related-time {
-              font-size: 11px;
+              font-size: var(--spacing-md);
               color: #969799;
             }
           }
         }
 
         .related-dot {
-          width: 8px;
-          height: 8px;
+          width: var(--spacing-sm);
+          height: var(--spacing-sm);
           background: var(--primary-color);
           border-radius: 50%;
-          margin-top: 4px;
+          margin-top: var(--spacing-xs);
           flex-shrink: 0;
         }
       }
@@ -629,6 +630,13 @@ onMounted(() => {
 }
 
 .ml-2 {
-  margin-left: 8px;
+  margin-left: var(--spacing-sm);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="营销配置"
-    :show-back="true"
-    :show-footer="false"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="营销配置" back-path="/mobile/centers">
     <div class="mobile-marketing-config">
       <!-- 活动选择 -->
       <van-cell-group class="activity-selector" inset>
@@ -260,14 +255,14 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { request } from '@/utils/request'
 
 const router = useRouter()
@@ -447,6 +442,12 @@ const previewConfig = () => {
 
 // 组件挂载时加载数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadActivities()
 })
 </script>

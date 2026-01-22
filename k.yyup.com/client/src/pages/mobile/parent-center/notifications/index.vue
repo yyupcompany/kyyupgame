@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="通知中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="通知中心" back-path="/mobile/parent-center">
     <!-- 数据统计卡片 -->
     <div class="stats-section">
       <div class="stats-grid">
@@ -236,14 +231,14 @@
       icon="chart-trending-o"
       @click="showStatsDrawer = true"
     />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import {
   getNotificationList,
   getNotificationStats,
@@ -600,6 +595,12 @@ const loadNotifications = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadNotifications()
 })
 </script>

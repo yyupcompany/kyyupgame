@@ -162,32 +162,31 @@
 
               <div class="card-footer">
                 <div class="footer-info">
-                  <UnifiedIcon name="default" />
+                  <UnifiedIcon name="calendar" :size="14" />
                   <span>计划日期: {{ formatDate(plan.planDate) }}</span>
                   <span v-if="plan.actualDate" class="actual-date">
                     | 实际日期: {{ formatDate(plan.actualDate) }}
                   </span>
                 </div>
                 <div class="footer-actions">
-                  <el-button link type="primary" size="small" class="action-button" @click.stop="handleEdit(plan)">
-                    <UnifiedIcon name="Edit" />
-                    编辑
-                  </el-button>
-                  <el-button link type="success" size="small" class="action-button" @click.stop="handleViewTasks(plan)">
-                    <UnifiedIcon name="default" />
-                    任务
-                  </el-button>
-                  <el-button 
-                    v-if="plan.status === 'completed'" 
-                    link 
-                    type="warning" 
-                    size="small" 
-                    class="action-button" 
-                    @click.stop="$emit('print-record', plan)"
-                  >
-                    <UnifiedIcon name="default" />
-                    打印
-                  </el-button>
+                  <div class="action-btn-group">
+                    <div class="action-btn action-btn--primary" @click.stop="handleEdit(plan)">
+                      <UnifiedIcon name="edit" :size="14" />
+                      <span>编辑</span>
+                    </div>
+                    <div class="action-btn action-btn--success" @click.stop="handleViewTasks(plan)">
+                      <UnifiedIcon name="check" :size="14" />
+                      <span>任务</span>
+                    </div>
+                    <div
+                      v-if="plan.status === 'completed'"
+                      class="action-btn action-btn--warning"
+                      @click.stop="$emit('print-record', plan)"
+                    >
+                      <UnifiedIcon name="download" :size="14" />
+                      <span>打印</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </el-card>
@@ -760,33 +759,66 @@ const handleViewTasks = (plan: InspectionPlan) => {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: var(--text-sm);
-      border-top: var(--z-index-dropdown) solid var(--border-color-lighter);
+      padding-top: var(--spacing-md);
+      margin-top: var(--spacing-md);
+      border-top: 1px solid var(--border-color-light);
 
       .footer-info {
         display: flex;
         align-items: center;
         gap: var(--spacing-sm);
         font-size: var(--text-sm);
-        color: var(--info-color);
+        color: var(--text-secondary);
 
         .actual-date {
           color: var(--success-color);
+          font-weight: 500;
         }
       }
 
       .footer-actions {
-        display: flex;
-        gap: var(--spacing-sm);
+        .action-btn-group {
+          display: flex;
+          gap: var(--spacing-sm);
 
-        .action-button {
-          font-size: var(--text-base) !important;
-          min-width: auto;
-          padding: var(--spacing-xs) var(--spacing-sm) !important;
+          .action-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 1px solid transparent;
 
-          .el-icon {
-            font-size: var(--text-base);
-            margin-right: var(--spacing-xs);
+            &--primary {
+              color: var(--primary-color);
+              background: var(--primary-light-bg);
+              &:hover {
+                background: var(--primary-color);
+                color: white;
+              }
+            }
+
+            &--success {
+              color: var(--success-color);
+              background: var(--success-light-bg);
+              &:hover {
+                background: var(--success-color);
+                color: white;
+              }
+            }
+
+            &--warning {
+              color: var(--warning-color);
+              background: var(--warning-light-bg);
+              &:hover {
+                background: var(--warning-color);
+                color: white;
+              }
+            }
           }
         }
       }

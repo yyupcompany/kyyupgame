@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="话术模板管理"
-    @back="handleBack"
-  >
+  <MobileCenterLayout title="话术模板管理" back-path="/mobile/centers">
     <div class="script-templates-mobile">
       <!-- 搜索和筛选栏 -->
       <van-sticky>
@@ -76,14 +73,14 @@
           <van-button
             v-if="selectedIds.length > 0"
             type="danger"
-            size="small"
+            size="medium"
             @click="handleBatchDelete"
           >
             批量删除
           </van-button>
           <van-button
             type="primary"
-            size="small"
+            size="medium"
             icon="plus"
             @click="handleCreate"
           >
@@ -122,7 +119,7 @@
                     <span class="template-title">{{ template.title }}</span>
                     <van-tag
                       :type="getCategoryTagType(template.category)"
-                      size="small"
+                      size="medium"
                     >
                       {{ getCategoryLabel(template.category) }}
                     </van-tag>
@@ -136,7 +133,7 @@
                       <van-tag
                         v-for="keyword in template.keywords.split(',').slice(0, 3)"
                         :key="keyword"
-                        size="small"
+                        size="medium"
                         plain
                         type="primary"
                       >
@@ -177,14 +174,14 @@
                       v-model="template.status"
                       active-value="active"
                       inactive-value="inactive"
-                      size="small"
+                      size="medium"
                       @change="handleStatusChange(template)"
                       @click.stop
                     />
                     <div class="action-buttons-inline">
                       <van-button
                         type="primary"
-                        size="mini"
+                        size="medium"
                         plain
                         @click.stop="handleTest(template)"
                       >
@@ -192,7 +189,7 @@
                       </van-button>
                       <van-button
                         type="primary"
-                        size="mini"
+                        size="medium"
                         plain
                         @click.stop="handleEdit(template)"
                       >
@@ -244,7 +241,7 @@
           <template #right>
             <van-button
               type="primary"
-              size="small"
+              size="medium"
               :loading="submitting"
               @click="handleSubmit"
             >
@@ -285,7 +282,7 @@
                 :rules="[{ required: true, message: '请输入关键词' }]"
               >
                 <template #button>
-                  <van-button size="mini" type="primary" @click="insertSampleKeywords">
+                  <van-button size="medium" type="primary" @click="insertSampleKeywords">
                     示例
                   </van-button>
                 </template>
@@ -390,7 +387,7 @@
                     v-for="kw in testResult.matchedKeywords"
                     :key="kw"
                     type="primary"
-                    size="small"
+                    size="medium"
                     style="margin: 2px"
                   >
                     {{ kw }}
@@ -408,14 +405,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import {
   getScriptTemplates,
   createScriptTemplate,
@@ -785,6 +782,12 @@ const handleBack = () => {
 
 // 初始化
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadData(true)
   loadStats()
 })

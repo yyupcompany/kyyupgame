@@ -496,11 +496,11 @@ export default defineComponent({
 }
 
 .activity-list-container :deep(.el-table__header-wrapper) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 .activity-list-container :deep(.el-table th) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -510,7 +510,7 @@ export default defineComponent({
 }
 
 .activity-list-container :deep(.el-table--striped .el-table__body tr.el-table__row--striped td) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 .activity-list-container :deep(.el-table td) {
@@ -530,7 +530,7 @@ export default defineComponent({
 /* Input styles */
 .filter-container :deep(.el-input__inner),
 .filter-container :deep(.el-select__wrapper) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   border-color: var(--border-color);
   color: var(--text-primary);
   border-radius: var(--radius-md);
@@ -548,11 +548,11 @@ export default defineComponent({
 
 /* Date picker styles */
 .filter-container :deep(.el-date-editor) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
 }
 
 .filter-container :deep(.el-date-editor .el-input__inner) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -610,7 +610,7 @@ export default defineComponent({
 /* Pagination button styles */
 .pagination-container :deep(.btn-prev),
 .pagination-container :deep(.btn-next) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-secondary);
 }
 
@@ -626,7 +626,7 @@ export default defineComponent({
 
 /* Date picker popover styles */
 .filter-container :deep(.el-date-picker__time-header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -640,7 +640,7 @@ export default defineComponent({
 }
 
 .pagination-container :deep(.el-pager li) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-secondary);
   border: var(--border-width-base) solid var(--border-color);
   transition: all var(--transition-fast);

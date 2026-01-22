@@ -227,35 +227,35 @@ export const enrollmentApi = {
     page: number;
     pageSize: number;
   }>> {
-    return get('/enrollment/list', { params });
+    return get('/api/enrollment/list', { params });
   },
 
   /**
    * 获取招生申请详情
    */
   getApplication(id: string): Promise<ApiResponse<EnrollmentApplication>> {
-    return get(`/enrollment/applications/${id}`);
+    return get(`/api/enrollment/applications/${id}`);
   },
 
   /**
    * 创建招生申请
    */
   createApplication(data: CreateEnrollmentApplicationRequest): Promise<ApiResponse<EnrollmentApplication>> {
-    return post('/enrollment/applications', data);
+    return post('/api/enrollment/applications', data);
   },
 
   /**
    * 更新招生申请
    */
   updateApplication(id: string, data: Partial<CreateEnrollmentApplicationRequest>): Promise<ApiResponse<EnrollmentApplication>> {
-    return put(`/enrollment/applications/${id}`, data);
+    return put(`/api/enrollment/applications/${id}`, data);
   },
 
   /**
    * 删除招生申请
    */
   deleteApplication(id: string): Promise<ApiResponse> {
-    return del(`/enrollment/applications/${id}`);
+    return del(`/api/enrollment/applications/${id}`);
   },
 
   /**
@@ -265,7 +265,7 @@ export const enrollmentApi = {
     status: EnrollmentApplicationStatus;
     notes?: string;
   }): Promise<ApiResponse<EnrollmentApplication>> {
-    return put(`/enrollment/applications/${id}/review`, data);
+    return put(`/api/enrollment/applications/${id}/review`, data);
   },
 
   /**
@@ -276,7 +276,7 @@ export const enrollmentApi = {
     status: EnrollmentApplicationStatus;
     notes?: string;
   }): Promise<ApiResponse> {
-    return post('/enrollment/applications/batch-review', data);
+    return post('/api/enrollment/applications/batch-review', data);
   },
 
   // ===== 面试管理API =====
@@ -297,7 +297,7 @@ export const enrollmentApi = {
     page: number;
     pageSize: number;
   }>> {
-    return get('/enrollment/interviews', { params });
+    return get('/api/enrollment/interviews', { params });
   },
 
   /**
@@ -312,7 +312,7 @@ export const enrollmentApi = {
     location?: string;
     notes?: string;
   }): Promise<ApiResponse<InterviewSchedule>> {
-    return post('/enrollment/interviews', data);
+    return post('/api/enrollment/interviews', data);
   },
 
   /**
@@ -326,7 +326,7 @@ export const enrollmentApi = {
     status: InterviewStatus;
     notes: string;
   }>): Promise<ApiResponse<InterviewSchedule>> {
-    return put(`/enrollment/interviews/${id}`, data);
+    return put(`/api/enrollment/interviews/${id}`, data);
   },
 
   /**
@@ -343,14 +343,14 @@ export const enrollmentApi = {
     page: number;
     pageSize: number;
   }>> {
-    return get('/enrollment/interviewers', { params });
+    return get('/api/enrollment/interviewers', { params });
   },
 
   /**
    * 获取可预约时间段
    */
   getAvailableTimeSlots(interviewerId: string, date: string): Promise<ApiResponse<TimeSlot[]>> {
-    return get(`/enrollment/interviewers/${interviewerId}/availability`, { params: { date } });
+    return get(`/api/enrollment/interviewers/${interviewerId}/availability`, { params: { date } });
   },
 
   /**
@@ -362,14 +362,14 @@ export const enrollmentApi = {
     comments: string;
     recommendation: 'approve' | 'reject' | 'further_review';
   }): Promise<ApiResponse<InterviewScore>> {
-    return post('/enrollment/interviews/scores', data);
+    return post('/api/enrollment/interviews/scores', data);
   },
 
   /**
    * 获取面试评分
    */
   getInterviewScore(interviewId: string): Promise<ApiResponse<InterviewScore>> {
-    return get(`/enrollment/interviews/${interviewId}/score`);
+    return get(`/api/enrollment/interviews/${interviewId}/score`);
   },
 
   // ===== 审核管理API =====
@@ -388,14 +388,14 @@ export const enrollmentApi = {
     page: number;
     pageSize: number;
   }>> {
-    return get('/enrollment/reviews/queue', { params });
+    return get('/api/enrollment/reviews/queue', { params });
   },
 
   /**
    * 获取申请审核记录
    */
   getApplicationReviews(applicationId: string): Promise<ApiResponse<ReviewRecord[]>> {
-    return get(`/enrollment/applications/${applicationId}/reviews`);
+    return get(`/api/enrollment/applications/${applicationId}/reviews`);
   },
 
   /**
@@ -409,7 +409,7 @@ export const enrollmentApi = {
     comments: string;
     attachments?: ReviewAttachment[];
   }): Promise<ApiResponse<ReviewRecord>> {
-    return post('/enrollment/reviews', data);
+    return post('/api/enrollment/reviews', data);
   },
 
   /**
@@ -421,7 +421,7 @@ export const enrollmentApi = {
     stage: 'initial' | 'secondary' | 'final';
     comments?: string;
   }): Promise<ApiResponse> {
-    return post('/enrollment/reviews/batch', data);
+    return post('/api/enrollment/reviews/batch', data);
   },
 
   /**
@@ -432,7 +432,7 @@ export const enrollmentApi = {
     reviewerId: string;
     stage: 'initial' | 'secondary' | 'final';
   }): Promise<ApiResponse> {
-    return post('/enrollment/reviews/assign', data);
+    return post('/api/enrollment/reviews/assign', data);
   },
 
   /**
@@ -450,7 +450,7 @@ export const enrollmentApi = {
     approvalRate: number;
     averageReviewTime: number;
   }>> {
-    return get('/enrollment/reviews/statistics', { params });
+    return get('/api/enrollment/reviews/statistics', { params });
   },
 
   // ===== 文件上传API =====
@@ -468,18 +468,14 @@ export const enrollmentApi = {
     formData.append('type', data.type);
     formData.append('file', data.file);
 
-    return post('/enrollment/applications/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    return post('/api/enrollment/applications/upload', formData);
   },
 
   /**
    * 删除申请附件
    */
   deleteApplicationAttachment(attachmentId: string): Promise<ApiResponse> {
-    return del(`/enrollment/applications/attachments/${attachmentId}`);
+    return del(`/api/enrollment/applications/attachments/${attachmentId}`);
   },
 
   // ===== 通知API =====
@@ -493,7 +489,7 @@ export const enrollmentApi = {
     channels: ('sms' | 'email' | 'wechat')[];
     customMessage?: string;
   }): Promise<ApiResponse> {
-    return post('/enrollment/notifications/send', data);
+    return post('/api/enrollment/notifications/send', data);
   }
 };
 

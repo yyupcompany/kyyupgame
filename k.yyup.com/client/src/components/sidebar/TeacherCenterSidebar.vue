@@ -19,7 +19,7 @@
           href="javascript:void(0)"
           class="nav-item center-item"
           :class="{ 'active': route.path === item.route }"
-          @click.prevent="router.push(item.route)"
+          @click.prevent="navigateToRoute(item.route)"
         >
           <UnifiedIcon
             :name="item.icon"
@@ -36,9 +36,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import { useMenuStore, type MenuItem } from '@/stores/menu-flat'
 
 // Props
 interface Props {
@@ -55,6 +56,43 @@ const props = withDefaults(defineProps<Props>(), {
 const router = useRouter()
 const route = useRoute()
 
+// 性能优化：使用菜单扁平化Store
+const menuStore = useMenuStore()
+
+// 性能优化：路由跳转防抖状态
+const navigationLock = ref(false)
+const lastClickTime = ref(0)
+const DEBOUNCE_TIME = 300 // 300ms防抖
+
+// 防抖路由跳转函数
+const navigateToRoute = (targetRoute: string) => {
+  const now = Date.now()
+  
+  // 防抖检查：如果在300ms内重复点击同一路由，忽略
+  if (navigationLock.value || (now - lastClickTime.value) < DEBOUNCE_TIME) {
+    console.log('🚫 防抖：跳过重复导航', targetRoute)
+    return
+  }
+  
+  // 如果已经在目标路由，不重复跳转
+  if (route.path === targetRoute) {
+    console.log('✅ 已在当前路由', targetRoute)
+    return
+  }
+  
+  // 设置导航锁
+  navigationLock.value = true
+  lastClickTime.value = now
+  
+  // 执行路由跳转
+  router.push(targetRoute).finally(() => {
+    // 300ms后释放锁
+    setTimeout(() => {
+      navigationLock.value = false
+    }, DEBOUNCE_TIME)
+  })
+}
+
 // 计算属性
 const sidebarClasses = computed(() => {
   return {
@@ -65,7 +103,7 @@ const sidebarClasses = computed(() => {
 })
 
 // 教师中心静态菜单 - 写死所有页面
-const teacherMenuItems = [
+const teacherMenuItems: MenuItem[] = [
   {
     id: 'teacher-dashboard',
     title: '教师工作台',
@@ -118,7 +156,13 @@ const teacherMenuItems = [
     id: 'teacher-performance',
     title: '绩效中心',
     route: '/teacher-center/performance-rewards',
-    icon: 'trophy'
+    icon: 'star'
   }
 ]
+
+// 性能优化：组件挂载时初始化菜单扁平化
+onMounted(() => {
+  menuStore.initTeacherMenus(teacherMenuItems)
+  console.log('📊 教师菜单性能统计:', menuStore.getStats())
+})
 </script>

@@ -272,7 +272,7 @@ export type PerformanceRuleType = 'ENROLLMENT' | 'TRIAL_CLASS' | 'ORDER' | 'PRE_
  */
 export function getPrincipalDashboardStats(): Promise<ApiResponse<PrincipalDashboardStats>> {
   // 使用真实API
-  return get('/dashboard/principal/stats');
+  return get('/api/dashboard/principal/stats');
 }
 
 /**
@@ -280,7 +280,7 @@ export function getPrincipalDashboardStats(): Promise<ApiResponse<PrincipalDashb
  * @returns {Promise<ApiResponse<CampusOverview>>} 园区概览数据
  */
 export const getCampusOverview = () => {
-  return get('/principal/campus/overview');
+  return get('/api/principal/campus/overview');
 };
 
 /**
@@ -289,7 +289,7 @@ export const getCampusOverview = () => {
  * @returns {Promise<ApiResponse<{ items: ApprovalItem[], total: number }>>} 待审批列表和总数
  */
 export const getApprovalList = (params: { status?: string; type?: string; page?: number; pageSize?: number } = {}) => {
-  return get('/principal/approvals', params);
+  return get('/api/principal/approvals', params);
 };
 
 /**
@@ -300,7 +300,7 @@ export const getApprovalList = (params: { status?: string; type?: string; page?:
  * @returns {Promise<ApiResponse<ApprovalItem>>} 更新后的审批项目
  */
 export const handleApproval = (id: string, action: 'APPROVE' | 'REJECT', comment?: string) => {
-  return post(`/principal/approvals/${id}/${action.toLowerCase()}`, { comment });
+  return post(`/api/principal/approvals/${id}/${action.toLowerCase()}`, { comment });
 };
 
 /**
@@ -309,7 +309,7 @@ export const handleApproval = (id: string, action: 'APPROVE' | 'REJECT', comment
  */
 export function getImportantNotices(): Promise<ApiResponse<PrincipalNotice[]>> {
   // 使用真实API
-  return get('/principal/notices/important');
+  return get('/api/principal/notices/important');
 }
 
 /**
@@ -325,7 +325,7 @@ export const publishNotice = (data: {
   recipientType: 'ALL' | 'TEACHERS' | 'PARENTS' | 'SPECIFIC';
   recipientIds?: string[];
 }) => {
-  return post('/principal/notices', data);
+  return post('/api/principal/notices', data);
 };
 
 /**
@@ -334,7 +334,7 @@ export const publishNotice = (data: {
  */
 export function getPrincipalSchedule(): Promise<ApiResponse<any>> {
   // 使用真实API
-  return get('/principal/schedule');
+  return get('/api/principal/schedule');
 }
 
 /**
@@ -349,7 +349,7 @@ export const createPrincipalSchedule = (data: {
   location?: string;
   description?: string;
 }) => {
-  return post('/principal/schedule', data);
+  return post('/api/principal/schedule', data);
 };
 
 /**
@@ -359,7 +359,7 @@ export const createPrincipalSchedule = (data: {
  */
 export function getEnrollmentTrend(period: 'week' | 'month' | 'year' = 'month'): Promise<ApiResponse<any>> {
   // 使用真实API
-  return get('/principal/enrollment/trend', { period });
+  return get('/api/principal/enrollment/trend', { period });
 }
 
 /**
@@ -368,7 +368,7 @@ export function getEnrollmentTrend(period: 'week' | 'month' | 'year' = 'month'):
  */
 export function getCustomerPoolStats(): Promise<ApiResponse<CustomerPoolStats>> {
   // 使用真实API
-  return get('/principal/customer-pool/stats');
+  return get('/api/principal/customer-pool/stats');
   // 备选模拟数据方案（暂不使用）
   // return request({
   //   url: '/mock/customer-pool-stats.json',
@@ -384,7 +384,7 @@ export function getCustomerPoolStats(): Promise<ApiResponse<CustomerPoolStats>> 
  */
 export function getCustomerPoolList(params: CustomerPoolParams): Promise<ApiResponse<any>> {
   // 使用真实API
-  return get('/principal/customer-pool/list', params);
+  return get('/api/principal/customer-pool/list', params);
   // 备选模拟数据方案（暂不使用）
   // return request({
   //   url: '/mock/customer-pool-list.json',
@@ -400,7 +400,7 @@ export function getCustomerPoolList(params: CustomerPoolParams): Promise<ApiResp
  * @returns Promise
  */
 export function assignCustomerTeacher(data: AssignTeacherData): Promise<ApiResponse<any>> {
-  return post('/principal/customer-pool/assign', data);
+  return post('/api/principal/customer-pool/assign', data);
 }
 
 /**
@@ -409,7 +409,7 @@ export function assignCustomerTeacher(data: AssignTeacherData): Promise<ApiRespo
  * @returns Promise
  */
 export function batchAssignCustomerTeacher(data: BatchAssignData): Promise<ApiResponse<any>> {
-  return post('/principal/customer-pool/batch-assign', data);
+  return post('/api/principal/customer-pool/batch-assign', data);
 }
 
 /**
@@ -418,7 +418,7 @@ export function batchAssignCustomerTeacher(data: BatchAssignData): Promise<ApiRe
  * @returns Promise
  */
 export function deleteCustomer(id: number): Promise<ApiResponse<any>> {
-  return del(`/principal/customer-pool/${id}`);
+  return del(`/api/principal/customer-pool/${id}`);
 }
 
 /**
@@ -444,7 +444,7 @@ export function getPerformanceStats(params?: {
   startDate?: string;
   endDate?: string;
 }): Promise<ApiResponse<PerformanceStats>> {
-  return get('/principal/performance/stats', params);
+  return get('/api/principal/performance/stats', params);
 }
 
 /**
@@ -457,7 +457,7 @@ export function getPerformanceRankings(params: {
   startDate?: string;
   endDate?: string;
 }): Promise<ApiResponse<PerformanceRanking[]>> {
-  return get('/principal/performance/rankings', params);
+  return get('/api/principal/performance/rankings', params);
 }
 
 /**
@@ -472,7 +472,7 @@ export function getPerformanceDetails(params: {
   page?: number;
   pageSize?: number;
 }): Promise<ApiResponse<{ items: PerformanceDetail[]; total: number }>> {
-  return get('/principal/performance/details', params);
+  return get('/api/principal/performance/details', params);
 }
 
 /**
@@ -498,7 +498,7 @@ export function exportPerformanceData(params: {
  * @returns Promise
  */
 export function getCommissionRules(): Promise<ApiResponse<CommissionRule>> {
-  return get('/principal/commission/rules');
+  return get('/api/principal/commission/rules');
 }
 
 /**
@@ -507,7 +507,7 @@ export function getCommissionRules(): Promise<ApiResponse<CommissionRule>> {
  * @returns Promise
  */
 export function saveCommissionRules(data: CommissionRule): Promise<ApiResponse<CommissionRule>> {
-  return post('/principal/commission/rules', data);
+  return post('/api/principal/commission/rules', data);
 }
 
 /**
@@ -515,7 +515,7 @@ export function saveCommissionRules(data: CommissionRule): Promise<ApiResponse<C
  * @returns Promise
  */
 export function getPerformanceGoals(): Promise<ApiResponse<PerformanceGoal>> {
-  return get('/principal/performance/goals');
+  return get('/api/principal/performance/goals');
 }
 
 /**
@@ -524,7 +524,7 @@ export function getPerformanceGoals(): Promise<ApiResponse<PerformanceGoal>> {
  * @returns Promise
  */
 export function savePerformanceGoals(data: PerformanceGoal): Promise<ApiResponse<PerformanceGoal>> {
-  return post('/principal/performance/goals', data);
+  return post('/api/principal/performance/goals', data);
 }
 
 /**
@@ -548,7 +548,7 @@ export function simulateCommission(data: {
     amount: number;
   }>;
 }>> {
-  return post('/principal/commission/simulate', data);
+  return post('/api/principal/commission/simulate', data);
 }
 
 /**
@@ -557,7 +557,7 @@ export function simulateCommission(data: {
  * @returns Promise
  */
 export function getCustomerDetail(id: number): Promise<ApiResponse<any>> {
-  return get(`/principal/customer-pool/${id}`);
+  return get(`/api/principal/customer-pool/${id}`);
 }
 
 /**
@@ -567,7 +567,7 @@ export function getCustomerDetail(id: number): Promise<ApiResponse<any>> {
  * @returns Promise
  */
 export function addCustomerFollowUp(id: number, data: { content: string; type: string }): Promise<ApiResponse<any>> {
-  return post(`/principal/customer-pool/${id}/follow-up`, data);
+  return post(`/api/principal/customer-pool/${id}/follow-up`, data);
 }
 
 /**
@@ -579,7 +579,7 @@ export function importCustomerData(file: File): Promise<ApiResponse<any>> {
   const formData = new FormData();
   formData.append('file', file);
   
-  return post('/principal/customer-pool/import', { file: file.name });
+  return post('/api/principal/customer-pool/import', { file: file.name });
 }
 
 /**
@@ -591,7 +591,7 @@ export function getPerformanceRuleList(params?: {
   type?: PerformanceRuleType;
   isActive?: boolean;
 }): Promise<ApiResponse<PerformanceRule[]>> {
-  return get('/performance/rules', params);
+  return get('/api/performance/rules', params);
 }
 
 /**
@@ -600,7 +600,7 @@ export function getPerformanceRuleList(params?: {
  * @returns Promise
  */
 export function getPerformanceRuleDetail(id: number | string): Promise<ApiResponse<PerformanceRule>> {
-  return get(`/performance/rules/${id}`);
+  return get(`/api/performance/rules/${id}`);
 }
 
 /**
@@ -609,7 +609,7 @@ export function getPerformanceRuleDetail(id: number | string): Promise<ApiRespon
  * @returns Promise
  */
 export function createPerformanceRule(data: Omit<PerformanceRule, 'id' | 'createdAt' | 'updatedAt'>): Promise<ApiResponse<PerformanceRule>> {
-  return post('/performance/rules', data);
+  return post('/api/performance/rules', data);
 }
 
 /**
@@ -619,7 +619,7 @@ export function createPerformanceRule(data: Omit<PerformanceRule, 'id' | 'create
  * @returns Promise
  */
 export function updatePerformanceRule(id: number | string, data: Partial<Omit<PerformanceRule, 'id' | 'createdAt' | 'updatedAt'>>): Promise<ApiResponse<PerformanceRule>> {
-  return put(`/performance/rules/${id}`, data);
+  return put(`/api/performance/rules/${id}`, data);
 }
 
 /**
@@ -628,7 +628,7 @@ export function updatePerformanceRule(id: number | string, data: Partial<Omit<Pe
  * @returns Promise
  */
 export function deletePerformanceRule(id: number | string): Promise<ApiResponse<{ id: number | string }>> {
-  return del(`/performance/rules/${id}`);
+  return del(`/api/performance/rules/${id}`);
 }
 
 /**
@@ -653,7 +653,7 @@ export function togglePerformanceRuleStatus(id: number | string, isActive: boole
 export async function getPosterTemplates(params?: PosterTemplateQueryParams): Promise<ApiResponse<{ templates: PosterTemplate[]; total: number }>> {
   try {
     // 直接调用API
-    const response = await get('/poster-templates', params);
+    const response = await get('/api/poster-templates', params);
     
     if (response.success) {
       let templates: PosterTemplate[] = [];
@@ -697,7 +697,7 @@ export async function getPosterTemplates(params?: PosterTemplateQueryParams): Pr
  * @returns Promise<ApiResponse<PosterTemplate>>
  */
 export async function getPosterTemplate(id: number): Promise<ApiResponse<PosterTemplate>> {
-  return get(`/poster-templates/${id}`).then(response => {
+  return get(`/api/poster-templates/${id}`).then(response => {
     if (response.success && response.data) {
       return {
         ...response,
@@ -714,7 +714,7 @@ export async function getPosterTemplate(id: number): Promise<ApiResponse<PosterT
  * @returns Promise<ApiResponse<PosterTemplate>>
  */
 export async function createPosterTemplate(data: Omit<PosterTemplate, 'id' | 'createdAt' | 'updatedAt' | 'usageCount'>): Promise<ApiResponse<PosterTemplate>> {
-  return post(`/poster-templates`, data).then(response => {
+  return post(`/api/poster-templates`, data).then(response => {
     if (response.success && response.data) {
       return {
         ...response,
@@ -732,7 +732,7 @@ export async function createPosterTemplate(data: Omit<PosterTemplate, 'id' | 'cr
  * @returns Promise<ApiResponse<PosterTemplate>>
  */
 export async function updatePosterTemplate(id: number, data: Partial<Omit<PosterTemplate, 'id' | 'createdAt' | 'updatedAt' | 'usageCount'>>): Promise<ApiResponse<PosterTemplate>> {
-  return put(`/poster-templates/${id}`, data).then(response => {
+  return put(`/api/poster-templates/${id}`, data).then(response => {
     if (response.success && response.data) {
       return {
         ...response,
@@ -749,7 +749,7 @@ export async function updatePosterTemplate(id: number, data: Partial<Omit<Poster
  * @returns Promise<ApiResponse<{ id: number }>>
  */
 export async function deletePosterTemplate(id: number): Promise<ApiResponse<{ id: number }>> {
-  return del(`/poster-templates/${id}`);
+  return del(`/api/poster-templates/${id}`);
 }
 
 /**

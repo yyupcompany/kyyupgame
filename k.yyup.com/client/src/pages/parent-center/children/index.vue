@@ -66,17 +66,17 @@
               <div class="card-content">
                 <div class="card-info-item">
                   <UnifiedIcon name="Calendar" :size="16" />
-                  <span>{{ child.age }}岁</span>
+                  <span>{{ child.age || 0 }}岁</span>
                 </div>
                 <div class="card-info-item">
                   <UnifiedIcon name="School" :size="16" />
                   <el-tag :type="getClassType(child.className)" size="small">
-                    {{ child.className }}
+                    {{ child.className || '未分配班级' }}
                   </el-tag>
                 </div>
                 <div class="card-info-item">
                   <UnifiedIcon name="User" :size="16" />
-                  <span>{{ child.birthday }}</span>
+                  <span>{{ child.birthday || '未知' }}</span>
                 </div>
               </div>
               <template #footer>
@@ -161,29 +161,29 @@
         <div class="child-header">
           <el-avatar size="large" :src="currentChild.avatar || defaultAvatar"></el-avatar>
           <div class="child-info">
-            <h2>{{ currentChild.name }}</h2>
+            <h2>{{ currentChild.name || '未知' }}</h2>
             <div class="child-meta">
               <el-tag :type="currentChild.gender === '男' ? 'primary' : 'danger'" size="small">
-                {{ currentChild.gender }}
+                {{ currentChild.gender || '未知' }}
               </el-tag>
-              <span class="child-age">{{ currentChild.age }}岁</span>
+              <span class="child-age">{{ currentChild.age || 0 }}岁</span>
             </div>
           </div>
         </div>
-        
+
         <el-divider />
-        
+
         <el-descriptions title="基本信息" :column="2" border>
-          <el-descriptions-item label="姓名">{{ currentChild.name }}</el-descriptions-item>
-          <el-descriptions-item label="性别">{{ currentChild.gender }}</el-descriptions-item>
-          <el-descriptions-item label="年龄">{{ currentChild.age }}岁</el-descriptions-item>
-          <el-descriptions-item label="出生日期">{{ currentChild.birthday }}</el-descriptions-item>
+          <el-descriptions-item label="姓名">{{ currentChild.name || '未知' }}</el-descriptions-item>
+          <el-descriptions-item label="性别">{{ currentChild.gender || '未知' }}</el-descriptions-item>
+          <el-descriptions-item label="年龄">{{ currentChild.age || 0 }}岁</el-descriptions-item>
+          <el-descriptions-item label="出生日期">{{ currentChild.birthday || '未知' }}</el-descriptions-item>
           <el-descriptions-item label="班级">
             <el-tag :type="getClassType(currentChild.className)" size="small">
-              {{ currentChild.className }}
+              {{ currentChild.className || '未分配班级' }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="入园时间">{{ currentChild.enrollmentDate }}</el-descriptions-item>
+          <el-descriptions-item label="入园时间">{{ currentChild.enrollmentDate || '未知' }}</el-descriptions-item>
         </el-descriptions>
         
         <div class="section-title">
@@ -304,16 +304,16 @@ interface Evaluation {
 
 interface Child {
   id: number;
-  name: string;
-  gender: string;
-  age: number;
-  birthday: string;
-  className: string;
-  enrollmentDate: string;
+  name?: string;
+  gender?: string;
+  age?: number;
+  birthday?: string;
+  className?: string;
+  enrollmentDate?: string;
   avatar?: string;
-  parents: Parent[];
-  healthRecords: HealthRecord[];
-  evaluations: Evaluation[];
+  parents?: Parent[];
+  healthRecords?: HealthRecord[];
+  evaluations?: Evaluation[];
 }
 
 export default defineComponent({
@@ -395,7 +395,8 @@ export default defineComponent({
     });
     
     // 获取班级对应的类型
-    const getClassType = (className: string): "success" | "warning" | "info" | "danger" | "primary" => {
+    const getClassType = (className: string | undefined): "success" | "warning" | "info" | "danger" | "primary" => {
+      if (!className) return 'info';
       if (className.includes('小班')) {
         return 'primary';
       } else if (className.includes('中班')) {
@@ -591,79 +592,41 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "@/styles/design-tokens.scss";
-@import "@/styles/list-components-optimization.scss";
+/* 使用设计令牌，不引入外部SCSS */
 
-.search-filter {
-  margin-bottom: var(--text-2xl);
-  padding: var(--spacing-lg);
-  background-color: var(--bg-hover);
-  border-radius: var(--radius-sm);
+/* ==================== 页面容器 ==================== */
+.page-container {
+  padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 }
 
-.filter-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.pagination-container {
-  margin-top: var(--text-2xl);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.child-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--text-2xl);
-}
-
-.child-info {
-  margin-left: var(--text-2xl);
-}
-
-.child-info h2 {
-  margin: 0 0 var(--spacing-sm) 0;
-}
-
-.child-meta {
-  display: flex;
-  align-items: center;
-}
-
-.child-age {
-  margin-left: var(--spacing-2xl);
-  color: var(--text-regular);
-}
-
-.section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: var(--spacing-lg) 0 var(--spacing-sm);
-}
-
-.section-title h3 {
-  margin: 0;
-}
-
+/* ==================== 应用卡片 ==================== */
 .app-card {
   background-color: var(--bg-card);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .app-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--text-2xl);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color-lighter);
 }
 
 .app-card-title {
   font-size: var(--text-lg);
   font-weight: 600;
+  color: var(--el-text-color-primary);
 }
 
 .card-actions {
@@ -671,7 +634,32 @@ export default defineComponent({
   gap: var(--spacing-sm);
 }
 
-// 卡片视图样式
+/* ==================== 搜索筛选 ==================== */
+.search-filter {
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background-color: var(--el-fill-color-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-lighter);
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+
+/* ==================== 分页容器 ==================== */
+.pagination-container {
+  margin-top: var(--spacing-xl);
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color-lighter);
+}
+
+/* ==================== 孩子卡片视图 ==================== */
 .children-cards {
   margin-bottom: var(--spacing-xl);
 }
@@ -682,12 +670,28 @@ export default defineComponent({
 
 .child-card {
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
   height: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color-lighter);
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--el-color-primary-light-3);
+  }
+
+  :deep(.el-card__header) {
+    padding: var(--spacing-md);
+    background: var(--el-fill-color-light);
+    border-bottom: 1px solid var(--border-color-lighter);
+  }
+
+  :deep(.el-card__footer) {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--el-fill-color-light);
+    border-top: 1px solid var(--border-color-lighter);
   }
 
   .card-header {
@@ -697,9 +701,10 @@ export default defineComponent({
 
     .child-avatar {
       flex-shrink: 0;
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--success-color) 100%);
+      background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
       color: white;
       font-weight: 600;
+      box-shadow: var(--shadow-sm);
     }
 
     .card-title {
@@ -708,9 +713,9 @@ export default defineComponent({
 
       h3 {
         margin: 0 0 var(--spacing-xs) 0;
-        font-size: var(--text-lg);
+        font-size: var(--text-base);
         font-weight: 600;
-        color: var(--text-primary);
+        color: var(--el-text-color-primary);
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -726,7 +731,7 @@ export default defineComponent({
       align-items: center;
       gap: var(--spacing-sm);
       margin-bottom: var(--spacing-sm);
-      color: var(--text-secondary);
+      color: var(--el-text-color-secondary);
       font-size: var(--text-sm);
 
       &:last-child {
@@ -734,7 +739,8 @@ export default defineComponent({
       }
 
       .unified-icon {
-        color: var(--text-muted);
+        color: var(--el-text-color-secondary);
+        flex-shrink: 0;
       }
     }
   }
@@ -748,12 +754,150 @@ export default defineComponent({
     .el-button {
       flex: 1;
       min-width: 60px;
+      transition: all var(--transition-base);
+
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 }
 
-// 响应式调整
+/* ==================== 表格样式 ==================== */
+.table-wrapper {
+  margin-bottom: var(--spacing-xl);
+}
+
+:deep(.el-table) {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  &::before {
+    display: none;
+  }
+
+  .el-table__header-wrapper th {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+    font-weight: 600;
+  }
+
+  .el-table__row {
+    transition: all var(--transition-base);
+
+    &:hover {
+      background: var(--el-fill-color-light) !important;
+    }
+  }
+}
+
+/* ==================== 孩子详情抽屉 ==================== */
+.child-detail {
+  padding: var(--spacing-md);
+}
+
+.child-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color-lighter);
+
+  .el-avatar {
+    background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+    box-shadow: var(--shadow-md);
+  }
+
+  .child-info {
+    h2 {
+      margin: 0 0 var(--spacing-sm) 0;
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+    }
+
+    .child-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+
+      .child-age {
+        color: var(--el-text-color-secondary);
+        font-size: var(--text-sm);
+      }
+    }
+  }
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--spacing-xl) 0 var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color-lighter);
+
+  &:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+}
+
+/* ==================== 评价详情对话框 ==================== */
+.evaluation-detail {
+  padding: var(--spacing-md);
+}
+
+/* ==================== 响应式设计 ==================== */
 @media (max-width: var(--breakpoint-md)) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
+  .app-card {
+    padding: var(--spacing-md);
+  }
+
+  .app-card-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .search-filter {
+    padding: var(--spacing-md);
+
+    .el-row {
+      gap: var(--spacing-md);
+    }
+
+    .el-col {
+      width: 100% !important;
+    }
+  }
+
+  .filter-actions {
+    justify-content: flex-start;
+  }
+
+  .pagination-container {
+    justify-content: center;
+
+    .el-pagination {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
   .child-card-col {
     margin-bottom: var(--spacing-md);
   }
@@ -763,6 +907,21 @@ export default defineComponent({
 
     .el-button {
       width: 100%;
+    }
+  }
+
+  .child-header {
+    flex-direction: column;
+    text-align: center;
+
+    .child-info {
+      h2 {
+        font-size: var(--text-lg);
+      }
+
+      .child-meta {
+        justify-content: center;
+      }
     }
   }
 }

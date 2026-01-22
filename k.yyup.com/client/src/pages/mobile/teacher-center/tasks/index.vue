@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="任务中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="任务中心" back-path="/mobile/teacher-center">
     <div class="mobile-teacher-tasks">
       <!-- 页面头部操作区 -->
       <div class="page-header">
@@ -420,7 +415,7 @@
       class="fab-button"
       @click="handleCreateTask"
     />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -431,7 +426,7 @@ import { showToast, showConfirmDialog, showSuccessToast } from 'vant'
 import { teacherTasksApi, type Task, type TaskStats } from '@/api/modules/teacher-tasks'
 
 // 导入布局组件
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 响应式数据
 const router = useRouter()
@@ -507,7 +502,7 @@ const completionPercentage = computed(() => {
 const progressColor = computed(() => {
   const percentage = completionPercentage.value
   if (percentage >= 80) return '#07c160'
-  if (percentage >= 60) return '#409eff'
+  if (percentage >= 60) return 'var(--primary-color)'
   return '#ee0a24'
 })
 
@@ -759,6 +754,12 @@ const loadTasks = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTasks()
 })
 </script>

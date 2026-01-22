@@ -529,20 +529,23 @@ onMounted(async () => {
   }
 
   // 恢复主题设置
-  const savedTheme = localStorage.getItem('theme')
+  let savedTheme = localStorage.getItem('theme')
   if (savedTheme) {
     // 应用主题
-    const allThemes = ['theme-light', 'theme-dark', 'glass-light', 'glass-dark', 'glass-neon', 'glass-gradient']
+    const allThemes = ['theme-light', 'theme-dark']
     document.documentElement.classList.remove(...allThemes)
     document.body.classList.remove(...allThemes)
     document.documentElement.removeAttribute('data-theme')
     document.body.removeAttribute('data-theme')
 
+    // 如果保存的主题是玻璃台主题，自动迁移到默认主题
     if (savedTheme.startsWith('glass-')) {
-      document.documentElement.setAttribute('data-theme', savedTheme)
-      document.body.setAttribute('data-theme', savedTheme)
-      document.documentElement.classList.add(savedTheme)
-      document.body.classList.add(savedTheme)
+      savedTheme = 'theme-light'
+      localStorage.setItem('theme', 'theme-light')
+      document.documentElement.setAttribute('data-theme', 'light')
+      document.body.setAttribute('data-theme', 'light')
+      document.documentElement.classList.add('theme-light')
+      document.body.classList.add('theme-light')
     } else {
       document.documentElement.classList.add(savedTheme)
       document.body.classList.add(savedTheme)
@@ -697,19 +700,19 @@ onMounted(async () => {
   transition: all var(--transition-base);
   backdrop-filter: blur(var(--blur-lg));
 
-  /* 暗黑模式适配 */
-  [data-theme="dark"] & {
-    background: var(--bg-card);
-    border-left-color: var(--border-color);
-    box-shadow: -2px 0 var(--spacing-sm) var(--shadow-lg);
-  }
-
   // ✅ 移动端适配 - 统一使用design-tokens断点
   @media (max-width: var(--breakpoint-md)) {
     width: 100%;
     height: calc(100vh - var(--header-height, 64px));
     box-shadow: var(--shadow-xl);
   }
+}
+
+/* 暗黑模式适配 */
+:global([data-theme="dark"]) .ai-sidebar-slot {
+  background: var(--bg-card);
+  border-left-color: var(--border-color);
+  box-shadow: -2px 0 var(--spacing-sm) var(--shadow-lg);
 }
 
 /* 移动端遮罩层 - 优化设计 */

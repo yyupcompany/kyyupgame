@@ -171,76 +171,99 @@ const formatStatValue = (value: any, key?: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+
 .timeline-item {
   position: relative;
   display: flex;
-  gap: var(--spacing-xl);
-  padding: var(--spacing-xl);
-  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-lg); /* ✨ 优化：减小间距 */
+  padding: var(--spacing-lg); /* ✨ 优化：减小内边距 */
+  margin-bottom: var(--spacing-md);
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
-  border: var(--border-width-thin) solid transparent;
+  border-radius: var(--radius-xl); /* ✨ 优化：更大的圆角 */
+  border: 1px solid var(--border-color-light); /* ✨ 优化：更浅的边框 */
   cursor: pointer;
-  transition: var(--transition-slow);
+  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     border-color: var(--primary-color);
     box-shadow: var(--shadow-md);
-    transform: translateX(var(--spacing-xs));
+    transform: translateX(var(--spacing-xs)) translateY(-2px);
+    background: var(--bg-hover);
   }
 
   &.active {
     border-color: var(--primary-color);
-    background: var(--primary-light-bg);
-    box-shadow: var(--glow-primary);
+    background: linear-gradient(135deg, var(--primary-light-bg) 0%, var(--bg-card) 100%);
+    box-shadow: var(--shadow-lg), var(--glow-primary);
+    transform: scale(1.02) translateX(var(--spacing-sm));
+    z-index: 2;
+
+    .timeline-dot {
+      transform: scale(1.1);
+      box-shadow: var(--glow-primary);
+    }
+
+    .timeline-title {
+      color: var(--primary-color);
+    }
   }
 
   &.completed .timeline-dot {
     background: var(--success-color);
     border-color: var(--success-color);
+    color: white;
   }
 
   &.in-progress .timeline-dot {
     background: var(--primary-color);
     border-color: var(--primary-color);
+    color: white;
     animation: pulse 2s infinite;
   }
 
   &.pending .timeline-dot {
-    background: var(--info-color);
-    border-color: var(--info-color);
+    background: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-muted);
   }
 }
 
 .timeline-line {
   position: absolute;
-  left: 39px;
-  top: 60px;
+  left: 31px; /* ✨ 优化：根据新的内边距和圆点大小调整位置 */
+  top: 52px;
   bottom: -var(--spacing-lg);
-  width: auto;
+  width: 2px;
   background: linear-gradient(180deg, var(--border-color) 0%, transparent 100%);
+  opacity: 0.5;
 }
 
 .timeline-dot {
   flex-shrink: 0;
-  width: var(--size-icon-xl);
-  height: var(--size-icon-xl);
+  width: 32px; /* ✨ 优化：稍微减小圆点大小 */
+  height: 32px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--border-width-thick) solid var(--bg-card);
+  border: 2px solid var(--bg-card);
   background: var(--bg-card);
   z-index: var(--z-dropdown);
-  transition: var(--transition-slow);
+  transition: all var(--transition-normal) ease;
+  box-shadow: var(--shadow-sm);
 
   // 确保图标不被拉伸
   :deep(svg) {
-    width: 18px;
-    height: 18px;
+    width: 16px; /* ✨ 优化：稍微减小图标大小 */
+    height: 16px;
     flex-shrink: 0;
-    color: var(--text-on-primary);
+    transition: transform var(--transition-normal);
   }
+}
+
+.timeline-item:hover .timeline-dot :deep(svg) {
+  transform: rotate(10deg) scale(1.1);
 }
 
 @keyframes pulse {

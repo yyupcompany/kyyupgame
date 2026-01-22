@@ -2,7 +2,7 @@
  * AI计费相关API端点
  */
 
-import { request } from '@/utils/request';
+import { request, type ApiResponse } from '@/utils/request';
 
 /**
  * 计费类型
@@ -115,16 +115,6 @@ export interface TrendData {
 }
 
 /**
- * API响应接口
- */
-export interface ApiResponse<T = any> {
-  success: boolean;
-  message?: string;
-  data?: T;
-  error?: string;
-}
-
-/**
  * 获取当前用户账单
  */
 export const getMyBill = (cycle?: string): Promise<ApiResponse<UserBill>> => {
@@ -141,11 +131,12 @@ export const getUserBill = (userId: number, cycle?: string): Promise<ApiResponse
 /**
  * 导出账单CSV
  */
-export const exportBillCSV = (userId: number, cycle: string): Promise<Blob> => {
-  return request.get(`/ai-billing/user/${userId}/export`, {
+export const exportBillCSV = async (userId: number, cycle: string): Promise<Blob> => {
+  const response: any = await request.get(`/ai-billing/user/${userId}/export`, {
     params: { cycle, format: 'csv' },
     responseType: 'blob',
   });
+  return response.data || response;
 };
 
 /**

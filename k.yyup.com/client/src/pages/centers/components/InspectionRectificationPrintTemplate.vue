@@ -251,7 +251,7 @@ const getSeverityLabel = (severity: string) => {
     }
 
     th {
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-page);
       font-weight: bold;
       text-align: center;
     }

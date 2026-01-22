@@ -416,7 +416,7 @@ function scrollToBottom() {
           }
 
           .bubble-content {
-            background: var(--bg-color);
+            background: var(--bg-card);
             border: 1px solid var(--border-color-lighter);
             border-radius: var(--border-radius-lg);
             padding: var(--spacing-md);
@@ -505,7 +505,7 @@ function scrollToBottom() {
 
   .import-dialog-content {
     .import-example {
-      background: var(--bg-color);
+      background: var(--bg-card);
       border: 1px solid var(--border-color-lighter);
       border-radius: var(--border-radius-base);
       padding: var(--spacing-md);

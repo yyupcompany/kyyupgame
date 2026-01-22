@@ -19,17 +19,17 @@
     <div class="conversion-table">
       <h4>转化详情</h4>
       <div class="table-wrapper">
-<el-table class="responsive-table" :data="conversionData" stripe>
-        <el-table-column prop="stage" label="阶段" width="120" />
-        <el-table-column prop="count" label="数量" width="80" align="center" />
-        <el-table-column prop="rate" label="转化率" width="100" align="center">
-          <template #default="{ row }">
-            <span :class="getRateClass(row.rate)">{{ row.rate }}%</span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="description" label="说明" />
-      </el-table>
-</div>
+        <el-table class="responsive-table" :data="conversionData" stripe>
+          <el-table-column prop="stage" label="阶段" width="120" />
+          <el-table-column prop="count" label="数量" width="80" align="center" />
+          <el-table-column prop="rate" label="转化率" width="100" align="center">
+            <template #default="{ row }">
+              <span :class="getRateClass(row.rate)">{{ row.rate }}%</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="description" label="说明" />
+        </el-table>
+      </div>
     </div>
 
     <!-- 转化趋势 -->
@@ -56,10 +56,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import * as echarts from 'echarts'
 
-// Props
+// 类型定义
 interface ConversionStage {
   stage: string
   count: number
@@ -88,12 +88,12 @@ interface Props {
   }
 }
 
+// Props和Emits
 const props = withDefaults(defineProps<Props>(), {
   loading: false,
   funnelData: undefined
 })
 
-// Emits
 const emit = defineEmits<{
   'time-range-change': [timeRange: string]
 }>()
@@ -104,12 +104,12 @@ const chartRef = ref()
 const trendChartRef = ref()
 let funnelChart: echarts.ECharts | null = null
 let trendChart: echarts.ECharts | null = null
+let isInitialized = false
 
 // 转化数据
 const conversionData = computed<ConversionStage[]>(() => {
   if (props.funnelData && props.funnelData.stages.length > 0) {
-    // 使用真实API数据
-    return props.funnelData.stages.map((stage, index, array) => ({
+    return props.funnelData.stages.map((stage) => ({
       stage: stage.stage,
       count: stage.count,
       rate: stage.percentage,
@@ -158,7 +158,7 @@ const getRateClass = (rate: number) => {
 }
 
 const getStageDescription = (stage: string) => {
-  const descriptions = {
+  const descriptions: Record<string, string> = {
     '潜在客户': '通过各种渠道获得的潜在客户',
     '已联系': '成功建立初次联系的客户',
     '有意向': '进行深度需求沟通的客户',
@@ -175,9 +175,9 @@ const handleTimeRangeChange = () => {
 
 const initFunnelChart = () => {
   if (!chartRef.value) return
-  
+
   funnelChart = echarts.init(chartRef.value)
-  
+
   const option = {
     title: {
       text: '客户转化漏斗',
@@ -233,15 +233,15 @@ const initFunnelChart = () => {
       }
     ]
   }
-  
+
   funnelChart.setOption(option)
 }
 
 const initTrendChart = () => {
   if (!trendChartRef.value) return
-  
+
   trendChart = echarts.init(trendChartRef.value)
-  
+
   const option = {
     title: {
       text: '转化率趋势',
@@ -297,12 +297,11 @@ const initTrendChart = () => {
       }
     ]
   }
-  
+
   trendChart.setOption(option)
 }
 
 const loadChartData = () => {
-  // TODO: 根据时间范围加载数据
   nextTick(() => {
     if (funnelChart) {
       funnelChart.resize()
@@ -322,13 +321,52 @@ const resizeCharts = () => {
   }
 }
 
-// 生命周期
-onMounted(() => {
-  nextTick(() => {
+// 安全初始化图表 - 只在容器有正确尺寸时初始化
+const safeInitCharts = () => {
+  if (isInitialized) return
+
+  if (!chartRef.value || !trendChartRef.value) return
+
+  const rect1 = chartRef.value.getBoundingClientRect()
+  const rect2 = trendChartRef.value.getBoundingClientRect()
+
+  // 只有当容器有正确的尺寸时才初始化
+  if (rect1.width > 0 && rect1.height > 0 && rect2.width > 0 && rect2.height > 0) {
+    isInitialized = true
     initFunnelChart()
     initTrendChart()
-  })
-  
+  }
+}
+
+// 生命周期 - 延迟初始化方案
+onMounted(() => {
+  // 延迟初始化，确保tab切换完成后再检查
+  // 使用多次检查确保不会错过tab切换的时机
+  const checkAndInit = (attempt = 0, maxAttempts = 20) => {
+    if (isInitialized) return
+
+    if (!chartRef.value || !trendChartRef.value) return
+
+    // 检查容器是否有正确的尺寸
+    const rect1 = chartRef.value.getBoundingClientRect()
+    const rect2 = trendChartRef.value.getBoundingClientRect()
+
+    // 同时检查offsetParent来判断元素是否真正可见（display:none的元素offsetParent为null）
+    const isVisible = chartRef.value.offsetParent !== null
+
+    if (rect1.width > 0 && rect1.height > 0 && rect2.width > 0 && rect2.height > 0 && isVisible) {
+      isInitialized = true
+      initFunnelChart()
+      initTrendChart()
+    } else if (attempt < maxAttempts) {
+      // 继续检查，每次间隔100ms
+      setTimeout(() => checkAndInit(attempt + 1, maxAttempts), 100)
+    }
+  }
+
+  // 延迟500ms后开始检查，给tab切换留出时间
+  setTimeout(() => checkAndInit(), 500)
+
   // 监听窗口大小变化
   window.addEventListener('resize', resizeCharts)
 })
@@ -364,7 +402,9 @@ onBeforeUnmount(() => {
 }
 
 .funnel-chart {
-  min-height: 60px; height: auto;
+  min-height: 300px;
+  height: 400px;
+  width: 100%;
   margin-bottom: var(--spacing-8xl);
   background: white;
   border-radius: var(--spacing-sm);
@@ -392,7 +432,9 @@ onBeforeUnmount(() => {
 }
 
 .trend-chart {
-  min-height: 60px; height: auto;
+  min-height: 300px;
+  height: 400px;
+  width: 100%;
   background: white;
   border-radius: var(--spacing-sm);
   box-shadow: 0 2px var(--spacing-xs) var(--shadow-light);

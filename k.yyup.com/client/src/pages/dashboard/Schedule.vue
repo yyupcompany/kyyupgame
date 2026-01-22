@@ -832,7 +832,7 @@ onMounted(async () => {
 <style scoped>
 .page-container {
   padding: var(--spacing-lg);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   min-height: calc(100vh - var(--header-height));
 }
 
@@ -1043,7 +1043,7 @@ onMounted(async () => {
   border-bottom: var(--border-width) solid var(--border-light);
   font-weight: 600; /* 语义化字重 */
   text-align: center;
-  background: var(--bg-primary);
+  background: var(--bg-page);
 }
 
 .day-schedule {
@@ -1127,7 +1127,7 @@ onMounted(async () => {
 }
 
 .upcoming-event:hover {
-  background: var(--bg-primary);
+  background: var(--bg-page);
 }
 
 .upcoming-event:last-child {
@@ -1237,7 +1237,7 @@ onMounted(async () => {
 }
 
 :deep(.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell) {
-  background-color: var(--bg-secondary) !important;
+  background-color: var(--bg-page) !important;
 }
 
 :deep(.el-table td.el-table__cell) {

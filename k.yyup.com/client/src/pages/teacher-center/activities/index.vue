@@ -1,70 +1,60 @@
 <template>
   <UnifiedCenterLayout
-    title="页面标题"
-    description="页面描述"
-    icon="User"
+    title="活动中心"
+    description="管理和参与园区各类活动"
+    icon="Calendar"
   >
-    <div class="center-container teacher-activities">
-    <!-- 页面头部 -->
-    <div class="activities-header">
-      <div class="header-content">
-        <div class="page-title">
-          <h1>
-            <UnifiedIcon name="default" />
-            活动中心
-          </h1>
-          <p>管理和参与园区各类活动</p>
-        </div>
-        <div class="header-actions">
-          <el-button type="primary" @click="handleCreateActivity">
-            <UnifiedIcon name="Plus" />
-            创建活动
-          </el-button>
-          <el-button @click="refreshData">
-            <UnifiedIcon name="Refresh" />
-            刷新
-          </el-button>
-        </div>
-      </div>
-    </div>
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button type="primary" @click="handleCreateActivity">
+        <UnifiedIcon name="plus" :size="16" />
+        创建活动
+      </el-button>
+      <el-button @click="refreshData">
+        <UnifiedIcon name="refresh" :size="16" />
+        刷新
+      </el-button>
+    </template>
 
-    <!-- 活动统计卡片 -->
-    <div class="stats-cards">
-      <el-row :gutter="24">
-        <el-col :xs="24" :sm="12" :md="6">
-          <ActivityStatCard
-            title="已发布活动"
-            :value="activityStats.upcoming"
-            icon="Clock"
-            color="var(--warning-color)"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <ActivityStatCard
-            title="总报名人数"
-            :value="activityStats.participating"
-            icon="User"
-            color="var(--primary-color)"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <ActivityStatCard
-            title="总签到人数"
-            :value="activityStats.thisWeek"
-            icon="Calendar"
-            color="var(--success-color)"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <ActivityStatCard
-            title="负责活动数"
-            :value="activityStats.responsible"
-            icon="Trophy"
-            color="var(--danger-color)"
-          />
-        </el-col>
-      </el-row>
-    </div>
+    <!-- 统计卡片 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        icon="clock"
+        title="已发布活动"
+        :value="activityStats.upcoming"
+        subtitle="已发布的活动"
+        type="warning"
+        :trend="activityStats.upcoming > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="user"
+        title="总报名人数"
+        :value="activityStats.participating"
+        subtitle="活动报名总数"
+        type="primary"
+        :trend="activityStats.participating > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="check"
+        title="总签到人数"
+        :value="activityStats.thisWeek"
+        subtitle="活动签到总数"
+        type="success"
+        :trend="activityStats.thisWeek > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="star"
+        title="负责活动数"
+        :value="activityStats.responsible"
+        subtitle="负责的活动"
+        type="danger"
+        :trend="activityStats.responsible > 0 ? 'up' : 'stable'"
+        clickable
+      />
+    </template>
 
     <!-- 主要内容区域 -->
     <div class="main-content">
@@ -74,7 +64,7 @@
             <el-tab-pane label="活动日历" name="calendar">
               <template #label>
                 <span class="tab-label">
-                  <UnifiedIcon name="default" />
+                  <UnifiedIcon name="Calendar" />
                   活动日历
                 </span>
               </template>
@@ -82,7 +72,7 @@
             <el-tab-pane label="活动列表" name="list">
               <template #label>
                 <span class="tab-label">
-                  <UnifiedIcon name="default" />
+                  <UnifiedIcon name="List" />
                   活动列表
                 </span>
               </template>
@@ -90,7 +80,7 @@
             <el-tab-pane label="我的活动" name="my-activities">
               <template #label>
                 <span class="tab-label">
-                  <UnifiedIcon name="default" />
+                  <UnifiedIcon name="User" />
                   我的活动
                 </span>
               </template>
@@ -148,8 +138,11 @@
 
     <!-- 活动详情弹窗 -->
     <ActivityDetail 
-      v-model="activityDetailVisible"
+      :visible="activityDetailVisible"
       :activity="currentActivity"
+      :participants="[]"
+      :evaluations="[]"
+      @close="activityDetailVisible = false"
       @join="handleJoinActivity"
       @edit="handleEditActivity"
       @delete="handleDeleteActivity"
@@ -157,8 +150,9 @@
 
     <!-- 活动创建/编辑弹窗 -->
     <ActivityForm 
-      v-model="activityFormVisible"
+      :visible="activityFormVisible"
       :activity="editingActivity"
+      @close="activityFormVisible = false"
       @save="handleSaveActivity"
     />
 
@@ -173,31 +167,21 @@
       @batch-signin="handleBatchSignin"
       @export="handleExportSignin"
     />
-    </div>
   </UnifiedCenterLayout>
 </template>
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import StatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { getActivityList } from '@/api/modules/activity'
 import { getTeacherActivityStatistics } from '@/api/modules/teacher'
 import { getCheckinStats } from '@/api/modules/activity-checkin'
-import {
-  Trophy,
-  Plus,
-  Refresh,
-  Calendar,
-  List,
-  User,
-  Check,
-  Clock
-} from '@element-plus/icons-vue'
 
 // 导入组件
-import ActivityStatCard from './components/ActivityStatCard.vue'
 import ActivityCalendar from './components/ActivityCalendar.vue'
 import ActivityList from './components/ActivityList.vue'
 import MyActivities from './components/MyActivities.vue'
@@ -463,63 +447,60 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/index.scss' as *;
+@use "@/styles/design-tokens.scss" as *;
 
-.teacher-activities {
-  padding: var(--spacing-lg);
-  background-color: var(--bg-color-page);
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  flex: 1 1 auto;
-}
-
-.activities-header {
-  margin-bottom: var(--spacing-xl);
-
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    .page-title {
-      h1 {
-        font-size: var(--text-2xl);
-        font-weight: var(--font-semibold);
-        color: var(--text-primary);
-        margin: 0 0 var(--spacing-xs) 0;
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-      }
-
-      p {
-        color: var(--text-secondary);
-        margin: 0;
-        font-size: var(--text-sm);
-      }
-    }
-
-    .header-actions {
-      display: flex;
-      gap: var(--spacing-md);
-    }
-  }
-}
-
-.stats-cards {
-  margin-bottom: var(--spacing-xl);
-}
-
+/* ==================== 主要内容区域 ==================== */
 .main-content {
   width: 100%;
   max-width: 100%;
   flex: 1 1 auto;
 
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+  }
+
+  :deep(.el-tabs) {
+    .el-tabs__header {
+      margin: 0;
+      padding: var(--spacing-md) var(--spacing-lg) 0;
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .el-tabs__nav-wrap::after {
+      display: none;
+    }
+
+    .el-tabs__item {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      &.is-active {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+    }
+
+    .el-tabs__active-bar {
+      background-color: var(--primary-color);
+    }
+
+    .el-tabs__content {
+      padding: var(--spacing-lg);
+    }
+  }
+
   .tab-label {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    font-size: var(--text-sm);
   }
 
   .tab-content {
@@ -530,21 +511,40 @@ onMounted(() => {
   }
 }
 
-// 响应式设计
+/* ==================== 对话框样式 ==================== */
+:deep(.el-dialog) {
+  border-radius: var(--radius-lg);
+
+  .el-dialog__header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .el-dialog__body {
+    padding: var(--spacing-xl);
+  }
+
+  .el-dialog__footer {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
 @media (max-width: var(--breakpoint-md)) {
-  .teacher-activities {
-    padding: var(--spacing-md);
-  }
+  .main-content {
+    :deep(.el-tabs) {
+      .el-tabs__header {
+        padding: var(--spacing-sm) var(--spacing-md) 0;
+      }
 
-  .activities-header .header-content {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    align-items: flex-start;
-  }
+      .el-tabs__content {
+        padding: var(--spacing-md);
+      }
+    }
 
-  .stats-cards {
-    :deep(.el-col) {
-      margin-bottom: var(--spacing-md);
+    .tab-label {
+      gap: var(--spacing-2xs);
     }
   }
 }

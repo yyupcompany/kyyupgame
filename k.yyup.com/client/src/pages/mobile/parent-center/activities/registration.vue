@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="活动报名"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="活动报名" back-path="/mobile/parent-center">
     <div class="activity-registration" v-if="activity">
       <!-- 活动信息摘要 -->
       <div class="activity-summary">
@@ -266,14 +261,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { getActivityDetail, createRegistration } from '@/api/modules/activity'
 import { useUserStore } from '@/stores/user'
 import type { Activity } from '@/api/modules/activity'
@@ -463,6 +458,12 @@ const handleSubmit = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadActivityInfo()
 })
 </script>
@@ -473,7 +474,7 @@ onMounted(() => {
   padding-bottom: 100px;
 
   .activity-summary {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     .activity-info {
       .info-item {
@@ -481,14 +482,14 @@ onMounted(() => {
         align-items: center;
         font-size: var(--text-xs);
         color: var(--van-text-color-2);
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
 
         &:last-child {
           margin-bottom: 0;
         }
 
         .van-icon {
-          margin-right: 4px;
+          margin-right: var(--spacing-xs);
           color: var(--van-primary-color);
           font-size: var(--text-sm);
         }
@@ -538,7 +539,7 @@ onMounted(() => {
       margin: var(--spacing-lg) 16px 80px 16px;
 
       .van-button {
-        border-radius: 24px;
+        border-radius: var(--spacing-2xl);
         height: 50px;
         font-size: var(--text-base);
         font-weight: 500;
@@ -596,6 +597,13 @@ onMounted(() => {
   .activity-registration {
     max-width: 768px;
     margin: 0 auto;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

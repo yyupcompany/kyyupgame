@@ -520,7 +520,7 @@ export default defineComponent({
 /* 🚀 搜索区域优化 */
 .search-section {
   margin-bottom: var(--spacing-lg);
-  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-primary) 100%);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-page) 100%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   position: relative;
@@ -616,7 +616,7 @@ export default defineComponent({
       }
 
       .reset-btn {
-        background: var(--bg-secondary);
+        background: var(--bg-page);
         border: 1px solid var(--border-color);
         color: var(--text-secondary);
 
@@ -696,7 +696,7 @@ export default defineComponent({
   // 表头样式
   .el-table__header-wrapper {
     .el-table__header {
-      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-card) 100%);
+      background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-card) 100%);
 
       th {
         background: transparent !important;
@@ -744,7 +744,7 @@ export default defineComponent({
       }
 
       .table-row-odd {
-        background-color: var(--bg-secondary);
+        background-color: var(--bg-page);
         transition: all var(--transition-normal);
 
         &:hover {
@@ -1560,7 +1560,7 @@ export default defineComponent({
     }
 
     &::-webkit-scrollbar-track {
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: calc(var(--radius-xs) + 1px);
     }
 
@@ -1610,14 +1610,14 @@ export default defineComponent({
   :deep(.enhanced-table) {
     .el-table__header {
       th {
-        background-color: var(--bg-primary);
+        background-color: var(--bg-page);
         color: var(--text-primary);
       }
     }
 
     .el-table__body-wrapper {
       &::-webkit-scrollbar-track {
-        background: var(--bg-primary);
+        background: var(--bg-page);
       }
 
       &::-webkit-scrollbar-thumb {

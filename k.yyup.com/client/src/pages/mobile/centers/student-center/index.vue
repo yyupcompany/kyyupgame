@@ -1,90 +1,95 @@
 <template>
-  <MobileMainLayout
-    title="学生管理"
-    :show-back="true"
-  >
+  <MobileCenterLayout title="学生管理" back-path="/mobile/centers">
     <!-- 搜索 -->
     <van-search
       v-model="searchQuery"
       placeholder="搜索学生姓名"
+      :background="isDark ? '#1e293b' : '#ffffff'"
       @search="handleSearch"
     />
 
     <!-- 统计 -->
-    <div class="stats-container">
-      <div class="stat-card">
-        <van-icon name="contact" size="32" color="#409eff" />
+    <div class="stats-container" :style="statsContainerStyle">
+      <div class="stat-card" :style="statCardStyle">
+        <van-icon name="contact" size="32" color="var(--primary-color)" />
         <div class="stat-info">
-          <div class="stat-value">{{ studentStats.total }}</div>
-          <div class="stat-label">学生总数</div>
+          <div class="stat-value" :style="{ color: isDark ? '#f1f5f9' : '#2c3e50' }">{{ studentStats.total }}</div>
+          <div class="stat-label" :style="{ color: isDark ? '#94a3b8' : '#8492a6' }">学生总数</div>
         </div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card" :style="statCardStyle">
         <van-icon name="star-o" size="32" color="#ff976a" />
         <div class="stat-info">
-          <div class="stat-value">{{ studentStats.active }}</div>
-          <div class="stat-label">在园学生</div>
+          <div class="stat-value" :style="{ color: isDark ? '#f1f5f9' : '#2c3e50' }">{{ studentStats.active }}</div>
+          <div class="stat-label" :style="{ color: isDark ? '#94a3b8' : '#8492a6' }">在园学生</div>
         </div>
       </div>
     </div>
 
     <!-- 班级筛选 -->
-    <van-dropdown-menu>
+    <van-dropdown-menu :style="{ marginBottom: '12px' }">
       <van-dropdown-item v-model="classFilter" :options="classOptions" @change="handleClassFilter" />
     </van-dropdown-menu>
 
     <!-- 学生列表 -->
-    <MobileList
-      :items="filteredStudents"
-      :loading="loading"
-      clickable
-      @item-click="handleStudentClick"
-      @refresh="handleRefresh"
-    >
-      <template #item="{ item }">
-        <van-cell-group inset>
-          <van-cell :title="item.name" :label="`${item.age}岁 | ${item.class}`">
-            <template #icon>
-              <van-image
-                :src="item.avatar"
-                width="48"
-                height="48"
-                round
-              />
-            </template>
-            <template #value>
-              <van-tag :type="item.status === '在园' ? 'success' : 'warning'">
-                {{ item.status }}
-              </van-tag>
-            </template>
-          </van-cell>
+    <div class="student-list" :style="listStyle">
+      <van-pull-refresh v-model="refreshing" @refresh="handleRefresh" :style="listStyle">
+        <van-list
+          v-model:loading="loading"
+          :finished="true"
+          finished-text="没有更多了"
+          :style="listStyle"
+        >
+          <div
+            v-for="student in filteredStudents"
+            :key="student.id"
+            class="student-card"
+            @click="handleStudentClick(student)"
+          >
+            <van-cell-group inset :style="cellGroupStyle">
+              <van-cell :title="student.name" :label="`${student.age}岁 | ${student.class}`">
+                <template #icon>
+                  <van-image
+                    :src="student.avatar"
+                    width="48"
+                    height="48"
+                    round
+                    style="margin-right: 12px"
+                  />
+                </template>
+                <template #value>
+                  <van-tag :type="student.status === '在园' ? 'success' : 'warning'">
+                    {{ student.status }}
+                  </van-tag>
+                </template>
+              </van-cell>
 
-          <van-cell title="家长" :value="item.parentName" />
-          <van-cell title="联系电话" :value="item.phone" />
+              <van-cell title="家长" :value="student.parentName" />
+              <van-cell title="联系电话" :value="student.phone" />
 
-          <van-cell v-if="item.notes">
-            <template #title>
-              <span>备注</span>
-            </template>
-            <template #value>
-              <span class="notes">{{ item.notes }}</span>
-            </template>
-          </van-cell>
-        </van-cell-group>
-      </template>
-    </MobileList>
+              <van-cell v-if="student.notes">
+                <template #title>
+                  <span>备注</span>
+                </template>
+                <template #value>
+                  <span class="notes" :style="{ color: isDark ? '#94a3b8' : '#8492a6' }">{{ student.notes }}</span>
+                </template>
+              </van-cell>
+            </van-cell-group>
+          </div>
+        </van-list>
+      </van-pull-refresh>
+    </div>
 
     <!-- 悬浮操作 -->
     <van-back-top right="20" bottom="80" />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { useRouter } from 'vue-router'
-import MobilePage from '@/pages/mobile/components/common/MobilePage.vue'
-import MobileList from '@/pages/mobile/components/common/MobileList.vue'
 import { showToast } from 'vant'
 
 interface Student {
@@ -101,9 +106,40 @@ interface Student {
 
 const router = useRouter()
 
+// 主题状态
+const isDark = ref(false)
+
+const detectTheme = () => {
+  isDark.value = document.documentElement.getAttribute('data-theme') === 'dark'
+}
+
+let observer: MutationObserver | null = null
+
+// 样式计算
+const statsContainerStyle = computed(() => ({
+  background: isDark.value ? '#1e293b' : '#ffffff',
+  borderColor: isDark.value ? '#334155' : '#e4e7ed'
+}))
+
+const statCardStyle = computed(() => ({
+  background: isDark.value ? '#0f172a' : '#f7f8fa',
+  borderColor: isDark.value ? '#334155' : '#e4e7ed'
+}))
+
+const listStyle = computed(() => ({
+  background: isDark.value ? '#0f172a' : '#f7f8fa',
+  minHeight: '200px'
+}))
+
+const cellGroupStyle = computed(() => ({
+  background: isDark.value ? '#1e293b' : '#ffffff',
+  marginBottom: '12px'
+}))
+
 const searchQuery = ref('')
 const classFilter = ref('all')
 const loading = ref(false)
+const refreshing = ref(false)
 
 const studentStats = ref({
   total: 342,
@@ -190,59 +226,94 @@ const loadStudents = async () => {
     // 加载数据
   } finally {
     loading.value = false
+    refreshing.value = false
   }
 }
 
 onMounted(() => {
+  detectTheme()
+  observer = new MutationObserver(detectTheme)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
   loadStudents()
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
 })
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mobile-base.scss';
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 .stats-container {
   display: flex;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background-color: var(--bg-color);
+  gap: 12px;
+  padding: 16px;
   margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid;
 
   .stat-card {
     flex: 1;
     display: flex;
     align-items: center;
-    padding: var(--spacing-md);
-    background-color: var(--app-bg-color);
+    padding: 16px;
     border-radius: 8px;
+    border: 1px solid;
 
     .stat-info {
       margin-left: 12px;
 
       .stat-value {
-        font-size: var(--text-xl);
+        font-size: 20px;
         font-weight: bold;
-        color: var(--text-primary);
       }
 
       .stat-label {
-        font-size: var(--text-xs);
-        color: var(--text-secondary);
+        font-size: 12px;
         margin-top: 4px;
       }
     }
   }
 }
 
+.student-list {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.student-card {
+  cursor: pointer;
+  transition: opacity 0.2s;
+  
+  &:active {
+    opacity: 0.8;
+  }
+}
+
 .notes {
-  font-size: var(--text-xs);
-  color: var(--text-secondary);
+  font-size: 12px;
 }
 
-:deep(.van-search) {
-  margin-bottom: 12px;
+:deep(.van-search__content) {
+  border-radius: 20px;
 }
 
-:deep(.van-dropdown-menu) {
-  margin-bottom: 12px;
+:deep(.van-cell) {
+  .theme-dark & {
+    background: #1e293b !important;
+    
+    .van-cell__title, .van-cell__value {
+      color: #f1f5f9 !important;
+    }
+    
+    .van-cell__label {
+      color: #94a3b8 !important;
+    }
+  }
 }
 </style>

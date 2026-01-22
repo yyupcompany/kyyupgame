@@ -49,3 +49,6 @@ export * from './attendance';
 
 // 通用工具
 export * from './utils';
+
+// 硬编码数据替换
+export * from './hardcoded-data-replacements';

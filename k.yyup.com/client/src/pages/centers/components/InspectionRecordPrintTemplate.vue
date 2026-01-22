@@ -244,7 +244,7 @@ const getStatusClass = (status: string) => {
     }
 
     th {
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-page);
       font-weight: bold;
       text-align: center;
     }
@@ -389,7 +389,7 @@ const getStatusClass = (status: string) => {
 @media print {
   .inspection-record-print-template {
     .summary-box {
-      background: var(--bg-secondary) !important;
+      background: var(--bg-page) !important;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }

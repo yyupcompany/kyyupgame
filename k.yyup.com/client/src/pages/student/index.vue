@@ -468,7 +468,7 @@ onMounted(async () => {
 // 页面特定样式
 .table-container {
   margin-top: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--border-radius-base);
   border: 1px solid var(--border-color-light);
   overflow: hidden;
@@ -525,7 +525,7 @@ onMounted(async () => {
 
   :deep(.el-pagination) {
     .el-pager li {
-      background-color: var(--bg-color);
+      background-color: var(--bg-card);
       border: 1px solid var(--border-color-light);
       border-radius: 6px;  /* 圆角 */
       margin: 0 4px;
@@ -549,7 +549,7 @@ onMounted(async () => {
 
     .btn-prev,
     .btn-next {
-      background-color: var(--bg-color);
+      background-color: var(--bg-card);
       border: 1px solid var(--border-color-light);
       border-radius: 6px;  /* 圆角 */
       color: var(--text-color-regular);
@@ -690,7 +690,7 @@ onMounted(async () => {
   .student-table {
     :deep(.el-table__body-wrapper) {
       overflow-x: auto;
-      background: var(--bg-color);
+      background: var(--bg-card);
     }
   }
 

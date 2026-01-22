@@ -381,11 +381,22 @@ export class UnifiedIntelligenceService {
         }
       }
 
-      // 2. ✨ 创建 ThinkingStream 实例（带进度）
+      // 🚀 快速意图检测 - 简单问候直接响应，不显示思考过程
+      const quickIntent = this.detectQuickIntent(request.content);
+      
+      if (quickIntent.isSimple) {
+        // ⚡ 简单问候/寒暄 - 秒回模式，不显示思考过程
+        console.log('⚡ [快速响应] 检测到简单问候，启用秒回模式');
+        await this.handleSimpleGreeting(request, res, quickIntent);
+        return;
+      }
+
+      // 2. ✨ 复杂查询才创建 ThinkingStream 实例（带进度）
+      console.log('🧠 [复杂模式] 检测到复杂查询，显示思考过程');
       const thinkingStream = new ThinkingStream(res, 4);
       thinkingStream.start();
       
-      // 模拟思考阶段
+      // 模拟思考阶段（仅复杂查询显示）
       thinkingStream.update('security_check', '🔒 验证用户权限...');
       await new Promise(resolve => setTimeout(resolve, 100));
       
@@ -449,7 +460,11 @@ export class UnifiedIntelligenceService {
         'get_api_details',           // API工具链(3): 获取API详细信息
         'http_request',              // API工具链(4): 发起HTTP请求
         'web_search',                // 网络搜索工具（火山引擎融合搜索）
-        'execute_activity_workflow'  // 活动工作流工具
+        'execute_activity_workflow', // 活动工作流工具
+        'analyze_task_complexity',   // 任务复杂度分析工具
+        'create_todo_list',          // 创建TodoList任务清单
+        'update_todo_task',          // 更新任务状态
+        'get_todo_list'              // 获取待办任务列表
       ];
       const availableTools = await this.toolLoader.loadTools(toolNames);
       const toolDefinitions = availableTools.map(tool => ({
@@ -564,8 +579,15 @@ export class UnifiedIntelligenceService {
               toolCall,
               request,
               (status, details) => {
-                // 工具执行进度回调
+                // 工具执行进度回调 - 🆕 发送SSE事件到前端
                 console.log(`📊 [工具进度] ${toolName}: ${status}`, details);
+                sendSSE(res, 'progress', {
+                  name: toolName,
+                  toolName: toolName,
+                  status: details?.message || details?.status || status,
+                  message: details?.message || details?.status || status,
+                  progress: details?.progress || 0
+                });
               }
             );
 
@@ -828,6 +850,133 @@ ${toolResultsText}
 
     // 默认返回通用查询意图
     return IntentType.GENERAL_QUERY;
+  }
+
+  /**
+   * 🚀 快速意图检测 - 毫秒级判断是否为简单问候
+   * 简单问候直接秒回，不走复杂的思考流程
+   */
+  private detectQuickIntent(content: string): { isSimple: boolean; type: string; response?: string } {
+    const trimmed = content.trim().toLowerCase();
+    
+    // 简单问候关键词和正则匹配
+    const greetingPatterns = [
+      // 纯问候
+      /^(你好|hello|hi|hey|嗨|哈喽|您好)[!！。\.\s]*$/i,
+      /^(早上好|下午好|晚上好|早安|晚安)[!！。\.\s]*$/i,
+      /^(在吗|你在吗|在不在)[？\?!！。\.\s]*$/i,
+      // 简单疑问
+      /^(你是谁|你叫什么|你能做什么)[？\?!！。\.\s]*$/i,
+      /^(谢谢|感谢|多谢|thanks)[!！。\.\s]*$/i,
+      /^(好的|明白|知道了|ok|收到)[!！。\.\s]*$/i,
+      /^(拜拜|再见|bye|告辞)[!！。\.\s]*$/i,
+    ];
+
+    // 预定义的快速响应
+    const quickResponses: Record<string, string> = {
+      'greeting': '你好！我是智慧幼儿园AI助手。有什么可以帮您的吗？比如查询学生信息、活动安排、招生数据等，我都可以帮您处理。',
+      'morning': '早上好！新的一天开始了，有什么可以帮您的吗？',
+      'afternoon': '下午好！工作辛苦了，有什么需要我帮忙的吗？',
+      'evening': '晚上好！今天过得怎么样？有什么可以帮您的吗？',
+      'thanks': '不客气！有其他问题随时问我~',
+      'bye': '再见！祝您工作顺利，有需要随时找我哦~',
+      'who': '我是智慧幼儿园AI助手，可以帮您查询数据、分析招生情况、制定活动方案等。有什么可以帮您的吗？',
+      'ok': '好的，还有其他需要帮忙的吗？',
+    };
+
+    // 检测问候类型
+    if (/^(你好|hello|hi|hey|嗨|哈喽|您好)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'greeting', response: quickResponses['greeting'] };
+    }
+    if (/^早(上好|安)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'morning', response: quickResponses['morning'] };
+    }
+    if (/^下午好[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'afternoon', response: quickResponses['afternoon'] };
+    }
+    if (/^(晚上好|晚安)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'evening', response: quickResponses['evening'] };
+    }
+    if (/^(谢谢|感谢|多谢|thanks)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'thanks', response: quickResponses['thanks'] };
+    }
+    if (/^(拜拜|再见|bye|告辞)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'bye', response: quickResponses['bye'] };
+    }
+    if (/^(你是谁|你叫什么|你能做什么)[？\?!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'who', response: quickResponses['who'] };
+    }
+    if (/^(好的|明白|知道了|ok|收到)[!！。\.\s]*$/i.test(trimmed)) {
+      return { isSimple: true, type: 'ok', response: quickResponses['ok'] };
+    }
+
+    // 如果不匹配任何简单模式，返回非简单
+    return { isSimple: false, type: 'complex' };
+  }
+
+  /**
+   * ⚡ 处理简单问候 - 秒回模式
+   * 不显示思考过程，直接流式输出回复
+   * 使用与前端兼容的 answer_start/answer_chunk/answer_complete 事件格式
+   */
+  private async handleSimpleGreeting(
+    request: UserRequest, 
+    res: any, 
+    quickIntent: { isSimple: boolean; type: string; response?: string }
+  ): Promise<void> {
+    const startTime = Date.now();
+    console.log(`⚡ [秒回模式] 处理简单问候: ${quickIntent.type}`);
+
+    try {
+      const response = quickIntent.response || '你好！有什么可以帮您的吗？';
+      
+      // ✨ 发送 answer_start 事件，通知前端开始接收答案
+      sendSSE(res, 'answer_start', { 
+        message: '开始回复'
+      });
+      
+      // 直接流式输出，不显示思考过程
+      // 使用 answer_chunk 事件（前端已支持的格式）
+      for (let i = 0; i < response.length; i++) {
+        sendSSE(res, 'answer_chunk', { 
+          content: response[i],
+          index: i 
+        });
+        // 极短延迟（10ms），保持流畅但不拖沓
+        if (i % 5 === 0) {
+          await new Promise(resolve => setTimeout(resolve, 10));
+        }
+      }
+
+      // ✨ 发送 answer_complete 事件
+      sendSSE(res, 'answer_complete', {
+        content: response,
+        message: '回复完成'
+      });
+
+      const duration = Date.now() - startTime;
+      console.log(`⚡ [秒回模式] 完成，耗时: ${duration}ms`);
+
+      // 发送完成事件
+      sendComplete(res, {
+        message: '✅ 处理完成',
+        isComplete: true,
+        needsContinue: false,
+        quickResponse: true,
+        duration
+      });
+
+    } catch (error: any) {
+      console.error('❌ [秒回模式] 处理失败:', error);
+      sendSSE(res, 'error', {
+        message: '处理失败: ' + error.message,
+        error: error.toString()
+      });
+    } finally {
+      if (!res.writableEnded) {
+        res.end();
+      }
+    }
   }
 }
 

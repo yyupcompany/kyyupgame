@@ -220,8 +220,8 @@ export class TestDatabaseUtil {
    * 清空所有表
    */
   async truncateAll(): Promise<void> {
-    const tables = await this.sequelize.query("SHOW TABLES");
-    const tableNames = (tables as any[][0[]]).map((row: any) => Object.values(row)[0]);
+    const [rows] = await this.sequelize.query("SHOW TABLES");
+    const tableNames = (rows as any[]).map((row: any) => Object.values(row)[0]);
 
     for (const tableName of tableNames) {
       if (tableName !== 'migrations') {

@@ -155,10 +155,15 @@ const handleSearch = () => {
 @import '@/styles/design-tokens.scss';
 
 .mobile-header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-index-header);
   background-color: var(--bg-color);
   transition: all var(--transition-duration-base) var(--transition-timing-ease);
+  width: 100%;
+  max-width: 100vw;
 
   .status-bar-spacer {
     height: env(safe-area-inset-top);

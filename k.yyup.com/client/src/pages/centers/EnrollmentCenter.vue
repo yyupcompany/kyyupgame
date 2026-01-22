@@ -3,13 +3,6 @@
     title="招生中心"
     description="这里是招生管理的核心枢纽，您可以管理招生计划、处理入学申请、跟进咨询转化、分析招生数据"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreate">
-        <UnifiedIcon name="Plus" />
-        新建
-      </el-button>
-    </template>
-
     <div class="center-container enrollment-center">
 
     <!-- 主要内容区域 -->
@@ -2586,7 +2579,7 @@ const loadConsultationsData = async () => {
 
 // 主容器背景设置 - 参考活动中心的标准样式
 .enrollment-center {
-  background: var(--bg-secondary, var(--bg-container));  // ✅ 与活动中心一致
+  background: var(--bg-page);  // ✅ 与活动中心一致
   width: 100%;
   max-width: 100%;
   flex: 1 1 auto;
@@ -3030,7 +3023,7 @@ const loadConsultationsData = async () => {
       display: flex;
       gap: var(--spacing-3);
       padding: var(--spacing-4);
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: var(--radius-md);
       border-left: var(--spacing-xs) solid var(--primary-color);
 
@@ -4166,14 +4159,14 @@ const loadConsultationsData = async () => {
     }
 
     code {
-      background: var(--bg-secondary, #f3f4f6);
+      background: var(--bg-page);
       padding: 2px 6px;
       border-radius: 4px;
       font-family: monospace;
     }
 
     pre {
-      background: var(--bg-secondary, #f3f4f6);
+      background: var(--bg-page);
       padding: var(--spacing-md, 16px);
       border-radius: var(--radius-md, 8px);
       overflow-x: auto;

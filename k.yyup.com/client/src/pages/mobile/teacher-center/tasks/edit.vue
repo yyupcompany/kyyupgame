@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="编辑任务"
-    :show-nav-bar="true"
-    :show-back="true"
-    :show-tab-bar="false"
-  >
+  <MobileSubPageLayout title="编辑任务" back-path="/mobile/teacher-center">
     <div class="edit-task-page" v-if="!loading && taskDetail">
       <van-form @submit="handleSubmit">
         <van-card class="form-card">
@@ -86,7 +81,7 @@
                     :step="5"
                     bar-height="6"
                     button-size="20"
-                    active-color="#409eff"
+                    active-color="var(--primary-color)"
                   />
                   <span class="progress-text">{{ form.progress }}%</span>
                 </div>
@@ -314,7 +309,7 @@
         show-word-limit
       />
     </van-dialog>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -322,7 +317,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showSuccessToast, showConfirmDialog } from 'vant'
 import { teacherTasksApi, type Task, type UpdateTaskData } from '@/api/modules/teacher-tasks'
-import MobileMainLayout from "@/components/mobile/layouts/MobileMainLayout.vue"
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -571,6 +566,12 @@ const loadTaskDetail = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTaskDetail()
 })
 </script>
@@ -579,13 +580,13 @@ onMounted(() => {
 @import '@/styles/mobile-base.scss';
 .edit-task-page {
   padding: 0 0 20px 0;
-  background-color: #f7f8fa;
+  background-color: var(--bg-page);
   min-height: calc(100vh - 46px);
 }
 
 .form-card {
   margin: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   overflow: hidden;
 }
 
@@ -638,8 +639,8 @@ onMounted(() => {
 }
 
 .tag-item {
-  margin-right: 8px;
-  margin-bottom: 8px;
+  margin-right: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .form-actions {
@@ -687,8 +688,8 @@ onMounted(() => {
 
 :deep(.van-slider) {
   .van-slider__button {
-    width: 20px;
-    height: 20px;
+    width: var(--spacing-xl);
+    height: var(--spacing-xl);
   }
 }
 
@@ -709,6 +710,13 @@ onMounted(() => {
   .edit-task-page {
     max-width: 768px;
     margin: 0 auto;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

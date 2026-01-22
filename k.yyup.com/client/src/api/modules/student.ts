@@ -16,6 +16,14 @@ interface ApiResponseType<T = any> {
   [key: string]: any;
 }
 
+interface PaginatedData<T> {
+  items: T[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 /**
  * 学生状态
  */
@@ -134,7 +142,7 @@ export interface StudentQueryParams {
  * @param params 查询参数
  * @returns 学生列表和总数
  */
-export function getStudentList(params?: StudentQueryParams): Promise<ApiResponseType<Student>> {
+export function getStudentList(params?: StudentQueryParams): Promise<ApiResponseType<PaginatedData<Student>>> {
   return request.get(STUDENT_ENDPOINTS.BASE, { params })
   .then((response: any) => {
     // 使用数据转换层处理响应

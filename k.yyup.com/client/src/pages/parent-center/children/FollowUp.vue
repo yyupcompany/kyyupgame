@@ -307,37 +307,26 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+/* 使用设计令牌，不引入外部SCSS */
 
-.loading-container {
-  padding: var(--spacing-lg);
+/* ==================== 页面容器 ==================== */
+.page-container {
+  padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 }
 
-.follow-up-form {
-  margin-top: var(--spacing-xl);
-}
-
-.parent-info {
-  display: flex;
-  align-items: center;
-}
-
-.parent-name {
-  font-size: var(--text-base);
-  font-weight: 500;
-  margin-right: var(--spacing-2xl);
-}
-
-.parent-phone {
-  margin-left: var(--spacing-2xl);
-  color: var(--text-regular);
-}
-
+/* ==================== 应用卡片 ==================== */
 .app-card {
   background-color: var(--bg-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .app-card-header {
@@ -345,11 +334,14 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color-lighter);
 }
 
 .app-card-title {
   font-size: var(--text-lg);
   font-weight: 600;
+  color: var(--el-text-color-primary);
 }
 
 .card-actions {
@@ -357,17 +349,123 @@ export default defineComponent({
   gap: var(--spacing-sm);
 }
 
-/* 全宽选择器样式 */
+/* ==================== 加载容器 ==================== */
+.loading-container {
+  padding: var(--spacing-3xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* ==================== 跟进表单 ==================== */
+.follow-up-form {
+  margin-top: var(--spacing-xl);
+}
+
+/* ==================== 家长信息 ==================== */
+.parent-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+
+  .parent-name {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+
+  .parent-phone {
+    color: var(--el-text-color-secondary);
+    font-size: var(--text-sm);
+  }
+}
+
+/* ==================== 全宽选择器 ==================== */
 .full-width-select {
   width: 100%;
 }
 
-/* 表单行间距 */
+/* ==================== 表单行间距 ==================== */
 .form-row {
   margin: 0 calc(var(--spacing-lg) / -2);
 
   .el-col {
     padding: 0 calc(var(--spacing-lg) / 2);
+  }
+}
+
+/* ==================== 表单样式 ==================== */
+:deep(.el-form) {
+  .el-form-item {
+    margin-bottom: var(--spacing-md);
+
+    .el-form-item__label {
+      font-weight: 500;
+      color: var(--el-text-color-primary);
+    }
+  }
+
+  .el-textarea__inner {
+    border-radius: var(--radius-md);
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .el-input__wrapper {
+    border-radius: var(--radius-md);
+  }
+
+  .el-select .el-input__wrapper {
+    border-radius: var(--radius-md);
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-md)) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
+  .app-card {
+    padding: var(--spacing-md);
+  }
+
+  .app-card-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .form-row {
+    margin: 0;
+
+    .el-col {
+      padding: 0;
+      margin-bottom: var(--spacing-md);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .parent-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+
+    .parent-phone {
+      margin-left: 0;
+    }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style> 

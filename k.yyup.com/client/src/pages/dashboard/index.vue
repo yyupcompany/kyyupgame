@@ -531,7 +531,7 @@ onMounted(() => {
       gap: var(--spacing-lg);
 
       .center-card {
-        background: var(--bg-primary);
+        background: var(--bg-page);
         border: 1px solid var(--border-light);
         border-radius: var(--radius-lg);
         padding: var(--spacing-lg);
@@ -627,7 +627,7 @@ onMounted(() => {
         gap: var(--spacing-md);
 
         .action-item {
-          background: var(--bg-primary);
+          background: var(--bg-page);
           border: 1px solid var(--border-light);
           border-radius: var(--radius-md);
           padding: var(--spacing-md);
@@ -665,7 +665,7 @@ onMounted(() => {
 
     .todo-section {
       .todo-list {
-        background: var(--bg-primary);
+        background: var(--bg-page);
         border: 1px solid var(--border-light);
         border-radius: var(--radius-md);
         padding: var(--spacing-md);
@@ -684,7 +684,7 @@ onMounted(() => {
           }
 
           &:hover {
-            background: var(--bg-secondary);
+            background: var(--bg-page);
             margin: 0 calc(-1 * var(--spacing-md));
             padding-left: var(--spacing-md);
             padding-right: var(--spacing-md);

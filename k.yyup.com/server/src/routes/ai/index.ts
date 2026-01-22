@@ -11,6 +11,7 @@ import aiStatsRoutes from '../ai-stats.routes';
 import analyticsRoutes from './analytics.routes';
 import quotaRoutes from './quota.routes';
 import tokenMonitorRoutes from './token-monitor.routes';
+import textToSpeechRoutes from '../text-to-speech.routes';
 
 /**
  * AI 模块路由配置
@@ -29,6 +30,14 @@ const aiModuleRoutes = (router: Router) => {
   // 注册统一流式AI路由（重要：包含stream-chat接口）
   router.use('/ai/unified', unifiedStreamRoutes);
   console.log('[AI模块] ✅ 已注册: /api/ai/unified/stream-chat - SSE流式AI对话');
+
+  // 注册文字转语音路由（TTS）
+  router.use('/ai/text-to-speech', textToSpeechRoutes);
+  console.log('[AI模块] ✅ 已注册: /api/ai/text-to-speech/* - 文字转语音');
+
+  // 注册TTS别名路由（前端兼容性）
+  router.use('/ai/tts', textToSpeechRoutes);
+  console.log('[AI模块] ✅ 已注册: /api/ai/tts/* - TTS别名路由');
 
   // 注册AI统计路由
   router.use('/ai-stats', aiStatsRoutes);

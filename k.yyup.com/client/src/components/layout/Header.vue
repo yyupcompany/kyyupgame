@@ -17,9 +17,10 @@
         :title="sidebarCollapsed ? '展开侧边栏' : '收起侧边栏'"
       >
         <UnifiedIcon
-          name="drawer"
-          :size="18"
+          name="menu"
+          :size="20"
         />
+        <span class="sidebar-toggle-text">{{ sidebarCollapsed ? '展开' : '收起' }}侧边栏</span>
       </button>
 
       <!-- 面包屑导航 -->
@@ -92,55 +93,6 @@
         </transition>
       </div>
 
-      <!-- 图标系统选择器 -->
-      <div class="icon-system-selector" v-click-outside="closeIconSystemDropdown">
-        <button
-          class="header-action-btn icon-system-btn"
-          @click="toggleIconSystemDropdown"
-          :class="{ 'active': showIconSystemDropdown }"
-        >
-          <UnifiedIcon
-            name="icon-library"
-            :size="18"
-          />
-          <span class="btn-label">图标</span>
-        </button>
-
-        <!-- 图标系统下拉列表 -->
-        <transition name="dropdown">
-          <div v-if="showIconSystemDropdown" class="icon-system-dropdown">
-            <div
-              v-for="system in iconSystems"
-              :key="system.id"
-              class="icon-system-option"
-              :class="{ active: currentIconSystem === system.id }"
-              @click="switchIconSystem(system.id)"
-            >
-              <div class="icon-system-preview">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" :stroke="system.id === 'colorful' ? 'none' : 'currentColor'" :stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path v-if="system.id === 'modern'" :d="system.preview"/>
-                  <path v-else-if="system.id === 'colorful'" :d="system.preview" :fill="currentIconSystem === 'colorful' ? '#4CAF50' : '#9E9E9E'"/>
-                  <path v-else :d="system.preview" :style="system.id === 'handdrawn' ? { filter: 'url(#roughPaper)' } : {}"/>
-                </svg>
-                <!-- 手绘效果滤镜 -->
-               <svg v-if="system.id === ('handdrawn' as IconSystem)" style="position: absolute; width: 0; height: 0;">
-                  <defs>
-                    <filter id="roughPaper">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise" />
-                      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.8" />
-                    </filter>
-                  </defs>
-                </svg>
-              </div>
-              <div class="icon-system-info">
-                <span class="icon-system-name">{{ system.name }}</span>
-                <span class="icon-system-desc">{{ system.description }}</span>
-              </div>
-            </div>
-          </div>
-        </transition>
-      </div>
-
       <!-- 用户信息 -->
       <div
         class="user-profile"
@@ -177,7 +129,6 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { useAIAssistantStore } from '@/stores/ai-assistant'
-import { useIconSystemStore, type IconSystem } from '@/stores/icon-system'
 import { useLogoStore } from '@/stores/logo'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import { getUnreadNotificationCount } from '@/api/modules/notification'
@@ -208,7 +159,6 @@ const router = useRouter()
 const route = useRoute()
 const userStore = useUserStore()
 const aiStore = useAIAssistantStore()
-const iconSystemStore = useIconSystemStore()
 const logoStore = useLogoStore()
 
 // 未读通知数量
@@ -223,15 +173,12 @@ onMounted(() => {
 
 // 下拉菜单状态
 const showThemeDropdown = ref(false)
-const showIconSystemDropdown = ref(false)
 
 // 主题相关
 const currentTheme = ref('theme-light')
 const availableThemes = ref([
   { name: '明亮主题', value: 'theme-light', color: '#f59e0b', icon: 'sun' },
-  { name: '暗黑主题', value: 'theme-dark', color: '#6366f1', icon: 'moon' },
-  { name: '明亮玻璃台', value: 'glass-light', color: '#06b6d4', icon: 'panel' },
-  { name: '暗黑玻璃台', value: 'glass-dark', color: '#8b5cf6', icon: 'panel' }
+  { name: '暗黑主题', value: 'theme-dark', color: '#6366f1', icon: 'moon' }
 ])
 
 // AI助手状态
@@ -250,10 +197,6 @@ const aiStatus = computed(() => {
   if (aiStore.panelVisible) return 'active'
   return 'idle'
 })
-
-// 图标系统状态
-const currentIconSystem = computed(() => iconSystemStore.currentSystem)
-const iconSystems = computed(() => iconSystemStore.getAllSystems())
 
 // 计算属性
 const currentPageTitle = computed(() => {
@@ -436,18 +379,9 @@ const closeThemeDropdown = () => {
 const getThemeIcon = (themeValue: string) => {
   const iconMap: Record<string, string> = {
     'theme-light': 'sun',
-    'theme-dark': 'moon',
-    'theme-custom': 'setting',
-    'glass-light': 'panel',              // 明亮玻璃台 - 使用面板图标
-    'glass-dark': 'panel',               // 暗黑玻璃台 - 使用面板图标
-    'glass-gradient': 'panel',           // 玻璃态主题 - 使用面板图标
-    'cyberpunk': 'lightning',            // 赛博朋克 - 使用闪电图标
-    'nature': 'growth',                  // 自然森林 - 使用成长/叶子图标
-    'ocean': 'cloud',                    // 深海海洋 - 使用云/水滴图标
-    'sunset': 'sun',                     // 夕阳余晖 - 使用太阳图标
-    'midnight': 'star'                   // 午夜星空 - 使用星星图标
+    'theme-dark': 'moon'
   }
-  return iconMap[themeValue] || 'palette'
+  return iconMap[themeValue] || 'sun'
 }
 
 const changeTheme = (theme: string) => {
@@ -473,30 +407,19 @@ const changeTheme = (theme: string) => {
   // 根据主题类型设置 data-theme 属性
   // CSS 选择器 [data-theme="xxx"] 会自动应用正确的变量
   switch (theme) {
-    case 'glass-light':
-      // 明亮玻璃台主题
-      document.documentElement.setAttribute('data-theme', 'glass-light')
-      document.body.setAttribute('data-theme', 'glass-light')
-      break
-
-    case 'glass-dark':
-      // 暗黑玻璃台主题
-      document.documentElement.setAttribute('data-theme', 'glass-dark')
-      document.body.setAttribute('data-theme', 'glass-dark')
-      document.body.classList.add('el-theme-dark')
-      break
-
     case 'theme-dark':
-      // 暗黑主题
+      // 暗黑主题 - 设置 data-theme="dark" 来触发 design-tokens.scss 中的样式
       document.documentElement.setAttribute('data-theme', 'dark')
+      document.body.setAttribute('data-theme', 'dark')
       document.body.classList.add('theme-dark')
       document.body.classList.add('el-theme-dark')
       break
 
     case 'theme-light':
     default:
-      // 明亮主题（默认）
+      // 明亮主题（默认）- 设置 data-theme="light"
       document.documentElement.setAttribute('data-theme', 'light')
+      document.body.setAttribute('data-theme', 'light')
       document.body.classList.add('theme-light')
       break
   }
@@ -506,34 +429,11 @@ const changeTheme = (theme: string) => {
   localStorage.setItem('app_theme', theme)
 }
 
-// 图标系统相关方法
-const toggleIconSystemDropdown = () => {
-  showIconSystemDropdown.value = !showIconSystemDropdown.value
-  showThemeDropdown.value = false
-}
-
-const closeIconSystemDropdown = () => {
-  showIconSystemDropdown.value = false
-}
-
-const switchIconSystem = (system: IconSystem) => {
-  iconSystemStore.switchIconSystem(system)
-  showIconSystemDropdown.value = false
-
-  // 强制重新渲染所有图标组件
-  window.dispatchEvent(new CustomEvent('icon-system-changed', {
-    detail: { system }
-  }))
-}
-
 // 点击外部关闭下拉菜单
 const handleClickOutside = (event: Event) => {
   const target = event.target as Element
   if (!target.closest('.theme-selector')) {
     showThemeDropdown.value = false
-  }
-  if (!target.closest('.icon-system-selector')) {
-    showIconSystemDropdown.value = false
   }
 }
 
@@ -549,9 +449,6 @@ onMounted(() => {
 
   // 监听点击外部关闭下拉菜单
   document.addEventListener('click', handleClickOutside)
-
-  // 初始化图标系统
-  iconSystemStore.initializeIconSystem()
 })
 
 onUnmounted(() => {
@@ -862,16 +759,19 @@ onUnmounted(() => {
 
 // 侧边栏切换按钮样式
 .sidebar-toggle {
-  width: 36px;
+  min-width: 36px;
   height: 36px;
+  padding: 0 12px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   background: transparent;
   color: var(--text-secondary, #606266);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 
   &:hover {
     background: var(--bg-tertiary, #f5f7fa);
@@ -885,6 +785,13 @@ onUnmounted(() => {
 
   .unified-icon {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+  }
+
+  .sidebar-toggle-text {
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
   }
 }
 
@@ -932,10 +839,21 @@ onUnmounted(() => {
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary, #ffffff);
 
     &:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+    }
+
+    .logo-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
     }
   }
 
@@ -1021,78 +939,6 @@ onUnmounted(() => {
     .theme-name {
       font-size: 13px;
       font-weight: 500;
-    }
-  }
-}
-
-// 图标系统下拉菜单样式
-.icon-system-dropdown {
-  background: var(--bg-elevated, #fff);
-  border: 1px solid var(--border-primary, #dcdfe6);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  padding: 8px;
-  min-width: 200px;
-
-  .icon-system-option {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background: var(--bg-tertiary, #f5f7fa);
-      transform: translateX(4px);
-    }
-
-    &.active {
-      background: var(--primary-color, #6366f1);
-      color: #fff;
-
-      .icon-system-preview svg {
-        color: #fff;
-      }
-
-      .icon-system-info {
-        .icon-system-name,
-        .icon-system-desc {
-          color: #fff;
-        }
-      }
-    }
-
-    .icon-system-preview {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-tertiary, #f5f7fa);
-
-      svg {
-        color: var(--text-secondary, #606266);
-        transition: all 0.3s ease;
-      }
-    }
-
-    .icon-system-info {
-      display: flex;
-      flex-direction: column;
-
-      .icon-system-name {
-        font-size: 13px;
-        font-weight: 500;
-        color: var(--text-primary, #303133);
-      }
-
-      .icon-system-desc {
-        font-size: 11px;
-        color: var(--text-tertiary, #909399);
-      }
     }
   }
 }

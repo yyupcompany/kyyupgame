@@ -81,7 +81,8 @@ export function isFileExtensionSafe(filename: string): boolean {
  * 检查MIME类型是否允许
  */
 export function isMimeTypeAllowed(mimeType: string, category: keyof typeof ALLOWED_MIME_TYPES = 'IMAGES'): boolean {
-  return ALLOWED_MIME_TYPES[category].includes(mimeType);
+  const allowedTypes = ALLOWED_MIME_TYPES[category] as readonly string[];
+  return allowedTypes.includes(mimeType);
 }
 
 /**
@@ -89,7 +90,7 @@ export function isMimeTypeAllowed(mimeType: string, category: keyof typeof ALLOW
  */
 export function createMulterConfig(options: {
   maxSize?: number;
-  allowedTypes?: string[];
+  allowedTypes?: readonly string[];
   destination?: string;
 }) {
   const {

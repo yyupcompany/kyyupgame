@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="游戏中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="游戏中心" back-path="/mobile/parent-center">
     <div class="mobile-games-center">
       <!-- 头部统计区域 -->
       <div class="header-stats">
@@ -117,7 +112,7 @@
         description="暂无相关游戏"
       />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -125,7 +120,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
 import { gamesApi } from '@/api/games'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import MobileGameCard from './components/MobileGameCard.vue'
 
 const router = useRouter()
@@ -255,6 +250,12 @@ const handleCategoryChange = (name: string) => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadGames()
 })
 </script>

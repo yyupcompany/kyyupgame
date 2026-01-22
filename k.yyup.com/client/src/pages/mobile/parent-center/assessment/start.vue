@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="开始测评"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    back-path="/mobile/parent-center/assessment"
-  >
+  <MobileSubPageLayout title="开始测评" back-path="/mobile/parent-center">
     <div class="mobile-assessment-start">
       <!-- 头部信息 -->
       <div class="header-section">
@@ -97,14 +91,14 @@
         </div>
       </van-cell-group>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { assessmentApi } from '@/api/assessment'
 import { useUserStore } from '@/stores/user'
 

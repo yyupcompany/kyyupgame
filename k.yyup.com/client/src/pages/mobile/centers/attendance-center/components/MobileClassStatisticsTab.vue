@@ -148,7 +148,7 @@
                 <!-- 操作按钮 -->
                 <div class="class-actions">
                   <van-button
-                    size="small"
+                    size="medium"
                     type="primary"
                     plain
                     @click="viewClassDetail(classStats)"
@@ -156,7 +156,7 @@
                     查看详情
                   </van-button>
                   <van-button
-                    size="small"
+                    size="medium"
                     type="success"
                     plain
                     @click="exportClassReport(classStats)"

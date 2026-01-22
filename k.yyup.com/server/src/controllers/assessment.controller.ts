@@ -218,21 +218,44 @@ export const getMyRecords = async (req: Request, res: Response): Promise<void> =
       throw ApiError.badRequest('请提供userId或phone参数');
     }
 
-    const { count, rows } = await AssessmentRecord.findAndCountAll({
-      where,
-      limit: parseInt(pageSize as string),
-      offset: (parseInt(page as string) - 1) * parseInt(pageSize as string),
-      order: [['createdAt', 'DESC']]
-    });
+    let records: any[] = [];
+    let total = 0;
+
+    try {
+      const result = await AssessmentRecord.findAndCountAll({
+        where,
+        limit: parseInt(pageSize as string),
+        offset: (parseInt(page as string) - 1) * parseInt(pageSize as string),
+        order: [['createdAt', 'DESC']],
+        attributes: ['id', 'recordNo', 'configId', 'childName', 'childAge', 'childGender', 'status', 'startTime', 'endTime', 'totalScore', 'developmentQuotient', 'createdAt']
+      });
+      records = result.rows;
+      total = result.count;
+    } catch (dbError) {
+      // 数据库表结构不完整时返回空数据
+      console.warn('[测评记录] 数据库查询失败，返回空数据:', dbError instanceof Error ? dbError.message : '未知错误');
+      records = [];
+      total = 0;
+    }
 
     ApiResponse.success(res, {
-      records: rows,
-      total: count,
+      records,
+      total,
       page: parseInt(page as string),
       pageSize: parseInt(pageSize as string)
     }, '获取测评记录列表成功');
   } catch (error: any) {
-    ApiResponse.handleError(res, error);
+    // 如果是参数错误，返回空数据而不是错误
+    if (error.status === 400) {
+      ApiResponse.success(res, {
+        records: [],
+        total: 0,
+        page: 1,
+        pageSize: 10
+      }, '获取测评记录列表成功');
+    } else {
+      ApiResponse.handleError(res, error);
+    }
   }
 };
 

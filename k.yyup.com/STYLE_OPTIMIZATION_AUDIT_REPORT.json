@@ -1,0 +1,2300 @@
+{
+  "timestamp": "2026-01-09T17:23:28.075Z",
+  "summary": {
+    "totalFiles": 55,
+    "totalPass": 21,
+    "totalAcceptable": 25,
+    "totalFail": 9,
+    "overallPassRate": "83.64"
+  },
+  "batches": {
+    "batchA": {
+      "total": 9,
+      "pass": 5,
+      "acceptable": 4,
+      "fail": 0,
+      "passRate": "100.00"
+    },
+    "batchB": {
+      "total": 12,
+      "pass": 7,
+      "acceptable": 4,
+      "fail": 1,
+      "passRate": "91.67"
+    },
+    "batchC": {
+      "total": 17,
+      "pass": 5,
+      "acceptable": 8,
+      "fail": 4,
+      "passRate": "76.47"
+    },
+    "batchD": {
+      "total": 13,
+      "pass": 3,
+      "acceptable": 7,
+      "fail": 3,
+      "passRate": "76.92"
+    },
+    "batchE": {
+      "total": 4,
+      "pass": 1,
+      "acceptable": 2,
+      "fail": 1,
+      "passRate": "75.00"
+    }
+  },
+  "detailedResults": {
+    "client/src/pages/parent-center/profile/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 9,
+        "designTokenColorCount": 2,
+        "elColorVarCount": 43,
+        "score": 65.33333333333334
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 3,
+        "tokenCount": 45,
+        "score": 89.25
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 19,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 88
+    },
+    "client/src/pages/parent-center/children/Growth.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 1,
+        "designTokenColorCount": 9,
+        "elColorVarCount": 2,
+        "score": 89.66666666666666
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 35,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 5,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "Plus"
+        ]
+      },
+      "overallScore": 87
+    },
+    "client/src/pages/parent-center/children/FollowUp.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 15,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 3,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/parent-center/assessment/Report.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 2,
+        "elColorVarCount": 7,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 27,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 10,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "Calendar",
+          "Phone",
+          "Star",
+          "School",
+          "TrendCharts",
+          "Share",
+          "ChatLineRound"
+        ]
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/parent-center/ai-assistant/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 4,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 30,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 8,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/parent-center/activities/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 4,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 23,
+        "score": 94.33333333333334
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 7,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "Picture",
+          "Clock",
+          "Location",
+          "UserFilled"
+        ]
+      },
+      "overallScore": 89
+    },
+    "client/src/pages/parent-center/games/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 4,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 13,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 7,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/parent-center/photo-album/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 5,
+        "designTokenColorCount": 1,
+        "elColorVarCount": 6,
+        "score": 48.333333333333336
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 38,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 14,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 85
+    },
+    "client/src/pages/parent-center/communication/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 9,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 40,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 16,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/teacher-center/dashboard/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 26,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 2,
+        "tokenCount": 67,
+        "score": 94.10144927536231
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 31,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": false,
+        "hasThemeAttribute": true,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 99
+    },
+    "client/src/pages/teacher-center/attendance/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 7,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 26,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 9,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "Clock",
+          "Download",
+          "Refresh",
+          "User",
+          "UserFilled",
+          "TrendCharts",
+          "Document",
+          ""
+        ]
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/teacher-center/tasks/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 12,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 24,
+        "score": 46.66666666666666
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 54,
+        "score": 96.68181818181819
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 25,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "List",
+          "Plus",
+          "Refresh",
+          "Search",
+          "Check",
+          "Clock",
+          "Warning",
+          "DataAnalysis",
+          "TrendCharts",
+          "Calendar",
+          "User"
+        ]
+      },
+      "overallScore": 74
+    },
+    "client/src/pages/teacher-center/activities/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 4,
+        "elColorVarCount": 5,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 33,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 5,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/teacher-center/customer-pool/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 5,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 8,
+        "score": 51.53846153846154
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 31,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 6,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "DataBoard",
+          "DocumentAdd",
+          "Refresh",
+          "User",
+          "UserFilled",
+          "Check",
+          "Connection",
+          "Search"
+        ]
+      },
+      "overallScore": 75
+    },
+    "client/src/pages/teacher-center/customer-tracking/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 9,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 31,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 4,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/teacher-center/enrollment/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 8,
+        "designTokenColorCount": 13,
+        "elColorVarCount": 0,
+        "score": 45.904761904761905
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 45,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 20,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": false,
+        "hasThemeAttribute": true,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 84
+    },
+    "client/src/pages/teacher-center/teaching/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 50
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 4,
+        "elColorVarCount": 2,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 30,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 4,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/teacher-center/notifications/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 20,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 58,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 25,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": false,
+        "hasThemeAttribute": true,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/teacher-center/performance-rewards/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 38,
+        "designTokenColorCount": 5,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 3,
+        "tokenCount": 47,
+        "score": 89.5
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 7,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 68
+    },
+    "client/src/pages/teacher-center/student-assessment/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": true,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": true,
+        "score": 0
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 17,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 41,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 13,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": true,
+        "unusedImports": [
+          "Search",
+          "User",
+          "Star"
+        ]
+      },
+      "overallScore": 80
+    },
+    "client/src/pages/teacher-center/creative-curriculum/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": true,
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 10,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 11,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 42,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": true,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/parent-center/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 39,
+        "designTokenColorCount": 9,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 6,
+        "tokenCount": 30,
+        "score": 74.33333333333334
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 16,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 66
+    },
+    "client/src/pages/mobile/parent-center/activities/detail.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 2,
+        "designTokenColorCount": 11,
+        "elColorVarCount": 0,
+        "score": 80.61538461538461
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 19,
+        "score": 93.5
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 9,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 93
+    },
+    "client/src/pages/mobile/parent-center/activities/registration.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 6,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 11,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 8,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/parent-center/children/add.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": false,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": false,
+        "score": 50
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 90
+    },
+    "client/src/pages/mobile/parent-center/children/edit.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 5,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 6,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/parent-center/children/followup.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 1,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 8,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/parent-center/children/growth.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 2,
+        "designTokenColorCount": 5,
+        "elColorVarCount": 0,
+        "score": 67.42857142857143
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 20,
+        "score": 93.73809523809523
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 8,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 89
+    },
+    "client/src/pages/mobile/parent-center/assessment/doing.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 6,
+        "designTokenColorCount": 11,
+        "elColorVarCount": 0,
+        "score": 52.705882352941174
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 0,
+        "score": 0
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 12,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 71
+    },
+    "client/src/pages/mobile/parent-center/assessment/growth-trajectory.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 12,
+        "designTokenColorCount": 15,
+        "elColorVarCount": 0,
+        "score": 35.55555555555556
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 81
+    },
+    "client/src/pages/mobile/parent-center/assessment/report.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 2,
+        "designTokenColorCount": 4,
+        "elColorVarCount": 0,
+        "score": 62.66666666666666
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 89
+    },
+    "client/src/pages/mobile/parent-center/games/achievements.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 26,
+        "designTokenColorCount": 7,
+        "elColorVarCount": 0,
+        "score": 1.212121212121211
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 25,
+        "score": 94.65384615384616
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 12,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 70
+    },
+    "client/src/pages/mobile/parent-center/games/records.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 4,
+        "designTokenColorCount": 9,
+        "elColorVarCount": 0,
+        "score": 61.230769230769226
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 23,
+        "score": 94.33333333333334
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 12,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 88
+    },
+    "client/src/pages/mobile/parent-center/communication/smart-hub.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 40,
+        "designTokenColorCount": 1,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 47,
+        "score": 96.41666666666666
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 25,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 69
+    },
+    "client/src/pages/mobile/parent-center/notifications/detail.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 20,
+        "designTokenColorCount": 7,
+        "elColorVarCount": 0,
+        "score": 5.925925925925924
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 31,
+        "score": 95.375
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 13,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 71
+    },
+    "client/src/pages/mobile/parent-center/profile/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 3,
+        "designTokenColorCount": 7,
+        "elColorVarCount": 0,
+        "score": 64
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 89
+    },
+    "client/src/pages/mobile/parent-center/promotion-center/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 13,
+        "designTokenColorCount": 27,
+        "elColorVarCount": 0,
+        "score": 47.5
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 36,
+        "score": 95.7972972972973
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 18,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 84
+    },
+    "client/src/pages/mobile/parent-center/share-stats/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 38,
+        "designTokenColorCount": 4,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 26,
+        "score": 94.79629629629629
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 11,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 69
+    },
+    "client/src/pages/mobile/teacher-center/tasks/create.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 3,
+        "designTokenColorCount": 2,
+        "elColorVarCount": 0,
+        "score": 34
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 9,
+        "score": 88.5
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 1,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 78
+    },
+    "client/src/pages/mobile/teacher-center/tasks/detail.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 12,
+        "designTokenColorCount": 6,
+        "elColorVarCount": 0,
+        "score": 13.333333333333329
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 18,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 5,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 74
+    },
+    "client/src/pages/mobile/teacher-center/tasks/edit.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 4,
+        "designTokenColorCount": 3,
+        "elColorVarCount": 0,
+        "score": 34.857142857142854
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 13,
+        "score": 91.35714285714286
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 79
+    },
+    "client/src/pages/mobile/teacher-center/activities/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 5,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 70
+    },
+    "client/src/pages/mobile/teacher-center/customer-pool/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 18,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 13,
+        "score": 91.35714285714286
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 8,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 69
+    },
+    "client/src/pages/mobile/teacher-center/customer-tracking/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 28,
+        "designTokenColorCount": 20,
+        "elColorVarCount": 0,
+        "score": 21.66666666666667
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 49,
+        "score": 96.5
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 22,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 76
+    },
+    "client/src/pages/mobile/teacher-center/enrollment/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 26,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 4,
+        "tokenCount": 38,
+        "score": 84.47619047619048
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 68
+    },
+    "client/src/pages/mobile/teacher-center/teaching/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 20,
+        "designTokenColorCount": 2,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 2,
+        "tokenCount": 40,
+        "score": 92.23809523809523
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 69
+    },
+    "client/src/pages/mobile/teacher-center/notifications/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 1,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 11,
+        "score": 90.16666666666666
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 7,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 99
+    },
+    "client/src/pages/mobile/teacher-center/performance-rewards/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 3,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 3,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/teacher-center/appointment-management/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 0,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 0,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/teacher-center/creative-curriculum/create.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 16,
+        "designTokenColorCount": 11,
+        "elColorVarCount": 0,
+        "score": 20.74074074074074
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 51,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 23,
+        "score": 93.83333333333334
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 75
+    },
+    "client/src/pages/mobile/teacher-center/creative-curriculum/preview.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 6,
+        "designTokenColorCount": 10,
+        "elColorVarCount": 0,
+        "score": 50.5
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 2,
+        "tokenCount": 57,
+        "score": 93.61016949152543
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 18,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 84
+    },
+    "client/src/pages/mobile/quick-actions/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 5,
+        "designTokenColorCount": 9,
+        "elColorVarCount": 0,
+        "score": 54.28571428571429
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 17,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 3,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 86
+    },
+    "client/src/pages/mobile/more/index.vue": {
+      "status": "FAIL",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 38,
+        "designTokenColorCount": 5,
+        "elColorVarCount": 0,
+        "score": 0
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 1,
+        "tokenCount": 7,
+        "score": 86
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 2,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 68
+    },
+    "client/src/pages/mobile/global-search/index.vue": {
+      "status": "PASS",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 0,
+        "designTokenColorCount": 3,
+        "elColorVarCount": 0,
+        "score": 100
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 20,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 6,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 100
+    },
+    "client/src/pages/mobile/login/index.vue": {
+      "status": "ACCEPTABLE",
+      "iconCoverage": {
+        "hasElIcon": false,
+        "hasUnifiedIcon": false,
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "score": 100
+      },
+      "colorTokenCoverage": {
+        "hexColorCount": 4,
+        "designTokenColorCount": 7,
+        "elColorVarCount": 0,
+        "score": 55.63636363636363
+      },
+      "spacingTokenCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 25,
+        "score": 100
+      },
+      "typographyCoverage": {
+        "hardcodedCount": 0,
+        "tokenCount": 10,
+        "score": 100
+      },
+      "darkModeSupport": {
+        "hasMediaQuery": true,
+        "hasThemeAttribute": false,
+        "hasDesignTokens": true,
+        "score": 100
+      },
+      "importStatements": {
+        "hasUnifiedIconImport": false,
+        "hasElementPlusIconsImport": false,
+        "unusedImports": []
+      },
+      "overallScore": 87
+    }
+  },
+  "issues": [
+    {
+      "file": "client/src/pages/parent-center/profile/index.vue",
+      "type": "color",
+      "message": "有 9 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/teacher-center/tasks/index.vue",
+      "type": "color",
+      "message": "有 12 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/teacher-center/enrollment/index.vue",
+      "type": "color",
+      "message": "有 8 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/teacher-center/performance-rewards/index.vue",
+      "type": "color",
+      "message": "有 38 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/teacher-center/student-assessment/index.vue",
+      "type": "icon",
+      "message": "仍在使用 <el-icon>"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/index.vue",
+      "type": "color",
+      "message": "有 39 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/assessment/doing.vue",
+      "type": "color",
+      "message": "有 6 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/assessment/growth-trajectory.vue",
+      "type": "color",
+      "message": "有 12 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/games/achievements.vue",
+      "type": "color",
+      "message": "有 26 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/communication/smart-hub.vue",
+      "type": "color",
+      "message": "有 40 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/notifications/detail.vue",
+      "type": "color",
+      "message": "有 20 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/promotion-center/index.vue",
+      "type": "color",
+      "message": "有 13 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/share-stats/index.vue",
+      "type": "color",
+      "message": "有 38 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/tasks/detail.vue",
+      "type": "color",
+      "message": "有 12 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/customer-pool/index.vue",
+      "type": "color",
+      "message": "有 18 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/customer-tracking/index.vue",
+      "type": "color",
+      "message": "有 28 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/enrollment/index.vue",
+      "type": "color",
+      "message": "有 26 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/teaching/index.vue",
+      "type": "color",
+      "message": "有 20 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/creative-curriculum/create.vue",
+      "type": "color",
+      "message": "有 16 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/creative-curriculum/preview.vue",
+      "type": "color",
+      "message": "有 6 个硬编码颜色"
+    },
+    {
+      "file": "client/src/pages/mobile/more/index.vue",
+      "type": "color",
+      "message": "有 38 个硬编码颜色"
+    }
+  ],
+  "recommendations": [
+    "优先修复 FAIL 状态的文件",
+    "批量替换所有 <el-icon> 为 <UnifiedIcon>",
+    "需要系统性替换硬编码颜色为设计令牌"
+  ]
+}

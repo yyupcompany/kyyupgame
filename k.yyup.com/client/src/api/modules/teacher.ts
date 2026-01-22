@@ -1,5 +1,6 @@
 // 教师管理模块API服务
 import { get, post, put, del } from '../../utils/request';
+import type { ApiResponse } from '../../utils/request';
 import { TEACHER_ENDPOINTS } from '../endpoints';
 import { transformTeacherData, transformListResponse } from '../../utils/dataTransform';
 import { API_PREFIX } from '../endpoints/base';
@@ -15,18 +16,6 @@ const TEACHER_CUSTOMERS_ENDPOINTS = {
   LIST: `${API_PREFIX}/teacher/customers/list`,
   FOLLOW: (customerId: number) => `${API_PREFIX}/teacher/customers/${customerId}/follow`
 } as const;
-
-/**
- * API响应类型
- */
-interface ApiResponseType<T = any> {
-  items?: T[];
-  total?: number;
-  success?: boolean;
-  message?: string;
-  data?: T;
-  [key: string]: any;
-}
 
 /**
  * 教师状态
@@ -150,7 +139,17 @@ export interface TeacherQueryParams {
  * @param params 查询参数
  * @returns 教师列表和总数
  */
-export function getTeacherList(params?: TeacherQueryParams): Promise<ApiResponseType<Teacher>> {
+export function getTeacherList(params?: TeacherQueryParams): Promise<{
+  success: boolean;
+  message: string;
+  data: {
+    items: Teacher[];
+    total: number;
+    page: number;
+    pageSize: number;
+    totalPages: number;
+  };
+}> {
   return get(TEACHER_ENDPOINTS.LIST, params).then(response => {
     // 使用数据转换层处理响应
     return transformListResponse(response, transformTeacherData);
@@ -162,7 +161,7 @@ export function getTeacherList(params?: TeacherQueryParams): Promise<ApiResponse
  * @param id 教师ID
  * @returns 教师详情
  */
-export function getTeacherDetail(id: string): Promise<ApiResponseType<Teacher>> {
+export function getTeacherDetail(id: string): Promise<ApiResponse<Teacher>> {
   return get(TEACHER_ENDPOINTS.GET_BY_ID(id)).then(response => {
     // 转换响应数据
     if (response.data) {
@@ -177,7 +176,7 @@ export function getTeacherDetail(id: string): Promise<ApiResponseType<Teacher>> 
  * @param data 教师创建参数
  * @returns 创建结果
  */
-export async function createTeacher(data: TeacherCreateParams): Promise<ApiResponseType<Teacher>> {
+export async function createTeacher(data: TeacherCreateParams): Promise<ApiResponse<Teacher>> {
   try {
     // 首先创建用户
     const userCreateData = {
@@ -234,7 +233,7 @@ export async function createTeacher(data: TeacherCreateParams): Promise<ApiRespo
  * @param data 教师更新参数
  * @returns 更新结果
  */
-export function updateTeacher(id: string, data: Partial<TeacherCreateParams>): Promise<ApiResponseType<Teacher>> {
+export function updateTeacher(id: string, data: Partial<TeacherCreateParams>): Promise<ApiResponse<Teacher>> {
   return put(TEACHER_ENDPOINTS.GET_BY_ID(id), data);
 }
 
@@ -243,7 +242,7 @@ export function updateTeacher(id: string, data: Partial<TeacherCreateParams>): P
  * @param id 教师ID
  * @returns 删除结果
  */
-export function deleteTeacher(id: string): Promise<ApiResponseType<{ success: boolean }>> {
+export function deleteTeacher(id: string): Promise<ApiResponse<{ success: boolean }>> {
   return del(TEACHER_ENDPOINTS.GET_BY_ID(id));
 }
 
@@ -255,7 +254,7 @@ export function deleteTeacher(id: string): Promise<ApiResponseType<{ success: bo
 export function searchTeachers(params: {
   keyword: string;
   excludeIds?: string[];
-}): Promise<ApiResponseType<TeacherBrief>> {
+}): Promise<ApiResponse<TeacherBrief>> {
   return get(TEACHER_ENDPOINTS.SEARCH, params);
 }
 
@@ -264,7 +263,7 @@ export function searchTeachers(params: {
  * @param id 教师ID
  * @returns 班级列表
  */
-export function getTeacherClasses(id: string): Promise<ApiResponseType<{ 
+export function getTeacherClasses(id: string): Promise<ApiResponse<{ 
   id: string;
   name: string;
   type: string;
@@ -351,7 +350,7 @@ export interface FollowRecordParams {
  * 获取教师客户统计
  * @returns 客户统计信息
  */
-export function getTeacherCustomerStats(): Promise<ApiResponseType<CustomerStats>> {
+export function getTeacherCustomerStats(): Promise<ApiResponse<CustomerStats>> {
   return get(TEACHER_CUSTOMERS_ENDPOINTS.STATS);
 }
 
@@ -360,7 +359,7 @@ export function getTeacherCustomerStats(): Promise<ApiResponseType<CustomerStats
  * @param params 查询参数
  * @returns 客户列表
  */
-export function getTeacherCustomerList(params?: CustomerQueryParams): Promise<ApiResponseType<{
+export function getTeacherCustomerList(params?: CustomerQueryParams): Promise<ApiResponse<{
   list: CustomerInfo[];
   total: number;
   page: number;
@@ -376,7 +375,7 @@ export function getTeacherCustomerList(params?: CustomerQueryParams): Promise<Ap
  * @param data 跟进记录数据
  * @returns 操作结果
  */
-export function addCustomerFollowRecord(customerId: number, data: FollowRecordParams): Promise<ApiResponseType<any>> {
+export function addCustomerFollowRecord(customerId: number, data: FollowRecordParams): Promise<ApiResponse<any>> {
   return post(TEACHER_CUSTOMERS_ENDPOINTS.FOLLOW(customerId), data);
 }
 
@@ -387,7 +386,7 @@ export function addCustomerFollowRecord(customerId: number, data: FollowRecordPa
  * @param remarks 备注
  * @returns 操作结果
  */
-export function updateCustomerStatus(customerId: number, status: string, remarks?: string): Promise<ApiResponseType<any>> {
+export function updateCustomerStatus(customerId: number, status: string, remarks?: string): Promise<ApiResponse<any>> {
   return put(`/api/teacher/customers/${customerId}/status`, { status, remarks });
 }
 
@@ -396,7 +395,7 @@ export function updateCustomerStatus(customerId: number, status: string, remarks
  * @param customerId 客户ID
  * @returns 跟进记录列表
  */
-export function getCustomerFollowRecords(customerId: number): Promise<ApiResponseType<FollowRecord[]>> {
+export function getCustomerFollowRecords(customerId: number): Promise<ApiResponse<FollowRecord[]>> {
   return get(`/api/teacher/customers/${customerId}/follow-records`);
 }
 
@@ -404,7 +403,7 @@ export function getCustomerFollowRecords(customerId: number): Promise<ApiRespons
  * 获取教师活动统计数据
  * @returns 教师活动统计信息
  */
-export function getTeacherActivityStatistics(): Promise<ApiResponseType<{
+export function getTeacherActivityStatistics(): Promise<ApiResponse<{
   overview: {
     totalActivities: number;
     publishedActivities: number;
@@ -419,5 +418,5 @@ export function getTeacherActivityStatistics(): Promise<ApiResponseType<{
     count: number;
   }>;
 }>> {
-  return get('/teacher-dashboard/activity-statistics');
+  return get('/api/teacher-dashboard/activity-statistics');
 }

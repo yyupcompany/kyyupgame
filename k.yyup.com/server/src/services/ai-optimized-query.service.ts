@@ -319,10 +319,7 @@ export class AIOptimizedQueryService {
       ],
       temperature: 0.2,
       max_tokens: analysis.estimatedTokens
-    }, {
-      endpointUrl: modelSelection.modelConfig.endpointUrl,
-      apiKey: modelSelection.modelConfig.apiKey
-    });
+    }, modelSelection.modelConfig.apiKey);
 
     return {
       type: 'ai_response',
@@ -363,10 +360,7 @@ export class AIOptimizedQueryService {
       ],
       temperature: 0.3,
       max_tokens: analysis.estimatedTokens
-    }, {
-      endpointUrl: modelSelection.modelConfig.endpointUrl,
-      apiKey: modelSelection.modelConfig.apiKey
-    });
+    }, modelSelection.modelConfig.apiKey);
 
     return {
       type: 'ai_response',
@@ -435,10 +429,7 @@ export class AIOptimizedQueryService {
       ],
       temperature: 0.7,
       max_tokens: analysis.estimatedTokens
-    }, {
-      endpointUrl: modelSelection.modelConfig.endpointUrl,
-      apiKey: modelSelection.modelConfig.apiKey
-    });
+    }, modelSelection.modelConfig.apiKey);
 
     return {
       type: 'ai_response',
@@ -504,10 +495,7 @@ export class AIOptimizedQueryService {
       ],
       temperature: 0.7,
       max_tokens: modelSelection.analysis.estimatedTokens
-    }, {
-      endpointUrl: modelSelection.modelConfig.endpointUrl,
-      apiKey: modelSelection.modelConfig.apiKey
-    });
+    }, modelSelection.modelConfig.apiKey);
 
     return {
       type: 'ai_response',

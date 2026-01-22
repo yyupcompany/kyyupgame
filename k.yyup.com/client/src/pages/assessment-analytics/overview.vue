@@ -265,6 +265,9 @@ onMounted(() => {
   padding: var(--spacing-lg);
 
   .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
     margin-bottom: 20px;
 
     .stat-card {
@@ -383,6 +386,11 @@ onMounted(() => {
   }
 }
 </style>
+
+
+
+
+
 
 
 

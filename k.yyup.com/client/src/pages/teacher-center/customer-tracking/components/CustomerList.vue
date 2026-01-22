@@ -36,35 +36,35 @@
 
     <!-- 客户表格 -->
     <div class="table-wrapper">
-<el-table class="responsive-table" :data="filteredCustomers" v-loading="loading" stripe style="width: 100%">
-      <el-table-column prop="name" label="客户姓名" min-width="100" />
-      <el-table-column prop="phone" label="联系电话" min-width="120" />
-      <el-table-column prop="childName" label="孩子姓名" min-width="100" />
-      <el-table-column prop="childAge" label="孩子年龄" min-width="90">
-        <template #default="{ row }">
-          {{ row.childAge }}岁
-        </template>
-      </el-table-column>
-      <el-table-column prop="status" label="状态" min-width="90">
-        <template #default="{ row }">
-          <el-tag :type="getStatusType(row.status)">
-            {{ getStatusText(row.status) }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="lastFollowTime" label="最后跟进" min-width="140">
-        <template #default="{ row }">
-          {{ formatTime(row.lastFollowTime) }}
-        </template>
-      </el-table-column>
-      <el-table-column prop="nextFollowTime" label="下次跟进" min-width="140">
-        <template #default="{ row }">
-          <span :class="{ 'text-danger': isOverdue(row.nextFollowTime) }">
-            {{ formatTime(row.nextFollowTime) }}
-          </span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" min-width="220" fixed="right">
+      <el-table :data="filteredCustomers" v-loading="loading" stripe style="width: 100%">
+        <el-table-column prop="name" label="客户姓名" min-width="120" />
+        <el-table-column prop="phone" label="联系电话" min-width="140" />
+        <el-table-column prop="childName" label="孩子姓名" min-width="110" />
+        <el-table-column prop="childAge" label="孩子年龄" min-width="100">
+          <template #default="{ row }">
+            {{ row.childAge }}岁
+          </template>
+        </el-table-column>
+        <el-table-column prop="status" label="状态" min-width="100">
+          <template #default="{ row }">
+            <el-tag :type="getStatusType(row.status)">
+              {{ getStatusText(row.status) }}
+            </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column prop="lastFollowTime" label="最后跟进" min-width="160">
+          <template #default="{ row }">
+            {{ formatTime(row.lastFollowTime) }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="nextFollowTime" label="下次跟进" min-width="160">
+          <template #default="{ row }">
+            <span :class="{ 'text-danger': isOverdue(row.nextFollowTime) }">
+              {{ formatTime(row.nextFollowTime) }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" width="280" fixed="right">
         <template #default="{ row }">
           <div class="table-actions">
             <el-button size="small" @click="$emit('view-customer', row)">
@@ -245,27 +245,32 @@ watch([filterStatus, searchKeyword], () => {
 
 <style scoped>
 .customer-list {
-  background: white;
-  border-radius: var(--spacing-sm);
-  padding: var(--text-2xl);
-  box-shadow: 0 2px var(--spacing-xs) var(--shadow-light);
+  /* 使用父容器的样式，不再设置固定背景 */
 }
 
 .list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--text-2xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .filters {
   display: flex;
-  gap: var(--text-sm);
+  gap: var(--spacing-md);
 }
 
 .actions {
   display: flex;
-  gap: var(--text-sm);
+  gap: var(--spacing-md);
+}
+
+.table-wrapper {
+  margin: var(--spacing-lg) 0;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
 }
 
 /* 使用全局 table-actions 样式，移除本地重复定义 */
@@ -275,7 +280,7 @@ watch([filterStatus, searchKeyword], () => {
 }
 
 .pagination-wrapper {
-  margin-top: var(--text-2xl);
+  margin-top: var(--spacing-lg);
   display: flex;
   justify-content: center;
 }

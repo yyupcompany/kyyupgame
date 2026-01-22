@@ -1,13 +1,12 @@
-// Mock Vue ref function for TypeScript compilation
-const ref = (value: any) => ({ value })
+import { ref } from 'vue'
 
 // 支持的主题类型
-export type ThemeType = 'default' | 'dark' | 'glass-light' | 'glass-dark';
+export type ThemeType = 'default' | 'dark' | 'custom';
 
 // 当前激活的主题（响应式）
 const __savedTheme1 = localStorage.getItem('app_theme') as ThemeType | null;
 const __savedTheme2 = localStorage.getItem('app-theme') as ThemeType | null;
-export const currentTheme = ref(__savedTheme1 || __savedTheme2 || 'default');
+export const currentTheme = ref<ThemeType>(__savedTheme1 || __savedTheme2 || 'default');
 
 // 特别处理侧边栏Logo区域 - 简化版本，避免死循环
 const updateSidebarLogo = (theme: ThemeType): void => {
@@ -121,21 +120,31 @@ export const setTheme = (theme: ThemeType): void => {
   localStorage.setItem('app-theme', theme);
   localStorage.setItem('app_theme', theme);
 
-  // 完全清除所有主题类名和属性
-  document.documentElement.classList.remove('default-theme', 'dark-theme', 'custom-theme', 'glassmorphism-theme',
-    'cyberpunk-theme', 'nature-theme', 'ocean-theme', 'sunset-theme', 'midnight-theme', 'dark-mode-debug',
-    'glass-light', 'glass-dark');
+  // 完全清除所有主题类名和属性（避免残留叠加）
+  document.documentElement.classList.remove(
+    'default-theme',
+    'dark-theme',
+    'custom-theme',
+    'glassmorphism-theme',
+    'cyberpunk-theme',
+    'nature-theme',
+    'ocean-theme',
+    'sunset-theme',
+    'midnight-theme',
+    'dark-mode-debug',
+    'glass-light',
+    'glass-dark'
+  );
   document.documentElement.removeAttribute('data-theme');
-  document.body.classList.remove('el-theme-dark');
+  document.body.classList.remove('el-theme-dark', 'theme-dark', 'theme-light');
   document.body.removeAttribute('data-el-theme');
 
-  // 清除内联样式
-  const allElements = document.querySelectorAll('*');
-  allElements.forEach(el => {
-    if (el instanceof HTMLElement) {
-      el.removeAttribute('style');
-    }
-  });
+  /**
+   * ⚠️ 不再全局清理所有元素的 style 属性
+   * 之前的实现会把 Element Plus 文本域等组件的内联高度样式移除，
+   * 在主题切换后导致输入框高度为 0、无法输入。这里保持各组件的内联样式，
+   * 仅依赖 CSS 变量完成主题切换。
+   */
 
   // 对于特殊主题，添加data-theme属性和类名
   if (theme === 'dark') {
@@ -150,20 +159,11 @@ export const setTheme = (theme: ThemeType): void => {
     if (process.env.NODE_ENV === 'development') {
       document.documentElement.classList.add('dark-mode-debug');
     }
-  } else if (theme === 'glass-light') {
-    // 明亮玻璃台主题
-    document.documentElement.setAttribute('data-theme', 'glass-light');
-    document.documentElement.classList.add('glass-light');
-    document.body.setAttribute('data-theme', 'glass-light');
-  } else if (theme === 'glass-dark') {
-    // 暗黑玻璃台主题
-    document.documentElement.setAttribute('data-theme', 'glass-dark');
-    document.documentElement.classList.add('glass-dark');
-    document.body.setAttribute('data-theme', 'glass-dark');
-
-    // 暗黑模式标记
-    document.body.setAttribute('data-el-theme', 'dark');
-    document.body.classList.add('el-theme-dark');
+  } else if (theme === 'custom') {
+    document.documentElement.setAttribute('data-theme', 'custom');
+    document.documentElement.classList.add('custom-theme');
+    document.body.classList.remove('el-theme-dark');
+    document.body.removeAttribute('data-el-theme');
   } else {
     // 默认主题 (default)
     document.documentElement.classList.add('default-theme');
@@ -173,8 +173,8 @@ export const setTheme = (theme: ThemeType): void => {
 
   // 统一：为工作台添加作用域类，并切换body的明暗主题类，确保样式生效
   document.body.classList.add('theme-workbench');
-  document.body.classList.toggle('theme-dark', theme === 'dark' || theme === 'glass-dark');
-  document.body.classList.toggle('theme-light', theme !== 'dark' && theme !== 'glass-dark');
+  document.body.classList.toggle('theme-dark', theme === 'dark');
+  document.body.classList.toggle('theme-light', theme !== 'dark');
 
   // 简化的主题应用，避免复杂的DOM操作导致死循环
   console.log(`[主题] 已切换到 ${theme} 主题`);
@@ -193,11 +193,25 @@ export const setTheme = (theme: ThemeType): void => {
 
 // 初始化主题
 export const initTheme = (): void => {
-  const savedTheme = localStorage.getItem('app-theme') as ThemeType || 'default';
-  console.log('[主题] 初始化主题:', savedTheme);
+  let savedTheme = localStorage.getItem('app-theme') as ThemeType | string || 'default';
+  
+  // 如果保存的主题是玻璃台主题，自动迁移到默认主题
+  if (savedTheme === 'glass-light' || savedTheme === 'glass-dark') {
+    console.log('[主题] 检测到已废弃的玻璃台主题，自动迁移到默认主题');
+    savedTheme = 'default';
+    localStorage.setItem('app-theme', 'default');
+    localStorage.setItem('app_theme', 'default');
+  }
+  
+  // 确保主题类型正确
+  const validTheme = (savedTheme === 'default' || savedTheme === 'dark' || savedTheme === 'custom')
+    ? savedTheme as ThemeType
+    : 'default';
+  
+  console.log('[主题] 初始化主题:', validTheme);
   
   // 更新当前主题状态
-  currentTheme.value = savedTheme;
+  currentTheme.value = validTheme;
   
   // 为确保主题正确应用，先设置一些必要的CSS类
   if (savedTheme === 'dark') {
@@ -205,6 +219,11 @@ export const initTheme = (): void => {
     document.documentElement.classList.add('dark-theme');
     document.documentElement.setAttribute('data-theme', 'dark');
     document.body.classList.add('el-theme-dark');
+  } else if (savedTheme === 'custom') {
+    document.documentElement.classList.add('custom-theme');
+    document.documentElement.setAttribute('data-theme', 'custom');
+    document.body.classList.remove('el-theme-dark');
+    document.body.removeAttribute('data-el-theme');
   } else {
     // 确保没有暗黑主题的类名
     document.documentElement.classList.remove('dark-theme', 'dark-mode-debug');
@@ -224,31 +243,15 @@ export const initTheme = (): void => {
 
 // 切换到下一个主题
 export const toggleTheme = (): void => {
-  const themes: ThemeType[] = ['default', 'dark', 'glass-light', 'glass-dark'];
+  const themes: ThemeType[] = ['default', 'dark', 'custom'];
   const currentIndex = themes.indexOf(currentTheme.value);
-  const nextIndex = (currentIndex + 1) % themes.length;
+  const safeIndex = currentIndex >= 0 ? currentIndex : 0;
+  const nextIndex = (safeIndex + 1) % themes.length;
 
   // 切换到下一个主题
   const nextTheme = themes[nextIndex];
 
-  // 如果要切换回默认主题，先删除所有可能的暗黑主题样式
-  if (nextTheme === 'default' && (currentTheme.value === 'dark' || currentTheme.value === 'glass-dark')) {
-    // 完全清除暗黑主题设置
-    document.documentElement.classList.remove('dark-theme', 'dark-mode-debug', 'glass-dark');
-    document.documentElement.removeAttribute('data-theme');
-    document.body.classList.remove('el-theme-dark');
-    document.body.removeAttribute('data-el-theme');
-
-    // 强制刷新页面(只在开发环境)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[主题] 强制刷新页面以完全清除暗黑主题样式');
-      // 使用更温和的方式刷新样式，不重载整个页面
-      document.body.style.display = 'none';
-      setTimeout(() => {
-        document.body.style.display = '';
-      }, 50);
-    }
-  }
+  // 不再做隐藏/恢复强刷，避免布局抖动（CLS）
 
   setTheme(nextTheme);
 };
@@ -258,8 +261,7 @@ export const getThemeName = (theme: ThemeType): string => {
   const nameMap: Record<ThemeType, string> = {
     default: '明亮主题',
     dark: '暗黑主题',
-    'glass-light': '明亮玻璃台',
-    'glass-dark': '暗黑玻璃台'
+    custom: '自定义主题'
   };
 
   return nameMap[theme] || '未知主题';
@@ -268,6 +270,11 @@ export const getThemeName = (theme: ThemeType): string => {
 // 判断是否为暗黑模式
 export const isDarkMode = (): boolean => {
   return currentTheme.value === 'dark';
+};
+
+// 获取当前主题
+export const getCurrentTheme = (): ThemeType => {
+  return currentTheme.value;
 };
 
 // 移除自动监听，避免死循环

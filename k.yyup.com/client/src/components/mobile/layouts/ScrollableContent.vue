@@ -46,6 +46,15 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
+// 主题状态
+const isDarkTheme = ref(false)
+
+// 检测当前主题
+const detectTheme = () => {
+  const htmlTheme = document.documentElement.getAttribute('data-theme')
+  isDarkTheme.value = htmlTheme === 'dark'
+}
+
 interface Props {
   withHeader?: boolean
   withFooter?: boolean
@@ -100,6 +109,8 @@ const contentStyle = computed(() => {
 
   if (props.backgroundColor) {
     style.backgroundColor = props.backgroundColor
+  } else if (isDarkTheme.value) {
+    style.backgroundColor = '#0f172a'
   }
 
   if (props.maxHeight) {
@@ -171,6 +182,15 @@ onMounted(() => {
   if (props.enableScroll && scrollContainer.value) {
     scrollContainer.value.addEventListener('scroll', handleScroll, { passive: true })
   }
+  // 主题检测
+  detectTheme()
+  const observer = new MutationObserver(() => {
+    detectTheme()
+  })
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
 })
 
 onUnmounted(() => {
@@ -216,12 +236,12 @@ defineExpose({
 
   // 为头部留出空间
   &.with-header {
-    padding-top: var(--header-height);
+    padding-top: var(--header-height, 64px);
   }
 
   // 为底部留出空间
   &.with-footer {
-    padding-bottom: var(--tabbar-height);
+    padding-bottom: var(--tabbar-height, 56px);
   }
 
   // 可滚动

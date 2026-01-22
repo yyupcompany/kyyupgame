@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="呼叫中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="呼叫中心" back-path="/mobile/centers">
     <!-- 头部操作按钮 -->
     <template #header-extra>
       <van-icon name="plus" size="18" @click="showMakeCallDialog = true" />
@@ -41,7 +36,7 @@
               <van-cell title="通话中" :value="`${activeCallCount || 0} / ${maxConcurrentCalls || 5}`" />
               <van-cell title="操作">
                 <template #right-icon>
-                  <van-button size="small" @click="showVosSettings = true">编辑</van-button>
+                  <van-button size="medium" @click="showVosSettings = true">编辑</van-button>
                 </template>
               </van-cell>
             </van-cell-group>
@@ -107,10 +102,10 @@
                 placeholder="选择模板后显示话术内容"
               />
               <div class="script-actions">
-                <van-button plain type="primary" size="small" @click="showScriptOptimize = true">
+                <van-button plain type="primary" size="medium" @click="showScriptOptimize = true">
                   <van-icon name="fire" /> AI优化
                 </van-button>
-                <van-button plain type="info" size="small" @click="previewScript">
+                <van-button plain type="info" size="medium" @click="previewScript">
                   <van-icon name="eye" /> 预览
                 </van-button>
               </div>
@@ -168,7 +163,7 @@
                 <template #title>
                   <div class="record-header">
                     <span class="contact-name">{{ record.contactName }}</span>
-                    <van-tag :type="getStatusType(record.status)" size="small">
+                    <van-tag :type="getStatusType(record.status)" size="medium">
                       {{ getStatusLabel(record.status) }}
                     </van-tag>
                   </div>
@@ -388,14 +383,14 @@
         @cancel="showExtensionPicker = false"
       />
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, watch } from 'vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { useUserStore } from '@/stores/user'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import MakeCallDialog from '@/components/call-center/MakeCallDialog.vue'
 import SIPSettingsDialog from '@/components/call-center/SIPSettingsDialog.vue'
 import { callAPI, overviewAPI, recordingAPI, aiAPI, contactAPI, extensionAPI } from '@/api/modules/call-center'
@@ -1061,11 +1056,18 @@ const loadContacts = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   initializeData()
 })
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 
 .call-center-mobile {

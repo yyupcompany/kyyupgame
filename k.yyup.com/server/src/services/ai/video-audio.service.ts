@@ -34,11 +34,11 @@ class VideoAudioService {
         speed: params.speed || 1.0,
       });
 
-      if (result.success && result.audioUrl) {
+      if (result.success && result.data?.audio_url) {
         return {
           success: true,
-          audioUrl: result.audioUrl,
-          duration: result.duration,
+          audioUrl: result.data.audio_url,
+          duration: result.data.duration,
         };
       }
 
@@ -83,11 +83,11 @@ class VideoAudioService {
         model: '', // audioUrls 作为附加参数
       });
 
-      if (response.success && response.audioUrl) {
+      if (response.success && response.data?.audio_url) {
         return {
           success: true,
-          audioUrl: response.audioUrl,
-          duration: response.duration,
+          audioUrl: response.data.audio_url,
+          duration: response.data.duration,
         };
       }
 

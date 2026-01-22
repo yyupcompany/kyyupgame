@@ -145,14 +145,14 @@ export interface CourseRecordCreateParams {
  * @param params 查询参数
  */
 export const getMyCourses = (params?: CourseQueryParams) => {
-  return request.get<TeacherCourse[]>('/teacher/courses', { params });
+  return request.get<TeacherCourse[]>('/api/teacher/courses', { params });
 };
 
 /**
  * 获取课程统计数据
  */
 export const getCourseStats = () => {
-  return request.get<CourseStats>('/teacher/courses/stats');
+  return request.get<CourseStats>('/api/teacher/courses/stats');
 };
 
 /**
@@ -160,7 +160,7 @@ export const getCourseStats = () => {
  * @param courseId 课程ID
  */
 export const getCourseDetail = (courseId: number) => {
-  return request.get<TeacherCourse>(`/teacher/courses/${courseId}`);
+  return request.get<TeacherCourse>(`/api/teacher/courses/${courseId}`);
 };
 
 /**
@@ -169,7 +169,7 @@ export const getCourseDetail = (courseId: number) => {
  * @param status 新状态
  */
 export const updateCourseStatus = (courseId: number, status: CourseStatus) => {
-  return request.put(`/teacher/courses/${courseId}/status`, { status });
+  return request.put(`/api/teacher/courses/${courseId}/status`, { status });
 };
 
 /**
@@ -178,7 +178,7 @@ export const updateCourseStatus = (courseId: number, status: CourseStatus) => {
  * @param data 记录数据
  */
 export const addCourseRecord = (courseId: number, data: CourseRecordCreateParams) => {
-  return request.post<TeacherCourseRecord>(`/teacher/courses/${courseId}/records`, data);
+  return request.post<TeacherCourseRecord>(`/api/teacher/courses/${courseId}/records`, data);
 };
 
 /**
@@ -188,7 +188,7 @@ export const addCourseRecord = (courseId: number, data: CourseRecordCreateParams
  * @param data 更新数据
  */
 export const updateCourseRecord = (courseId: number, recordId: number, data: Partial<CourseRecordCreateParams>) => {
-  return request.put<TeacherCourseRecord>(`/teacher/courses/${courseId}/records/${recordId}`, data);
+  return request.put<TeacherCourseRecord>(`/api/teacher/courses/${courseId}/records/${recordId}`, data);
 };
 
 /**
@@ -197,5 +197,5 @@ export const updateCourseRecord = (courseId: number, recordId: number, data: Par
  * @param recordId 记录ID
  */
 export const deleteCourseRecord = (courseId: number, recordId: number) => {
-  return request.delete(`/teacher/courses/${courseId}/records/${recordId}`);
+  return request.delete(`/api/teacher/courses/${courseId}/records/${recordId}`);
 };

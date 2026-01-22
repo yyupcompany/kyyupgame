@@ -646,7 +646,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .training-records {
   padding: var(--spacing-lg);
-  background-color: var(--bg-color);
+  background-color: var(--bg-card);
   min-height: 100vh;
 
   .page-header {
@@ -672,6 +672,9 @@ onMounted(() => {
   }
 
   .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
 
     .stat-card {

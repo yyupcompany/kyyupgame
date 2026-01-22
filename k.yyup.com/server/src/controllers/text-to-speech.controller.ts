@@ -1,18 +1,14 @@
 import { Request, Response } from 'express';
-import { aiBridgeService } from '../services/ai/bridge/ai-bridge.service';
-import { AiBridgeTextToSpeechParams } from '../services/ai/bridge/ai-bridge.types';
+import { unifiedAIBridge } from '../services/unified-ai-bridge.service';
 import AIModelConfig from '../models/ai-model-config.model';
 
 /**
  * 文字转语音控制器
+ * 通过统一AI Bridge调用TTS服务
+ * - Demo环境(k.yyup.cc) → 本地AI Bridge
+ * - 生产环境(k001.yyup.cc) → 统一认证AI Bridge
  */
 export class TextToSpeechController {
-  private aiBridgeService = aiBridgeService;
-
-  constructor() {
-    // Use the singleton instance
-  }
-
   /**
    * 生成语音
    */
@@ -44,7 +40,7 @@ export class TextToSpeechController {
         format
       });
 
-      // 查询TTS模型配置
+      // 查询TTS模型配置（从数据库）
       const ttsModel = await AIModelConfig.findOne({
         where: {
           modelType: 'speech',
@@ -52,41 +48,41 @@ export class TextToSpeechController {
         }
       });
 
-      // 构建请求参数
-      const params: AiBridgeTextToSpeechParams = {
-        model: ttsModel?.name || 'tts-1',
-        input: text,
-        voice: voice,
-        response_format: format as 'mp3' | 'opus' | 'aac' | 'flac',
-        speed: speed
-      };
+      // 获取认证token
+      const authToken = req.headers?.authorization?.replace('Bearer ', '');
 
-      // 调用AI Bridge服务
-      let audioResult;
-      if (ttsModel && ttsModel.endpointUrl && ttsModel.apiKey) {
-        console.log('🔊 [文字转语音] 使用自定义TTS模型配置');
-        audioResult = await this.aiBridgeService.textToSpeech(params, {
-          endpointUrl: ttsModel.endpointUrl,
-          apiKey: ttsModel.apiKey
-        });
-      } else {
-        console.log('🔊 [文字转语音] 使用默认TTS配置');
-        audioResult = await this.aiBridgeService.textToSpeech(params);
+      // 🔧 使用统一AI Bridge调用TTS
+      // 自动路由：Demo → 本地AI Bridge, Production → 统一认证AI Bridge
+      const audioResult = await unifiedAIBridge.processAudio({
+        model: ttsModel?.name || 'tts-1',
+        file: text,
+        action: 'synthesize',
+        voice: voice,
+        speed: speed,
+      }, authToken);
+
+      if (!audioResult.success || !audioResult.data?.audioData) {
+        throw new Error(audioResult.error || '语音生成失败');
       }
 
       console.log('🔊 [文字转语音] 语音生成成功');
 
+      // 确保audioData是Buffer类型
+      const audioBuffer = Buffer.isBuffer(audioResult.data.audioData)
+        ? audioResult.data.audioData
+        : Buffer.from(audioResult.data.audioData);
+
       // 设置响应头 - 支持音频播放和Range请求
-      res.setHeader('Content-Type', audioResult.contentType);
-      res.setHeader('Content-Length', audioResult.audioData.length.toString());
+      res.setHeader('Content-Type', audioResult.data.contentType || 'audio/mpeg');
+      res.setHeader('Content-Length', audioBuffer.length.toString());
       res.setHeader('Accept-Ranges', 'bytes');
       res.setHeader('Cache-Control', 'public, max-age=3600');
 
       // 不设置 Content-Disposition，让浏览器可以直接播放
       // 如果需要下载，前端会通过 download 属性处理
 
-      // 返回音频数据
-      res.send(audioResult.audioData);
+      // 返回音频数据 - 使用end确保二进制数据不被序列化
+      res.end(audioBuffer);
     } catch (error) {
       console.error('🔊 [文字转语音] 生成失败:', error);
       res.status(500).json({

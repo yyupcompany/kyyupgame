@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="分享统计"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="分享统计" back-path="/mobile/parent-center">
     <div class="share-stats-page">
       <!-- 刷新按钮 -->
       <div class="refresh-section">
@@ -209,12 +204,12 @@
       <!-- 返回顶部 -->
       <van-back-top right="20" bottom="80" />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showLoadingToast, closeToast, showFailToast } from 'vant'
 import { parentShareStatsApi, type ShareRecord, type ShareStats, SHARE_TYPE_MAP } from '@/api/modules/parent-share-stats'
 
@@ -457,6 +452,12 @@ const onEndDateConfirm = (value: Date) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadData()
 })
 </script>
@@ -484,7 +485,7 @@ onMounted(() => {
 // 统计卡片样式优化
 .stat-card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: var(--spacing-lg);
   padding: var(--spacing-lg) 16px;
   display: flex;
   align-items: center;
@@ -501,7 +502,7 @@ onMounted(() => {
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: var(--spacing-xs);
     background: linear-gradient(90deg, var(--van-primary-color), var(--van-success-color));
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -523,12 +524,12 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
     background: linear-gradient(135deg, rgba(64, 158, 255, 0.1), rgba(64, 158, 255, 0.05));
   }
 
   .stat-content {
-    margin-left: 16px;
+    margin-left: var(--spacing-lg);
     flex: 1;
     min-width: 0;
 
@@ -536,7 +537,7 @@ onMounted(() => {
       font-size: var(--text-2xl);
       font-weight: 700;
       color: #1e293b;
-      margin-bottom: 6px;
+      margin-bottom: var(--spacing-sm);
       line-height: 1.2;
       font-variant-numeric: tabular-nums;
     }
@@ -553,8 +554,8 @@ onMounted(() => {
 // 分享记录样式优化
 .share-record-cell {
   background: var(--card-bg);
-  border-radius: 12px;
-  margin-bottom: 8px;
+  border-radius: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   transition: all 0.2s ease;
   border: 1px solid rgba(226, 232, 240, 0.8);
 
@@ -567,7 +568,7 @@ onMounted(() => {
     font-size: var(--text-base);
     font-weight: 600;
     color: #1e293b;
-    margin-bottom: 6px;
+    margin-bottom: var(--spacing-sm);
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -609,11 +610,11 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: var(--spacing-sm);
     flex: 1;
     text-align: center;
     padding: var(--spacing-sm);
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     background: var(--card-bg);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
@@ -624,11 +625,11 @@ onMounted(() => {
 
     .van-icon {
       font-size: var(--text-lg);
-      margin-bottom: 2px;
+      margin-bottom: var(--spacing-xs);
     }
 
     span {
-      font-size: 11px;
+      font-size: var(--spacing-md);
       color: #475569;
       font-weight: 600;
       line-height: 1.2;
@@ -667,11 +668,11 @@ onMounted(() => {
     flex: 1;
     overflow-y: auto;
     padding: var(--spacing-md);
-    background: #fafbfc;
+    background: var(--bg-page);
 
     .van-cell-group {
-      margin-bottom: 16px;
-      border-radius: 12px;
+      margin-bottom: var(--spacing-lg);
+      border-radius: var(--spacing-md);
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
@@ -721,7 +722,7 @@ onMounted(() => {
     padding: var(--spacing-md) 12px;
 
     .stat-content {
-      margin-left: 12px;
+      margin-left: var(--spacing-md);
 
       .stat-value {
         font-size: var(--text-xl);
@@ -799,7 +800,7 @@ onMounted(() => {
 .share-record-cell {
   &:focus {
     outline: 2px solid var(--van-primary-color);
-    outline-offset: 2px;
+    outline-offset: var(--spacing-xs);
   }
 }
 

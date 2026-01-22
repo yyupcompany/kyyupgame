@@ -28,7 +28,7 @@ const priorityMap: Record<string, TodoPriority> = {
 const createTodoListTool: ToolDefinition = {
   name: 'create_todo_list',
   description: '创建TodoList任务清单。用于复杂任务的分步管理，AI会自动分解任务并创建可执行的待办列表。',
-  category: TOOL_CATEGORIES.WORKFLOW,
+  category: TOOL_CATEGORIES.MANAGEMENT,
   parameters: {
     type: 'object',
     properties: {

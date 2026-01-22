@@ -3,12 +3,6 @@
     title="营销中心"
     description="清晰展示营销活动的完整流程，方便园长一目了然地掌握营销进展"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreateCampaign">
-        创建营销活动
-      </el-button>
-    </template>
-
     <div class="center-container marketing-center-timeline">
     <!-- 子路由内容 -->
     <router-view v-if="$route.path !== '/centers/marketing'" />
@@ -19,62 +13,54 @@
       <!-- 主要内容 -->
       <div class="main-content">
 
-      <!-- 营销统计数据 -->
+      <!-- 营销统计数据 - 使用统一网格系统 -->
       <div class="stats-section">
-        <el-row :gutter="20">
-          <el-col :xs="24" :sm="12" :md="6" :lg="6">
-            <CentersStatCard
-              :value="stats.activeCampaigns.count"
-              title="活跃营销活动"
-              description="当前正在进行的营销活动数量"
-              icon-name="megaphone"
-              type="primary"
-              :trend="parseTrendValue(stats.activeCampaigns.change)"
-              :trend-text="stats.activeCampaigns.change"
-              :loading="loading"
-            />
-          </el-col>
-          <el-col :xs="24" :sm="12" :md="6" :lg="6">
-            <CentersStatCard
-              :value="stats.newCustomers.count"
-              title="本月新客户"
-              description="本月新增的客户数量"
-              icon-name="user-plus"
-              type="success"
-              :trend="parseTrendValue(stats.newCustomers.change)"
-              :trend-text="stats.newCustomers.change"
-              :loading="loading"
-            />
-          </el-col>
-          <el-col :xs="24" :sm="12" :md="6" :lg="6">
-            <CentersStatCard
-              :value="stats.conversionRate.rate"
-              title="转化率"
-              description="营销活动的转化效果"
-              icon-name="trend-charts"
-              type="warning"
-              unit="%"
-              :precision="1"
-              :trend="parseTrendValue(stats.conversionRate.change)"
-              :trend-text="stats.conversionRate.change"
-              :loading="loading"
-            />
-          </el-col>
-          <el-col :xs="24" :sm="12" :md="6" :lg="6">
-            <CentersStatCard
-              :value="stats.marketingROI.roi"
-              title="营销ROI"
-              description="营销投资回报率"
-              icon-name="dollar-sign"
-              type="info"
-              unit="%"
-              :precision="0"
-              :trend="parseTrendValue(stats.marketingROI.change)"
-              :trend-text="stats.marketingROI.change"
-              :loading="loading"
-            />
-          </el-col>
-        </el-row>
+        <div class="stats-grid-unified">
+          <CentersStatCard
+            :value="stats.activeCampaigns.count"
+            title="活跃营销活动"
+            description="当前正在进行的营销活动数量"
+            icon-name="megaphone"
+            type="primary"
+            :trend="parseTrendValue(stats.activeCampaigns.change)"
+            :trend-text="stats.activeCampaigns.change"
+            :loading="loading"
+          />
+          <CentersStatCard
+            :value="stats.newCustomers.count"
+            title="本月新客户"
+            description="本月新增的客户数量"
+            icon-name="user-plus"
+            type="success"
+            :trend="parseTrendValue(stats.newCustomers.change)"
+            :trend-text="stats.newCustomers.change"
+            :loading="loading"
+          />
+          <CentersStatCard
+            :value="stats.conversionRate.rate"
+            title="转化率"
+            description="营销活动的转化效果"
+            icon-name="trend-charts"
+            type="warning"
+            unit="%"
+            :precision="1"
+            :trend="parseTrendValue(stats.conversionRate.change)"
+            :trend-text="stats.conversionRate.change"
+            :loading="loading"
+          />
+          <CentersStatCard
+            :value="stats.marketingROI.roi"
+            title="营销ROI"
+            description="营销投资回报率"
+            icon-name="dollar-sign"
+            type="info"
+            unit="%"
+            :precision="0"
+            :trend="parseTrendValue(stats.marketingROI.change)"
+            :trend-text="stats.marketingROI.change"
+            :loading="loading"
+          />
+        </div>
       </div>
 
         <!-- 营销功能模块 - 重构后的四大核心页面 -->
@@ -224,12 +210,13 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 // 使用全局中心样式，确保与其他中心页面一致
 .marketing-center-timeline {
   // 继承 center-container 的样式
   min-height: 100vh;
-  background: var(--bg-primary, #f9fafb);  // 使用全局主背景色
-  padding: var(--text-2xl);
+  background: var(--bg-page);
+  padding: var(--spacing-xl);
   overflow-x: hidden;
 }
 
@@ -237,12 +224,12 @@ onMounted(() => {
 
 // 主内容区域 - 使用白色背景，与全局样式一致
 .main-content {
-  background: var(--bg-color) !important;  // 纯白色背景，不透明
-  border-radius: var(--text-lg);
-  padding: var(--text-3xl);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
   box-shadow: var(--shadow-md);
-  border: var(--border-width-default) solid var(--border-primary, var(--border-color));
-  margin-bottom: var(--text-2xl);
+  border: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-xl);
   backdrop-filter: none !important;  // 移除模糊效果
 
   // 确保内容不超出
@@ -252,7 +239,7 @@ onMounted(() => {
 
 // 统计数据区域
 .stats-section {
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-2xl);
 }
 
 /* .welcome-section 样式已移至全局 center-common.scss 中统一管理 */
@@ -262,79 +249,120 @@ onMounted(() => {
 .marketing-modules h3,
 .recent-campaigns h3,
 .channel-overview h3 {
-  margin-bottom: var(--text-2xl);
-  color: var(--text-primary, var(--text-primary));
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
   font-size: var(--text-xl);
   font-weight: 600;
 }
 
 .module-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--module-item-min-width, 280px), 1fr));
-  gap: var(--text-2xl);
-  margin-bottom: var(--spacing-10xl);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
   width: 100%;
-  box-sizing: border-box;
 }
 
 .module-item {
   display: flex;
   align-items: center;
-  padding: var(--text-2xl);
-  background: var(--bg-color) !important;  // 纯白色背景，不透明
-  border-radius: var(--text-sm);
-  border: var(--border-width-default) solid var(--border-primary, var(--border-color));
+  padding: var(--spacing-xl);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color-light);
   cursor: pointer;
-  transition: all var(--transition-base) ease;
+  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
   color: inherit;
   text-decoration: none;
   position: relative;
-  z-index: var(--z-index-dropdown);
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
-  backdrop-filter: none !important;  // 移除模糊效果
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-color);
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+  }
 
   &:hover {
-    background: var(--bg-color) !important;  // hover时也保持纯白
-    transform: translateY(var(--spacing-xs));
-    box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color, var(--primary-color));
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color-light);
+
+    &::before {
+      transform: scaleY(1);
+    }
+
+    .module-icon {
+      transform: scale(1.2) rotate(10deg);
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    }
+
+    h4 {
+      color: var(--primary-color);
+    }
   }
 }
 
 .module-icon {
-  font-size: var(--spacing-3xl);
-  margin-right: var(--spacing-4xl);
+  font-size: 32px;
+  margin-right: var(--spacing-xl);
+  width: 64px;
+  height: 64px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
 }
 
-.module-content h4 {
-  margin: 0 0 var(--spacing-xs) 0;
-  color: var(--text-primary, var(--text-primary));
-  font-size: var(--text-lg);
-  font-weight: 600;
-}
+.module-content {
+  flex: 1;
+  min-width: 0;
 
-.module-content p {
-  margin: 0;
-  color: var(--text-secondary, var(--text-secondary));
-  font-size: var(--text-base);
-  line-height: var(--line-height-base);
+  h4 {
+    margin: 0 0 var(--spacing-xs) 0;
+    color: var(--text-primary);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 .campaign-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4xl);
-  margin-bottom: var(--spacing-10xl);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
 }
 
 .campaign-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--text-2xl);
-  background: var(--bg-color) !important;  // 纯白色背景，不透明
-  border-radius: var(--text-sm);
-  border: var(--border-width-default) solid var(--border-primary, var(--border-color));
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base) ease;
   backdrop-filter: none !important;  // 移除模糊效果
@@ -346,24 +374,24 @@ onMounted(() => {
 
 .campaign-info h4 {
   margin: 0 0 var(--spacing-xs) 0;
-  color: var(--text-primary, var(--text-primary));
+  color: var(--text-primary);
   font-weight: 600;
 }
 
 .campaign-info p {
   margin: 0 0 var(--spacing-sm) 0;
-  color: var(--text-secondary, var(--text-secondary));
+  color: var(--text-secondary);
   font-size: var(--text-base);
 }
 
 .campaign-meta {
   display: flex;
-  gap: var(--spacing-4xl);
+  gap: var(--spacing-lg);
   align-items: center;
 }
 
 .campaign-status {
-  padding: var(--spacing-xs) var(--text-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -380,13 +408,13 @@ onMounted(() => {
 }
 
 .campaign-date {
-  color: var(--text-tertiary, var(--text-tertiary));
+  color: var(--text-tertiary);
   font-size: var(--text-sm);
 }
 
 .campaign-stats {
   display: flex;
-  gap: var(--text-2xl);
+  gap: var(--spacing-xl);
 }
 
 .stat {
@@ -395,13 +423,13 @@ onMounted(() => {
 
 .stat .label {
   display: block;
-  color: var(--text-secondary, var(--text-secondary));
+  color: var(--text-secondary);
   font-size: var(--text-sm);
 }
 
 .stat .value {
   display: block;
-  color: var(--text-primary, var(--text-primary));
+  color: var(--text-primary);
   font-weight: 600;
   margin-top: var(--spacing-sm);
   font-size: var(--text-lg);
@@ -409,20 +437,20 @@ onMounted(() => {
 
 .campaign-actions {
   display: flex;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-md);
 }
 
 .channel-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(var(--channel-item-min-width, 250px), 1fr));
-  gap: var(--text-2xl);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
 }
 
 .channel-item {
-  padding: var(--text-2xl);
-  background: var(--bg-color) !important;  // 纯白色背景，不透明
-  border-radius: var(--text-sm);
-  border: var(--border-width-default) solid var(--border-primary, var(--border-color));
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-base) ease;
   backdrop-filter: none !important;  // 移除模糊效果
@@ -432,280 +460,179 @@ onMounted(() => {
   }
 }
 
-.channel-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--spacing-4xl);
-}
-
-.channel-icon {
-  font-size: var(--text-3xl);
-  margin-right: var(--spacing-2xl);
-}
-
-.channel-header h4 {
-  margin: 0;
-  color: var(--text-primary, var(--text-primary));
+.channel-info h4 {
+  margin: 0 0 var(--spacing-xs) 0;
+  color: var(--text-primary);
   font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.channel-info p {
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--text-secondary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
 }
 
 .channel-stats {
-  margin-bottom: var(--spacing-4xl);
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-md);
 }
 
-.stat-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-sm);
+.channel-stats .stat-item {
+  text-align: center;
+}
+
+.channel-stats .stat-label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.channel-stats .stat-value {
+  display: block;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
   font-size: var(--text-base);
 }
 
-.stat-row span:first-child {
-  color: var(--text-secondary, var(--text-secondary));
-}
-
-.stat-row .value {
-  color: var(--text-primary, var(--text-primary));
-  font-weight: 600;
-}
-
 .channel-status {
-  text-align: center;
-  padding: var(--spacing-lg) var(--text-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 500;
 
   &.active {
-    background: var(--info-light);
-    color: var(--info-dark);
+    background: var(--success-light);
+    color: var(--success-dark);
   }
 
-  &.paused {
+  &.inactive {
     background: var(--warning-light);
     color: var(--warning-dark);
   }
+
+  &.paused {
+    background: var(--info-light);
+    color: var(--info-dark);
+  }
+}
+
+.channel-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-3xl);
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: var(--spacing-3xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-text {
+  font-size: var(--text-base);
+  margin-bottom: var(--spacing-md);
 }
 
 // 响应式设计 - 完整的断点系统
-@media (max-width: var(--breakpoint-xl)) {
-  .center-content {
-    padding: var(--text-2xl);
+@media (max-width: 1200px) {
+  .marketing-center-timeline {
+    padding: var(--spacing-lg);
   }
 
-  .welcome-section {
-    padding: var(--text-2xl);
-  }
-
-  .stats-grid-unified {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--text-lg);
+  .main-content {
+    padding: var(--spacing-xl);
   }
 
   .module-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--text-lg);
-  }
-
-  .campaign-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--text-lg);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
   }
 
   .channel-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--text-lg);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-lg);
   }
 }
 
-@media (max-width: var(--breakpoint-lg)) {
-  .center-content {
-    padding: var(--text-lg);
+@media (max-width: 768px) {
+  .marketing-center-timeline {
+    padding: var(--spacing-md);
   }
 
-  .welcome-section {
-    flex-direction: column;
-    gap: var(--text-lg);
-    align-items: flex-start;
-    padding: var(--text-xl);
-  }
-
-  .stats-grid-unified {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--text-base);
-  }
-
-  .module-grid {
-    grid-template-columns: 1fr;
-    gap: var(--text-base);
-  }
-
-  .campaign-grid {
-    grid-template-columns: 1fr;
-    gap: var(--text-base);
-  }
-
-  .channel-grid {
-    grid-template-columns: 1fr;
-    gap: var(--text-base);
-  }
-}
-
-@media (max-width: var(--breakpoint-md)) {
-  .center-content {
-    padding: var(--text-sm);
-  }
-
-  .welcome-section {
-    flex-direction: column;
-    text-align: center;
-    padding: var(--text-lg);
-    margin-bottom: var(--text-2xl);
-
-    .welcome-content {
-      text-align: center;
-      margin-bottom: var(--text-lg);
-
-      h2 {
-        font-size: var(--text-2xl);
-      }
-
-      p {
-        font-size: var(--text-base);
-      }
-    }
-
-    .header-actions {
-      margin-left: 0;
-      width: 100%;
-
-      .el-button {
-        width: 100%;
-      }
-    }
-  }
-
-  .stats-grid-unified {
-    grid-template-columns: 1fr;
-    gap: var(--text-sm);
-  }
-
-  .module-grid {
-    grid-template-columns: 1fr;
-    gap: var(--text-sm);
+  .main-content {
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
   }
 
   .module-item {
-    padding: var(--text-2xl);
-
-    .module-content {
-      h4 {
-        font-size: var(--text-lg);
-      }
-
-      p {
-        font-size: var(--text-base);
-      }
-    }
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-md);
   }
 
-  .campaign-grid {
-    grid-template-columns: 1fr;
-    gap: var(--text-lg);
+  .module-icon {
+    margin-right: 0;
+    margin-bottom: var(--spacing-sm);
   }
 
   .campaign-item {
-    .campaign-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--text-sm);
-    }
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-md);
+  }
 
-    .campaign-stats {
-      flex-direction: column;
-      gap: var(--spacing-sm);
-    }
+  .campaign-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
 
-    .campaign-actions {
-      flex-direction: column;
-      gap: var(--spacing-sm);
+  .campaign-stats {
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
 
-      .el-button {
-        width: 100%;
-      }
-    }
+  .campaign-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .module-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
 
   .channel-grid {
     grid-template-columns: 1fr;
-    gap: var(--text-lg);
+    gap: var(--spacing-md);
   }
 
   .channel-item {
-    padding: var(--text-lg);
+    padding: var(--spacing-md);
   }
 }
 
-@media (max-width: var(--breakpoint-sm)) {
-  .center-content {
+@media (max-width: 480px) {
+  .marketing-center-timeline {
     padding: var(--spacing-sm);
   }
 
-  .welcome-section {
-    padding: var(--text-sm);
-
-    .welcome-content {
-      h2 {
-        font-size: var(--text-xl);
-      }
-
-      p {
-        font-size: var(--text-sm);
-      }
-    }
+  .main-content {
+    padding: var(--spacing-md);
   }
 
-  .stats-grid-unified {
-    gap: var(--spacing-2xl);
-  }
-
-  .module-grid {
-    gap: var(--spacing-2xl);
-    grid-template-columns: 1fr;
-  }
-
-  .module-item {
-    padding: var(--text-base);
-
-    .module-icon {
-      font-size: var(--text-xl);
-    }
-
-    .module-content {
-      h4 {
-        font-size: var(--text-base);
-      }
-
-      p {
-        font-size: var(--text-sm);
-      }
-    }
-  }
-
-  .campaign-grid {
-    gap: var(--spacing-2xl);
-  }
-
-  .campaign-item {
-    padding: var(--text-base);
-  }
-
-  .channel-grid {
-    gap: var(--spacing-2xl);
-  }
-
+  .module-item,
+  .campaign-item,
   .channel-item {
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-sm);
   }
 }
 </style>

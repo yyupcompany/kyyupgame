@@ -75,7 +75,7 @@ export const notificationCenterApi = {
       total: number;
       page: number;
       pageSize: number;
-    }>('/principal/notifications/statistics', { params });
+    }>('/api/principal/notifications/statistics', { params });
   },
 
   /**
@@ -90,7 +90,7 @@ export const notificationCenterApi = {
     }
   ) => {
     return request.get<NotificationReaders>(
-      `/principal/notifications/${notificationId}/readers`,
+      `/api/principal/notifications/${notificationId}/readers`,
       { params }
     );
   },
@@ -99,7 +99,7 @@ export const notificationCenterApi = {
    * 获取通知统计概览
    */
   getNotificationOverview: () => {
-    return request.get<NotificationOverview>('/principal/notifications/overview');
+    return request.get<NotificationOverview>('/api/principal/notifications/overview');
   },
 
   /**
@@ -109,7 +109,7 @@ export const notificationCenterApi = {
     return request.post<{
       downloadUrl: string;
       fileName: string;
-    }>(`/principal/notifications/${notificationId}/export`);
+    }>(`/api/principal/notifications/${notificationId}/export`);
   },
 
   /**
@@ -131,7 +131,7 @@ export const notificationCenterApi = {
       templateId: number;
       totalRecipients: number;
       message: string;
-    }>('/principal/notifications', data);
+    }>('/api/principal/notifications', data);
   }
 };
 

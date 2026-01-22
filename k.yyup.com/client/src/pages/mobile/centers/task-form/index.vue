@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    :title="pageTitle"
-    :show-back="true"
-    @back="handleGoBack"
-  >
+  <MobileCenterLayout title="pageTitle" back-path="/mobile/centers">
     <div class="mobile-task-form">
       <!-- 表单内容 -->
       <div class="form-container">
@@ -108,7 +104,7 @@
               <template #label>
                 <div class="label-with-help">
                   <span>标签</span>
-                  <van-tag type="primary" size="mini">可选</van-tag>
+                  <van-tag type="primary" size="medium">可选</van-tag>
                 </div>
               </template>
             </van-field>
@@ -197,14 +193,14 @@
         @cancel="showDatePicker = false"
       />
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { createTask, updateTask, getTaskById } from '@/services/task'
 import type { Task } from '@/services/task'
 

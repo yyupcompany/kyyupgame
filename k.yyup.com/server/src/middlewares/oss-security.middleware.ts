@@ -164,10 +164,11 @@ export const tenantFileAccessMiddleware = (
 ): void => {
 	  try {
 	    // 1. 从 req.tenant 获取租户信息
-	    const tenant = (req as any).tenant;
+    const tenant = (req as any).tenant;
+    const tenantKey = tenant?.ossNamespace || tenant?.code;
 
     // 2. 验证租户信息
-    if (!tenant || !tenant.phone) {
+    if (!tenant || !tenantKey) {
       logger.warn('租户文件访问: 未找到租户信息', {
         ip: req.ip,
         userAgent: req.get('User-Agent')
@@ -179,7 +180,7 @@ export const tenantFileAccessMiddleware = (
 
     // 3. 验证通过
     logger.debug('租户文件访问验证通过', {
-      tenantPhone: tenant.phone.substring(0, 3) + '****' + tenant.phone.substring(7),
+      tenantKey: tenantKey.length > 4 ? `${tenantKey.slice(0, 2)}****${tenantKey.slice(-2)}` : tenantKey,
       fileType: req.params.fileType
     });
 

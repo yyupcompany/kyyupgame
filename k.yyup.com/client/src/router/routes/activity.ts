@@ -56,6 +56,50 @@ export const activityRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        path: 'poster-preview',
+        name: 'ActivityPosterPreview',
+        component: () => import('@/pages/activity/ActivityPosterPreview.vue'),
+        meta: {
+          title: '海报预览',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'registration-page-generator',
+        name: 'RegistrationPageGenerator',
+        component: () => import('@/pages/activity/RegistrationPageGenerator.vue'),
+        meta: {
+          title: '报名页面生成器',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'registrations',
+        name: 'ActivityRegistrations',
+        component: () => import('@/pages/activity/ActivityRegistrations.vue'),
+        meta: {
+          title: '报名审核',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'checkin',
+        name: 'ActivityCheckin',
+        component: () => import('@/pages/activity/ActivityCheckin.vue'),
+        meta: {
+          title: '活动签到',
+          requiresAuth: true,
+          permission: 'ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
         path: 'create',
         name: 'ActivityCreate',
         component: () => import('@/pages/activity/ActivityCreate.vue'),

@@ -111,28 +111,28 @@ export const personnelCenterApi = {
   getPersonnelTrend: () => request.get(`${API_BASE}/trend`),
 
   // 学生管理
-  getStudents: (params: QueryParams) => request.get(`${API_BASE}/students`, params),
+  getStudents: (params: QueryParams) => request.get(`${API_BASE}/students`, { params }),
   createStudent: (data: Partial<Student>) => request.post(`${API_BASE}/students`, data),
   updateStudent: (id: string, data: Partial<Student>) => request.put(`${API_BASE}/students/${id}`, data),
   deleteStudent: (id: string) => request.delete(`${API_BASE}/students/${id}`),
   getStudentDetail: (id: string) => request.get(`${API_BASE}/students/${id}`),
 
   // 家长管理
-  getParents: (params: QueryParams) => request.get(`${API_BASE}/parents`, params),
+  getParents: (params: QueryParams) => request.get(`${API_BASE}/parents`, { params }),
   createParent: (data: Partial<Parent>) => request.post(`${API_BASE}/parents`, data),
   updateParent: (id: string, data: Partial<Parent>) => request.put(`${API_BASE}/parents/${id}`, data),
   deleteParent: (id: string) => request.delete(`${API_BASE}/parents/${id}`),
   getParentDetail: (id: string) => request.get(`${API_BASE}/parents/${id}`),
 
   // 教师管理
-  getTeachers: (params: QueryParams) => request.get(`${API_BASE}/teachers`, params),
+  getTeachers: (params: QueryParams) => request.get(`${API_BASE}/teachers`, { params }),
   createTeacher: (data: Partial<Teacher>) => request.post(`${API_BASE}/teachers`, data),
   updateTeacher: (id: string, data: Partial<Teacher>) => request.put(`${API_BASE}/teachers/${id}`, data),
   deleteTeacher: (id: string) => request.delete(`${API_BASE}/teachers/${id}`),
   getTeacherDetail: (id: string) => request.get(`${API_BASE}/teachers/${id}`),
 
   // 班级管理
-  getClasses: (params: QueryParams) => request.get(`${API_BASE}/classes`, params),
+  getClasses: (params: QueryParams) => request.get(`${API_BASE}/classes`, { params }),
   createClass: (data: Partial<Class>) => request.post(`${API_BASE}/classes`, data),
   updateClass: (id: string, data: Partial<Class>) => request.put(`${API_BASE}/classes/${id}`, data),
   deleteClass: (id: string) => request.delete(`${API_BASE}/classes/${id}`),
@@ -142,10 +142,10 @@ export const personnelCenterApi = {
   getPersonnelStatistics: () => request.get(`${API_BASE}/statistics`),
   
   // 导出功能
-  exportStudents: (params: QueryParams) => request.get(`${API_BASE}/students/export`, params),
-  exportParents: (params: QueryParams) => request.get(`${API_BASE}/parents/export`, params),
-  exportTeachers: (params: QueryParams) => request.get(`${API_BASE}/teachers/export`, params),
-  exportClasses: (params: QueryParams) => request.get(`${API_BASE}/classes/export`, params),
+  exportStudents: (params: QueryParams) => request.get(`${API_BASE}/students/export`, { params }),
+  exportParents: (params: QueryParams) => request.get(`${API_BASE}/parents/export`, { params }),
+  exportTeachers: (params: QueryParams) => request.get(`${API_BASE}/teachers/export`, { params }),
+  exportClasses: (params: QueryParams) => request.get(`${API_BASE}/classes/export`, { params }),
 
   // 批量操作
   batchUpdateStudents: (ids: string[], data: Partial<Student>) => 

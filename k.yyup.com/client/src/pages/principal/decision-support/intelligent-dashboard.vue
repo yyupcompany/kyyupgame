@@ -1455,7 +1455,7 @@ onMounted(() => {
 .intelligent-decision-dashboard {
   padding: var(--spacing-lg);
   min-height: 100vh;
-  background: var(--bg-secondary);
+  background: var(--bg-page);
 }
 
 .dashboard-header {
@@ -1541,7 +1541,7 @@ onMounted(() => {
 }
 
 .scenario-card {
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   border: var(--border-width-base) solid var(--border-color);

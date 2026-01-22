@@ -1,8 +1,8 @@
 <template>
-  <el-card class="enrollment-stat-card" shadow="hover">
+  <el-card class="enrollment-stat-card" shadow="hover" @click="$emit('click')">
     <div class="card-content">
       <div class="card-icon" :style="{ backgroundColor: color + '20', color: color }">
-        <UnifiedIcon name="default" />
+        <UnifiedIcon :name="icon || 'stats'" />
       </div>
       <div class="card-info">
         <div class="card-value">{{ value }}</div>
@@ -17,12 +17,15 @@
 interface Props {
   title: string
   value: number
-  icon: string
+  icon?: string
   color: string
   description?: string
 }
 
 defineProps<Props>()
+defineEmits<{
+  click: []
+}>()
 </script>
 
 <style lang="scss" scoped>

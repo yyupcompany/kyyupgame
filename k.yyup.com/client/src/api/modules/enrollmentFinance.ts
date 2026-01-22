@@ -120,7 +120,7 @@ class EnrollmentFinanceAPI {
   // 招生审批通过后自动触发缴费单生成
   async onEnrollmentApproved(enrollmentId: string): Promise<ApiResponse<void>> {
     try {
-      const response = await request.post(`/enrollment-finance/enrollment-approved/${enrollmentId}`)
+      const response = await request.post(`/api/enrollment-finance/enrollment-approved/${enrollmentId}`)
       return response.data
     } catch (error) {
       console.error('处理招生审批通过失败:', error)
@@ -131,7 +131,7 @@ class EnrollmentFinanceAPI {
   // 获取招生付费流程状态
   async getEnrollmentPaymentProcess(enrollmentId: string): Promise<ApiResponse<EnrollmentPaymentProcess>> {
     try {
-      const response = await request.get(`/enrollment-finance/process/${enrollmentId}`)
+      const response = await request.get(`/api/enrollment-finance/process/${enrollmentId}`)
       return response.data
     } catch (error) {
       console.error('获取招生付费流程失败:', error)
@@ -256,7 +256,7 @@ class EnrollmentFinanceAPI {
   // 更新费用套餐模板
   async updateFeePackageTemplate(id: string, data: Partial<FeePackageTemplate>): Promise<ApiResponse<FeePackageTemplate>> {
     try {
-      const response = await request.put(`/enrollment-finance/fee-package-templates/${id}`, data)
+      const response = await request.put(`/api/enrollment-finance/fee-package-templates/${id}`, data)
       return response.data
     } catch (error) {
       console.error('更新费用套餐模板失败:', error)

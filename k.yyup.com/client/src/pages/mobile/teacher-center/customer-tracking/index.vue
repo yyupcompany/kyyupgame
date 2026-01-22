@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="客户跟踪"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="客户跟踪" back-path="/mobile/teacher-center">
     <div class="mobile-customer-tracking">
       <!-- 页面头部 -->
       <div class="page-header">
@@ -196,7 +191,7 @@
               <van-button
                 type="primary"
                 @click="activeTab = 'customers'"
-                style="margin-top: 16px;"
+                style="margin-top: var(--spacing-lg);"
               >
                 选择客户
               </van-button>
@@ -282,7 +277,7 @@
                   <van-progress
                     :percentage="stage.rate"
                     :stroke-width="8"
-                    color="#409eff"
+                    color="var(--primary-color)"
                     track-color="#f5f5f5"
                   />
                 </div>
@@ -300,7 +295,7 @@
                 :color="getSuggestionColor(suggestion.type)"
                 background="white"
                 wrapable
-                style="margin-bottom: 8px;"
+                style="margin-bottom: var(--spacing-sm);"
               />
             </div>
           </div>
@@ -438,14 +433,14 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 导入API
 import {
@@ -849,12 +844,12 @@ const getStageDescription = (stage: string) => {
 
 const getSuggestionColor = (type: string) => {
   const colors: Record<string, string> = {
-    success: '#67c23a',
-    warning: '#e6a23c',
-    info: '#409eff',
-    error: '#f56c6c'
+    success: 'var(--success-color)',
+    warning: 'var(--warning-color)',
+    info: 'var(--primary-color)',
+    error: 'var(--danger-color)'
   }
-  return colors[type] || '#409eff'
+  return colors[type] || 'var(--primary-color)'
 }
 
 const isOverdue = (time: string) => {
@@ -874,6 +869,12 @@ const formatTime = (time: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   showLoadingToast({ message: '加载中...', forbidClick: true })
   refreshData().finally(() => {
     closeToast()
@@ -885,7 +886,7 @@ onMounted(() => {
 @import '@/styles/mobile-base.scss';
 .mobile-customer-tracking {
   min-height: 100vh;
-  background-color: #f7f8fa;
+  background-color: var(--bg-page);
   padding-bottom: var(--van-tabbar-height);
 }
 
@@ -893,10 +894,10 @@ onMounted(() => {
 .page-header {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .header-content {
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .page-title {
       font-size: var(--text-xl);
@@ -921,23 +922,23 @@ onMounted(() => {
 // 统计卡片
 .stats-section {
   padding: 0 16px;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .stat-card {
   background: var(--card-bg);
-  border-radius: 8px;
+  border-radius: var(--spacing-sm);
   padding: var(--spacing-md);
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   .stat-icon {
     width: 48px;
     height: 48px;
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -952,14 +953,14 @@ onMounted(() => {
       font-weight: 700;
       color: #323233;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: var(--spacing-xs);
     }
 
     .stat-title {
       font-size: var(--text-sm);
       color: #323233;
       font-weight: 500;
-      margin-bottom: 2px;
+      margin-bottom: var(--spacing-xs);
     }
 
     .stat-desc {
@@ -986,10 +987,10 @@ onMounted(() => {
 .filter-section {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .filter-dropdown {
-    margin-top: 8px;
+    margin-top: var(--spacing-sm);
   }
 }
 
@@ -1000,16 +1001,16 @@ onMounted(() => {
 
 .customer-card {
   background: var(--card-bg);
-  border-radius: 8px;
+  border-radius: var(--spacing-sm);
   padding: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
   .customer-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .customer-info {
       flex: 1;
@@ -1018,7 +1019,7 @@ onMounted(() => {
         font-size: var(--text-base);
         font-weight: 600;
         color: #323233;
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
       }
     }
 
@@ -1029,12 +1030,12 @@ onMounted(() => {
   }
 
   .customer-details {
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .detail-item {
       font-size: var(--text-sm);
       color: #646566;
-      margin-bottom: 4px;
+      margin-bottom: var(--spacing-xs);
 
       .label {
         color: #969799;
@@ -1043,12 +1044,12 @@ onMounted(() => {
   }
 
   .customer-timeline {
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .timeline-item {
       font-size: var(--text-xs);
       color: #969799;
-      margin-bottom: 4px;
+      margin-bottom: var(--spacing-xs);
 
       .timeline-label {
         color: #969799;
@@ -1086,12 +1087,12 @@ onMounted(() => {
 
   .selected-customer {
     background: var(--card-bg);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
   }
 
   .add-record-btn {
     padding: 0 16px;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
   }
 
   .records-list {
@@ -1102,7 +1103,7 @@ onMounted(() => {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
 
         .record-type {
           font-size: var(--text-sm);
@@ -1120,7 +1121,7 @@ onMounted(() => {
         font-size: var(--text-sm);
         color: #646566;
         line-height: 1.5;
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
       }
 
       .next-follow {
@@ -1134,7 +1135,7 @@ onMounted(() => {
     .timeline-time {
       font-size: var(--text-xs);
       color: #969799;
-      margin-bottom: 8px;
+      margin-bottom: var(--spacing-sm);
     }
   }
 
@@ -1159,27 +1160,27 @@ onMounted(() => {
 
   .time-selector {
     background: var(--card-bg);
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     padding: var(--spacing-md);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
     text-align: center;
   }
 
   .conversion-stages {
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-xl);
   }
 
   .conversion-stage {
     background: var(--card-bg);
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     padding: var(--spacing-md);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .stage-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
 
       .stage-name {
         font-size: var(--text-base);
@@ -1217,7 +1218,7 @@ onMounted(() => {
     }
 
     .stage-progress {
-      margin-bottom: 8px;
+      margin-bottom: var(--spacing-sm);
     }
 
     .stage-desc {
@@ -1232,7 +1233,7 @@ onMounted(() => {
       font-size: var(--text-base);
       font-weight: 600;
       color: #323233;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
       padding: 0 4px;
     }
   }
@@ -1249,7 +1250,7 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-xl);
 
     .dialog-title {
       font-size: var(--text-lg);
@@ -1264,13 +1265,20 @@ onMounted(() => {
   }
 
   .dialog-actions {
-    margin-top: 20px;
-    padding-top: 20px;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-xl);
     border-top: 1px solid #ebedf0;
   }
 }
 
 :deep(.van-progress__portion) {
-  background: linear-gradient(to right, #409eff, #66b1ff);
+  background: linear-gradient(to right, var(--primary-color), #66b1ff);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="analytics-hub-page">
+  <MobileSubPageLayout title="数据分析" back-path="/mobile/centers">
+    <div class="wrapper">
     <!-- 页面标题 -->
     <van-nav-bar
       title="数据分析"
@@ -73,7 +74,7 @@
     <div class="detail-section">
       <div class="section-header">
         <h3 class="section-title">详细数据</h3>
-        <van-button size="small" type="primary" @click="navigateTo('/mobile/centers/analytics')">
+        <van-button size="medium" type="primary" @click="navigateTo('/mobile/centers/analytics')">
           查看全部
         </van-button>
       </div>
@@ -97,8 +98,9 @@
           <van-icon name="arrow" size="16" color="var(--text-tertiary)" />
         </div>
       </div>
+        </div>
     </div>
-  </div>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -226,6 +228,9 @@ const navigateTo = (path: string) => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/design-tokens.scss';
 
 .analytics-hub-page {
@@ -236,7 +241,7 @@ const navigateTo = (path: string) => {
 
 // 筛选器区域
 .filter-section {
-  background: var(--bg-color);
+  background: var(--bg-card);
   position: sticky;
   top: 46px;
   z-index: 10;
@@ -245,7 +250,7 @@ const navigateTo = (path: string) => {
 // 核心指标区域
 .metrics-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
 
   .metrics-grid {
     display: grid;
@@ -301,7 +306,7 @@ const navigateTo = (path: string) => {
 // 图表区域
 .chart-section {
   margin-top: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--app-gap) 0;
 
   .chart-container {
@@ -352,7 +357,7 @@ const navigateTo = (path: string) => {
 // 详细数据列表
 .detail-section {
   margin-top: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--app-gap) 0;
 
   .detail-list {

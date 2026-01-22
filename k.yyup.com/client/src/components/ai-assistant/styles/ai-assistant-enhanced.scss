@@ -13,19 +13,19 @@
 // ============================================
 
 .ai-glass-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--bg-card);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--border-color-light);
   box-shadow:
-    0 8px 32px rgba(31, 38, 135, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    0 8px 32px rgba(31, 38, 135, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
   // 暗色主题
   .theme-dark &,
   [data-theme="dark"] & {
-    background: rgba(30, 41, 59, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -425,7 +425,8 @@
 // 暗色主题优化 - Dark Theme Optimization
 // ============================================
 
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"],
+.theme-dark {
   .ai-message-user {
     background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   }

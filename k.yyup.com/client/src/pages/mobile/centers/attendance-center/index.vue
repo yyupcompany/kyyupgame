@@ -1,13 +1,8 @@
 <template>
-  <MobileMainLayout
-    title="考勤中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
-    <template #header-extra>
-      <van-icon name="share-o" size="18" @click="handleExport" />
-      <van-icon name="replay" size="18" @click="refreshData" style="margin-left: 12px" />
+  <MobileCenterLayout title="考勤中心" back-path="/mobile/centers">
+    <template #right>
+      <van-icon name="share-o" size="18" @click="handleExport" :color="isDark ? '#94a3b8' : ''" />
+      <van-icon name="replay" size="18" @click="refreshData" style="margin-left: 12px" :color="isDark ? '#94a3b8' : ''" />
     </template>
 
     <div class="attendance-center-mobile">
@@ -235,14 +230,21 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { useUserStore } from '@/stores/user'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
+
+// 主题状态
+const isDark = ref(false)
+const detectTheme = () => {
+  const htmlTheme = document.documentElement.getAttribute('data-theme')
+  isDark.value = htmlTheme === 'dark'
+}
 import {
   getOverview,
   exportAttendance,
@@ -390,16 +392,25 @@ const refreshData = () => {
 // ==================== 生命周期 ====================
 
 onMounted(() => {
+  detectTheme()
   loadOverview()
+  
+  // 监听主题变化
+  const observer = new MutationObserver(detectTheme)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
 })
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 
 .attendance-center-mobile {
-  min-height: 100vh;
-  background: var(--van-background-color-light);
+  min-height: calc(100vh - 46px);
+  background: var(--bg-color-page);
   padding-bottom: var(--van-safe-area-bottom);
 
   .overview-card {

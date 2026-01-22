@@ -189,7 +189,7 @@
       <div class="detail-dialog">
         <div class="dialog-header">
           <h3>考勤详情</h3>
-          <van-button size="small" @click="showDetailDialog = false">
+          <van-button size="medium" @click="showDetailDialog = false">
             关闭
           </van-button>
         </div>
@@ -225,6 +225,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, nextTick } from 'vue'
 import { showToast } from 'vant'
+import type { TagType } from 'vant'
 
 interface Props {
   studentId: string
@@ -361,12 +362,12 @@ const getWeekdayText = (dateString: string) => {
   return weekdays[date.getDay()]
 }
 
-const getStatusTagType = (status: string) => {
-  const statusMap: Record<string, string> = {
+const getStatusTagType = (status: string): TagType => {
+  const statusMap: Record<string, TagType> = {
     present: 'success',
     absent: 'danger',
     leave: 'warning',
-    late: 'info'
+    late: 'default'
   }
   return statusMap[status] || 'default'
 }

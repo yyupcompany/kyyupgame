@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    :title="studentData.name ? `${studentData.name}的详情` : '学生详情'"
-    :show-back="true"
-  >
+  <MobileCenterLayout title="studentData.name ? `${studentData.name}的详情` : '学生详情'" back-path="/mobile/centers">
     <div v-if="loading" class="loading-container">
       <van-loading size="24px">加载中...</van-loading>
     </div>
@@ -23,7 +20,7 @@
         <template #title>
           <div class="student-title">
             <h3>{{ studentData.name }}</h3>
-            <van-tag :type="getStatusTagType(studentData.status)" size="small">
+            <van-tag :type="getStatusTagType(studentData.status)" size="medium">
               {{ getStatusText(studentData.status) }}
             </van-tag>
           </div>
@@ -33,14 +30,14 @@
           <div class="student-badges">
             <van-tag
               :type="getGenderTagType(studentData.gender)"
-              size="small"
+              size="medium"
             >
               {{ studentData.gender === 'MALE' ? '男' : '女' }}
             </van-tag>
-            <van-tag type="primary" size="small">
+            <van-tag type="primary" size="medium">
               {{ calculateAge(studentData.birthDate) }}岁
             </van-tag>
-            <van-tag v-if="studentData.className" type="success" size="small">
+            <van-tag v-if="studentData.className" type="success" size="medium">
               {{ studentData.className }}
             </van-tag>
           </div>
@@ -65,13 +62,13 @@
 
         <template #footer>
           <div class="action-buttons">
-            <van-button size="small" type="primary" @click="editStudent">
+            <van-button size="medium" type="primary" @click="editStudent">
               编辑信息
             </van-button>
-            <van-button size="small" type="success" @click="viewGrades">
+            <van-button size="medium" type="success" @click="viewGrades">
               查看成绩
             </van-button>
-            <van-button size="small" type="info" @click="viewAttendance">
+            <van-button size="medium" type="info" @click="viewAttendance">
               考勤记录
             </van-button>
           </div>
@@ -101,14 +98,15 @@
         </van-tab>
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import type { TagType } from 'vant'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import BasicInfoTab from './components/tabs/BasicInfoTab.vue'
 import ParentsInfoTab from './components/tabs/ParentsInfoTab.vue'
 import GradesTab from './components/tabs/GradesTab.vue'
@@ -194,18 +192,18 @@ const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('zh-CN')
 }
 
-const getGenderTagType = (gender: string) => {
+const getGenderTagType = (gender: string): TagType => {
   return gender === 'MALE' ? 'primary' : 'danger'
 }
 
-const getStatusTagType = (status: string) => {
-  const statusMap: Record<string, string> = {
+const getStatusTagType = (status: string): TagType => {
+  const statusMap: Record<string, TagType> = {
     ACTIVE: 'success',
-    GRADUATED: 'info',
+    GRADUATED: 'default',
     TRANSFERRED: 'warning',
     SUSPENDED: 'danger'
   }
-  return statusMap[status] || 'info'
+  return statusMap[status] || 'default'
 }
 
 const getStatusText = (status: string) => {
@@ -220,11 +218,20 @@ const getStatusText = (status: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadStudentDetail()
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 .loading-container {
   display: flex;
   justify-content: center;

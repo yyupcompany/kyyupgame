@@ -913,17 +913,18 @@ export function map<T, R>(collection: T[] | Record<string, T>, iteratee: any): R
 /**
  * Reduces array to a value which is the accumulated result of running each element through iteratee
  */
-export function reduce<T, R>(array: T[], iteratee: (accumulator: R, value: T) => R, initialValue?: R): R {
+export function reduce<T>(array: T[], iteratee: (accumulator: T, value: T) => T): T
+export function reduce<T, R>(array: T[], iteratee: (accumulator: R, value: T) => R, initialValue: R): R
+export function reduce<T, R>(array: T[], iteratee: (accumulator: any, value: T) => any, initialValue?: R): R {
   if (!Array.isArray(array)) {
     if (initialValue !== undefined) return initialValue
     throw new TypeError('Reduce of empty array with no initial value')
   }
 
   if (initialValue !== undefined) {
-    return array.reduce(iteratee, initialValue)
-  } else {
-    return array.reduce(iteratee as any)
+    return array.reduce(iteratee, initialValue as R)
   }
+  return array.reduce(iteratee as any) as unknown as R
 }
 
 /**

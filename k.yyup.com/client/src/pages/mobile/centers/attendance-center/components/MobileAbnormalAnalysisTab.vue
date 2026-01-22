@@ -70,7 +70,7 @@
         <template #title>
           <div class="section-header">
             <span class="section-title">连续缺勤学生</span>
-            <van-tag type="danger" size="small">
+            <van-tag type="danger" size="medium">
               {{ abnormalData.consecutiveAbsent.length }}人
             </van-tag>
           </div>
@@ -107,7 +107,7 @@
         <template #title>
           <div class="section-header">
             <span class="section-title">频繁迟到学生</span>
-            <van-tag type="warning" size="small">
+            <van-tag type="warning" size="medium">
               {{ abnormalData.frequentLate.length }}人
             </van-tag>
           </div>
@@ -144,7 +144,7 @@
         <template #title>
           <div class="section-header">
             <span class="section-title">频繁早退学生</span>
-            <van-tag type="primary" size="small">
+            <van-tag type="primary" size="medium">
               {{ abnormalData.frequentEarlyLeave.length }}人
             </van-tag>
           </div>

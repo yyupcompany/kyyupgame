@@ -869,7 +869,7 @@ onMounted(() => {
 /* 使用全局CSS变量，确保主题切换兼容性，完成三重修复 */
 .page-container {
   padding: var(--app-gap); /* 硬编码修复：使用统一间距变量 */
-  background: var(--bg-secondary); /* 白色区域修复：使用主题背景色 */
+  background: var(--bg-page); /* 白色区域修复：使用主题背景色 */
   min-height: calc(100vh - var(--header-height, 60px));
 }
 

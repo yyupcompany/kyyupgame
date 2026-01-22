@@ -273,7 +273,7 @@ onMounted(() => {
     align-items: center;
     margin-bottom: var(--text-2xl);
     padding: var(--text-xl);
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: var(--text-sm);
     border: 1px solid var(--border-light);
 
@@ -289,7 +289,7 @@ onMounted(() => {
         align-items: center;
         padding: var(--text-xl);
         margin-bottom: var(--spacing-lg);
-        background: var(--bg-color);
+        background: var(--bg-card);
         border-radius: var(--text-sm);
         border: 1px solid var(--border-light);
         transition: all var(--transition-base) ease;
@@ -301,7 +301,7 @@ onMounted(() => {
 
         &.top-three {
           border-color: var(--primary-color);
-          background: linear-gradient(135deg, var(--bg-color), rgba(var(--primary-rgb), 0.05));
+          background: linear-gradient(135deg, var(--bg-card), rgba(var(--primary-rgb), 0.05));
         }
 
         .ranking-medal {

@@ -262,13 +262,17 @@ export function sendComplete(res: Response, options?: {
   needsContinue?: boolean;
   nextUserMessage?: string;
   data?: any;
+  quickResponse?: boolean;
+  duration?: number;
 }): void {
   const {
     message = '✅ 处理完成',
     isComplete = true,
     needsContinue = false,
     nextUserMessage,
-    data
+    data,
+    quickResponse,
+    duration
   } = options || {};
   
   sendSSE(res, 'complete', {
@@ -276,7 +280,9 @@ export function sendComplete(res: Response, options?: {
     isComplete,
     needsContinue,
     nextUserMessage,
-    data
+    data,
+    quickResponse,
+    duration
   });
   res.end();
 }

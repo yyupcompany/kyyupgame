@@ -306,7 +306,7 @@ onMounted(() => {
     .search-section {
       margin-bottom: var(--spacing-xl);
       padding: var(--spacing-lg);
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: var(--spacing-xs);
 
       .search-form {

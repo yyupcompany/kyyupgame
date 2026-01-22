@@ -190,7 +190,7 @@ export class PromptCacheService {
           replacements: [1],
           type: QueryTypes.SELECT
         }
-      );
+      ) as Array<{ count: number }>;
       const totalClasses = classesResult[0]?.count || 0;
 
       // 2. 查询学生数量（只统计在读学生，status=1）
@@ -200,7 +200,7 @@ export class PromptCacheService {
           replacements: [1],
           type: QueryTypes.SELECT
         }
-      );
+      ) as Array<{ count: number }>;
       const totalStudents = studentsResult[0]?.count || 0;
 
       // 3. 查询教师数量（只统计在职教师，status=1）
@@ -210,7 +210,7 @@ export class PromptCacheService {
           replacements: [1],
           type: QueryTypes.SELECT
         }
-      );
+      ) as Array<{ count: number }>;
       const totalTeachers = teachersResult[0]?.count || 0;
 
       // 4. 计算师生比
@@ -223,7 +223,7 @@ export class PromptCacheService {
         `SELECT COUNT(*) as count FROM enrollment_applications
          WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)`,
         { type: QueryTypes.SELECT }
-      );
+      ) as Array<{ count: number }>;
       const recentApplications = applicationsResult[0]?.count || 0;
 
       // 6. 查询已录取的申请数
@@ -231,7 +231,7 @@ export class PromptCacheService {
         `SELECT COUNT(*) as count FROM enrollment_applications
          WHERE status = 'accepted' AND created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)`,
         { type: QueryTypes.SELECT }
-      );
+      ) as Array<{ count: number }>;
       const acceptedApplications = acceptedResult[0]?.count || 0;
 
       // 7. 查询最近7天的活动数
@@ -239,7 +239,7 @@ export class PromptCacheService {
         `SELECT COUNT(*) as count FROM activities
          WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)`,
         { type: QueryTypes.SELECT }
-      );
+      ) as Array<{ count: number }>;
       const recentActivities = activitiesResult[0]?.count || 0;
 
       const fetchTime = Date.now() - startTime;

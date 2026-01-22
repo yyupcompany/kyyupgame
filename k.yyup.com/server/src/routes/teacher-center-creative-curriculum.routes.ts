@@ -585,10 +585,12 @@ router.get('/', async (req: Request, res: Response) => {
 
     console.log('📚 获取课程列表 - userId:', userId, 'kindergartenId:', kindergartenId);
 
-    // 构建查询条件
-    const where: any = {
-      creatorId: userId
-    };
+    // 构建查询条件 - 仅当userId存在时才按creatorId筛选
+    const where: any = {};
+    
+    if (userId) {
+      where.creatorId = userId;
+    }
 
     // 如果有幼儿园ID，则添加到查询条件
     if (kindergartenId) {
@@ -639,12 +641,15 @@ router.get('/', async (req: Request, res: Response) => {
         rows: rows
       }
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('❌ 获取课程列表失败:', error);
+    console.error('❌ 错误详情:', error.message);
+    console.error('❌ 错误堆栈:', error.stack);
     return res.status(500).json({
       code: 500,
       success: false,
-      message: '获取课程列表失败'
+      message: '获取课程列表失败',
+      detail: error.message
     });
   }
 });

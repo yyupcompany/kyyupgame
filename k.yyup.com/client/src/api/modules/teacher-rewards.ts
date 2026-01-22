@@ -84,42 +84,28 @@ class TeacherRewardsService {
    * 获取教师奖励列表和统计信息
    */
   async getRewardsList(params?: TeacherRewardListParams): Promise<ApiResponse<TeacherRewardListResponse>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REWARDS,
-      method: 'GET',
-      params
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REWARDS, { params })
   }
 
   /**
    * 获取奖励统计信息
    */
   async getRewardStats(): Promise<ApiResponse<TeacherRewardStats>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REWARDS_STATS,
-      method: 'GET'
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REWARDS_STATS)
   }
 
   /**
    * 获取单个奖励详情
    */
   async getRewardDetail(id: number): Promise<ApiResponse<TeacherReward>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REWARD_BY_ID(id),
-      method: 'GET'
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REWARD_BY_ID(id))
   }
 
   /**
    * 使用代金券
    */
   async useVoucher(id: number, params: UseVoucherParams): Promise<ApiResponse<{ success: boolean; message: string }>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.USE_VOUCHER(id),
-      method: 'POST',
-      data: params
-    })
+    return request.post(TEACHER_REWARDS_ENDPOINTS.USE_VOUCHER(id), params)
   }
 
   /**
@@ -148,10 +134,7 @@ class TeacherRewardsService {
    * 获取转介绍分享带来的线索信息
    */
   async getReferralLeads(rewardId: number): Promise<ApiResponse<any[]>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REFERRAL_LEADS(rewardId),
-      method: 'GET'
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REFERRAL_LEADS(rewardId))
   }
 
   /**
@@ -170,10 +153,7 @@ class TeacherRewardsService {
       rewards: number
     }>
   }>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REFERRAL_STATS,
-      method: 'GET'
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REFERRAL_STATS)
   }
 
   /**
@@ -190,11 +170,7 @@ class TeacherRewardsService {
     referralCode: string
     shareUrl: string
   }>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REFERRALS,
-      method: 'POST',
-      data
-    })
+    return request.post(TEACHER_REWARDS_ENDPOINTS.REFERRALS, data)
   }
 
   /**
@@ -210,17 +186,13 @@ class TeacherRewardsService {
     page: number
     pageSize: number
   }>> {
-    return request({
-      url: TEACHER_REWARDS_ENDPOINTS.REFERRALS,
-      method: 'GET',
-      params
-    })
+    return request.get(TEACHER_REWARDS_ENDPOINTS.REFERRALS, { params })
   }
 }
 
 // 创建服务实例
-export const TeacherRewardsService = new TeacherRewardsService()
+const teacherRewardsServiceInstance = new TeacherRewardsService()
 
 // 导出类型和服务
-export type { TeacherRewardsService as default }
-export default TeacherRewardsService
+export { TeacherRewardsService }
+export default teacherRewardsServiceInstance

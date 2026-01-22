@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="成长档案"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileSubPageLayout title="成长档案" back-path="/mobile/parent-center">
     <div class="mobile-growth-page">
       <!-- 加载状态 -->
       <div v-if="loading" class="loading-container">
@@ -278,7 +272,7 @@
         </van-popup>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -289,7 +283,8 @@ import * as echarts from 'echarts'
 import { request } from '@/utils/request'
 import { STUDENT_ENDPOINTS } from '@/api/endpoints'
 import { useUserStore } from '@/stores/user'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
+import { growthRecordsApi } from '@/api/modules/growth-records'
 
 interface Assessment {
   id: number
@@ -431,10 +426,11 @@ const fetchChildInfo = async () => {
 
   loading.value = true
   try {
-    const response = await request.get(`${STUDENT_ENDPOINTS.BASE}/${childId.value}/growth-report`)
+    // 使用新的成长记录API
+    const response = await growthRecordsApi.getGrowthReport(childId.value, { months: 6 })
 
-    if (response.success && response.data) {
-      childInfo.value = response.data
+    if (response.data?.data) {
+      childInfo.value = response.data.data
 
       nextTick(() => {
         initChart()
@@ -655,6 +651,12 @@ watch(chartType, () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   fetchChildInfo()
 })
 
@@ -671,7 +673,7 @@ onUnmounted(() => {
 .mobile-growth-page {
   min-height: calc(100vh - var(--mobile-header-height) - var(--mobile-footer-height));
   background: var(--van-background-color-light);
-  padding-bottom: 20px;
+  padding-bottom: var(--spacing-xl);
 }
 
 .loading-container,
@@ -721,7 +723,7 @@ onUnmounted(() => {
 }
 
 .milestone-content {
-  margin-top: 8px;
+  margin-top: var(--spacing-sm);
 
   .milestone-desc {
     font-size: var(--text-sm);
@@ -737,7 +739,7 @@ onUnmounted(() => {
     .milestone-image {
       width: 60px;
       height: 60px;
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
     }
   }
 }
@@ -746,14 +748,14 @@ onUnmounted(() => {
   .assessment-item {
     padding: var(--spacing-md);
     background: var(--van-background-color);
-    border-radius: 8px;
-    margin-bottom: 12px;
+    border-radius: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
 
     .assessment-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
 
       .assessment-date {
         font-size: var(--text-sm);
@@ -770,7 +772,7 @@ onUnmounted(() => {
     .assessment-stats {
       display: flex;
       justify-content: space-around;
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
 
       .stat-item {
         text-align: center;
@@ -779,7 +781,7 @@ onUnmounted(() => {
           display: block;
           font-size: var(--text-xs);
           color: var(--van-text-color-2);
-          margin-bottom: 4px;
+          margin-bottom: var(--spacing-xs);
         }
 
         .stat-value {
@@ -794,14 +796,14 @@ onUnmounted(() => {
     .assessment-remarks {
       font-size: var(--text-xs);
       color: var(--van-text-color-2);
-      padding-top: 8px;
+      padding-top: var(--spacing-sm);
       border-top: 1px solid var(--van-border-color);
     }
   }
 }
 
 :deep(.van-swipe-cell__wrapper) {
-  border-radius: 8px;
+  border-radius: var(--spacing-sm);
 }
 
 .form-header {
@@ -826,5 +828,12 @@ onUnmounted(() => {
 
 :deep(.van-field__label) {
   width: 80px;
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

@@ -87,12 +87,6 @@ defineExpose({
   transition: all var(--transition-fast) ease;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 
-  /* 🎨 深色主题适配 */
-  .theme-dark & {
-    background: var(--white-alpha-5);
-    border-color: var(--white-alpha-10);
-  }
-
   &:hover {
     border-color: var(--el-border-color);
     box-shadow: 0 2px var(--spacing-xs) var(--shadow-lighter);
@@ -166,15 +160,20 @@ defineExpose({
 .step-content {
   padding: var(--text-sm) var(--text-lg);
   padding-top: 0;
-  border-top: var(--z-index-dropdown) solid var(--el-border-color-lighter);
+  border-top: 1px solid var(--el-border-color-lighter);
   background: var(--el-bg-color);
   animation: slideDown 0.2s ease;
+}
 
-  /* 🎨 深色主题适配 */
-  .theme-dark & {
-    background: var(--shadow-heavy);
-    border-top-color: var(--white-alpha-10);
-  }
+/* 🎨 深色主题适配 */
+:global(.theme-dark) .step-block {
+  background: var(--white-alpha-5);
+  border-color: var(--white-alpha-10);
+}
+
+:global(.theme-dark) .step-content {
+  background: var(--shadow-heavy);
+  border-top-color: var(--white-alpha-10);
 }
 
 .step-content-text {

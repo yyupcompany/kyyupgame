@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="测评报告"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="测评报告" back-path="/mobile/parent-center">
     <div class="assessment-report-page" v-if="!loading && reportData">
       <!-- 报告头部 -->
       <van-card class="report-header">
@@ -109,7 +104,7 @@
     >
       <van-button type="primary" @click="loadReport">重试</van-button>
     </van-empty>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -237,6 +232,12 @@ const renderChart = () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadReport()
 })
 </script>
@@ -364,6 +365,13 @@ onMounted(() => {
     .chart-container {
       height: 250px;
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

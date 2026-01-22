@@ -1,0 +1,812 @@
+{
+  "meta": {
+    "version": "1.0",
+    "lastUpdated": "2026-01-19T14:00:00.000Z",
+    "totalPages": 103,
+    "completedPages": 84,
+    "inProgressPages": 0
+  },
+  "pages": {
+    "/centers/business-pc": {
+      "name": "管理员端 - 业务中心",
+      "route": "/centers/business",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info",
+          "redirectedTo": "/403"
+        }
+      ],
+      "lastChecked": "2026-01-17T11:38:00.000Z"
+    },
+    "/mobile/centers/business-center-mobile": {
+      "name": "管理员端 - 业务中心",
+      "route": "/mobile/centers/business-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-17T12:00:00.000Z"
+    },
+    "/centers/activity-pc": {
+      "name": "管理员端 - 活动中心",
+      "route": "/centers/activity",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)，重定向到 /403",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-17T12:00:00.000Z"
+    },
+    "/mobile/centers/activity-center-mobile": {
+      "name": "管理员端 - 活动中心",
+      "route": "/mobile/centers/activity-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-17T12:00:00.000Z"
+    },
+    "/centers/enrollment-pc": {
+      "name": "管理员端 - 招生中心",
+      "route": "/centers/enrollment",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:00:00.000Z"
+    },
+    "/mobile/centers/enrollment-center-mobile": {
+      "name": "管理员端 - 招生中心",
+      "route": "/mobile/centers/enrollment-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:05:00.000Z"
+    },
+    "/centers/customer-pool-pc": {
+      "name": "管理员端 - 客户池中心",
+      "route": "/centers/customer-pool",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:10:00.000Z"
+    },
+    "/mobile/centers/customer-pool-center-mobile": {
+      "name": "管理员端 - 客户池中心",
+      "route": "/mobile/centers/customer-pool-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:15:00.000Z"
+    },
+    "/centers/task-pc": {
+      "name": "管理员端 - 任务中心",
+      "route": "/centers/task",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:20:00.000Z"
+    },
+    "/mobile/centers/task-center-mobile": {
+      "name": "管理员端 - 任务中心",
+      "route": "/mobile/centers/task-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:25:00.000Z"
+    },
+    "/centers/document-center-pc": {
+      "name": "管理员端 - 文档中心",
+      "route": "/centers/document-center",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:30:00.000Z"
+    },
+    "/mobile/centers/document-center-mobile": {
+      "name": "管理员端 - 文档中心",
+      "route": "/mobile/centers/document-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:35:00.000Z"
+    },
+    "/centers/finance-pc": {
+      "name": "管理员端 - 财务中心",
+      "route": "/centers/finance",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:40:00.000Z"
+    },
+    "/mobile/centers/finance-center-mobile": {
+      "name": "管理员端 - 财务中心",
+      "route": "/mobile/centers/finance-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:45:00.000Z"
+    },
+    "/centers/marketing-pc": {
+      "name": "管理员端 - 营销中心",
+      "route": "/centers/marketing",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T13:50:00.000Z"
+    },
+    "/mobile/centers/marketing-center-mobile": {
+      "name": "管理员端 - 营销中心",
+      "route": "/mobile/centers/marketing-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T13:55:00.000Z"
+    },
+    "/centers/call-pc": {
+      "name": "管理员端 - 呼叫中心",
+      "route": "/centers/call",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:00:00.000Z"
+    },
+    "/mobile/centers/call-center-mobile": {
+      "name": "管理员端 - 呼叫中心",
+      "route": "/mobile/centers/call-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:05:00.000Z"
+    },
+    "/centers/media-pc": {
+      "name": "管理员端 - 相册中心",
+      "route": "/centers/media",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:10:00.000Z"
+    },
+    "/mobile/centers/media-center-mobile": {
+      "name": "管理员端 - 相册中心",
+      "route": "/mobile/centers/media-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:15:00.000Z"
+    },
+    "/centers/personnel-pc": {
+      "name": "管理员端 - 人员中心",
+      "route": "/centers/personnel",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:20:00.000Z"
+    },
+    "/mobile/centers/personnel-center-mobile": {
+      "name": "管理员端 - 人员中心",
+      "route": "/mobile/centers/personnel-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:25:00.000Z"
+    },
+    "/centers/teaching-pc": {
+      "name": "管理员端 - 教学中心",
+      "route": "/centers/teaching",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:30:00.000Z"
+    },
+    "/mobile/centers/teaching-center-mobile": {
+      "name": "管理员端 - 教学中心",
+      "route": "/mobile/centers/teaching-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:35:00.000Z"
+    },
+    "/centers/assessment-pc": {
+      "name": "管理员端 - 测评中心",
+      "route": "/centers/assessment",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:40:00.000Z"
+    },
+    "/mobile/centers/assessment-center-mobile": {
+      "name": "管理员端 - 测评中心",
+      "route": "/mobile/centers/assessment-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:45:00.000Z"
+    },
+    "/centers/attendance-pc": {
+      "name": "管理员端 - 考勤中心",
+      "route": "/centers/attendance",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T14:50:00.000Z"
+    },
+    "/mobile/centers/attendance-center-mobile": {
+      "name": "管理员端 - 考勤中心",
+      "route": "/mobile/centers/attendance-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T14:55:00.000Z"
+    },
+    "/centers/analytics-pc": {
+      "name": "管理员端 - 数据分析中心",
+      "route": "/centers/analytics",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:00:00.000Z"
+    },
+    "/mobile/centers/analytics-center-mobile": {
+      "name": "管理员端 - 数据分析中心",
+      "route": "/mobile/centers/analytics-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T15:05:00.000Z"
+    },
+    "/centers/usage-pc": {
+      "name": "管理员端 - 用量中心",
+      "route": "/centers/usage",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:10:00.000Z"
+    },
+    "/mobile/centers/usage-center-mobile": {
+      "name": "管理员端 - 用量中心",
+      "route": "/mobile/centers/usage-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T15:15:00.000Z"
+    },
+    "/centers/group-pc": {
+      "name": "管理员端 - 集团中心",
+      "route": "/centers/group",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        },
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /centers/group",
+          "severity": "medium"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:20:00.000Z"
+    },
+    "/mobile/centers/group-center-mobile": {
+      "name": "管理员端 - 集团中心",
+      "route": "/mobile/centers/group-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /mobile/centers/group-center",
+          "severity": "medium"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:25:00.000Z"
+    },
+    "/centers/inspection-pc": {
+      "name": "管理员端 - 督查中心",
+      "route": "/centers/inspection",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:30:00.000Z"
+    },
+    "/mobile/centers/inspection-center-mobile": {
+      "name": "管理员端 - 督查中心",
+      "route": "/mobile/centers/inspection-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T15:35:00.000Z"
+    },
+    "/centers/ai-pc": {
+      "name": "管理员端 - AI中心",
+      "route": "/centers/ai",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 admin 或 principal)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:40:00.000Z"
+    },
+    "/mobile/centers/ai-center-mobile": {
+      "name": "管理员端 - AI中心",
+      "route": "/mobile/centers/ai-center",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T15:45:00.000Z"
+    },
+    "/principal/dashboard-pc": {
+      "name": "园长端 - 园长仪表板",
+      "route": "/principal/dashboard",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T15:50:00.000Z"
+    },
+    "/mobile/principal-center/dashboard-mobile": {
+      "name": "园长端 - 园长仪表板",
+      "route": "/mobile/principal-center/dashboard",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /mobile/principal-center/dashboard",
+          "severity": "medium"
+        }
+      ],
+      "lastChecked": "2026-01-19T15:55:00.000Z"
+    },
+    "/teacher-center/dashboard-pc": {
+      "name": "老师端 - 教师工作台",
+      "route": "/teacher-center/dashboard",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-17T11:40:00.000Z"
+    },
+    "/mobile/teacher-center/dashboard-mobile": {
+      "name": "老师端 - 教师工作台",
+      "route": "/mobile/teacher-center/dashboard",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "apiPermissionDenied",
+          "message": "后端API权限不足: /api/teacher/dashboard, /api/teacher/weekly-schedule, /api/teacher/todo-items 返回403",
+          "severity": "medium"
+        }
+      ],
+      "lastChecked": "2026-01-17T11:45:00.000Z"
+    },
+    "/teacher-center/activities-pc": {
+      "name": "老师端 - 活动管理",
+      "route": "/teacher-center/activities",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:00:00.000Z"
+    },
+    "/mobile/teacher-center/activities-mobile": {
+      "name": "老师端 - 活动管理",
+      "route": "/mobile/teacher-center/activities",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:00:00.000Z"
+    },
+    "/teacher-center/attendance-pc": {
+      "name": "老师端 - 考勤管理",
+      "route": "/teacher-center/attendance",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:05:00.000Z"
+    },
+    "/mobile/teacher-center/attendance-mobile": {
+      "name": "老师端 - 考勤管理",
+      "route": "/mobile/teacher-center/attendance",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:05:00.000Z"
+    },
+    "/teacher-center/appointment-management-pc": {
+      "name": "老师端 - 预约管理",
+      "route": "/teacher-center/appointment-management",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:10:00.000Z"
+    },
+    "/mobile/teacher-center/appointment-management-mobile": {
+      "name": "老师端 - 预约管理",
+      "route": "/mobile/teacher-center/appointment-management",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:10:00.000Z"
+    },
+    "/teacher-center/class-contacts-pc": {
+      "name": "老师端 - 班级通讯录",
+      "route": "/teacher-center/class-contacts",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /teacher-center/class-contacts",
+          "severity": "high"
+        }
+      ],
+      "lastChecked": "2026-01-19T11:15:00.000Z"
+    },
+    "/mobile/teacher-center/class-contacts-mobile": {
+      "name": "老师端 - 班级通讯录",
+      "route": "/mobile/teacher-center/class-contacts",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:15:00.000Z"
+    },
+    "/teacher-center/creative-curriculum-pc": {
+      "name": "老师端 - 创意课程",
+      "route": "/teacher-center/creative-curriculum",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:20:00.000Z"
+    },
+    "/mobile/teacher-center/creative-curriculum-mobile": {
+      "name": "老师端 - 创意课程",
+      "route": "/mobile/teacher-center/creative-curriculum",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:20:00.000Z"
+    },
+    "/teacher-center/customer-pool-pc": {
+      "name": "老师端 - 客户池",
+      "route": "/teacher-center/customer-pool",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /teacher-center/customer-pool",
+          "severity": "high"
+        }
+      ],
+      "lastChecked": "2026-01-19T11:25:00.000Z"
+    },
+    "/mobile/teacher-center/customer-pool-mobile": {
+      "name": "老师端 - 客户池",
+      "route": "/mobile/teacher-center/customer-pool",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:25:00.000Z"
+    },
+    "/teacher-center/customer-tracking-pc": {
+      "name": "老师端 - 客户跟踪",
+      "route": "/teacher-center/customer-tracking",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:30:00.000Z"
+    },
+    "/mobile/teacher-center/customer-tracking-mobile": {
+      "name": "老师端 - 客户跟踪",
+      "route": "/mobile/teacher-center/customer-tracking",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:30:00.000Z"
+    },
+    "/teacher-center/enrollment-pc": {
+      "name": "老师端 - 招生管理",
+      "route": "/teacher-center/enrollment",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:35:00.000Z"
+    },
+    "/mobile/teacher-center/enrollment-mobile": {
+      "name": "老师端 - 招生管理",
+      "route": "/mobile/teacher-center/enrollment",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:35:00.000Z"
+    },
+    "/teacher-center/notifications-pc": {
+      "name": "老师端 - 通知管理",
+      "route": "/teacher-center/notifications",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:40:00.000Z"
+    },
+    "/mobile/teacher-center/notifications-mobile": {
+      "name": "老师端 - 通知管理",
+      "route": "/mobile/teacher-center/notifications",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:40:00.000Z"
+    },
+    "/teacher-center/performance-rewards-pc": {
+      "name": "老师端 - 绩效奖励",
+      "route": "/teacher-center/performance-rewards",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:45:00.000Z"
+    },
+    "/mobile/teacher-center/performance-rewards-mobile": {
+      "name": "老师端 - 绩效奖励",
+      "route": "/mobile/teacher-center/performance-rewards",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "apiNotFound",
+          "message": "API 404: /api/principal-performance 返回404",
+          "severity": "high"
+        }
+      ],
+      "lastChecked": "2026-01-19T11:45:00.000Z"
+    },
+    "/teacher-center/tasks-pc": {
+      "name": "老师端 - 任务管理",
+      "route": "/teacher-center/tasks",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:50:00.000Z"
+    },
+    "/mobile/teacher-center/tasks-mobile": {
+      "name": "老师端 - 任务管理",
+      "route": "/mobile/teacher-center/tasks",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:50:00.000Z"
+    },
+    "/teacher-center/teaching-pc": {
+      "name": "老师端 - 教学管理",
+      "route": "/teacher-center/teaching",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:55:00.000Z"
+    },
+    "/mobile/teacher-center/teaching-mobile": {
+      "name": "老师端 - 教学管理",
+      "route": "/mobile/teacher-center/teaching",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T11:55:00.000Z"
+    },
+    "/teacher-center/student-assessment-pc": {
+      "name": "老师端 - 学生评估",
+      "route": "/teacher-center/student-assessment",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T16:00:00.000Z"
+    },
+    "/mobile/teacher-center/student-assessment-mobile": {
+      "name": "老师端 - 学生评估",
+      "route": "/mobile/teacher-center/student-assessment",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "routeNotFound",
+          "message": "Vue Router警告: No match found for location with path /mobile/teacher-center/student-assessment",
+          "severity": "medium"
+        }
+      ],
+      "lastChecked": "2026-01-19T16:05:00.000Z"
+    },
+    "/parent-center/dashboard-pc": {
+      "name": "家长端 - 我的首页",
+      "route": "/parent-center/dashboard",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 parent 或 admin)",
+          "severity": "info",
+          "redirectedTo": "/403"
+        }
+      ],
+      "lastChecked": "2026-01-17T11:42:00.000Z"
+    },
+    "/mobile/parent-center/dashboard-mobile": {
+      "name": "家长端 - 我的首页",
+      "route": "/mobile/parent-center/dashboard",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T16:10:00.000Z"
+    },
+    "/parent-center/ai-assistant-pc": {
+      "name": "家长端 - AI育儿助手",
+      "route": "/parent-center/ai-assistant",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 parent 或 admin)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T16:15:00.000Z"
+    },
+    "/mobile/parent-center/ai-assistant-mobile": {
+      "name": "家长端 - AI育儿助手",
+      "route": "/mobile/parent-center/ai-assistant",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T16:20:00.000Z"
+    },
+    "/parent-center/communication-pc": {
+      "name": "家长端 - 家校沟通",
+      "route": "/parent-center/communication",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 parent 或 admin)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T16:25:00.000Z"
+    },
+    "/mobile/parent-center/communication-mobile": {
+      "name": "家长端 - 家校沟通",
+      "route": "/mobile/parent-center/communication",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T16:30:00.000Z"
+    },
+    "/parent-center/children-pc": {
+      "name": "家长端 - 我的孩子",
+      "route": "/parent-center/children",
+      "platform": "pc",
+      "status": "completed",
+      "issues": [
+        {
+          "type": "permissionDenied",
+          "message": "角色权限不足: teacher (需要 parent 或 admin)",
+          "severity": "info"
+        }
+      ],
+      "lastChecked": "2026-01-19T16:35:00.000Z"
+    },
+    "/mobile/parent-center/children-mobile": {
+      "name": "家长端 - 我的孩子",
+      "route": "/mobile/parent-center/children",
+      "platform": "mobile",
+      "status": "completed",
+      "issues": [],
+      "lastChecked": "2026-01-19T16:40:00.000Z"
+    }
+  },
+  "cycle": {
+    "current": 0,
+    "lastRun": "2026-01-19T16:40:00.000Z",
+    "intervalMs": 30000,
+    "isRunning": false
+  }
+}

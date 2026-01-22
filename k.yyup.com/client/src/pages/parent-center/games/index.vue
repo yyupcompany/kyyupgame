@@ -121,18 +121,26 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 游戏中心页面 ==================== */
 .games-center {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
   padding: var(--spacing-5xl) var(--spacing-xl);
 
   .header {
     text-align: center;
-    color: var(--text-on-primary);
+    color: white;
     margin-bottom: var(--spacing-3xl);
 
     h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
       font-size: var(--text-4xl);
+      font-weight: 600;
       margin: 0;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
@@ -145,38 +153,94 @@ onMounted(() => {
   }
 
   .game-categories {
-    max-width: var(--container-xl);
+    max-width: var(--breakpoint-2xl);
     margin: 0 auto;
 
     .category-section {
       background: var(--bg-card);
       border-radius: var(--radius-2xl);
-      padding: var(--spacing-3xl);
-      margin-bottom: var(--spacing-3xl);
+      padding: var(--spacing-2xl);
+      margin-bottom: var(--spacing-2xl);
       box-shadow: var(--shadow-xl);
+      transition: all var(--transition-base);
+
+      &:hover {
+        box-shadow: var(--shadow-2xl);
+        transform: translateY(-4px);
+      }
 
       .category-header {
-        margin-bottom: var(--spacing-2xl);
+        margin-bottom: var(--spacing-xl);
+        padding-bottom: var(--spacing-md);
+        border-bottom: 1px solid var(--border-color-lighter);
 
         h2 {
-          font-size: var(--text-2xl);
-          color: var(--text-primary);
-          margin: 0 0 var(--spacing-sm) 0;
+          display: flex;
+          align-items: center;
+          gap: var(--spacing-sm);
+          font-size: var(--text-xl);
+          font-weight: 600;
+          color: var(--el-text-color-primary);
+          margin: 0 0 var(--spacing-xs) 0;
+
+          &::before {
+            content: '';
+            display: inline-block;
+            width: var(--spacing-xs);
+            height: var(--spacing-xl);
+            background: linear-gradient(180deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+            border-radius: var(--spacing-xs);
+          }
         }
 
         p {
           font-size: var(--text-base);
-          color: var(--text-secondary);
+          color: var(--el-text-color-secondary);
           margin: 0;
+          padding-left: var(--spacing-lg);
         }
       }
 
       .game-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(var(--container-sm), 1fr));
-        gap: var(--spacing-xl);
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--spacing-lg);
       }
     }
+  }
+
+  /* ==================== 响应式设计 ==================== */
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-2xl) var(--spacing-md);
+
+    .header {
+      h1 {
+        font-size: var(--text-2xl);
+      }
+
+      .subtitle {
+        font-size: var(--text-base);
+      }
+    }
+
+    .game-categories .category-section {
+      padding: var(--spacing-lg);
+
+      .category-header h2 {
+        font-size: var(--text-lg);
+      }
+
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

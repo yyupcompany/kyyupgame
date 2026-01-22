@@ -4,54 +4,38 @@
     description="管理测评配置、题目和体能训练项目"
     icon="grid"
   >
-    <!-- 头部操作按钮 -->
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreateConfig">
-        <UnifiedIcon name="Plus" />
-        新建配置
-      </el-button>
-    </template>
-
-    <!-- 统计卡片 -->
+    <!-- 统计卡片 - 使用统一网格系统 -->
     <template #stats>
-      <el-row :gutter="16">
-        <el-col :xs="12" :sm="12" :md="6" :lg="6">
-          <StatCard
-            title="测评配置数"
-            :value="stats.configCount"
-            unit="个"
-            type="primary"
-            icon-name="setting"
-          />
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6">
-          <StatCard
-            title="题目总数"
-            :value="stats.questionCount"
-            unit="题"
-            type="success"
-            icon-name="document"
-          />
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6">
-          <StatCard
-            title="完成测评数"
-            :value="stats.completedCount"
-            unit="次"
-            type="info"
-            icon-name="check"
-          />
-        </el-col>
-        <el-col :xs="12" :sm="12" :md="6" :lg="6">
-          <StatCard
-            title="体能项目数"
-            :value="stats.physicalItemCount"
-            unit="个"
-            type="warning"
-            icon-name="activity"
-          />
-        </el-col>
-      </el-row>
+      <div class="stats-grid-unified">
+        <CentersStatCard
+          title="测评配置数"
+          :value="stats.configCount"
+          unit="个"
+          type="primary"
+          iconName="setting"
+        />
+        <CentersStatCard
+          title="题目总数"
+          :value="stats.questionCount"
+          unit="题"
+          type="success"
+          iconName="document"
+        />
+        <CentersStatCard
+          title="完成测评数"
+          :value="stats.completedCount"
+          unit="次"
+          type="info"
+          iconName="check"
+        />
+        <CentersStatCard
+          title="体能项目数"
+          :value="stats.physicalItemCount"
+          unit="个"
+          type="warning"
+          iconName="activity"
+        />
+      </div>
     </template>
 
     <!-- 主要内容区域 -->
@@ -211,32 +195,31 @@
             <template #header>
               <h3>测评数据统计</h3>
             </template>
-            <el-row :gutter="48">
-              <el-col :span="6">
-                <div class="stat-item">
-                  <div class="stat-value">{{ stats.totalRecords }}</div>
-                  <div class="stat-label">总测评数</div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="stat-item">
-                  <div class="stat-value">{{ stats.completedRecords }}</div>
-                  <div class="stat-label">已完成</div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="stat-item">
-                  <div class="stat-value">{{ stats.inProgressRecords }}</div>
-                  <div class="stat-label">进行中</div>
-                </div>
-              </el-col>
-              <el-col :span="6">
-                <div class="stat-item">
-                  <div class="stat-value">{{ stats.completionRate.toFixed(1) }}%</div>
-                  <div class="stat-label">完成率</div>
-                </div>
-              </el-col>
-            </el-row>
+            <div class="stats-grid-unified">
+              <CentersStatCard
+                title="总测评数"
+                :value="stats.totalRecords"
+                iconName="document"
+              />
+              <CentersStatCard
+                title="已完成"
+                :value="stats.completedRecords"
+                type="success"
+                iconName="check"
+              />
+              <CentersStatCard
+                title="进行中"
+                :value="stats.inProgressRecords"
+                type="warning"
+                iconName="clock"
+              />
+              <CentersStatCard
+                title="完成率"
+                :value="`${stats.completionRate.toFixed(1)}%`"
+                type="primary"
+                iconName="chart"
+              />
+            </div>
           </el-card>
         </div>
       </el-tab-pane>
@@ -352,7 +335,7 @@ import { ref, onMounted, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { Document, Plus, CircleCheck, Setting, Promotion, Picture, MagicStick } from '@element-plus/icons-vue'
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
-import StatCard from '@/components/centers/StatCard.vue'
+import CentersStatCard from '@/components/centers/StatCard.vue'
 import { assessmentAdminApi } from '@/api/assessment-admin'
 
 const activeTab = ref('configs')

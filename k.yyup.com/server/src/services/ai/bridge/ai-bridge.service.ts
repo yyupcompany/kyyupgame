@@ -114,7 +114,7 @@ class AIBridgeService {
       headers: Record<string, string>;
     },
     data?: any,
-    timeout: number = 180000 // 默认180秒
+    timeout: number = 600000 // 默认600秒（10分钟）
   ): Promise<T> {
     return new Promise((resolve, reject) => {
       const parsedUrl = new URL(url);
@@ -234,7 +234,7 @@ class AIBridgeService {
       headers: Record<string, string>;
     },
     data?: any,
-    timeout: number = 180000 // 默认180秒
+    timeout: number = 600000 // 默认600秒（10分钟）
   ): Promise<http.IncomingMessage> {
     return new Promise((resolve, reject) => {
       const parsedUrl = new URL(url);
@@ -394,7 +394,7 @@ class AIBridgeService {
       // 添加重试机制处理503错误
       const maxRetries = 3;
       const retryDelay = 1000; // 1秒
-      const timeout = 180000; // 180秒超时
+      const timeout = 600000; // 600秒超时（10分钟）
 
       for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {

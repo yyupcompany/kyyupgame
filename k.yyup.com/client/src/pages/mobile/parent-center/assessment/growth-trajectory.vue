@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="成长轨迹"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="成长轨迹" back-path="/mobile/parent-center">
     <div class="growth-trajectory-page">
       <!-- 筛选条件 -->
       <van-card class="filter-card">
@@ -193,7 +188,7 @@
         </van-card>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -252,7 +247,7 @@ const getImprovementColor = (trend: string) => {
     case 'down':
       return '#F56C6C'
     default:
-      return '#909399'
+      return 'var(--info-color)'
   }
 }
 
@@ -396,7 +391,7 @@ const renderDimensionChart = () => {
 
   const dimensionTrends = trajectoryData.value.trends.dimensionTrends
   const dates = trajectoryData.value.trends.dates
-  const colors = ['#409EFF', '#67C23A', '#E6A23C', '#F56C6C', '#909399', '#8B5CF6']
+  const colors = ['#409EFF', '#67C23A', '#E6A23C', '#F56C6C', 'var(--info-color)', '#8B5CF6']
 
   const series = Object.keys(dimensionTrends).map((dim, index) => ({
     name: getDimensionName(dim),
@@ -480,6 +475,12 @@ const viewReport = (recordId: number) => {
 
 // 初始化
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // 从路由参数获取筛选条件
   if (route.query.childName) {
     filterForm.value.childName = route.query.childName as string
@@ -713,6 +714,13 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

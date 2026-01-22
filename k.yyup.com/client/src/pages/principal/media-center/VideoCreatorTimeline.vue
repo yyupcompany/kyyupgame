@@ -307,7 +307,7 @@
                         @click="toggleAudioPlay(index, audio.audioUrl)"
                         circle
                       >
-                        <el-icon :size="16" color="var(--bg-color)">
+                        <el-icon :size="16" color="var(--bg-card)">
                           <VideoPause v-if="playingAudioIndex === index" />
                           <VideoPlay v-else />
                         </el-icon>
@@ -802,7 +802,7 @@
                   @click="toggleAudioPlay(index, audio.audioUrl)"
                   circle
                 >
-                  <el-icon :size="16" color="var(--bg-color)">
+                  <el-icon :size="16" color="var(--bg-card)">
                     <VideoPause v-if="playingAudioIndex === index" />
                     <VideoPlay v-else />
                   </el-icon>

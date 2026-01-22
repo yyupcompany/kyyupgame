@@ -259,6 +259,58 @@ router.post('/answer', parentAssistantController.answerQuestion);
 */
 router.get('/quick-questions', parentAssistantController.getQuickQuestions);
 
+/**
+* @swagger
+ * /api/parent-assistant/statistics:
+ *   get:
+ *     tags: [家长助手服务]
+ *     summary: "获取统计数据"
+ *     description: "获取家长助手的使用统计数据"
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: "获取成功"
+ */
+router.get('/statistics', parentAssistantController.getStatistics);
+
+/**
+* @swagger
+ * /api/parent-assistant/history:
+ *   get:
+ *     tags: [家长助手服务]
+ *     summary: "获取对话历史"
+ *     description: "获取家长的对话历史记录"
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: "获取成功"
+ */
+router.get('/history', parentAssistantController.getHistory);
+
+/**
+* @swagger
+ * /api/parent-assistant/search:
+ *   get:
+ *     tags: [家长助手服务]
+ *     summary: "搜索对话历史"
+ *     description: "根据关键词搜索对话历史"
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: keyword
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: "搜索关键词"
+ *     responses:
+ *       200:
+ *         description: "搜索成功"
+ */
+router.get('/search', parentAssistantController.searchHistory);
+
 export default router;
 
 

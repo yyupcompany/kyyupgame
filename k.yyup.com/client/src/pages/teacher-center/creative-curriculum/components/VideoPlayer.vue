@@ -103,7 +103,7 @@ function downloadVideo() {
   gap: var(--text-2xl);
 
   .player-container {
-    background: var(--bg-primary);
+    background: var(--bg-page);
     border-radius: var(--spacing-sm);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     aspect-ratio: 16 / 9;
@@ -133,7 +133,7 @@ function downloadVideo() {
   }
 
   .video-info {
-    background: var(--bg-primary);
+    background: var(--bg-page);
     border-radius: var(--spacing-xs);
     padding: var(--spacing-4xl);
     display: flex;

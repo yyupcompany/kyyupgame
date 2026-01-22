@@ -19,9 +19,13 @@ import { aiBridgeClient } from './ai-bridge-client.service';
 
 // ==================== 类型定义 ====================
 
+// 消息角色类型 - 与 AiBridgeMessageRole 保持兼容
+export type UnifiedMessageRole = 'system' | 'user' | 'assistant' | 'function' | 'tool';
+
 export interface ChatMessage {
-  role: 'system' | 'user' | 'assistant';
+  role: UnifiedMessageRole | string;
   content: string;
+  name?: string;
 }
 
 export interface UnifiedChatRequest {
@@ -29,6 +33,7 @@ export interface UnifiedChatRequest {
   messages: ChatMessage[];
   temperature?: number;
   max_tokens?: number;
+  maxTokens?: number;  // 兼容旧接口
   tools?: any[];
   response_format?: string;
   stream?: boolean;
@@ -58,6 +63,7 @@ export interface UnifiedImageGenerateRequest {
   n?: number;
   size?: string;
   quality?: string;
+  style?: string;  // 支持风格参数
   logo_info?: {
     add_logo: boolean;
     [key: string]: any;
@@ -92,6 +98,9 @@ export interface UnifiedAudioProcessRequest {
 
 export interface UnifiedAudioProcessResponse {
   success: boolean;
+  text?: string;       // 顶层属性兼容旧代码
+  language?: string;   // 顶层属性兼容旧代码
+  duration?: number;   // 顶层属性兼容旧代码
   data?: {
     text?: string;
     audio_url?: string;
@@ -107,6 +116,7 @@ export interface UnifiedVideoProcessRequest {
   action: 'generate' | 'merge' | 'add_audio' | 'transcode';
   model?: string;
   prompt?: string;
+  duration?: number;   // 支持时长参数
   videoUrls?: string[];
   audioUrl?: string;
   format?: string;
@@ -303,34 +313,28 @@ class UnifiedAIBridgeService {
       switch (requestType) {
         case 'chat':
           const chatResponse = await localFullAIBridge.generateChatCompletion(params);
-          const message = chatResponse.choices?.[0]?.message as any;
 
-          // 🔧 修复: 保留完整的 tool_calls 信息，不要丢弃
-          // message 对象包含: content, tool_calls, reasoning_content
-          const toolCalls = message?.tool_calls;
-          const hasToolCalls = toolCalls && toolCalls.length > 0;
+          // 🔧 修复: 正确提取AI响应 - 豆包API格式是 choices[0].message.content
+          // chatResponse 格式: { id, choices: [{ message: { content, reasoning_content, tool_calls } }], usage }
+          const message = (chatResponse as any).choices?.[0]?.message || {};
+          const content = (message as any).content || '';
+          const reasoningContent = (message as any).reasoning_content || '';
+          const toolCalls = (message as any).tool_calls || [];
+          const hasToolCalls = toolCalls.length > 0;
 
           console.log(`🔧 [统一AI Bridge-Debug] AI响应分析:`);
-          console.log(`  - content: ${message?.content?.substring(0, 50) || 'empty'}...`);
+          console.log(`  - content: ${content?.substring(0, 50) || 'empty'}...`);
           console.log(`  - tool_calls: ${hasToolCalls ? `检测到 ${toolCalls.length} 个工具调用` : '无'}`);
-          console.log(`  - reasoning_content: ${message?.reasoning_content?.substring(0, 50) || 'none'}...`);
+          console.log(`  - reasoning_content: ${reasoningContent?.substring(0, 50) || 'none'}...`);
 
           return {
             success: true,
             data: {
-              content: message?.content || '',
-              message: message?.content || '',
-              reasoning_content: message?.reasoning_content,
-              // ✨ 新增: 传递 tool_calls 信息
-              tool_calls: toolCalls || null,
-              usage: chatResponse.usage ? {
-                inputTokens: chatResponse.usage.prompt_tokens || 0,
-                outputTokens: chatResponse.usage.completion_tokens || 0,
-                totalTokens: chatResponse.usage.total_tokens || 0,
-                reasoning_tokens: (chatResponse.usage as any)?.reasoning_tokens || 0,
-                cost: 0,
-                responseTime: 0
-              } : undefined
+              content: content,
+              message: content,
+              reasoning_content: reasoningContent,
+              tool_calls: toolCalls,
+              usage: chatResponse.usage
             }
           };
 
@@ -345,6 +349,7 @@ class UnifiedAIBridgeService {
           };
 
         case 'audio':
+          // 🔧 TTS修复: 本地环境直接使用火山引擎TTS服务
           if (params.action === 'transcribe') {
             const sttResponse = await localFullAIBridge.speechToText(params);
             return {
@@ -354,17 +359,19 @@ class UnifiedAIBridgeService {
               }
             };
           } else if (params.action === 'synthesize') {
-            const ttsResponse = await localFullAIBridge.textToSpeech({
-              input: params.file,
-              model: params.model,
-              voice: params.voice,
-              speed: params.speed
+            // 🔧 本地环境使用火山引擎TTS服务
+            const { volcengineTTSService } = await import('./volcengine/tts.service');
+            const ttsResponse = await volcengineTTSService.textToSpeech({
+              text: params.file,
+              voice: params.voice || 'zh_female_cancan_mars_bigtts',
+              speed: params.speed || 1.0,
+              encoding: 'mp3'
             });
             return {
               success: true,
               data: {
-                audioData: ttsResponse.audioData,
-                contentType: ttsResponse.contentType
+                audioData: ttsResponse.audioBuffer,
+                contentType: 'audio/mpeg'
               }
             };
           }

@@ -76,7 +76,7 @@
                   <span class="student-name">{{ record.studentName }}</span>
                   <van-tag
                     :type="getStatusTagType(record.status)"
-                    size="small"
+                    size="medium"
                   >
                     {{ getStatusText(record.status) }}
                   </van-tag>
@@ -140,7 +140,7 @@
 
                 <div class="record-actions">
                   <van-button
-                    size="mini"
+                    size="medium"
                     type="primary"
                     plain
                     @click.stop="editRecord(record)"
@@ -148,7 +148,7 @@
                     编辑
                   </van-button>
                   <van-button
-                    size="mini"
+                    size="medium"
                     type="danger"
                     plain
                     @click.stop="deleteRecord(record)"
@@ -156,7 +156,7 @@
                     删除
                   </van-button>
                   <van-button
-                    size="mini"
+                    size="medium"
                     type="success"
                     plain
                     @click.stop="viewRecordDetail(record)"

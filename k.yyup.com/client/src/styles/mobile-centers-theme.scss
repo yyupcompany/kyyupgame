@@ -11,12 +11,12 @@
 /* ==================== 主题变量扩展 ==================== */
 :root {
   /* 中心卡片主题变量 */
-  --center-card-bg: var(--bg-card);
-  --center-card-border: var(--border-color-light);
-  --center-card-shadow: var(--shadow-sm);
-  --center-card-hover-shadow: var(--shadow-md);
-  --center-card-active-shadow: var(--shadow-xs);
-  --center-card-transition: var(--transition-duration-base);
+  --center-card-bg: #ffffff;
+  --center-card-border: #e4e7ed;
+  --center-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --center-card-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --center-card-active-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  --center-card-transition: 200ms;
 
   /* 统计卡片变量 */
   --stat-card-gradient-start: rgba(99, 102, 241, 0.1);
@@ -54,17 +54,19 @@
 
 /* ==================== 明暗主题适配 ==================== */
 [data-theme="dark"] {
-  --center-card-bg: #1a1625;
-  --center-card-border: rgba(255, 255, 255, 0.08);
+  --center-card-bg: #1e293b;
+  --center-card-border: #334155;
+  --center-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --center-card-hover-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 
   --stat-card-gradient-start: rgba(99, 102, 241, 0.2);
   --stat-card-gradient-end: rgba(99, 102, 241, 0.1);
 
-  --search-bar-bg: #1a1625;
-  --search-bar-border: rgba(255, 255, 255, 0.08);
+  --search-bar-bg: #1e293b;
+  --search-bar-border: #334155;
   --search-bar-placeholder: rgba(255, 255, 255, 0.3);
 
-  --quick-action-bg: #1a1625;
+  --quick-action-bg: #1e293b;
   --quick-action-hover: rgba(255, 255, 255, 0.05);
 }
 

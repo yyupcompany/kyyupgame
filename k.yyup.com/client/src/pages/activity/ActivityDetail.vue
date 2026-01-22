@@ -520,7 +520,7 @@ const handleShare = async (command: string) => {
   line-height: 1.6;
   color: var(--text-secondary);
   padding: var(--spacing-sm);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-sm);
 }
 
@@ -602,7 +602,7 @@ const handleShare = async (command: string) => {
 :deep(.el-descriptions__label) {
   color: var(--text-primary);
   font-weight: 500;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-descriptions__content) {
@@ -690,7 +690,7 @@ const handleShare = async (command: string) => {
 }
 
 :deep(.el-skeleton__item) {
-  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-tertiary) 50%, var(--bg-secondary) 75%);
+  background: linear-gradient(90deg, var(--bg-page) 25%, var(--bg-tertiary) 50%, var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: loading 1.5s infinite;
 }

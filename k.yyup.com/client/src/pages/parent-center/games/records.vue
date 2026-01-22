@@ -212,59 +212,81 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 游戏记录页面 ==================== */
 .game-records {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 
   .page-header {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color-lighter);
 
     h1 {
-      font-size: var(--text-3xl);
-      font-weight: var(--font-semibold);
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-sm);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+      margin-bottom: var(--spacing-xs);
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 3px;
+        height: 16px;
+        background: linear-gradient(180deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+        border-radius: 2px;
+        margin-right: var(--spacing-sm);
+        vertical-align: middle;
+      }
     }
 
     p {
-      font-size: var(--text-base);
-      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      color: var(--el-text-color-secondary);
+      margin: 0;
+      padding-left: var(--spacing-md);
     }
   }
 
   .stats-section {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
 
     .stat-card {
       display: flex;
       align-items: center;
-      padding: var(--spacing-2xl);
+      padding: var(--spacing-lg);
       background: var(--bg-card);
       border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      transition: var(--transition-base);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color-lighter);
+      transition: all var(--transition-base);
 
       &:hover {
-        box-shadow: var(--shadow-lg);
+        box-shadow: var(--shadow-md);
         transform: translateY(-2px);
       }
 
-      .stat-icon {
-        margin-right: var(--spacing-xl);
+      :deep(.el-icon) {
+        font-size: var(--text-2xl);
+        color: var(--el-color-primary);
+        margin-right: var(--spacing-md);
       }
 
       .stat-content {
         .stat-value {
-          font-size: var(--text-4xl);
-          font-weight: var(--font-bold);
-          color: var(--text-primary);
-          line-height: var(--leading-none);
-          margin-bottom: var(--spacing-sm);
+          font-size: var(--text-2xl);
+          font-weight: 600;
+          color: var(--el-text-color-primary);
+          line-height: 1;
+          margin-bottom: var(--spacing-xs);
         }
 
         .stat-label {
           font-size: var(--text-sm);
-          color: var(--text-secondary);
-          font-weight: var(--font-medium);
+          color: var(--el-text-color-secondary);
         }
       }
     }
@@ -272,33 +294,96 @@ onMounted(() => {
 
   .records-section {
     background: var(--bg-card);
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color-lighter);
 
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: var(--spacing-2xl);
+      margin-bottom: var(--spacing-lg);
+      flex-wrap: wrap;
+      gap: var(--spacing-md);
 
       h2 {
-        font-size: var(--text-xl);
-        font-weight: var(--font-semibold);
-        color: var(--text-primary);
+        font-size: var(--text-lg);
+        font-weight: 600;
+        color: var(--el-text-color-primary);
+
+        &::before {
+          content: '';
+          display: inline-block;
+          width: 3px;
+          height: 14px;
+          background: var(--el-color-primary);
+          border-radius: 2px;
+          margin-right: var(--spacing-sm);
+          vertical-align: middle;
+        }
+      }
+
+      :deep(.el-radio-group) {
+        .el-radio-button__inner {
+          border-radius: var(--radius-md) !important;
+        }
+      }
+    }
+
+    .table-wrapper {
+      :deep(.el-table) {
+        border-radius: var(--radius-md);
+        overflow: hidden;
+
+        th.el-table__cell {
+          background: var(--el-fill-color-light);
+        }
+
+        .cell {
+          word-break: break-word;
+        }
       }
     }
 
     .score-text {
-      font-size: var(--text-xl);
-      font-weight: var(--font-semibold);
-      color: var(--primary-color);
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--el-color-success);
     }
 
     .pagination {
-      margin-top: var(--spacing-2xl);
+      margin-top: var(--spacing-lg);
       display: flex;
       justify-content: center;
+    }
+  }
+
+  /* ==================== 响应式设计 ==================== */
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-md);
+
+    .stats-section {
+      .el-col {
+        margin-bottom: var(--spacing-md);
+      }
+    }
+
+    .records-section {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        h2 {
+          font-size: var(--text-base);
+        }
+      }
+
+      .table-wrapper {
+        :deep(.el-table) {
+          font-size: var(--text-xs);
+        }
+      }
     }
   }
 }

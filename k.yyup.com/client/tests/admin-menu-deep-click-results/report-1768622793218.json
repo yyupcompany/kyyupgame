@@ -1,0 +1,565 @@
+{
+  "baseUrl": "http://localhost:5173",
+  "results": [
+    {
+      "name": "管理控制台",
+      "path": "/dashboard",
+      "url": "http://localhost:5173/dashboard",
+      "status": "PASS",
+      "loadTimeMs": 3432,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 377,
+        "bodyTextLen": 313,
+        "appTextLen": 541
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "查看全部",
+          "from": "http://localhost:5173/dashboard",
+          "to": "http://localhost:5173/todo"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "业务中心",
+      "path": "/centers/business",
+      "url": "http://localhost:5173/centers/business",
+      "status": "PASS",
+      "loadTimeMs": 1702,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 238,
+        "bodyTextLen": 259,
+        "appTextLen": 417
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "活动中心",
+      "path": "/centers/activity",
+      "url": "http://localhost:5173/centers/activity",
+      "status": "PASS",
+      "loadTimeMs": 4472,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 247,
+        "bodyTextLen": 182,
+        "appTextLen": 402
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "刷新",
+          "from": "http://localhost:5173/centers/activity",
+          "to": "http://localhost:5173/centers/activity"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/activity",
+          "to": "http://localhost:5173/centers/activity"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "招生中心",
+      "path": "/centers/enrollment",
+      "url": "http://localhost:5173/centers/enrollment",
+      "status": "PASS",
+      "loadTimeMs": 6727,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 304,
+        "bodyTextLen": 210,
+        "appTextLen": 476
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/enrollment",
+          "to": "http://localhost:5173/centers/enrollment"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/enrollment",
+          "to": "http://localhost:5173/centers/enrollment"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/enrollment",
+          "to": "http://localhost:5173/centers/enrollment"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "客户池中心",
+      "path": "/centers/customer-pool",
+      "url": "http://localhost:5173/centers/customer-pool",
+      "status": "PASS",
+      "loadTimeMs": 5025,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 366,
+        "bodyTextLen": 306,
+        "appTextLen": 1398
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/customer-pool",
+          "to": "http://localhost:5173/centers/customer-pool"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/customer-pool",
+          "to": "http://localhost:5173/centers/customer-pool"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/customer-pool",
+          "to": "http://localhost:5173/centers/customer-pool"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "任务中心",
+      "path": "/centers/task",
+      "url": "http://localhost:5173/centers/task",
+      "status": "PASS",
+      "loadTimeMs": 4881,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 466,
+        "bodyTextLen": 385,
+        "appTextLen": 832
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "刷新",
+          "from": "http://localhost:5173/centers/task",
+          "to": "http://localhost:5173/centers/task"
+        },
+        {
+          "label": "新建",
+          "from": "http://localhost:5173/centers/task",
+          "to": "http://localhost:5173/centers/task"
+        },
+        {
+          "label": "刷新",
+          "from": "http://localhost:5173/centers/task",
+          "to": "http://localhost:5173/centers/task"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "文档中心",
+      "path": "/centers/document-center",
+      "url": "http://localhost:5173/centers/document-center",
+      "status": "PASS",
+      "loadTimeMs": 4548,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 820,
+        "bodyTextLen": 1267,
+        "appTextLen": 3190
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "刷新",
+          "from": "http://localhost:5173/centers/document-center",
+          "to": "http://localhost:5173/centers/document-center"
+        },
+        {
+          "label": "新建",
+          "from": "http://localhost:5173/centers/document-center",
+          "to": "http://localhost:5173/centers/document-center"
+        },
+        {
+          "label": "刷新",
+          "from": "http://localhost:5173/centers/document-center",
+          "to": "http://localhost:5173/centers/document-center"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "财务中心",
+      "path": "/centers/finance",
+      "url": "http://localhost:5173/centers/finance",
+      "status": "PASS",
+      "loadTimeMs": 1928,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 365,
+        "bodyTextLen": 353,
+        "appTextLen": 1631
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "营销中心",
+      "path": "/centers/marketing",
+      "url": "http://localhost:5173/centers/marketing",
+      "status": "PASS",
+      "loadTimeMs": 4425,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 301,
+        "bodyTextLen": 416,
+        "appTextLen": 633
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "🎯\n渠道管理\n\n管理营销渠道，包括线上线下渠道配置、联系人管理、效果监控",
+          "from": "http://localhost:5173/centers/marketing",
+          "to": "http://localhost:5173/centers/marketing/channels"
+        },
+        {
+          "label": "管理联系人 (0)",
+          "from": "http://localhost:5173/centers/marketing/channels",
+          "to": "http://localhost:5173/centers/marketing/channels"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "呼叫中心",
+      "path": "/centers/call",
+      "url": "http://localhost:5173/centers/call",
+      "status": "FAIL",
+      "loadTimeMs": 6466,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 355,
+        "bodyTextLen": 341,
+        "appTextLen": 769
+      },
+      "consoleErrors": [
+        "Response error: AxiosError",
+        "Error details: {code: ERROR, message: 获取激活的VOS配置失败, detail: undefined, statusCode: 400}",
+        "请求失败，已重试0次: Request failed with status code 400",
+        "❌ 加载VOS配置失败: AxiosError",
+        "Response error: AxiosError"
+      ],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "编辑",
+          "from": "http://localhost:5173/centers/call",
+          "to": "http://localhost:5173/centers/call"
+        }
+      ],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/client/tests/admin-menu-deep-click-results/screenshots/_centers_call.png"
+    },
+    {
+      "name": "相册中心",
+      "path": "/centers/media",
+      "url": "http://localhost:5173/centers/media",
+      "status": "PASS",
+      "loadTimeMs": 4302,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 430,
+        "bodyTextLen": 644,
+        "appTextLen": 904
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "查看全部",
+          "from": "http://localhost:5173/centers/media",
+          "to": "http://localhost:5173/centers/media"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/media",
+          "to": "http://localhost:5173/centers/media"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/media",
+          "to": "http://localhost:5173/centers/media"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "新媒体中心",
+      "path": "/principal/media-center",
+      "url": "http://localhost:5173/principal/media-center",
+      "status": "PASS",
+      "loadTimeMs": 1769,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 227,
+        "bodyTextLen": 336,
+        "appTextLen": 1228
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "人员中心",
+      "path": "/centers/personnel",
+      "url": "http://localhost:5173/centers/personnel",
+      "status": "PASS",
+      "loadTimeMs": 4632,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 382,
+        "bodyTextLen": 351,
+        "appTextLen": 1465
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/personnel",
+          "to": "http://localhost:5173/centers/personnel"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/personnel",
+          "to": "http://localhost:5173/centers/personnel"
+        },
+        {
+          "label": "(no label)",
+          "from": "http://localhost:5173/centers/personnel",
+          "to": "http://localhost:5173/centers/personnel"
+        }
+      ],
+      "screenshot": null
+    },
+    {
+      "name": "教学中心",
+      "path": "/centers/teaching",
+      "url": "http://localhost:5173/centers/teaching",
+      "status": "FAIL",
+      "loadTimeMs": 4555,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 351,
+        "bodyTextLen": 333,
+        "appTextLen": 935
+      },
+      "consoleErrors": [
+        "Response error: AxiosError",
+        "Error details: {code: UNKNOWN_ERROR, message: 获取延期告警列表失败, detail: Object, statusCode: 500}",
+        "Response error: AxiosError",
+        "Error details: {code: UNKNOWN_ERROR, message: 获取延期告警列表失败, detail: Object, statusCode: 500}",
+        "请求失败，已重试1次: Request failed with status code 500"
+      ],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "新建课程",
+          "from": "http://localhost:5173/centers/teaching",
+          "to": "http://localhost:5173/centers/teaching"
+        },
+        {
+          "label": "创建脑科学课程",
+          "from": "http://localhost:5173/centers/teaching",
+          "to": "http://localhost:5173/centers/teaching"
+        },
+        {
+          "label": "新建",
+          "from": "http://localhost:5173/centers/teaching",
+          "to": "http://localhost:5173/centers/teaching"
+        }
+      ],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/client/tests/admin-menu-deep-click-results/screenshots/_centers_teaching.png"
+    },
+    {
+      "name": "测评中心",
+      "path": "/centers/assessment",
+      "url": "http://localhost:5173/centers/assessment",
+      "status": "PASS",
+      "loadTimeMs": 1711,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 295,
+        "bodyTextLen": 253,
+        "appTextLen": 683
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "考勤中心",
+      "path": "/centers/attendance",
+      "url": "http://localhost:5173/centers/attendance",
+      "status": "PASS",
+      "loadTimeMs": 1832,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 383,
+        "bodyTextLen": 309,
+        "appTextLen": 835
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "数据分析中心",
+      "path": "/centers/analytics",
+      "url": "http://localhost:5173/centers/analytics",
+      "status": "PASS",
+      "loadTimeMs": 1763,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 312,
+        "bodyTextLen": 469,
+        "appTextLen": 689
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "用量中心",
+      "path": "/centers/usage",
+      "url": "http://localhost:5173/centers/usage",
+      "status": "FAIL",
+      "loadTimeMs": 1790,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 369,
+        "bodyTextLen": 425,
+        "appTextLen": 779
+      },
+      "consoleErrors": [
+        "Error: <path> attribute d: Expected number, \"M 0 NaN\".",
+        "Error: <path> attribute d: Expected number, \"M 0 NaN L 600 200 L …\".",
+        "Error: <path> attribute d: Expected number, \"M 0 NaN\".",
+        "Error: <path> attribute d: Expected number, \"M 0 NaN L 600 200 L …\".",
+        "Error: <path> attribute d: Expected number, \"M 0 NaN\"."
+      ],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/client/tests/admin-menu-deep-click-results/screenshots/_centers_usage.png"
+    },
+    {
+      "name": "集团中心",
+      "path": "/group",
+      "url": "http://localhost:5173/group",
+      "status": "PASS",
+      "loadTimeMs": 1860,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 321,
+        "bodyTextLen": 265,
+        "appTextLen": 413
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "督查中心",
+      "path": "/centers/inspection",
+      "url": "http://localhost:5173/centers/inspection",
+      "status": "FAIL",
+      "loadTimeMs": 5195,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 410,
+        "bodyTextLen": 332,
+        "appTextLen": 851
+      },
+      "consoleErrors": [
+        "Response error: AxiosError",
+        "Error details: {code: NOT_FOUND, message: 请求的资源不存在, detail: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta char…nspection-ai/plan-analysis</pre>\n</body>\n</html>\n, statusCode: 404}",
+        "请求失败，已重试0次: Request failed with status code 404",
+        "AI分析失败: AxiosError"
+      ],
+      "pageErrors": [],
+      "clickedActions": [
+        {
+          "label": "创建文档",
+          "from": "http://localhost:5173/centers/inspection",
+          "to": "http://localhost:5173/centers/inspection"
+        },
+        {
+          "label": "AI智能分析",
+          "from": "http://localhost:5173/centers/inspection",
+          "to": "http://localhost:5173/centers/inspection"
+        },
+        {
+          "label": "查看",
+          "from": "http://localhost:5173/centers/inspection",
+          "to": "http://localhost:5173/centers/inspection"
+        }
+      ],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/client/tests/admin-menu-deep-click-results/screenshots/_centers_inspection.png"
+    },
+    {
+      "name": "系统中心",
+      "path": "/centers/system",
+      "url": "http://localhost:5173/centers/system",
+      "status": "PASS",
+      "loadTimeMs": 2315,
+      "blank": {
+        "isBlank": false,
+        "visibleCount": 406,
+        "bodyTextLen": 608,
+        "appTextLen": 1608
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": null
+    },
+    {
+      "name": "AI中心",
+      "path": "/centers/ai",
+      "url": "http://localhost:5173/centers/ai",
+      "status": "BLANK",
+      "loadTimeMs": 1729,
+      "blank": {
+        "isBlank": true,
+        "visibleCount": 2,
+        "bodyTextLen": 0,
+        "appTextLen": 0,
+        "stage": "afterClick"
+      },
+      "consoleErrors": [],
+      "pageErrors": [],
+      "clickedActions": [],
+      "screenshot": "/home/zhgue/kyyupgame/k.yyup.com/client/tests/admin-menu-deep-click-results/screenshots/AI_centers_ai.png"
+    }
+  ]
+}

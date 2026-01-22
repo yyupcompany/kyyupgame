@@ -556,7 +556,7 @@ const resetForm = () => {
     display: flex;
     gap: var(--text-2xl);
     padding: var(--text-3xl);
-    background: var(--bg-color);
+    background: var(--bg-card);
     border: var(--border-width-base) solid var(--border-color);
     border-radius: var(--text-sm);
     transition: all 0.3s ease;

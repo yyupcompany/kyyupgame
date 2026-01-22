@@ -4,18 +4,6 @@
     description="基于AI智能的专业语音通话系统，支持老家长、客户池、员工三大呼叫场景"
     :icon="Phone"
   >
-    <!-- 头部操作按钮 -->
-    <template #header-actions>
-      <el-button type="primary" @click="showMakeCallDialog = true">
-        <UnifiedIcon name="default" />
-        发起通话
-      </el-button>
-      <el-button @click="showVosSettings = true">
-        <UnifiedIcon name="default" />
-        VOS设置
-      </el-button>
-    </template>
-
     <!-- 主要内容区域 - 标签页 -->
     <el-tabs v-model="activeTab" type="card" class="call-center-tabs">
       <!-- 标签页1: 电话呼叫 -->
@@ -990,6 +978,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .call-center-tabs {
   :deep(.el-tabs__content) {
     padding: var(--spacing-lg) 0;

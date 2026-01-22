@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="人员中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="人员中心" back-path="/mobile/centers">
     <!-- 新建按钮 -->
     <template #header-extra>
       <van-icon
@@ -104,7 +99,7 @@
                   v-for="filter in studentsFilters"
                   :key="filter.key"
                   :type="studentsFilterAge === filter.key ? 'primary' : 'default'"
-                  size="small"
+                  size="medium"
                   round
                   @click="handleStudentsFilter(filter.key)"
                 >
@@ -213,7 +208,7 @@
                     <van-tag
                       v-for="child in parent.children"
                       :key="child.id"
-                      size="small"
+                      size="medium"
                       class="child-tag"
                     >
                       {{ child.name }}
@@ -235,14 +230,14 @@
                 <!-- 操作按钮 -->
                 <div class="item-actions">
                   <van-button
-                    size="small"
+                    size="medium"
                     type="primary"
                     @click="handleEditParent(parent)"
                   >
                     编辑
                   </van-button>
                   <van-button
-                    size="small"
+                    size="medium"
                     type="danger"
                     @click="handleDeleteParent(parent)"
                   >
@@ -298,7 +293,7 @@
                     <van-tag
                       v-for="cls in teacher.classes"
                       :key="cls.id"
-                      size="small"
+                      size="medium"
                       class="class-tag"
                     >
                       {{ cls.name }}
@@ -320,14 +315,14 @@
                 <!-- 操作按钮 -->
                 <div class="item-actions">
                   <van-button
-                    size="small"
+                    size="medium"
                     type="primary"
                     @click="handleEditTeacher(teacher)"
                   >
                     编辑
                   </van-button>
                   <van-button
-                    size="small"
+                    size="medium"
                     type="danger"
                     @click="handleDeleteTeacher(teacher)"
                   >
@@ -437,14 +432,14 @@
         </van-form>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, watch, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import * as echarts from 'echarts'
 import { personnelCenterApi } from '@/api/personnel-center'
 
@@ -529,7 +524,7 @@ const classesTotal = ref(0)
 const classesSearchKeyword = ref('')
 
 // 生命周期
-onMounted(() => {
+onMounted(async () => {
   loadOverviewData()
   initCharts()
 })

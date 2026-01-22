@@ -3,13 +3,6 @@
     title="文档协作"
     description="多人协作编辑文档，支持实时同步和版本管理"
   >
-    <template #header-actions>
-      <el-button @click="goBack">
-        <UnifiedIcon name="ArrowLeft" />
-        返回
-      </el-button>
-    </template>
-
     <div class="center-container document-collaboration">
       <!-- 文档列表（当没有ID时显示） -->
       <div v-if="!hasDocumentId" class="document-list-container">

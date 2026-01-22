@@ -6,7 +6,7 @@
 
 // Note: CenterContainer is replaced by UnifiedCenterLayout.vue
 // import CenterContainer from './CenterContainer.vue'
-import UnifiedCenterLayout from '../layout/UnifiedCenterLayout.vue'
+import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
 import TabContainer from './TabContainer.vue'
 import DataTable from './DataTable.vue'
 import DetailPanel from './DetailPanel.vue'

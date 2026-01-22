@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="通知中心"
-    :show-back="true"
-    @back="handleBack"
-  >
+  <MobileCenterLayout title="通知中心" back-path="/mobile/centers">
     <div class="notification-center">
       <!-- 搜索和筛选栏 -->
       <div class="search-filter-bar">
@@ -31,10 +27,10 @@
           <span>已选择 {{ selectedNotifications.length }} 项</span>
         </div>
         <div class="batch-buttons">
-          <van-button size="small" @click="selectAll">全选</van-button>
-          <van-button size="small" @click="deselectAll">取消</van-button>
-          <van-button size="small" type="primary" @click="markSelectedAsRead">标记已读</van-button>
-          <van-button size="small" type="warning" @click="deleteSelected">删除</van-button>
+          <van-button size="medium" @click="selectAll">全选</van-button>
+          <van-button size="medium" @click="deselectAll">取消</van-button>
+          <van-button size="medium" type="primary" @click="markSelectedAsRead">标记已读</van-button>
+          <van-button size="medium" type="warning" @click="deleteSelected">删除</van-button>
         </div>
       </div>
 
@@ -77,7 +73,7 @@
                 <van-tag
                   v-if="notification.priority === 'high'"
                   type="danger"
-                  size="small"
+                  size="medium"
                 >
                   重要
                 </van-tag>
@@ -96,7 +92,7 @@
               <van-button
                 v-for="action in notification.actions"
                 :key="action.id"
-                size="mini"
+                size="medium"
                 :type="action.type"
                 @click.stop="handleAction(action, notification)"
               >
@@ -193,14 +189,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast, Dialog, ImagePreview } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { notificationApi } from '@/api/unified-api'
 
 interface NotificationAction {
@@ -566,6 +562,12 @@ watch([searchQuery, activeFilter], () => {
 
 // 组件挂载时加载数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadNotifications()
 })
 </script>

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="页面"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="页面" back-path="/mobile/centers">
     <div class="page">
       <van-cell-group inset>
         <van-cell title="数据加载中" v-if="loading" />
@@ -14,12 +9,12 @@
         <van-cell v-for="item in dataList" :key="item.id" :title="item.title || item.name" is-link />
       </van-list>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
 
@@ -55,6 +50,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 .page { min-height: 100vh; background-color: var(--bg-color-page); padding-bottom: 20px; }
 </style>

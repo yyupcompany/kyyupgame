@@ -284,8 +284,9 @@ export class OSSProxyController {
     try {
       const { fileType, filename } = req.params;
       const tenant = (req as any).tenant;
+      const tenantKey = tenant?.ossNamespace || tenant?.code;
 
-      if (!tenant || !tenant.phone) {
+      if (!tenant || !tenantKey) {
         res.status(401).json({
           success: false,
           message: '未找到租户信息'
@@ -303,8 +304,8 @@ export class OSSProxyController {
         return;
       }
 
-      // 构建租户文件路径 - 使用 req.tenant.phone
-      const ossPath = `kindergarten/rent/${tenant.phone}/user-uploads/${fileType}/${filename}`;
+      // 构建租户文件路径 - 使用租户标识
+      const ossPath = `kindergarten/rent/${tenantKey}/user-uploads/${fileType}/${filename}`;
 
       console.log(`[OSS代理] 获取租户文件: ${ossPath}`);
 
@@ -329,7 +330,7 @@ export class OSSProxyController {
       res.json({
         success: true,
         data: {
-          phone: tenant.phone,
+          tenantKey,
           fileType,
           filename,
           ossPath,

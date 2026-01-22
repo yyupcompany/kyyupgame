@@ -59,11 +59,12 @@
 /* ==================== 侧边栏布局规范 ==================== */
 .sidebar {
   position: fixed;
-  top: 0;
+  // ✅ 修复：侧边栏从头部下方开始，避免 header 覆盖导致点击被拦截
+  top: var(--header-height, 64px);
   left: 0;
   bottom: 0;
   width: var(--sidebar-width);
-  height: 100vh;
+  height: calc(100vh - var(--header-height, 64px));
   background: var(--sidebar-bg, #ffffff);
   border-right: 1px solid var(--border-color, #e5e7eb);
   z-index: var(--z-sidebar);

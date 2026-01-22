@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="模板详情"
-    :show-back="true"
-    @back="goBack"
-  >
+  <MobileCenterLayout title="模板详情" back-path="/mobile/centers">
     <div class="mobile-template-detail">
       <!-- 加载状态 -->
       <van-loading v-if="loading" type="spinner" color="#1989fa" class="loading-center">
@@ -28,9 +24,9 @@
 
           <template #desc>
             <div class="template-meta">
-              <van-tag type="primary" size="small">{{ template.code }}</van-tag>
-              <van-tag type="success" size="small">{{ getCategoryName(template.category) }}</van-tag>
-              <van-tag type="warning" size="small">{{ getFrequencyLabel(template.frequency) }}</van-tag>
+              <van-tag type="primary" size="medium">{{ template.code }}</van-tag>
+              <van-tag type="success" size="medium">{{ getCategoryName(template.category) }}</van-tag>
+              <van-tag type="warning" size="medium">{{ getFrequencyLabel(template.frequency) }}</van-tag>
             </div>
             
             <div class="template-stats">
@@ -103,19 +99,19 @@
                 >
                   <template #right-icon>
                     <div class="variable-tags">
-                      <van-tag :type="getTypeTagType(variable.type)" size="small">
+                      <van-tag :type="getTypeTagType(variable.type)" size="medium">
                         {{ getTypeLabel(variable.type) }}
                       </van-tag>
                       <van-tag
                         :type="variable.source === 'auto' ? 'success' : 'warning'"
-                        size="small"
+                        size="medium"
                       >
                         {{ variable.source === 'auto' ? '自动获取' : '手动填写' }}
                       </van-tag>
                       <van-tag
                         v-if="variable.required"
                         type="danger"
-                        size="small"
+                        size="medium"
                       >
                         必填
                       </van-tag>
@@ -179,10 +175,10 @@
                   class="related-card"
                 >
                   <template #tags>
-                    <van-tag :type="getPriorityTagType(item.priority)" size="small">
+                    <van-tag :type="getPriorityTagType(item.priority)" size="medium">
                       {{ getPriorityLabel(item.priority) }}
                     </van-tag>
-                    <van-tag type="primary" size="small">{{ item.code }}</van-tag>
+                    <van-tag type="primary" size="medium">{{ item.code }}</van-tag>
                   </template>
                   <template #thumb>
                     <van-icon name="description" size="40" color="#1989fa" />
@@ -194,14 +190,15 @@
         </van-tabs>
       </template>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { showToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import { showToast, showFailToast, showSuccessToast, showLoadingToast, closeToast } from 'vant'
+import type { TagType } from 'vant'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { marked } from 'marked'
 import { getTemplateById, type Template } from '@/api/endpoints/document-templates'
 
@@ -289,23 +286,23 @@ const getTypeLabel = (type: string) => {
   return map[type] || type
 }
 
-const getTypeTagType = (type: string) => {
-  const map: Record<string, string> = {
-    string: '',
+const getTypeTagType = (type: string): TagType => {
+  const map: Record<string, TagType> = {
+    string: 'default',
     number: 'success',
     date: 'warning',
-    boolean: 'info'
+    boolean: 'primary'
   }
-  return map[type] || ''
+  return map[type] || 'default'
 }
 
-const getPriorityTagType = (priority: string) => {
-  const map: Record<string, string> = {
+const getPriorityTagType = (priority: string): TagType => {
+  const map: Record<string, TagType> = {
     required: 'danger',
     recommended: 'warning',
-    optional: ''
+    optional: 'default'
   }
-  return map[priority] || ''
+  return map[priority] || 'default'
 }
 
 const getPriorityLabel = (priority: string) => {
@@ -325,9 +322,33 @@ const handleUseTemplate = () => {
   })
 }
 
-const handleDownload = () => {
-  // TODO: 实现下载功能
-  showToast('下载功能开发中...')
+const handleDownload = async () => {
+  if (!template.value) {
+    showToast('模板数据不存在')
+    return
+  }
+  
+  showLoadingToast({ message: '下载中...', forbidClick: true })
+  
+  try {
+    // 生成模板内容
+    const content = JSON.stringify(template.value, null, 2)
+    const blob = new Blob([content], { type: 'application/json;charset=utf-8' })
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${template.value.name || '模板'}.json`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    
+    closeToast()
+    showSuccessToast('下载成功')
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '下载失败')
+  }
 }
 
 const goToTemplate = (id: number) => {
@@ -389,6 +410,12 @@ const loadRelatedTemplates = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTemplate()
 })
 </script>

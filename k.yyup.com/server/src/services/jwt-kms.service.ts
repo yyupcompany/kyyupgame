@@ -75,14 +75,14 @@ export class JWTKMSService {
       return this.cacheKey;
     }
 
-    // 从KMS获取密钥
-    const key = await this.kms.getKey(this.config.keyAlias);
+    // 从KMS生成数据密钥
+    const result = await this.kms.generateDataKey(this.config.keyAlias);
 
     // 缓存密钥
-    this.cacheKey = key;
+    this.cacheKey = result.plaintext;
     this.cacheExpire = Date.now() + this.CACHE_TTL;
 
-    return key;
+    return result.plaintext;
   }
 
   /**

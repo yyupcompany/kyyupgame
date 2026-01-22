@@ -55,15 +55,18 @@ const getGameIcon = (gameKey: string): string => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 游戏卡片组件 ==================== */
 .game-card {
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   cursor: pointer;
-  transition: all var(--transition-slow) var(--ease-in-out);
-  border: var(--border-width-base) solid transparent;
+  transition: all var(--transition-base);
+  border: 1px solid var(--border-color-lighter);
   position: relative;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -71,83 +74,99 @@ const getGameIcon = (gameKey: string): string => {
     top: 0;
     left: 0;
     right: 0;
-    height: var(--spacing-sm);
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--gradient-purple-end) 100%);
+    height: 3px;
+    background: linear-gradient(90deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
     opacity: 0;
-    transition: opacity var(--transition-slow);
+    transition: opacity var(--transition-base);
   }
 
   &:hover {
-    transform: translateY(-var(--spacing-sm));
-    box-shadow: 0 var(--spacing-sm) var(--spacing-2xl) var(--shadow-lg);
-    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--el-color-primary-light-3);
 
     &::before {
       opacity: 1;
     }
 
     .play-btn {
-      transform: scale(1.1);
-      background: var(--gradient-primary);
+      transform: translateX(50%) scale(1.1);
+      background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
     }
   }
 
   &.theme-girl {
     &::before {
-      background: linear-gradient(90deg, var(--gradient-warning-start) 0%, var(--gradient-warning-end) 100%);
+      background: linear-gradient(90deg, var(--el-color-warning) 0%, var(--el-color-warning-light-3) 100%);
     }
   }
 
   &.theme-boy {
     &::before {
-      background: linear-gradient(90deg, var(--gradient-primary-start) 0%, var(--gradient-primary-end) 100%);
+      background: linear-gradient(90deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
     }
   }
 
   .game-icon {
-    font-size: var(--icon-xl);
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto var(--spacing-md);
+    background: linear-gradient(135deg, var(--el-color-primary-light-8) 0%, var(--el-color-primary-light-9) 100%);
+    border-radius: var(--radius-full);
+    font-size: var(--text-2xl);
+    color: var(--el-color-primary);
+
+    :deep(.el-icon) {
+      font-size: var(--text-2xl);
+    }
   }
 
   .game-info {
-    padding-bottom: var(--spacing-4xl); // 为播放按钮留出空间
+    padding-bottom: var(--spacing-3xl);
 
     h3 {
-      font-size: var(--text-2xl);
-      color: var(--text-primary);
-      margin: 0 0 var(--spacing-sm) 0;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+      margin: 0 0 var(--spacing-xs) 0;
       text-align: center;
+      line-height: var(--leading-tight);
     }
 
     .description {
-      font-size: var(--text-base);
-      color: var(--text-secondary);
-      margin: 0 0 var(--spacing-lg) 0;
+      font-size: var(--text-xs);
+      color: var(--el-text-color-secondary);
+      margin: 0 0 var(--spacing-md) 0;
       text-align: center;
-      min-height: var(--spacing-2xl);
+      line-height: var(--leading-normal);
+      min-height: 40px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     .stats {
       display: flex;
       justify-content: space-around;
-      padding: var(--spacing-sm) var(--spacing-lg);
-      border-top: var(--border-width-base) solid var(--border-color);
+      padding-top: var(--spacing-sm);
       margin-top: var(--spacing-sm);
+      border-top: 1px solid var(--border-color-lighter);
 
       .stat-item {
         display: flex;
         align-items: center;
-        gap: var(--spacing-sm);
-        font-size: var(--text-sm);
-        font-weight: var(--font-semibold);
-        color: var(--text-primary);
-        text-shadow: var(--text-shadow-sm);
+        gap: var(--spacing-xs);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        color: var(--el-text-color-secondary);
 
-        .el-icon {
-          color: var(--warning-color);
-          font-size: var(--text-xl);
-          filter: drop-shadow(var(--text-shadow-sm));
+        :deep(.el-icon) {
+          color: var(--el-color-warning);
+          font-size: var(--text-base);
         }
       }
     }
@@ -155,25 +174,29 @@ const getGameIcon = (gameKey: string): string => {
 
   .play-btn {
     position: absolute;
-    bottom: var(--spacing-xl);
-    right: 50%;
-    transform: translateX(50%); // 居中显示
-    width: var(--spacing-4xl);
-    height: var(--spacing-4xl);
+    bottom: var(--spacing-md);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 48px;
+    height: 48px;
     border-radius: var(--radius-full);
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-on-primary);
-    font-size: var(--text-2xl);
-    transition: all var(--transition-slow);
-    box-shadow: 0 var(--spacing-sm) var(--spacing-lg) var(--glow-primary);
-    z-index: var(--z-sticky);
+    color: white;
+    font-size: var(--text-lg);
+    transition: all var(--transition-base);
+    box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
+    z-index: 1;
+
+    :deep(.el-icon) {
+      font-size: var(--text-lg);
+    }
 
     &:hover {
-      transform: translateX(50%) scale(1.15);
-      box-shadow: 0 var(--spacing-sm) var(--spacing-2xl) var(--glow-primary);
+      transform: translateX(-50%) scale(1.15);
+      box-shadow: 0 6px 16px rgba(64, 158, 255, 0.4);
     }
   }
 }

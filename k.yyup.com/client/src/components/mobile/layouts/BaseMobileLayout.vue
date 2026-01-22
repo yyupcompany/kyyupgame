@@ -1,5 +1,9 @@
 <template>
-  <div class="base-mobile-layout" :class="layoutClasses">
+  <div 
+    class="base-mobile-layout" 
+    :class="layoutClasses"
+    :style="{ backgroundColor: isDarkTheme ? '#0f172a' : 'var(--bg-color-page)' }"
+  >
     <!-- 固定头部导航 -->
     <FixedHeader
       v-if="showHeader"
@@ -65,6 +69,15 @@ import { useUserStore } from '@/stores/user'
 import FixedHeader from './FixedHeader.vue'
 import ScrollableContent from './ScrollableContent.vue'
 import FixedFooter from './FixedFooter.vue'
+
+// 主题状态
+const isDarkTheme = ref(false)
+
+// 检测当前主题
+const detectTheme = () => {
+  const htmlTheme = document.documentElement.getAttribute('data-theme')
+  isDarkTheme.value = htmlTheme === 'dark'
+}
 
 // 类型已在上面导出，这里直接使用
 
@@ -149,6 +162,15 @@ watch(() => route.path, updateActiveTab, { immediate: true })
 
 onMounted(() => {
   updateActiveTab()
+  detectTheme()
+  // 监听主题变化
+  const observer = new MutationObserver(() => {
+    detectTheme()
+  })
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
 })
 
 // 事件处理

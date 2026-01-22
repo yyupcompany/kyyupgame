@@ -22,6 +22,14 @@ const Layout = () => import('@/layouts/MainLayout.vue')
 const PrincipalDashboard = () => import('@/pages/principal/Dashboard.vue')
 const PrincipalReports = () => import('@/pages/principal/PrincipalReports.vue')
 const PrincipalMediaCenter = () => import('@/pages/principal/MediaCenter.vue')
+const PrincipalPerformance = () => import('@/pages/principal/Performance.vue')
+const PrincipalPosterGenerator = () => import('@/pages/principal/PosterGenerator.vue')
+const PrincipalPosterTemplates = () => import('@/pages/principal/PosterTemplates.vue')
+const PrincipalParentPermissionManagement = () => import('@/pages/principal/ParentPermissionManagement.vue')
+const PrincipalIntelligentDashboard = () => import('@/pages/principal/decision-support/intelligent-dashboard.vue')
+const PrincipalCustomerPool = () => import('@/pages/principal/CustomerPool.vue')
+const PrincipalActivities = () => import('@/pages/principal/Activities.vue')
+const PrincipalMarketingAnalysis = () => import('@/pages/principal/MarketingAnalysis.vue')
 
 export const principalRoutes: RouteRecordRaw[] = [
   // 🔧 修复：园长功能模块嵌套在 MainLayout 中
@@ -67,6 +75,94 @@ export const principalRoutes: RouteRecordRaw[] = [
           title: '新媒体中心',
           requiresAuth: true,
           permission: 'PRINCIPAL_MEDIA_CENTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'performance',
+        name: 'PrincipalPerformance',
+        component: PrincipalPerformance,
+        meta: {
+          title: '招生业绩统计',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_PERFORMANCE_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'poster-generator',
+        name: 'PrincipalPosterGenerator',
+        component: PrincipalPosterGenerator,
+        meta: {
+          title: '海报生成器',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_POSTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'poster-templates',
+        name: 'PrincipalPosterTemplates',
+        component: PrincipalPosterTemplates,
+        meta: {
+          title: '海报模板',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_POSTER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'parent-permission-management',
+        name: 'PrincipalParentPermissionManagement',
+        component: PrincipalParentPermissionManagement,
+        meta: {
+          title: '家长权限管理',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_PERMISSION_MANAGE',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'decision-support/intelligent-dashboard',
+        name: 'PrincipalIntelligentDashboard',
+        component: PrincipalIntelligentDashboard,
+        meta: {
+          title: '智能决策仪表板',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_DECISION_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'customer-pool',
+        name: 'PrincipalCustomerPool',
+        component: PrincipalCustomerPool,
+        meta: {
+          title: '客户池管理',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_CUSTOMER_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'activities',
+        name: 'PrincipalActivities',
+        component: PrincipalActivities,
+        meta: {
+          title: '活动管理',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_ACTIVITY_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
+        path: 'marketing-analysis',
+        name: 'PrincipalMarketingAnalysis',
+        component: PrincipalMarketingAnalysis,
+        meta: {
+          title: '营销分析',
+          requiresAuth: true,
+          permission: 'PRINCIPAL_MARKETING_VIEW',
           priority: 'medium'
         }
       }

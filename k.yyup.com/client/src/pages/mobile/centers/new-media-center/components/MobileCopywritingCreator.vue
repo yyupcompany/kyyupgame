@@ -726,7 +726,7 @@ onMounted(() => {
         padding: var(--app-gap-sm);
         border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
-        background: var(--bg-secondary);
+        background: var(--bg-page);
         cursor: pointer;
         transition: all var(--transition-base);
 
@@ -810,7 +810,7 @@ onMounted(() => {
       .generated-content {
         .text-preview {
           padding: var(--app-gap);
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-md);
           min-height: 200px;
 
@@ -823,7 +823,7 @@ onMounted(() => {
         }
 
         .wechat-preview {
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-md);
           padding: var(--app-gap);
           min-height: 200px;

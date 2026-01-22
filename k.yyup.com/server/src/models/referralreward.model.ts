@@ -53,14 +53,13 @@ export class ReferralReward extends Model<ReferralRewardAttributes, ReferralRewa
 ReferralReward.init(
   {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING(50),
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
   },
   referral_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
+    type: DataTypes.STRING(50),
+    allowNull: false,
   },
   reward_type: {
     type: DataTypes.STRING,
@@ -111,9 +110,8 @@ ReferralReward.init(
     sequelize,
     tableName: 'referral_rewards',
     modelName: 'ReferralReward',
-    timestamps: true,
+    timestamps: false,
     underscored: true,
-    paranoid: true, // 软删除
   }
 );
 

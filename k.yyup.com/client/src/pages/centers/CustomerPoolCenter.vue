@@ -2,14 +2,8 @@
   <UnifiedCenterLayout
     title="客户池中心"
     description="这里是客户管理的核心平台，您可以管理客户信息、跟进客户状态、分析客户数据、提高转化率"
+    :full-width="true"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreate">
-        <UnifiedIcon name="Plus" />
-        新建客户
-      </el-button>
-    </template>
-
     <div class="center-container customer-pool-center-timeline">
 
     <!-- 主要内容区域 -->
@@ -296,12 +290,12 @@
               @size-change="handleFollowupsPageSizeChange"
               @search="handleFollowupsSearch"
             >
-              <template #column-type="{ value }">
+              <template #column-followupMethod="{ value }">
                 <el-tag :type="getFollowupTypeColor(value)" size="small">
                   {{ getFollowupTypeText(value) }}
                 </el-tag>
               </template>
-              <template #column-result="{ value }">
+              <template #column-followupResult="{ value }">
                 <el-tag :type="getFollowupResultColor(value)" size="small">
                   {{ getFollowupResultText(value) }}
                 </el-tag>
@@ -649,6 +643,13 @@ const route = useRoute()
 const activeTab = ref('overview')
 const chartsLoading = ref(false)
 
+const tabs = [
+  { key: 'overview', label: '概览' },
+  { key: 'customers', label: '客户管理' },
+  { key: 'followups', label: '跟进记录' },
+  { key: 'analytics', label: '数据分析' }
+]
+
 // 概览统计数据
 const overviewStats = ref([
   { key: 'total', title: '总客户数', value: 0, unit: '人', type: 'primary', iconName: 'user', trend: 12, trendText: '较上月' },
@@ -864,7 +865,7 @@ const loadOverviewData = async () => {
     const response = await get(CUSTOMER_ENDPOINTS.POOL_STATS)
     console.log('📊 客户池统计API响应:', response)
 
-    if (response.success) {
+    if (response.success && response.data) {
       const stats = response.data
       console.log('📊 客户池统计数据:', stats)
 
@@ -1661,33 +1662,50 @@ const getSourceText = (source: string) => {
 }
 
 const getFollowupTypeColor = (type: string) => {
+  if (!type) return 'info'
+  const typeLower = type.toLowerCase()
   const colorMap: Record<string, string> = {
     phone: 'primary',
+    '电话': 'primary',
     wechat: 'success',
+    '微信': 'success',
     visit: 'warning',
-    email: 'info'
+    '面谈': 'warning',
+    '拜访': 'warning',
+    email: 'info',
+    '邮件': 'info'
   }
-  return colorMap[type] || 'default'
+  return colorMap[typeLower] || colorMap[type] || 'info'
 }
 
 const getFollowupTypeText = (type: string) => {
+  if (!type) return '-'
+  const typeLower = type.toLowerCase()
   const textMap: Record<string, string> = {
     phone: '电话跟进',
     wechat: '微信沟通',
     visit: '上门拜访',
     email: '邮件联系'
   }
-  return textMap[type] || type
+  return textMap[typeLower] || type
 }
 
 const getFollowupResultColor = (result: string) => {
+  if (!result) return 'info'
+  const resultLower = result.toLowerCase()
   const colorMap: Record<string, string> = {
     interested: 'success',
+    '有意向': 'success',
+    '非常满意': 'success',
     considering: 'warning',
+    '考虑中': 'warning',
+    '需要考虑': 'warning',
     not_interested: 'danger',
-    converted: 'primary'
+    '无意向': 'danger',
+    converted: 'primary',
+    '已转化': 'primary'
   }
-  return colorMap[result] || 'default'
+  return colorMap[resultLower] || colorMap[result] || 'info'
 }
 
 // 🎯 新增：关键信息列格式化方法
@@ -1967,13 +1985,14 @@ watch(() => route.query.tab, (newTab) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 /* 客户池中心根容器 - 完全参考活动中心的标准样式 */
 .customer-pool-center-timeline {
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: var(--spacing-xl);
-  background: var(--el-bg-color-page);
+  background: var(--bg-page);
 }
 
 /* .page-header 样式已移至全局 center-common.scss 中统一管理 */
@@ -1999,7 +2018,8 @@ watch(() => route.query.tab, (newTab) => {
 }
 
 /* 🔧 修复：统计卡片网格布局 - 一排两个 */
-.stats-section .stats-cards {
+.stats-section .stats-cards,
+.analytics-stats .stats-cards {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-lg);
@@ -2059,7 +2079,7 @@ watch(() => route.query.tab, (newTab) => {
   align-items: center;
   justify-content: space-between;
   padding: var(--spacing-lg);
-  background: var(--el-bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-lg);
   box-shadow: var(--shadow-sm);
@@ -2074,7 +2094,7 @@ watch(() => route.query.tab, (newTab) => {
   margin: 0;
   font-size: var(--text-lg);
   font-weight: 600;
-  color: var(--el-text-color-primary);
+  color: var(--text-primary);
 }
 
 .toolbar-right {
@@ -2099,7 +2119,7 @@ watch(() => route.query.tab, (newTab) => {
   justify-content: space-between;
   gap: var(--spacing-lg);
   padding: var(--spacing-lg);
-  background: var(--el-bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-md);
   margin-bottom: var(--spacing-lg);
 }
@@ -2121,7 +2141,7 @@ watch(() => route.query.tab, (newTab) => {
 }
 
 .filter-tip {
-  color: var(--el-color-danger);
+  color: var(--danger-color);
   font-size: var(--text-base);
   font-weight: 500;
 }
@@ -2129,42 +2149,42 @@ watch(() => route.query.tab, (newTab) => {
 .selected-count {
   margin-left: var(--spacing-sm);
   font-weight: 600;
-  color: var(--el-color-primary-light-3);
+  color: var(--primary-light);
 }
 
 /* 🎯 新增：关键信息列样式 */
 .child-age {
-  color: var(--el-color-primary);
+  color: var(--primary-color);
   font-weight: 500;
 }
 
 .teacher-name {
-  color: var(--el-text-color-primary);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
 .enrollment-date {
-  color: var(--el-color-info);
+  color: var(--info-color);
   font-size: var(--text-sm);
 }
 
 .text-gray {
-  color: var(--el-text-color-secondary);
+  color: var(--text-secondary);
   font-size: var(--text-sm);
 }
 
 .text-success {
-  color: var(--el-color-success);
+  color: var(--success-color);
   font-weight: 500;
 }
 
 .text-warning {
-  color: var(--el-color-warning);
+  color: var(--warning-color);
   font-weight: 500;
 }
 
 .text-danger {
-  color: var(--el-color-danger);
+  color: var(--danger-color);
   font-weight: 500;
 }
 
@@ -2251,13 +2271,13 @@ watch(() => route.query.tab, (newTab) => {
     
     .current-stage-tasks {
       .task-item {
-        padding: var(--spacing-base);
-        margin-bottom: var(--spacing-base);
-        border: var(--border-width-base) solid var(--border-color);
-        border-radius: var(--radius-base);
-        background: var(--bg-color);
-        transition: all var(--duration-fast);
-        
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        background: var(--bg-card);
+        transition: all var(--transition-fast);
+
         &:hover {
           background: var(--bg-hover);
           box-shadow: var(--shadow-sm);
@@ -2296,7 +2316,7 @@ watch(() => route.query.tab, (newTab) => {
     
     .script-content {
       padding: var(--spacing-base);
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: var(--radius-sm);
       line-height: 1.8;
       color: var(--text-primary);
@@ -2352,7 +2372,7 @@ watch(() => route.query.tab, (newTab) => {
           
           .log-feedback {
             padding: var(--spacing-sm) var(--spacing-base);
-            background: var(--bg-secondary);
+            background: var(--bg-page);
             border-radius: var(--radius-sm);
             font-size: var(--text-sm);
             line-height: 1.5;

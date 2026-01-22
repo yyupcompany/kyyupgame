@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="使用模板"
-    :show-back="true"
-    @back="goBack"
-  >
+  <MobileCenterLayout title="使用模板" back-path="/mobile/centers">
     <div class="mobile-template-use">
       <van-loading v-if="loading" type="spinner" color="#1989fa" class="loading-center">
         加载中...
@@ -65,14 +61,14 @@
         </van-form>
       </template>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { getTemplateById, type Template } from '@/api/endpoints/document-templates'
 
 const router = useRouter()
@@ -202,11 +198,19 @@ const loadTemplate = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTemplate()
 })
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+@import '@/styles/mixins/responsive-mobile.scss';
 @import '@/styles/mobile-base.scss';
 
 .mobile-template-use {

@@ -34,11 +34,11 @@ const SYSTEM_ENDPOINTS = {
   USER_STATUS: (id: number | string) => `/users/${id}/status`,
   USER_CHANGE_PASSWORD: (id: number | string) => `/users/${id}/change-password`,
   
-  // 角色管理接口 (对应 role.routes.ts)
-  ROLES: '/roles',
-  ROLE_BY_ID: (id: number | string) => `/roles/${id}`,
+  // 角色管理接口 (对应 system/roles)
+  ROLES: '/system/roles',
+  ROLE_BY_ID: (id: number | string) => `/system/roles/${id}`,
   MY_ROLES: '/roles/my-roles',
-  CHECK_ROLE: (roleCode: string) => `/roles/check/${roleCode}`,
+  CHECK_ROLE: (roleCode: string) => `/system/roles/check/${roleCode}`,
   
   // 权限管理接口 (对应 permission.routes.ts)
   PERMISSIONS: '/permissions',
@@ -811,7 +811,7 @@ export const getSystemOperationLogs = getSystemLogs;
  */
 export function getSettings(group?: string): Promise<ApiResponse<any[]>> {
   return request({
-    url: '/api15527',
+    url: '/system/settings',
     method: 'get',
     params: group ? { group } : undefined
   });
@@ -822,7 +822,7 @@ export function getSettings(group?: string): Promise<ApiResponse<any[]>> {
  */
 export function updateSettings(group: string, settings: any[]): Promise<ApiResponse<any[]>> {
   return request({
-    url: '/api15765',
+    url: '/system/settings',
     method: 'put',
     data: { group, settings }
   });
@@ -864,7 +864,7 @@ export interface MessageTemplateStats {
  */
 export function getMessageTemplates(params?: PaginationParams): Promise<ApiResponse<PaginatedResult<MessageTemplate>>> {
   return request({
-    url: '/api16571',
+    url: '/system/message-templates',
     method: 'get',
     params
   });
@@ -875,7 +875,7 @@ export function getMessageTemplates(params?: PaginationParams): Promise<ApiRespo
  */
 export function getMessageTemplateStats(): Promise<ApiResponse<MessageTemplateStats>> {
   return request({
-    url: '/api16775',
+    url: '/system/message-templates/stats',
     method: 'get'
   });
 }
@@ -885,7 +885,7 @@ export function getMessageTemplateStats(): Promise<ApiResponse<MessageTemplateSt
  */
 export function createMessageTemplate(data: Partial<MessageTemplate>): Promise<ApiResponse<MessageTemplate>> {
   return request({
-    url: '/api16994',
+    url: '/system/message-templates',
     method: 'post',
     data
   });
@@ -928,7 +928,7 @@ export function updateMessageTemplateStatus(id: string, status: number): Promise
  */
 export function batchDeleteMessageTemplates(ids: string[]): Promise<ApiResponse<void>> {
   return request({
-    url: '/api17869',
+    url: '/system/message-templates/batch-delete',
     method: 'post',
     data: { ids }
   });
@@ -989,7 +989,7 @@ export interface AIModelStats {
  */
 export function getAIModels(params?: PaginationParams): Promise<ApiResponse<PaginatedResult<AIModel>>> {
   return request({
-    url: '/api19046',
+    url: '/ai/models',
     method: 'get',
     params
   });
@@ -1000,7 +1000,7 @@ export function getAIModels(params?: PaginationParams): Promise<ApiResponse<Pagi
  */
 export function getAIModelStats(): Promise<ApiResponse<AIModelStats>> {
   return request({
-    url: '/api19226',
+    url: '/ai/models/stats',
     method: 'get'
   });
 }
@@ -1010,7 +1010,7 @@ export function getAIModelStats(): Promise<ApiResponse<AIModelStats>> {
  */
 export function createAIModel(data: Partial<AIModel>): Promise<ApiResponse<AIModel>> {
   return request({
-    url: '/api19413',
+    url: '/ai/models',
     method: 'post',
     data
   });
@@ -1071,7 +1071,7 @@ export function testAIModel(id: string, data: { message: string }): Promise<ApiR
  */
 export function batchTestAIModels(ids: string[]): Promise<ApiResponse<void>> {
   return request({
-    url: '/api20544',
+    url: '/ai/models/batch-test',
     method: 'post',
     data: { ids }
   });
@@ -1082,7 +1082,7 @@ export function batchTestAIModels(ids: string[]): Promise<ApiResponse<void>> {
  */
 export function batchDeleteAIModels(ids: string[]): Promise<ApiResponse<void>> {
   return request({
-    url: '/api20752',
+    url: '/ai/models/batch-delete',
     method: 'post',
     data: { ids }
   });
@@ -1120,12 +1120,18 @@ export interface SystemDetailInfo {
  * 获取系统统计数据
  */
 export function getSystemStats(): Promise<ApiResponse<SystemStats>> {
-  return requestInstance.get('/system/stats');
+  return request({
+    url: '/api/system/stats',
+    method: 'get'
+  });
 }
 
 /**
  * 获取系统详细信息
  */
 export function getSystemDetailInfo(): Promise<ApiResponse<SystemDetailInfo>> {
-  return requestInstance.get('/system/detail-info');
+  return request({
+    url: '/api/system/detail-info',
+    method: 'get'
+  });
 }

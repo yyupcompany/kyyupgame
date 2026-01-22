@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="预约管理"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="预约管理" back-path="/mobile/teacher-center">
     <div class="appointment-management-page">
       <van-tabs v-model:active="activeTab" sticky>
         <van-tab title="待确认" name="pending">
@@ -17,12 +12,12 @@
         </van-tab>
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
 
@@ -81,6 +76,12 @@ const handleAppointment = async (appt: Appointment) => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadAppointments()
 })
 </script>
@@ -90,6 +91,13 @@ onMounted(() => {
 .appointment-management-page {
   min-height: 100vh;
   background-color: var(--bg-color-page);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>
 

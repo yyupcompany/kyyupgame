@@ -165,6 +165,12 @@ async function handleMultiRoundToolCalling(message: string) {
     currentlySending: sending.value,
     hasMultiRound: !!multiRound
   })
+
+  // 🔧 修复：每次新消息发送时重置思考状态，确保新查询能正确显示思考内容
+  hasShownThinking.value = false
+  currentThinkingMessage.value = ''
+  pendingThinkingContent.value = ''
+  console.log('🔄 [AIAssistantCore] 已重置思考状态：hasShownThinking=false')
   
   try {
     console.log('🚀 [AIAssistantCore] 开始执行 multiRound.executeMultiRound')
@@ -219,86 +225,124 @@ async function handleMultiRoundToolCalling(message: string) {
     case 'thinking':
             // 🔍 [修复] 使用真实的reasoning_content而不是硬编码的message
             console.log('🔍 [AIAssistantCore] thinking event:', event);
-
+    
             // 提取真实的思考内容
-      const thinkingContent = typeof event.data === 'string'
+      let thinkingContent = typeof event.data === 'string'
         ? event.data
-              : (event.data?.content || event.data?.message || event.message || '');
-
-            console.log('🔍 [AIAssistantCore] thinkingContent:', thinkingContent.substring(0, 100));
-
+              : (event.data?.content || event.data?.message || event.data?.reasoning_content || event.message || '');
+    
+            // 🔧 清理思考内容：移除可能的乱码和特殊字符
+            if (thinkingContent) {
+              thinkingContent = thinkingContent
+                .replace(/◇/g, '') // 移除菱形符号
+                .replace(/建\.|\u4e0a\.|\u4e0b\.|准|文|备/g, '') // 移除乱码字符
+                .replace(/A\.I\.处理/g, 'AI处理') // 规范化AI文本
+                .replace(/\s+/g, ' ') // 规范化空格
+                .trim()
+            }
+    
+            console.log('🔍 [AIAssistantCore] thinkingContent (cleaned):', thinkingContent.substring(0, 100));
+    
       if (thinkingContent) {
-              currentThinkingMessage.value = thinkingContent;
+              // 🔧 修复：累加思考内容，而不是覆盖
+              if (currentThinkingMessage.value && !currentThinkingMessage.value.includes(thinkingContent)) {
+                currentThinkingMessage.value = currentThinkingMessage.value + '\n' + thinkingContent;
+              } else if (!currentThinkingMessage.value) {
+                currentThinkingMessage.value = thinkingContent;
+              }
+                  
               // 🆕 存储thinking内容，用于下一个工具调用
-              pendingThinkingContent.value = thinkingContent;
-              console.log('💭 [Thinking] 已存储thinking内容，等待工具调用');
-
-              // 🆕 创建thinking消息，显示在聊天历史中
-              if (!hasShownThinking.value) {
+              pendingThinkingContent.value = currentThinkingMessage.value;
+              console.log('💭 [Thinking] 已存储thinking内容，累计长度:', currentThinkingMessage.value.length);
+    
+              // 🔧 修复：查找现有思考消息并更新，或创建新的
+              const messages = chatHistory.currentMessages.value
+              const thinkingMsg = messages.find(m => m.type === 'thinking' && m.role === 'assistant')
+                  
+              if (thinkingMsg) {
+                // 更新现有思考消息
+                chatHistory.updateMessage(thinkingMsg.id, currentThinkingMessage.value)
+                console.log('✅ [Thinking] 已更新现有thinking消息')
+              } else if (!hasShownThinking.value) {
+                // 🆕 创建thinking消息，显示在聊天历史中
                 chatHistory.addMessage({
-                  id: `thinking-${Date.now()}`,
                   role: 'assistant' as const,
                   type: 'thinking' as const,
-                  content: thinkingContent,
-                  timestamp: new Date()
+                  content: currentThinkingMessage.value
                 })
                 hasShownThinking.value = true
                 console.log('✅ [Thinking] 已添加thinking消息到聊天历史')
               }
-
+    
               // 同时更新AI响应显示
-              aiResponse.showThinkingPhase(thinkingContent);
+              aiResponse.showThinkingPhase(currentThinkingMessage.value);
       }
       break
 
     case 'thinking_update':
             // 🔍 处理thinking_update事件（来自后端的reasoning_content）
             console.log('🔍 [AIAssistantCore] thinking_update event:', event);
-
+        
             // 提取思考内容
-      const thinkingUpdateContent = typeof event.data === 'string'
+      let thinkingUpdateContent = typeof event.data === 'string'
         ? event.data
-              : (event.data?.content || event.data?.message || event.message || '');
-
-            console.log('🔍 [AIAssistantCore] thinkingUpdateContent:', thinkingUpdateContent.substring(0, 100));
-
+              : (event.data?.content || event.data?.message || event.data?.reasoning_content || event.message || '');
+        
+            // 检查是否是追加模式
+            const isAppendUpdate = event.data?.append === true;
+        
+            // 🔧 清理思考内容：移除可能的乱码和特殊字符
+            if (thinkingUpdateContent) {
+              // 移除常见的乱码模式
+              thinkingUpdateContent = thinkingUpdateContent
+                .replace(/◇/g, '') // 移除菱形符号
+                .replace(/建\.|上\.|下\.|准|文|备/g, '') // 移除乱码字符
+                .replace(/A\.I\.处理/g, 'AI处理') // 规范化AI文本
+                .replace(/\s+/g, ' ') // 规范化空格
+                .trim()
+            }
+        
+            console.log('🔍 [AIAssistantCore] thinkingUpdateContent (cleaned):', thinkingUpdateContent.substring(0, 100));
+        
       if (thinkingUpdateContent) {
-              currentThinkingMessage.value = thinkingUpdateContent;
-
-              // 🎯 只在第一次显示思考过程
-              if (!hasShownThinking.value) {
-                // 🎯 新架构：直接添加思考消息到聊天历史
-                // 检查最后一条消息是否是思考消息，如果是则更新，否则添加新消息
-                const lastMsg = chatHistory.currentMessages.value[chatHistory.currentMessages.value.length - 1]
-        if (lastMsg && lastMsg.type === 'thinking' && lastMsg.role === 'assistant') {
-                  // 更新现有思考消息
-                  lastMsg.content = thinkingUpdateContent
-                  lastMsg.timestamp = new Date()
-                  console.log('✅ [thinking_update] 更新现有思考消息')
-          } else {
-                  // 添加新的思考消息
-                  const thinkingMsg = {
-                    id: `thinking-${Date.now()}`,
+              // 🔧 修复：根据 append 标志决定是累加还是替换
+              if (isAppendUpdate && currentThinkingMessage.value) {
+                currentThinkingMessage.value = currentThinkingMessage.value + thinkingUpdateContent;
+              } else {
+                currentThinkingMessage.value = thinkingUpdateContent;
+              }
+        
+              // 🎯 查找或创建思考消息
+              const messages = chatHistory.currentMessages.value
+              const lastMsg = messages.find(m => m.type === 'thinking' && m.role === 'assistant')
+                      
+              // 检查是否有思考消息
+              if (lastMsg) {
+                  // 🔧 使用updateMessage方法确保响应式更新
+                  chatHistory.updateMessage(lastMsg.id, currentThinkingMessage.value)
+                  console.log('✅ [thinking_update] 更新现有思考消息:', lastMsg.id)
+          } else if (!hasShownThinking.value) {
+                  // 🔧 修复：只有在还没有显示过思考消息时才创建新的，防止重复创建
+                  const thinkingMsg = chatHistory.addMessage({
                     role: 'assistant' as const,
                     type: 'thinking' as const,
-                    content: thinkingUpdateContent,
-                    timestamp: new Date()
-                  }
-                  chatHistory.currentMessages.value.push(thinkingMsg)
-                  console.log('✅ [thinking_update] 添加新思考消息到聊天历史')
-
+                    content: currentThinkingMessage.value
+                  })
+                  console.log('✅ [thinking_update] 添加新思考消息到聊天历史:', thinkingMsg.id)
+        
                   // 🔧 修复：当思考消息被添加时，立即触发加载完成事件
-                  // 这样思考消息就能立即显示，而不是被加载消息覆盖
                   emit('loading-complete')
                   console.log('✅ [thinking_update] 触发加载完成事件，显示思考消息')
-
+        
                   // 标记已经显示过思考过程
                   hasShownThinking.value = true
                   console.log('✅ [thinking_update] 已标记显示过思考过程')
+                } else {
+                  // 🔧 已经有思考消息但find找不到（异步问题），等待下次事件再更新
+                  console.log('⏭️ [thinking_update] 思考消息已存在但暂时找不到，跳过创建')
                 }
-        } else {
-                console.log('⏭️ [thinking_update] 跳过重复的思考过程显示')
-        }
+      } else {
+                console.log('⏭️ [thinking_update] 思考内容为空，跳过')
       }
       break
 
@@ -508,13 +552,28 @@ async function handleMultiRoundToolCalling(message: string) {
 
       if (toolCallMsg) {
               // 更新消息状态与耗时
-        const isSuccess = event.data?.result?.status === 'success'
+              // 🔧 修复：支持多种成功判断方式
+        const toolResult = event.data?.result
+        const eventStatus = event.data?.status  // 直接检查事件数据中的status字段
+        
+        // 判断成功的条件：
+        // 1. result.success === true
+        // 2. result.status === 'success'
+        // 3. event.data.status === 'completed' (后端发送的格式)
+        // 4. result存在且没有error字段
+        const isSuccess = 
+          toolResult?.success === true || 
+          toolResult?.status === 'success' || 
+          eventStatus === 'completed' ||  // 🔧 新增：直接检查事件状态
+          eventStatus === 'success' ||    // 🔧 新增：兼容success状态
+          (toolResult && !toolResult?.error)
+          
         const endTime = Date.now()
         const startTime = toolCallMsg.startTimestamp || endTime
 
               toolCallMsg.toolStatus = isSuccess ? 'completed' : 'failed'
         toolCallMsg.duration = toolCallMsg.duration || (endTime - startTime)
-              console.log('✅ [工具调用] 聊天历史状态已更新:', toolCallMsg.toolName, '→', toolCallMsg.toolStatus, `，耗时: ${toolCallMsg.duration}ms`)
+              console.log('✅ [工具调用] 聊天历史状态已更新:', toolCallMsg.toolName, '→', toolCallMsg.toolStatus, `，耗时: ${toolCallMsg.duration}ms`, '原始状态:', eventStatus)
             }
 
       // 🔧 手动触发响应式更新
@@ -655,9 +714,10 @@ async function handleMultiRoundToolCalling(message: string) {
             const progressToolName = event.data?.name || event.data?.toolName || ''
             const progressMessage = event.data?.message || event.data?.status || ''
             const progressDetails = event.data?.details || ''
+            const progressPercent = event.data?.progress || 0
             
-            if (progressToolName && progressMessage) {
-              // 找到对应的工具调用
+            if (progressMessage) {
+              // 查找对应的工具调用
               const progressFunctionCall = currentAIResponse.value.functionCalls.find(fc =>
                 (fc.name === progressToolName || fc.friendlyName === progressToolName) &&
                 fc.status === 'running'
@@ -676,14 +736,45 @@ async function handleMultiRoundToolCalling(message: string) {
                   // 触发响应式更新
                   currentAIResponse.value = { ...currentAIResponse.value }
                 }
+              } else {
+                // 🆕 如果没找到运行中的工具调用，更新聊天历史中的工具消息
+                console.log('🔍 [进度更新] 未找到运行中的工具调用，尝试更新聊天历史')
+                
+                // 查找最后一个工具调用消息
+                const messages = chatHistory.currentMessages.value
+                const lastToolMsg = messages.slice().reverse().find(m => 
+                  (m.type === 'tool_call_start' || m.type === 'tool_call') &&
+                  (m.toolName === progressToolName || !progressToolName)
+                )
+                
+                if (lastToolMsg) {
+                  // 更新工具消息的进度状态
+                  lastToolMsg.progressMessage = progressMessage
+                  lastToolMsg.progressPercent = progressPercent
+                  console.log('✅ [进度更新] 已更新聊天历史中的工具消息:', progressMessage)
+                } else {
+                  // 如果连工具消息都没有，创建一个进度消息
+                  chatHistory.addMessage({
+                    id: `progress-${Date.now()}`,
+                    role: 'assistant' as const,
+                    type: 'tool_progress' as const,
+                    content: progressMessage,
+                    toolName: progressToolName || 'any_query',
+                    progressPercent: progressPercent,
+                    timestamp: new Date()
+                  })
+                  console.log('✅ [进度更新] 已创建进度消息:', progressMessage)
+                }
               }
               
               // 同时更新 toolCalls 列表的进度
-              const progressToolCall = toolCalls.value.find(t =>
-                t.name === progressToolName && (t.status === 'calling' || t.status === 'processing')
-              )
-              if (progressToolCall) {
-                progressToolCall.progress = event.data?.progress || progressToolCall.progress || 0
+              if (progressToolName) {
+                const progressToolCall = toolCalls.value.find(t =>
+                  t.name === progressToolName && (t.status === 'calling' || t.status === 'processing')
+                )
+                if (progressToolCall) {
+                  progressToolCall.progress = progressPercent
+                }
               }
       }
       break
@@ -971,25 +1062,50 @@ async function handleMultiRoundToolCalling(message: string) {
                 }
               }
 
-              // 🎯 修复：如果有组件数据，不生成总结文本，只显示组件
-              // 如果没有组件数据，才生成总结文本
-              let answerContent = currentAIResponse.value?.answer?.content?.trim() || ''
+              // 🎯 修复：优先从event.data获取答案内容，然后从currentAIResponse获取
+              let answerContent = ''
+              
+              // 优先从event.data获取答案
+              if (event.data?.content) {
+                answerContent = event.data.content.trim()
+                console.log('✅ [complete事件] 从event.data获取答案内容:', answerContent.substring(0, 100))
+              } else if (event.data?.answer) {
+                answerContent = (typeof event.data.answer === 'string' ? event.data.answer : event.data.answer.content || '').trim()
+                console.log('✅ [complete事件] 从event.data.answer获取答案内容:', answerContent.substring(0, 100))
+              } else if (currentAIResponse.value?.answer?.content) {
+                answerContent = currentAIResponse.value.answer.content.trim()
+                console.log('✅ [complete事件] 从currentAIResponse获取答案内容:', answerContent.substring(0, 100))
+              }
 
+              // 🔧 清理答案内容：移除可能的乱码
+              if (answerContent) {
+                answerContent = answerContent
+                  .replace(/◇/g, '') // 移除菱形符号
+                  .replace(/建\.|上\.|下\.|准|文|备/g, '') // 移除乱码字符
+                  .replace(/A\.I\.处理/g, 'AI处理') // 规范化AI文本
+                  .replace(/\s+/g, ' ') // 规范化空格
+                  .trim()
+              }
+
+              // 如果没有答案内容
               if (!answerContent) {
                 if (componentData) {
                   // 🎯 有组件数据：不显示总结文本，让组件自己说话
                   answerContent = '' // 空内容，只显示组件
                   console.log('✅ [complete事件] 有组件数据，不生成总结文本')
-        } else {
-                  // 🎯 没有组件数据：生成总结文本
-                  const executed = (toolCalls.value || []).map(t => t.description || t.intent || t.name).filter(Boolean)
-                  answerContent = executed.length
-                    ? `已完成本次请求的自动执行：\n- ${executed.join('\n- ')}\n\n结果已在右侧"执行步骤"或预览中展示。`
-                    : '已完成本次工具执行。结果已在右侧"执行步骤"或预览中展示。'
-                  console.log('✅ [complete事件] 无组件数据，生成总结性回答:', answerContent)
+                } else {
+                  // 🎯 没有组件数据：检查是否有工具调用结果
+                  const hasToolResults = currentAIResponse.value?.functionCalls?.some(fc => fc.result)
+                  if (hasToolResults) {
+                    answerContent = '操作已完成。'
+                    console.log('✅ [complete事件] 有工具调用结果，生成简洁回答')
+                  } else {
+                    answerContent = '处理完成。'
+                    console.log('✅ [complete事件] 无组件数据也无工具结果，生成默认回答')
+                  }
                 }
-      } else {
-                console.log('✅ [complete事件] 使用已有答案内容:', answerContent)
+              } else {
+                console.log('✅ [complete事件] 使用答案内容:', answerContent.substring(0, 100))
               }
 
               // 🎯 关键修复：立即将答案添加到聊天历史中

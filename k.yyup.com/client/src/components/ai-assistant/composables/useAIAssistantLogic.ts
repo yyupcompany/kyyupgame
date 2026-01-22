@@ -178,8 +178,7 @@ const showErrorTip = (error: any) => {
 
   // 显示消息
   ElMessage({
-    message: fullMessage,
-    title: config.title,
+    message: `${config.title}: ${fullMessage}`,
     type: config.type,
     duration: 5000,
     showClose: true,
@@ -235,6 +234,11 @@ export function useAIAssistantLogic(mode: AIAssistantMode) {
     uploadingFile: false,
     uploadingImage: false,
     conversationId: '',
+
+    // 语音相关
+    isListening: false,
+    isSpeaking: false,
+    speechStatus: '',
     
     // 模式特定状态
     ...(mode === 'sidebar' ? {
@@ -359,11 +363,12 @@ export function useAIAssistantLogic(mode: AIAssistantMode) {
         state.isThinking = true
         state.showThinkingSubtitle = true
         state.thinkingSubtitle = event.data?.message || '🤔 AI 正在思考中...'
+        // 🔧 修复：初始内容为空，等待 thinking_update 填充真实的思考内容
         state.messages.push({
           id: `thinking-${Date.now()}`,
           role: 'assistant',
           type: 'thinking',
-          content: event.data?.message || '🤔 AI 正在思考中...',
+          content: '',  // 🔧 初始为空，避免与 thinking_update 的内容混合
           timestamp: new Date()
         } as any)
         break
@@ -371,16 +376,34 @@ export function useAIAssistantLogic(mode: AIAssistantMode) {
       case 'thinking':
       case 'thinking_update':
         if (!state.isSearching) {
-          // 🔧 修复：同时更新 thinkingSubtitle 和 rightSidebarThinking
-          state.thinkingSubtitle = event.data?.content || event.message || ''
-          state.showThinkingSubtitle = true
-          state.rightSidebarThinking = event.data?.content || event.message || ''
-
+          // 🔧 修复：thinking内容应该累积显示，而不是覆盖
+          const thinkingContent = event.data?.content || event.message || ''
+          // 🆕 默认累积内容，除非明确设置 append: false
+          const shouldReplace = event.data?.append === false
+          
           // 更新最后一条thinking消息的内容
           const lastMessage = state.messages[state.messages.length - 1]
           if (lastMessage && lastMessage.type === 'thinking') {
-            lastMessage.content = event.data?.content || event.message || ''
+            if (shouldReplace || !lastMessage.content) {
+              // 🔧 替换模式 或 首次设置
+              lastMessage.content = thinkingContent
+              console.log(`🤔 [${mode}模式] thinking_update(设置), 内容长度:`, thinkingContent.length)
+            } else {
+              // 🆕 累积模式：追加新内容（用换行分隔不同步骤）
+              lastMessage.content = lastMessage.content + '\n' + thinkingContent
+              console.log(`🤔 [${mode}模式] thinking_update(累积), 累计长度:`, lastMessage.content.length)
+            }
           }
+          
+          // 🔧 同步更新 thinkingSubtitle 和 rightSidebarThinking（累积显示）
+          if (!shouldReplace && state.thinkingSubtitle && state.thinkingSubtitle !== '🤔 AI 正在思考中...') {
+            state.thinkingSubtitle = state.thinkingSubtitle + '\n' + thinkingContent
+            state.rightSidebarThinking = (state.rightSidebarThinking || '') + '\n' + thinkingContent
+          } else {
+            state.thinkingSubtitle = thinkingContent
+            state.rightSidebarThinking = thinkingContent
+          }
+          state.showThinkingSubtitle = true
         }
         break
 

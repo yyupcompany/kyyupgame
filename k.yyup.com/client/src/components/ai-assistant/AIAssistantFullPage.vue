@@ -6,7 +6,7 @@
 
 <template>
   <!-- 全屏模式始终显示，不依赖visible prop -->
-  <FullPageLayout :sidebar-collapsed="state.leftSidebarCollapsed">
+  <FullPageLayout :sidebar-collapsed="leftSidebarCollapsed">
     <!-- 头部插槽 -->
     <template #header>
       <FullPageHeader
@@ -15,7 +15,7 @@
         features="多场景任务支持"
         :usage-label="tokenUsageProgress.label"
         :usage-percent="tokenUsageProgress.percent"
-        :sidebar-collapsed="state.leftSidebarCollapsed"
+        :sidebar-collapsed="leftSidebarCollapsed"
         @toggle-sidebar="toggleLeftSidebar"
         @close-fullpage="handleCloseFullPage"
         @toggle-theme="handleToggleTheme"
@@ -25,8 +25,13 @@
     <!-- 侧边栏插槽 -->
     <template #sidebar>
       <FullPageSidebar
+        :conversations="conversationList"
+        :active-conversation-id="currentConversationId"
+        :loading="conversationsLoading"
+        :token-usage="tokenUsage"
         @new-conversation="handleNewConversation"
-        @quick-action="handleQuickAction"
+        @select-conversation="handleSelectConversation"
+        @delete-conversation="handleDeleteConversation"
         @common-feature="handleCommonFeature"
       />
     </template>
@@ -38,32 +43,12 @@
         @quick-action="handleQuickActionFromDialog"
         @suggestion-click="handleQuickQuery"
       >
-        <!-- 消息列表插槽 -->
+        <!-- 消息列表 -->
         <template v-if="(chatHistory.currentMessages?.value?.length || 0) > 0" #messages>
           <MessageList
             :messages="chatHistory.currentMessages?.value || []"
-            :current-ai-response="state.currentAIResponse"
             :message-font-size="state.messageFontSize"
             :is-thinking="isThinkingComputed"
-            :thinking-subtitle="state.thinkingSubtitle"
-            :show-thinking-subtitle="state.showThinkingSubtitle"
-          />
-
-          <!-- AI响应显示 -->
-          <AnswerDisplay
-            v-if="state.currentAIResponse?.answer?.visible"
-            :content="state.currentAIResponse?.answer?.content || ''"
-            :streaming="!!state.currentAIResponse?.answer?.streaming"
-            :has-component="!!(state.currentAIResponse?.answer?.componentData)"
-            :component-data="state.currentAIResponse?.answer?.componentData || null"
-            @regenerate="handleRetry"
-            @copy="handleAnswerCopy"
-          />
-
-          <!-- 函数调用显示 -->
-          <FunctionCallList
-            v-if="(state.toolCalls?.length || 0) > 0"
-            :function-calls="state.toolCalls || []"
           />
         </template>
       </FullPageDialog>
@@ -77,16 +62,21 @@
         :web-search="state.webSearch"
         :font-size="state.messageFontSize"
         :is-registered="state.isRegistered"
-        :is-listening="false"
-        :is-speaking="false"
-        :speech-status="''"
+        :is-listening="state.isListening"
+        :is-speaking="state.isSpeaking"
+        :speech-status="state.speechStatus"
         :has-last-message="(chatHistory.currentMessages?.value?.length || 0) > 0"
         :uploading-file="state.uploadingFile"
         :uploading-image="state.uploadingImage"
+        :simple-mode="false"
         @send="handleSendMessageWithContext"
         @stop-sending="handleStopSending"
         @update:fontSize="state.messageFontSize = $event"
         @update:webSearch="state.webSearch = $event"
+        @toggle-voice-input="handleToggleVoiceInput"
+        @toggle-voice-output="handleToggleVoiceOutput"
+        @upload-file="handleUploadFile"
+        @upload-image="handleUploadImage"
       />
     </template>
   </FullPageLayout>
@@ -135,13 +125,11 @@ import { useConversationManager } from './composables/useConversationManager'
 
 // 导入其他组件
 import MessageList from './chat/MessageList.vue'
-import AnswerDisplay from './ai-response/AnswerDisplay.vue'
-import FunctionCallList from './ai-response/FunctionCallList.vue'
 import InputArea from './input/InputArea.vue'
 import AIAssistantCore from './core/AIAssistantCore.vue'
 import AIStatistics from './dialogs/AIStatistics.vue'
 import QuickQueryGroups from './quick-query/QuickQuerySidebar.vue'
-import { useAIAssistantLogic } from './composables/useAIAssistantLogicSimple'
+import { useAIAssistantLogic } from './composables/useAIAssistantLogic'
 import { useChatHistory } from '@/composables/useChatHistory'
 
 // Props
@@ -160,9 +148,13 @@ const emit = defineEmits<Emits>()
 
 // 使用会话管理composable
 const {
+  conversations,
   currentConversationId,
   createConversation,
-  addMessage
+  addMessage,
+  switchConversation,
+  deleteConversation,
+  isLoading: conversationsLoading
 } = useConversationManager()
 
 // 使用聊天历史composable，与AIAssistantCore保持一致
@@ -186,6 +178,18 @@ const tokenLoading = ref(false)
 const statisticsVisible = ref(false)
 const quickQueryVisible = ref(false)
 const coreRef = ref()
+const leftSidebarCollapsed = ref(false)
+
+// 会话列表（从 composable 获取）
+const conversationList = computed(() => {
+  return conversations.value.map(conv => ({
+    id: conv.id,
+    title: conv.title || '新对话',
+    messageCount: conv.messages?.length || 0,
+    createdAt: conv.createdAt,
+    updatedAt: conv.updatedAt
+  }))
+})
 
 // Token用量进度
 const tokenUsageProgress = computed(() => {
@@ -200,16 +204,28 @@ const tokenUsageProgress = computed(() => {
 
 // 方法
 const toggleLeftSidebar = () => {
-  // 使用对象修改避免直接赋值readonly属性
-  Object.assign(state, { leftSidebarCollapsed: !state.leftSidebarCollapsed })
+  leftSidebarCollapsed.value = !leftSidebarCollapsed.value
 }
 
 const handleNewConversation = () => {
   createConversation()
-  // 清空本地消息（使用splice避免直接赋值）
-  chatHistory.currentMessages.value.splice(0)
+  // 清空本地消息
+  chatHistory.clearCurrentSession()
   state.inputMessage = ''
   ElMessage.success('✅ 创建新会话成功')
+}
+
+// 选择会话
+const handleSelectConversation = async (id: string | number) => {
+  console.log('💬 [会话选择] 切换到会话:', id)
+  await switchConversation(String(id))
+}
+
+// 删除会话
+const handleDeleteConversation = async (id: string | number) => {
+  console.log('🗑️ [会话删除] 删除会话:', id)
+  await deleteConversation(String(id))
+  ElMessage.success('会话已删除')
 }
 
 // 重写消息发送处理器，集成会话上下文和真正的API调用
@@ -273,13 +289,11 @@ const handleSendMessageWithContext = async (content?: string) => {
   }
 }
 
-const handleQuickAction = (action: string) => {
-  const actionMap: Record<string, string> = {
-    'create-activity': '创建活动',
-    'check-attendance': '检查考勤',
-    'generate-report': '生成报告'
-  }
-  handleQuickQuery(actionMap[action] || action)
+const handleQuickAction = (actionText: string) => {
+  console.log('🎯 [AIAssistantFullPage] 快捷导航点击:', actionText)
+  // 直接将快捷导航文本作为输入内容发送给AI
+  state.inputMessage = actionText
+  handleSendMessageWithContext(actionText)
 }
 
 const handleCommonFeature = (action: string) => {
@@ -290,13 +304,20 @@ const handleCommonFeature = (action: string) => {
   }
 }
 
-const handleQuickActionFromDialog = (action: string) => {
-  const actionMap: Record<string, string> = {
-    'create-activity': '创建活动方案',
-    'data-analysis': '数据分析',
-    'task-management': '任务管理'
+const handleQuickActionFromDialog = async (text: string, action?: any) => {
+  console.log('🎯 [AIAssistantFullPage] 快捷导航点击:', { text, action })
+  
+  // 确保有当前会话，如果没有则创建新会话
+  if (!currentConversationId.value) {
+    console.log('📝 [AIAssistantFullPage] 没有当前会话，创建新会话')
+    await handleNewConversation()
+    // 等待会话创建完成
+    await new Promise(resolve => setTimeout(resolve, 100))
   }
-  handleQuickQuery(actionMap[action] || action)
+  
+  // 直接将快捷导航文本作为输入内容发送给AI
+  state.inputMessage = text
+  await handleSendMessageWithContext(text)
 }
 
 const handleQuickQuery = (query: string) => {
@@ -331,6 +352,80 @@ const handleToggleTheme = () => {
   console.log('🎨 [AIAssistantFullPage] 主题切换')
   // 主题切换的具体逻辑已在FullPageHeader中处理
   // 这里可以添加额外的主题切换后的处理
+}
+
+// ==================== 语音功能 ====================
+// 语音输入状态
+const isListening = ref(false)
+const isSpeaking = ref(false)
+const speechStatus = ref('')
+
+// 切换语音输入
+const handleToggleVoiceInput = () => {
+  if (isListening.value) {
+    // 停止录音
+    isListening.value = false
+    speechStatus.value = ''
+    console.log('🛑 [AIAssistantFullPage] 停止语音输入')
+  } else {
+    // 开始录音（这里需要集成实际的语音识别API）
+    isListening.value = true
+    speechStatus.value = '正在聆听...'
+    console.log('🎤 [AIAssistantFullPage] 开始语音输入')
+    ElMessage.info('语音输入功能开发中')
+    // 模拟停止
+    setTimeout(() => {
+      isListening.value = false
+      speechStatus.value = ''
+    }, 2000)
+  }
+}
+
+// 切换语音播放
+const handleToggleVoiceOutput = () => {
+  if (isSpeaking.value) {
+    // 停止播放
+    isSpeaking.value = false
+    console.log('🛑 [AIAssistantFullPage] 停止语音播放')
+  } else {
+    // 开始播放（这里需要集成实际的语音合成API）
+    isSpeaking.value = true
+    console.log('🔊 [AIAssistantFullPage] 开始语音播放')
+    ElMessage.info('语音播放功能开发中')
+    // 模拟停止
+    setTimeout(() => {
+      isSpeaking.value = false
+    }, 2000)
+  }
+}
+
+// ==================== 文件上传功能 ====================
+// 处理文件上传
+const handleUploadFile = (file: File) => {
+  console.log('📁 [AIAssistantFullPage] 上传文件:', file.name)
+  state.uploadingFile = true
+
+  // 模拟上传过程
+  setTimeout(() => {
+    state.uploadingFile = false
+    ElMessage.success(`文件 ${file.name} 上传成功`)
+    // 将文件内容添加到输入框或发送
+    state.inputMessage = `[已上传文件: ${file.name}] ${file.name} 的内容分析...`
+  }, 1500)
+}
+
+// 处理图片上传
+const handleUploadImage = (file: File) => {
+  console.log('🖼️ [AIAssistantFullPage] 上传图片:', file.name)
+  state.uploadingImage = true
+
+  // 模拟上传过程
+  setTimeout(() => {
+    state.uploadingImage = false
+    ElMessage.success(`图片 ${file.name} 上传成功`)
+    // 将图片添加到输入框
+    state.inputMessage = `[已上传图片: ${file.name}] 请分析这张图片的内容`
+  }, 1500)
 }
 </script>
 

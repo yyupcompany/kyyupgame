@@ -26,7 +26,7 @@ export const useLogoStore = defineStore('logo', () => {
 
   // 计算属性 - 获取 Logo URL（如果没有自定义，返回默认）
   const currentLogoUrl = computed(() => {
-    return hasCustomLogo.value ? logoUrl.value : '/src/assets/logo.png';
+    return hasCustomLogo.value ? logoUrl.value : '/logo.png';
   });
 
   // 计算属性 - 获取 Favicon URL

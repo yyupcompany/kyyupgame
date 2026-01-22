@@ -34,6 +34,7 @@ const TimeoutConfigManager = {
 let isRedirectingToLogin = false;
 let lastErrorTime = 0;
 const ERROR_THROTTLE_TIME = 3000; // 3秒内不重复显示相同类型的错误
+let isProcessing401 = false; // 401错误处理标志
 
 // ================================
 // Token刷新锁机制 - 防止并发刷新
@@ -73,10 +74,14 @@ function onRefreshed(token: string): void {
 async function refreshTokenWithLock(): Promise<string> {
   // 如果正在刷新，返回Promise等待刷新完成
   if (isRefreshing) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       addRefreshSubscriber((token: string) => {
         resolve(token);
       });
+      // 设置超时，避免无限等待
+      setTimeout(() => {
+        reject(new Error('Token刷新超时'));
+      }, 5000);
     });
   }
 
@@ -87,12 +92,19 @@ async function refreshTokenWithLock(): Promise<string> {
     const refreshToken = tokenStorage.getRefreshToken();
 
     if (!refreshToken) {
-      throw new Error('没有找到refresh token');
+      console.warn('⚠️ 没有找到refresh token，尝试使用当前token续期');
+      // 如果没有refreshToken，检查当前token是否还有效
+      const currentToken = tokenStorage.getToken();
+      if (!currentToken) {
+        throw new Error('没有找到认证token');
+      }
+      // 当前token无法自动续期，需要重新登录
+      throw new Error('Token已过期，请重新登录');
     }
 
     console.log('📝 使用refresh token刷新认证...');
 
-    const refreshUrl = `${getApiBaseURL().replace(/\/$/, '')}/auth/refresh-token`;
+    const refreshUrl = `${getApiBaseURL().replace(/\/$/, '')}/api/auth/refresh-token`;
     const refreshResponse = await fetch(refreshUrl, {
       method: 'POST',
       headers: {
@@ -140,23 +152,23 @@ interface RequestConfig extends Partial<InternalAxiosRequestConfig> {
 
 // 智能API基础URL检测 - 使用环境配置
 const getApiBaseURL = (): string => {
-  // 优先使用环境配置的API基础URL
-  if (env.apiBaseUrl) {
-    return env.apiBaseUrl;
+  /**
+   * 关键修复：
+   * - 之前开发环境默认走 Vite 代理（/api），但当本地端口/代理状态异常时会出现请求“挂住直到超时”，导致移动端页面黑屏。
+   * - PC/移动端共用同一套 request，如果代理不稳定，我们直接走后端 http://localhost:3000，保证接口可用。
+   */
+  if (typeof window === 'undefined') {
+    return env.apiBaseUrl || '/api'
   }
 
-  // 获取当前主机名
-  const hostname = window.location.hostname;
-
-  // 开发环境：使用相对路径（通过vite代理）
+  // 开发环境：优先直连后端（避免代理不稳定导致超时黑屏）
   if (env.isDevelopment) {
-    console.log('🔧 开发环境：使用vite代理 /api');
-    return '/api';
+    const host = window.location.hostname || 'localhost'
+    return `http://${host}:3000`
   }
 
-  // 生产环境：使用相对路径（同域名）
-  console.log('🔧 生产环境：使用相对路径 /api');
-  return '/api';
+  // 生产/其它环境：使用环境配置（默认 /api，同域）
+  return env.apiBaseUrl || '/api'
 };
 
 // 创建axios实例
@@ -292,12 +304,22 @@ aiService.interceptors.response.use(
     const errorData = error.response?.data as any;
 
     if (is401Error) {
+      // 如果已经在处理401错误，直接拒绝，避免重复处理
+      if (isProcessing401) {
+        console.warn('⚠️ AI服务：401错误正在处理中，跳过重复处理');
+        return Promise.reject(error);
+      }
+
       const isTokenExpired = errorData?.error?.code === 'TOKEN_EXPIRED' ||
                             errorData?.message?.includes('过期') ||
                             errorData?.message?.includes('expired') ||
-                            errorData?.error === 'INVALID_CREDENTIALS';
+                            errorData?.error === 'INVALID_CREDENTIALS' ||
+                            true; // 所有401都尝试刷新token
 
       if (isTokenExpired) {
+        // 设置处理标志
+        isProcessing401 = true;
+
         console.warn('🔄 AI服务：尝试自动刷新token...');
 
         try {
@@ -312,6 +334,8 @@ aiService.interceptors.response.use(
             // 兼容Axios类型
             originalRequest.headers = (originalRequest.headers || {}) as any;
             (originalRequest.headers as any)['Authorization'] = `Bearer ${newToken}`;
+            // 重置处理标志
+            isProcessing401 = false;
             return aiService.request(originalRequest as any);
           }
         } catch (refreshError) {
@@ -336,6 +360,7 @@ aiService.interceptors.response.use(
               router.push('/login').finally(() => {
                 setTimeout(() => {
                   isRedirectingToLogin = false;
+                  isProcessing401 = false;
                 }, 1000);
               });
             }, 1000);
@@ -429,14 +454,24 @@ const shouldRetry = (error: any): boolean => {
 
 
 
-// 构建完整的API URL，现在axios已有baseURL，直接返回相对路径
+// 构建完整的API URL
 const buildApiUrl = (url: string): string => {
   // 如果是完整URL，直接返回
-  if (url.startsWith('http')) {
-    return url
+  if (url.startsWith('http')) return url
+
+  const base = getApiBaseURL()
+
+  // base 为相对路径（例如 /api）：交给当前域名（可能是生产同域或开发代理）
+  if (base.startsWith('/')) return url
+
+  // base 为绝对地址（开发环境直连 http://localhost:3000）：拼接
+  const baseNormalized = base.replace(/\/$/, '')
+  const urlNormalized = url.startsWith('/') ? url : `/${url}`
+  // 如果URL已经包含/api前缀，就不再添加
+  if (urlNormalized.startsWith('/api')) {
+    return `${baseNormalized}${urlNormalized}`
   }
-  // 否则返回相对路径，让axios的baseURL处理
-  return url
+  return `${baseNormalized}/api${urlNormalized}`
 }
 
 // 请求拦截器 - 优化版本，避免导航超时
@@ -570,15 +605,25 @@ service.interceptors.response.use(
 
     // 处理会话超时和token过期
     if (is401Error) {
+      // 如果已经在处理401错误，直接拒绝，避免重复处理
+      if (isProcessing401) {
+        console.warn('⚠️ 401错误正在处理中，跳过重复处理');
+        return Promise.reject(error);
+      }
+
       console.warn('🔐 检测到401错误，可能是会话超时或token过期');
 
       // 检查是否是token过期的具体错误
       const isTokenExpired = errorData?.error?.code === 'TOKEN_EXPIRED' ||
                             errorData?.message?.includes('过期') ||
                             errorData?.message?.includes('expired') ||
-                            errorData?.error === 'INVALID_CREDENTIALS';
+                            errorData?.error === 'INVALID_CREDENTIALS' ||
+                            true; // 所有401都尝试刷新token
 
       if (isTokenExpired) {
+        // 设置处理标志
+        isProcessing401 = true;
+
         console.warn('🔄 尝试自动刷新token...');
 
         try {
@@ -593,6 +638,8 @@ service.interceptors.response.use(
             // 兼容Axios类型
             originalRequest.headers = (originalRequest.headers || {}) as any;
             (originalRequest.headers as any)['Authorization'] = `Bearer ${newToken}`;
+            // 重置处理标志
+            isProcessing401 = false;
             return service.request(originalRequest as any);
           }
         } catch (refreshError) {
@@ -603,7 +650,7 @@ service.interceptors.response.use(
             isRedirectingToLogin = true;
             console.warn('🕐 会话已超时，即将跳转到登录页面');
 
-            // 显示会话超时提示
+            // 显示会话超时提示（只显示一次）
             ElMessage.warning({
               message: '会话已超时，请重新登录',
               duration: 3000,
@@ -625,6 +672,7 @@ service.interceptors.response.use(
                 // 重置标志，允许下次登录后再次处理
                 setTimeout(() => {
                   isRedirectingToLogin = false;
+                  isProcessing401 = false;
                 }, 1000);
               });
             }, 1000);
@@ -642,13 +690,13 @@ service.interceptors.response.use(
                     error.config?.url?.includes('/ai/models');
     const is404Error = error.response?.status === 404;
     const is503Error = error.response?.status === 503; // 服务不可用
-    
+
     // AI记忆相关的404错误静默处理（数据不存在是正常情况）
     if (isAIApi && is404Error && error.config?.url?.includes('/memory')) {
       console.debug('AI记忆API: 数据不存在，静默处理404错误');
       return Promise.reject(error);
     }
-    
+
     // AI模型服务不可用时的友好提示
     if (isAIApi && is503Error) {
       console.warn('AI服务暂时不可用');
@@ -670,7 +718,7 @@ service.interceptors.response.use(
       ErrorHandler.handle(friendlyError, true);
       return Promise.reject(friendlyError);
     }
-    
+
     // 检查是否是网络错误（服务器未启动）
     const isNetworkError = !error.response && error.request;
     const currentTime = Date.now();

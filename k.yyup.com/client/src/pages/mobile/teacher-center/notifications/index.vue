@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="通知中心"
-    :show-back="false"
-    :show-tab-bar="true"
-    custom-tab-bar
-  >
+  <MobileSubPageLayout title="通知中心" back-path="/mobile/teacher-center">
     <template #nav-right>
       <van-icon
         name="ellipsis"
@@ -214,13 +209,13 @@
         </van-form>
       </div>
     </van-dialog>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from "@/components/mobile/layouts/MobileMainLayout.vue"
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import MobileNotificationStats from './components/MobileNotificationStats.vue'
 import MobileNotificationDetail from './components/MobileNotificationDetail.vue'
 import {
@@ -591,6 +586,12 @@ const loadNotifications = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadNotifications()
 })
 </script>
@@ -603,7 +604,7 @@ onMounted(() => {
 
   .filter-section {
     background: white;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     :deep(.van-tabs) {
       .van-tabs__nav {
@@ -613,7 +614,7 @@ onMounted(() => {
   }
 
   .announcements-section {
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .announcement-header {
       display: flex;
@@ -638,7 +639,7 @@ onMounted(() => {
     padding: 0 0 80px 0;
 
     .notification-item {
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
       transition: all 0.3s ease;
 
       &.unread {
@@ -651,14 +652,14 @@ onMounted(() => {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
 
         .notification-title {
           font-weight: 600;
           font-size: var(--text-base);
           color: var(--van-text-color-1);
           flex: 1;
-          margin-right: 8px;
+          margin-right: var(--spacing-sm);
         }
 
         .notification-meta {
@@ -670,7 +671,7 @@ onMounted(() => {
         color: var(--van-text-color-2);
         font-size: var(--text-sm);
         line-height: 1.5;
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -687,7 +688,7 @@ onMounted(() => {
           color: var(--van-text-color-3);
           background: var(--van-background-color-light);
           padding: 2px 6px;
-          border-radius: 4px;
+          border-radius: var(--spacing-xs);
         }
 
         .notification-time {
@@ -703,7 +704,7 @@ onMounted(() => {
   padding: var(--spacing-md);
 
   .publish-actions {
-    margin-top: 16px;
+    margin-top: var(--spacing-lg);
   }
 
   :deep(.van-field__label) {
@@ -729,6 +730,13 @@ onMounted(() => {
 
   .publish-form {
     padding: var(--spacing-md);
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

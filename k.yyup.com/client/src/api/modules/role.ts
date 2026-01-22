@@ -5,12 +5,12 @@ import { API_PREFIX } from '../endpoints/base'
 
 // API端点常量
 export const ROLE_ENDPOINTS = {
-  BASE: `${API_PREFIX}/roles`,
-  BY_ID: (id: number | string) => `${API_PREFIX}/roles/${id}`,
-  BATCH_DELETE: `${API_PREFIX}/roles/batch-delete`,
-  SEARCH: `${API_PREFIX}/roles/search`,
-  EXPORT: `${API_PREFIX}/roles/export`,
-  IMPORT: `${API_PREFIX}/roles/import`
+  BASE: `${API_PREFIX}/system/roles`,
+  BY_ID: (id: number | string) => `${API_PREFIX}/system/roles/${id}`,
+  BATCH_DELETE: `${API_PREFIX}/system/roles/batch-delete`,
+  SEARCH: `${API_PREFIX}/system/roles/search`,
+  EXPORT: `${API_PREFIX}/system/roles/export`,
+  IMPORT: `${API_PREFIX}/system/roles/import`
 } as const
 
 // 获取Role列表

@@ -132,16 +132,24 @@ export interface PaymentBill {
 // 缴费记录接口
 export interface PaymentRecord {
   id: string
-  billId: string
-  studentId: string
-  studentName: string
-  feeType: string
+  billId?: string
+  date?: string
+  studentId?: string
+  studentName?: string
+  feeType?: string
   amount: number
-  period: string
-  paymentMethod: string
-  paidAt: string
-  status: 'paid' | 'refunded' | 'cancelled'
+  period?: string
+  paymentMethod?: string
+  method?: 'cash' | 'bank_transfer' | 'wechat' | 'alipay' | 'credit_card'
+  paidAt?: string
+  status: 'pending' | 'paid' | 'refunded' | 'cancelled' | 'partial_refund'
   receipt?: string
+  customer?: string
+  customerId?: string
+  remark?: string
+  receiptUrl?: string
+  createdAt?: string
+  confirmedAt?: string
 }
 
 // 退费申请接口
@@ -188,21 +196,6 @@ export interface FinancialReport {
     }>
   }
   generatedAt: string
-}
-
-// 收款记录接口
-export interface PaymentRecord {
-  id: string
-  date: string
-  amount: number
-  customer: string
-  customerId: string
-  method: 'cash' | 'bank_transfer' | 'wechat' | 'alipay' | 'credit_card'
-  status: 'pending' | 'paid' | 'refunded' | 'partial_refund'
-  remark?: string
-  receiptUrl?: string
-  createdAt: string
-  confirmedAt?: string
 }
 
 // 银行流水接口
@@ -706,8 +699,8 @@ class FinanceAPI {
     }
   }
 
-  // 获取缴费记录
-  async getPaymentRecords(params?: {
+  // 获取缴费记录（学生）
+  async getStudentPaymentRecords(params?: {
     studentId?: string
     dateRange?: string[]
     status?: string
@@ -819,7 +812,7 @@ class FinanceAPI {
   // ===== 财务报表相关API =====
 
   // 获取报表数据（包含模板、自定义报表、历史记录、分享）
-  async getReports(): Promise<ApiResponse<{
+  async getReportsAll(): Promise<ApiResponse<{
     templates: import('@/pages/mobile/finance/types/batch3').FinanceReportTemplate[]
     customReports: import('@/pages/mobile/finance/types/batch3').CustomReport[]
     reportHistory: import('@/pages/mobile/finance/types/batch3').ReportData[]
@@ -834,8 +827,8 @@ class FinanceAPI {
     }
   }
 
-  // 生成报表
-  async generateReport(params: import('@/pages/mobile/finance/types/batch3').ReportGenerateParams): Promise<ApiResponse<import('@/pages/mobile/finance/types/batch3').ReportData>> {
+  // 生成报表（第3批API）
+  async generateBatch3Report(params: import('@/pages/mobile/finance/types/batch3').ReportGenerateParams): Promise<ApiResponse<import('@/pages/mobile/finance/types/batch3').ReportData>> {
     try {
       const response = await request.post(FINANCE_ENDPOINTS.REPORTS_GENERATE, params)
       return response.data
@@ -1023,7 +1016,7 @@ class FinanceAPI {
   }
 
   // 获取预测报告
-  async getForecastReports(): Promise<ApiResponse<import('@/pages/mobile/finance/types/batch3').ForecastReport[]>> {
+  async getForecastReports(): Promise<ApiResponse<import('@/pages/mobile/finance/types/batch3').ForecastResult[]>> {
     try {
       const response = await request.get(FINANCE_ENDPOINTS.FORECAST_REPORTS)
       return response.data

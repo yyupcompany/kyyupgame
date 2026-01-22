@@ -221,6 +221,13 @@ export const STATIC_MENU_CONFIG: MenuItem[] = [
         path: '/teacher-center/student-assessment',
         component: 'teacher-center/student-assessment',
         roles: ['teacher']
+      },
+      {
+        id: 'teacher-class-contacts',
+        title: '班级通讯录',
+        path: '/teacher-center/class-contacts',
+        component: 'teacher-center/class-contacts',
+        roles: ['admin', 'principal', 'teacher']
       }
     ]
   },

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    :title="activity?.title || '活动详情'"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="activity?.title || '活动详情'" back-path="/mobile/parent-center">
     <div class="activity-detail" v-if="activity">
       <!-- 活动封面图 -->
       <div class="activity-cover">
@@ -289,14 +284,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { 
   getActivityDetail, 
   createRegistration, 
@@ -626,6 +621,12 @@ const handleShare = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadActivityDetail()
 })
 </script>
@@ -652,10 +653,10 @@ onMounted(() => {
 
     .activity-status {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
       padding: 6px 12px;
-      border-radius: 16px;
+      border-radius: var(--spacing-lg);
       font-size: var(--text-xs);
       font-weight: 500;
       color: white;
@@ -680,7 +681,7 @@ onMounted(() => {
   }
 
   .activity-info {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     .activity-title {
       padding: var(--spacing-md);
@@ -694,7 +695,7 @@ onMounted(() => {
 
   .activity-description,
   .activity-agenda {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     h2 {
       padding: 0 16px;
@@ -715,7 +716,7 @@ onMounted(() => {
   }
 
   .registration-info {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     h2 {
       padding: 0 16px;
@@ -729,18 +730,18 @@ onMounted(() => {
       margin: var(--spacing-md);
       padding: var(--spacing-md);
       background: var(--card-bg);
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
       .progress-label {
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
         font-size: var(--text-sm);
         font-weight: 500;
         color: var(--van-text-color);
       }
 
       .progress-text {
-        margin-top: 8px;
+        margin-top: var(--spacing-sm);
         font-size: var(--text-xs);
         color: var(--van-text-color-2);
         text-align: right;
@@ -749,7 +750,7 @@ onMounted(() => {
   }
 
   .participation-record {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     h2 {
       padding: 0 16px;
@@ -778,7 +779,7 @@ onMounted(() => {
 
     .van-button {
       flex: 1;
-      border-radius: 24px;
+      border-radius: var(--spacing-2xl);
     }
   }
 }
@@ -825,6 +826,13 @@ onMounted(() => {
       left: 50%;
       transform: translateX(-50%);
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

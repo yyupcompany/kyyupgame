@@ -684,7 +684,7 @@ async function generateWithStream() {
     align-items: center;
     padding: var(--text-lg);
     background: var(--bg-overlay);
-    border-bottom: var(--z-index-dropdown) solid var(--border-color-light);
+    border-bottom: 1px solid var(--border-color-light);
     color: var(--text-on-primary);
 
     .header-title {
@@ -722,7 +722,7 @@ async function generateWithStream() {
 
         .message-content {
           order: 1;
-          background: var(--bg-color);
+          background: var(--bg-card);
           color: var(--text-primary);
           border-radius: var(--text-sm) var(--spacing-xs) var(--text-sm) var(--text-sm);
         }
@@ -931,7 +931,7 @@ async function generateWithStream() {
   .input-area {
     padding: var(--text-lg);
     background: var(--white-alpha-10);
-    border-top: var(--z-index-dropdown) solid var(--white-alpha-20);
+    border-top: 1px solid var(--white-alpha-20);
 
     :deep(.el-textarea__inner) {
       background: var(--white-alpha-90);

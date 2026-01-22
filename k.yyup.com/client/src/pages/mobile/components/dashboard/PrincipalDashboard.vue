@@ -60,7 +60,7 @@
 
 .stats-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
 
   .stats-grid {
     display: grid;
@@ -91,7 +91,7 @@
 
 .quick-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   margin-top: var(--app-gap);
 
   .section-title {

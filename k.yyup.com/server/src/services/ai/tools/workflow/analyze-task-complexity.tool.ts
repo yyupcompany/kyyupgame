@@ -125,7 +125,7 @@ function generateRecommendations(complexity: ComplexityAnalysis, needsTodoList: 
 const analyzeTaskComplexityTool: ToolDefinition = {
   name: 'analyze_task_complexity',
   description: '分析用户任务的复杂度，判断是否需要创建TodoList进行任务分解。适用于复杂任务的预处理。',
-  category: TOOL_CATEGORIES.WORKFLOW,
+  category: TOOL_CATEGORIES.ANALYSIS,
   parameters: {
     type: 'object',
     properties: {

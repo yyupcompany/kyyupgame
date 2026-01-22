@@ -469,6 +469,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .document-template-center {
   padding: var(--text-2xl);
 

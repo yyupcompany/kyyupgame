@@ -1256,9 +1256,9 @@ onMounted(async () => {
   width: var(--icon-size); height: var(--icon-size);
   border-radius: var(--radius-md);
   background: linear-gradient(90deg,
-    var(--bg-secondary) 25%,
+    var(--bg-page) 25%,
     var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%);
+    var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -1275,9 +1275,9 @@ onMounted(async () => {
   width: auto;
   border-radius: var(--radius-sm);
   background: linear-gradient(90deg,
-    var(--bg-secondary) 25%,
+    var(--bg-page) 25%,
     var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%);
+    var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -1287,9 +1287,9 @@ onMounted(async () => {
   max-width: 120px; width: 100%;
   border-radius: var(--radius-sm);
   background: linear-gradient(90deg,
-    var(--bg-secondary) 25%,
+    var(--bg-page) 25%,
     var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%);
+    var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -1305,9 +1305,9 @@ onMounted(async () => {
   width: auto;
   border-radius: var(--radius-sm);
   background: linear-gradient(90deg,
-    var(--bg-secondary) 25%,
+    var(--bg-page) 25%,
     var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%);
+    var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -1317,9 +1317,9 @@ onMounted(async () => {
   width: auto;
   border-radius: var(--radius-sm);
   background: linear-gradient(90deg,
-    var(--bg-secondary) 25%,
+    var(--bg-page) 25%,
     var(--bg-tertiary) 50%,
-    var(--bg-secondary) 75%);
+    var(--bg-page) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }

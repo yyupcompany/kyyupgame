@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import { StudentController } from '../controllers/student.controller';
 import { checkPermission, checkParentStudentAccess, verifyToken } from '../middlewares/auth.middleware';
 
@@ -8,6 +8,23 @@ const router = Router();
 router.use(verifyToken);
 
 const studentControllerInstance = new StudentController();
+
+/**
+ * 自定义中间件：允许教师和管理员使用student:view权限，家长仅能查看自己的孩子
+ */
+const checkStudentViewOrParent = (req: Request, res: Response, next: NextFunction): void => {
+  const user = (req as any).user;
+
+  // 家长角色允许通过（list方法会过滤数据）
+  if (user.role === 'parent') {
+    console.log('[学生权限] 家长角色，允许访问学生列表');
+    next();
+    return;
+  }
+
+  // 其他角色需要 student:view 权限
+  checkPermission('student:view')(req, res, next);
+};
 
 /**
 * @swagger
@@ -521,7 +538,7 @@ router.get('/statistics', checkPermission('student:view'), studentControllerInst
  *       403:
  *         description: 权限不足
 */
-router.get('/', checkPermission('student:view'), studentControllerInstance.list);
+router.get('/', checkStudentViewOrParent, studentControllerInstance.list);
 
 /**
 * @swagger

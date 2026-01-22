@@ -1425,7 +1425,7 @@ onMounted(async () => {
           }
 
           &.stopped {
-            background: var(--bg-secondary);
+            background: var(--bg-page);
             color: var(--info-color);
           }
 

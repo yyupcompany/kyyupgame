@@ -45,7 +45,7 @@
   .analysis-panel,
   .results-panel,
   .control-panel
-):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.stat-card *):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
   background: var(--bg-card) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -70,7 +70,7 @@
   .analysis-panel,
   .results-panel,
   .control-panel
-):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.stat-card *):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page) {
   background: var(--bg-card) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -136,7 +136,7 @@
   [class*='panel'],
   [class*='container'],
   [class*='section']
-):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page):not(.modern-login-page *) {
+):not(.login-container):not([class^='login-']):not([class*=' login-']):not(.stat-card):not(.stat-card *):not(.unified-center-layout .page-header):not(.welcome-section):not(.todo-page .page-header):not(.modern-login-page):not(.modern-login-page *) {
   background: var(--bg-card) !important;
   color: var(--text-primary) !important;
   border-color: var(--border-color) !important;
@@ -311,12 +311,12 @@
   color: var(--text-primary) !important;
 }
 
-/* 修复所有带边框的元素 */
-.theme-workbench [class*='card'],
+/* 修复所有带边框的元素 - 排除彩色类型卡片 */
+.theme-workbench [class*='card']:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info),
 .theme-workbench [class*='Card'],
 .theme-workbench .el-card,
 .theme-workbench .chart-container,
-.theme-workbench .stat-card,
+.theme-workbench .stat-card:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info),
 .theme-workbench .management-card,
 .theme-workbench .app-card {
   border-color: var(--border-color) !important;

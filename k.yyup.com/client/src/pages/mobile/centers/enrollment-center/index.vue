@@ -1,1451 +1,436 @@
 <template>
-  <MobileMainLayout
-    title="招生中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
-    <!-- 头部操作区域 -->
-    <template #header-extra>
+  <MobileCenterLayout title="招生中心" back-path="/mobile/centers">
+    <template #right>
       <van-icon name="plus" size="20" @click="handleCreate" />
     </template>
 
-    <div class="mobile-enrollment-center">
-      <!-- 统计卡片区域 -->
+    <div class="enrollment-center-mobile">
+      <!-- 统计卡片 -->
       <div class="stats-section">
-        <div class="stats-grid">
-          <div
-            v-for="(stat, index) in overviewStats"
-            :key="stat.key"
-            class="stat-card"
-            @click="handleStatClick(stat)"
-          >
-            <div class="stat-icon" :class="`stat-${stat.type}`">
-              <van-icon :name="getStatIcon(stat.iconName)" size="24" />
-            </div>
+        <van-grid :column-num="2" :gutter="12">
+          <van-grid-item v-for="stat in statsData" :key="stat.key" class="stat-card" @click="handleStatClick(stat.key)">
             <div class="stat-content">
-              <div class="stat-value">{{ stat.value }}</div>
-              <div class="stat-label">{{ stat.title }}</div>
-              <div class="stat-unit">{{ stat.unit }}</div>
-            </div>
-            <div class="stat-trend" v-if="stat.trend !== 0">
-              <van-icon
-                :name="stat.trend > 0 ? 'arrow-up' : 'arrow-down'"
-                size="12"
-                :color="stat.trend > 0 ? '#06a561' : '#ee0a24'"
-              />
-              <span class="trend-value" :class="{ 'trend-up': stat.trend > 0, 'trend-down': stat.trend < 0 }">
-                {{ Math.abs(stat.trend) }}%
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 图表区域 -->
-      <div class="charts-section">
-        <van-tabs v-model:active="activeChartTab" sticky shrink>
-          <van-tab title="招生趋势">
-            <div class="chart-container">
-              <div ref="trendChartRef" class="chart"></div>
-            </div>
-          </van-tab>
-          <van-tab title="来源渠道">
-            <div class="chart-container">
-              <div ref="channelChartRef" class="chart"></div>
-            </div>
-          </van-tab>
-          <van-tab title="转化漏斗">
-            <div class="chart-container">
-              <div ref="funnelChartRef" class="chart"></div>
-            </div>
-          </van-tab>
-        </van-tabs>
-      </div>
-
-      <!-- 快速操作区域 -->
-      <div class="quick-actions-section">
-        <div class="section-header">
-          <h3>快速操作</h3>
-        </div>
-        <div class="actions-grid">
-          <van-button
-            v-for="action in quickActions"
-            :key="action.key"
-            :type="action.type"
-            :icon="action.icon"
-            block
-            @click="handleQuickAction(action)"
-            class="action-button"
-          >
-            {{ action.label }}
-          </van-button>
-        </div>
-      </div>
-
-      <!-- 数据管理区域 -->
-      <div class="data-management-section">
-        <van-tabs v-model:active="activeDataTab" sticky>
-          <van-tab title="招生计划">
-            <div class="data-list">
-              <div class="list-header">
-                <div class="header-title">招生计划管理</div>
-                <van-button size="small" type="primary" @click="handleCreatePlan">
-                  新建计划
-                </van-button>
+              <van-icon :name="stat.icon" :color="stat.color" size="24" />
+              <div class="stat-value">{{ stat.value }}<span class="unit">{{ stat.unit }}</span></div>
+              <div class="stat-label">{{ stat.label }}</div>
+              <div class="stat-trend" v-if="stat.trend !== undefined">
+                <van-tag size="medium" :type="stat.trend >= 0 ? 'success' : 'danger'">
+                  {{ stat.trend >= 0 ? '+' : '' }}{{ stat.trend }}%
+                </van-tag>
               </div>
-
-              <van-list
-                v-model:loading="plansLoading"
-                :finished="plansFinished"
-                finished-text="没有更多了"
-                @load="loadMorePlans"
-              >
-                <van-card
-                  v-for="plan in plansData"
-                  :key="plan.id"
-                  :title="plan.title"
-                  :desc="`${plan.year}年 ${plan.semester === 'spring' ? '春季' : '秋季'}`"
-                  class="plan-card"
-                  @click="handlePlanClick(plan)"
-                >
-                  <template #thumb>
-                    <van-icon name="calendar-o" size="40" color="#409eff" />
-                  </template>
-                  <template #tags>
-                    <van-tag :type="getPlanStatusType(plan.status)">
-                      {{ getPlanStatusText(plan.status) }}
-                    </van-tag>
-                  </template>
-                  <template #footer>
-                    <div class="plan-progress">
-                      <div class="progress-info">
-                        <span>进度: {{ plan.appliedCount }}/{{ plan.targetCount }}</span>
-                        <span>{{ calculateProgress(plan) }}%</span>
-                      </div>
-                      <van-progress
-                        :percentage="calculateProgress(plan)"
-                        :color="getProgressColor(plan)"
-                        stroke-width="6"
-                      />
-                    </div>
-                  </template>
-                </van-card>
-              </van-list>
             </div>
-          </van-tab>
+          </van-grid-item>
+        </van-grid>
+      </div>
 
-          <van-tab title="申请管理">
-            <div class="data-list">
-              <!-- 筛选器 -->
-              <div class="filter-bar">
-                <van-dropdown-menu>
-                  <van-dropdown-item
-                    v-model="applicationStatusFilter"
-                    :options="applicationStatusOptions"
-                    @change="filterApplications"
-                  />
-                  <van-dropdown-item
-                    v-model="applicationTimeFilter"
-                    :options="applicationTimeOptions"
-                    @change="filterApplications"
-                  />
-                </van-dropdown-menu>
-              </div>
+      <!-- 快捷功能 -->
+      <div class="quick-actions">
+        <div class="section-title">快捷功能</div>
+        <van-grid :column-num="4" :gutter="8">
+          <van-grid-item v-for="action in quickActions" :key="action.key" @click="handleAction(action.key)">
+            <van-icon :name="action.icon" :color="action.color" size="24" />
+            <span class="action-label">{{ action.label }}</span>
+          </van-grid-item>
+        </van-grid>
+      </div>
 
+      <!-- 标签页 -->
+      <van-tabs v-model:active="activeTab" sticky offset-top="46">
+        <!-- 咨询列表 -->
+        <van-tab title="咨询管理" name="consultations">
+          <div class="tab-content">
+            <van-search v-model="searchKeyword" placeholder="搜索咨询记录" @search="loadConsultations" />
+            
+            <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
               <van-list
-                v-model:loading="applicationsLoading"
-                :finished="applicationsFinished"
+                v-model:loading="loading"
+                :finished="finished"
                 finished-text="没有更多了"
-                @load="loadMoreApplications"
+                @load="onLoad"
               >
-                <van-card
-                  v-for="application in applicationsData"
-                  :key="application.id"
-                  :title="application.studentName"
-                  :desc="`家长: ${application.parentName} | ${application.phone}`"
-                  class="application-card"
-                  @click="handleApplicationClick(application)"
-                >
-                  <template #thumb>
-                    <van-icon name="contact" size="40" color="#409eff" />
-                  </template>
-                  <template #tags>
-                    <van-tag :type="getApplicationStatusType(application.status)">
-                      {{ getApplicationStatusText(application.status) }}
-                    </van-tag>
-                  </template>
-                  <template #footer>
-                    <div class="application-footer">
-                      <div class="application-info">
-                        <span>{{ application.planTitle }}</span>
-                        <span>{{ application.applicationDate }}</span>
-                      </div>
-                      <div class="application-actions" v-if="application.status === 'pending'">
-                        <van-button
-                          size="mini"
-                          type="success"
-                          @click.stop="handleApproveApplication(application)"
-                        >
-                          通过
-                        </van-button>
-                        <van-button
-                          size="mini"
-                          type="danger"
-                          @click.stop="handleRejectApplication(application)"
-                        >
-                          拒绝
-                        </van-button>
-                      </div>
-                    </div>
-                  </template>
-                </van-card>
-              </van-list>
-            </div>
-          </van-tab>
-
-          <van-tab title="咨询管理">
-            <div class="data-list">
-              <!-- 咨询统计 -->
-              <div class="consultation-stats">
-                <div
-                  v-for="stat in consultationStats"
-                  :key="stat.key"
-                  class="consultation-stat-item"
-                >
-                  <div class="stat-icon-small">
-                    <van-icon :name="getStatIcon(stat.icon)" size="20" />
-                  </div>
-                  <div class="stat-info">
-                    <div class="stat-value-small">{{ stat.value }}</div>
-                    <div class="stat-label-small">{{ stat.title }}</div>
-                  </div>
+                <div v-if="consultations.length === 0 && !loading" class="empty-state">
+                  <van-empty description="暂无咨询记录" />
                 </div>
-              </div>
-
-              <van-list
-                v-model:loading="consultationsLoading"
-                :finished="consultationsFinished"
-                finished-text="没有更多了"
-                @load="loadMoreConsultations"
-              >
-                <van-card
-                  v-for="consultation in consultationsData"
-                  :key="consultation.id"
-                  :title="consultation.parentName"
-                  :desc="`${consultation.phone} | 来源: ${consultation.source}`"
+                <div
+                  v-for="item in consultations"
+                  :key="item.id"
                   class="consultation-card"
-                  @click="handleConsultationClick(consultation)"
+                  @click="viewConsultation(item)"
                 >
-                  <template #thumb>
-                    <van-icon name="phone-o" size="40" color="#409eff" />
-                  </template>
-                  <template #tags>
-                    <van-tag :type="getConsultationStatusType(consultation.status)">
-                      {{ getConsultationStatusText(consultation.status) }}
-                    </van-tag>
-                  </template>
-                  <template #footer>
-                    <div class="consultation-footer">
-                      <span>负责人: {{ consultation.assignee }}</span>
-                      <span>{{ consultation.createdAt }}</span>
+                  <div class="card-header">
+                    <div class="card-avatar">
+                      <van-icon name="user-o" size="20" />
                     </div>
-                  </template>
-                </van-card>
-              </van-list>
-            </div>
-          </van-tab>
-
-          <van-tab title="数据分析">
-            <div class="analytics-content">
-              <div class="analytics-metrics">
-                <div
-                  v-for="metric in analyticsMetrics"
-                  :key="metric.key"
-                  class="metric-card"
-                >
-                  <div class="metric-title">{{ metric.title }}</div>
-                  <div class="metric-value">{{ metric.value }}{{ metric.unit }}</div>
-                  <div class="metric-trend">
-                    <van-icon
-                      :name="metric.trend > 0 ? 'arrow-up' : 'arrow-down'"
-                      size="14"
-                      :color="metric.trend > 0 ? '#06a561' : '#ee0a24'"
-                    />
-                    <span>{{ Math.abs(metric.trend) }}%</span>
+                    <div class="card-info">
+                      <div class="card-title">{{ item.parentName }}</div>
+                      <div class="card-subtitle">{{ item.childName }} · {{ item.childAge }}岁</div>
+                    </div>
+                    <van-tag size="medium" :type="getStatusType(item.status)">
+                      {{ getStatusLabel(item.status) }}
+                    </van-tag>
+                  </div>
+                  <div class="card-content">
+                    <div class="info-row">
+                      <van-icon name="phone-o" size="14" />
+                      <span>{{ item.phone }}</span>
+                    </div>
+                    <div class="info-row">
+                      <van-icon name="clock-o" size="14" />
+                      <span>{{ formatDate(item.createdAt) }}</span>
+                    </div>
+                  </div>
+                  <div class="card-actions">
+                    <van-button size="medium" type="primary" plain @click.stop="followUp(item)">跟进</van-button>
+                    <van-button size="medium" plain @click.stop="callParent(item)">拨打电话</van-button>
                   </div>
                 </div>
-              </div>
+              </van-list>
+            </van-pull-refresh>
+          </div>
+        </van-tab>
 
-              <div class="analytics-actions">
-                <van-button
-                  v-for="action in analyticsActions"
-                  :key="action.key"
-                  :icon="action.icon"
-                  block
-                  @click="handleAnalyticsAction(action)"
+        <!-- 报名列表 -->
+        <van-tab title="报名管理" name="registrations">
+          <div class="tab-content">
+            <van-pull-refresh v-model="regRefreshing" @refresh="onRegRefresh">
+              <van-list
+                v-model:loading="regLoading"
+                :finished="regFinished"
+                finished-text="没有更多了"
+                @load="onRegLoad"
+              >
+                <div v-if="registrations.length === 0 && !regLoading" class="empty-state">
+                  <van-empty description="暂无报名记录" />
+                </div>
+                <div
+                  v-for="item in registrations"
+                  :key="item.id"
+                  class="registration-card"
+                  @click="viewRegistration(item)"
                 >
-                  {{ action.label }}
-                </van-button>
-              </div>
-            </div>
-          </van-tab>
-        </van-tabs>
-      </div>
-
-      <!-- 时间筛选和导出 -->
-      <div class="bottom-actions">
-        <van-dropdown-menu>
-          <van-dropdown-item
-            v-model="timeRangeFilter"
-            :options="timeRangeOptions"
-            title="时间范围"
-          />
-        </van-dropdown-menu>
-        <van-button
-          type="primary"
-          icon="down"
-          size="small"
-          @click="handleExportReport"
-        >
-          导出报表
-        </van-button>
-      </div>
-
-      <!-- 悬浮帮助按钮 -->
-      <van-floating-bubble
-        icon="question"
-        magnetic="x"
-        @click="showHelp = true"
-      />
-      
-      <!-- 悬浮操作按钮 -->
-      <van-floating-bubble
-        icon="add"
-        magnetic="y"
-        axis="xy"
-        @click="handleCreate"
-        style="right: 80px; bottom: 100px;"
-      />
+                  <div class="card-header">
+                    <div class="card-info">
+                      <div class="card-title">{{ item.childName }}</div>
+                      <div class="card-subtitle">{{ item.className }} · {{ item.parentName }}</div>
+                    </div>
+                    <van-tag size="medium" :type="getRegStatusType(item.status)">
+                      {{ getRegStatusLabel(item.status) }}
+                    </van-tag>
+                  </div>
+                  <div class="card-footer">
+                    <span>报名时间: {{ formatDate(item.registeredAt) }}</span>
+                    <span>入园日期: {{ item.enrollmentDate }}</span>
+                  </div>
+                </div>
+              </van-list>
+            </van-pull-refresh>
+          </div>
+        </van-tab>
+      </van-tabs>
     </div>
-
-    <!-- 帮助弹窗 -->
-    <van-popup
-      v-model:show="showHelp"
-      position="bottom"
-      :style="{ height: '70%' }"
-      round
-      closeable
-    >
-      <div class="help-content">
-        <h3>招生中心使用指南</h3>
-        <p>移动端招生中心为您提供完整的招生管理功能，包括计划制定、申请审核、咨询跟进和数据分析。</p>
-
-        <van-tabs v-model:active="helpTab">
-          <van-tab title="功能特色">
-            <div class="feature-list">
-              <div v-for="(feature, index) in helpFeatures" :key="index" class="feature-item">
-                <van-icon name="star" color="#ffd21e" />
-                <span>{{ feature }}</span>
-              </div>
-            </div>
-          </van-tab>
-
-          <van-tab title="使用技巧">
-            <div class="tips-list">
-              <div v-for="(tip, index) in helpTips" :key="index" class="tip-item">
-                <van-icon name="lightbulb" color="#ff6b35" />
-                <span>{{ tip }}</span>
-              </div>
-            </div>
-          </van-tab>
-        </van-tabs>
-      </div>
-    </van-popup>
-
-    <!-- AI分析弹窗 -->
-    <EnrollmentAIAnalysisDialog
-      v-model="aiAnalysisDialogVisible"
-    />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { showToast, showDialog, showActionSheet } from 'vant'
-import * as echarts from 'echarts'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
-import EnrollmentAIAnalysisDialog from './components/EnrollmentAIAnalysisDialog.vue'
-import {
-  getEnrollmentOverview,
-  getEnrollmentPlans,
-  getEnrollmentApplications,
-  getEnrollmentConsultations,
-  getConsultationStatistics,
-  type OverviewData,
-  type EnrollmentPlan,
-  type EnrollmentApplication,
-  type ConsultationStatistics
-} from '@/api/enrollment-center'
+import { showToast } from 'vant'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 
 const router = useRouter()
 
-// 全局状态
+// 状态
+const activeTab = ref('consultations')
 const loading = ref(false)
-const showHelp = ref(false)
-const helpTab = ref(0)
-const aiAnalysisDialogVisible = ref(false)
+const finished = ref(false)
+const refreshing = ref(false)
+const regLoading = ref(false)
+const regFinished = ref(false)
+const regRefreshing = ref(false)
+const searchKeyword = ref('')
 
-// Tab状态
-const activeChartTab = ref(0)
-const activeDataTab = ref(0)
+// 数据
+const consultations = ref<any[]>([])
+const registrations = ref<any[]>([])
 
-// 图表引用
-const trendChartRef = ref<HTMLElement>()
-const channelChartRef = ref<HTMLElement>()
-const funnelChartRef = ref<HTMLElement>()
-
-// 统计数据 - 对应PC端结构
-const overviewStats = ref([
-  {
-    key: 'total_consultations',
-    title: '总咨询数',
-    value: 0,
-    unit: '人',
-    trend: 0,
-    type: 'primary',
-    iconName: 'user'
-  },
-  {
-    key: 'applications',
-    title: '已报名',
-    value: 0,
-    unit: '人',
-    trend: 0,
-    type: 'success',
-    iconName: 'check'
-  },
-  {
-    key: 'trials',
-    title: '试听中',
-    value: 0,
-    unit: '人',
-    trend: 0,
-    type: 'warning',
-    iconName: 'clock'
-  },
-  {
-    key: 'conversion_rate',
-    title: '转化率',
-    value: 0,
-    unit: '%',
-    trend: 0,
-    type: 'info',
-    iconName: 'trending-up'
-  }
+// 统计数据
+const statsData = reactive([
+  { key: 'total', label: '总咨询数', value: 256, unit: '人', icon: 'friends-o', color: '#6366f1', trend: 12 },
+  { key: 'registered', label: '已报名', value: 89, unit: '人', icon: 'passed', color: '#10b981', trend: 8 },
+  { key: 'trial', label: '试听中', value: 23, unit: '人', icon: 'clock-o', color: '#f59e0b', trend: -5 },
+  { key: 'conversion', label: '转化率', value: 34.8, unit: '%', icon: 'chart-trending-o', color: '#3b82f6', trend: 3 }
 ])
 
-// 快速操作
-const quickActions = ref([
-  { key: 'create_plan', label: '新建计划', type: 'primary', icon: 'plus' },
-  { key: 'view_applications', label: '查看申请', type: 'success', icon: 'eye' },
-  { key: 'ai_analysis', label: 'AI分析', icon: 'bulb-o' },
-  { key: 'export_report', label: '导出报表', icon: 'down' }
-])
-
-// 招生计划数据
-const plansData = ref<EnrollmentPlan[]>([])
-const plansLoading = ref(false)
-const plansFinished = ref(false)
-const plansPage = ref(1)
-const plansPageSize = ref(10)
-const plansTotal = ref(0)
-
-// 申请管理数据
-const applicationsData = ref<EnrollmentApplication[]>([])
-const applicationsLoading = ref(false)
-const applicationsFinished = ref(false)
-const applicationsPage = ref(1)
-const applicationsPageSize = ref(10)
-const applicationsTotal = ref(0)
-const applicationStatusFilter = ref('all')
-const applicationTimeFilter = ref('month')
-
-const applicationStatusOptions = [
-  { text: '全部状态', value: 'all' },
-  { text: '待审核', value: 'pending' },
-  { text: '已通过', value: 'approved' },
-  { text: '已拒绝', value: 'rejected' }
+// 快捷操作
+const quickActions = [
+  { key: 'add', label: '新增咨询', icon: 'add-o', color: '#6366f1' },
+  { key: 'followup', label: '今日跟进', icon: 'todo-list-o', color: '#10b981' },
+  { key: 'trial', label: '试听安排', icon: 'calendar-o', color: '#f59e0b' },
+  { key: 'analysis', label: '数据分析', icon: 'chart-trending-o', color: '#3b82f6' }
 ]
 
-const applicationTimeOptions = [
-  { text: '本月', value: 'month' },
-  { text: '上周', value: 'lastWeek' },
-  { text: '本周', value: 'week' },
-  { text: '全部', value: 'all' }
-]
+// 初始化
+onMounted(() => {
+  loadConsultations()
+})
 
-// 咨询管理数据
-const consultationsData = ref<any[]>([])
-const consultationsLoading = ref(false)
-const consultationsFinished = ref(false)
-const consultationsPage = ref(1)
-const consultationsPageSize = ref(10)
-const consultationsTotal = ref(0)
-
-const consultationStats = ref([
-  { key: 'today', title: '今日咨询', value: 23, unit: '人', type: 'primary', icon: 'phone' },
-  { key: 'pending', title: '待跟进', value: 45, unit: '人', type: 'warning', icon: 'clock' },
-  { key: 'monthly', title: '本月转化', value: 156, unit: '人', type: 'success', icon: 'check' },
-  { key: 'response', title: '平均响应', value: 2.5, unit: '小时', type: 'info', icon: 'timer' }
-])
-
-undefined
-
-const analyticsActions = ref([
-  { key: 'export', label: '导出报表', icon: 'down' },
-  { key: 'refresh', label: '刷新数据', icon: 'replay' }
-])
-
-// 时间筛选
-const timeRangeFilter = ref('month')
-const timeRangeOptions = [
-  { text: '本月', value: 'month' },
-  { text: '上月', value: 'lastMonth' },
-  { text: '本季度', value: 'quarter' },
-  { text: '本年', value: 'year' }
-]
-
-undefined
-
-// 图标映射
-const getStatIcon = (iconName: string) => {
-  const iconMap: Record<string, string> = {
-    'user': 'friends-o',
-    'check': 'success',
-    'clock': 'clock-o',
-    'trending-up': 'chart-trending-o',
-    'phone': 'phone-o',
-    'timer': 'timer-o'
-  }
-  return iconMap[iconName] || 'info-o'
-}
-
-// 状态类型映射
-const getPlanStatusType = (status: string) => {
-  const typeMap: Record<string, string> = {
-    active: 'success',
-    inactive: 'danger',
-    draft: 'warning'
-  }
-  return typeMap[status] || 'info'
-}
-
-const getPlanStatusText = (status: string) => {
-  const textMap: Record<string, string> = {
-    active: '进行中',
-    inactive: '已结束',
-    draft: '草稿'
-  }
-  return textMap[status] || status
-}
-
-const getApplicationStatusType = (status: string) => {
-  const typeMap: Record<string, string> = {
-    pending: 'warning',
-    approved: 'success',
-    rejected: 'danger'
-  }
-  return typeMap[status] || 'info'
-}
-
-const getApplicationStatusText = (status: string) => {
-  const textMap: Record<string, string> = {
-    pending: '待审核',
-    approved: '已通过',
-    rejected: '已拒绝'
-  }
-  return textMap[status] || status
-}
-
-const getConsultationStatusType = (status: string) => {
-  const typeMap: Record<string, string> = {
-    new: 'primary',
-    following: 'warning',
-    converted: 'success',
-    lost: 'danger'
-  }
-  return typeMap[status] || 'info'
-}
-
-const getConsultationStatusText = (status: string) => {
-  const textMap: Record<string, string> = {
-    new: '新咨询',
-    following: '跟进中',
-    converted: '已转化',
-    lost: '已流失'
-  }
-  return textMap[status] || status
-}
-
-// 计算进度
-const calculateProgress = (plan: any) => {
-  if (!plan.targetCount) return 0
-  return Math.round((plan.appliedCount / plan.targetCount) * 100)
-}
-
-const getProgressColor = (plan: any) => {
-  const progress = calculateProgress(plan)
-  if (progress >= 80) return '#07c160'
-  if (progress >= 60) return '#ff976a'
-  if (progress >= 40) return '#ee0a24'
-  return '#1989fa'
-}
-
-// 事件处理
-const handleCreate = async () => {
-  await router.push('/enrollment-plan/create')
-}
-
-const handleStatClick = (stat: any) => {
-  showToast(`点击了${stat.title}`)
-}
-
-const handleQuickAction = async (action: any) => {
-  switch (action.key) {
-    case 'create_plan':
-      await router.push('/enrollment-plan/create')
-      break
-    case 'view_applications':
-      activeDataTab.value = 1 // 切换到申请管理tab
-      break
-    case 'ai_analysis':
-      aiAnalysisDialogVisible.value = true
-      break
-    case 'export_report':
-      handleExportReport()
-      break
-    default:
-      showToast(`${action.label}功能开发中`)
-  }
-}
-
-const handleCreatePlan = async () => {
-  await router.push('/enrollment-plan/create')
-}
-
-const handlePlanClick = (plan: any) => {
-  router.push(`/enrollment-plan/detail?id=${plan.id}`)
-}
-
-const handleApplicationClick = (application: any) => {
-  router.push(`/enrollment-application/detail?id=${application.id}`)
-}
-
-const handleApproveApplication = async (application: any) => {
-  try {
-    await showDialog({
-      title: '确认通过',
-      message: '确认通过该申请吗？'
-    })
-
-    // 这里调用API更新状态
-    application.status = 'approved'
-    showToast('已通过申请')
-  } catch (error) {
-    // 用户取消
-  }
-}
-
-const handleRejectApplication = async (application: any) => {
-  try {
-    await showDialog({
-      title: '确认拒绝',
-      message: '确认拒绝该申请吗？'
-    })
-
-    // 这里调用API更新状态
-    application.status = 'rejected'
-    showToast('已拒绝申请')
-  } catch (error) {
-    // 用户取消
-  }
-}
-
-const handleConsultationClick = (consultation: any) => {
-  router.push(`/enrollment-consultation/detail?id=${consultation.id}`)
-}
-
-const handleAnalyticsAction = (action: any) => {
-  if (action.key === 'export') {
-    handleExportReport()
-  } else {
-    showToast(`${action.label}功能开发中`)
-  }
-}
-
-const handleExportReport = () => {
-  showToast('正在生成报表...')
-  setTimeout(() => {
-    showToast('报表导出成功！')
-  }, 2000)
-}
-
-const filterApplications = () => {
-  applicationsPage.value = 1
-  applicationsData.value = []
-  loadMoreApplications()
-}
-
-// 加载数据方法
-const loadOverviewData = async () => {
+// 加载咨询列表
+const loadConsultations = async () => {
   try {
     loading.value = true
-    const response = await getEnrollmentOverview({ timeRange: 'month' })
-    const data = response.data || response
-
-    if (data.statistics) {
-      overviewStats.value = [
-        {
-          key: 'total_consultations',
-          title: '总咨询数',
-          value: data.statistics.totalConsultations?.value || 234,
-          unit: '人',
-          trend: data.statistics.totalConsultations?.trend || 12,
-          type: 'primary',
-          iconName: 'user'
-        },
-        {
-          key: 'applications',
-          title: '已报名',
-          value: data.statistics.applications?.value || 156,
-          unit: '人',
-          trend: data.statistics.applications?.trend || 8,
-          type: 'success',
-          iconName: 'check'
-        },
-        {
-          key: 'trials',
-          title: '试听中',
-          value: data.statistics.trials?.value || 45,
-          unit: '人',
-          trend: data.statistics.trials?.trend || -5,
-          type: 'warning',
-          iconName: 'clock'
-        },
-        {
-          key: 'conversion_rate',
-          title: '转化率',
-          value: data.statistics.conversionRate?.value || 68.5,
-          unit: '%',
-          trend: data.statistics.conversionRate?.trend || 3.2,
-          type: 'info',
-          iconName: 'trending-up'
-        }
-      ]
-    }
-  } catch (error) {
-    console.error('加载概览数据失败:', error)
-    // 使用默认数据
-    overviewStats.value = [
-      { key: 'total_consultations', title: '总咨询数', value: 234, unit: '人', trend: 12, type: 'primary', iconName: 'user' },
-      { key: 'applications', title: '已报名', value: 156, unit: '人', trend: 8, type: 'success', iconName: 'check' },
-      { key: 'trials', title: '试听中', value: 45, unit: '人', trend: -5, type: 'warning', iconName: 'clock' },
-      { key: 'conversion_rate', title: '转化率', value: 68.5, unit: '%', trend: 3.2, type: 'info', iconName: 'trending-up' }
+    // TODO: 调用API
+    consultations.value = [
+      { id: 1, parentName: '张女士', childName: '张小明', childAge: 3, phone: '138****1234', status: 'pending', createdAt: '2026-01-07 10:30' },
+      { id: 2, parentName: '李先生', childName: '李小红', childAge: 4, phone: '139****5678', status: 'following', createdAt: '2026-01-06 14:20' },
+      { id: 3, parentName: '王女士', childName: '王小华', childAge: 3, phone: '137****9012', status: 'trial', createdAt: '2026-01-05 09:15' }
     ]
+    finished.value = true
+  } catch (error) {
+    console.error('加载咨询失败:', error)
   } finally {
     loading.value = false
+    refreshing.value = false
   }
 }
 
-const loadMorePlans = async () => {
-  if (plansFinished.value) return
-
+// 加载报名列表
+const loadRegistrations = async () => {
   try {
-    plansLoading.value = true
-    const response = await getEnrollmentPlans({
-      page: plansPage.value,
-      pageSize: plansPageSize.value
-    })
-
-    const newPlans = Array.isArray(response.data?.data) ? response.data.data : []
-    if (newPlans.length === 0) {
-      plansFinished.value = true
-    } else {
-      plansData.value.push(...newPlans)
-      plansPage.value++
-    }
-  } catch (error) {
-    console.error('加载招生计划失败:', error)
-    // 使用模拟数据
-    const mockPlans = [
-      {
-        id: 1,
-        title: '2024年秋季招生计划',
-        year: 2024,
-        semester: 'autumn',
-        targetCount: 60,
-        appliedCount: 45,
-        status: 'active'
-      },
-      {
-        id: 2,
-        title: '2025年春季招生计划',
-        year: 2025,
-        semester: 'spring',
-        targetCount: 80,
-        appliedCount: 12,
-        status: 'draft'
-      }
+    regLoading.value = true
+    // TODO: 调用API
+    registrations.value = [
+      { id: 1, childName: '张小明', className: '小班1班', parentName: '张女士', status: 'confirmed', registeredAt: '2026-01-05', enrollmentDate: '2026-02-01' },
+      { id: 2, childName: '李小红', className: '中班2班', parentName: '李先生', status: 'pending', registeredAt: '2026-01-04', enrollmentDate: '2026-02-15' }
     ]
-
-    if (plansPage.value === 1) {
-      plansData.value = mockPlans
-      plansFinished.value = true
-    }
-  } finally {
-    plansLoading.value = false
-  }
-}
-
-const loadMoreApplications = async () => {
-  if (applicationsFinished.value) return
-
-  try {
-    applicationsLoading.value = true
-    const response = await getEnrollmentApplications({
-      page: applicationsPage.value,
-      pageSize: applicationsPageSize.value,
-      status: applicationStatusFilter.value !== 'all' ? applicationStatusFilter.value : undefined
-    })
-
-    const newApplications = Array.isArray(response.data?.data) ? response.data.data : []
-    if (newApplications.length === 0) {
-      applicationsFinished.value = true
-    } else {
-      applicationsData.value.push(...newApplications)
-      applicationsPage.value++
-    }
+    regFinished.value = true
   } catch (error) {
-    console.error('加载申请数据失败:', error)
-    // 使用模拟数据
-    const mockApplications = [
-      {
-        id: 1,
-        studentName: '张小明',
-        parentName: '张先生',
-        phone: '138****8888',
-        planTitle: '2024年秋季招生计划',
-        status: 'pending',
-        applicationDate: '2025-01-15'
-      },
-      {
-        id: 2,
-        studentName: '李小红',
-        parentName: '李女士',
-        phone: '139****9999',
-        planTitle: '2024年秋季招生计划',
-        status: 'approved',
-        applicationDate: '2025-01-10'
-      }
-    ]
-
-    if (applicationsPage.value === 1) {
-      applicationsData.value = mockApplications
-      applicationsFinished.value = true
-    }
+    console.error('加载报名失败:', error)
   } finally {
-    applicationsLoading.value = false
+    regLoading.value = false
+    regRefreshing.value = false
   }
 }
 
-const loadMoreConsultations = async () => {
-  if (consultationsFinished.value) return
+// 刷新
+const onRefresh = () => loadConsultations()
+const onRegRefresh = () => loadRegistrations()
+const onLoad = () => { finished.value = true }
+const onRegLoad = () => { regFinished.value = true }
 
-  try {
-    consultationsLoading.value = true
-    const response = await getEnrollmentConsultations({
-      page: consultationsPage.value,
-      pageSize: consultationsPageSize.value
-    })
-
-    const newConsultations = Array.isArray(response.data?.data) ? response.data.data : []
-    if (newConsultations.length === 0) {
-      consultationsFinished.value = true
-    } else {
-      consultationsData.value.push(...newConsultations)
-      consultationsPage.value++
-    }
-  } catch (error) {
-    console.error('加载咨询数据失败:', error)
-    // 使用模拟数据，确保与PC端数据结构一致
-    const mockConsultations = [
-      {
-        id: 1,
-        consultationNo: 'ZX20250115001',
-        parentName: '王先生',
-        phone: '137****7777',
-        source: '线上推广',
-        status: 'new',
-        assignee: '李老师',
-        createdAt: '2025-01-15 14:30',
-        contactPhone: '137****7777',
-        sourceChannelText: '线上推广',
-        followupStatusText: '新咨询',
-        consultant: { realName: '李老师' }
-      },
-      {
-        id: 2,
-        consultationNo: 'ZX20250114002',
-        parentName: '赵女士',
-        phone: '136****6666',
-        source: '口碑推荐',
-        status: 'following',
-        assignee: '张老师',
-        createdAt: '2025-01-14 10:15',
-        contactPhone: '136****6666',
-        sourceChannelText: '口碑推荐',
-        followupStatusText: '跟进中',
-        consultant: { realName: '张老师' }
-      }
-    ]
-
-    if (consultationsPage.value === 1) {
-      consultationsData.value = mockConsultations
-      consultationsFinished.value = true
-    }
-  } finally {
-    consultationsLoading.value = false
-  }
+// 状态映射
+const getStatusType = (status: string) => {
+  const map: Record<string, string> = { pending: 'warning', following: 'primary', trial: 'success', converted: 'success', lost: 'default' }
+  return map[status] || 'default'
 }
 
-// 初始化图表
-const initCharts = async () => {
-  await nextTick()
-
-  if (trendChartRef.value) {
-    const trendChart = echarts.init(trendChartRef.value)
-    const trendOption = {
-      title: { text: '' },
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        type: 'category',
-        data: ['1月', '2月', '3月', '4月', '5月', '6月']
-      },
-      yAxis: { type: 'value' },
-      series: [{
-        data: [120, 200, 150, 80, 70, 110],
-        type: 'line',
-        smooth: true,
-        itemStyle: { color: '#409eff' }
-      }]
-    }
-    trendChart.setOption(trendOption)
-  }
-
-  if (channelChartRef.value) {
-    const channelChart = echarts.init(channelChartRef.value)
-    const channelOption = {
-      title: { text: '' },
-      tooltip: { trigger: 'item' },
-      series: [{
-        type: 'pie',
-        radius: '50%',
-        data: [
-          { value: 40, name: '线上推广' },
-          { value: 30, name: '口碑推荐' },
-          { value: 20, name: '地推活动' },
-          { value: 10, name: '其他渠道' }
-        ]
-      }]
-    }
-    channelChart.setOption(channelOption)
-  }
-
-  if (funnelChartRef.value) {
-    const funnelChart = echarts.init(funnelChartRef.value)
-    const funnelOption = {
-      title: { text: '' },
-      tooltip: { trigger: 'item' },
-      series: [{
-        type: 'funnel',
-        data: [
-          { value: 1000, name: '咨询' },
-          { value: 800, name: '意向' },
-          { value: 600, name: '试听' },
-          { value: 400, name: '报名' },
-          { value: 300, name: '入学' }
-        ]
-      }]
-    }
-    funnelChart.setOption(funnelOption)
-  }
+const getStatusLabel = (status: string) => {
+  const map: Record<string, string> = { pending: '待跟进', following: '跟进中', trial: '试听中', converted: '已转化', lost: '已流失' }
+  return map[status] || '未知'
 }
 
-// 组件挂载
-onMounted(async () => {
-  await Promise.all([
-    loadOverviewData(),
-    loadMorePlans(),
-    loadMoreApplications(),
-    loadMoreConsultations()
-  ])
+const getRegStatusType = (status: string) => {
+  const map: Record<string, string> = { pending: 'warning', confirmed: 'success', cancelled: 'danger' }
+  return map[status] || 'default'
+}
 
-  await initCharts()
-})
+const getRegStatusLabel = (status: string) => {
+  const map: Record<string, string> = { pending: '待确认', confirmed: '已确认', cancelled: '已取消' }
+  return map[status] || '未知'
+}
+
+const formatDate = (dateStr: string) => dateStr?.split(' ')[0] || ''
+
+// 操作
+const handleCreate = () => showToast('新增咨询')
+const handleStatClick = (key: string) => showToast(`查看${key}详情`)
+const handleAction = (key: string) => showToast(`执行${key}操作`)
+const viewConsultation = (item: any) => showToast(`查看咨询: ${item.parentName}`)
+const viewRegistration = (item: any) => showToast(`查看报名: ${item.childName}`)
+const followUp = (item: any) => showToast(`跟进: ${item.parentName}`)
+const callParent = (item: any) => window.location.href = `tel:${item.phone?.replace(/\*/g, '')}`
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mobile-base.scss';
-.mobile-enrollment-center {
-  padding: var(--spacing-md);
-  background: var(--van-background-color-light);
+<style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+@import '@/styles/mixins/responsive-mobile.scss';
+.enrollment-center-mobile {
   min-height: 100vh;
+  background: var(--van-background-2);
 }
 
-// 统计卡片样式
 .stats-section {
-  margin-bottom: 20px;
+  padding: 12px;
+}
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-
-    .stat-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: var(--spacing-md);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      position: relative;
-      cursor: pointer;
-      transition: all 0.3s;
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      .stat-icon {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-
-        &.stat-primary {
-          background: linear-gradient(135deg, #409eff, #66b1ff);
-        }
-
-        &.stat-success {
-          background: linear-gradient(135deg, #07c160, #38d9a9);
-        }
-
-        &.stat-warning {
-          background: linear-gradient(135deg, #ff976a, #ffc069);
-        }
-
-        &.stat-info {
-          background: linear-gradient(135deg, #909399, #b3b3b3);
-        }
-      }
-
-      .stat-content {
-        padding-right: 48px;
-
-        .stat-value {
-          font-size: var(--text-3xl);
-          font-weight: bold;
-          color: #323233;
-          line-height: 1;
-          margin-bottom: 4px;
-        }
-
-        .stat-label {
-          font-size: var(--text-sm);
-          color: #969799;
-          margin-bottom: 2px;
-        }
-
-        .stat-unit {
-          font-size: var(--text-xs);
-          color: #c8c9cc;
-        }
-      }
-
-      .stat-trend {
-        position: absolute;
-        bottom: 8px;
-        right: 12px;
-        display: flex;
-        align-items: center;
-        gap: 2px;
-
-        .trend-value {
-          font-size: var(--text-xs);
-          font-weight: 500;
-
-          &.trend-up {
-            color: #07c160;
-          }
-
-          &.trend-down {
-            color: #ee0a24;
-          }
-        }
-      }
-    }
+.stat-card {
+  :deep(.van-grid-item__content) {
+    padding: 12px;
+    background: var(--van-background);
+    border-radius: 8px;
   }
 }
 
-// 图表区域样式
-.charts-section {
-  margin-bottom: 20px;
-  background: var(--card-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-  .chart-container {
-    height: 300px;
-    padding: var(--spacing-md);
-
-    .chart {
-      width: 100%;
-      height: 100%;
+.stat-content {
+  text-align: center;
+  
+  .stat-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--van-text-color);
+    margin: 6px 0 2px;
+    
+    .unit {
+      font-size: 12px;
+      font-weight: normal;
+      margin-left: 2px;
     }
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    color: var(--van-text-color-2);
+  }
+  
+  .stat-trend {
+    margin-top: 4px;
   }
 }
 
-// 快速操作区域样式
-.quick-actions-section {
-  margin-bottom: 20px;
-
-  .section-header {
+.quick-actions {
+  padding: 12px;
+  background: var(--van-background);
+  margin: 0 12px 12px;
+  border-radius: 8px;
+  
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--van-text-color);
     margin-bottom: 12px;
-
-    h3 {
-      margin: 0;
-      font-size: var(--text-base);
-      font-weight: 600;
-      color: #323233;
-    }
   }
-
-  .actions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-
-    .action-button {
-      height: 48px;
-      font-size: var(--text-sm);
-      border-radius: 8px;
-      font-weight: 500;
-    }
+  
+  .action-label {
+    font-size: 11px;
+    color: var(--van-text-color-2);
+    margin-top: 4px;
   }
 }
 
-// 数据管理区域样式
-.data-management-section {
-  margin-bottom: 20px;
-  background: var(--card-bg);
+.tab-content {
+  min-height: 300px;
+}
+
+.consultation-card,
+.registration-card {
+  margin: 12px;
+  padding: 14px;
+  background: var(--van-background);
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-  .data-list {
-    .list-header {
+  border: 1px solid var(--van-border-color);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  
+  &:active {
+    transform: scale(0.99);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    
+    .card-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(16, 185, 129, 0.14));
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: var(--spacing-md);
-      border-bottom: 1px solid var(--van-border-color);
-
-      .header-title {
-        font-size: var(--text-base);
+      justify-content: center;
+      color: var(--van-primary-color);
+    }
+    
+    .card-info {
+      flex: 1;
+      min-width: 0;
+      
+      .card-title {
+        font-size: 15px;
         font-weight: 600;
-        color: #323233;
+        color: var(--van-text-color);
+        line-height: 1.2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
-    }
-
-    .filter-bar {
-      border-bottom: 1px solid var(--van-border-color);
-    }
-
-    .consultation-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md);
-      border-bottom: 1px solid var(--van-border-color);
-
-      .consultation-stat-item {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-sm);
-        padding: var(--spacing-sm) 12px;
-        background: #f7f8fa;
-        border-radius: 6px;
-
-        .stat-icon-small {
-          color: var(--primary-color);
-        }
-
-        .stat-info {
-          .stat-value-small {
-            font-size: var(--text-base);
-            font-weight: bold;
-            color: #323233;
-            line-height: 1;
-          }
-
-          .stat-label-small {
-            font-size: var(--text-xs);
-            color: #969799;
-            margin-top: 2px;
-          }
-        }
+      
+      .card-subtitle {
+        font-size: 12px;
+        color: var(--van-text-color-3);
+        margin-top: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
   }
-
-  // 卡片样式
-  :deep(.van-card) {
-    background: var(--card-bg);
-    border-radius: 0;
-    margin: 0;
-
-    .van-card__content {
-      padding: var(--spacing-md);
-    }
-
-    .van-card__footer {
-      padding: 0 16px 16px;
-    }
-  }
-
-  .plan-card,
-  .application-card,
-  .consultation-card {
-    border-bottom: 1px solid var(--van-border-color);
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:active {
-      background-color: #f2f3f5;
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  .plan-progress {
-    .progress-info {
+  
+  .card-content {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 10px;
+    
+    .info-row {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      font-size: var(--text-xs);
-      color: #969799;
+      gap: 4px;
+      font-size: 12px;
+      color: var(--van-text-color-2);
     }
   }
-
-  .application-footer,
-  .consultation-footer {
+  
+  .card-footer {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: var(--text-xs);
-    color: #969799;
-
-    .application-info {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-xs);
-      flex: 1;
-    }
-
-    .application-actions {
-      display: flex;
-      gap: var(--spacing-sm);
-    }
+    font-size: 12px;
+    color: var(--van-text-color-3);
+    padding-top: 8px;
+    border-top: 1px solid var(--van-border-color);
   }
-}
-
-// 数据分析样式
-.analytics-content {
-  padding: var(--spacing-md);
-
-  .analytics-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-    margin-bottom: 20px;
-
-    .metric-card {
-      background: #f7f8fa;
-      border-radius: 8px;
-      padding: var(--spacing-md);
-      text-align: center;
-
-      .metric-title {
-        font-size: var(--text-xs);
-        color: #969799;
-        margin-bottom: 8px;
-      }
-
-      .metric-value {
-        font-size: var(--text-xl);
-        font-weight: bold;
-        color: #323233;
-        margin-bottom: 8px;
-      }
-
-      .metric-trend {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--spacing-xs);
-        font-size: var(--text-xs);
-        color: #07c160;
-      }
-    }
-  }
-
-  .analytics-actions {
+  
+  .card-actions {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-
+    gap: 8px;
+    justify-content: flex-end;
+    padding-top: 10px;
+    border-top: 1px solid var(--van-border-color);
+    
     :deep(.van-button) {
-      height: 48px;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 0 12px;
     }
   }
 }
 
-// 底部操作区域样式
-.bottom-actions {
-  display: flex;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--card-bg);
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-
-  :deep(.van-dropdown-menu) {
-    flex: 1;
-  }
-
-  :deep(.van-button) {
-    flex-shrink: 0;
-    width: 100px;
-  }
-}
-
-// 帮助弹窗样式
-.help-content {
-  padding: var(--spacing-lg);
-  height: 100%;
-  overflow-y: auto;
-
-  h3 {
-    margin: 0 0 8px 0;
-    font-size: var(--text-lg);
-    font-weight: 600;
-    color: #323233;
-  }
-
-  p {
-    margin: 0 0 20px 0;
-    font-size: var(--text-sm);
-    color: #969799;
-    line-height: 1.5;
-  }
-
-  .feature-list,
-  .tips-list {
-    .feature-item,
-    .tip-item {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md) 0;
-      border-bottom: 1px solid var(--van-border-color);
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      span {
-        flex: 1;
-        font-size: var(--text-sm);
-        color: #323233;
-        line-height: 1.5;
-      }
+/* 深色主题下：让卡片与页面底色有层级对比（避免“融在一起”） */
+:deep(.theme-dark) {
+  .consultation-card,
+  .registration-card {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(148, 163, 184, 0.18);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+    
+    &:active {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.34);
     }
   }
 }
 
-// 响应式设计
-@media (min-width: 768px) {
-  .mobile-enrollment-center {
-    max-width: 768px;
-    margin: 0 auto;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  }
-}
-
-// 深色模式适配
-:root[data-theme="dark"] {
-  .mobile-enrollment-center {
-    background: var(--van-background-color-dark);
-  }
-
-  .stats-grid .stat-card,
-  .charts-section,
-  .data-management-section,
-  .bottom-actions {
-    background: var(--van-background-color-dark);
-    border-color: var(--van-border-color-dark);
-  }
-
-  .quick-actions-section .section-header h3,
-  .data-list .list-header .header-title {
-    color: var(--van-text-color-dark);
-  }
-
-  .stat-card .stat-content .stat-value,
-  .consultation-stat-item .stat-info .stat-value-small,
-  .metric-card .metric-value {
-    color: var(--van-text-color-dark);
-  }
-
-  .help-content {
-    h3 {
-      color: var(--van-text-color-dark);
-    }
-
-    p {
-      color: var(--van-text-color-3);
-    }
-
-    .feature-item,
-    .tip-item {
-      border-bottom-color: var(--van-border-color-dark);
-
-      span {
-        color: var(--van-text-color-dark);
-      }
-    }
-  }
+.empty-state {
+  padding: 40px 0;
 }
 </style>

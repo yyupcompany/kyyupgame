@@ -44,9 +44,9 @@ export function useMultiRoundToolCalling() {
   // 🔧 AbortController用于取消请求
   let abortController: AbortController | null = null
 
-  // 🆕 超时控制：3分钟自动停止
+  // 🆕 超时控制：2分钟自动停止
   let timeoutId: NodeJS.Timeout | null = null
-  const EXECUTION_TIMEOUT = 3 * 60 * 1000 // 3分钟
+  const EXECUTION_TIMEOUT = 2 * 60 * 1000 // 2分钟
 
   // 🔧 第一阶段优化：限制历史长度，防止无限累积
   const MAX_HISTORY_LENGTH = 8 // 最大保留8轮历史，优化token使用
@@ -306,17 +306,17 @@ export function useMultiRoundToolCalling() {
       state.value.isRunning = true
       state.value.maxRounds = options.maxRounds || 20
 
-      // 🆕 启动超时计时器（3分钟）
-      console.log('⏱️ [超时控制] 启动3分钟超时计时器')
+      // 🆕 启动超时计时器（2分钟）
+      console.log('⏱️ [超时控制] 启动2分钟超时计时器')
       timeoutId = setTimeout(() => {
         console.log('⏰ [超时控制] 执行超时，自动停止')
         cancel()
         options.onProgress?.({
           type: 'error',
-          message: '执行超时：已超过3分钟，自动停止以防止卡死',
+          message: '执行超时：已超过2分钟，自动停止以防止卡死',
           round: state.value.currentRound
         })
-        options.onError?.(new Error('执行超时：已超过3分钟'))
+        options.onError?.(new Error('执行超时：已超过2分钟'))
       }, EXECUTION_TIMEOUT)
 
       // 🔐 认证前置检查，避免在未登录状态下进入循环空转

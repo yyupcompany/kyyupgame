@@ -36,10 +36,20 @@ const usersModuleRoutes = (router: Router) => {
   // 🔹 特定用户类型
   router.use('/students', studentRoutes);
   router.use('/student', studentRoutes); // 别名
+
+  // 🔹 教师客户管理 - 必须在 /teacher 路由之前注册，避免被 /:id/stats 路由拦截
+  router.use('/teacher/customers', teacherCustomersRoutes);
+
   router.use('/teachers', teacherRoutes);
   router.use('/teacher', teacherRoutes); // 别名
-  router.use('/parents', parentRoutes);
-  router.use('/parent', parentRoutes); // 别名
+  router.use('/parents', (req, res, next) => {
+    console.log('[Users模块] /parents 路由被调用, path:', req.path);
+    next();
+  }, parentRoutes);
+  router.use('/parent', (req, res, next) => {
+    console.log('[Users模块] /parent 路由被调用, path:', req.path);
+    next();
+  }, parentRoutes); // 别名
 
   // 🔹 管理员
   router.use('/admin', adminRoutes);
@@ -48,9 +58,6 @@ const usersModuleRoutes = (router: Router) => {
   router.use('/parent-student-relations', parentStudentRelationsRoutes);
   router.use('/parent-student-relation', parentStudentRelationRoutes); // 别名
   router.use('/parent-assistant', parentAssistantRoutes);
-
-  // 🔹 教师客户管理
-  router.use('/teacher/customers', teacherCustomersRoutes);
 
   console.log('✅ 用户模块路由已注册 (12+ 个路由)');
 };

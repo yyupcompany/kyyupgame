@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="集团中心"
-    :show-back="false"
-    :show-footer="true"
-  >
+  <MobileCenterLayout title="集团中心" back-path="/mobile/centers">
     <div class="group-center">
       <!-- 集团概览 -->
       <div class="overview-section">
@@ -58,7 +54,7 @@
                 <div class="kindergarten-name">{{ kindergarten.name }}</div>
                 <van-tag
                   :type="getStatusType(kindergarten.status)"
-                  size="small"
+                  size="medium"
                 >
                   {{ kindergarten.statusText }}
                 </van-tag>
@@ -140,14 +136,14 @@
       <!-- 底部间距 -->
       <div class="bottom-spacer"></div>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 
 const router = useRouter()
 
@@ -257,6 +253,9 @@ const onLoad = () => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/design-tokens.scss';
 
 .group-center {
@@ -288,7 +287,7 @@ const onLoad = () => {
       padding: 0 var(--app-gap);
 
       .overview-card {
-        background: var(--bg-color);
+        background: var(--bg-card);
         border-radius: var(--border-radius-md);
         padding: var(--app-gap);
         text-align: center;
@@ -333,7 +332,7 @@ const onLoad = () => {
     margin-bottom: var(--app-gap);
 
     .kindergarten-card {
-      background: var(--bg-color);
+      background: var(--bg-card);
       border-radius: var(--border-radius-md);
       padding: var(--app-gap);
       margin-bottom: var(--app-gap-sm);
@@ -390,7 +389,7 @@ const onLoad = () => {
       padding: 0 var(--app-gap);
 
       .chart-card {
-        background: var(--bg-color);
+        background: var(--bg-card);
         border-radius: var(--border-radius-md);
         padding: var(--app-gap);
         margin-bottom: var(--app-gap-sm);
@@ -430,7 +429,7 @@ const onLoad = () => {
       align-items: center;
       gap: var(--app-gap-sm);
       padding: var(--app-gap);
-      background: var(--bg-color);
+      background: var(--bg-card);
       border-radius: var(--border-radius-md);
       box-shadow: var(--shadow-sm);
 

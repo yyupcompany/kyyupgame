@@ -187,7 +187,7 @@ onMounted(() => {
 }
 
 .debug-info {
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   padding: var(--spacing-4xl);
   border-radius: var(--spacing-sm);
   margin-bottom: var(--text-2xl);

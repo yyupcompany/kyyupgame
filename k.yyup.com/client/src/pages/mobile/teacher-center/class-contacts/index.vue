@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="班级通讯录"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="班级通讯录" back-path="/mobile/teacher-center">
     <div class="class-contacts-page">
       <van-search v-model="searchQuery" placeholder="搜索家长或学生" />
       <van-index-bar :index-list="indexList">
@@ -17,12 +12,12 @@
         </div>
       </van-index-bar>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
 
@@ -99,11 +94,20 @@ const callParent = (contact: Contact) => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadContacts()
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 .class-contacts-page {
   min-height: 100vh;

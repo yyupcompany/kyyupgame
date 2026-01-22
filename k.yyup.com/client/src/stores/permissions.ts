@@ -8,7 +8,7 @@ import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import { getUserMenu, getUserRoles, getUserPermissions, type MenuItem } from '../api/modules/auth-permissions';
 import { post } from '../utils/request';
-import { useUserStore } from '@/stores/user';
+// useUserStore 的导入会在函数内部动态导入以避免循环依赖
 
 
 
@@ -52,11 +52,11 @@ const getChineseNameForMenuItem = (name: string): string => {
 
 export const usePermissionsStore = defineStore('permissions', () => {
   // 核心状态
-  const menuItems = ref([]);
-  const roles = ref([]);
-  const permissions = ref([]);
+  const menuItems = ref<any[]>([]);
+  const roles = ref<any[]>([]);
+  const permissions = ref<any[]>([]);
   const loading = ref(false);
-  const error = ref(null);
+  const error = ref<string | null>(null);
   
   // 权限缓存已移至verificationCache统一管理
 
@@ -346,6 +346,7 @@ export const usePermissionsStore = defineStore('permissions', () => {
       }
 
       // 检查是否有认证token，如果没有则跳过权限检查
+      const { useUserStore } = await import('@/stores/user');
       const userStore = useUserStore();
       if (!userStore.token) {
         console.log(`🔧 未登录状态，跳过权限检查: ${path}`);
@@ -406,7 +407,7 @@ export const usePermissionsStore = defineStore('permissions', () => {
       console.log(`⚡ Level 2: 权限验证完成: ${path} -> ${hasPermission} (${responseTime}ms)`);
       return hasPermission;
 
-    } catch (err) {
+    } catch (err: any) {
       console.error(`❌ Level 2: 页面权限验证失败: ${path}`, err);
       // 如果是401错误（未认证），返回true让路由守卫处理
       if (err?.response?.status === 401) {

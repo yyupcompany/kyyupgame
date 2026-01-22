@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="新建任务"
-    :show-nav-bar="true"
-    :show-back="true"
-    :show-tab-bar="false"
-  >
+  <MobileSubPageLayout title="新建任务" back-path="/mobile/teacher-center">
     <div class="create-task-page">
       <van-form @submit="handleSubmit">
         <van-card class="form-card">
@@ -275,7 +270,7 @@
         show-word-limit
       />
     </van-dialog>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -283,7 +278,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showSuccessToast, showConfirmDialog } from 'vant'
 import { teacherTasksApi, type CreateTaskData } from '@/api/modules/teacher-tasks'
-import MobileMainLayout from "@/components/mobile/layouts/MobileMainLayout.vue"
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -475,6 +470,12 @@ const handleCancel = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // 如果是编辑模式，加载任务数据
   if (isEdit.value) {
     // TODO: 加载任务数据
@@ -486,13 +487,13 @@ onMounted(() => {
 @import '@/styles/mobile-base.scss';
 .create-task-page {
   padding: 0 0 20px 0;
-  background-color: #f7f8fa;
+  background-color: var(--bg-page);
   min-height: calc(100vh - 46px);
 }
 
 .form-card {
   margin: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   overflow: hidden;
 }
 
@@ -526,8 +527,8 @@ onMounted(() => {
 }
 
 .tag-item {
-  margin-right: 8px;
-  margin-bottom: 8px;
+  margin-right: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .form-actions {
@@ -573,6 +574,13 @@ onMounted(() => {
 :deep(.van-dialog) {
   .van-dialog__content {
     padding: var(--spacing-lg) 16px;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

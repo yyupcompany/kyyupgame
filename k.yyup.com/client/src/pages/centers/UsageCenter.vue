@@ -3,17 +3,6 @@
     title="AI模型用量中心"
     description="追踪和管理AI模型使用情况，包括文本生成、图片处理、视频分析的Token消耗和成本分析"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleRefresh" :loading="loading">
-        <UnifiedIcon name="refresh-cw" />
-        刷新数据
-      </el-button>
-      <el-button type="success" size="large" @click="handleExport">
-        <UnifiedIcon name="download" />
-        导出报告
-      </el-button>
-    </template>
-
     <div class="usage-center-container">
       <!-- 统计概览卡片 -->
       <div class="stats-overview">

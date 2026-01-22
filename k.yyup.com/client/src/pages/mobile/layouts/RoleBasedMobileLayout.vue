@@ -179,7 +179,7 @@ const handleTabChange = (name: string) => {
 
 // 底部导航栏样式
 :deep(.van-tabbar) {
-  background-color: var(--bg-color);  // 使用设计令牌
+  background-color: var(--bg-card);  // 使用设计令牌
   box-shadow: var(--shadow-lg);       // 使用设计令牌
   border-top: 1px solid var(--border-color);
   
@@ -200,10 +200,10 @@ const handleTabChange = (name: string) => {
 // 暗黑模式适配（不能在scoped中使用&，需要全局选择器）
 :global([data-theme="dark"]) {
   .role-based-mobile-layout {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-page);
     
     .main-content {
-      background-color: var(--bg-primary);
+      background-color: var(--bg-page);
     }
   }
 }

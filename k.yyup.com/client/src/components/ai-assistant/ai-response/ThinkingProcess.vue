@@ -8,8 +8,15 @@
     <!-- 单行头部 -->
     <div class="event-header">
       <span class="expand-icon">{{ collapsed ? '▸' : '▾' }}</span>
-      <span v-if="isStreaming" class="event-spinner"></span>
-      <span v-else class="event-check">✔</span>
+      <div v-if="isStreaming" class="pulse-indicator">
+        <span class="pulse-ring"></span>
+        <span class="pulse-dot"></span>
+      </div>
+      <span v-else class="event-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M20 6L9 17L4 12" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
       <span class="event-label">深度思考</span>
       <span class="event-time">· {{ elapsedTime }}</span>
     </div>
@@ -91,31 +98,56 @@ const handleToggle = () => {
 .event-header {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 13px;
   color: var(--text-secondary);
-  padding: 0 var(--spacing-xs);
-  height: 24px;
+  padding: 0 var(--spacing-sm);
+  height: 28px;
 }
 
-.expand-icon {
-  width: 12px;
-  color: var(--text-tertiary);
-  font-size: 10px;
-}
-
-.event-spinner {
+.pulse-indicator {
+  position: relative;
   width: 12px;
   height: 12px;
-  border: 1.5px solid var(--border-color);
-  border-top-color: var(--warning-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  background: var(--ai-thinking-pulse);
+  opacity: 0.4;
+  animation: pulse-ring 1.5s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ai-thinking-pulse);
+  box-shadow: 0 0 8px var(--ai-primary-glow);
 }
 
 .event-check {
   color: var(--success-color);
-  font-size: 11px;
+  display: flex;
+  align-items: center;
+  width: 12px;
+  height: 12px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 
 .event-label {

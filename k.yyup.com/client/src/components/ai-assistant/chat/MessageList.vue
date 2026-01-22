@@ -1,471 +1,380 @@
 <!--
   消息列表组件
-  从 AIAssistant.vue 第87-163行模板提取
+  参考 Claude/ChatGPT 风格：简洁容器，优雅欢迎页
 -->
 
 <template>
-  <div class="message-list">
-    <!-- 🎯 新架构：渲染所有聊天历史消息，包括用户消息、思考消息、答案消息 -->
-    <template v-for="message in allMessages" :key="message.id">
-      <!-- 用户消息 -->
-      <MessageItem
-        v-if="message.role === 'user'"
-        :message="message"
-        :font-size="messageFontSize"
-        :is-fullscreen-mode="isFullscreenMode"
-      />
+  <div class="chat-message-list">
+    <!-- 空状态/欢迎页 -->
+    <template v-if="messages.length === 0">
+      <slot name="empty">
+        <div class="welcome-container">
+          <div class="welcome-icon">
+            <div class="icon-glow"></div>
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="24" cy="20" r="8" fill="currentColor" opacity="0.15"/>
+              <path d="M10 38C10 31 16 27 24 27C32 27 38 31 38 38" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="20" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <h2 class="welcome-title">有什么可以帮您的？</h2>
+          <p class="welcome-subtitle">我是您的AI助手，可以帮助您处理各种任务</p>
 
-      <!-- 🎯 工具意图消息（精简显示，只在非全屏模式且有内容时显示） -->
-      <div
-        v-else-if="message.type === 'tool_intent' && !isFullscreenMode && message.content"
-        class="tool-intent-inline"
-      >
-        <UnifiedIcon name="lightbulb" :size="14" />
-        <span class="intent-text">{{ message.content }}</span>
-      </div>
-
-      <!-- 🎯 工具调用消息（统一使用ToolCallBar，不再区分简化和完整模式） -->
-      <ToolCallBar
-        v-else-if="message.type === 'tool_call' && (message.toolName || message.content)"
-        :tool-name="message.toolName || message.content"
-        :status="message.toolStatus || 'running'"
-        :intent="message.toolIntent || message.intent"
-        :description="message.toolDescription || message.description || message.content"
-        :start-timestamp="message.startTimestamp"
-        :duration="message.duration"
-        :progress="message.progress"
-        :result="message.result"
-        :simple-mode="simpleMode"
-      />
-
-      <!-- 🎯 工具解说消息（内嵌在答案中显示，不单独占位） -->
-      <div
-        v-else-if="message.type === 'tool_narration' && message.content"
-        class="tool-narration-inline"
-      >
-        <span class="narration-check">✓</span>
-        <MarkdownMessage :content="message.content" role="assistant" />
-      </div>
-
-      <!-- 🎯 思考消息（折叠到消息底部） -->
-      <!-- 思考过程现在通过 MessageItem 的 thinkingProcess 内嵌显示 -->
-
-      <!-- 🎯 上下文优化消息（折叠显示） -->
-      <div
-        v-else-if="message.type === 'context_optimization' && message.content"
-        class="context-optimization-inline"
-      >
-        <UnifiedIcon name="setting" :size="12" />
-        <span class="context-text">{{ message.content }}</span>
-      </div>
-
-      <!-- 🎯 AI答案消息 -->
-      <MessageItem
-        v-else-if="message.type === 'answer' || message.role === 'assistant' || !message.type"
-        :message="message"
-        :font-size="messageFontSize"
-        :is-fullscreen-mode="isFullscreenMode"
-      />
+          <!-- 快捷建议 -->
+          <div class="quick-suggestions">
+            <div class="suggestion-label">试试这样问</div>
+            <div class="suggestion-cards">
+              <button class="suggestion-card" @click="handleSuggestion('帮我制定下周的幼儿园亲子活动方案')">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10 2a8 8 0 100 16 8 8 0 000-16z" stroke-linejoin="round"/>
+                  <path d="M10 6v4l2 2" stroke-linecap="round"/>
+                </svg>
+                <span>制定幼儿园活动方案</span>
+              </button>
+              <button class="suggestion-card" @click="handleSuggestion('分析近期招生数据并给出建议')">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 17V4a1 1 0 011-1h4a1 1 0 011 1v13" stroke-linecap="round"/>
+                  <path d="M13 17V9a1 1 0 00-1-1H8a1 1 0 00-1 1v8" stroke-linecap="round"/>
+                  <path d="M17 17v-3a1 1 0 012-1h2" stroke-linecap="round"/>
+                </svg>
+                <span>分析招生数据</span>
+              </button>
+              <button class="suggestion-card" @click="handleSuggestion('生成家长通知文案')">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" stroke-linejoin="round"/>
+                  <path d="M6 8h8M6 11h4" stroke-linecap="round"/>
+                </svg>
+                <span>生成家长通知</span>
+              </button>
+              <button class="suggestion-card" @click="handleSuggestion('帮我写一份教学反思')">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M10 2v16M2 10h16" stroke-linecap="round"/>
+                  <path d="M14 4l-4 4-2 2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>撰写教学反思</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </slot>
     </template>
 
-    <!-- 🎯 加载状态 - 当AI正在处理时显示思考动画 -->
-    <div v-if="isLoading" class="loading-indicator">
-      <div class="thinking-dots">
-        <span></span><span></span><span></span>
+    <!-- 消息列表 -->
+    <template v-else>
+      <div class="messages-scroll">
+        <MessageItem
+          v-for="message in messages"
+          :key="message.id"
+          :message="message"
+          :font-size="messageFontSize"
+          @copy="handleCopy"
+          @regenerate="handleRegenerate"
+        />
       </div>
-      <span class="loading-text">AI 正在思考...</span>
-    </div>
+
+      <!-- 思考中状态 -->
+      <div v-if="isThinking" class="typing-indicator">
+        <div class="typing-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" stroke-linecap="round"/>
+            <path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </template>
+
+    <!-- 插槽用于插入其他内容 -->
+    <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { watch, computed, ref, onMounted, onUnmounted } from 'vue'
 import MessageItem from './MessageItem.vue'
-import ToolCallBar from '../ai-response/ToolCallBar.vue'
-import LoadingMessage from '../ai-response/LoadingMessage.vue'
-import MarkdownMessage from '../panels/MarkdownMessage.vue'
-import type { ExtendedChatMessage, CurrentAIResponseState } from '../types/aiAssistant'
+import type { ExtendedChatMessage } from '../types/aiAssistant'
 
-// ====================  Props ====================
 interface Props {
   messages: ExtendedChatMessage[]
-  currentAIResponse?: CurrentAIResponseState // 改为可选,避免Vue警告
-  messageFontSize: number
-  contextOptimization?: any
-  isLoading?: boolean // 🆕 加载状态标志
-  isFullscreenMode?: boolean // 🆕 是否为全屏模式
-  simpleMode?: boolean // 🆕 简化模式(侧边栏),只使用Markdown,不渲染工具组件
+  messageFontSize?: number
+  isThinking?: boolean
+  isFullscreenMode?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  currentAIResponse: () => ({
-    visible: false,
-    thinking: {
-      visible: false,
-      collapsed: false,
-      content: ''
-    },
-    functionCalls: [],
-    answer: {
-      visible: false,
-      content: '',
-      streaming: false,
-      hasComponent: false,
-      componentData: null
-    }
+withDefaults(defineProps<Props>(), {
+  messageFontSize: 14,
+  isThinking: false,
+  isFullscreenMode: false
+})
+
+const emit = defineEmits<{
+  'copy': [content: string]
+  'regenerate': []
+}>()
+
+function handleCopy(content: string) {
+  navigator.clipboard.writeText(content).then(() => {
+    // 可以添加复制成功的提示
   })
-})
-
-// 🧠 ToolCall 状态和计时 Hook
-const now = ref(Date.now())
-let toolTimer: number | null = null
-
-const getToolStatusInfo = (msg: ExtendedChatMessage) => {
-  const status = (msg as any).toolStatus || 'running'
-  if (status === 'completed') {
-    return { status: 'completed', cls: 'status-completed', text: '执行完成' }
-  }
-  if (status === 'failed' || status === 'error') {
-    return { status: 'failed', cls: 'status-failed', text: '执行失败' }
-  }
-  return { status: 'running', cls: 'status-running', text: '执行中' }
+  emit('copy', content)
 }
 
-const getToolElapsedSeconds = (msg: ExtendedChatMessage): number | null => {
-  const start = (msg as any).startTimestamp
-  if (!start) return null
-  const info = getToolStatusInfo(msg)
-  const baseDuration = (msg as any).duration
-  let durationMs: number
-  if (info.status === 'running') {
-    durationMs = now.value - start
-  } else {
-    durationMs = typeof baseDuration === 'number' ? baseDuration : now.value - start
-  }
-  if (!Number.isFinite(durationMs) || durationMs < 0) return null
-  return Math.floor(durationMs / 1000)
+function handleRegenerate() {
+  emit('regenerate')
 }
 
-onMounted(() => {
-  toolTimer = window.setInterval(() => {
-    now.value = Date.now()
-  }, 500)
-})
-
-onUnmounted(() => {
-  if (toolTimer) {
-    clearInterval(toolTimer)
-    toolTimer = null
-  }
-})
-
-// ==================== 计算属性 ====================
-/**
- * 🎯 新架构：显示所有消息，包括思考消息和答案消息
- */
-const allMessages = computed(() => {
-  console.log('📊 [MessageList] 当前消息数:', props.messages.length)
-  console.log('📋 [MessageList] 消息列表:', props.messages.map(m => ({
-    id: m.id,
-    role: m.role,
-    type: (m as any).type,
-    content: m.content?.substring(0, 50)
-  })))
-  return props.messages
-})
-
-/**
- * 🎯 检查是否已有思考消息，避免与加载状态重复显示
- */
-const hasThinkingMessage = computed(() => {
-  return props.messages.some(m => (m as any).type === 'thinking')
-})
-
-// ==================== 调试日志 ====================
-watch(
-  () => props.currentAIResponse,
-  newVal => {
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-    console.log('🔍 [MessageList] currentAIResponse变化')
-    console.log('📊 [visible]:', newVal?.visible)
-    console.log('📊 [functionCalls.length]:', newVal?.functionCalls?.length)
-    console.log('📋 [functionCalls]:', JSON.stringify(newVal?.functionCalls, null, 2))
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')
-  },
-  { deep: true, immediate: true }
-)
-
-// ==================== Emits ====================
-interface Emits {
-  'toggle-thinking': []
-  'toggle-context-optimization': []
-}
-
-const emit = defineEmits<Emits>()
-
-// ==================== 事件处理 ====================
-const handleToggleThinking = () => {
-  emit('toggle-thinking')
-}
-
-const handleToggleContextOptimization = () => {
-  emit('toggle-context-optimization')
-}
-
-// 🆕 切换thinking消息的折叠状态
-const toggleThinkingCollapse = (message: ExtendedChatMessage) => {
-  ;(message as any).collapsed = !(message as any).collapsed
-  console.log('💭 [思考折叠] 切换状态:', (message as any).collapsed)
+function handleSuggestion(text: string) {
+  // 可以通过事件通知父组件
+  console.log('Suggestion clicked:', text)
 }
 </script>
 
 <style scoped lang="scss">
-// design-tokens 已通过 vite.config 全局注入
-
-// ✨ 现代化消息列表样式
-.message-list {
+.chat-message-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  align-items: flex-start;
-  padding: var(--spacing-sm);
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  flex-shrink: 0;
-  transition: all var(--transition-base);
-
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(var(--primary-color-rgb, 67), 0.02) 50%,
-    transparent 100%
-  );
+  height: 100%;
+  overflow: hidden;
 }
 
-// ✨ 美化消息项样式
-.message-item {
-  display: flex;
-  gap: var(--spacing-sm);
-  margin-bottom: 0;
-  width: fit-content;
-  max-width: 95%;
-  border-left: none !important;
-  border: none !important;
-  animation: messageSlideIn 0.3s ease-out;
-}
+.messages-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  scroll-behavior: smooth;
 
-@keyframes messageSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+  /* 滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 6px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background: var(--text-tertiary);
+    }
   }
 }
 
-.message-item.assistant {
-  justify-content: flex-start;
-  align-self: flex-start;
-}
-
-.message-item.user {
-  justify-content: flex-end;
-  flex-direction: row-reverse;
-  align-self: flex-end;
-}
-
-// ✨ 美化头像样式
-.message-avatar {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
-  border-radius: var(--radius-full);
+// 欢迎页面
+.welcome-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
-  align-self: flex-start;
+  height: 100%;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+}
+
+.welcome-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+
+  .icon-glow {
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle, var(--primary-light-bg) 0%, transparent 70%);
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.welcome-title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.welcome-subtitle {
+  margin: 0 0 var(--spacing-2xl);
   font-size: var(--text-base);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-md);
-  }
-}
-
-.message-item.assistant .message-avatar {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-light-3));
-  border-color: var(--primary-color-light-5);
-  color: white;
-  box-shadow: 0 2px 8px rgba(var(--primary-color-rgb, 0), 0.3);
-}
-
-.message-item.user .message-avatar {
-  background: var(--el-color-success-light-9);
-  border: none !important;
-  color: var(--el-color-success);
-}
-
-.message-content {
-  flex: 1;
-  min-width: 0;
-  max-width: 80%;
-}
-
-.message-item.user .message-content {
-  max-width: 70%;
-}
-
-// ==================== 精简的内联工具消息样式 ====================
-
-/* 🎯 工具意图内联样式 - 简约版 */
-.tool-intent-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  margin: var(--spacing-xs) 0;
-  background: rgba(251, 191, 60, 0.1);
-  border-left: 2px solid var(--warning-color);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: var(--text-xs);
   color: var(--text-secondary);
+}
 
-  .intent-text {
-    line-height: 1.4;
+// 快捷建议
+.quick-suggestions {
+  width: 100%;
+  max-width: 480px;
+
+  .suggestion-label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-md);
   }
 }
 
-/* 🎯 工具解说内联样式 - 简约版 */
-.tool-narration-inline {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs) 0;
-  margin: var(--spacing-xs) 0;
-  font-size: var(--text-xs);
-
-  .narration-check {
-    color: var(--success-color);
-    font-size: 10px;
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-
-  :deep(p) {
-    margin: 0;
-    line-height: 1.5;
-    color: var(--text-secondary);
-  }
+.suggestion-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
 }
 
-/* 🎯 上下文优化内联样式 */
-.context-optimization-inline {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-2xs) var(--spacing-sm);
-  margin: var(--spacing-xs) 0;
-  background: rgba(99, 102, 241, 0.08);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
-  color: var(--text-placeholder);
-
-  .context-text {
-    line-height: 1.4;
-  }
-}
-
-// ==================== 加载状态样式 ====================
-.loading-indicator {
+.suggestion-card {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-md);
   background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  border: var(--border-width) solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
 
-  .loading-text {
+  svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-color);
+    flex-shrink: 0;
+  }
+
+  span {
     font-size: var(--text-sm);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  &:hover {
+    background: var(--bg-hover);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }
 
-.thinking-dots {
+// 思考中指示器
+.typing-indicator {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.typing-avatar {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+  }
+}
+
+.typing-dots {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
 
   span {
     width: 8px;
     height: 8px;
     background: var(--primary-color);
     border-radius: 50%;
-    animation: dotBounce 1.4s ease-in-out infinite;
+    animation: typingDot 1.4s ease-in-out infinite;
 
-    &:nth-child(1) { animation-delay: 0s; }
-    &:nth-child(2) { animation-delay: 0.2s; }
-    &:nth-child(3) { animation-delay: 0.4s; }
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      animation-delay: 0.4s;
+    }
   }
 }
 
-@keyframes dotBounce {
-  0%, 80%, 100% {
+@keyframes typingDot {
+  0%, 60%, 100% {
     transform: scale(0.6);
-    opacity: 0.5;
+    opacity: 0.4;
   }
-  40% {
+  30% {
     transform: scale(1);
     opacity: 1;
   }
 }
 
-// ==================== 响应式设计 ====================
+// 响应式
 @media (max-width: var(--breakpoint-md)) {
-  .message-item {
-    gap: var(--spacing-2xl);
-    margin-bottom: var(--text-base);
+  .messages-scroll {
+    padding: var(--spacing-md);
   }
 
-  .message-avatar {
-    width: var(--spacing-3xl);
-    height: var(--spacing-3xl);
-    font-size: var(--text-lg);
+  .welcome-icon {
+    width: 64px;
+    height: 64px;
+
+    .icon-glow {
+      inset: -15px;
+    }
   }
 
-  .message-content {
-    max-width: 85%;
+  .welcome-title {
+    font-size: var(--text-xl);
   }
 
-  .message-item.user .message-content {
-    max-width: 75%;
-  }
-}
-
-@media (max-width: var(--breakpoint-sm)) {
-  .message-item {
-    gap: var(--spacing-sm);
-    margin-bottom: var(--text-sm);
+  .welcome-subtitle {
+    font-size: var(--text-sm);
   }
 
-  .message-avatar {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    font-size: var(--text-base);
+  .suggestion-cards {
+    grid-template-columns: 1fr;
   }
 
-  .message-content {
-    max-width: 90%;
-  }
-
-  .message-item.user .message-content {
-    max-width: 80%;
+  .suggestion-card {
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 }
 </style>

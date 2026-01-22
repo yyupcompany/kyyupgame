@@ -170,7 +170,7 @@ const navigateTo = (path: string) => {
     margin-bottom: var(--text-lg);
     
     .feature-tag {
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       color: var(--text-primary);
       padding: var(--spacing-xs) var(--spacing-sm);
       border-radius: var(--spacing-sm);

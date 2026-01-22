@@ -233,7 +233,13 @@ const options = {
   ],
 };
 
-const specs = swaggerJsdoc(options);
+let specs: any;
+try {
+  specs = swaggerJsdoc(options);
+} catch (error) {
+  console.warn('⚠️  Swagger文档解析失败，将使用空文档:', error);
+  specs = { paths: {}, components: { schemas: {} } };
+}
 
 // 忽略 swagger-jsdoc 的YAML语法警告
 console.log('✅ Swagger配置加载完成');

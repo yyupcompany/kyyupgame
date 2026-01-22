@@ -151,7 +151,7 @@ const handleClose = () => {
 .print-preview-dialog {
   :deep(.el-dialog__body) {
     padding: var(--text-2xl);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
   }
 }
 

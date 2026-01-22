@@ -27,9 +27,9 @@
 }
 
 /* ==================== 基础统计卡片 ==================== */
-/* Base Statistics Card */
+/* Base Statistics Card - 彩色类型卡片使用组件级别样式 */
 
-.stat-card {
+.stat-card:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info) {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);

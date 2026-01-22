@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="我的文档"
-    :show-back="false"
-  >
+  <MobileCenterLayout title="我的文档" back-path="/mobile/centers">
     <div class="mobile-document-instance-list">
       <!-- 页面头部 -->
       <div class="page-header">
@@ -138,14 +135,14 @@
                     <van-tag
                       v-if="instance.deadline && isOverdue(instance.deadline)"
                       type="danger"
-                      size="small"
+                      size="medium"
                       class="overdue-tag"
                     >
                       已逾期
                     </van-tag>
                   </h3>
                   <div class="document-meta">
-                    <van-tag :type="getStatusType(instance.status)" size="small">
+                    <van-tag :type="getStatusType(instance.status)" size="medium">
                       {{ getStatusLabel(instance.status) }}
                     </van-tag>
                     <span class="template-name">{{ instance.template?.name || '-' }}</span>
@@ -179,7 +176,7 @@
                 <van-button
                   v-if="instance.status === 'draft' || instance.status === 'filling'"
                   type="primary"
-                  size="small"
+                  size="medium"
                   icon="edit"
                   @click.stop="handleEditDocument(instance)"
                 >
@@ -188,7 +185,7 @@
                 <van-button
                   v-else
                   type="default"
-                  size="small"
+                  size="medium"
                   icon="eye-o"
                   @click.stop="handleViewDocument(instance)"
                 >
@@ -278,14 +275,14 @@
         style="right: 20px; bottom: 80px;"
       />
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed, nextTick, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog, showActionSheet } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import {
   getInstances,
   deleteInstance,
@@ -374,10 +371,10 @@ const getSortLabel = (sort: string) => {
 }
 
 const getProgressColor = (progress: number) => {
-  if (progress >= PROGRESS_THRESHOLDS.EXCELLENT) return '#67c23a'
-  if (progress >= PROGRESS_THRESHOLDS.GOOD) return '#e6a23c'
-  if (progress >= PROGRESS_THRESHOLDS.MEDIUM) return '#f56c6c'
-  return '#909399'
+  if (progress >= PROGRESS_THRESHOLDS.EXCELLENT) return 'var(--success-color)'
+  if (progress >= PROGRESS_THRESHOLDS.GOOD) return 'var(--warning-color)'
+  if (progress >= PROGRESS_THRESHOLDS.MEDIUM) return 'var(--danger-color)'
+  return 'var(--info-color)'
 }
 
 const formatDate = (date: string | Date | null) => {
@@ -622,6 +619,12 @@ const updateStats = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadInstances()
   window.addEventListener('scroll', handleScroll)
 })
@@ -633,6 +636,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 .mobile-document-instance-list {
   min-height: 100vh;

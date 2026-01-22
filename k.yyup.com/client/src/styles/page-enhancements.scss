@@ -67,7 +67,8 @@
   }
   
   // ==================== 统计卡片美化 ====================
-  .stat-card,
+  // 排除彩色类型卡片，保留其原生渐变背景
+  .stat-card:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info),
   .overview-item,
   .team-item {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%) !important;

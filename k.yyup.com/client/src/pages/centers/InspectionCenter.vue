@@ -3,112 +3,57 @@
     title="检查中心"
     description="全年检查计划一目了然，智能提醒不遗漏"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleGenerateYearlyPlan">
-        <UnifiedIcon name="calendar" />
-        生成年度计划
-      </el-button>
-      <el-button type="warning" size="large" @click="openTimelineEditor">
-        <UnifiedIcon name="Edit" />
-        调整计划时间
-      </el-button>
-      <el-button type="success" size="large" @click="handleUploadDocument">
-        <UnifiedIcon name="Upload" />
-        上传检查文档
-      </el-button>
-      <el-button type="danger" size="large" @click="openAIScoring">
-        <UnifiedIcon name="analytics" />
-        AI全园预评分
-      </el-button>
-      <el-button type="info" size="large" @click="handlePrintYearlyReport">
-        <UnifiedIcon name="print" />
-        打印年度报告
-      </el-button>
-    </template>
-
     <div class="center-container inspection-center-timeline">
 
-    <!-- 统计卡片 -->
-    <el-row :gutter="20" class="stats-row">
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon pending">
-              <UnifiedIcon name="clock" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ stats.pending }}</div>
-              <div class="stat-label">待开始</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon preparing">
-              <UnifiedIcon name="Edit" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ stats.preparing }}</div>
-              <div class="stat-label">准备中</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon in-progress">
-              <UnifiedIcon name="loading" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ stats.inProgress }}</div>
-              <div class="stat-label">进行中</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon completed">
-              <UnifiedIcon name="Check" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ stats.completed }}</div>
-              <div class="stat-label">已完成</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon templates">
-              <UnifiedIcon name="note-edit" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ documentStats.templates }}</div>
-              <div class="stat-label">文档模板</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-      <el-col :span="4">
-        <el-card class="stat-card">
-          <div class="stat-content">
-            <div class="stat-icon instances">
-              <UnifiedIcon name="database" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ documentStats.instances }}</div>
-              <div class="stat-label">文档实例</div>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
+    <!-- 统计卡片区域 - 使用统一网格系统 -->
+    <div class="stats-section">
+      <div class="stats-grid-unified">
+        <CentersStatCard
+          title="待开始"
+          :value="stats.pending"
+          type="info"
+          iconName="clock"
+          clickable
+          @click="handleStatusFilter('pending')"
+        />
+        <CentersStatCard
+          title="准备中"
+          :value="stats.preparing"
+          type="warning"
+          iconName="Edit"
+          clickable
+          @click="handleStatusFilter('preparing')"
+        />
+        <CentersStatCard
+          title="进行中"
+          :value="stats.inProgress"
+          type="primary"
+          iconName="loading"
+          clickable
+          @click="handleStatusFilter('in_progress')"
+        />
+        <CentersStatCard
+          title="已完成"
+          :value="stats.completed"
+          type="success"
+          iconName="Check"
+          clickable
+          @click="handleStatusFilter('completed')"
+        />
+        <CentersStatCard
+          title="文档模板"
+          :value="documentStats.templates"
+          type="info"
+          iconName="note-edit"
+        />
+        <CentersStatCard
+          title="文档实例"
+          :value="documentStats.instances"
+          type="warning"
+          iconName="database"
+        />
+      </div>
+    </div>
 
     <!-- 逾期提醒 -->
     <el-alert
@@ -338,55 +283,49 @@
         </div>
       </template>
 
-      <!-- 文档模板选择器 -->
+      <!-- 文档模板选择器 - 使用统一网格系统 -->
       <div class="template-selector-section">
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-select
-              v-model="selectedTemplateCategory"
-              placeholder="选择模板类别"
-              @change="handleCategoryChange"
-              class="full-width-select"
-            >
-              <el-option label="全部类别" value="" />
-              <el-option label="年度检查类" value="annual" />
-              <el-option label="专项检查类" value="special" />
-              <el-option label="常态化督导类" value="routine" />
-              <el-option label="教职工管理类" value="staff" />
-              <el-option label="幼儿管理类" value="student" />
-              <el-option label="财务管理类" value="finance" />
-              <el-option label="保教工作类" value="education" />
-            </el-select>
-          </el-col>
-          <el-col :span="8">
-            <el-select
-              v-model="selectedTemplateId"
-              placeholder="选择文档模板"
-              @change="handleTemplateChange"
-              class="full-width-select"
-              :loading="templatesLoading"
-            >
-              <el-option
-                v-for="template in filteredTemplates"
-                :key="template.id"
-                :label="`[${template.code}] ${template.name}`"
-                :value="template.id"
-              />
-            </el-select>
-          </el-col>
-          <el-col :span="8">
-            <el-input
-              v-model="documentSearchKeyword"
-              placeholder="搜索文档..."
-              @input="handleDocumentSearch"
-              clearable
-            >
-              <template #prefix>
-                <UnifiedIcon name="Search" />
-              </template>
-            </el-input>
-          </el-col>
-        </el-row>
+        <div class="actions-grid-unified">
+          <el-select
+            v-model="selectedTemplateCategory"
+            placeholder="选择模板类别"
+            @change="handleCategoryChange"
+            class="full-width-select"
+          >
+            <el-option label="全部类别" value="" />
+            <el-option label="年度检查类" value="annual" />
+            <el-option label="专项检查类" value="special" />
+            <el-option label="常态化督导类" value="routine" />
+            <el-option label="教职工管理类" value="staff" />
+            <el-option label="幼儿管理类" value="student" />
+            <el-option label="财务管理类" value="finance" />
+            <el-option label="保教工作类" value="education" />
+          </el-select>
+          <el-select
+            v-model="selectedTemplateId"
+            placeholder="选择文档模板"
+            @change="handleTemplateChange"
+            class="full-width-select"
+            :loading="templatesLoading"
+          >
+            <el-option
+              v-for="template in filteredTemplates"
+              :key="template.id"
+              :label="`[${template.code}] ${template.name}`"
+              :value="template.id"
+            />
+          </el-select>
+          <el-input
+            v-model="documentSearchKeyword"
+            placeholder="搜索文档..."
+            @input="handleDocumentSearch"
+            clearable
+          >
+            <template #prefix>
+              <UnifiedIcon name="Search" />
+            </template>
+          </el-input>
+        </div>
       </div>
 
       <!-- 文档实例列表 -->
@@ -532,35 +471,29 @@
         </el-descriptions>
 
         <el-divider content-position="left"><UnifiedIcon name="analytics" /> 评分分析</el-divider>
-        <el-row :gutter="20">
-          <el-col :span="8">
-            <el-card shadow="hover">
-              <div class="score-card">
-                <div class="score-label">时间分布</div>
-                <div class="score-value">{{ aiAnalysisResult.analysis?.timeDistribution?.score || 0 }}</div>
-                <div class="score-desc">{{ aiAnalysisResult.analysis?.timeDistribution?.description }}</div>
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card shadow="hover">
-              <div class="score-card">
-                <div class="score-label">检查频率</div>
-                <div class="score-value">{{ aiAnalysisResult.analysis?.frequency?.score || 0 }}</div>
-                <div class="score-desc">{{ aiAnalysisResult.analysis?.frequency?.description }}</div>
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="8">
-            <el-card shadow="hover">
-              <div class="score-card">
-                <div class="score-label">资源配置</div>
-                <div class="score-value">{{ aiAnalysisResult.analysis?.resourceAllocation?.score || 0 }}</div>
-                <div class="score-desc">{{ aiAnalysisResult.analysis?.resourceAllocation?.description }}</div>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
+        <div class="charts-grid-unified">
+          <el-card shadow="hover">
+            <div class="score-card">
+              <div class="score-label">时间分布</div>
+              <div class="score-value">{{ aiAnalysisResult.analysis?.timeDistribution?.score || 0 }}</div>
+              <div class="score-desc">{{ aiAnalysisResult.analysis?.timeDistribution?.description }}</div>
+            </div>
+          </el-card>
+          <el-card shadow="hover">
+            <div class="score-card">
+              <div class="score-label">检查频率</div>
+              <div class="score-value">{{ aiAnalysisResult.analysis?.frequency?.score || 0 }}</div>
+              <div class="score-desc">{{ aiAnalysisResult.analysis?.frequency?.description }}</div>
+            </div>
+          </el-card>
+          <el-card shadow="hover">
+            <div class="score-card">
+              <div class="score-label">资源配置</div>
+              <div class="score-value">{{ aiAnalysisResult.analysis?.resourceAllocation?.score || 0 }}</div>
+              <div class="score-desc">{{ aiAnalysisResult.analysis?.resourceAllocation?.description }}</div>
+            </div>
+          </el-card>
+        </div>
 
         <el-divider content-position="left"><UnifiedIcon name="lightbulb" /> 优化建议</el-divider>
         <el-timeline>
@@ -618,26 +551,22 @@
         </el-descriptions>
 
         <el-divider content-position="left"><UnifiedIcon name="analytics" /> 质量评分</el-divider>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-card shadow="hover">
-              <div class="score-card">
-                <div class="score-label">完整性</div>
-                <div class="score-value">{{ aiAssistResult.analysis?.completeness?.score || 0 }}</div>
-                <div class="score-desc">{{ aiAssistResult.analysis?.completeness?.description }}</div>
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="12">
-            <el-card shadow="hover">
-              <div class="score-card">
-                <div class="score-label">内容质量</div>
-                <div class="score-value">{{ aiAssistResult.analysis?.quality?.score || 0 }}</div>
-                <div class="score-desc">{{ aiAssistResult.analysis?.quality?.description }}</div>
-              </div>
-            </el-card>
-          </el-col>
-        </el-row>
+        <div class="charts-grid-unified">
+          <el-card shadow="hover">
+            <div class="score-card">
+              <div class="score-label">完整性</div>
+              <div class="score-value">{{ aiAssistResult.analysis?.completeness?.score || 0 }}</div>
+              <div class="score-desc">{{ aiAssistResult.analysis?.completeness?.description }}</div>
+            </div>
+          </el-card>
+          <el-card shadow="hover">
+            <div class="score-card">
+              <div class="score-label">内容质量</div>
+              <div class="score-value">{{ aiAssistResult.analysis?.quality?.score || 0 }}</div>
+              <div class="score-desc">{{ aiAssistResult.analysis?.quality?.description }}</div>
+            </div>
+          </el-card>
+        </div>
 
         <el-divider content-position="left"><UnifiedIcon name="clipboard" /> 缺失内容</el-divider>
         <el-tag
@@ -687,6 +616,7 @@
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import CentersStatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, onMounted, computed } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
@@ -1629,94 +1559,14 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .inspection-center-timeline {
-  background: var(--bg-secondary, var(--bg-container));  // ✅ 与活动中心一致
+  background: var(--bg-page);
   padding: var(--text-2xl);
 
-  .header-card {
+  // 统计卡片区域 - 使用统一网格系统
+  .stats-section {
     margin-bottom: var(--text-2xl);
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      .title-section {
-        .page-title {
-          font-size: var(--text-3xl);
-          font-weight: bold;
-          margin: 0 0 var(--spacing-sm) 0;
-          color: var(--text-primary);
-        }
-
-        .page-subtitle {
-          font-size: var(--text-base);
-          color: var(--info-color);
-          margin: 0;
-        }
-      }
-
-      .action-section {
-        display: flex;
-        gap: var(--text-sm);
-      }
-    }
-  }
-
-  .stats-row {
-    margin-bottom: var(--text-2xl);
-
-    .stat-card {
-      .stat-content {
-        display: flex;
-        align-items: center;
-        gap: var(--text-lg);
-
-        .stat-icon {
-          width: var(--icon-size); height: var(--icon-size);
-          border-radius: var(--text-sm);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: var(--text-3xl);
-
-          &.pending {
-            background: var(--bg-info);
-            color: var(--primary-color);
-          }
-
-          &.preparing {
-            background: var(--bg-warning);
-            color: var(--warning-color);
-          }
-
-          &.in-progress {
-            background: var(--bg-primary);
-            color: var(--primary-color);
-          }
-
-          &.completed {
-            background: var(--bg-success);
-            color: var(--success-color);
-          }
-        }
-
-        .stat-info {
-          .stat-value {
-            font-size: var(--spacing-3xl);
-            font-weight: bold;
-            color: var(--text-primary);
-            line-height: 1;
-            margin-bottom: var(--spacing-sm);
-          }
-
-          .stat-label {
-            font-size: var(--text-base);
-            color: var(--info-color);
-          }
-        }
-      }
-    }
   }
 
   // 逾期提醒样式
@@ -1870,7 +1720,7 @@ onMounted(() => {
     :deep(.el-table) {
       .el-table__row {
         &.is-selected {
-          background-color: var(--bg-primary);
+          background-color: var(--bg-page);
         }
       }
     }

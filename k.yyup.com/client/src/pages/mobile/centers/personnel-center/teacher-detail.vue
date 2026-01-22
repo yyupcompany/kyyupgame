@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="教师详情"
-    :show-back="true"
-    @back="handleGoBack"
-  >
+  <MobileCenterLayout title="教师详情" back-path="/mobile/centers">
     <div v-if="loading" class="loading-container">
       <van-loading size="24px">加载中...</van-loading>
     </div>
@@ -84,14 +80,14 @@
       :teacher-data="teacher"
       @refresh="refreshData"
     />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import TeacherEditDialog from './components/TeacherEditDialog.vue'
 
 const router = useRouter()
@@ -180,11 +176,20 @@ const handleDelete = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTeacherDetail()
 })
 </script>
 
 <style scoped lang="scss">
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 @import '@/styles/design-tokens.scss';
 

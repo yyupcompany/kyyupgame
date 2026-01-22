@@ -964,7 +964,7 @@ onMounted(() => {
   .after {
     flex: 1;
     padding: var(--spacing-lg);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-page);
     border-radius: var(--radius-md);
 
     h4 {
@@ -1014,7 +1014,7 @@ onMounted(() => {
 
 /* Element Plus 组件样式覆盖 */
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 
@@ -1023,7 +1023,7 @@ onMounted(() => {
 }
 
 :deep(.el-table th) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 

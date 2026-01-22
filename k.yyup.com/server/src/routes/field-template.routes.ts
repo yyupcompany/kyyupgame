@@ -173,7 +173,12 @@ const router = express.Router();
 *                     templates:
 *                       type: array
 *                       items:
-*                         $ref: '#/components/schemas/FieldTemplateSummary'
+*                         type: object
+*                         properties:
+*                           id:
+*                             type: integer
+*                           name:
+*                             type: string
 *                     total:
 *                       type: integer
 *                       example: 10

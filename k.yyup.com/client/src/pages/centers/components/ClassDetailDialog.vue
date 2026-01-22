@@ -363,7 +363,7 @@ const loadDisplayRecords = async () => {
   .class-info-section {
     margin-bottom: var(--spacing-2xl);
     padding: var(--spacing-lg);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
 

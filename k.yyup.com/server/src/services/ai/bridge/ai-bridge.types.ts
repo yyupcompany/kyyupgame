@@ -314,9 +314,7 @@ export interface AiBridgeVODMergeResponse {
     status?: string;
   };
   error?: string;
-}
-
-// VOD添加音频参数
+}// VOD添加音频参数
 export interface AiBridgeVODAddAudioParams {
   videoFileId?: string;
   videoUrl?: string;  // 兼容旧接口

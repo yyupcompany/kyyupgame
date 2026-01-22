@@ -119,6 +119,7 @@ export function useMobileState(initialConfig: StateConfig = {}) {
     details?: string
     type?: 'network' | 'permission' | 'not-found' | 'server' | 'validation' | 'custom'
     retryable?: boolean
+    fullscreen?: boolean
   } = {}) => {
     reset()
     error.value = true
@@ -294,8 +295,9 @@ export async function useAsyncOperation<T>(
 
     return { result, error: null }
   } catch (err) {
+    const error = err as { message?: string }
     state.handleNetworkError({
-      message: err?.message || '操作失败',
+      message: error?.message || '操作失败',
       details: err,
       retryable: true
     })
@@ -355,7 +357,7 @@ export function useMobileListState<T>(
         page: (params.value.page || 1) + 1
       })
 
-      data.value.push(...result.data)
+      data.value = (data.value as any[]).concat(result.data as any[])
       hasMore.value = result.hasMore
       state.setSuccess()
     } catch (err) {

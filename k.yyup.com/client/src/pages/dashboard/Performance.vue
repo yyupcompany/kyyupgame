@@ -171,7 +171,7 @@ const optimizePerformance = (type: string) => {
 <style scoped>
 .dashboard-performance {
   padding: var(--text-2xl);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   min-height: 100vh;
 }
 

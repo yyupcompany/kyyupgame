@@ -180,6 +180,45 @@ export const teacherCenterRoutes: RouteRecordRaw[] = [
           hideInMenu: true,
           priority: 'medium'
         }
+      },
+      // 绩效中心
+      {
+        path: 'performance-rewards',
+        name: 'TeacherPerformanceRewards',
+        component: () => import('@/pages/teacher-center/performance-rewards/index.vue'),
+        meta: {
+          title: '绩效中心',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Trophy',
+          priority: 'medium'
+        }
+      },
+      // 班级通讯录
+      {
+        path: 'class-contacts',
+        name: 'TeacherClassContacts',
+        component: () => import('@/pages/teacher-center/class-contacts/index.vue'),
+        meta: {
+          title: '班级通讯录',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'Phone',
+          priority: 'low'
+        }
+      },
+      // 客户池
+      {
+        path: 'customer-pool',
+        name: 'TeacherCustomerPool',
+        component: () => import('@/pages/teacher-center/customer-pool/index.vue'),
+        meta: {
+          title: '客户池',
+          requiresAuth: true,
+          roles: ['teacher'],
+          icon: 'UserFilled',
+          priority: 'low'
+        }
       }
     ]
   }

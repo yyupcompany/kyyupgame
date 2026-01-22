@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="我的成就"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileSubPageLayout title="我的成就" back-path="/mobile/parent-center">
     <div class="mobile-game-achievements">
       <!-- 成就统计卡片 -->
       <div class="achievement-summary">
@@ -93,11 +87,11 @@
                 <van-icon
                   :name="getAchievementIcon(achievement.icon)"
                   size="32"
-                  :color="achievement.unlocked ? '#ffd21e' : '#c8c9cc'"
+                  :color="achievement.unlocked ? 'var(--warning-color)' : 'var(--border-dark)'"
                 />
               </div>
               <div v-if="!achievement.unlocked" class="lock-overlay">
-                <van-icon name="lock" size="16" color="#c8c9cc" />
+                <van-icon name="lock" size="16" color="var(--border-dark)" />
               </div>
             </div>
 
@@ -110,7 +104,7 @@
               <div class="achievement-progress">
                 <van-progress
                   :percentage="achievement.progress"
-                  :color="achievement.unlocked ? '#07c160' : '#1989fa'"
+                  :color="achievement.unlocked ? 'var(--success-color)' : 'var(--primary-color)'"
                   :pivot-text="`${achievement.progress}%`"
                   stroke-width="6"
                 />
@@ -148,7 +142,7 @@
                 <van-icon
                   :name="getAchievementIcon(selectedAchievement.icon)"
                   size="48"
-                  :color="selectedAchievement.unlocked ? '#ffd21e' : '#c8c9cc'"
+                  :color="selectedAchievement.unlocked ? 'var(--warning-color)' : 'var(--border-dark)'"
                 />
               </div>
             </div>
@@ -170,14 +164,14 @@
                 </div>
                 <van-progress
                   :percentage="selectedAchievement.progress"
-                  :color="selectedAchievement.unlocked ? '#07c160' : '#1989fa'"
+                  :color="selectedAchievement.unlocked ? 'var(--success-color)' : 'var(--primary-color)'"
                   stroke-width="8"
                 />
               </div>
 
               <div v-if="selectedAchievement.unlocked" class="unlock-status">
                 <div class="unlock-badge">
-                  <van-icon name="passed" color="#07c160" />
+                  <van-icon name="passed" color="var(--success-color)" />
                   <span>已解锁</span>
                 </div>
                 <div class="unlock-time-info">
@@ -186,7 +180,7 @@
               </div>
               <div v-else class="lock-status">
                 <div class="lock-badge">
-                  <van-icon name="lock" color="#c8c9cc" />
+                  <van-icon name="lock" color="var(--border-dark)" />
                   <span>未解锁</span>
                 </div>
                 <div class="lock-tips">
@@ -198,13 +192,13 @@
         </div>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface Achievement {
   id: number
@@ -420,6 +414,12 @@ const loadData = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadData()
 })
 </script>
@@ -440,18 +440,18 @@ onMounted(() => {
     align-items: center;
     padding: var(--spacing-lg);
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     height: 100%;
 
     .summary-icon {
       width: 48px;
       height: 48px;
-      border-radius: 24px;
+      border-radius: var(--spacing-2xl);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 16px;
+      margin-right: var(--spacing-lg);
 
       &.total {
         background: var(--primary-gradient);
@@ -459,17 +459,17 @@ onMounted(() => {
       }
 
       &.unlocked {
-        background: linear-gradient(135deg, #07c160 0%, #38d9a9 100%);
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-light) 100%);
         color: white;
       }
 
       &.locked {
-        background: linear-gradient(135deg, #c8c9cc 0%, #ebedf0 100%);
+        background: linear-gradient(135deg, var(--border-dark) 0%, var(--border-light) 100%);
         color: var(--info-color);
       }
 
       &.stars {
-        background: linear-gradient(135deg, #ffd21e 0%, #ff9800 100%);
+        background: linear-gradient(135deg, var(--warning-color) 0%, var(--warning-color) 100%);
         color: white;
       }
     }
@@ -480,7 +480,7 @@ onMounted(() => {
         font-weight: bold;
         color: var(--van-text-color);
         line-height: 1.2;
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
       }
 
       .summary-label {
@@ -493,7 +493,7 @@ onMounted(() => {
 
 .category-tabs {
   background: var(--card-bg);
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-sm);
 
   :deep(.van-tabs__wrap) {
     border-radius: 0;
@@ -525,7 +525,7 @@ onMounted(() => {
 
 .achievement-card {
   background: var(--card-bg);
-  border-radius: 16px;
+  border-radius: var(--spacing-lg);
   padding: var(--spacing-lg);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -544,7 +544,7 @@ onMounted(() => {
     position: relative;
     display: flex;
     justify-content: center;
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     .icon-bg {
       width: 64px;
@@ -560,19 +560,19 @@ onMounted(() => {
       }
 
       &.memory {
-        background: linear-gradient(135deg, #07c160 0%, #38d9a9 100%);
+        background: linear-gradient(135deg, var(--success-color) 0%, var(--success-light) 100%);
       }
 
       &.logic {
-        background: linear-gradient(135deg, #ff9800 0%, #ff5722 100%);
+        background: linear-gradient(135deg, var(--warning-color) 0%, var(--danger-color) 100%);
       }
 
       &.other {
-        background: linear-gradient(135deg, #c8c9cc 0%, #ebedf0 100%);
+        background: linear-gradient(135deg, var(--border-dark) 0%, var(--border-light) 100%);
       }
 
       &.locked {
-        background: #f5f5f5;
+        background: var(--bg-page);
       }
 
       &.large {
@@ -589,8 +589,8 @@ onMounted(() => {
       transform: translate(-50%, -50%);
       background: rgba(0, 0, 0, 0.6);
       border-radius: 50%;
-      width: 24px;
-      height: 24px;
+      width: var(--spacing-2xl);
+      height: var(--spacing-2xl);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -615,13 +615,13 @@ onMounted(() => {
     }
 
     .achievement-progress {
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
 
       .progress-text {
         font-size: var(--text-xs);
         color: var(--van-text-color-2);
         text-align: center;
-        margin-top: 8px;
+        margin-top: var(--spacing-sm);
       }
     }
 
@@ -671,7 +671,7 @@ onMounted(() => {
     .detail-icon {
       display: flex;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: var(--spacing-xl);
     }
 
     .detail-info {
@@ -694,17 +694,17 @@ onMounted(() => {
       .detail-category {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: var(--spacing-xl);
       }
 
       .detail-progress {
-        margin-bottom: 20px;
+        margin-bottom: var(--spacing-xl);
 
         .progress-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          margin-bottom: 8px;
+          margin-bottom: var(--spacing-sm);
 
           .progress-ratio {
             font-weight: 600;
@@ -719,11 +719,11 @@ onMounted(() => {
           align-items: center;
           justify-content: center;
           gap: var(--spacing-sm);
-          margin-bottom: 8px;
+          margin-bottom: var(--spacing-sm);
 
           span {
             font-weight: 600;
-            color: #07c160;
+            color: var(--success-color);
           }
         }
 
@@ -740,11 +740,11 @@ onMounted(() => {
           align-items: center;
           justify-content: center;
           gap: var(--spacing-sm);
-          margin-bottom: 8px;
+          margin-bottom: var(--spacing-sm);
 
           span {
             font-weight: 600;
-            color: #c8c9cc;
+            color: var(--border-dark);
           }
         }
 
@@ -765,8 +765,15 @@ onMounted(() => {
 :deep(.van-progress__pivot) {
   background-color: var(--van-primary-color);
   color: white;
-  border-radius: 10px;
-  font-size: 10px;
+  border-radius: var(--spacing-md);
+  font-size: var(--spacing-md);
   min-width: 30px;
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

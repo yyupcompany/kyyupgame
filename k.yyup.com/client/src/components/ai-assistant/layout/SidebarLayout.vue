@@ -51,6 +51,15 @@
         </div>
       </div>
 
+      <!-- 🆕 快捷导航区域 -->
+      <div v-if="showQuickActions" class="quick-actions-section">
+        <QuickActionsPanel
+          display-mode="sidebar"
+          :show-title="false"
+          @action-click="handleQuickActionClick"
+        />
+      </div>
+
       <!-- 聊天容器 -->
       <div class="sidebar-content">
         <slot name="chat-container" />
@@ -66,25 +75,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, withDefaults, defineProps, defineEmits } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import QuickActionsPanel from '../components/QuickActionsPanel.vue'
+import type { QuickAction } from '@/config/ai-quick-actions'
 
 // Props
 interface Props {
   visible: boolean
   showShortcuts?: boolean  // 是否显示快捷键提示
+  showQuickActions?: boolean  // 是否显示快捷导航
 }
 
 const props = withDefaults(defineProps<Props>(), {
   visible: false,
-  showShortcuts: true
+  showShortcuts: true,
+  showQuickActions: true
 })
 
 // Emits
 const emit = defineEmits<{
   close: []
   'toggle-fullscreen': []
+  'quick-action': [text: string, action: QuickAction]
 }>()
+
+// 处理快捷导航点击
+const handleQuickActionClick = (text: string, action: QuickAction) => {
+  console.log('🎯 [SidebarLayout] 快捷导航点击:', { text, action })
+  emit('quick-action', text, action)
+}
 
 // 侧边栏宽度
 const sidebarWidth = ref(400)  // 精简宽度
@@ -208,6 +228,33 @@ onUnmounted(() => {
   &.close:hover {
     background: var(--danger-color-light-9);
     color: var(--danger-color);
+  }
+}
+
+// 快捷导航区域
+.quick-actions-section {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: var(--border-width) solid var(--border-color);
+  background: var(--bg-card);
+  flex-shrink: 0;
+  max-height: 300px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background: var(--text-placeholder);
+    }
   }
 }
 

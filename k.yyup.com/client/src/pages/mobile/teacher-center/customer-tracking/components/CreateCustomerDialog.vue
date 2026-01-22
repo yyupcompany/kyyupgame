@@ -471,7 +471,7 @@ async function handleSubmit() {
     gap: var(--spacing-md);
     padding: var(--spacing-md) 0;
     margin: 0;
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-top: 1px solid var(--border-color-lighter);
 
     .el-button {

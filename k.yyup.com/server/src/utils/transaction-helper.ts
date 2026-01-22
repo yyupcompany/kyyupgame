@@ -5,14 +5,14 @@
  * 防止数据竞态条件和丢失更新问题
  */
 
-import { Transaction, LOCK } from 'sequelize';
+import { Transaction, LOCK, Op } from 'sequelize';
 import { sequelize } from '../init';
 
 /**
  * 事务配置选项
  */
 export interface TransactionOptions {
-  isolationLevel?: 'READ_UNCOMMITTED' | 'READ_COMMITTED' | 'REPEATABLE_READ' | 'SERIALIZABLE';
+  isolationLevel?: Transaction.ISOLATION_LEVELS;
   timeout?: number;
   readOnly?: boolean;
 }
@@ -65,21 +65,25 @@ export async function withTransaction<T>(
   options: TransactionOptions = {}
 ): TransactionResult<T> {
   // 配置隔离级别
-  const isolationLevel = options.isolationLevel || 'REPEATABLE_READ';
+  const isolationLevel = options.isolationLevel || Transaction.ISOLATION_LEVELS.REPEATABLE_READ;
 
   try {
+    const transactionOptions: any = {
+      isolationLevel,
+      readOnly: options.readOnly || false
+    };
+    if (options.timeout) {
+      transactionOptions.timeout = options.timeout;
+    }
+
     const result = await sequelize.transaction(
-      {
-        isolationLevel,
-        timeout: options.timeout || 30000, // 默认30秒超时
-        readOnly: options.readOnly || false
-      },
+      transactionOptions,
       async (t) => {
         return await callback(t);
       }
     );
 
-    return result;
+    return result as T;
   } catch (error: any) {
     // 检测死锁错误
     if (error.parent?.code === 'ER_LOCK_DEADLOCK' || error.parent?.code === 'ER_LOCK_WAIT_TIMEOUT') {
@@ -151,8 +155,8 @@ export async function withTransactionRetry<T>(
  * @param transaction 事务对象
  * @returns 锁定的记录
  */
-export async function lockForUpdate<M extends any>(
-  model: M,
+export async function lockForUpdate(
+  model: any,
   pk: string | number,
   transaction: Transaction
 ): Promise<any> {
@@ -170,8 +174,8 @@ export async function lockForUpdate<M extends any>(
  * @param transaction 事务对象
  * @returns 锁定的记录列表
  */
-export async function lockForUpdateAll<M extends any>(
-  model: M,
+export async function lockForUpdateAll(
+  model: any,
   where: any,
   transaction: Transaction
 ): Promise<any[]> {
@@ -193,8 +197,8 @@ export async function lockForUpdateAll<M extends any>(
  * @param transaction 事务对象
  * @returns 更新后的记录
  */
-export async function updateWithOptimisticLock<M extends any>(
-  model: M,
+export async function updateWithOptimisticLock(
+  model: any,
   pk: string | number,
   updates: any,
   currentVersion: number,
@@ -367,16 +371,16 @@ export class ConcurrentUpdateHelper {
       const existing = await model.findOne({
         where: {
           [field]: newValue,
-          id: { [sequelize.Op.ne]: pk }
+          id: { [Op.ne]: pk }
         },
-        transaction
+        transaction: t
       });
 
       if (existing) {
         throw new Error(`${field} "${newValue}" 已被使用`);
       }
 
-      const record = await model.findByPk(pk, { transaction });
+      const record = await model.findByPk(pk, { transaction: t });
 
       if (!record) {
         throw new Error('记录不存在');

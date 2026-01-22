@@ -66,26 +66,26 @@ export class OSSService {
 
   /**
    * 生成租户隔离的OSS路径
-   * @param phoneNumber 租户手机号
+   * @param tenantKey 租户标识
    * @param fileType 文件类型 (photos, students, albums)
    * @param subPath 子路径
    * @returns 租户隔离的完整路径
    */
-  getTenantPath(phoneNumber: string, fileType: string, subPath: string = ''): string {
-    if (!phoneNumber) {
-      throw new Error('手机号不能为空');
+  getTenantPath(tenantKey: string, fileType: string, subPath: string = ''): string {
+    if (!tenantKey) {
+      throw new Error('租户标识不能为空');
     }
     // 路径格式: kindergarten/rent/{phone}/{fileType}/{subPath}
-    const basePath = `${this.pathPrefix}${SHANGHAI_OSS_SECURITY.TENANT_PREFIX}${phoneNumber}/${fileType}/`;
+    const basePath = `${this.pathPrefix}${SHANGHAI_OSS_SECURITY.TENANT_PREFIX}${tenantKey}/${fileType}/`;
     return subPath ? `${basePath}${subPath}` : basePath;
   }
 
   /**
    * 生成MD5租户令牌用于OSS路径验证
    */
-  generateOssToken(userPhone: string, tenantCode: string, ossPath: string): string {
+  generateOssToken(tenantKey: string, tenantCode: string, ossPath: string): string {
     const timestamp = Math.floor(Date.now() / (SHANGHAI_OSS_SECURITY.TIMESTAMP_UNIT * 1000));
-    const data = `${userPhone}:${tenantCode}:${ossPath}:${this.bucket}:${timestamp}:${SHANGHAI_OSS_SECURITY.SALT}`;
+    const data = `${tenantKey}:${tenantCode}:${ossPath}:${this.bucket}:${timestamp}:${SHANGHAI_OSS_SECURITY.SALT}`;
     const hash = crypto.createHash('md5').update(data).digest('hex');
     return `${SHANGHAI_OSS_SECURITY.TOKEN_PREFIX}${hash}`;
   }
@@ -93,7 +93,7 @@ export class OSSService {
   /**
    * 验证MD5租户令牌
    */
-  validateOssToken(token: string, userPhone: string, tenantCode: string, ossPath: string): boolean {
+  validateOssToken(token: string, tenantKey: string, tenantCode: string, ossPath: string): boolean {
     if (!token || !token.startsWith(SHANGHAI_OSS_SECURITY.TOKEN_PREFIX)) {
       return false;
     }
@@ -103,7 +103,7 @@ export class OSSService {
     // 检查当前时间和前一个时间单位
     for (let i = 0; i <= 1; i++) {
       const timestamp = currentTimestamp - i;
-      const data = `${userPhone}:${tenantCode}:${ossPath}:${this.bucket}:${timestamp}:${SHANGHAI_OSS_SECURITY.SALT}`;
+      const data = `${tenantKey}:${tenantCode}:${ossPath}:${this.bucket}:${timestamp}:${SHANGHAI_OSS_SECURITY.SALT}`;
       const hash = crypto.createHash('md5').update(data).digest('hex');
       const expectedToken = `${SHANGHAI_OSS_SECURITY.TOKEN_PREFIX}${hash}`;
 
@@ -117,11 +117,11 @@ export class OSSService {
 
   /**
    * 验证OSS路径访问权限
-   * @param userPhone 用户手机号
+   * @param tenantKey 租户标识
    * @param ossPath OSS路径
    * @returns 验证结果
    */
-  validatePathAccess(userPhone: string, ossPath: string): { isValid: boolean; error?: string; accessType?: 'public' | 'tenant' } {
+  validatePathAccess(tenantKey: string, ossPath: string): { isValid: boolean; error?: string; accessType?: 'public' | 'tenant' } {
     if (!ossPath) {
       return { isValid: false, error: 'OSS路径不能为空' };
     }
@@ -146,11 +146,11 @@ export class OSSService {
       const pathParts = relativePath.substring(SHANGHAI_OSS_SECURITY.TENANT_PREFIX.length).split('/');
       const pathPhone = pathParts[0];
 
-      if (!userPhone) {
-        return { isValid: false, error: '访问租户资源需要提供手机号' };
+      if (!tenantKey) {
+        return { isValid: false, error: '访问租户资源需要提供租户标识' };
       }
 
-      if (pathPhone !== userPhone) {
+      if (pathPhone !== tenantKey) {
         return { isValid: false, error: `无权访问其他租户(${pathPhone})的资源` };
       }
 
@@ -272,11 +272,11 @@ export class OSSService {
   /**
    * 获取租户安全的临时URL（验证权限后）
    * @param ossPath OSS路径
-   * @param userPhone 用户手机号
+   * @param tenantKey 租户标识
    * @param expiresInMinutes 有效期（分钟）
    */
-  getSecureTenantUrl(ossPath: string, userPhone: string, expiresInMinutes: number = 60): string | null {
-    const validation = this.validatePathAccess(userPhone, ossPath);
+  getSecureTenantUrl(ossPath: string, tenantKey: string, expiresInMinutes: number = 60): string | null {
+    const validation = this.validatePathAccess(tenantKey, ossPath);
     if (!validation.isValid) {
       console.warn(`⚠️ OSS访问被拒绝: ${validation.error}`);
       return null;

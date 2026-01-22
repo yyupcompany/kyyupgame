@@ -177,7 +177,7 @@ export const sipAPI = {
   },
 
   // 连接SIP服务器 - 已弃用
-  connect: (config: SIPConfig) => {
+  connect: (_config: SIPConfig) => {
     console.warn('⚠️ SIP连接已弃用，请使用VOS配置API')
     return Promise.reject(new Error('SIP API已弃用'))
   },
@@ -189,13 +189,13 @@ export const sipAPI = {
   },
 
   // 测试SIP连接 - 已弃用
-  testConnection: (config: Partial<SIPConfig>) => {
+  testConnection: (_config: Partial<SIPConfig>) => {
     console.warn('⚠️ SIP测试已弃用，请使用VOS配置API')
     return Promise.reject(new Error('SIP API已弃用'))
   },
 
   // 更新SIP配置 - 已弃用
-  updateConfig: (config: Partial<SIPConfig>) => {
+  updateConfig: (_config: Partial<SIPConfig>) => {
     console.warn('⚠️ SIP配置更新已弃用，请使用VOS配置API')
     return Promise.reject(new Error('SIP API已弃用'))
   },
@@ -207,13 +207,13 @@ export const sipAPI = {
   },
 
   // 注册分机 - 已弃用
-  registerExtension: (extension: string, config: Partial<SIPConfig>) => {
+  registerExtension: (_extension: string, _config: Partial<SIPConfig>) => {
     console.warn('⚠️ SIP分机注册已弃用')
     return Promise.reject(new Error('SIP API已弃用'))
   },
 
   // 注销分机 - 已弃用
-  unregisterExtension: (extension: string) => {
+  unregisterExtension: (_extension: string) => {
     console.warn('⚠️ SIP分机注销已弃用')
     return Promise.reject(new Error('SIP API已弃用'))
   }
@@ -234,7 +234,7 @@ export const callAPI = {
   },
 
   // 接听通话 - 已弃用（VOS自动处理）
-  answerCall: (callId: string) => {
+  answerCall: (_callId: string) => {
     console.warn('⚠️ 接听通话已弃用，VOS自动处理')
     return Promise.reject(new Error('VOS自动处理通话'))
   },
@@ -245,31 +245,31 @@ export const callAPI = {
   },
 
   // 保持通话 - 已弃用
-  holdCall: (callId: string) => {
+  holdCall: (_callId: string) => {
     console.warn('⚠️ 保持通话已弃用')
     return Promise.reject(new Error('VOS不支持此操作'))
   },
 
   // 恢复通话 - 已弃用
-  unholdCall: (callId: string) => {
+  unholdCall: (_callId: string) => {
     console.warn('⚠️ 恢复通话已弃用')
     return Promise.reject(new Error('VOS不支持此操作'))
   },
 
   // 转移通话 - 已弃用
-  transferCall: (callId: string, targetExtension: string) => {
+  transferCall: (_callId: string, _targetExtension: string) => {
     console.warn('⚠️ 转移通话已弃用')
     return Promise.reject(new Error('VOS不支持此操作'))
   },
 
   // 开始录音 - 已弃用（VOS自动录音）
-  startRecording: (callId: string) => {
+  startRecording: (_callId: string) => {
     console.warn('⚠️ VOS自动录音，无需手动启动')
     return Promise.resolve()
   },
 
   // 停止录音 - 已弃用
-  stopRecording: (callId: string) => {
+  stopRecording: (_callId: string) => {
     console.warn('⚠️ VOS自动录音，无需手动停止')
     return Promise.resolve()
   },
@@ -306,7 +306,7 @@ export const callAPI = {
 
   // 发送DTMF
   sendDTMF: (callId: string, digits: string) => {
-    return request.post(`/call-center/call/${callId}/dtmf`, { digits })
+    return request.post(`/api/call-center/call/${callId}/dtmf`, { digits })
   }
 }
 
@@ -334,7 +334,7 @@ export const recordingAPI = {
 
   // 删除录音
   deleteRecording: (id: string) => {
-    return request.delete(`/call-center/recordings/${id}`)
+    return request.delete(`/api/call-center/recordings/${id}`)
   },
 
   // 获取录音转写
@@ -346,12 +346,12 @@ export const recordingAPI = {
 
   // 更新转写内容
   updateTranscript: (id: string, transcript: string) => {
-    return request.put(`/call-center/recordings/${id}/transcript`, { transcript })
+    return request.put(`/api/call-center/recordings/${id}/transcript`, { transcript })
   },
 
   // 请求转写
   requestTranscription: (id: string, options: { language?: string } = {}) => {
-    return request.post(`/call-center/recordings/${id}/transcribe`, options)
+    return request.post(`/api/call-center/recordings/${id}/transcribe`, options)
   }
 }
 
@@ -384,12 +384,12 @@ export const aiAPI = {
 
   // 实时转写
   startTranscription: (callId: string, options: { language?: string } = {}) => {
-    return request.post(`/call-center/ai/transcribe/${callId}/start`, options)
+    return request.post(`/api/call-center/ai/transcribe/${callId}/start`, options)
   },
 
   // 停止转写
   stopTranscription: (callId: string) => {
-    return request.post(`/call-center/ai/transcribe/${callId}/stop`)
+    return request.post(`/api/call-center/ai/transcribe/${callId}/stop`)
   },
 
   // 获取转写结果
@@ -453,12 +453,12 @@ export const extensionAPI = {
 
   // 更新分机状态
   updateExtensionStatus: (id: string, status: Extension['status']) => {
-    return request.put(`/call-center/extensions/${id}/status`, { status })
+    return request.put(`/api/call-center/extensions/${id}/status`, { status })
   },
 
   // 重置分机
   resetExtension: (id: string) => {
-    return request.post(`/call-center/extensions/${id}/reset`)
+    return request.post(`/api/call-center/extensions/${id}/reset`)
   }
 }
 
@@ -484,12 +484,12 @@ export const contactAPI = {
 
   // 更新联系人
   updateContact: (id: string, contact: Partial<Contact>) => {
-    return request.put(`/call-center/contacts/${id}`, contact)
+    return request.put(`/api/call-center/contacts/${id}`, contact)
   },
 
   // 删除联系人
   deleteContact: (id: string) => {
-    return request.delete(`/call-center/contacts/${id}`)
+    return request.delete(`/api/call-center/contacts/${id}`)
   },
 
   // 搜索联系人

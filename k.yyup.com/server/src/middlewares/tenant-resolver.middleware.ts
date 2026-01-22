@@ -20,6 +20,8 @@ interface RequestWithTenant extends Request {
     code: string;
     domain: string;
     databaseName: string;
+    id?: number | string;
+    ossNamespace?: string;
   }; // 租户信息
   tenantDb?: any; // 共享的全局数据库连接
 }
@@ -55,10 +57,12 @@ export const tenantResolverMiddleware = async (
       } else {
         // 开发环境允许使用默认配置
         logger.info('[租户识别] 使用开发环境默认配置');
+        const ossNamespace = resolveOssNamespace(domain, 'dev', null);
         req.tenant = {
           code: 'dev',
           domain: domain,
-          databaseName: process.env.DB_NAME || 'tenant_dev'
+          databaseName: process.env.DB_NAME || 'tenant_dev',
+          ossNamespace
         };
 
         // 获取共享连接
@@ -76,19 +80,15 @@ export const tenantResolverMiddleware = async (
     }
 
     // 验证租户是否存在
-    const tenantInfo = await validateTenant(tenantCode);
-    if (!tenantInfo) {
+    const tenantContext = await resolveTenantContext(tenantCode, domain);
+    if (!tenantContext) {
       logger.warn('[租户识别] 租户不存在或未激活', { tenantCode, domain });
       ApiResponse.error(res, '租户不存在或未激活', 'TENANT_NOT_FOUND');
       return;
     }
 
     // 设置租户信息到请求对象
-    req.tenant = {
-      code: tenantCode,
-      domain: domain,
-      databaseName: `tenant_${tenantCode}`
-    };
+    req.tenant = tenantContext;
 
     // 获取共享的全局数据库连接
     try {
@@ -121,12 +121,18 @@ export const tenantResolverMiddleware = async (
 /**
  * 从域名中提取租户代码
  * 支持格式: k001.yyup.cc -> k001
+ * 特殊支持: k.yyup.cc -> k_tenant
  */
 function extractTenantCode(domain: string): string | null {
   // 移除端口号
   const cleanDomain = domain.split(':')[0];
 
-  // 匹配格式: k001.yyup.cc
+  // 特殊处理：k.yyup.cc -> k_tenant
+  if (cleanDomain === 'k.yyup.cc') {
+    return 'k_tenant';
+  }
+
+  // 匹配格式: k001.yyup.cc -> k001
   const match = cleanDomain.match(/^(k\d+)\.yyup\.cc$/);
 
   if (match) {
@@ -143,15 +149,40 @@ function extractTenantCode(domain: string): string | null {
   return null;
 }
 
+function isDemoDomain(domain: string): boolean {
+  const cleanDomain = domain.split(':')[0];
+  return ['k.yyup.cc', 'k.yyup.com', 'localhost', '127.0.0.1'].includes(cleanDomain);
+}
+
+function resolveOssNamespace(domain: string, tenantCode: string, tenantInfo: any): string {
+  if (isDemoDomain(domain) || tenantCode === 'k_tenant') {
+    return 'demo';
+  }
+  return (
+    tenantInfo?.ossNamespace ||
+    tenantInfo?.tenant_id ||
+    tenantInfo?.tenantCode ||
+    tenantCode
+  );
+}
+
 /**
  * 验证租户是否存在且已激活
  */
-async function validateTenant(tenantCode: string): Promise<boolean> {
+async function resolveTenantContext(
+  tenantCode: string,
+  domain: string
+): Promise<RequestWithTenant['tenant'] | null> {
   try {
-    // 开发环境：直接支持k001租户用于测试
-    if (process.env.NODE_ENV !== 'production' && tenantCode === 'k001') {
-      logger.info('开发环境：k001租户验证通过（模拟）');
-      return true;
+    // 开发环境：直接支持 k001 和 k_tenant 租户用于测试
+    if (process.env.NODE_ENV !== 'production' && (tenantCode === 'k001' || tenantCode === 'k_tenant')) {
+      logger.info(`开发环境：${tenantCode}租户验证通过（模拟）`);
+      return {
+        code: tenantCode,
+        domain,
+        databaseName: `tenant_${tenantCode}`,
+        ossNamespace: resolveOssNamespace(domain, tenantCode, null)
+      };
     }
 
     // 这里可以调用统一租户中心的API验证租户
@@ -164,22 +195,39 @@ async function validateTenant(tenantCode: string): Promise<boolean> {
       }
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      return data.success && data.data.status === 'active';
+    if (!response.ok) {
+      return null;
     }
 
-    return false;
+    const data = await response.json();
+    const tenantInfo = data?.tenant || data?.data || data;
+    const tenantStatus = tenantInfo?.status;
+    if (tenantStatus && tenantStatus !== 'active') {
+      return null;
+    }
+
+    return {
+      code: tenantCode,
+      domain,
+      databaseName: `tenant_${tenantCode}`,
+      id: tenantInfo?.id || tenantInfo?.tenantId,
+      ossNamespace: resolveOssNamespace(domain, tenantCode, tenantInfo)
+    };
   } catch (error) {
     logger.error('验证租户失败', { tenantCode, error });
 
-    // 开发环境：如果API调用失败，允许k001租户通过验证
-    if (process.env.NODE_ENV !== 'production' && tenantCode === 'k001') {
-      logger.warn('API调用失败，开发环境允许k001租户通过');
-      return true;
+    // 开发环境：如果API调用失败，允许 k001/k_tenant 租户通过验证
+    if (process.env.NODE_ENV !== 'production' && (tenantCode === 'k001' || tenantCode === 'k_tenant')) {
+      logger.warn(`API调用失败，开发环境允许 ${tenantCode} 租户通过`);
+      return {
+        code: tenantCode,
+        domain,
+        databaseName: `tenant_${tenantCode}`,
+        ossNamespace: resolveOssNamespace(domain, tenantCode, null)
+      };
     }
 
-    return false;
+    return null;
   }
 }
 
@@ -196,13 +244,9 @@ export const optionalTenantResolverMiddleware = async (
     const tenantCode = extractTenantCode(domain);
 
     if (tenantCode) {
-      const tenantInfo = await validateTenant(tenantCode);
-      if (tenantInfo) {
-        req.tenant = {
-          code: tenantCode,
-          domain: domain,
-          databaseName: `tenant_${tenantCode}`
-        };
+      const tenantContext = await resolveTenantContext(tenantCode, domain);
+      if (tenantContext) {
+        req.tenant = tenantContext;
 
         // 获取共享连接
         try {

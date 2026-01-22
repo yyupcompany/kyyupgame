@@ -2,14 +2,8 @@
   <UnifiedCenterLayout
     title="人员中心"
     description="清晰展示人员管理的完整流程，方便园长一目了然地掌握人员状况"
+    :full-width="true"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleCreate">
-        <UnifiedIcon name="Plus" />
-        新建
-      </el-button>
-    </template>
-
     <div class="center-container personnel-center-timeline">
 
     <!-- 标签页内容 -->
@@ -1539,71 +1533,83 @@ const getCommunicationTypeColor = (type: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 // 引入列表组件优化样式
 @import "@/styles/list-components-optimization.scss";
 .personnel-center-timeline {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-3xl);
-  background: var(--bg-secondary, var(--bg-container));
+  padding: var(--spacing-lg) var(--spacing-xl); /* ✨ 优化：保持一致的透气感 */
+  background: var(--bg-page);
 }
 
 /* .page-header 样式已移至全局 center-common.scss 中统一管理 */
 
 .main-content {
   flex: 1;
-  background: var(--bg-card);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
+  background: transparent; /* ✨ 优化：改用透明容器，内部由 el-tabs 控制 */
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  overflow: visible;
   transition: all var(--transition-normal);
 
   // 标签页美化
   :deep(.el-tabs) {
     .el-tabs__header {
       margin-bottom: var(--spacing-xl);
-      border-bottom: var(--transform-drop) solid var(--border-color);
-      transition: all var(--transition-normal);
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
     }
 
-    .el-tabs__nav {
-      display: flex;
-      gap: var(--spacing-lg);
+    .el-tabs__nav-wrap::after {
+      display: none;
     }
 
     .el-tabs__item {
-      padding: var(--spacing-md) var(--spacing-lg);
+      padding: 0 var(--spacing-2xl) !important; /* ✨ 核心修复：增加水平内边距 */
+      height: 40px;
+      line-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-size: var(--text-base);
-      font-weight: var(--font-medium);
+      font-weight: var(--font-bold);
       color: var(--text-secondary);
-      border: none;
-      border-bottom: 3px solid transparent;
-      transition: all var(--transition-fast);
-      position: relative;
+      border-radius: var(--radius-lg);
+      margin: 4px 8px;
+      transition: all var(--transition-normal);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      min-width: 100px;
 
       &:hover {
-        color: var(--text-primary);
-        border-bottom-color: var(--primary-light);
+        color: var(--primary-color);
+        background: var(--primary-light-bg);
       }
 
       &.is-active {
-        color: var(--primary-color);
-        border-bottom-color: var(--primary-color);
-        font-weight: var(--font-semibold);
-
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          right: 0;
-          min-height: 32px; height: auto;
-          background: linear-gradient(90deg, var(--primary-color), transparent);
-          opacity: 0.5;
-        }
+        color: white !important;
+        background: var(--primary-color) !important;
+        box-shadow: 0 4px 12px var(--glow-primary);
+        border-color: var(--primary-color);
       }
+    }
+
+    .el-tabs__active-bar {
+      display: none;
+    }
+
+    .el-tab-pane {
+      background: var(--bg-card);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-xl);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
     }
   }
 }
@@ -1902,7 +1908,7 @@ const getCommunicationTypeColor = (type: string) => {
       .list-header {
         margin-bottom: var(--spacing-xl);
         padding-bottom: var(--spacing-lg);
-        border-bottom: var(--z-index-dropdown) solid var(--border-light);
+        border-bottom: 1px solid var(--border-light);
 
         .list-title {
           font-size: var(--text-lg);
@@ -1945,7 +1951,7 @@ const getCommunicationTypeColor = (type: string) => {
           background: transparent;
 
           th {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-tertiary) 100%);
             color: var(--text-primary);
             font-weight: var(--font-semibold);
             padding: var(--spacing-lg) var(--spacing-md);
@@ -1953,7 +1959,7 @@ const getCommunicationTypeColor = (type: string) => {
             transition: all var(--transition-fast);
 
             &:hover {
-              background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+              background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-page) 100%);
             }
           }
         }
@@ -1973,7 +1979,7 @@ const getCommunicationTypeColor = (type: string) => {
 
           td {
             padding: var(--spacing-lg) var(--spacing-md);
-            border-bottom: var(--z-index-dropdown) solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
             background: transparent;
             transition: all var(--transition-fast);
 
@@ -2103,7 +2109,7 @@ const getCommunicationTypeColor = (type: string) => {
     align-items: center;
     justify-content: space-between;
     padding: var(--spacing-md) 0;
-    border-bottom: var(--z-index-dropdown) solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
     line-height: 1.5;
 
     &:last-child {
@@ -2446,6 +2452,26 @@ const getCommunicationTypeColor = (type: string) => {
 
     :deep(.action-card) {
       padding: var(--spacing-lg);
+    }
+  }
+}
+
+// 暗黑主题样式
+.dark,
+html.dark {
+  .personnel-center-timeline {
+    background: var(--bg-page);
+  }
+
+  .main-content :deep(.el-tabs) {
+    .el-tabs__header {
+      background: var(--bg-secondary);
+      border-color: var(--border-color);
+    }
+
+    .el-tab-pane {
+      background: var(--bg-card);
+      border-color: var(--border-color);
     }
   }
 }

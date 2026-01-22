@@ -8,7 +8,7 @@
  * - 数据库持久化
  */
 
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import AIConversationService from '@/api/modules/ai-conversation'
 import type { Conversation as DBConversation, Message as DBMessage } from '@/api/modules/ai-conversation'
@@ -40,7 +40,7 @@ const generateSmartTitle = (userMessage: string): string => {
 
   // 消息太短，返回默认标题
   if (message.length < 3) {
-    return null
+    return '新会话'
   }
 
   // 定义关键词匹配规则 (幼儿园管理领域)
@@ -145,7 +145,7 @@ export function useConversationManager() {
       messageType: 'text',
       metadata: {
         toolCalls: message.toolCalls,
-        ...message.metadata
+        ...(message.metadata || {})
       },
       tokens: safeContent.length // 安全的token计算
     }
@@ -403,23 +403,21 @@ export function useConversationManager() {
 
     try {
       // 验证和标准化消息对象
-      const safeMessage: Message = {
-        id: message.id || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      const messageId = `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      const safeRole = message.role || 'user'
+      
+      const fullMessage: Message = {
+        id: messageId,
         content: message.content || '',
-        role: message.role || 'user',
+        role: safeRole,
         timestamp: message.timestamp || new Date(),
         toolCalls: message.toolCalls,
         metadata: message.metadata
       }
 
-      // 创建完整消息对象
-      const fullMessage: Message = {
-        ...safeMessage
-      }
-
       // 尝试保存到数据库
       const dbMessage = convertMessageToDBMessage(fullMessage, conversationId)
-      const response = await AIConversationService.addMessage(conversationId, dbMessage)
+      const response = await AIConversationService.addMessage(conversationId, dbMessage as any)
 
       if (response.success && response.data) {
         // 使用数据库返回的ID
@@ -459,8 +457,9 @@ export function useConversationManager() {
       console.error('添加消息失败:', err)
 
       // 降级到本地处理
+      const fallbackId = `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       const fullMessage: Message = {
-        id: message.id || `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        id: fallbackId,
         content: message.content || '',
         role: message.role || 'user',
         timestamp: message.timestamp || new Date(),
@@ -528,8 +527,9 @@ export function useConversationManager() {
   // 更新消息（例如添加工具调用结果）
   const updateMessage = (conversationId: string, messageId: string, updates: Partial<Message>) => {
     const conversation = conversations.value.find(c => c.id === conversationId)
-    const message = conversation?.messages.find(m => m.id === messageId)
-
+    if (!conversation) return
+    
+    const message = conversation.messages.find(m => m.id === messageId)
     if (message) {
       Object.assign(message, updates)
       conversation.updatedAt = new Date()

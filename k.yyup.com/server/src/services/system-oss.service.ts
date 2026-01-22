@@ -87,12 +87,14 @@ export class SystemOSSService {
     const ossPath = `${this.config.basePath}${directory}/${uniqueName}`;
 
     try {
-      // 上传到OSS
-      const result = await this.client.put(ossPath, file, {
+      // 上传到OSS（bucket已设置为公开读，无需单独设置object ACL）
+      const uploadOptions: any = {
         headers: {
           'Content-Type': contentType,
         },
-      });
+      };
+      
+      const result = await this.client.put(ossPath, file, uploadOptions);
 
       console.log(`✅ 系统文件上传成功: ${ossPath}`);
 
@@ -100,7 +102,11 @@ export class SystemOSSService {
       const size = Buffer.isBuffer(file) ? file.length : 0;
 
       // 返回访问URL
-      const url = this.getFileUrl(ossPath);
+      // 如果需要公开访问，返回签名URL（设置10年有效期）
+      // 因为bucket是私有的，无法通过直接URL访问
+      const url = isPublic 
+        ? this.getFileUrl(ossPath, 10 * 365 * 24 * 60 * 60) // 10年有效期
+        : this.getFileUrl(ossPath);
 
       return {
         url,

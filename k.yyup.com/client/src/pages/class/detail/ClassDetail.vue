@@ -668,7 +668,7 @@ onMounted(async () => {
   line-height: 1.6;
   color: var(--text-secondary);
   padding: var(--spacing-sm);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-sm);
 }
 
@@ -739,7 +739,7 @@ onMounted(async () => {
   display: flex;
   gap: var(--spacing-md);
   padding: var(--spacing-lg);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -802,14 +802,14 @@ onMounted(async () => {
 
 /* Element Plus 组件样式覆盖 */
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 
 :deep(.el-descriptions__label) {
   color: var(--text-primary);
   font-weight: 500;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-descriptions__content) {
@@ -822,7 +822,7 @@ onMounted(async () => {
 }
 
 :deep(.el-table th) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -831,7 +831,7 @@ onMounted(async () => {
 }
 
 :deep(.el-progress-bar__outer) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-tag) {

@@ -109,330 +109,41 @@
  */
 
 import { Router } from 'express'
-import callCenterController from '../controllers/call-center.controller'
-import { verifyToken } from '../middlewares/auth.middleware'
+import callCenterController from '../../controllers/call-center.controller'
 
 const router = Router()
 
 // 所有路由都需要认证
-router.use(verifyToken)
+// router.use(authMiddleware)
 
 // ========== 概览数据 ==========
 
-/**
- * @swagger
- * /api/call-center/overview:
- *   get:
- *     summary: 获取呼叫中心概览数据
- *     description: 获取呼叫中心的整体运营数据概览，包括通话统计、AI分析结果、实时状态等
- *     tags:
- *       - 呼叫中心管理
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: 成功获取概览数据
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     totalCalls:
- *                       type: number
- *                       example: 1250
- *                       description: 总通话数量
- *                     activeCalls:
- *                       type: number
- *                       example: 12
- *                       description: 当前活跃通话数
- *                     aiAnalysisCount:
- *                       type: number
- *                       example: 850
- *                       description: AI分析通话数量
- *                     averageCallDuration:
- *                       type: number
- *                       example: 245
- *                       description: 平均通话时长（秒）
- *                     satisfactionRate:
- *                       type: number
- *                       example: 4.2
- *                       description: 客户满意度评分
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.get('/overview', callCenterController.getOverview)
+// router.get('/overview', callCenterController.getOverview)
 
 // ========== VOS呼叫管理 ==========
 
-/**
- * @swagger
- * /api/call-center/call/make:
- *   post:
- *     summary: 发起UDP呼叫
- *     description: 通过VOS系统发起UDP协议的外呼电话
- *     tags:
- *       - 呼叫中心管理
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - phoneNumber
- *             properties:
- *               phoneNumber:
- *                 type: string
- *                 example: "13800138000"
- *                 description: 目标电话号码
- *               callerId:
- *                 type: string
- *                 example: "1001"
- *                 description: 主叫号码/分机号
- *               customerId:
- *                 type: integer
- *                 example: 123
- *                 description: 客户ID
- *               callType:
- *                 type: string
- *                 enum: [outbound, inbound, transfer]
- *                 example: "outbound"
- *                 description: 通话类型
- *     responses:
- *       200:
- *         description: 成功发起呼叫
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     callId:
- *                       type: string
- *                       example: "call_123456789"
- *                       description: 通话ID
- *                     status:
- *                       type: string
- *                       example: "initiated"
- *                       description: 通话状态
- *       400:
- *         $ref: '#/components/responses/BadRequest'
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.post('/call/make', callCenterController.makeCallUDP)
-
-/**
- * @swagger
- * /api/call-center/call/{callId}/status:
- *   get:
- *     summary: 获取通话状态
- *     description: 获取指定通话的实时状态信息
- *     tags:
- *       - 呼叫中心管理
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: callId
- *         required: true
- *         schema:
- *           type: string
- *         description: 通话ID
- *     responses:
- *       200:
- *         description: 成功获取通话状态
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     callId:
- *                       type: string
- *                       example: "call_123456789"
- *                     status:
- *                       type: string
- *                       example: "active"
- *                       description: 通话状态
- *                     startTime:
- *                       type: string
- *                       format: date-time
- *                       example: "2023-12-01T10:30:00Z"
- *                     duration:
- *                       type: integer
- *                       example: 125
- *                       description: 通话时长（秒）
- *       404:
- *         $ref: '#/components/responses/NotFound'
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.get('/call/:callId/status', callCenterController.getCallStatusUDP)
-
-/**
- * @swagger
- * /api/call-center/call/hangup:
- *   post:
- *     summary: 挂断通话
- *     description: 主动挂断指定的通话
- *     tags:
- *       - 呼叫中心管理
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - callId
- *             properties:
- *               callId:
- *                 type: string
- *                 example: "call_123456789"
- *                 description: 要挂断的通话ID
- *               reason:
- *                 type: string
- *                 example: "completed"
- *                 description: 挂断原因
- *     responses:
- *       200:
- *         description: 成功挂断通话
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     callId:
- *                       type: string
- *                       example: "call_123456789"
- *                     finalStatus:
- *                       type: string
- *                       example: "completed"
- *                     endTime:
- *                       type: string
- *                       format: date-time
- *                       example: "2023-12-01T10:32:05Z"
- *       400:
- *         $ref: '#/components/responses/BadRequest'
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.post('/call/hangup', callCenterController.hangupCallUDP)
-
-/**
- * @swagger
- * /api/call-center/calls/active:
- *   get:
- *     summary: 获取活跃通话列表
- *     description: 获取当前所有活跃的通话列表
- *     tags:
- *       - 呼叫中心管理
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           example: 1
- *         description: 页码
- *       - in: query
- *         name: limit
- *         schema:
- *           type: integer
- *           example: 20
- *         description: 每页数量
- *     responses:
- *       200:
- *         description: 成功获取活跃通话列表
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     items:
- *                       type: array
- *                       items:
- *                         type: object
- *                         properties:
- *                           callId:
- *                             type: string
- *                           phoneNumber:
- *                             type: string
- *                           startTime:
- *                             type: string
- *                             format: date-time
- *                           duration:
- *                             type: integer
- *                           status:
- *                             type: string
- *                     pagination:
- *                       $ref: '#/components/schemas/PaginationResponse'
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.get('/calls/active', callCenterController.getActiveCallsUDP)
+// router.post('/call/make', callCenterController.makeCallUDP)
+// router.get('/call/:callId/status', callCenterController.getCallStatusUDP)
+// router.post('/call/hangup', callCenterController.hangupCallUDP)
+// router.get('/calls/active', callCenterController.getActiveCallsUDP)
 
 // 通话查询
-router.get('/calls/active', callCenterController.getActiveCalls)
-router.get('/calls/history', callCenterController.getCallHistory)
-router.get('/calls/statistics', callCenterController.getCallStatistics)
+// router.get('/calls/active', callCenterController.getActiveCalls)
+// router.get('/calls/history', callCenterController.getCallHistory)
+// router.get('/calls/statistics', callCenterController.getCallStatistics)
 
 // ========== 录音管理 ==========
-router.post('/call/:callId/recording/start', callCenterController.startRecording)
-router.post('/call/:callId/recording/stop', callCenterController.stopRecording)
+// router.post('/call/:callId/recording/start', callCenterController.startRecording)
+// router.post('/call/:callId/recording/stop', callCenterController.stopRecording)
 
-router.get('/recordings', callCenterController.getRecordings)
-router.get('/recordings/:id', callCenterController.getRecording)
-router.delete('/recordings/:id', callCenterController.deleteRecording)
+// router.get('/recordings', callCenterController.getRecordings)
+// router.get('/recordings/:id', callCenterController.getRecording)
+// router.delete('/recordings/:id', callCenterController.deleteRecording)
 
-router.get('/recordings/:id/download', callCenterController.downloadRecording)
-router.get('/recordings/:id/transcript', callCenterController.getTranscript)
-router.put('/recordings/:id/transcript', callCenterController.updateTranscript)
-router.post('/recordings/:id/transcribe', callCenterController.requestTranscription)
+// router.get('/recordings/:id/download', callCenterController.downloadRecording)
+// router.get('/recordings/:id/transcript', callCenterController.getTranscript)
+// router.put('/recordings/:id/transcript', callCenterController.updateTranscript)
+// router.post('/recordings/:id/transcribe', callCenterController.requestTranscription)
 
 // ========== AI分析功能 ==========
 
@@ -664,99 +375,43 @@ router.post('/ai/batch-analyze', callCenterController.batchAnalyze)
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
  */
-router.post('/ai/synthesize', callCenterController.synthesizeVoice)
+// router.post('/ai/synthesize', callCenterController.synthesizeVoice)
 
-/**
- * @swagger
- * /api/call-center/ai/synthesize/{taskId}/status:
- *   get:
- *     summary: 获取语音合成状态
- *     description: 查询语音合成任务的执行状态和结果
- *     tags:
- *       - 呼叫中心管理
- *       - AI分析
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: taskId
- *         required: true
- *         schema:
- *           type: string
- *         description: 任务ID
- *     responses:
- *       200:
- *         description: 成功获取合成状态
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 success:
- *                   type: boolean
- *                   example: true
- *                 data:
- *                   type: object
- *                   properties:
- *                     taskId:
- *                       type: string
- *                       example: "synthesize_123456"
- *                     status:
- *                       type: string
- *                       enum: [processing, completed, failed]
- *                       example: "completed"
- *                     progress:
- *                       type: integer
- *                       example: 100
- *                     audioUrl:
- *                       type: string
- *                       example: "https://example.com/audio/voice.mp3"
- *                     duration:
- *                       type: number
- *                       example: 15.5
- *                       description: 音频时长（秒）
- *       404:
- *         $ref: '#/components/responses/NotFound'
- *       401:
- *         $ref: '#/components/responses/Unauthorized'
- *       500:
- *         $ref: '#/components/responses/InternalServerError'
- */
-router.get('/ai/synthesize/:taskId/status', callCenterController.getSynthesisStatus)
+// router.get('/ai/synthesize/:taskId/status', callCenterController.getSynthesisStatus)
 
 // TTS测试功能
-router.post('/ai/tts/test', callCenterController.testTTS)
-router.get('/ai/tts/voices', callCenterController.getTTSVoices)
+// router.post('/ai/tts/test', callCenterController.testTTS)
+// router.get('/ai/tts/voices', callCenterController.getTTSVoices)
 
 // AI智能功能（新增）
-router.post('/ai/generate-script', callCenterController.generateAIScript)  // AI话术生成
-router.post('/ai/speech-to-text', callCenterController.speechToText)       // 语音识别
-router.post('/ai/check-compliance', callCenterController.checkCompliance)  // 合规审查
+// router.post('/ai/generate-script', callCenterController.generateAIScript)  // AI话术生成
+// router.post('/ai/speech-to-text', callCenterController.speechToText)       // 语音识别
+// router.post('/ai/check-compliance', callCenterController.checkCompliance)  // 合规审查
 
 // 实时转写
-router.post('/ai/transcribe/:callId/start', callCenterController.startTranscription)
-router.post('/ai/transcribe/:callId/stop', callCenterController.stopTranscription)
-router.get('/ai/transcribe/:callId/result', callCenterController.getTranscriptionResult)
+// router.post('/ai/transcribe/:callId/start', callCenterController.startTranscription)
+// router.post('/ai/transcribe/:callId/stop', callCenterController.stopTranscription)
+// router.get('/ai/transcribe/:callId/result', callCenterController.getTranscriptionResult)
 
 // 情感分析和智能回复
-router.get('/ai/sentiment/:callId', callCenterController.analyzeSentiment)
-router.post('/ai/generate-response/:callId', callCenterController.generateResponse)
+// router.get('/ai/sentiment/:callId', callCenterController.analyzeSentiment)
+// router.post('/ai/generate-response/:callId', callCenterController.generateResponse)
 
 // ========== 分机管理 ==========
-router.get('/extensions', callCenterController.getExtensions)
-router.get('/extensions/:id', callCenterController.getExtension)
-router.put('/extensions/:id/status', callCenterController.updateExtensionStatus)
-router.post('/extensions/:id/reset', callCenterController.resetExtension)
+// router.get('/extensions', callCenterController.getExtensions)
+// router.get('/extensions/:id', callCenterController.getExtension)
+// router.put('/extensions/:id/status', callCenterController.updateExtensionStatus)
+// router.post('/extensions/:id/reset', callCenterController.resetExtension)
 
 // ========== 联系人管理 ==========
-router.get('/contacts', callCenterController.getContacts)
-router.post('/contacts', callCenterController.createContact)
-router.put('/contacts/:id', callCenterController.updateContact)
-router.delete('/contacts/:id', callCenterController.deleteContact)
-router.get('/contacts/search', callCenterController.searchContacts)
+// router.get('/contacts', callCenterController.getContacts)
+// router.post('/contacts', callCenterController.createContact)
+// router.put('/contacts/:id', callCenterController.updateContact)
+// router.delete('/contacts/:id', callCenterController.deleteContact)
+// router.get('/contacts/search', callCenterController.searchContacts)
 
 // ========== 实时状态 ==========
-router.get('/realtime/status', callCenterController.getRealTimeStatus)
+// router.get('/realtime/status', callCenterController.getRealTimeStatus)
 
 // ========== WebSocket连接支持 ==========
 // 注意：WebSocket连接通常通过升级请求处理，这里只是定义相关的HTTP API

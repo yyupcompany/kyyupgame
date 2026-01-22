@@ -47,6 +47,11 @@ export interface DialogConfig {
   dialogClass?: string
   popupClass?: string
   contentClass?: string
+
+  // 回调函数
+  onConfirm?: () => void
+  onCancel?: () => void
+  onActionSelect?: (action: DialogAction) => void
 }
 
 /**
@@ -66,6 +71,9 @@ export function useBaseDialog(initialConfig: DialogConfig = {}) {
     cancelButtonText: '取消',
     closeOnClickOverlay: true,
     loading: false,
+    onConfirm: undefined,
+    onCancel: undefined,
+    onActionSelect: undefined,
     ...initialConfig
   })
 

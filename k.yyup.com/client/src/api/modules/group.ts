@@ -217,7 +217,7 @@ export const groupApi = {
    * 删除集团
    */
   deleteGroup(id: number) {
-    return request.delete(`/groups/${id}`);
+    return request.delete(`/api/groups/${id}`);
   },
 
   /**
@@ -261,7 +261,7 @@ export const groupApi = {
    * 移除集团用户
    */
   removeGroupUser(groupId: number, userId: number) {
-    return request.delete(`/groups/${groupId}/users/${userId}`);
+    return request.delete(`/api/groups/${groupId}/users/${userId}`);
   },
 
   /**
@@ -278,7 +278,7 @@ export const groupApi = {
     startDate?: string;
     endDate?: string;
   }) {
-    return request.get(`/groups/${id}/activities`, { params });
+    return request.get(`/api/groups/${id}/activities`, { params });
   },
 
   /**
@@ -287,7 +287,7 @@ export const groupApi = {
   getGroupEnrollment(id: number, params?: {
     year?: number;
   }) {
-    return request.get(`/groups/${id}/enrollment`, { params });
+    return request.get(`/api/groups/${id}/enrollment`, { params });
   },
 
   /**

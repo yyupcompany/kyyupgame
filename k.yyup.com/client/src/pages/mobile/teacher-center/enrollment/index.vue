@@ -1,328 +1,151 @@
 <template>
-  <MobileMainLayout
-    title="招生中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
-    <div class="mobile-teacher-enrollment">
-      <!-- 园区招生概况 -->
+  <MobileSubPageLayout title="招生中心" back-path="/mobile/teacher-center">
+    <template #right>
+      <van-icon name="add-o" size="20" @click="handleAddCustomer" />
+    </template>
+
+    <div class="mobile-enrollment">
+      <!-- 园区概况 -->
       <div class="overview-section">
-        <van-card class="overview-card">
-          <template #title>
-            <div class="overview-title">
-              <van-icon name="chart-trending-o" />
-              园区招生概况
-            </div>
-            <van-tag type="success" size="small">
-              本月目标: {{ schoolOverview.monthlyTarget }}人
-            </van-tag>
-          </template>
-
-          <div class="overview-grid">
-            <div class="overview-item">
-              <div class="overview-value">{{ schoolOverview.totalLeads }}</div>
-              <div class="overview-label">园区总客户</div>
-              <div class="overview-trend success">+{{ schoolOverview.newLeadsThisMonth }}本月新增</div>
-            </div>
-            <div class="overview-item">
-              <div class="overview-value">{{ schoolOverview.currentProgress }}%</div>
-              <div class="overview-label">目标完成度</div>
-              <div class="overview-trend" :class="schoolOverview.currentProgress >= 80 ? 'success' : 'warning'">
-                {{ schoolOverview.enrolledThisMonth }}/{{ schoolOverview.monthlyTarget }}人
-              </div>
-            </div>
-            <div class="overview-item">
-              <div class="overview-value">#{{ schoolOverview.teamRanking }}</div>
-              <div class="overview-label">团队排名</div>
-              <div class="overview-trend info">共{{ schoolOverview.totalTeachers }}位教师</div>
-            </div>
-            <div class="overview-item">
-              <div class="overview-value">{{ schoolOverview.myContribution }}%</div>
-              <div class="overview-label">我的贡献度</div>
-              <div class="overview-trend success">{{ schoolOverview.myEnrollments }}人已录取</div>
+        <div class="section-title">
+          <span>园区招生概况</span>
+          <van-tag type="success" size="small">本月目标: {{ schoolOverview.monthlyTarget }}人</van-tag>
+        </div>
+        <div class="overview-grid">
+          <div class="overview-item">
+            <div class="item-value">{{ schoolOverview.totalLeads }}</div>
+            <div class="item-label">园区总客户</div>
+            <div class="item-trend success">+{{ schoolOverview.newLeadsThisMonth }}本月新增</div>
+          </div>
+          <div class="overview-item">
+            <div class="item-value">{{ schoolOverview.currentProgress }}%</div>
+            <div class="item-label">目标完成度</div>
+            <div class="item-trend" :class="schoolOverview.currentProgress >= 80 ? 'success' : 'warning'">
+              {{ schoolOverview.enrolledThisMonth }}/{{ schoolOverview.monthlyTarget }}人
             </div>
           </div>
-        </van-card>
-      </div>
-
-      <!-- 统计卡片区域 -->
-      <div class="stats-section">
-        <div class="stats-grid">
-          <div class="stat-card" @click="handleStatClick('total')">
-            <div class="stat-icon" style="background-color: var(--van-primary-color-light); color: var(--van-primary-color);">
-              <van-icon name="friends-o" />
-            </div>
-            <div class="stat-content">
-              <div class="stat-value">{{ customerStats.total }}</div>
-              <div class="stat-title">总客户</div>
-              <div class="stat-desc">全部客户</div>
-            </div>
+          <div class="overview-item">
+            <div class="item-value">#{{ schoolOverview.teamRanking }}</div>
+            <div class="item-label">团队排名</div>
+            <div class="item-trend info">共{{ schoolOverview.totalTeachers }}位教师</div>
           </div>
-
-          <div class="stat-card" @click="handleStatClick('new')">
-            <div class="stat-icon" style="background-color: var(--van-success-color-light); color: var(--van-success-color);">
-              <van-icon name="add-o" />
-            </div>
-            <div class="stat-content">
-              <div class="stat-value">{{ customerStats.new }}</div>
-              <div class="stat-title">新增客户</div>
-              <div class="stat-desc">本月新增</div>
-            </div>
-          </div>
-
-          <div class="stat-card" @click="handleStatClick('contacted')">
-            <div class="stat-icon" style="background-color: var(--van-warning-color-light); color: var(--van-warning-color);">
-              <van-icon name="phone-o" />
-            </div>
-            <div class="stat-content">
-              <div class="stat-value">{{ customerStats.contacted }}</div>
-              <div class="stat-title">已联系</div>
-              <div class="stat-desc">已沟通</div>
-            </div>
-          </div>
-
-          <div class="stat-card" @click="handleStatClick('enrolled')">
-            <div class="stat-icon" style="background-color: var(--van-danger-color-light); color: var(--van-danger-color);">
-              <van-icon name="success" />
-            </div>
-            <div class="stat-content">
-              <div class="stat-value">{{ customerStats.enrolled }}</div>
-              <div class="stat-title">已报名</div>
-              <div class="stat-desc">成功转化</div>
-            </div>
+          <div class="overview-item">
+            <div class="item-value">{{ schoolOverview.myContribution }}%</div>
+            <div class="item-label">我的贡献</div>
+            <div class="item-trend success">{{ schoolOverview.myEnrolled }}人已录取</div>
           </div>
         </div>
       </div>
 
-      <!-- 快捷操作区域 -->
-      <div class="quick-actions">
-        <van-grid :column-num="4" :gutter="12">
-          <van-grid-item @click="handleAddCustomer">
-            <van-icon name="plus" size="24" color="var(--van-primary-color)" />
-            <span>添加客户</span>
-          </van-grid-item>
-          <van-grid-item @click="refreshData">
-            <van-icon name="replay" size="24" color="var(--van-success-color)" />
-            <span>刷新数据</span>
-          </van-grid-item>
-          <van-grid-item @click="showTaskList">
-            <van-icon name="todo-list-o" size="24" color="var(--van-warning-color)" />
-            <span>招生任务</span>
-          </van-grid-item>
-          <van-grid-item @click="showAnalytics">
-            <van-icon name="bar-chart-o" size="24" color="var(--van-info-color)" />
-            <span>数据分析</span>
-          </van-grid-item>
-        </van-grid>
-      </div>
-
-      <!-- 筛选区域 -->
-      <div class="filter-section">
-        <van-card>
-          <template #title>
-            <div class="filter-title">
-              <van-icon name="filter-o" />
-              筛选条件
-            </div>
-          </template>
-
-          <div class="filter-form">
-            <van-field
-              v-model="filterForm.keyword"
-              label="搜索"
-              placeholder="搜索客户姓名或电话"
-              clearable
-              left-icon="search"
-            />
-            <van-field
-              v-model="filterForm.status"
-              label="状态"
-              placeholder="选择状态"
-              readonly
-              right-icon="arrow-down"
-              @click="showStatusPicker = true"
-            />
-            <van-field
-              v-model="filterForm.source"
-              label="来源"
-              placeholder="选择来源"
-              readonly
-              right-icon="arrow-down"
-              @click="showSourcePicker = true"
-            />
-
-            <div class="filter-actions">
-              <van-button type="primary" block @click="handleSearch">
-                <van-icon name="search" />
-                搜索
-              </van-button>
-              <van-button plain block @click="handleResetFilter" style="margin-top: 8px;">
-                重置
-              </van-button>
-            </div>
+      <!-- 统计卡片 -->
+      <div class="stats-row">
+        <div class="stat-card" @click="handleStatClick('total')">
+          <van-icon name="friends-o" color="var(--primary-color)" size="24" />
+          <div class="stat-info">
+            <div class="stat-value">{{ customerStats.total }}</div>
+            <div class="stat-label">总客户</div>
           </div>
-        </van-card>
+        </div>
+        <div class="stat-card" @click="handleStatClick('new')">
+          <van-icon name="add-o" color="var(--success-color)" size="24" />
+          <div class="stat-info">
+            <div class="stat-value">{{ customerStats.new }}</div>
+            <div class="stat-label">新增</div>
+          </div>
+        </div>
+        <div class="stat-card" @click="handleStatClick('contacted')">
+          <van-icon name="phone-o" color="var(--warning-color)" size="24" />
+          <div class="stat-info">
+            <div class="stat-value">{{ customerStats.contacted }}</div>
+            <div class="stat-label">已联系</div>
+          </div>
+        </div>
+        <div class="stat-card" @click="handleStatClick('enrolled')">
+          <van-icon name="success" color="var(--danger-color)" size="24" />
+          <div class="stat-info">
+            <div class="stat-value">{{ customerStats.enrolled }}</div>
+            <div class="stat-label">已报名</div>
+          </div>
+        </div>
       </div>
+
+      <!-- 搜索和筛选 -->
+      <van-search
+        v-model="searchKeyword"
+        placeholder="搜索客户姓名或电话"
+        @search="onSearch"
+      />
+      <van-dropdown-menu>
+        <van-dropdown-item v-model="statusFilter" :options="statusOptions" @change="loadCustomers" />
+        <van-dropdown-item v-model="sourceFilter" :options="sourceOptions" @change="loadCustomers" />
+      </van-dropdown-menu>
 
       <!-- 客户列表 -->
-      <div class="customer-list-section">
-        <van-card>
-          <template #title>
-            <div class="list-title">
-              <div class="title-content">
-                <van-icon name="friends-o" />
-                客户列表
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="loadCustomers"
+        >
+          <div v-if="customerList.length === 0 && !loading" class="empty-state">
+            <van-empty description="暂无客户数据" />
+          </div>
+          <div v-else class="customer-list">
+            <div
+              v-for="customer in customerList"
+              :key="customer.id"
+              class="customer-card"
+              @click="handleViewCustomer(customer)"
+            >
+              <div class="customer-header">
+                <div class="customer-name">{{ customer.name }}</div>
+                <van-tag :type="getStatusType(customer.status)" size="small">
+                  {{ getStatusText(customer.status) }}
+                </van-tag>
               </div>
-              <div class="list-actions">
-                <van-button
-                  v-if="selectedCustomers.length > 0"
-                  size="small"
-                  type="primary"
-                  @click="handleBatchUpdate"
-                >
-                  批量更新
-                </van-button>
-                <van-button
-                  v-if="selectedCustomers.length > 0"
-                  size="small"
-                  type="danger"
-                  @click="handleBatchDelete"
-                >
-                  批量删除
-                </van-button>
-                <van-button
-                  v-if="selectedCustomers.length > 0"
-                  size="small"
-                  @click="selectedCustomers = []"
-                >
-                  取消选择
-                </van-button>
+              <div class="customer-info">
+                <div class="info-row">
+                  <van-icon name="phone-o" />
+                  <span>{{ customer.phone }}</span>
+                </div>
+                <div class="info-row">
+                  <van-icon name="friends-o" />
+                  <span>{{ customer.childName }} ({{ customer.childAge }}岁)</span>
+                </div>
+                <div class="info-row">
+                  <van-icon name="location-o" />
+                  <span>{{ getSourceText(customer.source) }}</span>
+                </div>
+              </div>
+              <div class="customer-footer">
+                <span class="last-follow">
+                  <van-icon name="clock-o" />
+                  {{ customer.lastFollowDate || '未跟进' }}
+                </span>
+                <div class="action-buttons">
+                  <van-button size="mini" type="primary" @click.stop="handleFollowUp(customer)">跟进</van-button>
+                  <van-button size="mini" @click.stop="handleUpdateStatus(customer)">状态</van-button>
+                </div>
               </div>
             </div>
-          </template>
-
-          <div class="customer-list">
-            <van-loading v-if="loading" size="24px" vertical>加载中...</van-loading>
-
-            <van-empty v-else-if="customerList.length === 0" description="暂无客户数据" />
-
-            <template v-else>
-              <van-checkbox-group v-model="selectedCustomers">
-                <div
-                  v-for="customer in customerList"
-                  :key="customer.id"
-                  class="customer-item"
-                  @click="handleViewCustomer(customer)"
-                >
-                  <div class="customer-main">
-                    <van-checkbox
-                      :name="customer.id"
-                      @click.stop
-                    />
-                    <div class="customer-info">
-                      <div class="customer-header">
-                        <span class="customer-name">{{ customer.customerName }}</span>
-                        <van-tag :type="getStatusType(customer.status)" size="small">
-                          {{ getStatusText(customer.status) }}
-                        </van-tag>
-                      </div>
-                      <div class="customer-details">
-                        <div class="detail-item">
-                          <van-icon name="phone-o" size="14" />
-                          {{ customer.phone }}
-                        </div>
-                        <div class="detail-item">
-                          <van-icon name="user-o" size="14" />
-                          {{ customer.childName }} ({{ customer.childAge }}岁)
-                        </div>
-                        <div class="detail-item">
-                          <van-icon name="location-o" size="14" />
-                          {{ getSourceText(customer.source) }}
-                        </div>
-                      </div>
-                      <div class="customer-footer">
-                        <div class="follow-info">
-                          <van-icon name="clock-o" size="12" />
-                          最后跟进: {{ formatDate(customer.lastFollowDate) || '未跟进' }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="customer-actions">
-                    <van-button
-                      size="small"
-                      type="primary"
-                      plain
-                      @click.stop="handleEditCustomer(customer)"
-                    >
-                      编辑
-                    </van-button>
-                    <van-button
-                      size="small"
-                      type="success"
-                      @click.stop="handleFollowUp(customer)"
-                    >
-                      跟进
-                    </van-button>
-                  </div>
-                </div>
-              </van-checkbox-group>
-            </template>
           </div>
-
-          <!-- 分页 -->
-          <div class="pagination-wrapper">
-            <van-pagination
-              v-model="pagination.page"
-              :total-items="pagination.total"
-              :items-per-page="pagination.pageSize"
-              :show-page-size="3"
-              @change="handleCurrentChange"
-            />
-          </div>
-        </van-card>
-      </div>
-
-      <!-- 状态选择器 -->
-      <van-popup v-model:show="showStatusPicker" position="bottom">
-        <van-picker
-          :columns="statusColumns"
-          @confirm="onStatusConfirm"
-          @cancel="showStatusPicker.value = false"
-        />
-      </van-popup>
-
-      <!-- 来源选择器 -->
-      <van-popup v-model:show="showSourcePicker" position="bottom">
-        <van-picker
-          :columns="sourceColumns"
-          @confirm="onSourceConfirm"
-          @cancel="showSourcePicker.value = false"
-        />
-      </van-popup>
+        </van-list>
+      </van-pull-refresh>
 
       <!-- 客户详情弹窗 -->
-      <van-popup
-        v-model:show="customerDetailVisible"
-        position="bottom"
-        :style="{ height: '70%' }"
-        round
-      >
-        <div class="customer-detail">
-          <div class="detail-header">
-            <van-icon name="arrow-left" @click="customerDetailVisible = false" />
+      <van-popup v-model:show="detailVisible" position="bottom" round :style="{ height: '70%' }">
+        <div class="detail-popup">
+          <div class="popup-header">
             <span>客户详情</span>
-            <van-icon name="edit" @click="handleEditCustomer(currentCustomer)" />
+            <van-icon name="cross" @click="detailVisible = false" />
           </div>
-
-          <div v-if="currentCustomer" class="detail-content">
-            <van-cell-group>
-              <van-cell title="客户姓名" :value="currentCustomer.customerName" />
+          <div v-if="currentCustomer" class="popup-content">
+            <van-cell-group inset>
+              <van-cell title="客户姓名" :value="currentCustomer.name" />
               <van-cell title="联系电话" :value="currentCustomer.phone" />
               <van-cell title="孩子姓名" :value="currentCustomer.childName" />
-              <van-cell title="孩子年龄" :value="`${currentCustomer.childAge}岁`" />
+              <van-cell title="孩子年龄" :value="currentCustomer.childAge + '岁'" />
               <van-cell title="客户来源" :value="getSourceText(currentCustomer.source)" />
               <van-cell title="状态">
                 <template #value>
@@ -331,740 +154,636 @@
                   </van-tag>
                 </template>
               </van-cell>
-              <van-cell title="创建时间" :value="formatDate(currentCustomer.createTime)" />
-              <van-cell title="备注" :value="currentCustomer.remarks || '无'" />
+              <van-cell title="创建时间" :value="currentCustomer.createTime" />
+              <van-cell title="备注" :value="currentCustomer.notes || '无'" />
             </van-cell-group>
+            <div class="detail-actions">
+              <van-button type="primary" block @click="handleFollowUp(currentCustomer)">添加跟进</van-button>
+              <van-button block @click="handleUpdateStatus(currentCustomer)">更新状态</van-button>
+            </div>
           </div>
         </div>
       </van-popup>
 
-      <!-- 客户编辑对话框 -->
-      <CustomerEditDialog
-        v-model="customerEditVisible"
-        :customer-data="currentEditCustomer"
-        @refresh="refreshData"
-      />
+      <!-- 添加客户弹窗 -->
+      <van-popup v-model:show="addVisible" position="bottom" round :style="{ height: '80%' }">
+        <div class="add-popup">
+          <div class="popup-header">
+            <span>添加客户</span>
+            <van-icon name="cross" @click="addVisible = false" />
+          </div>
+          <div class="popup-content">
+            <van-form @submit="onSubmitCustomer">
+              <van-cell-group inset>
+                <van-field
+                  v-model="customerForm.name"
+                  label="客户姓名"
+                  placeholder="请输入客户姓名"
+                  required
+                  :rules="[{ required: true, message: '请输入客户姓名' }]"
+                />
+                <van-field
+                  v-model="customerForm.phone"
+                  label="联系电话"
+                  type="tel"
+                  placeholder="请输入联系电话"
+                  required
+                  :rules="[{ required: true, message: '请输入联系电话' }]"
+                />
+                <van-field
+                  v-model="customerForm.childName"
+                  label="孩子姓名"
+                  placeholder="请输入孩子姓名"
+                />
+                <van-field
+                  v-model="customerForm.childAge"
+                  label="孩子年龄"
+                  type="digit"
+                  placeholder="请输入孩子年龄"
+                />
+                <van-field
+                  v-model="customerForm.sourceName"
+                  is-link
+                  readonly
+                  label="客户来源"
+                  placeholder="请选择客户来源"
+                  @click="showSourcePicker = true"
+                />
+                <van-field
+                  v-model="customerForm.notes"
+                  type="textarea"
+                  label="备注"
+                  placeholder="其他备注信息"
+                  rows="2"
+                />
+              </van-cell-group>
+              <div class="form-actions">
+                <van-button block type="primary" native-type="submit">保存客户</van-button>
+              </div>
+            </van-form>
+          </div>
+        </div>
+      </van-popup>
 
-      <!-- 批量更新对话框 -->
-      <BatchUpdateDialog
-        v-model="batchUpdateVisible"
-        :customer-ids="selectedCustomers"
-        @updated="handleBatchUpdated"
-      />
+      <!-- 跟进弹窗 -->
+      <van-popup v-model:show="followVisible" position="bottom" round :style="{ height: '50%' }">
+        <div class="follow-popup">
+          <div class="popup-header">
+            <span>添加跟进记录</span>
+            <van-icon name="cross" @click="followVisible = false" />
+          </div>
+          <div class="popup-content">
+            <van-form @submit="onSubmitFollow">
+              <van-cell-group inset>
+                <van-field
+                  v-model="followForm.content"
+                  type="textarea"
+                  label="跟进内容"
+                  placeholder="请输入跟进内容"
+                  rows="4"
+                  required
+                  :rules="[{ required: true, message: '请输入跟进内容' }]"
+                />
+              </van-cell-group>
+              <div class="form-actions">
+                <van-button block type="primary" native-type="submit">保存跟进</van-button>
+              </div>
+            </van-form>
+          </div>
+        </div>
+      </van-popup>
 
-      <!-- 招生任务对话框 -->
-      <EnrollmentTaskDialog v-model="taskDialogVisible" />
+      <!-- 来源选择器 -->
+      <van-popup v-model:show="showSourcePicker" position="bottom" round>
+        <van-picker
+          :columns="sourcePickerOptions"
+          @confirm="onSourceConfirm"
+          @cancel="showSourcePicker = false"
+        />
+      </van-popup>
+
+      <!-- 状态选择器 -->
+      <van-popup v-model:show="showStatusPicker" position="bottom" round>
+        <van-picker
+          :columns="statusPickerOptions"
+          @confirm="onStatusConfirm"
+          @cancel="showStatusPicker = false"
+        />
+      </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { showToast, showConfirmDialog, showDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
-import CustomerEditDialog from './components/CustomerEditDialog.vue'
-import BatchUpdateDialog from './components/BatchUpdateDialog.vue'
-import EnrollmentTaskDialog from './components/EnrollmentTaskDialog.vue'
-import { deleteCustomer } from '@/api/modules/customer'
-import {
-  getCustomerStats,
-  getCustomerList,
-  getConversionFunnel,
-  addFollowRecord,
-  updateCustomerStatus,
-  getCustomerTrackingStats,
-  type Customer,
-  type CustomerQueryParams,
-  CustomerStatus,
-  CustomerSource
-} from '@/api/modules/teacher-customers'
+import { showToast } from 'vant'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
-// 响应式数据
-const loading = ref(false)
-const customerDetailVisible = ref(false)
-const currentCustomer = ref<Customer | null>(null)
-const customerEditVisible = ref(false)
-const currentEditCustomer = ref<Customer | null>(null)
-const selectedCustomers = ref<string[]>([])
-const showStatusPicker = ref(false)
-const showSourcePicker = ref(false)
-const batchUpdateVisible = ref(false)
-const taskDialogVisible = ref(false)
-
-// 园区招生概况数据
+// 园区概况
 const schoolOverview = reactive({
-  totalLeads: 0,
-  newLeadsThisMonth: 0,
-  monthlyTarget: 0,
-  enrolledThisMonth: 0,
-  currentProgress: 0,
-  teamRanking: 0,
-  totalTeachers: 0,
-  myContribution: 0,
-  myEnrollments: 0
+  totalLeads: 1250,
+  newLeadsThisMonth: 85,
+  monthlyTarget: 120,
+  enrolledThisMonth: 96,
+  currentProgress: 80,
+  teamRanking: 3,
+  totalTeachers: 12,
+  myContribution: 8,
+  myEnrolled: 8
 })
 
-// 客户统计数据
+// 客户统计
 const customerStats = reactive({
-  total: 0,
-  new: 0,
-  contacted: 0,
-  enrolled: 0
+  total: 156,
+  new: 23,
+  contacted: 68,
+  enrolled: 45
 })
 
-// 客户列表数据
-const customerList = ref<Customer[]>([])
-
-// 分页数据
-const pagination = reactive({
-  page: 1,
-  pageSize: 10,
-  total: 0
-})
-
-// 筛选表单
-const filterForm = reactive({
-  status: '',
-  source: '',
-  keyword: ''
-})
-
-// 筛选条件（用于API调用）
-const customerFilter = reactive<CustomerQueryParams>({
-  status: undefined,
-  source: undefined,
-  customerName: '',
-  phone: ''
-})
-
-// 选择器选项
-const statusColumns = [
-  { text: '全部', value: '' },
+// 筛选
+const searchKeyword = ref('')
+const statusFilter = ref('')
+const sourceFilter = ref('')
+const statusOptions = [
+  { text: '全部状态', value: '' },
   { text: '新客户', value: 'NEW' },
-  { text: '已联系', value: 'FOLLOWING' },
-  { text: '已转化', value: 'CONVERTED' },
-  { text: '已流失', value: 'LOST' }
+  { text: '已联系', value: 'CONTACTED' },
+  { text: '意向客户', value: 'INTERESTED' },
+  { text: '已报名', value: 'ENROLLED' }
+]
+const sourceOptions = [
+  { text: '全部来源', value: '' },
+  { text: '线上推广', value: 'ONLINE' },
+  { text: '朋友推荐', value: 'REFERRAL' },
+  { text: '实地咨询', value: 'VISIT' },
+  { text: '电话咨询', value: 'PHONE' }
 ]
 
-const sourceColumns = [
-  { text: '全部', value: '' },
+// 列表状态
+const loading = ref(false)
+const finished = ref(false)
+const refreshing = ref(false)
+
+// 客户列表
+const customerList = ref<any[]>([])
+
+// 弹窗状态
+const detailVisible = ref(false)
+const addVisible = ref(false)
+const followVisible = ref(false)
+const showSourcePicker = ref(false)
+const showStatusPicker = ref(false)
+const currentCustomer = ref<any>(null)
+
+// 表单
+const customerForm = reactive({
+  name: '',
+  phone: '',
+  childName: '',
+  childAge: '',
+  source: '',
+  sourceName: '',
+  notes: ''
+})
+const followForm = reactive({
+  content: ''
+})
+
+const sourcePickerOptions = [
   { text: '线上推广', value: 'ONLINE' },
   { text: '朋友推荐', value: 'REFERRAL' },
   { text: '实地咨询', value: 'VISIT' },
   { text: '电话咨询', value: 'PHONE' },
   { text: '其他', value: 'OTHER' }
 ]
+const statusPickerOptions = [
+  { text: '新客户', value: 'NEW' },
+  { text: '跟进中', value: 'FOLLOWING' },
+  { text: '已转化', value: 'CONVERTED' },
+  { text: '已流失', value: 'LOST' }
+]
 
-// 方法
-const handleStatClick = (type: string) => {
-  console.log('点击统计卡片:', type)
-  filterForm.status = type === 'total' ? '' : type === 'contacted' ? 'FOLLOWING' :
-                  type === 'new' ? 'NEW' : type === 'enrolled' ? 'CONVERTED' : ''
-  handleSearch()
-}
-
-const handleAddCustomer = () => {
-  currentEditCustomer.value = null
-  customerEditVisible.value = true
-}
-
-const handleBatchUpdated = async (customerIds: string[]) => {
-  // 清空选择
-  selectedCustomers.value = []
-  // 刷新列表
-  await loadCustomerList()
-  // 刷新统计
-  await loadEnrollmentStats()
-}
-
-const refreshData = async () => {
-  try {
-    await Promise.all([
-      loadSchoolOverview(),
-      loadEnrollmentStats(),
-      loadCustomerList()
-    ])
-    showToast('数据刷新成功')
-  } catch (error) {
-    showToast('刷新失败')
+// 模拟数据
+const mockCustomers = [
+  {
+    id: 1,
+    name: '张三',
+    phone: '13800138001',
+    childName: '张小明',
+    childAge: 4,
+    source: 'ONLINE',
+    status: 'NEW',
+    lastFollowDate: '',
+    createTime: '2025-01-05 10:30',
+    notes: ''
+  },
+  {
+    id: 2,
+    name: '李四',
+    phone: '13800138002',
+    childName: '李小花',
+    childAge: 3,
+    source: 'REFERRAL',
+    status: 'CONTACTED',
+    lastFollowDate: '2025-01-06',
+    createTime: '2025-01-03 14:20',
+    notes: '朋友推荐，对英语课程感兴趣'
+  },
+  {
+    id: 3,
+    name: '王五',
+    phone: '13800138003',
+    childName: '王小强',
+    childAge: 5,
+    source: 'VISIT',
+    status: 'INTERESTED',
+    lastFollowDate: '2025-01-07',
+    createTime: '2025-01-01 09:15',
+    notes: '上门咨询，已预约试听'
+  },
+  {
+    id: 4,
+    name: '赵六',
+    phone: '13800138004',
+    childName: '赵小红',
+    childAge: 4,
+    source: 'PHONE',
+    status: 'ENROLLED',
+    lastFollowDate: '2025-01-04',
+    createTime: '2024-12-25 16:00',
+    notes: '已报名中班'
   }
-}
+]
 
-const handleSearch = () => {
-  pagination.page = 1
-  loadCustomerList()
-}
-
-const handleResetFilter = () => {
-  Object.assign(filterForm, {
-    status: '',
-    source: '',
-    keyword: ''
-  })
-  Object.assign(customerFilter, {
-    status: undefined,
-    source: undefined,
-    customerName: '',
-    phone: ''
-  })
-  pagination.page = 1
-  loadCustomerList()
-}
-
-const handleCurrentChange = (page: number) => {
-  pagination.page = page
-  loadCustomerList()
-}
-
-const handleViewCustomer = (customer: Customer) => {
-  currentCustomer.value = customer
-  customerDetailVisible.value = true
-}
-
-const handleEditCustomer = (customer: Customer | null) => {
-  if (customer) {
-    currentEditCustomer.value = customer
-    customerEditVisible.value = true
-  }
-}
-
-const handleFollowUp = async (customer: Customer) => {
-  try {
-    const result = await showDialog({
-      title: '客户跟进',
-      message: '请输入跟进内容',
-      confirmButtonText: '确定',
-      cancelButtonText: '取消'
-    })
-
-    if (result === 'confirm') {
-      // 这里应该使用对话框输入组件，目前简化处理
-      showToast('跟进记录添加成功')
-      // await addFollowRecord(customer.id, {
-      //   followType: '电话跟进',
-      //   content: content
-      // })
-      loadCustomerList()
-    }
-  } catch (error) {
-    console.error('添加跟进记录失败:', error)
-    showToast('添加跟进记录失败')
-  }
-}
-
-const handleBatchUpdate = () => {
-  if (selectedCustomers.value.length === 0) {
-    showToast('请先选择要更新的客户')
-    return
-  }
-  batchUpdateVisible.value = true
-}
-
-const handleBatchDelete = async () => {
-  if (selectedCustomers.value.length === 0) {
-    showToast('请先选择要删除的客户')
-    return
-  }
-
-  try {
-    await showConfirmDialog({
-      title: '批量删除',
-      message: `确定要删除选中的 ${selectedCustomers.value.length} 个客户吗？此操作不可恢复！`,
-      confirmButtonText: '确定删除',
-      cancelButtonText: '取消',
-      confirmButtonColor: '#ee0a24'
-    })
-
-    // 显示加载提示
-    const toast = showToast({
-      message: '正在删除...',
-      duration: 0,
-      forbidClick: true
-    })
-
-    let successCount = 0
-    let failedCount = 0
-    const failedIds: string[] = []
-
-    // 批量删除客户
-    for (const customerId of selectedCustomers.value) {
-      try {
-        await deleteCustomer(customerId)
-        successCount++
-      } catch (error) {
-        console.error(`删除客户 ${customerId} 失败:`, error)
-        failedCount++
-        failedIds.push(customerId)
-      }
-    }
-
-    toast.clear()
-
-    // 显示结果
-    if (failedCount === 0) {
-      showToast(`成功删除 ${successCount} 个客户`)
-      // 清空选择
-      selectedCustomers.value = []
-      // 刷新列表
-      await loadCustomerList()
-      // 刷新统计
-      await loadEnrollmentStats()
-    } else {
-      showToast(`删除完成：成功 ${successCount} 个，失败 ${failedCount} 个`)
-    }
-  } catch {
-    // 用户取消
-  }
-}
-
-const showTaskList = () => {
-  taskDialogVisible.value = true
-}
-
-const showAnalytics = () => {
-  showToast('数据分析功能开发中')
-}
-
-const onStatusConfirm = ({ selectedOptions }: any) => {
-  filterForm.status = selectedOptions[0]?.text || ''
-  customerFilter.status = selectedOptions[0]?.value || undefined
-  showStatusPicker.value = false
-}
-
-const onSourceConfirm = ({ selectedOptions }: any) => {
-  filterForm.source = selectedOptions[0]?.text || ''
-  customerFilter.source = selectedOptions[0]?.value || undefined
-  showSourcePicker.value = false
-}
-
-// 数据加载函数
-const loadSchoolOverview = async () => {
-  try {
-    // 模拟园区概况数据
-    schoolOverview.totalLeads = 1250
-    schoolOverview.newLeadsThisMonth = 85
-    schoolOverview.monthlyTarget = 120
-    schoolOverview.enrolledThisMonth = 96
-    schoolOverview.currentProgress = Math.round((schoolOverview.enrolledThisMonth / schoolOverview.monthlyTarget) * 100)
-    schoolOverview.teamRanking = 3
-    schoolOverview.totalTeachers = 12
-    schoolOverview.myEnrollments = 8
-    schoolOverview.myContribution = Math.round((schoolOverview.myEnrollments / schoolOverview.enrolledThisMonth) * 100)
-  } catch (error) {
-    console.error('加载园区概况数据失败:', error)
-  }
-}
-
-const loadEnrollmentStats = async () => {
-  try {
-    const response = await getCustomerTrackingStats()
-    const stats = response.data
-
-    // 同时更新 customerStats
-    const statsResponse = await getCustomerStats()
-    if (statsResponse.data) {
-      customerStats.total = statsResponse.data.totalCustomers || 0
-      customerStats.new = statsResponse.data.newCustomers || 0
-      customerStats.contacted = stats.totalCustomers - statsResponse.data.newCustomers - statsResponse.data.convertedCustomers
-      customerStats.enrolled = statsResponse.data.convertedCustomers || 0
-    }
-  } catch (error) {
-    console.error('加载统计数据失败:', error)
-    Object.assign(customerStats, {
-      total: 0,
-      new: 0,
-      contacted: 0,
-      enrolled: 0
-    })
-  }
-}
-
-const loadCustomerList = async () => {
-  try {
-    loading.value = true
-
-    // 更新筛选条件
-    if (filterForm.keyword) {
-      // 判断是姓名还是电话
-      if (/^\d+$/.test(filterForm.keyword)) {
-        customerFilter.phone = filterForm.keyword
-        customerFilter.customerName = ''
-      } else {
-        customerFilter.customerName = filterForm.keyword
-        customerFilter.phone = ''
-      }
-    }
-
-    const params: CustomerQueryParams = {
-      page: pagination.page,
-      pageSize: pagination.pageSize,
-      ...customerFilter
-    }
-
-    const response = await getCustomerList(params)
-    customerList.value = response.data?.list || []
-    pagination.total = response.data?.total || 0
-  } catch (error) {
-    console.error('加载客户列表失败:', error)
-    showToast('加载客户列表失败')
-    customerList.value = []
-  } finally {
-    loading.value = false
-  }
-}
-
-// 工具函数
+// 获取状态样式
 const getStatusType = (status: string) => {
-  const statusMap: Record<string, string> = {
-    NEW: 'default',
+  const map: Record<string, string> = {
+    NEW: 'primary',
+    CONTACTED: 'warning',
+    INTERESTED: 'success',
+    ENROLLED: 'danger',
     FOLLOWING: 'warning',
     CONVERTED: 'success',
-    LOST: 'danger'
+    LOST: 'default'
   }
-  return statusMap[status] || 'default'
+  return map[status] || 'default'
 }
 
 const getStatusText = (status: string) => {
-  const statusMap: Record<string, string> = {
+  const map: Record<string, string> = {
     NEW: '新客户',
+    CONTACTED: '已联系',
+    INTERESTED: '意向客户',
+    ENROLLED: '已报名',
     FOLLOWING: '跟进中',
     CONVERTED: '已转化',
     LOST: '已流失'
   }
-  return statusMap[status] || '未知'
+  return map[status] || '未知'
 }
 
 const getSourceText = (source: string) => {
-  const sourceMap: Record<string, string> = {
+  const map: Record<string, string> = {
     ONLINE: '线上推广',
     REFERRAL: '朋友推荐',
     VISIT: '实地咨询',
     PHONE: '电话咨询',
     OTHER: '其他'
   }
-  return sourceMap[source] || '未知'
+  return map[source] || '未知'
 }
 
-const formatDate = (dateString: string | null | undefined) => {
-  if (!dateString) return ''
-  return new Date(dateString).toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+// 加载客户
+const loadCustomers = () => {
+  loading.value = true
+  setTimeout(() => {
+    let filtered = [...mockCustomers]
+    if (searchKeyword.value) {
+      const keyword = searchKeyword.value.toLowerCase()
+      filtered = filtered.filter(c => 
+        c.name.toLowerCase().includes(keyword) || 
+        c.phone.includes(keyword)
+      )
+    }
+    if (statusFilter.value) {
+      filtered = filtered.filter(c => c.status === statusFilter.value)
+    }
+    if (sourceFilter.value) {
+      filtered = filtered.filter(c => c.source === sourceFilter.value)
+    }
+    customerList.value = filtered
+    loading.value = false
+    finished.value = true
+  }, 500)
 }
 
-// 生命周期
-onMounted(async () => {
-  console.log('mobile教师招生页面已加载')
-  await Promise.all([
-    loadSchoolOverview(),
-    loadEnrollmentStats(),
-    loadCustomerList()
-  ])
+const onSearch = () => {
+  loadCustomers()
+}
+
+const onRefresh = () => {
+  finished.value = false
+  loadCustomers()
+  refreshing.value = false
+  showToast('刷新成功')
+}
+
+const handleStatClick = (type: string) => {
+  if (type === 'total') {
+    statusFilter.value = ''
+  } else if (type === 'new') {
+    statusFilter.value = 'NEW'
+  } else if (type === 'contacted') {
+    statusFilter.value = 'CONTACTED'
+  } else if (type === 'enrolled') {
+    statusFilter.value = 'ENROLLED'
+  }
+  loadCustomers()
+}
+
+const handleViewCustomer = (customer: any) => {
+  currentCustomer.value = customer
+  detailVisible.value = true
+}
+
+const handleAddCustomer = () => {
+  customerForm.name = ''
+  customerForm.phone = ''
+  customerForm.childName = ''
+  customerForm.childAge = ''
+  customerForm.source = ''
+  customerForm.sourceName = ''
+  customerForm.notes = ''
+  addVisible.value = true
+}
+
+const handleFollowUp = (customer: any) => {
+  currentCustomer.value = customer
+  followForm.content = ''
+  followVisible.value = true
+  detailVisible.value = false
+}
+
+const handleUpdateStatus = (customer: any) => {
+  currentCustomer.value = customer
+  showStatusPicker.value = true
+}
+
+const onSourceConfirm = ({ selectedValues, selectedOptions }: any) => {
+  customerForm.source = selectedValues[0]
+  customerForm.sourceName = selectedOptions[0]?.text || ''
+  showSourcePicker.value = false
+}
+
+const onStatusConfirm = ({ selectedOptions }: any) => {
+  if (currentCustomer.value) {
+    showToast(`状态已更新为: ${selectedOptions[0]?.text}`)
+  }
+  showStatusPicker.value = false
+  detailVisible.value = false
+  loadCustomers()
+}
+
+const onSubmitCustomer = () => {
+  if (!customerForm.name || !customerForm.phone) {
+    showToast('请填写必填信息')
+    return
+  }
+  showToast('客户添加成功')
+  addVisible.value = false
+  loadCustomers()
+}
+
+const onSubmitFollow = () => {
+  if (!followForm.content) {
+    showToast('请输入跟进内容')
+    return
+  }
+  showToast('跟进记录添加成功')
+  followVisible.value = false
+  loadCustomers()
+}
+
+onMounted(() => {
+  loadCustomers()
 })
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mobile-base.scss';
-.mobile-teacher-enrollment {
-  padding: var(--spacing-md);
-  background-color: var(--van-background-color-light);
+<style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+.mobile-enrollment {
   min-height: 100vh;
+  background: var(--bg-page);
 }
 
-// 概况区域
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.content {
+  padding-bottom: var(--spacing-xl);
+}
+
 .overview-section {
-  margin-bottom: 16px;
+  background: var(--white);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 
-  .overview-card {
-    .overview-title {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-sm);
-      font-size: var(--text-base);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .overview-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--spacing-md);
-
-      .overview-item {
-        text-align: center;
-        padding: var(--spacing-md) 8px;
-        background: var(--van-background-color);
-        border-radius: 8px;
-
-        .overview-value {
-          font-size: var(--text-2xl);
-          font-weight: bold;
-          color: var(--van-primary-color);
-          margin-bottom: 4px;
-        }
-
-        .overview-label {
-          font-size: var(--text-sm);
-          color: var(--van-text-color-2);
-          margin-bottom: 4px;
-        }
-
-        .overview-trend {
-          font-size: var(--text-xs);
-          padding: var(--spacing-xs) 8px;
-          border-radius: 12px;
-
-          &.success {
-            color: var(--van-success-color);
-            background-color: var(--van-success-color-light);
-          }
-
-          &.warning {
-            color: var(--van-warning-color);
-            background-color: var(--van-warning-color-light);
-          }
-
-          &.info {
-            color: var(--van-info-color);
-            background-color: var(--van-info-color-light);
-          }
-        }
-      }
-    }
-  }
-}
-
-// 统计卡片区域
-.stats-section {
-  margin-bottom: 16px;
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-md);
-
-    .stat-card {
-      background: white;
-      padding: var(--spacing-md);
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-md);
-      cursor: pointer;
-      transition: all 0.3s ease;
-
-      &:active {
-        transform: scale(0.95);
-      }
-
-      .stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: var(--text-xl);
-        flex-shrink: 0;
-      }
-
-      .stat-content {
-        flex: 1;
-
-        .stat-value {
-          font-size: var(--text-xl);
-          font-weight: 700;
-          color: var(--van-text-color);
-          line-height: 1;
-          margin-bottom: 2px;
-        }
-
-        .stat-title {
-          font-size: var(--text-sm);
-          color: var(--van-text-color);
-          font-weight: 500;
-          margin-bottom: 2px;
-        }
-
-        .stat-desc {
-          font-size: var(--text-xs);
-          color: var(--van-text-color-2);
-        }
-      }
-    }
-  }
-}
-
-// 快捷操作
-.quick-actions {
-  margin-bottom: 16px;
-
-  :deep(.van-grid-item__content) {
-    padding: var(--spacing-md) 8px;
-
-    .van-grid-item__icon {
-      margin-bottom: 8px;
-    }
-
-    .van-grid-item__text {
-      font-size: var(--text-xs);
-      color: var(--van-text-color);
-    }
-  }
-}
-
-// 筛选区域
-.filter-section {
-  margin-bottom: 16px;
-
-  .filter-title {
+  .section-title {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: var(--spacing-sm);
-    font-size: var(--text-base);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--spacing-lg);
     font-weight: 600;
+    color: var(--text-primary);
   }
+}
 
-  .filter-form {
-    .filter-actions {
-      margin-top: 12px;
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+
+  .overview-item {
+    background: var(--bg-page);
+    border-radius: var(--spacing-sm);
+    padding: var(--spacing-md);
+    text-align: center;
+
+    .item-value {
+      font-size: var(--spacing-2xl);
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .item-label {
+      font-size: var(--spacing-lg);
+      color: var(--text-secondary);
+      margin: 4px 0;
+    }
+
+    .item-trend {
+      font-size: var(--spacing-md);
+      padding: 2px 8px;
+      border-radius: var(--spacing-xs);
+      display: inline-block;
+
+      &.success {
+        color: var(--success-color);
+        background: #f6ffed;
+      }
+
+      &.warning {
+        color: var(--warning-color);
+        background: var(--white)be6;
+      }
+
+      &.info {
+        color: var(--primary-color);
+        background: #e6f4ff;
+      }
     }
   }
 }
 
-// 客户列表
-.customer-list-section {
-  .list-title {
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--white);
+  margin-bottom: var(--spacing-md);
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    background: var(--bg-page);
+    border-radius: var(--spacing-sm);
+
+    .stat-info {
+      margin-top: var(--spacing-sm);
+      text-align: center;
+
+      .stat-value {
+        font-size: var(--spacing-xl);
+        font-weight: bold;
+        color: var(--text-primary);
+      }
+
+      .stat-label {
+        font-size: var(--spacing-md);
+        color: var(--text-tertiary);
+        margin-top: var(--spacing-xs);
+      }
+    }
+  }
+}
+
+.empty-state {
+  padding: 40px 0;
+}
+
+.customer-list {
+  padding: var(--spacing-md);
+}
+
+.customer-card {
+  background: var(--white);
+  border-radius: var(--spacing-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  .customer-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: var(--spacing-md);
 
-    .title-content {
+    .customer-name {
+      font-size: var(--spacing-lg);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+  }
+
+  .customer-info {
+    margin-bottom: var(--spacing-md);
+
+    .info-row {
       display: flex;
       align-items: center;
       gap: var(--spacing-sm);
-      font-size: var(--text-base);
-      font-weight: 600;
-    }
-  }
+      font-size: var(--spacing-lg);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-sm);
 
-  .customer-list {
-    margin-top: 12px;
-
-    .customer-item {
-      background: var(--van-background-color);
-      border-radius: 8px;
-      padding: var(--spacing-md);
-      margin-bottom: 8px;
-
-      .customer-main {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--spacing-md);
-        margin-bottom: 8px;
-
-        .customer-info {
-          flex: 1;
-
-          .customer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-
-            .customer-name {
-              font-size: var(--text-base);
-              font-weight: 600;
-              color: var(--van-text-color);
-            }
-          }
-
-          .customer-details {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-xs);
-            margin-bottom: 8px;
-
-            .detail-item {
-              display: flex;
-              align-items: center;
-              gap: 6px;
-              font-size: var(--text-sm);
-              color: var(--van-text-color-2);
-            }
-          }
-
-          .customer-footer {
-            .follow-info {
-              display: flex;
-              align-items: center;
-              gap: 6px;
-              font-size: var(--text-xs);
-              color: var(--van-text-color-3);
-            }
-          }
-        }
-      }
-
-      .customer-actions {
-        display: flex;
-        gap: var(--spacing-sm);
-        justify-content: flex-end;
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
 
-  .pagination-wrapper {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-  }
-}
-
-// 客户详情弹窗
-.customer-detail {
-  .detail-header {
+  .customer-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--spacing-md);
-    border-bottom: 1px solid var(--van-border-color);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-light);
 
-    .van-icon {
-      font-size: var(--text-xl);
-      color: var(--van-primary-color);
+    .last-follow {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: var(--spacing-md);
+      color: var(--text-tertiary);
     }
 
-    span {
-      font-size: var(--text-base);
-      font-weight: 600;
+    .action-buttons {
+      display: flex;
+      gap: var(--spacing-sm);
     }
-  }
-
-  .detail-content {
-    padding: var(--spacing-md);
   }
 }
 
-// 响应式适配
-@media (min-width: 768px) {
-  .mobile-teacher-enrollment {
-    max-width: 768px;
-    margin: 0 auto;
-  }
+.detail-popup, .add-popup, .follow-popup {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
-  .overview-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
-  }
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-light);
+  font-size: var(--spacing-lg);
+  font-weight: 600;
+}
 
-  .stats-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+.popup-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: var(--spacing-xl);
+}
+
+.detail-actions, .form-actions {
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>
-

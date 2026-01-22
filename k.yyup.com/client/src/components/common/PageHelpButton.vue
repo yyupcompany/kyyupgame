@@ -16,7 +16,7 @@
       <div v-if="showHelp" class="help-popover" :style="popoverStyle">
         <div class="help-header">
           <div class="help-title">
-            <UnifiedIcon name="default" />
+            <el-icon><InfoFilled /></el-icon>
             <span>{{ helpContent.title }}</span>
           </div>
           <el-button
@@ -37,7 +37,7 @@
             <h4>主要功能：</h4>
             <ul>
               <li v-for="(feature, index) in helpContent.features" :key="index">
-                <UnifiedIcon name="Check" />
+                <el-icon><Check /></el-icon>
                 <span>{{ feature }}</span>
               </li>
             </ul>
@@ -65,7 +65,7 @@
         <div class="help-footer">
           <el-button size="small" @click="closeHelp">知道了</el-button>
           <el-button size="small" type="primary" @click="contactSupport">
-            <UnifiedIcon name="default" />
+            <el-icon><Service /></el-icon>
             联系客服
           </el-button>
         </div>
@@ -106,15 +106,19 @@ const showHelp = ref(false)
 
 // 计算提示框位置
 const popoverStyle = computed(() => {
-  if (props.position === 'left') {
+  // 如果按钮在右侧，提示框应该向左弹出
+  if (props.position === 'right') {
     return {
-      right: '60px',
-      left: 'auto'
+      right: '50px',
+      left: 'auto',
+      transformOrigin: 'right top'
     }
   }
+  // 如果按钮在左侧，提示框应该向右弹出
   return {
-    left: '60px',
-    right: 'auto'
+    left: '50px',
+    right: 'auto',
+    transformOrigin: 'left top'
   }
 })
 
@@ -138,45 +142,49 @@ const contactSupport = () => {
 <style scoped lang="scss">
 .page-help-button-container {
   position: fixed;
-  top: var(--z-index-fixed);
-  right: var(--text-3xl);
-  z-index: var(--z-index-dropdown)px;
+  bottom: 80px; /* ✨ 优化：改到右下角更符合习惯 */
+  right: 30px;
+  z-index: 2000;
 }
 
 .help-button {
-  width: var(--icon-size); height: var(--icon-size);
-  font-size: var(--text-3xl);
-  box-shadow: 0 var(--spacing-xs) var(--text-sm) var(--shadow-medium);
+  width: 48px; 
+  height: 48px;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: all var(--transition-normal) ease;
 
   &:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px var(--text-lg) var(--shadow-heavy);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 }
 
 .help-popover {
   position: absolute;
-  top: 0;
-  width: 100%; max-width: 400px;
-  max-min-height: 60px; height: auto;
-  overflow-y: auto;
+  bottom: 60px; /* ✨ 优化：相对于按钮向上弹出 */
+  width: 360px; 
+  min-width: 360px; /* ✨ 修复：确保最小宽度，防止被容器压缩 */
+  max-height: 80vh;
+  display: flex; /* ✨ 修复：改为 flex 布局以便控制内部滚动 */
+  flex-direction: column;
   background: white;
-  border-radius: var(--text-sm);
-  box-shadow: 0 var(--spacing-sm) var(--text-3xl) var(--shadow-medium);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   padding: 0;
-  z-index: 1001;
+  z-index: 2001;
 }
 
 .help-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--text-lg) var(--spacing-xl);
-  border-bottom: var(--z-index-dropdown) solid #ebeef5;
+  padding: 16px 20px;
+  border-bottom: 1px solid #ebeef5; /* ✨ 修复：巨型边框问题 */
   background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
   color: var(--text-on-primary);
-  border-radius: var(--text-sm) var(--text-sm) 0 0;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0; /* ✨ 修复：防止标题栏被压缩 */
 
   .help-title {
     display: flex;
@@ -270,10 +278,11 @@ const contactSupport = () => {
   display: flex;
   justify-content: flex-end;
   gap: var(--text-sm);
-  padding: var(--text-sm) var(--spacing-xl);
-  border-top: var(--z-index-dropdown) solid #ebeef5;
+  padding: 12px 20px;
+  border-top: 1px solid #ebeef5; /* ✨ 修复：巨型边框问题 */
   background: var(--bg-tertiary);
-  border-radius: 0 0 var(--text-sm) var(--text-sm);
+  border-radius: 0 0 12px 12px;
+  flex-shrink: 0; /* ✨ 修复：防止页脚被压缩 */
 }
 
 // 动画
@@ -286,12 +295,12 @@ const contactSupport = () => {
 }
 
 .slide-fade-enter-from {
-  transform: translateX(var(--spacing-xl));
+  transform: translateY(20px);
   opacity: 0;
 }
 
 .slide-fade-leave-to {
-  transform: translateX(var(--spacing-xl));
+  transform: translateY(20px);
   opacity: 0;
 }
 

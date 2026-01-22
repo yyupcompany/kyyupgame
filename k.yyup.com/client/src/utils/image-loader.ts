@@ -48,9 +48,7 @@ class ImageLoader {
   constructor(config: ImageConfig = {}) {
     // 默认配置
     this.config = {
-      useOSS: process.env.NODE_ENV === 'production' || process.env.VITE_APP_USE_OSS === 'true',
-      ossBaseUrl: process.env.VITE_APP_OSS_BASE_URL || 'https://systemkarder.oss-cn-guangzhou.aliyuncs.com',
-      localBaseUrl: process.env.VITE_APP_LOCAL_BASE_URL || '/src/assets/images',
+      useOSS: import.meta.env.PROD || import.meta.env.VITE_APP_USE_OSS === 'true',
       quality: 80,
       imageProcess: 'image/resize,w_200,h_200',
       ...config
@@ -128,7 +126,7 @@ class ImageLoader {
 
     // 开发环境使用require动态导入
     try {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         // 尝试动态导入本地图片
         const imagePath = `@/assets/images/${categoryPath}/${filename}`
         try {
@@ -314,8 +312,7 @@ const imageLoader = new ImageLoader()
 
 export default imageLoader
 
-// 导出类型
-export { ImageLoader, ImageSource, ImageConfig }
+// ImageLoader 类和类型已在文件中定义并导出
 
 // Vue插件安装方法
 export const ImageLoaderPlugin = {

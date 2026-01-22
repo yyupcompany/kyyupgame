@@ -127,11 +127,12 @@ export class PaginationConfigManager {
    */
   static getPaginationProps(scenario: keyof PaginationConfig['scenarios'] = 'table') {
     const scenarioConfig = this.getScenarioConfig(scenario);
+    const pageSizes = 'pageSizes' in scenarioConfig ? scenarioConfig.pageSizes : this.config.defaultPageSizes;
 
     return {
       current: 1,
       pageSize: scenarioConfig.defaultPageSize,
-      pageSizes: scenarioConfig.pageSizes,
+      pageSizes,
       showSizeChanger: this.config.component.showSizeChanger,
       showQuickJumper: this.config.component.showQuickJumper,
       showTotal: this.config.component.showTotal,
@@ -192,16 +193,17 @@ export class PaginationConfigManager {
    */
   static getRecommendedPageSize(total: number, scenario: keyof PaginationConfig['scenarios'] = 'table'): number {
     const scenarioConfig = this.getScenarioConfig(scenario);
+    const pageSizes = 'pageSizes' in scenarioConfig ? scenarioConfig.pageSizes : this.config.defaultPageSizes;
     const recommended = this.config.performance.recommendedPageSize;
 
     // 如果总数小于推荐大小，返回总数
     if (total <= recommended) {
-      return Math.max(total, scenarioConfig.pageSizes[0]);
+      return Math.max(total, pageSizes[0]);
     }
 
     // 否则返回推荐大小或最接近的可用大小
-    const availableSizes = scenarioConfig.pageSizes;
-    const closestSize = availableSizes.reduce((prev, curr) => {
+    const availableSizes = pageSizes;
+    const closestSize = availableSizes.reduce((prev: number, curr: number) => {
       return Math.abs(curr - recommended) < Math.abs(prev - recommended) ? curr : prev;
     });
 

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="活动中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="活动中心" back-path="/mobile/teacher-center">
     <div class="teacher-activities-page">
       <!-- 活动统计卡片 -->
       <MobileActivityStatCard :stats="activityStats" />
@@ -122,7 +117,7 @@
         </div>
       </van-overlay>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -131,7 +126,7 @@ import { showToast, showLoadingToast, closeToast, showConfirmDialog } from 'vant
 import { useRouter } from 'vue-router'
 
 // 导入布局组件
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 导入移动端活动组件
 import MobileActivityStatCard from './components/MobileActivityStatCard.vue'
@@ -536,6 +531,12 @@ const formatDateTime = (startTime: string, endTime: string): string => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadActivityStats()
   loadTabData('calendar')
 })
@@ -589,6 +590,13 @@ onMounted(() => {
 
   &:active {
     background: #f5f5f5;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

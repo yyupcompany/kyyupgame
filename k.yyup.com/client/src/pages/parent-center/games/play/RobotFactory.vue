@@ -306,14 +306,14 @@ const playVoice = (type: string) => {
     .tip { margin-top: var(--spacing-md); padding: var(--spacing-sm) var(--spacing-md); background: var(--warning-light-bg); border-left: var(--spacing-xs) solid var(--warning-color); color: var(--warning-color); font-size: var(--text-base); border-radius: var(--radius-xs); }
     &.tips { background: var(--info-light-bg); padding: var(--spacing-lg); border-radius: var(--radius-sm); border: var(--border-width-thick) solid var(--info-color);
       h3 { color: var(--text-secondary); border-bottom-color: var(--info-color); }
-      ul li { color: var(--bg-primary); }
+      ul li { color: var(--bg-page); }
     }
   }
 }
 
 .robot-factory-game {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-tertiary) 100%);
   padding: var(--spacing-2xl);
 }
 

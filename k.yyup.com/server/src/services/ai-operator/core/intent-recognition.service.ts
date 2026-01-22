@@ -269,8 +269,8 @@ export class IntentRecognitionService {
       return IntentType.OPERATION;
     }
     
-    // 对话意图（默认）
-    if (/你好|谢谢|再见|帮助/.test(query) || query.length < 10) {
+    // 对话意图（问候/寒暄）
+    if (/你好|您好|hi|hello|hey|嗨|哈喽|早上好|下午好|晚上好|早安|晚安|谢谢|感谢|再见|拜拜|bye|帮助/.test(query) || query.length < 5) {
       return IntentType.CONVERSATION;
     }
     

@@ -440,7 +440,7 @@ const generateInsights = async () => {
   .analytics-tabs {
     :deep(.center-tabs) {
       .el-tabs__header {
-        background: var(--bg-color, var(--bg-white));
+        background: var(--bg-card));
         border-radius: var(--spacing-sm);
         padding: var(--spacing-xs);
         margin-bottom: var(--spacing-xl);
@@ -568,7 +568,7 @@ const generateInsights = async () => {
 
       .report-stat-card {
         padding: var(--spacing-xl);
-        background: var(--bg-color, var(--bg-white));
+        background: var(--bg-card));
         border-radius: var(--spacing-sm);
         text-align: center;
 
@@ -613,7 +613,7 @@ const generateInsights = async () => {
 
       .chart-container {
         padding: var(--text-3xl);
-        background: var(--bg-color, var(--bg-white));
+        background: var(--bg-card));
         border-radius: var(--text-sm);
         border: var(--border-width-base) solid var(--border-color);
 
@@ -730,7 +730,7 @@ const generateInsights = async () => {
       .insight-card {
         display: flex;
         padding: var(--spacing-xl);
-        background: var(--bg-color, var(--bg-white));
+        background: var(--bg-card));
         border-radius: var(--text-sm);
         border-left: var(--spacing-xs) solid var(--primary-color);
 

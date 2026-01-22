@@ -336,7 +336,7 @@ onMounted(() => {
 }
 
 .message.assistant .message-content {
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   margin-right: 50px;
 }
 

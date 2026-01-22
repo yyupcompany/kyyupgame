@@ -205,7 +205,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { Plus } from '@element-plus/icons-vue'
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import StatCard from '@/components/statistics/StatCard.vue'
@@ -361,18 +360,40 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 主内容区域 ==================== */
 .main-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-2xl);
 }
 
 .content-row {
   margin-bottom: 0;
 }
 
+/* ==================== 内容卡片 ==================== */
 .content-card {
   margin-bottom: 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color-lighter);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  :deep(.el-card__header) {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--el-fill-color-light);
+    border-bottom: 1px solid var(--border-color-lighter);
+  }
+
+  :deep(.el-card__body) {
+    padding: var(--spacing-lg);
+  }
 
   .card-header {
     display: flex;
@@ -381,18 +402,45 @@ onMounted(() => {
 
     h3 {
       margin: 0;
-      font-size: var(--text-lg);
+      font-size: var(--text-base);
       font-weight: 600;
       color: var(--el-text-color-primary);
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 3px;
+        height: 14px;
+        background: var(--el-color-primary);
+        border-radius: 2px;
+        margin-right: var(--spacing-sm);
+        vertical-align: middle;
+      }
     }
   }
 }
 
+/* ==================== 成长时间线 ==================== */
 .growth-timeline {
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-md) 0;
+
+  :deep(.el-timeline-item) {
+    padding-bottom: var(--spacing-lg);
+
+    .el-timeline-item__node {
+      background: var(--el-color-primary);
+    }
+  }
 
   .timeline-card {
-    border: var(--border-width-base) solid var(--el-border-color-lighter);
+    border: 1px solid var(--border-color-lighter);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-base);
+
+    &:hover {
+      box-shadow: var(--shadow-sm);
+      border-color: var(--el-color-primary-light-3);
+    }
 
     .record-header {
       display: flex;
@@ -407,7 +455,7 @@ onMounted(() => {
 
         h4 {
           margin: 0;
-          font-size: var(--text-base);
+          font-size: var(--text-sm);
           font-weight: 600;
           color: var(--el-text-color-primary);
         }
@@ -418,11 +466,11 @@ onMounted(() => {
         gap: var(--spacing-xs);
 
         .delete-button {
-          color: var(--danger-color);
+          color: var(--el-color-danger);
 
           &:hover {
-            color: var(--danger-dark);
-            background-color: var(--danger-light-bg);
+            color: var(--el-color-danger-dark);
+            background-color: var(--el-color-danger-light-9);
           }
         }
       }
@@ -431,36 +479,54 @@ onMounted(() => {
     .record-content {
       margin: 0 0 var(--spacing-md) 0;
       color: var(--el-text-color-regular);
-      line-height: 1.6;
+      line-height: var(--leading-normal);
+      font-size: var(--text-sm);
     }
 
     .record-photos {
       display: flex;
       gap: var(--spacing-sm);
       flex-wrap: wrap;
+      margin-top: var(--spacing-md);
 
       .photo-item {
         width: 80px;
         height: 80px;
         border-radius: var(--radius-md);
         cursor: pointer;
+        transition: all var(--transition-base);
+        object-fit: cover;
+        border: 1px solid var(--border-color-lighter);
+
+        &:hover {
+          transform: scale(1.05);
+          box-shadow: var(--shadow-md);
+        }
       }
     }
   }
 }
 
+/* ==================== 里程碑卡片 ==================== */
 .milestones-card {
   .milestones-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
 
     .milestone-item {
       display: flex;
       gap: var(--spacing-md);
       padding: var(--spacing-md);
-      background: var(--el-fill-color-lighter);
+      background: var(--el-fill-color-light);
       border-radius: var(--radius-md);
+      border: 1px solid var(--border-color-lighter);
+      transition: all var(--transition-base);
+
+      &:hover {
+        background: var(--el-fill-color);
+        transform: translateX(4px);
+      }
 
       .milestone-icon {
         width: 40px;
@@ -468,14 +534,16 @@ onMounted(() => {
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--el-color-primary);
+        background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
         color: white;
         border-radius: var(--radius-sm);
         flex-shrink: 0;
+        box-shadow: var(--shadow-sm);
       }
 
       .milestone-content {
         flex: 1;
+        min-width: 0;
 
         h4 {
           margin: 0 0 var(--spacing-xs) 0;
@@ -486,31 +554,41 @@ onMounted(() => {
 
         p {
           margin: 0 0 var(--spacing-xs) 0;
-          font-size: var(--text-sm);
+          font-size: var(--text-xs);
           color: var(--el-text-color-secondary);
-          line-height: 1.5;
+          line-height: var(--leading-normal);
         }
 
         .milestone-date {
           font-size: var(--text-xs);
-          color: var(--el-text-color-placeholder);
+          color: var(--el-text-color-secondary);
         }
       }
     }
   }
 }
 
+/* ==================== 统计卡片 ==================== */
 .stats-card {
+  margin-top: var(--spacing-lg);
+
   .growth-stats {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
 
     .stat-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: var(--spacing-sm) 0;
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--el-fill-color-light);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-base);
+
+      &:hover {
+        background: var(--el-fill-color);
+      }
 
       .stat-label {
         font-size: var(--text-sm);
@@ -526,26 +604,43 @@ onMounted(() => {
   }
 }
 
-// 响应式设计
+/* ==================== 响应式设计 ==================== */
 @media (max-width: var(--breakpoint-md)) {
   .main-content {
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
   }
 
-  .content-card .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
+  .content-card {
+    :deep(.el-card__body) {
+      padding: var(--spacing-md);
+    }
+
+    .card-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+    }
   }
 
-  .timeline-card .record-header {
-    flex-direction: column;
-    gap: var(--spacing-sm);
+  .timeline-card {
+    .record-header {
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .record-photos .photo-item {
+      width: 60px;
+      height: 60px;
+    }
   }
 
   .milestone-item {
     flex-direction: column;
     text-align: center;
+
+    .milestone-content {
+      text-align: left;
+    }
   }
 }
 </style>

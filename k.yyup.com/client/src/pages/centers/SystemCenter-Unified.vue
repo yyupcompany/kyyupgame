@@ -4,13 +4,6 @@
     description="清晰展示系统管理的完整流程，方便园长一目了然地掌握系统状态"
     :icon="Monitor"
   >
-    <!-- 头部操作按钮 -->
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleSystemCheck">
-        系统检查
-      </el-button>
-    </template>
-
     <!-- 统计卡片 -->
     <template #stats>
       <el-col :xs="12" :sm="12" :md="6" :lg="6">
@@ -115,14 +108,6 @@
       <!-- 概览标签页 -->
       <el-tab-pane label="概览" name="overview">
         <div class="tab-content">
-          <!-- 欢迎信息 -->
-          <div class="welcome-card">
-            <div class="welcome-content">
-              <h2>欢迎来到系统中心</h2>
-              <p>这里是系统管理和维护的中心枢纽，您可以管理系统配置、监控系统状态、处理系统安全。</p>
-            </div>
-          </div>
-
           <!-- 系统功能模块 -->
           <div class="modules-section">
             <h3 class="section-title">系统功能模块</h3>
@@ -412,6 +397,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @use '@/styles/index.scss' as *;
 
 // 侧边栏样式

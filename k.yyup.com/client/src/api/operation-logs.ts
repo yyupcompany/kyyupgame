@@ -91,11 +91,12 @@ export const getOperationLogStats = (): Promise<OperationLogStatsResponse> => {
 /**
  * 导出操作日志
  */
-export const exportOperationLogs = (params: OperationLogQuery): Promise<Blob> => {
-  return request.get('/api/operation-logs/export', { 
+export const exportOperationLogs = async (params: OperationLogQuery): Promise<Blob> => {
+  const response: any = await request.get('/api/operation-logs/export', { 
     params,
     responseType: 'blob'
   })
+  return response.data || response
 }
 
 /**

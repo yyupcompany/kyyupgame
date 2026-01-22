@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    :title="taskDetail?.title || '任务详情'"
-    :show-nav-bar="true"
-    :show-back="true"
-    :show-tab-bar="false"
-  >
+  <MobileSubPageLayout title="taskDetail?.title || '任务详情'" back-path="/mobile/teacher-center">
     <div class="task-detail-page" v-if="!loading && taskDetail">
       <!-- 任务状态卡片 -->
       <van-card class="status-card">
@@ -237,7 +232,7 @@
         <van-button type="primary" @click="goBack">返回列表</van-button>
       </van-empty>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -245,7 +240,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showSuccessToast, showConfirmDialog } from 'vant'
 import { teacherTasksApi, type Task } from '@/api/modules/teacher-tasks'
-import MobileMainLayout from "@/components/mobile/layouts/MobileMainLayout.vue"
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -261,7 +256,7 @@ const historySteps = ref([
     title: '任务创建',
     description: '任务已创建',
     icon: 'add-o',
-    color: '#409eff'
+    color: 'var(--primary-color)'
   }
 ])
 
@@ -269,7 +264,7 @@ const historySteps = ref([
 const progressColor = computed(() => {
   const progress = taskDetail.value?.progress || 0
   if (progress >= 80) return '#07c160'
-  if (progress >= 50) return '#409eff'
+  if (progress >= 50) return 'var(--primary-color)'
   if (progress >= 20) return '#ff976a'
   return '#ee0a24'
 })
@@ -382,7 +377,7 @@ const updateProgress = async () => {
       title: '进度更新',
       description: `进度更新为 ${newProgress.value}%`,
       icon: 'chart-trending-o',
-      color: '#409eff'
+      color: 'var(--primary-color)'
     })
   } catch (error) {
     console.error('更新进度失败:', error)
@@ -486,7 +481,7 @@ const loadTaskDetail = async () => {
         title: '任务创建',
         description: `任务创建于 ${formatDateTime(task.createdAt)}`,
         icon: 'add-o',
-        color: '#409eff'
+        color: 'var(--primary-color)'
       },
       ...(task.status === 'completed' ? [{
         title: '任务完成',
@@ -505,6 +500,12 @@ const loadTaskDetail = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTaskDetail()
 })
 </script>
@@ -513,7 +514,7 @@ onMounted(() => {
 @import '@/styles/mobile-base.scss';
 .task-detail-page {
   padding: 0 0 20px 0;
-  background-color: #f7f8fa;
+  background-color: var(--bg-page);
   min-height: calc(100vh - 46px);
 }
 
@@ -606,7 +607,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
     
     .van-progress {
       flex: 1;
@@ -637,7 +638,7 @@ onMounted(() => {
     
     .van-icon {
       color: var(--primary-color);
-      margin-right: 8px;
+      margin-right: var(--spacing-sm);
     }
   }
 }
@@ -671,7 +672,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    gap: var(--spacing-sm);
     font-weight: 500;
   }
 }
@@ -687,7 +688,7 @@ onMounted(() => {
 
 // Vant组件样式覆盖
 :deep(.van-card) {
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   overflow: hidden;
 }
 
@@ -725,6 +726,13 @@ onMounted(() => {
   .task-detail-page {
     max-width: 768px;
     margin: 0 auto;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

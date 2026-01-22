@@ -3,13 +3,6 @@
     title="考勤中心"
     description="清晰展示考勤管理的完整流程，方便园长一目了然地掌握考勤状况"
   >
-    <template #header-actions>
-      <el-button type="primary" :icon="Download" @click="handleExport">
-        导出报表
-      </el-button>
-      <el-button :icon="Refresh" @click="refreshData">刷新</el-button>
-    </template>
-
     <div class="center-container attendance-center-timeline">
 
     <!-- 全园概览卡片 -->
@@ -28,84 +21,60 @@
         </div>
       </template>
 
-      <el-row :gutter="32">
-        <el-col :span="6">
-          <div class="overview-stat">
-            <div class="stat-icon stat-total">
-              <UnifiedIcon name="default" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ overview.totalRecords }}</div>
-              <div class="stat-label">总人数</div>
-            </div>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="overview-stat">
-            <div class="stat-icon stat-present">
-              <UnifiedIcon name="Check" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ overview.presentCount }}</div>
-              <div class="stat-label">出勤人数</div>
-            </div>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="overview-stat">
-            <div class="stat-icon stat-absent">
-              <UnifiedIcon name="Close" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ overview.absentCount }}</div>
-              <div class="stat-label">缺勤人数</div>
-            </div>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="overview-stat">
-            <div class="stat-icon stat-rate">
-              <UnifiedIcon name="default" />
-            </div>
-            <div class="stat-info">
-              <div class="stat-value">{{ overview.attendanceRate }}%</div>
-              <div class="stat-label">出勤率</div>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
+      <div class="stats-grid-unified">
+        <CentersStatCard
+          title="总人数"
+          :value="overview.totalRecords"
+          iconName="default"
+        />
+        <CentersStatCard
+          title="出勤人数"
+          :value="overview.presentCount"
+          type="success"
+          iconName="Check"
+        />
+        <CentersStatCard
+          title="缺勤人数"
+          :value="overview.absentCount"
+          type="danger"
+          iconName="Close"
+        />
+        <CentersStatCard
+          title="出勤率"
+          :value="`${overview.attendanceRate}%`"
+          type="primary"
+          iconName="default"
+        />
+      </div>
 
       <el-divider />
 
-      <el-row :gutter="32">
-        <el-col :span="6">
-          <div class="detail-stat">
-            <span class="label">迟到:</span>
-            <span class="value late">{{ overview.lateCount }}</span>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="detail-stat">
-            <span class="label">早退:</span>
-            <span class="value early-leave">{{ overview.earlyLeaveCount }}</span>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="detail-stat">
-            <span class="label">病假:</span>
-            <span class="value sick">{{ overview.sickLeaveCount }}</span>
-          </div>
-        </el-col>
-        <el-col :span="6">
-          <div class="detail-stat">
-            <span class="label">事假:</span>
-            <span class="value personal">{{ overview.personalLeaveCount }}</span>
-          </div>
-        </el-col>
-      </el-row>
+      <div class="stats-grid-unified">
+        <CentersStatCard
+          title="迟到"
+          :value="overview.lateCount"
+          type="warning"
+          iconName="default"
+        />
+        <CentersStatCard
+          title="早退"
+          :value="overview.earlyLeaveCount"
+          type="warning"
+          iconName="default"
+        />
+        <CentersStatCard
+          title="病假"
+          :value="overview.sickLeaveCount"
+          type="info"
+          iconName="default"
+        />
+        <CentersStatCard
+          title="事假"
+          :value="overview.personalLeaveCount"
+          type="info"
+          iconName="default"
+        />
+      </div>
     </el-card>
 
     <!-- Tab切换 -->
@@ -199,6 +168,7 @@
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import CentersStatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, onMounted } from 'vue';
 import { ElMessage } from 'element-plus';
@@ -345,8 +315,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .attendance-center-timeline {
-  background: var(--bg-secondary, var(--bg-container));  // ✅ 与活动中心一致
+  background: var(--bg-page);  // ✅ 与活动中心一致
   padding: var(--text-2xl);
 
   .page-header {

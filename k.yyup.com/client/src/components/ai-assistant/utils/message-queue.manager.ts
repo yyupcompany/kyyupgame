@@ -121,7 +121,7 @@ export class MessageQueueManager {
       this.queue.splice(insertIndex + 1, 0, item)
     }
 
-    this._totalCount++
+    this._totalCount.value++
 
     console.log(`[消息队列] 添加消息 "${content.substring(0, 30)}..."，队列长度: ${this.queue.length}`)
 
@@ -179,12 +179,12 @@ export class MessageQueueManager {
 
       // 通知成功
       item.onResolve(result)
-      this._processedCount++
+      this._processedCount.value++
 
     } catch (error) {
       console.error(`[消息队列] 消息处理失败:`, error)
       item.onReject(error)
-      this._failedCount++
+      this._failedCount.value++
     }
 
     // 继续处理下一条
@@ -283,9 +283,9 @@ export class MessageQueueManager {
   // 销毁
   destroy() {
     this.clear()
-    this._processedCount = 0
-    this._failedCount = 0
-    this._totalCount = 0
+    this._processedCount.value = 0
+    this._failedCount.value = 0
+    this._totalCount.value = 0
     console.log('[消息队列] 实例已销毁')
   }
 }
@@ -293,7 +293,11 @@ export class MessageQueueManager {
 // 导出单例
 let globalQueueManager: MessageQueueManager | null = null
 
-export function getGlobalMessageQueueManager(config?: Parameters<typeof MessageQueueManager>[0]): MessageQueueManager {
+export function getGlobalMessageQueueManager(config?: Partial<{
+  maxQueueSize: number
+  processDelay: number
+  autoProcess: boolean
+}>): MessageQueueManager {
   if (!globalQueueManager) {
     globalQueueManager = new MessageQueueManager(config)
   }

@@ -186,57 +186,92 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 家长活动页面 ==================== */
 .parent-activities {
   padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 
   .page-header {
     margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color-lighter);
 
     h1 {
-      font-size: var(--text-2xl);
-      font-weight: var(--font-semibold);
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-sm);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--el-text-color-primary);
+      margin-bottom: var(--spacing-xs);
     }
 
     p {
-      font-size: var(--text-base);
-      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      color: var(--el-text-color-secondary);
     }
   }
 
+  /* ==================== 筛选区域 ==================== */
   .filter-section {
     background: var(--bg-card);
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
     margin-bottom: var(--spacing-xl);
     box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color-lighter);
+
+    :deep(.el-form) {
+      .el-form-item {
+        margin-bottom: 0;
+      }
+
+      .el-form-item__label {
+        font-weight: 500;
+        color: var(--el-text-color-primary);
+      }
+
+      .el-select .el-input__wrapper {
+        border-radius: var(--radius-md);
+      }
+    }
   }
 
+  /* ==================== 活动列表 ==================== */
   .activities-list {
     .activity-card {
-      margin-bottom: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
       cursor: pointer;
-      transition: var(--card-transition);
+      transition: all var(--transition-base);
       border-radius: var(--radius-lg);
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
-      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color-lighter);
 
       &:hover {
         transform: translateY(-4px);
         box-shadow: var(--shadow-lg);
+        border-color: var(--el-color-primary-light-3);
       }
 
+      :deep(.el-card__body) {
+        padding: 0;
+      }
+
+      /* ==================== 活动图片 ==================== */
       .activity-image {
         position: relative;
-        height: var(--spacing-5xl);
+        height: 160px;
         overflow: hidden;
-        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 
         .el-image {
           width: 100%;
           height: 100%;
-          transition: var(--transition-slow);
+          transition: all var(--transition-base);
+        }
+
+        &:hover .el-image {
+          transform: scale(1.05);
         }
 
         .image-slot {
@@ -245,49 +280,49 @@ onMounted(() => {
           align-items: center;
           width: 100%;
           height: 100%;
-          background: var(--bg-hover);
-          color: var(--text-secondary);
-          font-size: var(--text-3xl);
-
-          .el-icon {
-            font-size: var(--icon-lg);
-          }
+          background: var(--el-fill-color-light);
+          color: var(--el-text-color-secondary);
+          font-size: var(--text-2xl);
         }
 
         .activity-tag {
           position: absolute;
           top: var(--spacing-sm);
           right: var(--spacing-sm);
-          padding: var(--spacing-xs) var(--spacing-sm);
-          border-radius: var(--radius-md);
+          padding: 4px var(--spacing-sm);
+          border-radius: var(--radius-sm);
           font-size: var(--text-xs);
-          font-weight: var(--font-medium);
-          color: var(--text-on-primary);
+          font-weight: 500;
+          color: white;
           box-shadow: var(--shadow-sm);
 
           &.tag-open {
-            background: var(--success-color);
+            background: var(--el-color-success);
           }
 
           &.tag-closed {
-            background: var(--info-color);
+            background: var(--el-color-info);
           }
 
           &.tag-full {
-            background: var(--danger-color);
+            background: var(--el-color-danger);
           }
         }
       }
 
+      /* ==================== 活动内容 ==================== */
       .activity-content {
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
 
         .activity-title {
-          font-size: var(--text-lg);
-          font-weight: var(--font-semibold);
-          color: var(--text-primary);
+          font-size: var(--text-base);
+          font-weight: 600;
+          color: var(--el-text-color-primary);
           margin-bottom: var(--spacing-sm);
           line-height: var(--leading-tight);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .activity-info {
@@ -296,32 +331,31 @@ onMounted(() => {
           .info-item {
             display: flex;
             align-items: center;
-            font-size: var(--text-sm);
-            color: var(--text-regular);
+            font-size: var(--text-xs);
+            color: var(--el-text-color-secondary);
             margin-bottom: var(--spacing-xs);
 
             &:last-child {
               margin-bottom: 0;
             }
 
-            .el-icon {
-              margin-right: var(--spacing-sm);
-              color: var(--primary-color);
+            :deep(.el-icon) {
+              margin-right: var(--spacing-xs);
+              color: var(--el-text-color-secondary);
               flex-shrink: 0;
-              font-size: var(--icon-sm);
             }
 
             span {
-              line-height: var(--leading-snug);
+              line-height: var(--leading-normal);
             }
           }
         }
 
         .activity-desc {
-          font-size: var(--text-sm);
-          color: var(--text-secondary);
-          line-height: var(--leading-relaxed);
-          margin-bottom: var(--spacing-lg);
+          font-size: var(--text-xs);
+          color: var(--el-text-color-secondary);
+          line-height: var(--leading-normal);
+          margin-bottom: var(--spacing-md);
           display: -webkit-box;
           -webkit-box-orient: vertical;
           -webkit-line-clamp: 2;
@@ -330,39 +364,62 @@ onMounted(() => {
 
         .activity-actions {
           display: flex;
-          gap: var(--spacing-sm);
+          gap: var(--spacing-xs);
 
-          .el-button {
-            border-radius: var(--radius-md);
-            font-weight: var(--font-medium);
-            transition: var(--transition-fast);
+          :deep(.el-button) {
+            flex: 1;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            transition: all var(--transition-base);
+
+            &:hover {
+              transform: translateY(-2px);
+            }
           }
         }
       }
     }
   }
 
+  /* ==================== 分页 ==================== */
   .pagination {
     display: flex;
     justify-content: center;
-    margin-top: var(--spacing-2xl);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color-lighter);
   }
-}
 
-/* 响应式优化 */
-@media (max-width: var(--breakpoint-md)) {
-  .parent-activities {
+  /* ==================== 响应式设计 ==================== */
+  @media (max-width: var(--breakpoint-md)) {
     padding: var(--spacing-md);
 
-    .activities-list {
-      .el-col {
-        &:not(:last-child) {
-          .activity-card {
-            margin-bottom: var(--spacing-md);
-          }
+    .filter-section {
+      padding: var(--spacing-md);
+
+      :deep(.el-form) {
+        flex-direction: column;
+
+        .el-form-item {
+          margin-bottom: var(--spacing-sm);
         }
       }
     }
+
+    .activities-list .activity-card {
+      margin-bottom: var(--spacing-md);
+
+      .activity-image {
+        height: 140px;
+      }
+    }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

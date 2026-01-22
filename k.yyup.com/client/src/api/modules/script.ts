@@ -244,7 +244,7 @@ export class ScriptAPI {
    * 获取话术详情
    */
   static async getScriptById(id: number): Promise<ApiResponse<Script>> {
-    const response = await request.get(`/scripts/${id}`);
+    const response = await request.get(`/api/scripts/${id}`);
     return response.data;
   }
 
@@ -260,7 +260,7 @@ export class ScriptAPI {
    * 更新话术
    */
   static async updateScript(id: number, data: UpdateScriptData): Promise<ApiResponse<Script>> {
-    const response = await request.put(`/scripts/${id}`, data);
+    const response = await request.put(`/api/scripts/${id}`, data);
     return response.data;
   }
 
@@ -268,7 +268,7 @@ export class ScriptAPI {
    * 删除话术
    */
   static async deleteScript(id: number): Promise<ApiResponse<null>> {
-    const response = await request.delete(`/scripts/${id}`);
+    const response = await request.delete(`/api/scripts/${id}`);
     return response.data;
   }
 
@@ -276,7 +276,7 @@ export class ScriptAPI {
    * 使用话术（记录使用次数）
    */
   static async useScript(id: number, data?: UseScriptData): Promise<ApiResponse<null>> {
-    const response = await request.post(`/scripts/${id}/use`, data);
+    const response = await request.post(`/api/scripts/${id}/use`, data);
     return response.data;
   }
 
@@ -304,7 +304,7 @@ export class ScriptAPI {
    * 获取话术分类详情
    */
   static async getCategoryById(id: number): Promise<ApiResponse<ScriptCategory>> {
-    const response = await request.get(`/script-categories/${id}`);
+    const response = await request.get(`/api/script-categories/${id}`);
     return response.data;
   }
 
@@ -320,7 +320,7 @@ export class ScriptAPI {
    * 更新话术分类
    */
   static async updateCategory(id: number, data: UpdateCategoryData): Promise<ApiResponse<ScriptCategory>> {
-    const response = await request.put(`/script-categories/${id}`, data);
+    const response = await request.put(`/api/script-categories/${id}`, data);
     return response.data;
   }
 
@@ -328,7 +328,7 @@ export class ScriptAPI {
    * 删除话术分类
    */
   static async deleteCategory(id: number): Promise<ApiResponse<null>> {
-    const response = await request.delete(`/script-categories/${id}`);
+    const response = await request.delete(`/api/script-categories/${id}`);
     return response.data;
   }
 

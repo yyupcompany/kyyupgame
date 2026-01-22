@@ -217,7 +217,7 @@ const selectedTenantCode = ref('')
 
 // 快捷登录账号
 const QUICK_LOGIN_ACCOUNTS = {
-  admin: { username: 'admin', password: '123456' },
+  admin: { username: 'test_admin', password: '123456' },
   principal: { username: 'principal', password: '123456' },
   teacher: { username: 'teacher', password: '123456' },
   parent: { username: 'test_parent', password: '123456' }
@@ -291,6 +291,11 @@ const handleLogin = async () => {
     }
   } catch (error: any) {
     console.error('❌ [移动端登录] 登录失败:', error)
+    console.error('❌ 错误详情:', {
+      message: error.message,
+      response: error.response?.data,
+      status: error.response?.status
+    })
 
     // 检查是否需要租户选择
     if (error.message?.includes('租户') || error.message?.includes('tenant')) {
@@ -315,9 +320,9 @@ const handleQuickLogin = (role: string) => {
 
     console.log('⚡ [移动端登录] 快捷登录:', role)
 
-    // 自动提交
+    // 自动提交 - 通过表单提交，确保验证通过
     setTimeout(() => {
-      handleLogin()
+      loginFormRef.value?.submit()
     }, 300)
   }
 }
@@ -477,7 +482,7 @@ onMounted(() => {
       /* 响应式字体大小 */
       font-size: clamp(18px, 5vw, 24px);
       font-weight: bold;
-      color: var(--text-white, #ffffff);
+      color: var(--text-white, var(--bg-card));
       margin: 0 0 var(--spacing-sm, 8px);
       line-height: 1.3;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -526,7 +531,7 @@ onMounted(() => {
       box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
 
       &--loading-color {
-        color: var(--text-white, #ffffff);
+        color: var(--text-white, var(--bg-card));
       }
 
       &:active {
@@ -578,7 +583,7 @@ onMounted(() => {
         &.van-button--primary {
           background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
           border-color: rgba(102, 126, 234, 0.5);
-          color: #ffffff;
+          color: var(--bg-card);
 
           &:hover {
             background: linear-gradient(135deg, rgba(102, 126, 234, 1) 0%, rgba(118, 75, 162, 1) 100%);
@@ -594,7 +599,7 @@ onMounted(() => {
         &.van-button--success {
           background: linear-gradient(135deg, rgba(103, 194, 58, 0.9) 0%, rgba(82, 196, 26, 0.9) 100%);
           border-color: rgba(103, 194, 58, 0.5);
-          color: #ffffff;
+          color: var(--bg-card);
 
           &:hover {
             background: linear-gradient(135deg, rgba(103, 194, 58, 1) 0%, rgba(82, 196, 26, 1) 100%);
@@ -610,7 +615,7 @@ onMounted(() => {
         &.van-button--warning {
           background: linear-gradient(135deg, rgba(230, 162, 60, 0.9) 0%, rgba(246, 189, 22, 0.9) 100%);
           border-color: rgba(230, 162, 60, 0.5);
-          color: #ffffff;
+          color: var(--bg-card);
 
           &:hover {
             background: linear-gradient(135deg, rgba(230, 162, 60, 1) 0%, rgba(246, 189, 22, 1) 100%);
@@ -626,7 +631,7 @@ onMounted(() => {
         &.van-button--default {
           background: rgba(255, 255, 255, 0.25);
           border-color: rgba(255, 255, 255, 0.4);
-          color: #ffffff;
+          color: var(--bg-card);
 
           &:hover {
             background: rgba(255, 255, 255, 0.35);
@@ -650,7 +655,7 @@ onMounted(() => {
 
     :deep(.van-tag) {
       background: rgba(255, 255, 255, 0.25);
-      color: var(--text-white, #ffffff);
+      color: var(--text-white, var(--bg-card));
       border-color: rgba(255, 255, 255, 0.4);
       font-size: clamp(10px, 2.5vw, 12px);
       padding: var(--spacing-xs) 12px;
@@ -691,13 +696,20 @@ onMounted(() => {
       .tenant-code {
         font-size: var(--text-xs);
         color: var(--text-secondary);
-        margin-top: 4px;
+        margin-top: var(--spacing-xs);
       }
     }
 
     .tenant-actions {
       margin-top: var(--spacing-lg);
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

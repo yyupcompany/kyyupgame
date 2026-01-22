@@ -6,7 +6,7 @@ import { systemOSSService } from './system-oss.service'; // 广东 OSS
  * 租户 OSS 配置接口
  */
 interface TenantOSSConfig {
-  phone: string;
+  tenantKey: string;
   tenantCode: string;
   region: 'shanghai' | 'guangdong';
   // 照片 OSS 配置
@@ -35,12 +35,13 @@ export class TenantOSSRouterService {
   getTenantOSSConfig(req: Request): TenantOSSConfig {
     const tenant = (req as any).tenant;
 
-    if (!tenant || !tenant.phone) {
+    const tenantKey = tenant?.ossNamespace || tenant?.code;
+    if (!tenant || !tenantKey) {
       throw new Error('租户信息未找到，请确保已通过租户识别中间件');
     }
 
     return {
-      phone: tenant.phone,
+      tenantKey,
       tenantCode: tenant.code || tenant.databaseName?.replace('tenant_', '') || 'dev',
       region: tenant.region || 'guangdong',
 
@@ -48,14 +49,14 @@ export class TenantOSSRouterService {
       photoOSS: {
         service: 'shanghai',
         bucket: process.env.OSS_BUCKET || 'faceshanghaikarden',
-        basePath: `kindergarten/rent/${tenant.phone}/photos/`
+        basePath: `kindergarten/rent/${tenantKey}/photos/`
       },
 
       // 其他文件 → 广东 OSS
       fileOSS: {
         service: 'guangdong',
         bucket: process.env.SYSTEM_OSS_BUCKET || 'systemkarder',
-        basePath: `kindergarten/rent/${tenant.phone}/files/`
+        basePath: `kindergarten/rent/${tenantKey}/files/`
       }
     };
   }
@@ -91,7 +92,7 @@ export class TenantOSSRouterService {
     // 使用上海 OSS 的租户上传方法
     const result = await ossService.uploadTenantImage(
       buffer,
-      config.phone,
+      config.tenantKey,
       options
     );
 
@@ -135,7 +136,7 @@ export class TenantOSSRouterService {
     // 使用广东 OSS
     const result = await systemOSSService.uploadFile(buffer, {
       filename,
-      directory: `rent/${config.phone}/${directory}`,
+      directory: `rent/${config.tenantKey}/${directory}`,
       contentType
     });
 
@@ -162,7 +163,7 @@ export class TenantOSSRouterService {
     // 判断是照片还是文件
     if (ossPath.includes('/photos/') || ossPath.includes('/students/') || ossPath.includes('/albums/')) {
       // 上海 OSS - 验证权限
-      return ossService.getSecureTenantUrl(ossPath, config.phone, expiresInMinutes);
+      return ossService.getSecureTenantUrl(ossPath, config.tenantKey, expiresInMinutes);
     } else {
       // 广东 OSS
       return systemOSSService.getTemporaryUrl(ossPath, expiresInMinutes);
@@ -178,7 +179,7 @@ export class TenantOSSRouterService {
     const config = this.getTenantOSSConfig(req);
 
     // 验证路径是否属于当前租户
-    if (!ossPath.includes(`rent/${config.phone}/`)) {
+    if (!ossPath.includes(`rent/${config.tenantKey}/`)) {
       throw new Error('无权删除其他租户的文件');
     }
 
@@ -198,7 +199,7 @@ export class TenantOSSRouterService {
 
     // 验证所有路径
     for (const path of ossPaths) {
-      if (!path.includes(`rent/${config.phone}/`)) {
+      if (!path.includes(`rent/${config.tenantKey}/`)) {
         throw new Error(`无权删除其他租户的文件: ${path}`);
       }
     }

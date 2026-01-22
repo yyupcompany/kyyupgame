@@ -8,13 +8,13 @@
  * - system/: 公共系统资源（所有租户可访问）
  * - games/: 游戏资源（所有租户可访问）
  * - education/: 教育资源（所有租户可访问）
- * - rent/{phone}/: 租户隔离目录（仅对应租户可访问）
+ * - rent/{tenant}/: 租户隔离目录（仅对应租户可访问）
  *
  * 【上海OSS - faceshanghaikarden】人脸识别/相册
  * - test-faces/: 测试人脸数据（公共）
- * - rent/{phone}/photos/: 租户班级照片（隔离）
- * - rent/{phone}/students/: 租户学生照片（隔离）
- * - rent/{phone}/albums/: 租户相册（隔离）
+ * - rent/{tenant}/photos/: 租户班级照片（隔离）
+ * - rent/{tenant}/students/: 租户学生照片（隔离）
+ * - rent/{tenant}/albums/: 租户相册（隔离）
  */
 
 import crypto from 'crypto';
@@ -24,7 +24,7 @@ import { logger } from '../utils/logger';
  * OSS访问令牌信息
  */
 export interface OSSAccessTokenInfo {
-  userPhone: string;
+  tenantKey: string;
   tenantCode: string;
   ossPath: string;
   bucket: 'shanghai' | 'guangzhou';
@@ -101,28 +101,28 @@ export class OssTenantSecurityService {
    * 生成OSS访问令牌
    */
   generateOSSAccessToken(
-    userPhone: string,
+    tenantKey: string,
     tenantCode: string,
     ossPath: string,
     bucket: 'shanghai' | 'guangzhou' = 'guangzhou'
   ): OSSAccessTokenInfo {
     try {
-      this.validateInputs(userPhone, tenantCode, ossPath);
+      this.validateInputs(tenantKey, tenantCode, ossPath);
 
       const timestamp = Math.floor(Date.now() / (OSS_SECURITY_CONFIG.TIMESTAMP_UNIT * 1000));
-      const tokenData = `${userPhone}:${tenantCode}:${ossPath}:${bucket}:${timestamp}:${OSS_SECURITY_CONFIG.SALT}`;
+      const tokenData = `${tenantKey}:${tenantCode}:${ossPath}:${bucket}:${timestamp}:${OSS_SECURITY_CONFIG.SALT}`;
       const md5Hash = crypto.createHash('md5').update(tokenData, 'utf8').digest('hex');
       const token = `${OSS_SECURITY_CONFIG.TOKEN_PREFIX}${md5Hash}`;
       const expiresAt = new Date(timestamp * OSS_SECURITY_CONFIG.TIMESTAMP_UNIT * 1000 + OSS_SECURITY_CONFIG.EXPIRES_IN);
 
       logger.info('OSS访问令牌生成成功', {
-        userPhone: this.maskPhone(userPhone),
+        tenantKey: this.maskTenantKey(tenantKey),
         tenantCode,
         ossPath: this.truncatePath(ossPath),
         bucket
       });
 
-      return { userPhone, tenantCode, ossPath, bucket, timestamp, token, expiresAt };
+      return { tenantKey, tenantCode, ossPath, bucket, timestamp, token, expiresAt };
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
       logger.error('生成OSS访问令牌失败', { error: errorMessage });
@@ -134,7 +134,7 @@ export class OssTenantSecurityService {
    * 验证OSS路径访问权限
    */
   validateOSSPathAccess(
-    userPhone: string,
+    tenantKey: string,
     tenantCode: string,
     ossPath: string
   ): { isValid: boolean; error?: string; accessType?: 'public' | 'tenant' } {
@@ -149,14 +149,14 @@ export class OssTenantSecurityService {
 
       // 3. 检查租户隔离目录权限
       if (this.isTenantResource(normalizedPath)) {
-        const pathPhone = this.extractPhoneFromPath(normalizedPath);
-        if (!pathPhone) {
+        const pathTenantKey = this.extractTenantKeyFromPath(normalizedPath);
+        if (!pathTenantKey) {
           return { isValid: false, error: '无效的租户路径格式' };
         }
-        if (pathPhone !== userPhone) {
+        if (pathTenantKey !== tenantKey) {
           logger.warn('OSS租户越权访问尝试', {
-            userPhone: this.maskPhone(userPhone),
-            pathPhone: this.maskPhone(pathPhone),
+            tenantKey: this.maskTenantKey(tenantKey),
+            pathTenantKey: this.maskTenantKey(pathTenantKey),
             ossPath: this.truncatePath(ossPath)
           });
           return { isValid: false, error: 'OSS资源访问越权' };
@@ -176,25 +176,25 @@ export class OssTenantSecurityService {
   /**
    * 生成租户隔离的OSS路径（广州OSS）
    */
-  generateTenantOSSPath(userPhone: string, subPath: string): string {
-    if (!userPhone || !/^[1-9]\d{10}$/.test(userPhone)) {
-      throw new Error('用户手机号格式无效');
+  generateTenantOSSPath(tenantKey: string, subPath: string): string {
+    if (!tenantKey) {
+      throw new Error('租户标识无效');
     }
-    return `${GUANGZHOU_OSS_CONFIG.BASE_PATH}${GUANGZHOU_OSS_CONFIG.TENANT_PREFIX}${userPhone}/${subPath}`;
+    return `${GUANGZHOU_OSS_CONFIG.BASE_PATH}${GUANGZHOU_OSS_CONFIG.TENANT_PREFIX}${tenantKey}/${subPath}`;
   }
 
   /**
    * 生成上海OSS租户隔离路径（人脸识别/相册）
    */
   generateShanghaiTenantPath(
-    userPhone: string,
+    tenantKey: string,
     fileType: 'photos' | 'students' | 'albums',
     subPath: string = ''
   ): string {
-    if (!userPhone || !/^[1-9]\d{10}$/.test(userPhone)) {
-      throw new Error('用户手机号格式无效');
+    if (!tenantKey) {
+      throw new Error('租户标识无效');
     }
-    const basePath = `${SHANGHAI_OSS_CONFIG.BASE_PATH}${SHANGHAI_OSS_CONFIG.TENANT_PREFIX}${userPhone}/${fileType}/`;
+    const basePath = `${SHANGHAI_OSS_CONFIG.BASE_PATH}${SHANGHAI_OSS_CONFIG.TENANT_PREFIX}${tenantKey}/${fileType}/`;
     return subPath ? `${basePath}${subPath}` : basePath;
   }
 
@@ -202,7 +202,7 @@ export class OssTenantSecurityService {
    * 验证上海OSS路径访问权限
    */
   validateShanghaiOSSPath(
-    userPhone: string,
+    tenantKey: string,
     ossPath: string
   ): { isValid: boolean; error?: string; accessType?: 'public' | 'tenant' } {
     try {
@@ -215,14 +215,14 @@ export class OssTenantSecurityService {
 
       // 检查租户隔离目录
       if (normalizedPath.startsWith(SHANGHAI_OSS_CONFIG.TENANT_PREFIX)) {
-        const pathPhone = this.extractPhoneFromPath(normalizedPath);
-        if (!pathPhone) {
+        const pathTenantKey = this.extractTenantKeyFromPath(normalizedPath);
+        if (!pathTenantKey) {
           return { isValid: false, error: '无效的上海OSS租户路径格式' };
         }
-        if (pathPhone !== userPhone) {
+        if (pathTenantKey !== tenantKey) {
           logger.warn('上海OSS租户越权访问尝试', {
-            userPhone: this.maskPhone(userPhone),
-            pathPhone: this.maskPhone(pathPhone),
+            tenantKey: this.maskTenantKey(tenantKey),
+            pathTenantKey: this.maskTenantKey(pathTenantKey),
             ossPath: this.truncatePath(ossPath)
           });
           return { isValid: false, error: '上海OSS资源访问越权' };
@@ -261,24 +261,24 @@ export class OssTenantSecurityService {
    * 统一验证OSS路径（自动识别bucket）
    */
   validateOSSPathUnified(
-    userPhone: string,
+    tenantKey: string,
     ossPath: string
   ): { isValid: boolean; error?: string; accessType?: 'public' | 'tenant'; bucket?: string } {
     const bucket = this.getBucketFromUrl(ossPath);
 
     if (bucket === 'shanghai') {
-      const result = this.validateShanghaiOSSPath(userPhone, ossPath);
+      const result = this.validateShanghaiOSSPath(tenantKey, ossPath);
       return { ...result, bucket: 'shanghai' };
     }
 
     // 默认使用广州OSS验证
-    const result = this.validateOSSPathAccess(userPhone, 'default', ossPath);
+    const result = this.validateOSSPathAccess(tenantKey, 'default', ossPath);
     return { ...result, bucket: 'guangzhou' };
   }
 
   // 辅助方法
-  private validateInputs(userPhone: string, tenantCode: string, ossPath: string): void {
-    if (!userPhone || !/^[1-9]\d{10}$/.test(userPhone)) throw new Error('用户手机号格式无效');
+  private validateInputs(tenantKey: string, tenantCode: string, ossPath: string): void {
+    if (!tenantKey) throw new Error('租户标识无效');
     if (!tenantCode || !/^[a-zA-Z0-9_]+$/.test(tenantCode)) throw new Error('租户代码格式无效');
     if (!ossPath) throw new Error('OSS路径不能为空');
   }
@@ -307,13 +307,15 @@ export class OssTenantSecurityService {
     return path.startsWith(OSS_SECURITY_CONFIG.TENANT_PREFIX);
   }
 
-  private extractPhoneFromPath(path: string): string | null {
-    const match = path.match(/^rent\/(\d{11})\//);
+  private extractTenantKeyFromPath(path: string): string | null {
+    const match = path.match(/^rent\/([^/]+)\//);
     return match ? match[1] : null;
   }
 
-  private maskPhone(phone: string): string {
-    return phone?.length >= 7 ? phone.substring(0, 3) + '****' + phone.substring(7) : phone;
+  private maskTenantKey(tenantKey: string): string {
+    if (!tenantKey) return '';
+    if (tenantKey.length <= 4) return tenantKey;
+    return tenantKey.substring(0, 2) + '****' + tenantKey.substring(tenantKey.length - 2);
   }
 
   private truncatePath(path: string): string {

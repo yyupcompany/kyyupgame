@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="成长报告"
-    :show-nav-bar="true"
-    :show-back="true"
-    :show-tab-bar="true"
-  >
+  <MobileSubPageLayout title="成长报告" back-path="/mobile/parent-center">
     <!-- 下拉刷新 -->
     <van-pull-refresh v-model="refreshing" @refresh="refreshData">
       <!-- 加载状态 -->
@@ -257,13 +252,13 @@
     />
       </template>
     </van-pull-refresh>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, reactive } from 'vue'
 import { showToast, showConfirmDialog, showImagePreview, showLoadingToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { childGrowthApi, type Child, type GrowthRecord, type Milestone, type GrowthStats } from '@/api/modules/child-growth'
 
 // 响应式数据

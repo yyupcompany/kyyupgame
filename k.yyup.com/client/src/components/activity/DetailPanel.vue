@@ -32,16 +32,23 @@
     <div class="quick-actions">
       <h3 class="section-title">快捷操作</h3>
       <div class="actions-grid">
-        <el-button
+        <div
           v-for="action in item.actions"
           :key="action.key"
-          :type="action.type as any"
-          size="large"
+          class="action-item"
+          :class="[`action-item--${action.type || 'default'}`]"
           @click="handleAction(action.key)"
         >
-          <UnifiedIcon :name="convertIconName(getActionIcon(action.key))" :size="18" />
-          {{ action.label }}
-        </el-button>
+          <div class="action-icon-wrapper">
+            <UnifiedIcon :name="convertIconName(getActionIcon(action.key))" :size="20" />
+          </div>
+          <div class="action-info">
+            <span class="action-label">{{ action.label }}</span>
+          </div>
+          <div class="action-arrow">
+            <UnifiedIcon name="arrow-right" :size="14" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -49,12 +56,14 @@
     <div class="feature-details">
       <h3 class="section-title">功能详情</h3>
       <div class="feature-list">
-        <div 
-          v-for="feature in getFeatures(item.id)" 
+        <div
+          v-for="feature in getFeatures(item.id)"
           :key="feature.title"
           class="feature-item"
         >
-          <div class="feature-icon">{{ feature.icon }}</div>
+          <div class="feature-icon">
+            <UnifiedIcon :name="feature.icon" :size="24" />
+          </div>
           <div class="feature-content">
             <h4>{{ feature.title }}</h4>
             <p>{{ feature.description }}</p>
@@ -262,44 +271,44 @@ const formatStatValue = (value: any, key?: string) => {
 const getFeatures = (id: string) => {
   const featuresMap: Record<string, Array<{ icon: string; title: string; description: string }>> = {
     'activity-planning': [
-      { icon: '📋', title: '模板选择', description: '从活动模板库中选择合适的模板快速创建活动' },
-      { icon: '✏️', title: '基本信息', description: '填写活动标题、时间、地点、人数等基本信息' },
-      { icon: '🎯', title: '目标设定', description: '设置活动类型和预期目标' }
+      { icon: 'file', title: '模板选择', description: '从活动模板库中选择合适的模板快速创建活动' },
+      { icon: 'edit', title: '基本信息', description: '填写活动标题、时间、地点、人数等基本信息' },
+      { icon: 'check', title: '目标设定', description: '设置活动类型和预期目标' }
     ],
     'content-creation': [
-      { icon: '🎨', title: '海报设计', description: '选择模板、编辑海报、AI生成海报' },
-      { icon: '🛒', title: '营销配置', description: '设置团购、积攒、优惠券、推荐奖励' },
-      { icon: '👁️', title: '预览效果', description: '实时预览海报和营销配置效果' }
+      { icon: 'activity', title: '海报设计', description: '选择模板、编辑海报、AI生成海报' },
+      { icon: 'marketing', title: '营销配置', description: '设置团购、积攒、优惠券、推荐奖励' },
+      { icon: 'view', title: '预览效果', description: '实时预览海报和营销配置效果' }
     ],
     'page-generation': [
-      { icon: '📱', title: '页面生成', description: '生成活动报名页面（H5/小程序）' },
-      { icon: '🔗', title: '链接管理', description: '生成分享链接和二维码' },
-      { icon: '💰', title: '营销展示', description: '团购倒计时、积攒进度条、优惠券领取' }
+      { icon: 'phone', title: '页面生成', description: '生成活动报名页面（H5/小程序）' },
+      { icon: 'link', title: '链接管理', description: '生成分享链接和二维码' },
+      { icon: 'activity', title: '营销展示', description: '团购倒计时、积攒进度条、优惠券领取' }
     ],
     'activity-publish': [
-      { icon: '📢', title: '渠道发布', description: '发布到微信、网站、小程序等渠道' },
-      { icon: '✍️', title: '分享设置', description: '设置分享文案和图片' },
-      { icon: '📊', title: '推广管理', description: '查看浏览量、分享次数、转化率' }
+      { icon: 'send', title: '渠道发布', description: '发布到微信、网站、小程序等渠道' },
+      { icon: 'edit', title: '分享设置', description: '设置分享文案和图片' },
+      { icon: 'analytics', title: '推广管理', description: '查看浏览量、分享次数、转化率' }
     ],
     'registration-management': [
-      { icon: '✅', title: '报名审核', description: '审核报名信息，批量处理' },
-      { icon: '📈', title: '报名统计', description: '统计报名人数、团购、积攒数据' },
-      { icon: '📋', title: '名单管理', description: '导出名单、打印签到表' }
+      { icon: 'check', title: '报名审核', description: '审核报名信息，批量处理' },
+      { icon: 'trend-charts', title: '报名统计', description: '统计报名人数、团购、积攒数据' },
+      { icon: 'file', title: '名单管理', description: '导出名单、打印签到表' }
     ],
     'activity-execution': [
-      { icon: '📷', title: '签到管理', description: '扫码签到、手动签到' },
-      { icon: '👥', title: '现场管理', description: '实时人数、活动进度、突发事件处理' },
-      { icon: '📸', title: '参与统计', description: '参与度分析、现场照片、现场反馈' }
+      { icon: 'qr-code', title: '签到管理', description: '扫码签到、手动签到' },
+      { icon: 'users', title: '现场管理', description: '实时人数、活动进度、突发事件处理' },
+      { icon: 'photo', title: '参与统计', description: '参与度分析、现场照片、现场反馈' }
     ],
     'activity-evaluation': [
-      { icon: '📝', title: '满意度调查', description: '问卷设计、发放、结果统计' },
-      { icon: '💬', title: '反馈收集', description: '文字反馈、图片反馈、建议收集' },
-      { icon: '📊', title: '评价分析', description: '评分统计、评论分析、改进建议' }
+      { icon: 'file', title: '满意度调查', description: '问卷设计、发放、结果统计' },
+      { icon: 'message', title: '反馈收集', description: '文字反馈、图片反馈、建议收集' },
+      { icon: 'analytics', title: '评价分析', description: '评分统计、评论分析、改进建议' }
     ],
     'effect-analysis': [
-      { icon: '📈', title: '数据分析', description: '参与度、转化率、营销效果分析' },
-      { icon: '💰', title: 'ROI计算', description: '成本统计、收益统计、投资回报率' },
-      { icon: '📄', title: '报告生成', description: '活动总结报告、数据可视化、报告导出' }
+      { icon: 'trend-charts', title: '数据分析', description: '参与度、转化率、营销效果分析' },
+      { icon: 'finance', title: 'ROI计算', description: '成本统计、收益统计、投资回报率' },
+      { icon: 'document', title: '报告生成', description: '活动总结报告、数据可视化、报告导出' }
     ]
   }
   return featuresMap[id] || []
@@ -313,150 +322,340 @@ const handleAction = (actionKey: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+
 .detail-panel {
   height: 100%;
   overflow-y: auto;
-  padding: var(--spacing-3xl);
+  padding: var(--spacing-xl); /* ✨ 优化：减小内边距 */
+  background: linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-page) 100%);
 }
 
 .panel-header {
   display: flex;
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-3xl);
-  padding-bottom: var(--spacing-3xl);
-  border-bottom: var(--border-width-thin) solid var(--border-color);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl); /* ✨ 优化：减小间距 */
+  padding: var(--spacing-xl);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 
   .header-icon {
     flex-shrink: 0;
-    width: var(--size-icon-2xl);
-    height: var(--size-icon-2xl);
+    width: 72px;
+    height: 72px;
     border-radius: var(--radius-lg);
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-on-primary);
+    box-shadow: var(--glow-primary);
+
+    // 确保图标不被拉伸
+    :deep(svg) {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
   }
 
   .header-content {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     .panel-title {
       font-size: var(--text-2xl);
       font-weight: var(--font-bold);
       color: var(--text-primary);
-      margin: 0 0 var(--spacing-sm) 0;
+      margin: 0 0 var(--spacing-xs) 0;
+      letter-spacing: -0.5px;
     }
 
     .panel-description {
       font-size: var(--text-base);
       color: var(--text-secondary);
       margin: 0;
+      line-height: 1.5;
     }
   }
 }
 
 .stats-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-2xl);
 
   .stat-card {
     display: flex;
+    align-items: center;
     gap: var(--spacing-md);
     padding: var(--spacing-lg);
     background: var(--bg-card);
     border-radius: var(--radius-lg);
-    border: var(--border-width-thin) solid var(--border-color);
-    transition: var(--transition-slow);
+    border: 1px solid var(--border-color-light);
+    transition: all var(--transition-normal) ease;
+    box-shadow: var(--shadow-sm);
 
     &:hover {
       border-color: var(--primary-color);
       box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      background: var(--bg-hover);
     }
 
     .stat-icon {
       flex-shrink: 0;
-      width: var(--size-icon-xl);
-      height: var(--size-icon-xl);
+      width: 44px;
+      height: 44px;
       border-radius: var(--radius-md);
       background: var(--primary-light-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary-color);
+      transition: transform var(--transition-normal) ease;
+
+      // 确保图标不被拉伸
+      :deep(svg) {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+    }
+
+    &:hover .stat-icon {
+      transform: scale(1.1) rotate(-5deg);
     }
 
     .stat-content {
       flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: center;
 
       .stat-value {
-        font-size: var(--text-2xl);
+        font-size: var(--text-xl);
         font-weight: var(--font-bold);
         color: var(--text-primary);
-        margin-bottom: var(--spacing-xs);
+        line-height: 1.2;
       }
 
       .stat-label {
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
+        font-size: var(--text-xs);
+        color: var(--text-muted);
+        margin-top: 2px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
     }
   }
 }
 
 .section-title {
-  font-size: var(--text-xl);
-  font-weight: var(--font-semibold);
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
   color: var(--text-primary);
   margin: 0 0 var(--spacing-lg) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  &::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--primary-color);
+    border-radius: var(--radius-full);
+  }
 }
 
 .quick-actions {
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-xl);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 
   .actions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
 
-    .el-button {
+    .action-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: var(--spacing-sm);
+      gap: var(--spacing-md);
+      padding: var(--spacing-md) var(--spacing-lg);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color-light);
+      cursor: pointer;
+      transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-color);
+
+        .action-icon-wrapper {
+          transform: scale(1.1) rotate(-5deg);
+        }
+
+        .action-arrow {
+          transform: translateX(4px);
+          opacity: 1;
+        }
+      }
+
+      .action-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-secondary);
+        color: var(--primary-color);
+        transition: all var(--transition-normal);
+        flex-shrink: 0;
+
+        :deep(svg) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+
+      .action-info {
+        flex: 1;
+        min-width: 0;
+
+        .action-label {
+          font-size: var(--text-base);
+          font-weight: var(--font-bold);
+          color: var(--text-primary);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .action-arrow {
+        color: var(--text-muted);
+        opacity: 0.5;
+        transition: all var(--transition-normal);
+        flex-shrink: 0;
+      }
+
+      // 不同类型的配色方案
+      &--primary {
+        &:hover {
+          background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light-bg) 100%);
+          border-color: var(--primary-color);
+        }
+        .action-icon-wrapper {
+          background: var(--primary-light-bg);
+          color: var(--primary-color);
+        }
+      }
+
+      &--success {
+        &:hover {
+          background: linear-gradient(135deg, var(--bg-card) 0%, var(--success-light-bg) 100%);
+          border-color: var(--success-color);
+        }
+        .action-icon-wrapper {
+          background: var(--success-light-bg);
+          color: var(--success-color);
+        }
+      }
+
+      &--warning {
+        &:hover {
+          background: linear-gradient(135deg, var(--bg-card) 0%, var(--warning-light-bg) 100%);
+          border-color: var(--warning-color);
+        }
+        .action-icon-wrapper {
+          background: var(--warning-light-bg);
+          color: var(--warning-color);
+        }
+      }
+
+      &--danger {
+        &:hover {
+          background: linear-gradient(135deg, var(--bg-card) 0%, var(--danger-light-bg) 100%);
+          border-color: var(--danger-color);
+        }
+        .action-icon-wrapper {
+          background: var(--danger-light-bg);
+          color: var(--danger-color);
+        }
+      }
+
+      &--info, &--default {
+        &:hover {
+          background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+          border-color: var(--text-muted);
+        }
+        .action-icon-wrapper {
+          background: var(--bg-secondary);
+          color: var(--text-secondary);
+        }
+      }
     }
   }
 }
 
 .feature-details {
   .feature-list {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
 
     .feature-item {
       display: flex;
       gap: var(--spacing-lg);
-      padding: var(--spacing-lg);
+      padding: var(--spacing-xl);
       background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      border: var(--border-width-thin) solid var(--border-color);
-      transition: var(--transition-slow);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-color-light);
+      transition: all var(--transition-normal) ease;
 
       &:hover {
         border-color: var(--primary-color);
         box-shadow: var(--shadow-md);
+        transform: scale(1.02);
       }
 
       .feature-icon {
         flex-shrink: 0;
-        font-size: var(--text-2xl);
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-lg);
+        background: var(--bg-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color);
+        transition: all var(--transition-normal);
+
+        // 确保图标不被拉伸
+        :deep(svg) {
+          width: 24px;
+          height: 24px;
+          flex-shrink: 0;
+        }
+      }
+
+      &:hover .feature-icon {
+        background: var(--primary-color);
+        color: white;
       }
 
       .feature-content {
@@ -464,16 +663,16 @@ const handleAction = (actionKey: string) => {
 
         h4 {
           font-size: var(--text-lg);
-          font-weight: var(--font-semibold);
+          font-weight: var(--font-bold);
           color: var(--text-primary);
-          margin: 0 0 var(--spacing-sm) 0;
+          margin: 0 0 var(--spacing-xs) 0;
         }
 
         p {
-          font-size: var(--text-base);
+          font-size: var(--text-sm);
           color: var(--text-secondary);
           margin: 0;
-          line-height: var(--leading-relaxed);
+          line-height: 1.6;
         }
       }
     }

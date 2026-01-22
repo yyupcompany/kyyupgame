@@ -42,6 +42,14 @@ export class CreativeCurriculum extends Model<
   declare metadata: CreationOptional<any>; // 元数据 (JSON: {generatedAt, models, status, progress})
   declare courseAnalysis: CreationOptional<any>; // 课程分析结果 (JSON)
   declare curriculumType: CreationOptional<string>; // 课程类型 (standard, interactive)
+  
+  // 幻灯片课件字段
+  declare slides: CreationOptional<any>; // 幻灯片数据 (JSON: 页面数组)
+  declare originalPrompt: CreationOptional<string>; // 原始生成提示词
+  declare editHistory: CreationOptional<any>; // 编辑历史 (JSON数组)
+  declare themeConfig: CreationOptional<any>; // 主题配置 (JSON)
+  declare totalScore: CreationOptional<number>; // 课件总分
+  declare estimatedDuration: CreationOptional<number>; // 预计时长（分钟）
 
   declare readonly createdAt: CreationOptional<Date>;
   declare readonly updatedAt: CreationOptional<Date>;
@@ -100,17 +108,17 @@ export class CreativeCurriculum extends Model<
         },
         htmlCode: {
           type: DataTypes.TEXT('long'),
-          allowNull: false,
+          allowNull: true,
           comment: 'HTML代码',
         },
         cssCode: {
           type: DataTypes.TEXT('long'),
-          allowNull: false,
+          allowNull: true,
           comment: 'CSS代码',
         },
         jsCode: {
           type: DataTypes.TEXT('long'),
-          allowNull: false,
+          allowNull: true,
           comment: 'JavaScript代码',
         },
         schedule: {
@@ -169,9 +177,39 @@ export class CreativeCurriculum extends Model<
           comment: '课程分析结果',
         },
         curriculumType: {
-          type: DataTypes.ENUM('standard', 'interactive'),
+          type: DataTypes.ENUM('standard', 'interactive', 'a2ui', 'slideshow'),
           defaultValue: 'standard',
-          comment: '课程类型',
+          comment: '课程类型 (standard=标准, interactive=互动, a2ui=AI搭积木, slideshow=幻灯片)',
+        },
+        slides: {
+          type: DataTypes.JSON,
+          allowNull: true,
+          comment: '幻灯片页面数据 (JSON数组)',
+        },
+        originalPrompt: {
+          type: DataTypes.TEXT('long'),
+          allowNull: true,
+          comment: '原始AI生成提示词（用于编辑和重新生成）',
+        },
+        editHistory: {
+          type: DataTypes.JSON,
+          allowNull: true,
+          comment: '编辑历史记录 (JSON数组)',
+        },
+        themeConfig: {
+          type: DataTypes.JSON,
+          allowNull: true,
+          comment: '课件主题配置 (颜色、字体等)',
+        },
+        totalScore: {
+          type: DataTypes.INTEGER,
+          defaultValue: 100,
+          comment: '课件总分',
+        },
+        estimatedDuration: {
+          type: DataTypes.INTEGER,
+          defaultValue: 15,
+          comment: '预计时长（分钟）',
         },
         createdAt: {
           type: DataTypes.DATE,
@@ -193,6 +231,7 @@ export class CreativeCurriculum extends Model<
         tableName: 'creative_curriculums',
         timestamps: true,
         paranoid: true,
+        underscored: true, // 自动转换 camelCase 为 snake_case
         indexes: [
           {
             fields: ['kindergartenId'],

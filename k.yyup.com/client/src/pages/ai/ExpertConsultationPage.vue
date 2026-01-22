@@ -1267,7 +1267,7 @@ const scrollToBottom = () => {
 }
 
 .message.assistant .message-content {
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   margin-right: 50px;
 }
 
@@ -1648,7 +1648,7 @@ const scrollToBottom = () => {
   display: flex;
   justify-content: space-between;
   padding: var(--spacing-sm);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--spacing-xs);
 }
 
@@ -1705,7 +1705,7 @@ const scrollToBottom = () => {
 .timestamp { color: var(--text-muted) !important; }
 
 .message.user .message-content { background: var(--primary-light-bg) !important; }
-.message.assistant .message-content { background: var(--bg-secondary) !important; }
+.message.assistant .message-content { background: var(--bg-page) !important; }
 .role-badge.user { color: var(--primary-color) !important; }
 .role-badge.assistant { color: var(--success-color, var(--success-color)) !important; }
 
@@ -1720,7 +1720,7 @@ const scrollToBottom = () => {
 
 .chat-input { border-top-color: var(--border-color) !important; }
 .input-group textarea {
-  background: var(--bg-primary) !important;
+  background: var(--bg-page) !important;
   color: var(--text-primary) !important;
   border-color: var(--border-color) !important;
 }

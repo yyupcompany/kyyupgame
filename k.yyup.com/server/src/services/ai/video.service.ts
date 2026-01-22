@@ -32,19 +32,19 @@ class VideoService {
       const result = await unifiedAIBridge.processVideo({
         prompt: params.prompt,
         duration: params.duration || 10,
-        size: params.size || '1280x720',
-        style: params.style || 'realistic',
+        action: 'generate',
+        quality: 'medium'
       });
 
-      // 属性可能在顶层或 data 中
-      const videoUrl = result.videoUrl || result.data?.videoUrl;
+      // 从 UnifiedVideoProcessResponse 获取数据
+      const videoUrl = result.data?.videoUrl;
       if (result.success && videoUrl) {
         return {
           success: true,
           videoUrl: videoUrl,
-          videoId: result.videoId || result.data?.videoId,
-          duration: result.duration || result.data?.duration,
-          thumbnailUrl: result.thumbnailUrl || result.data?.thumbnailUrl,
+          videoId: result.data?.taskId,
+          duration: undefined,
+          thumbnailUrl: undefined,
         };
       }
 

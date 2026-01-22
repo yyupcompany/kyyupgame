@@ -8,6 +8,7 @@ import { JWT_SECRET } from '../config/jwt.config';
 import SessionService, { UserSession } from '../services/session.service';
 import { sanitizeLog, authLogSanitizer, sanitizePhone, sanitizeToken } from '../utils/log-sanitizer';
 import { secureAuditLogService, AuditLogLevel, AuditLogCategory } from '../services/secure-audit-log.service';
+import { decryptField } from '../utils/encryption.util';
 
 // 从请求中提取客户端信息的辅助函数
 const getRequestContext = (req: Request) => ({
@@ -362,17 +363,24 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
           console.warn('[认证] Demo系统角色查询失败，使用默认角色:', roleError);
         }
 
-        // 设置用户信息
+        // 解密phone字段（如果已加密）
+        const decryptedPhone = user.phone ? (decryptField(user.phone) || user.phone) : '';
+
+        // 设置用户信息，包含JWT中的园区数据范围字段
         req.user = {
           id: user.id,
           username: user.username,
           role: userRole,
           email: user.email || '',
           realName: user.real_name || user.username,
-          phone: user.phone || '',
+          phone: decryptedPhone,
           status: user.status,
           isAdmin: userRole === 'admin' || userRole === 'super_admin',
-          kindergartenId: 1 // Demo系统默认幼儿园ID
+          // 从JWT Token中获取园区数据范围字段
+          primaryKindergartenId: decoded.primaryKindergartenId || decoded.kindergartenId || 1,
+          kindergartenId: decoded.kindergartenId || decoded.primaryKindergartenId || 1,
+          dataScope: decoded.dataScope || 'single',
+          allowedKindergartenIds: decoded.allowedKindergartenIds || null
         } as any;
 
         console.log('[认证] Demo系统Token验证成功:', {
@@ -608,6 +616,93 @@ export const checkPermission = (permissionCode: string) => {
         console.log('[权限检查] 管理员用户，直接通过');
         next();
         return;
+      }
+
+      // 园长角色对招生中心、教师中心等管理模块拥有查看权限
+      const userRole = (req.user as any).role;
+      if (userRole === 'principal') {
+        // 园长可以访问的权限列表
+        const principalAllowedPermissions = [
+          'enrollment:overview:view',
+          'enrollment:plans:view',
+          'enrollment:applications:view',
+          'enrollment:consultations:view',
+          'enrollment:analytics:view',
+          'teacher-dashboard:view',
+          'dashboard:view',
+          'centers:view',
+          'activity:view',
+          'finance:view',
+          'marketing:view',
+          'system:view',
+          'principal:performance:view',
+          // 添加绩效相关权限的别名，确保所有变体都被允许
+          'principal:performance:stats:view',
+          'principal:performance:rankings:view',
+          'principal:performance:details:view',
+          'principal:performance:trends:view',
+          'principal:performance:export:view',
+          'principal:performance:goals:view'
+        ];
+
+        // 支持通配符匹配：principal:performance:* -> principal:performance:view
+        if (permissionCode.startsWith('principal:performance:') ||
+            principalAllowedPermissions.includes(permissionCode)) {
+          console.log(`[权限检查] 园长角色，允许访问: ${permissionCode}`);
+          next();
+          return;
+        }
+      }
+
+      // 教师角色权限白名单
+      if (userRole === 'teacher') {
+        console.log(`[权限检查] 检测到教师用户，检查白名单权限: ${permissionCode}`);
+        // 教师可以访问的权限列表
+        const teacherAllowedPermissions = [
+          'ENROLLMENT_INTERVIEW_MANAGE',  // 预约面试管理
+          'ENROLLMENT_INTERVIEW_VIEW',    // 预约面试查看
+          'activity:view',                // 活动查看
+          'activity:manage',              // 活动管理
+          'TEACHING_CENTER_VIEW',        // 教学中心查看
+          'TASK_VIEW',                   // 任务查看
+          'TASK_MANAGE'                  // 任务管理
+        ];
+
+        console.log(`[权限检查] 教师白名单:`, teacherAllowedPermissions);
+        console.log(`[权限检查] 权限码是否在白名单: ${teacherAllowedPermissions.includes(permissionCode)}`);
+
+        if (teacherAllowedPermissions.includes(permissionCode)) {
+          console.log(`[权限检查] ✅ 教师角色白名单匹配，允许访问: ${permissionCode}`);
+          next();
+          return;
+        }
+        console.log(`[权限检查] ❌ 教师角色白名单不匹配，继续数据库查询...`);
+      }
+
+      // 家长角色权限白名单
+      if (userRole === 'parent') {
+        console.log(`[权限检查] 检测到家长用户，检查白名单权限: ${permissionCode}`);
+        // 家长可以访问的权限列表
+        const parentAllowedPermissions = [
+          'parent:view',                  // 家长信息查看
+          'parent:manage',                // 家长信息管理
+          'PARENT_CENTER_VIEW',          // 家长中心查看
+          'CHILDREN_VIEW',               // 孩子列表查看
+          'ASSESSMENT_VIEW',             // 评估记录查看
+          'ACTIVITY_VIEW',               // 活动查看
+          'NOTIFICATION_VIEW',           // 通知查看
+          'AI_ASSISTANT_VIEW'            // AI助手查看
+        ];
+
+        console.log(`[权限检查] 家长白名单:`, parentAllowedPermissions);
+        console.log(`[权限检查] 权限码是否在白名单: ${parentAllowedPermissions.includes(permissionCode)}`);
+
+        if (parentAllowedPermissions.includes(permissionCode)) {
+          console.log(`[权限检查] ✅ 家长角色白名单匹配，允许访问: ${permissionCode}`);
+          next();
+          return;
+        }
+        console.log(`[权限检查] ❌ 家长角色白名单不匹配，继续数据库查询...`);
       }
 
 
@@ -1054,34 +1149,73 @@ const authenticateWithDemoSystem = async (req: Request, res: Response, loginIden
       database: DEMO_DATABASE
     });
 
-    // 在 kargerdensales 数据库中查找用户（支持手机号或用户名）
-    const whereClause = isPhone ? 'u.phone = ?' : 'u.username = ?';
-    const [userRows] = await sequelize.query(`
-      SELECT u.id, u.username, u.email, u.real_name, u.phone, u.password, u.status, u.role
-      FROM ${DEMO_DATABASE}.users u
-      WHERE ${whereClause} AND u.status = 'active'
-      LIMIT 1
-    `, {
-      replacements: [loginIdentifier]
-    });
+    let user: any = null;
 
-    if (!userRows || (userRows as any[]).length === 0) {
-      // 审计日志：登录失败 - 用户不存在
-      await secureAuditLogService.logAuth('Demo登录失败-用户不存在', {
-        username: logIdentifier,
-        ipAddress: getRequestContext(req).ipAddress,
-        userAgent: getRequestContext(req).userAgent,
-        details: { reason: '用户不存在或未激活', type: isPhone ? 'phone' : 'username' }
+    if (isPhone) {
+      // 手机号登录：由于phone字段加密，需要查询所有活跃用户并解密匹配
+      console.log('[Demo认证] 手机号登录，查询并解密phone字段');
+      const [allUsers] = await sequelize.query(`
+        SELECT u.id, u.username, u.email, u.real_name, u.phone, u.password, u.status, u.role,
+               u.primary_kindergarten_id, u.kindergarten_id, u.data_scope, u.allowed_kindergarten_ids
+        FROM ${DEMO_DATABASE}.users u
+        WHERE u.status = 'active' AND u.phone IS NOT NULL AND u.phone != ''
+      `);
+
+      // 解密phone字段并匹配
+      for (const dbUser of allUsers as any[]) {
+        const decryptedPhone = decryptField(dbUser.phone);
+        if (decryptedPhone === loginIdentifier) {
+          user = dbUser;
+          break;
+        }
+      }
+
+      if (!user) {
+        console.log('[Demo认证] 手机号未找到匹配用户');
+        await secureAuditLogService.logAuth('Demo登录失败-用户不存在', {
+          username: logIdentifier,
+          ipAddress: getRequestContext(req).ipAddress,
+          userAgent: getRequestContext(req).userAgent,
+          details: { reason: '用户不存在或未激活', type: 'phone' }
+        });
+        res.status(401).json({
+          success: false,
+          message: '用户不存在或未激活',
+          error: 'USER_NOT_FOUND'
+        });
+        return;
+      }
+    } else {
+      // 用户名登录：直接查询username字段
+      console.log('[Demo认证] 用户名登录，直接查询username');
+      const [userRows] = await sequelize.query(`
+        SELECT u.id, u.username, u.email, u.real_name, u.phone, u.password, u.status, u.role,
+               u.primary_kindergarten_id, u.kindergarten_id, u.data_scope, u.allowed_kindergarten_ids
+        FROM ${DEMO_DATABASE}.users u
+        WHERE u.username = ? AND u.status = 'active'
+        LIMIT 1
+      `, {
+        replacements: [loginIdentifier]
       });
-      res.status(401).json({
-        success: false,
-        message: '用户不存在或未激活',
-        error: 'USER_NOT_FOUND'
-      });
-      return;
+
+      if (!userRows || (userRows as any[]).length === 0) {
+        console.log('[Demo认证] 用户名未找到匹配用户');
+        await secureAuditLogService.logAuth('Demo登录失败-用户不存在', {
+          username: logIdentifier,
+          ipAddress: getRequestContext(req).ipAddress,
+          userAgent: getRequestContext(req).userAgent,
+          details: { reason: '用户不存在或未激活', type: 'username' }
+        });
+        res.status(401).json({
+          success: false,
+          message: '用户不存在或未激活',
+          error: 'USER_NOT_FOUND'
+        });
+        return;
+      }
+
+      user = (userRows as any[])[0];
     }
-
-    const user = (userRows as any[])[0];
 
     // 验证密码
     const isPasswordValid = await bcrypt.compare(password, user.password);
@@ -1113,7 +1247,11 @@ const authenticateWithDemoSystem = async (req: Request, res: Response, loginIden
         id: user.id,
         phone: user.phone,
         role: user.role || 'parent',
-        isDemo: true
+        isDemo: true,
+        // 添加园区数据范围字段，确保 applyDataScope 中间件能正常工作
+        primaryKindergartenId: user.primary_kindergarten_id || null,
+        kindergartenId: user.kindergarten_id || null,
+        dataScope: user.data_scope || 'single'
       },
       JWT_SECRET,
       { expiresIn: '7d' }
@@ -1152,6 +1290,9 @@ const authenticateWithDemoSystem = async (req: Request, res: Response, loginIden
       details: { role: userRole, loginType: isPhone ? 'phone' : 'username' }
     });
 
+    // 解密phone字段（如果已加密）
+    const decryptedPhone = user.phone ? (decryptField(user.phone) || user.phone) : '';
+
     res.json({
       success: true,
       message: '登录成功',
@@ -1162,7 +1303,7 @@ const authenticateWithDemoSystem = async (req: Request, res: Response, loginIden
           username: user.username,
           email: user.email || '',
           realName: user.real_name || user.username,
-          phone: user.phone,
+          phone: decryptedPhone,
           role: userRole,
           isAdmin: userRole === 'admin' || userRole === 'super_admin',
           status: user.status

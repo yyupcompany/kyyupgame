@@ -1336,7 +1336,7 @@ onMounted(() => {
   flex-direction: column;
   height: 100%;
   width: 100%;
-  background: var(--bg-secondary); /* 白色区域修复：使用主题背景色 */
+  background: var(--bg-page); /* 白色区域修复：使用主题背景色 */
   max-width: 100%;
   box-sizing: border-box;
   overflow: auto;
@@ -1359,7 +1359,7 @@ onMounted(() => {
   overflow-y: auto;
   width: 100%;
   box-sizing: border-box;
-  background: var(--bg-secondary); /* 白色区域修复：使用主题背景色 */
+  background: var(--bg-page); /* 白色区域修复：使用主题背景色 */
 }
 
 .page-title {
@@ -1423,7 +1423,7 @@ onMounted(() => {
   min-min-height: 60px; height: auto;
   width: 100%;
   box-sizing: border-box;
-  background: var(--bg-secondary); /* 白色区域修复：使用主题背景色 */
+  background: var(--bg-page); /* 白色区域修复：使用主题背景色 */
   border-radius: var(--radius-lg); /* 硬编码修复：使用统一圆角变量 */
   padding: var(--app-gap); /* 硬编码修复：使用统一间距变量 */
 }

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="个人中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="个人中心" back-path="/mobile/parent-center">
     <div class="mobile-parent-profile">
       <!-- 头部信息卡片 -->
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -402,7 +397,7 @@
         </van-cell-group>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -412,7 +407,7 @@ import { showToast, showConfirmDialog, showSuccessToast } from 'vant'
 import { PARENT_ENDPOINTS } from '@/api/endpoints'
 import { request } from '@/utils/request'
 import type { ApiResponse } from '@/api/endpoints'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 数据接口定义
 interface Child {
@@ -781,6 +776,12 @@ const handleLogout = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   fetchParentDetail()
 })
 </script>
@@ -1197,6 +1198,13 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

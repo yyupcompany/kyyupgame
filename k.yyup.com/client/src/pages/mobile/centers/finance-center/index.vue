@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="财务中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="财务中心" back-path="/mobile/centers">
     <!-- 快速操作按钮 -->
     <template #header-extra>
       <van-icon name="plus" size="20" @click="handleQuickPayment" />
@@ -329,14 +324,14 @@
         <p>默认缴费期限是指从生成缴费单到缴费截止日期的天数，系统会自动根据此设置计算缴费截止日期。</p>
       </div>
     </van-dialog>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { showSuccessToast, showFailToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import financeAPI, { type FinanceOverview, type PaymentRecord } from '@/api/modules/finance'
 import * as echarts from 'echarts'
 
@@ -810,6 +805,12 @@ const loadTodayPayments = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   console.log('移动端财务中心已加载')
   loadOverviewData()
   loadTodayPayments()

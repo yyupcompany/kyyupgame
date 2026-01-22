@@ -137,6 +137,6 @@ export function updateContent(id: number, data: UpdateContentParams) {
  * 删除媒体内容
  */
 export function deleteContent(id: number) {
-  return request.delete(`/media-center/content/${id}`);
+  return request.delete(`/api/media-center/content/${id}`);
 }
 

@@ -29,17 +29,14 @@
       <!-- 图标区域 -->
       <div class="card-icon" v-if="icon || iconName || $slots.icon">
         <slot name="icon">
-          <!-- 使用UnifiedIcon组件 -->
+          <!-- 使用UnifiedIcon组件 - 同时支持 icon 和 iconName，优先使用 icon -->
           <UnifiedIcon
-            v-if="iconName"
-            :name="iconName"
+            :name="icon || iconName || 'default'"
             :size="iconSize"
             :color="iconColor"
             :variant="iconVariant"
             :stroke-width="1.5"
           />
-          <!-- 兼容旧的图标方式 -->
-          <UnifiedIcon name="default" />
         </slot>
       </div>
 
@@ -105,7 +102,7 @@ interface Props {
   trend?: number | 'up' | 'down' | 'stable'
   trendText?: string
   type?: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
-  size?: 'small' | 'default' | 'large'
+  size?: 'small' | 'normal' | 'large'
   loading?: boolean
   clickable?: boolean
   badge?: number | string
@@ -117,7 +114,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   type: 'default',
-  size: 'default',
+  size: 'normal',
   loading: false,
   clickable: false,
   badgeMax: 99,
@@ -205,16 +202,15 @@ const handleClick = () => {
 .stat-card {
   position: relative;
   background: var(--bg-card);
-  border: var(--border-width) solid var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg); /* ✨ 修复：减小上下内边距，使卡片更紧凑 */
   min-height: var(--spacing-3xl);
   display: flex;
   flex-direction: column;
   transition: all var(--transition-base);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
-  box-shadow: var(--shadow-md);
-  backdrop-filter: var(--backdrop-blur);
+  box-shadow: var(--shadow-sm);
 
   /* 渐变边框动画 */
   &::before {
@@ -223,7 +219,7 @@ const handleClick = () => {
     top: 0;
     left: 0;
     right: 0;
-    height: var(--border-width, var(--spacing-xs));
+    height: var(--spacing-xs);
     background: linear-gradient(90deg, var(--card-gradient, var(--gradient-purple)));
     transform: scaleX(0);
     transform-origin: left;
@@ -233,41 +229,17 @@ const handleClick = () => {
     backface-visibility: hidden;
   }
 
-  /* 霓虹发光背景光效 */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    right: calc(var(--spacing-xl) * -1.5);
-    width: var(--card-glow-size);
-    height: var(--card-glow-size);
-    background: radial-gradient(circle, var(--card-glow-bg, rgba(102, 126, 234, 0.2)) 0%, var(--card-glow-color, rgba(118, 75, 162, 0.1)) 30%, transparent 70%);
-    border-radius: var(--radius-full);
-    opacity: 0;
-    transition: all var(--transition-base);
-    pointer-events: none;
-    will-change: opacity, transform;
-    transform: translateX(0);
-  }
-
   &--clickable {
     cursor: pointer;
     will-change: transform, box-shadow, border-color;
 
     &:hover {
-      transform: translateY(-var(--spacing-sm)) scale(1.02);
-      box-shadow: var(--shadow-2xl),
-                  0 0 var(--spacing-xl) var(--card-glow-color, rgba(102, 126, 234, 0.3)),
-                  0 0 40px var(--card-glow-bg, rgba(102, 126, 234, 0.1));
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: var(--shadow-md);
       border-color: var(--border-focus);
 
       &::before {
         transform: scaleX(1);
-      }
-
-      &::after {
-        opacity: 1;
-        transform: translateX(30px) scale(1.1);
       }
 
       .card-icon {
@@ -282,24 +254,12 @@ const handleClick = () => {
         transform: translateX(var(--spacing-xs));
       }
 
-      &.stat-card--primary {
-        box-shadow: var(--shadow-2xl);
-      }
-
-      &.stat-card--success {
-        box-shadow: var(--shadow-2xl);
-      }
-
-      &.stat-card--warning {
-        box-shadow: var(--shadow-2xl);
-      }
-
-      &.stat-card--info {
-        box-shadow: var(--shadow-2xl);
-      }
-
+      &.stat-card--primary,
+      &.stat-card--success,
+      &.stat-card--warning,
+      &.stat-card--info,
       &.stat-card--danger {
-        box-shadow: var(--shadow-2xl);
+        box-shadow: var(--shadow-md);
       }
     }
 
@@ -309,16 +269,11 @@ const handleClick = () => {
 
       &:hover {
         transform: none;
-        box-shadow: 0 var(--spacing-xs) var(--text-lg) var(--black-alpha-8);
+        box-shadow: var(--shadow-sm);
         border-color: var(--border-color);
 
         &::before {
           transform: scaleX(0);
-        }
-
-        &::after {
-          opacity: 0;
-          right: var(--position-negative-12xl);
         }
 
         .card-icon {
@@ -384,13 +339,23 @@ const handleClick = () => {
     --card-glow-bg: var(--primary-light-bg);
     --card-glow-color: var(--glow-primary);
 
-    border-color: var(--primary-color);
-    background: var(--gradient-primary);
-    color: var(--text-on-primary);
-    box-shadow: 0 var(--spacing-xs) var(--spacing-xl) var(--primary-shadow);
+    border: none;
+    background: var(--gradient-primary) !important;
+    color: #ffffff !important;
+    box-shadow: var(--shadow-sm);
 
     .card-title,
     .card-description {
+      color: var(--text-on-primary-secondary);
+    }
+
+    .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .value-unit,
+    .trend-text {
       color: var(--text-on-primary-secondary);
     }
   }
@@ -402,13 +367,23 @@ const handleClick = () => {
     --card-glow-bg: var(--success-light-bg);
     --card-glow-color: var(--glow-success);
 
-    border-color: var(--success-color);
+    border: none;
     background: var(--gradient-success);
     color: var(--text-on-primary);
-    box-shadow: 0 var(--spacing-xs) var(--spacing-xl) var(--glow-success);
+    box-shadow: var(--shadow-sm);
 
     .card-title,
     .card-description {
+      color: var(--text-on-primary-secondary);
+    }
+
+    .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .value-unit,
+    .trend-text {
       color: var(--text-on-primary-secondary);
     }
   }
@@ -420,13 +395,23 @@ const handleClick = () => {
     --card-glow-bg: var(--warning-light-bg);
     --card-glow-color: var(--glow-warning);
 
-    border-color: var(--warning-color);
+    border: none;
     background: var(--gradient-warning);
     color: var(--text-on-primary);
-    box-shadow: 0 var(--spacing-xs) var(--spacing-xl) var(--glow-warning);
+    box-shadow: var(--shadow-sm);
 
     .card-title,
     .card-description {
+      color: var(--text-on-primary-secondary);
+    }
+
+    .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .value-unit,
+    .trend-text {
       color: var(--text-on-primary-secondary);
     }
   }
@@ -438,13 +423,23 @@ const handleClick = () => {
     --card-glow-bg: var(--danger-light-bg);
     --card-glow-color: var(--glow-danger);
 
-    border-color: var(--danger-color);
+    border: none;
     background: var(--gradient-danger);
     color: var(--text-on-primary);
-    box-shadow: 0 var(--spacing-xs) var(--spacing-xl) var(--glow-danger);
+    box-shadow: var(--shadow-sm);
 
     .card-title,
     .card-description {
+      color: var(--text-on-primary-secondary);
+    }
+
+    .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .value-unit,
+    .trend-text {
       color: var(--text-on-primary-secondary);
     }
   }
@@ -456,13 +451,23 @@ const handleClick = () => {
     --card-glow-bg: var(--info-light-bg);
     --card-glow-color: var(--glow-blue);
 
-    border-color: var(--info-color);
+    border: none;
     background: var(--gradient-info);
     color: var(--text-on-primary);
-    box-shadow: 0 var(--spacing-xs) var(--spacing-xl) var(--glow-blue);
+    box-shadow: var(--shadow-sm);
 
     .card-title,
     .card-description {
+      color: var(--text-on-primary-secondary);
+    }
+
+    .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .value-unit,
+    .trend-text {
       color: var(--text-on-primary-secondary);
     }
   }
@@ -513,7 +518,7 @@ const handleClick = () => {
     font-size: var(--spacing-xl);
     font-weight: 600;
     line-height: 1;
-    color: var(--text-primary);
+    color: inherit; /* ✨ 修复：继承父级文字颜色，确保在彩色卡片上显示正确 */
     transition: transform var(--transition-base);
     will-change: transform;
     backface-visibility: hidden;
@@ -564,7 +569,7 @@ const handleClick = () => {
     &--up {
       background: var(--success-light-bg);
       color: var(--success-color);
-      border: var(--border-width) solid rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(16, 185, 129, 0.2);
 
       .trend-icon {
         color: var(--success-color);
@@ -574,7 +579,7 @@ const handleClick = () => {
     &--down {
       background: var(--danger-light-bg);
       color: var(--danger-color);
-      border: var(--border-width) solid var(--danger-light-bg);
+      border: 1px solid rgba(239, 68, 68, 0.2);
 
       .trend-icon {
         color: var(--danger-color);
@@ -584,7 +589,7 @@ const handleClick = () => {
     &--flat {
       background: var(--bg-hover);
       color: var(--text-secondary);
-      border: var(--border-width) solid var(--border-color-light);
+      border: 1px solid var(--border-color-light);
 
       .trend-icon {
         color: var(--text-secondary);
@@ -602,7 +607,7 @@ const handleClick = () => {
 .card-footer {
   margin-top: var(--spacing-lg);
   padding-top: var(--spacing-lg);
-  border-top: var(--z-index-dropdown) solid var(--border-color);
+  border-top: 1px solid var(--border-color);
 }
 
 .card-badge {
@@ -611,38 +616,7 @@ const handleClick = () => {
   right: var(--spacing-sm, var(--spacing-sm));
 }
 
-// 🎨 暗黑主题适配
-:deep(.dark) {
-  .stat-card {
-    --bg-card: var(--bg-card);
-    --border-color: var(--border-color);
-    --text-primary: var(--text-primary);
-    --text-secondary: var(--text-secondary);
-    --card-glow-bg: var(--card-glow-bg);
-    --card-glow-color: var(--card-glow-color);
-
-    background: var(--bg-card);
-    border-color: var(--border-color);
-    color: var(--text-primary);
-    box-shadow: var(--shadow-lg);
-
-    &::before {
-      background: var(--gradient-primary);
-    }
-
-    &::after {
-      background: radial-gradient(circle, var(--card-glow-bg) 0%, var(--card-glow-color) 30%, transparent 70%);
-    }
-
-    &:hover {
-      border-color: var(--border-focus);
-      box-shadow: var(--shadow-2xl),
-                  0 0 var(--spacing-xl) var(--card-glow-bg),
-                  0 0 40px var(--card-glow-color);
-    }
-  }
-}
-
+// 🎨 暗黑主题适配 - 已统一使用 CSS 变量，移除强制覆盖
 // 响应式设计
 @media (max-width: var(--breakpoint-md)) {
   .stat-card {

@@ -98,21 +98,21 @@ export const chatApi = {
     items: ChatConversation[];
     total: number;
   }>> {
-    return get('/chat/conversations', { params });
+    return get('/api/chat/conversations', { params });
   },
 
   /**
    * 创建对话
    */
   createConversation(data: CreateConversationRequest): Promise<ApiResponse<ChatConversation>> {
-    return post('/chat/conversations', data);
+    return post('/api/chat/conversations', data);
   },
 
   /**
    * 获取对话详情
    */
   getConversation(id: string): Promise<ApiResponse<ChatConversation>> {
-    return get(`/chat/conversations/${id}`);
+    return get(`/api/chat/conversations/${id}`);
   },
 
   /**
@@ -122,14 +122,14 @@ export const chatApi = {
     title?: string;
     participantIds?: string[];
   }): Promise<ApiResponse<ChatConversation>> {
-    return put(`/chat/conversations/${id}`, data);
+    return put(`/api/chat/conversations/${id}`, data);
   },
 
   /**
    * 删除对话
    */
   deleteConversation(id: string): Promise<ApiResponse> {
-    return del(`/chat/conversations/${id}`);
+    return del(`/api/chat/conversations/${id}`);
   },
 
   /**
@@ -144,35 +144,35 @@ export const chatApi = {
     total: number;
     hasMore: boolean;
   }>> {
-    return get(`/chat/conversations/${conversationId}/messages`, { params });
+    return get(`/api/chat/conversations/${conversationId}/messages`, { params });
   },
 
   /**
    * 发送消息
    */
   sendMessage(data: SendMessageRequest): Promise<ApiResponse<ChatMessage>> {
-    return post('/chat/messages', data);
+    return post('/api/chat/messages', data);
   },
 
   /**
    * 标记消息已读
    */
   markMessageAsRead(messageId: string): Promise<ApiResponse> {
-    return put(`/chat/messages/${messageId}/read`);
+    return put(`/api/chat/messages/${messageId}/read`);
   },
 
   /**
    * 标记对话已读
    */
   markConversationAsRead(conversationId: string): Promise<ApiResponse> {
-    return put(`/chat/conversations/${conversationId}/read`);
+    return put(`/api/chat/conversations/${conversationId}/read`);
   },
 
   /**
    * 删除消息
    */
   deleteMessage(messageId: string): Promise<ApiResponse> {
-    return del(`/chat/messages/${messageId}`);
+    return del(`/api/chat/messages/${messageId}`);
   },
 
   /**
@@ -187,7 +187,7 @@ export const chatApi = {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('conversationId', conversationId);
-    return post('/chat/upload', formData);
+    return post('/api/chat/upload', formData);
   },
 
   /**
@@ -197,7 +197,7 @@ export const chatApi = {
     total: number;
     byConversation: Record<string, number>;
   }>> {
-    return get('/chat/unread-count');
+    return get('/api/chat/unread-count');
   }
 };
 

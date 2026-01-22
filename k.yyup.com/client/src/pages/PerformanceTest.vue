@@ -534,7 +534,7 @@ onMounted(() => {
         padding-top: 12px;
 
         pre {
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: 4px;
           padding: var(--spacing-md);
           overflow-x: auto;

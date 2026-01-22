@@ -1559,7 +1559,7 @@ onMounted(() => {
   .detail-content {
     margin-bottom: var(--spacing-lg);
     padding: var(--spacing-md);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--radius-md);
 
     p {
@@ -1698,7 +1698,7 @@ onMounted(() => {
 .read-details-content {
   .notification-info {
     padding: var(--spacing-lg);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--radius-lg);
     margin-bottom: var(--spacing-lg);
 

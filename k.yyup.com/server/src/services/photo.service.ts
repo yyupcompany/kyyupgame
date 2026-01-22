@@ -15,7 +15,7 @@ export class PhotoService {
    * 上传照片（含压缩优化）- 支持租户隔离
    * @param file 文件Buffer
    * @param options 上传选项
-   * @param tenantPhone 租户手机号（用于隔离存储）
+   * @param tenantKey 租户标识（用于隔离存储）
    */
   async uploadPhoto(
     file: Buffer,
@@ -32,7 +32,7 @@ export class PhotoService {
       tags?: string[];
       caption?: string;
     },
-    tenantPhone?: string
+    tenantKey?: string
   ): Promise<Photo> {
     try {
       console.log('\n' + '='.repeat(80));
@@ -41,7 +41,7 @@ export class PhotoService {
       console.log(`文件名：${options.originalName}`);
       console.log(`文件大小：${(file.length / 1024).toFixed(2)} KB`);
       console.log(`上传人：${options.uploadUserId}`);
-      console.log(`租户手机：${tenantPhone || '未指定（使用旧版路径）'}`);
+      console.log(`租户标识：${tenantKey || '未指定（使用旧版路径）'}`);
       console.log(`活动类型：${options.activityType || '未指定'}`);
       console.log(`拍摄日期：${options.shootDate || '未指定'}`);
 
@@ -54,9 +54,9 @@ export class PhotoService {
         console.log('\n📤 步骤1/4：上传到阿里云OSS...');
 
         // 如果提供了租户手机号，使用租户隔离路径
-        if (tenantPhone) {
-          console.log(`   使用租户隔离路径: rent/${tenantPhone}/photos/...`);
-          const uploadResult = await ossService.uploadTenantImage(file, tenantPhone, {
+        if (tenantKey) {
+          console.log(`   使用租户隔离路径: rent/${tenantKey}/photos/...`);
+          const uploadResult = await ossService.uploadTenantImage(file, tenantKey, {
             filename: options.originalName,
             fileType: 'photos',
             subPath: new Date().toISOString().slice(0, 7), // photos/{yyyy-MM}/

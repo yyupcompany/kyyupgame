@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="发育测评"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="发育测评" back-path="/mobile/parent-center">
     <div class="mobile-development-assessment">
       <!-- 页面头部 -->
       <div class="header-section">
@@ -191,14 +186,14 @@
         </div>
       </van-cell-group>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
 const starting = ref(false)
@@ -337,6 +332,12 @@ const loadHistory = async () => {
 
 // 组件挂载时加载数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadHistory()
 })
 </script>

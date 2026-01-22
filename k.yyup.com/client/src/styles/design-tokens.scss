@@ -139,6 +139,20 @@
   --border-color-extra-light: #f2f6fc;
   --border-color-dark: #d3d4d6;
 
+  /* ==================== AI 助手专用语义化变量 ==================== */
+  /* AI Assistant Semantic Variables */
+  --ai-primary-glow: rgba(91, 141, 239, 0.4);
+  --ai-bubble-user-bg: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  --ai-bubble-ai-bg: var(--bg-card);
+  --ai-bubble-ai-bg-light: #f8f9fc;  /* 浅色主题AI消息背景 */
+  --ai-bubble-ai-bg-dark: linear-gradient(135deg, #2a2d35 0%, #1e2128 100%);  /* 深色主题AI消息渐变背景 */
+  --ai-bubble-ai-border: var(--border-color-light);
+  --ai-thinking-pulse: var(--primary-color);
+  --ai-input-bg: var(--bg-card);
+  --ai-input-shadow: var(--shadow-lg);
+  --ai-transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ai-transition-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
   /* ==================== 渐变色 ==================== */
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
@@ -278,6 +292,7 @@
   --header-height: 64px;
   --toolbar-height: 48px;
   --footer-height: 60px;
+  --tabbar-height: 56px; /* 移动端底部导航栏高度 */
 
   /* Logo尺寸 - Logo Sizes */
   --logo-size: 40px;
@@ -656,6 +671,9 @@ html[data-theme="theme-light"],
   --bg-tertiary: var(--bg-tertiary-light);
   --bg-card: var(--bg-card-light);
   --bg-hover: var(--bg-hover-light);
+  
+  /* AI助手消息气泡：浅色主题使用柔和的浅灰蓝色 */
+  --ai-bubble-ai-bg: #f4f6fb;
   --text-primary: var(--text-primary-light);
   --text-regular: var(--text-secondary-light);
   --text-secondary: var(--text-muted-light);
@@ -718,6 +736,10 @@ html[data-theme="theme-dark"],
   --bg-tertiary: #2a2a2a;
   --bg-hover: #2f3033;
   --bg-active: #3c4043;
+  
+  /* AI助手消息气泡：深色主题使用带主色调的渐变背景 */
+  --ai-bubble-ai-bg: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.04) 100%);
+  --ai-bubble-ai-border: rgba(139, 92, 246, 0.15);
 
   /* 边框色彩 - Border Colors */
   --border-color: rgba(255, 255, 255, 0.08);
@@ -793,7 +815,7 @@ html[data-theme="theme-dark"],
 
   html[data-theme="dark"],
   :root[data-theme="dark"] {
-    --border-color: var(--border-color)fff;
+    --border-color: #ffffff;
     --border-color-light: #cccccc;
     --text-primary: #ffffff;
   }
@@ -887,4 +909,33 @@ body.theme-workbench[data-center="system"] {
 body.theme-workbench[data-center="ai"] {
   --primary-color: var(--accent-ai);
   --primary-hover: var(--accent-ai-hover);
+}
+
+/* ==================== 移动端底部导航栏样式修复 ==================== */
+/* Mobile Bottom Tabbar Style Fix */
+
+html[data-theme="dark"] {
+  // 强制覆盖深色主题下的 tabbar 选中项背景
+  .van-tabbar-item--active,
+  .van-tabbar-item.van-tabbar-item--active,
+  .van-tabbar-item--active .van-tabbar-item__wrapper,
+  .van-tabbar-item--active .van-tabbar-item__icon,
+  .van-tabbar-item--active .van-tabbar-item__text,
+  .van-tabbar-item--active .van-tabbar-item__icon-wrapper,
+  .van-tabbar-item--active .van-tabbar-item__badge-wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  
+  // 覆盖所有可能的子元素
+  .van-tabbar-item__wrapper {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  
+  // 确保选中状态下的所有元素都是透明背景
+  .van-tabbar-item.van-tabbar-item--active * {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
 }

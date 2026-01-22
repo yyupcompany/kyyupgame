@@ -235,7 +235,7 @@ const posterApi = {
    * @returns Promise<ApiResponse<string[]>>
    */
   async getCategories(): Promise<ApiResponse<string[]>> {
-    return get('/poster-templates/categories');
+    return get('/api/poster-templates/categories');
   },
 
   /**
@@ -259,7 +259,7 @@ const posterApi = {
     startDate?: string;
     endDate?: string;
   }): Promise<ApiResponse<{ usageStats: Array<{ date: string; count: number }> }>> {
-    return get('/poster-templates/statistics', { params });
+    return get('/api/poster-templates/statistics', { params });
   }
 };
 

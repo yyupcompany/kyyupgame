@@ -73,7 +73,7 @@ class MultimodalService {
         action: 'transcribe',
         file: request.audioBuffer,
         model: 'whisper-1'
-      });
+      }) as any;
 
       return {
         text: result.data?.text || result.text || '',
@@ -99,8 +99,8 @@ class MultimodalService {
         model: voice || 'alloy'
       });
 
-      if (result.success && result.audioBuffer) {
-        return result.audioBuffer;
+      if (result.success && result.data?.audioData) {
+        return result.data.audioData;
       }
 
       throw new Error(result.error || '语音合成失败');

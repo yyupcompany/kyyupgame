@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="系统中心"
-    :show-back="true"
-    @back="handleBack"
-  >
+  <MobileCenterLayout title="系统中心" back-path="/mobile/centers">
     <!-- 头部操作按钮 -->
     <template #header-extra>
       <van-icon name="scan" size="20" @click="handleSystemCheck" />
@@ -24,7 +20,7 @@
               <div class="stat-value">{{ stat.value }}</div>
               <div class="stat-label">{{ stat.label }}</div>
               <div class="stat-trend" v-if="stat.trend">
-                <van-tag :type="stat.trendType" size="small">{{ stat.trend }}</van-tag>
+                <van-tag :type="stat.trendType" size="medium">{{ stat.trend }}</van-tag>
               </div>
             </div>
           </van-grid-item>
@@ -70,7 +66,7 @@
                 <h4>{{ service.name }}</h4>
                 <van-tag
                   :type="getServiceStatusType(service.status)"
-                  size="small"
+                  size="medium"
                 >
                   {{ getServiceStatusText(service.status) }}
                 </van-tag>
@@ -177,11 +173,11 @@
               <div class="logs-header">
                 <h3>系统日志</h3>
                 <div class="logs-actions">
-                  <van-button size="small" @click="refreshLogs" :loading="loadingLogs">
+                  <van-button size="medium" @click="refreshLogs" :loading="loadingLogs">
                     <van-icon name="replay" />
                     刷新
                   </van-button>
-                  <van-button size="small" type="primary" @click="exportLogs">
+                  <van-button size="medium" type="primary" @click="exportLogs">
                     <van-icon name="down" />
                     导出
                   </van-button>
@@ -204,14 +200,14 @@
         </van-tab>
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { getSystemStats, getSystemLogs } from '@/api/modules/system'
 
 const router = useRouter()
@@ -498,6 +494,12 @@ const loadSystemLogs = async () => {
 
 // 初始化数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadSystemStats()
   loadSystemLogs()
 })

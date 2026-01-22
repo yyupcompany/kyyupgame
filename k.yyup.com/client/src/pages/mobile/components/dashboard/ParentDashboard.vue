@@ -64,7 +64,7 @@
 
 .child-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
 
   .section-title {
     font-size: var(--text-base);
@@ -113,7 +113,7 @@
 
 .quick-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   margin-top: var(--app-gap);
 
   .section-title {

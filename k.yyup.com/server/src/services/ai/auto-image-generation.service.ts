@@ -60,17 +60,17 @@ export class AutoImageGenerationService {
       });
 
       // 获取第一个生成的图片
-      const imageData = Array.isArray(result.data) ? result.data[0] : result.data;
-      const imageUrl = result.url || result.data?.url || imageData?.url;
+      const imageData = result.data?.images?.[0];
+      const imageUrl = imageData?.url;
 
       if (result.success && imageUrl) {
         return {
           success: true,
           imageUrl: imageUrl,
-          thumbnailUrl: result.thumbnailUrl || result.data?.thumbnailUrl || imageUrl,
+          thumbnailUrl: imageUrl,
           usage: {
-            model: result.model || result.data?.model || 'dall-e',
-            tokens: result.tokens || result.data?.usage?.totalTokens || 0,
+            model: result.data?.usage ? 'dall-e' : undefined,
+            tokens: result.data?.usage?.totalTokens || 0,
             generated_images: 1,
           },
           metadata: {

@@ -1,6 +1,6 @@
 import AIModelConfig from '../models/ai-model-config.model';
 import axios from 'axios';
-import { unifiedAIBridge } from './unified-ai-bridge.service';
+import { unifiedAIBridge, ChatMessage } from './unified-ai-bridge.service';
 import { AiBridgeMessage, AiBridgeMessageRole } from './ai/bridge/ai-bridge.types';
 
 /**
@@ -95,8 +95,8 @@ ${options.requireStructured ? `
       console.log('📤 请求参数:', JSON.stringify(requestBody, null, 2));
 
       // 🚀 使用UnifiedAIBridge替代直接axios调用
-      const aiBridgeMessages: AiBridgeMessage[] = requestBody.messages.map((msg: any) => ({
-        role: msg.role as AiBridgeMessageRole,
+      const aiBridgeMessages: ChatMessage[] = requestBody.messages.map((msg: any) => ({
+        role: msg.role as 'system' | 'user' | 'assistant',
         content: msg.content
       }));
 
@@ -539,7 +539,7 @@ ${options.requireStructured ? `
         model: model.name,
         messages: [
           {
-            role: 'user' as AiBridgeMessageRole,
+            role: 'user',
             content: '测试连接'
           }
         ],

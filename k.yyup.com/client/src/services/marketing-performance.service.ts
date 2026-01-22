@@ -7,11 +7,7 @@ export default class MarketingPerformanceService {
     startDate: string
     endDate: string
   }) {
-    return request({
-      url: '/api/marketing-performance/referral-stats',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/referral-stats', { params })
   }
 
   // 获取转介绍奖励列表
@@ -26,19 +22,12 @@ export default class MarketingPerformanceService {
     sortBy?: string
     sortOrder?: string
   }) {
-    return request({
-      url: '/api/marketing-performance/referral-rewards',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/referral-rewards', { params })
   }
 
   // 审批发放奖励
   static async approveReward(rewardId: string) {
-    return request({
-      url: `/api/marketing-performance/referral-rewards/${rewardId}/approve`,
-      method: 'POST'
-    })
+    return request.post(`/api/marketing-performance/referral-rewards/${rewardId}/approve`)
   }
 
   // 获取团队排名
@@ -48,11 +37,7 @@ export default class MarketingPerformanceService {
     startDate?: string
     endDate?: string
   }) {
-    return request({
-      url: '/api/marketing-performance/team-ranking',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/team-ranking', { params })
   }
 
   // 获取个人贡献数据
@@ -60,11 +45,7 @@ export default class MarketingPerformanceService {
     startDate: string
     endDate: string
   }) {
-    return request({
-      url: '/api/marketing-performance/personal-contribution',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/personal-contribution', { params })
   }
 
   // 获取个人转介绍记录
@@ -74,19 +55,12 @@ export default class MarketingPerformanceService {
     startDate: string
     endDate: string
   }) {
-    return request({
-      url: '/api/marketing-performance/personal-referral-records',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/personal-referral-records', { params })
   }
 
   // 发送提醒
   static async sendReminder(recordId: string) {
-    return request({
-      url: `/api/marketing-performance/referral-records/${recordId}/remind`,
-      method: 'POST'
-    })
+    return request.post(`/api/marketing-performance/referral-records/${recordId}/remind`)
   }
 
   // 导出个人记录
@@ -94,9 +68,7 @@ export default class MarketingPerformanceService {
     startDate: string
     endDate: string
   }) {
-    return request({
-      url: '/api/marketing-performance/export/personal-records',
-      method: 'GET',
+    return request.get('/api/marketing-performance/export/personal-records', {
       params,
       responseType: 'blob'
     })
@@ -104,19 +76,12 @@ export default class MarketingPerformanceService {
 
   // 获取奖励设置
   static async getRewardSettings() {
-    return request({
-      url: '/api/marketing-performance/reward-settings',
-      method: 'GET'
-    })
+    return request.get('/api/marketing-performance/reward-settings')
   }
 
   // 更新奖励设置
   static async updateRewardSettings(settings: any) {
-    return request({
-      url: '/api/marketing-performance/reward-settings',
-      method: 'PUT',
-      data: settings
-    })
+    return request.put('/api/marketing-performance/reward-settings', settings)
   }
 
   // 获取设置变更历史
@@ -124,11 +89,7 @@ export default class MarketingPerformanceService {
     page?: number
     size?: number
   } = {}) {
-    return request({
-      url: '/api/marketing-performance/reward-settings/history',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/reward-settings/history', { params })
   }
 
   // 导出绩效报告
@@ -137,9 +98,7 @@ export default class MarketingPerformanceService {
     endDate: string
     tab: string
   }) {
-    return request({
-      url: '/api/marketing-performance/export/report',
-      method: 'GET',
+    return request.get('/api/marketing-performance/export/report', {
       params,
       responseType: 'blob'
     })
@@ -147,10 +106,7 @@ export default class MarketingPerformanceService {
 
   // 生成推荐码
   static async generateReferralCode(userId: string) {
-    return request({
-      url: `/api/marketing-performance/generate-referral-code/${userId}`,
-      method: 'POST'
-    })
+    return request.post(`/api/marketing-performance/generate-referral-code/${userId}`)
   }
 
   // 获取推荐统计
@@ -160,11 +116,7 @@ export default class MarketingPerformanceService {
     startDate?: string
     endDate?: string
   }) {
-    return request({
-      url: '/api/marketing-performance/referral-analytics',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/referral-analytics', { params })
   }
 
   // 获取转化漏斗数据
@@ -173,11 +125,7 @@ export default class MarketingPerformanceService {
     endDate: string
     groupBy?: 'day' | 'week' | 'month'
   }) {
-    return request({
-      url: '/api/marketing-performance/conversion-funnel',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/conversion-funnel', { params })
   }
 
   // 获取奖励发放记录
@@ -188,20 +136,12 @@ export default class MarketingPerformanceService {
     endDate?: string
     status?: string
   }) {
-    return request({
-      url: '/api/marketing-performance/reward-payments',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/reward-payments', { params })
   }
 
   // 批量发放奖励
   static async batchApproveRewards(rewardIds: string[]) {
-    return request({
-      url: '/api/marketing-performance/referral-rewards/batch-approve',
-      method: 'POST',
-      data: { rewardIds }
-    })
+    return request.post('/api/marketing-performance/referral-rewards/batch-approve', { rewardIds })
   }
 
   // 获取排行榜
@@ -210,11 +150,7 @@ export default class MarketingPerformanceService {
     period: 'week' | 'month' | 'quarter' | 'year'
     limit?: number
   }) {
-    return request({
-      url: '/api/marketing-performance/leaderboard',
-      method: 'GET',
-      params
-    })
+    return request.get('/api/marketing-performance/leaderboard', { params })
   }
 }
 

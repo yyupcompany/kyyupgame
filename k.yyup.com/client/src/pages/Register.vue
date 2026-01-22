@@ -733,7 +733,7 @@ const handleClose = (done) => {
 .captcha-code {
   max-width: 100px; width: 100%;
   height: var(--button-height-xl);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border: var(--border-width-base) solid var(--border-color);
   border-radius: var(--radius-md);
   display: flex;
@@ -785,7 +785,7 @@ const handleClose = (done) => {
   max-min-height: 60px; height: auto;
   overflow-y: auto;
   padding: var(--text-lg);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--radius-md);
 }
 

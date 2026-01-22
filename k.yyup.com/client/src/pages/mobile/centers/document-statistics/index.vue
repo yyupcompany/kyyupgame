@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="文档统计"
-    :show-back="true"
-  >
+  <MobileCenterLayout title="文档统计" back-path="/mobile/centers">
     <div class="mobile-document-statistics">
       <!-- 页面头部和导出按钮 -->
       <div class="page-header">
@@ -12,7 +9,7 @@
         </div>
         <van-button
           type="primary"
-          size="small"
+          size="medium"
           icon="browsing-history-o"
           @click="handleExport"
           :loading="exportLoading"
@@ -186,7 +183,7 @@
                       <div class="template-name">{{ item.template?.name || '未知模板' }}</div>
                       <div class="template-meta">
                         <span class="template-code">{{ item.template?.code }}</span>
-                        <van-tag size="mini" type="primary">
+                        <van-tag size="medium" type="primary">
                           {{ getCategoryName(item.template?.category) }}
                         </van-tag>
                       </div>
@@ -202,13 +199,13 @@
         </van-tabs>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick, onUnmounted } from 'vue'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import * as echarts from 'echarts'
 import {
   getOverview,
@@ -304,10 +301,10 @@ const getCategoryName = (code?: string) => {
 }
 
 const getProgressColor = (percentage: number) => {
-  if (percentage >= 80) return '#67c23a'
-  if (percentage >= 60) return '#e6a23c'
-  if (percentage >= 40) return '#f56c6c'
-  return '#909399'
+  if (percentage >= 80) return 'var(--success-color)'
+  if (percentage >= 60) return 'var(--warning-color)'
+  if (percentage >= 40) return 'var(--danger-color)'
+  return 'var(--info-color)'
 }
 
 const onPeriodConfirm = ({ selectedValues }: { selectedValues: string[] }) => {
@@ -587,7 +584,7 @@ const renderRankingChart = (data: any[]) => {
         type: 'bar',
         data: data.map(item => item.count).slice(0, 8).reverse(),
         itemStyle: {
-          color: '#67c23a'
+          color: 'var(--success-color)'
         }
       }
     ]
@@ -636,6 +633,7 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 .mobile-document-statistics {
   padding: var(--spacing-md);

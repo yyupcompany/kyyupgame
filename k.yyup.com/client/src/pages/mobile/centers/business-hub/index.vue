@@ -1,5 +1,6 @@
 <template>
-  <div class="business-hub-page">
+  <MobileSubPageLayout title="业务中心" back-path="/mobile/centers">
+    <div class="wrapper">
     <!-- 页面标题 -->
     <van-nav-bar
       title="业务中心"
@@ -51,7 +52,7 @@
     <div class="todo-section">
       <div class="section-header">
         <h3 class="section-title">待办事项</h3>
-        <van-button size="small" type="primary" @click="navigateTo('/mobile/centers/task')">
+        <van-button size="medium" type="primary" @click="navigateTo('/mobile/centers/task')">
           全部
         </van-button>
       </div>
@@ -79,7 +80,7 @@
     <div class="recent-section">
       <div class="section-header">
         <h3 class="section-title">最近活动</h3>
-        <van-button size="small" type="primary" @click="navigateTo('/mobile/centers/activity')">
+        <van-button size="medium" type="primary" @click="navigateTo('/mobile/centers/activity')">
           更多
         </van-button>
       </div>
@@ -102,7 +103,8 @@
         </div>
       </div>
     </div>
-  </div>
+    </div> <!-- 闭合 wrapper div -->
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -233,6 +235,9 @@ const handleTodoClick = (todo: any) => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/design-tokens.scss';
 
 .business-hub-page {
@@ -244,7 +249,7 @@ const handleTodoClick = (todo: any) => {
 // 统计卡片区域
 .stats-section {
   padding: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
 
   .stats-grid {
     display: grid;
@@ -311,7 +316,7 @@ const handleTodoClick = (todo: any) => {
 // 快捷入口
 .quick-access-section {
   margin-top: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--app-gap) 0;
 
   .quick-access-grid {
@@ -359,7 +364,7 @@ const handleTodoClick = (todo: any) => {
 // 待办事项
 .todo-section {
   margin-top: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--app-gap) 0;
 
   .todo-list {
@@ -390,7 +395,7 @@ const handleTodoClick = (todo: any) => {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-color);
+      background: var(--bg-card);
       border-radius: var(--border-radius-sm);
       flex-shrink: 0;
     }
@@ -425,7 +430,7 @@ const handleTodoClick = (todo: any) => {
 // 最近活动
 .recent-section {
   margin-top: var(--app-gap);
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--app-gap) 0;
 
   .recent-list {
@@ -456,7 +461,7 @@ const handleTodoClick = (todo: any) => {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--bg-color);
+      background: var(--bg-card);
       border-radius: var(--border-radius-sm);
       flex-shrink: 0;
     }

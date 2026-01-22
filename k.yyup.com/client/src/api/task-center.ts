@@ -1,5 +1,6 @@
 import { request } from '../utils/request'
-import { useUserStore } from '@/stores/user'
+// 动态导入 store 以避免循环依赖
+const getStore = () => import('@/stores/user').then(m => m.useUserStore())
 
 // 任务接口类型定义
 export interface Task {
@@ -76,8 +77,50 @@ export interface UpdateTaskData extends Partial<CreateTaskData> {
   completedAt?: string
 }
 
+async function normalizeTaskPayload(input: any): Promise<any> {
+  const userStore = await getStore()
+
+  const payload: Record<string, any> = { ...(input || {}) }
+
+  // 兼容旧字段：camelCase -> snake_case（后端 tasks 表字段使用下划线）
+  if (payload.assignedTo !== undefined && payload.assignee_id === undefined) {
+    payload.assignee_id = payload.assignedTo
+    delete payload.assignedTo
+  }
+
+  if (payload.dueDate !== undefined && payload.due_date === undefined) {
+    payload.due_date = payload.dueDate
+    delete payload.dueDate
+  }
+
+  if (payload.completedAt !== undefined && payload.completed_at === undefined) {
+    payload.completed_at = payload.completedAt
+    delete payload.completedAt
+  }
+
+  // 兼容旧枚举：最高/取消 -> 后端支持范围
+  if (payload.priority === 'highest') payload.priority = 'high'
+  if (payload.status === 'cancelled') payload.status = 'overdue'
+
+  // 确保 creator_id 存在，避免后端回退到 1 触发外键失败导致 500
+  if (payload.creator_id === undefined && userStore.user?.id) {
+    payload.creator_id = userStore.user.id
+  }
+
+  // 兼容当前数据库约束：assignee_id 不能为空
+  // 若未选择分配人，则默认分配给创建人/当前用户，避免 500 "assignee_id cannot be null"
+  if (payload.assignee_id === undefined || payload.assignee_id === null) {
+    const fallbackAssignee = payload.creator_id ?? userStore.user?.id
+    if (fallbackAssignee !== undefined && fallbackAssignee !== null) {
+      payload.assignee_id = fallbackAssignee
+    }
+  }
+
+  return payload
+}
+
 // 任务管理API
-export const getTasks = (params?: TaskQuery) => {
+export const getTasks = async (params?: TaskQuery) => {
   // 转换参数格式以匹配后端期望
   const queryParams: any = {}
 
@@ -88,8 +131,8 @@ export const getTasks = (params?: TaskQuery) => {
   if (params?.type) queryParams.type = params.type
   if (params?.keyword) queryParams.keyword = params.keyword
   if (params?.assignedToMe) {
-    // 从用户store中获取当前登录用户ID
-    const userStore = useUserStore()
+    // 动态获取当前登录用户ID
+    const userStore = await getStore()
     queryParams.assignee_id = userStore.user?.id
   }
   if (params?.assigneeId) queryParams.assignee_id = params.assigneeId
@@ -102,13 +145,13 @@ export const getTask = (id: number) => {
   return request.get(`/api/tasks/${id}`)
 }
 
-export const createTask = (data: CreateTaskData) => {
+export const createTask = async (data: CreateTaskData) => {
   // Fixed API path to remove duplicate /api prefix
-  return request.post('/api/tasks', data)
+  return request.post('/api/tasks', await normalizeTaskPayload(data))
 }
 
-export const updateTask = (id: number, data: UpdateTaskData) => {
-  return request.put(`/api/tasks/${id}`, data)
+export const updateTask = async (id: number, data: UpdateTaskData) => {
+  return request.put(`/api/tasks/${id}`, await normalizeTaskPayload(data))
 }
 
 export const deleteTask = (id: number) => {

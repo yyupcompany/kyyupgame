@@ -12,7 +12,7 @@
 
 import { Router } from 'express';
 import { twoFactorController } from '../controllers/two-factor.controller';
-import { authenticateToken } from '../middlewares/auth.middleware';
+import { authenticate } from '../middlewares/auth.middleware';
 
 const router = Router();
 
@@ -21,21 +21,21 @@ const router = Router();
 * @desc    初始化2FA设置（生成二维码和备用码）
 * @access  Private
 */
-router.post('/setup', authenticateToken, twoFactorController.setup.bind(twoFactorController));
+router.post('/setup', authenticate, twoFactorController.setup.bind(twoFactorController));
 
 /**
 * @route   POST /api/auth/2fa/verify
 * @desc    验证并启用2FA
 * @access  Private
 */
-router.post('/verify', authenticateToken, twoFactorController.verifyAndEnable.bind(twoFactorController));
+router.post('/verify', authenticate, twoFactorController.verifyAndEnable.bind(twoFactorController));
 
 /**
 * @route   POST /api/auth/2fa/disable
 * @desc    禁用2FA
 * @access  Private
 */
-router.post('/disable', authenticateToken, twoFactorController.disable.bind(twoFactorController));
+router.post('/disable', authenticate, twoFactorController.disable.bind(twoFactorController));
 
 /**
 * @route   POST /api/auth/2fa/verify-login
@@ -49,7 +49,7 @@ router.post('/verify-login', twoFactorController.verifyLogin.bind(twoFactorContr
 * @desc    获取2FA状态
 * @access  Private
 */
-router.get('/status', authenticateToken, twoFactorController.getStatus.bind(twoFactorController));
+router.get('/status', authenticate, twoFactorController.getStatus.bind(twoFactorController));
 
 /**
 * @route   GET /api/auth/2fa/authenticators

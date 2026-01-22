@@ -86,6 +86,6 @@ export const parentPermissionAPI = {
    */
   checkParentPermissionStatus(parentId: number, scope?: string) {
     const params = scope ? { scope } : {};
-    return request.get(`/parent-permissions/check/${parentId}`, { params });
+    return request.get(`/api/parent-permissions/check/${parentId}`, { params });
   }
 };

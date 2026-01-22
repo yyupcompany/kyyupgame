@@ -4,6 +4,7 @@
  */
 
 import { unifiedAIBridge } from '../unified-ai-bridge.service';
+import { aiBridgeService } from './bridge/ai-bridge.service';
 
 export interface ImageGenerationParams {
   model?: string;

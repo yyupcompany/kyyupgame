@@ -332,7 +332,10 @@ export class DesignTokenManager {
    * 获取z-index令牌
    */
   static getZIndex(name: string): number {
-    return this.tokens.zIndex[name as keyof typeof zIndexTokens] || 1;
+    const value = this.tokens.zIndex[name as keyof typeof zIndexTokens];
+    if (typeof value === 'number') return value;
+    if (typeof value === 'string') return Number(value) || 1;
+    return 1;
   }
 
   /**

@@ -1236,7 +1236,7 @@ onMounted(() => {
 .predictive-maintenance-container {
   padding: var(--spacing-lg);
   min-height: 100vh;
-  background: var(--bg-secondary);
+  background: var(--bg-page);
 }
 
 .page-header {

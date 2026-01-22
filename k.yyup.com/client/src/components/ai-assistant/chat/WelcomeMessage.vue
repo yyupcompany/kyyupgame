@@ -1,6 +1,7 @@
 <!--
   欢迎消息组件
   从 AIAssistant.vue 第70-85行模板提取
+  支持根据用户角色显示定制化的欢迎消息和快捷问题
 -->
 
 <template>
@@ -12,80 +13,38 @@
       <div class="message-text">
         <div class="welcome-title">
           <UnifiedIcon name="ai-center" />
-          🌈 嗨，亲爱的园长/老师！
+          {{ welcomeConfig.title }}
         </div>
         <div class="welcome-subtitle">
-          我是你的AI小助手，有什么想知道的尽管问我，我会用最简单的方式回答你哦！✨
+          {{ welcomeConfig.subtitle }}
         </div>
       </div>
       <div class="suggestion-buttons">
-        <!-- 原有功能提示词 -->
-        <!-- 园长老师关心的日常问题 -->
+        <!-- 根据角色显示不同的快捷问题 -->
         <button
+          v-for="(suggestion, index) in welcomeConfig.suggestions"
+          :key="index"
           class="suggestion-btn"
-          @click="handleSuggestion('现在有多少个小朋友呀？')"
-          :title="'查看学生总数'"
-          @mousedown="() => console.log('🔥 [按钮测试] 鼠标按下事件触发')"
-          @mouseup="() => console.log('🔥 [按钮测试] 鼠标释放事件触发')"
+          :class="{ 'html-preview-btn': suggestion.htmlPreview }"
+          @click="handleSuggestion(suggestion.text)"
+          :title="suggestion.description"
         >
-          <UnifiedIcon name="ai-center" />
-          👶 有多少小朋友呀？
-        </button>
-        <button
-          class="suggestion-btn"
-          @click="handleSuggestion('哪个班级的小朋友最多？')"
-          :title="'查看班级人数统计'"
-        >
-          <UnifiedIcon name="ai-center" />
-          🏆 哪个班小朋友最多？
-        </button>
-        <button
-          class="suggestion-btn"
-          @click="handleSuggestion('最近有什么有趣的活动吗？')"
-          :title="'查看近期活动安排'"
-        >
-          <UnifiedIcon name="Edit" />
-          🎉 最近有什么好玩的活动？
-        </button>
-
-        <!-- 老师教学相关功能 -->
-        <button
-          class="suggestion-btn html-preview-btn"
-          @click="handleSuggestion('帮我做个认识数字的小游戏')"
-          :title="'生成数字认知游戏'"
-        >
-          <UnifiedIcon name="ai-center" />
-          🔢 数字小游戏
-        </button>
-        <button
-          class="suggestion-btn html-preview-btn"
-          @click="handleSuggestion('给我讲讲小动物的故事吧')"
-          :title="'动物认知教学内容'"
-        >
-          <UnifiedIcon name="ai-center" />
-          🐾 小动物故事
-        </button>
-        <button
-          class="suggestion-btn html-preview-btn"
-          @click="handleSuggestion('帮小朋友认识形状和颜色')"
-          :title="'形状颜色教学游戏'"
-        >
-          <UnifiedIcon name="ai-center" />
-          🎨 形状颜色认知
+          <UnifiedIcon :name="suggestion.icon || 'ai-center'" />
+          {{ suggestion.text }}
         </button>
       </div>
       <div class="welcome-tips">
         <div class="tip-item">
-          <UnifiedIcon name="ai-center" />
-          <span>💬 用大白话聊天</span>
+          <UnifiedIcon name="ChatDotRound" />
+          <span>{{ welcomeConfig.tips.talk }}</span>
         </div>
         <div class="tip-item">
-          <UnifiedIcon name="ai-center" />
-          <span>🔧 会做各种事情</span>
+          <UnifiedIcon name="Tools" />
+          <span>{{ welcomeConfig.tips.actions }}</span>
         </div>
         <div class="tip-item">
-          <UnifiedIcon name="microphone" :size="16" />
-          <span>🎤 还能语音对话</span>
+          <UnifiedIcon name="Microphone" :size="16" />
+          <span>{{ welcomeConfig.tips.voice }}</span>
         </div>
       </div>
     </div>
@@ -105,6 +64,8 @@ import {
   Orange,
   Grid
 } from '@element-plus/icons-vue'
+import { computed } from 'vue'
+import { useUserStore } from '@/stores/user'
 
 // ==================== Emits ====================
 interface Emits {
@@ -113,9 +74,148 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 
+// 获取用户角色
+const userStore = useUserStore()
+
+// 角色类型定义
+type UserRole = 'admin' | 'principal' | 'teacher' | 'parent' | 'default'
+
+// 获取当前用户角色
+const currentRole = computed<UserRole>(() => {
+  const role = userStore.userInfo?.role?.toLowerCase() || ''
+  const roles = userStore.userInfo?.roles || []
+
+  // 根据角色信息判断
+  if (role === 'admin' || role === 'super_admin' || roles.includes('admin')) {
+    return 'admin'
+  } else if (role === 'principal' || role === '园长' || roles.includes('principal')) {
+    return 'principal'
+  } else if (role === 'teacher' || role === '教师' || roles.includes('teacher')) {
+    return 'teacher'
+  } else if (role === 'parent' || role === '家长' || roles.includes('parent')) {
+    return 'parent'
+  }
+  return 'default'
+})
+
+// 不同角色的欢迎消息配置
+const roleConfigs: Record<UserRole, {
+  title: string
+  subtitle: string
+  suggestions: Array<{
+    text: string
+    icon?: string
+    description?: string
+    htmlPreview?: boolean
+  }>
+  tips: {
+    talk: string
+    actions: string
+    voice: string
+  }
+}> = {
+  // 园长角色
+  principal: {
+    title: '🌈 尊敬的园长您好！',
+    subtitle: '我是您的AI管理助手，专注园区运营管理，助您科学决策、高效管理！',
+    suggestions: [
+      { text: '👶 现在有多少小朋友呀？', icon: 'Orange', description: '查看当前在园儿童总数' },
+      { text: '🏆 哪个班小朋友最多？', icon: 'Histogram', description: '查看班级人数统计排名' },
+      { text: '📊 本月的出勤率怎么样？', icon: 'TrendCharts', description: '查看月度出勤数据分析' },
+      { text: '📋 生成今日工作报告', icon: 'EditPen', description: '自动生成园区日常工作报告' },
+      { text: '💰 查看月度财务概览', icon: 'Service', description: '了解园区财务收支情况' },
+      { text: '👨‍🏫 老师们的排班情况如何？', icon: 'Grid', description: '查看教师值班安排' }
+    ],
+    tips: {
+      talk: '用大白话聊天',
+      actions: '会做各种事情',
+      voice: '还能语音对话'
+    }
+  },
+
+  // 教师角色
+  teacher: {
+    title: '🌈 亲爱的老师您好！',
+    subtitle: '我是您的AI教学助手，专注教学支持，助您轻松备课、高效教学！',
+    suggestions: [
+      { text: '🔢 帮我设计数字认知小游戏', icon: 'Grid', description: '生成数字教学互动游戏' },
+      { text: '🐾 讲个关于小动物的故事吧', icon: 'ChatDotRound', description: '获取儿童故事内容' },
+      { text: '🎨 设计形状颜色认知活动', icon: 'EditPen', description: '创建形状颜色教学方案' },
+      { text: '📝 帮我写一篇教学反思', icon: 'EditPen', description: '辅助撰写教学反思文档' },
+      { text: '👶 班级小朋友的个性特点分析', icon: 'Service', description: '了解幼儿个体差异' },
+      { text: '🎉 设计一个亲子互动游戏', icon: 'Tools', description: '创建家园互动活动方案' }
+    ],
+    tips: {
+      talk: '用大白话聊天',
+      actions: '会做各种事情',
+      voice: '还能语音对话'
+    }
+  },
+
+  // 家长角色
+  parent: {
+    title: '🌈 亲爱的家长您好！',
+    subtitle: '我是您的AI育儿助手，专注家庭教育，助您科学育儿、快乐成长！',
+    suggestions: [
+      { text: '👶 适合3岁宝宝的绘本推荐', icon: 'Service', description: '获取适龄绘本推荐' },
+      { text: '🍎 宝宝挑食怎么办？', icon: 'ChatDotRound', description: '获取幼儿饮食建议' },
+      { text: '😴 如何培养宝宝午睡习惯？', icon: 'Tools', description: '获取作息培养建议' },
+      { text: '🎨 和宝宝玩什么亲子游戏？', icon: 'EditPen', description: '获取亲子互动游戏' },
+      { text: '📚 如何培养孩子的阅读习惯？', icon: 'School', description: '获取阅读习惯培养方法' },
+      { text: '👫 宝宝在幼儿园不合群怎么办？', icon: 'Service', description: '获取社交能力培养建议' }
+    ],
+    tips: {
+      talk: '用大白话聊天',
+      actions: '会做各种事情',
+      voice: '还能语音对话'
+    }
+  },
+
+  // 管理员角色
+  admin: {
+    title: '🌈 尊敬的系统管理员您好！',
+    subtitle: '我是您的AI系统助手，专注系统管理，助您高效运维、智慧管理！',
+    suggestions: [
+      { text: '📊 查看系统使用统计', icon: 'TrendCharts', description: '获取系统运营数据' },
+      { text: '🔧 系统运行状态如何？', icon: 'Service', description: '监控系统健康状况' },
+      { text: '👥 用户活跃度分析', icon: 'Histogram', description: '分析用户活跃情况' },
+      { text: '📋 生成运营报告', icon: 'EditPen', description: '生成系统运营报告' }
+    ],
+    tips: {
+      talk: '用大白话聊天',
+      actions: '会做各种事情',
+      voice: '还能语音对话'
+    }
+  },
+
+  // 默认角色（未登录或未知角色）
+  default: {
+    title: '🌈 您好！',
+    subtitle: '我是您的AI助手，有什么想知道的尽管问我，我会用最简单的方式回答您！',
+    suggestions: [
+      { text: '👶 有多少小朋友呀？', icon: 'Orange', description: '查看学生总数' },
+      { text: '🏆 哪个班小朋友最多？', icon: 'Histogram', description: '查看班级人数统计' },
+      { text: '🎉 最近有什么好玩的活动？', icon: 'EditPen', description: '查看近期活动安排' },
+      { text: '🔢 数字小游戏', icon: 'Grid', description: '生成数字认知游戏' },
+      { text: '🐾 小动物故事', icon: 'ChatDotRound', description: '获取动物故事' },
+      { text: '🎨 形状颜色认知', icon: 'EditPen', description: '形状颜色教学游戏' }
+    ],
+    tips: {
+      talk: '用大白话聊天',
+      actions: '会做各种事情',
+      voice: '还能语音对话'
+    }
+  }
+}
+
+// 根据当前角色获取配置
+const welcomeConfig = computed(() => {
+  return roleConfigs[currentRole.value] || roleConfigs.default
+})
+
 // ==================== 事件处理 ====================
 const handleSuggestion = (text: string) => {
-  console.log('🔍 [WelcomeMessage] 建议按钮点击:', text)
+  console.log('🔍 [WelcomeMessage] 建议按钮点击:', text, '角色:', currentRole.value)
   emit('suggestion', text)
 }
 </script>

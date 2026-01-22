@@ -129,7 +129,7 @@ const handleTabChange = (name: string) => {
 }
 
 :deep(.van-tabbar) {
-  background-color: var(--bg-color);
+  background-color: var(--bg-card);
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 </style>

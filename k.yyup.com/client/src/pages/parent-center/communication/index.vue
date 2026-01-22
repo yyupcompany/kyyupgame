@@ -15,7 +15,7 @@
         <div class="sidebar-header">
           <h3>老师列表</h3>
           <el-badge :value="unreadCount" class="unread-badge">
-            <el-icon><Bell /></el-icon>
+            <UnifiedIcon name="bell" :size="16" />
           </el-badge>
         </div>
 
@@ -59,11 +59,11 @@
           </div>
           <div class="chat-actions">
             <el-button size="small" @click="showVideoCall">
-              <el-icon><VideoCamera /></el-icon>
+              <UnifiedIcon name="video-camera" :size="16" />
               视频通话
             </el-button>
             <el-button size="small" @click="showVoiceCall">
-              <el-icon><Phone /></el-icon>
+              <UnifiedIcon name="phone" :size="16" />
               语音通话
             </el-button>
           </div>
@@ -98,7 +98,7 @@
                 </div>
                 <div v-else-if="message.type === 'file'" class="file-message">
                   <div class="file-info">
-                    <el-icon><Document /></el-icon>
+                    <UnifiedIcon name="document" :size="16" />
                     <span>{{ message.fileName }}</span>
                     <el-button size="small" text>下载</el-button>
                   </div>
@@ -106,7 +106,7 @@
                 <div v-else-if="message.type === 'voice'" class="voice-message">
                   <div class="voice-player">
                     <el-button size="small" circle>
-                      <el-icon><Microphone /></el-icon>
+                      <UnifiedIcon name="microphone" :size="16" />
                     </el-button>
                     <span>{{ message.duration }}s</span>
                   </div>
@@ -128,7 +128,7 @@
               accept="image/*"
             >
               <el-button size="small" text>
-                <el-icon><Picture /></el-icon>
+                <UnifiedIcon name="picture" :size="16" />
               </el-button>
             </el-upload>
             <el-upload
@@ -136,11 +136,11 @@
               :before-upload="handleFileUpload"
             >
               <el-button size="small" text>
-                <el-icon><Paperclip /></el-icon>
+                <UnifiedIcon name="paperclip" :size="16" />
               </el-button>
             </el-upload>
             <el-button size="small" text @click="startVoiceRecord">
-              <el-icon><Microphone /></el-icon>
+              <UnifiedIcon name="microphone" :size="16" />
             </el-button>
           </div>
           <div class="input-box">
@@ -157,7 +157,7 @@
               :disabled="!messageInput.trim()"
               @click="sendMessage"
             >
-              <el-icon><Position /></el-icon>
+              <UnifiedIcon name="position" :size="16" />
               发送
             </el-button>
           </div>
@@ -176,7 +176,7 @@
     <el-dialog v-model="videoCallVisible" title="视频通话" width="600px">
       <div class="video-call-container">
         <div class="video-placeholder">
-          <el-icon size="64"><VideoCamera /></el-icon>
+          <UnifiedIcon name="video-camera" :size="64" />
           <p>视频通话功能开发中...</p>
         </div>
       </div>
@@ -186,7 +186,7 @@
     <el-dialog v-model="voiceCallVisible" title="语音通话" width="400px">
       <div class="voice-call-container">
         <div class="voice-call-placeholder">
-          <el-icon size="64"><Phone /></el-icon>
+          <UnifiedIcon name="phone" :size="64" />
           <p>语音通话功能开发中...</p>
         </div>
       </div>
@@ -197,16 +197,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { ElMessage } from 'element-plus'
-import {
-  Bell,
-  VideoCamera,
-  Phone,
-  Picture,
-  Paperclip,
-  Microphone,
-  Document,
-  Position
-} from '@element-plus/icons-vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 
 // 类型定义
 interface Message {
@@ -519,8 +510,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+/* 使用设计令牌 */
 
+/* ==================== 家校沟通页面 ==================== */
 .parent-communication {
   height: calc(100vh - 120px);
   display: flex;
@@ -529,44 +521,57 @@ onMounted(() => {
 
 .page-header {
   padding: var(--spacing-lg) var(--spacing-xl);
-  background: var(--el-bg-color);
-  border-bottom: 1px solid var(--el-border-color-light);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color-lighter);
 
   .header-content {
-    max-width: var(--container-xl);
+    max-width: var(--breakpoint-2xl);
     margin: 0 auto;
   }
 
   .page-title {
-    font-size: var(--text-2xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--text-xl);
     font-weight: 600;
     color: var(--el-text-color-primary);
-    margin: 0 0 var(--spacing-sm) 0;
+    margin: 0 0 var(--spacing-xs) 0;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: var(--spacing-xs);
+      height: var(--spacing-xl);
+      background: linear-gradient(180deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+      border-radius: var(--spacing-xs);
+    }
   }
 
   .page-subtitle {
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     color: var(--el-text-color-secondary);
     margin: 0;
+    padding-left: var(--spacing-lg);
   }
 }
 
 .communication-main {
   flex: 1;
   display: flex;
-  background: var(--el-bg-color-page);
+  background: var(--el-fill-color-light);
 }
 
 .teacher-sidebar {
   width: 320px;
-  background: var(--el-bg-color);
-  border-right: 1px solid var(--el-border-color-light);
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-color-lighter);
   display: flex;
   flex-direction: column;
 
   .sidebar-header {
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--el-border-color-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color-lighter);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -589,10 +594,10 @@ onMounted(() => {
   }
 
   .teacher-item {
-    padding: var(--spacing-lg);
-    border-bottom: 1px solid var(--el-border-color-lighter);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color-lighter);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--transition-base);
     display: flex;
     align-items: center;
     gap: var(--spacing-md);
@@ -614,16 +619,17 @@ onMounted(() => {
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 12px;
-      height: 12px;
+      width: var(--spacing-md);
+      height: var(--spacing-md);
       background: var(--el-color-success);
-      border-radius: 50%;
-      border: 2px solid var(--el-bg-color);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--bg-card);
     }
   }
 
   .teacher-info {
     flex: 1;
+    min-width: 0;
 
     .teacher-name {
       font-size: var(--text-base);
@@ -640,7 +646,7 @@ onMounted(() => {
 
     .last-message {
       font-size: var(--text-sm);
-      color: var(--el-text-color-regular);
+      color: var(--el-text-color-secondary);
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -649,6 +655,7 @@ onMounted(() => {
 
   .teacher-meta {
     text-align: right;
+    flex-shrink: 0;
 
     .message-time {
       font-size: var(--text-xs);
@@ -664,9 +671,9 @@ onMounted(() => {
   flex-direction: column;
 
   .chat-header {
-    padding: var(--spacing-lg);
-    background: var(--el-bg-color);
-    border-bottom: 1px solid var(--el-border-color-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color-lighter);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -692,9 +699,9 @@ onMounted(() => {
           color: var(--el-text-color-secondary);
 
           .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            width: var(--spacing-sm);
+            height: var(--spacing-sm);
+            border-radius: var(--radius-full);
             background: var(--el-text-color-placeholder);
 
             &.online {
@@ -719,6 +726,7 @@ onMounted(() => {
     .message-item {
       display: flex;
       margin-bottom: var(--spacing-lg);
+      transition: all var(--transition-base);
 
       &.self-message {
         flex-direction: row-reverse;
@@ -732,7 +740,7 @@ onMounted(() => {
         }
 
         .message-bubble {
-          background: var(--el-color-primary);
+          background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
           color: white;
         }
       }
@@ -766,15 +774,35 @@ onMounted(() => {
       }
 
       .message-bubble {
-        background: var(--el-bg-color);
+        background: var(--bg-card);
         border-radius: var(--radius-lg);
         padding: var(--spacing-md);
         box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color-lighter);
+        transition: all var(--transition-base);
+
+        &:hover {
+          box-shadow: var(--shadow-md);
+        }
 
         .text-message {
           font-size: var(--text-base);
-          line-height: 1.4;
+          line-height: var(--leading-relaxed);
           word-wrap: break-word;
+        }
+
+        .image-message {
+          .el-image {
+            border-radius: var(--radius-md);
+            max-width: 200px;
+            max-height: 200px;
+            cursor: pointer;
+            transition: transform var(--transition-base);
+
+            &:hover {
+              transform: scale(1.02);
+            }
+          }
         }
 
         .file-message {
@@ -782,6 +810,21 @@ onMounted(() => {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
+            padding: var(--spacing-sm);
+            background: var(--el-fill-color-light);
+            border-radius: var(--radius-md);
+
+            .el-icon {
+              font-size: var(--text-lg);
+              color: var(--el-color-primary);
+            }
+
+            span {
+              flex: 1;
+              font-size: var(--text-sm);
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
         }
 
@@ -797,14 +840,20 @@ onMounted(() => {
   }
 
   .input-area {
-    padding: var(--spacing-lg);
-    background: var(--el-bg-color);
-    border-top: 1px solid var(--el-border-color-light);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color-lighter);
 
     .input-toolbar {
       display: flex;
       gap: var(--spacing-sm);
-      margin-bottom: var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+
+      .el-button {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+      }
     }
 
     .input-box {
@@ -812,8 +861,19 @@ onMounted(() => {
       gap: var(--spacing-md);
       align-items: flex-end;
 
-      .el-textarea {
+      :deep(.el-textarea) {
         flex: 1;
+
+        .el-textarea__inner {
+          border-radius: var(--radius-md);
+          resize: none;
+          min-height: 40px !important;
+        }
+      }
+
+      .el-button {
+        height: 40px;
+        border-radius: var(--radius-md);
       }
     }
   }
@@ -824,6 +884,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--bg-card);
 }
 
 .video-call-container,
@@ -837,14 +898,24 @@ onMounted(() => {
     flex-direction: column;
     align-items: center;
     gap: var(--spacing-lg);
+    padding: var(--spacing-2xl);
+    background: var(--el-fill-color-light);
+    border-radius: var(--radius-lg);
 
     .el-icon {
+      font-size: var(--text-3xl);
       color: var(--el-text-color-secondary);
+    }
+
+    p {
+      font-size: var(--text-base);
+      color: var(--el-text-color-secondary);
+      margin: 0;
     }
   }
 }
 
-/* 响应式设计 */
+/* ==================== 响应式设计 ==================== */
 @media (max-width: var(--breakpoint-md)) {
   .teacher-sidebar {
     width: 280px;
@@ -875,12 +946,19 @@ onMounted(() => {
       width: 100%;
       height: 200px;
       border-right: none;
-      border-bottom: 1px solid var(--el-border-color-light);
+      border-bottom: 1px solid var(--border-color-lighter);
     }
 
     .chat-area {
       flex: 1;
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

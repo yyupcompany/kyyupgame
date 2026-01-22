@@ -155,6 +155,15 @@ const suggestions = ref<Suggestion[]>([
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+
+    &:hover {
+      background: var(--primary-light-bg);
+      border-color: var(--primary-color);
+    }
+  }
 
     .button-icon {
       font-size: var(--text-xl);

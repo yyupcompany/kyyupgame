@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="招商中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileCenterLayout title="招商中心" back-path="/mobile/centers">
     <!-- 头部操作按钮 -->
     <template #header-extra>
       <van-icon name="add-o" size="20" @click="handleQuickAdd" />
@@ -26,7 +20,7 @@
               <div class="stat-value">{{ stat.value }}</div>
               <div class="stat-label">{{ stat.label }}</div>
               <div class="stat-trend" v-if="stat.trend">
-                <van-tag :type="stat.trendType" size="small">{{ stat.trend }}</van-tag>
+                <van-tag :type="stat.trendType" size="medium">{{ stat.trend }}</van-tag>
               </div>
             </div>
           </van-grid-item>
@@ -103,7 +97,7 @@
                     <div class="timeline-meta">
                       <van-tag
                         :type="getStatusTagType(item.status)"
-                        size="small"
+                        size="medium"
                         class="timeline-status"
                       >
                         {{ getStatusText(item.status) }}
@@ -121,7 +115,7 @@
                 <div class="detail-title">
                   <van-icon :name="convertIconName(selectedItem.icon)" size="24" />
                   <h4>{{ selectedItem.title }}</h4>
-                  <van-button type="primary" size="small" @click="handleEditAction()">
+                  <van-button type="primary" size="medium" @click="handleEditAction()">
                     <van-icon name="edit" size="14" />
                     编辑
                   </van-button>
@@ -169,7 +163,7 @@
                       v-for="action in getQuickActions(selectedItem.title)"
                       :key="action.key"
                       :type="action.type || 'primary'"
-                      size="small"
+                      size="medium"
                       @click="handleQuickAction(action)"
                       class="quick-action-btn"
                     >
@@ -286,7 +280,7 @@
                       <h4>{{ channel.name }}</h4>
                       <p>{{ channel.description }}</p>
                     </div>
-                    <van-tag :type="channel.performanceType" size="small">
+                    <van-tag :type="channel.performanceType" size="medium">
                       {{ channel.performance }}
                     </van-tag>
                   </div>
@@ -397,7 +391,7 @@
                       <h4>{{ partner.name }}</h4>
                       <p>{{ partner.type }}</p>
                     </div>
-                    <van-tag :type="getPartnerStatusType(partner.status)" size="small">
+                    <van-tag :type="getPartnerStatusType(partner.status)" size="medium">
                       {{ getPartnerStatusText(partner.status) }}
                     </van-tag>
                   </div>
@@ -412,10 +406,10 @@
                     </div>
                   </div>
                   <div class="partner-actions">
-                    <van-button size="mini" @click.stop="editPartner(partner)">
+                    <van-button size="medium" @click.stop="editPartner(partner)">
                       编辑
                     </van-button>
-                    <van-button size="mini" type="primary" @click.stop="contactPartner(partner)">
+                    <van-button size="medium" type="primary" @click.stop="contactPartner(partner)">
                       联系
                     </van-button>
                   </div>
@@ -507,7 +501,7 @@
                   <div class="contract-header">
                     <div class="contract-title">
                       <h4>{{ contract.title }}</h4>
-                      <van-tag :type="getContractStatusType(contract.status)" size="small">
+                      <van-tag :type="getContractStatusType(contract.status)" size="medium">
                         {{ getContractStatusText(contract.status) }}
                       </van-tag>
                     </div>
@@ -531,10 +525,10 @@
                     </div>
                   </div>
                   <div class="contract-actions">
-                    <van-button size="mini" @click.stop="editContract(contract)">
+                    <van-button size="medium" @click.stop="editContract(contract)">
                       编辑
                     </van-button>
-                    <van-button size="mini" type="primary" @click.stop="viewContract(contract)">
+                    <van-button size="medium" type="primary" @click.stop="viewContract(contract)">
                       查看
                     </van-button>
                   </div>
@@ -604,7 +598,7 @@
                 >
                   <div class="task-header">
                     <div class="task-priority">
-                      <van-tag :type="getPriorityType(task.priority)" size="small">
+                      <van-tag :type="getPriorityType(task.priority)" size="medium">
                         {{ getPriorityText(task.priority) }}
                       </van-tag>
                     </div>
@@ -615,10 +609,10 @@
                     <p>{{ task.description }}</p>
                   </div>
                   <div class="task-actions">
-                    <van-button size="mini" @click.stop="completeTask(task)">
+                    <van-button size="medium" @click.stop="completeTask(task)">
                       完成
                     </van-button>
-                    <van-button size="mini" type="primary" @click.stop="postponeTask(task)">
+                    <van-button size="medium" type="primary" @click.stop="postponeTask(task)">
                       延期
                     </van-button>
                   </div>
@@ -675,7 +669,7 @@
                   <div class="opportunity-header">
                     <div class="opportunity-title">
                       <h4>{{ opportunity.title }}</h4>
-                      <van-tag :type="getOpportunityType(opportunity.type)" size="small">
+                      <van-tag :type="getOpportunityType(opportunity.type)" size="medium">
                         {{ opportunity.type }}
                       </van-tag>
                     </div>
@@ -698,10 +692,10 @@
                     </div>
                   </div>
                   <div class="opportunity-actions">
-                    <van-button size="mini" @click.stop="pursueOpportunity(opportunity)">
+                    <van-button size="medium" @click.stop="pursueOpportunity(opportunity)">
                       跟进
                     </van-button>
-                    <van-button size="mini" type="primary" @click.stop="analyzeOpportunity(opportunity)">
+                    <van-button size="medium" type="primary" @click.stop="analyzeOpportunity(opportunity)">
                       分析
                     </van-button>
                   </div>
@@ -752,14 +746,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast, Dialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { BusinessCenterService, type TimelineItem, type EnrollmentProgress } from '@/api/modules/business-center'
 import { request } from '@/utils/request'
 import {
@@ -1482,11 +1476,18 @@ const loadBusinessCenterData = async () => {
 
 // 初始化
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadBusinessCenterData()
 })
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 
 .business-center-mobile {

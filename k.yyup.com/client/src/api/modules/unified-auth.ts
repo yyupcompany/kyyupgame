@@ -39,22 +39,14 @@ export interface AuthResponse {
  * 统一认证登录 - 用于手机号登录
  */
 export function loginWithUnifiedAuth(data: UnifiedAuthParams): Promise<ApiResponse<UnifiedAuthResponse>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.LOGIN_WITH_CODE,
-    method: 'post',
-    data
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.LOGIN_WITH_CODE, data);
 }
 
 /**
  * 传统登录 - 也通过统一认证系统处理
  */
 export function loginWithTraditionalAuth(data: TraditionalAuthParams): Promise<ApiResponse<AuthResponse>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.LOGIN,
-    method: 'post',
-    data
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.LOGIN, data);
 }
 
 /**
@@ -66,11 +58,7 @@ export function loginWithCode(data: {
   password: string;
   role: string;
 }): Promise<ApiResponse<UnifiedAuthResponse>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.LOGIN_WITH_CODE,
-    method: 'post',
-    data
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.LOGIN_WITH_CODE, data);
 }
 
 /**
@@ -80,30 +68,19 @@ export function sendVerificationCode(data: {
   phone: string;
   type: string;
 }): Promise<ApiResponse<{ success: boolean; message: string }>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.SEND_CODE,
-    method: 'post',
-    data
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.SEND_CODE, data);
 }
 
 /**
  * 刷新Token
  */
 export function refreshToken(refreshToken: string): Promise<ApiResponse<{ token: string }>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.REFRESH,
-    method: 'post',
-    data: { refreshToken }
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.REFRESH, { refreshToken });
 }
 
 /**
  * 登出
  */
 export function logout(): Promise<ApiResponse<{ success: boolean }>> {
-  return requestInstance({
-    url: UNIFIED_AUTH_ENDPOINTS.LOGOUT,
-    method: 'post'
-  });
+  return requestInstance.post(UNIFIED_AUTH_ENDPOINTS.LOGOUT);
 }

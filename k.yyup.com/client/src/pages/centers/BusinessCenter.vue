@@ -35,19 +35,28 @@
         >
           <div class="timeline-marker">
             <div class="timeline-dot">
-              <UnifiedIcon :name="convertIconName(item.icon)" :size="16" />
+              <div class="dot-inner">
+                <UnifiedIcon :name="convertIconName(item.icon)" :size="16" />
+              </div>
             </div>
             <div class="timeline-line" v-if="index < timelineItems.length - 1"></div>
           </div>
           
           <div class="timeline-content">
-            <div class="timeline-title">{{ item.title }}</div>
-            <div class="timeline-description">{{ item.description }}</div>
-            <div class="timeline-meta">
-              <span class="timeline-status" :class="item.status">
+            <div class="timeline-header-info">
+              <span class="timeline-title">{{ item.title }}</span>
+              <span class="timeline-status-tag" :class="item.status">
                 {{ getStatusText(item.status) }}
               </span>
-              <span class="timeline-progress">{{ item.progress }}%</span>
+            </div>
+            <div class="timeline-description">{{ item.description }}</div>
+            <div class="timeline-footer-info">
+              <div class="progress-info">
+                <div class="progress-bar-mini">
+                  <div class="progress-fill" :style="{ width: item.progress + '%' }"></div>
+                </div>
+                <span class="progress-text">{{ item.progress }}%</span>
+              </div>
             </div>
           </div>
         </div>
@@ -160,17 +169,23 @@
                 快捷操作
               </h5>
               <div class="quick-actions-grid">
-                <el-button
+                <div
                   v-for="action in getQuickActions(selectedItem.title)"
                   :key="action.key"
-                  :type="action.type || 'primary'"
-                  :icon="action.icon"
+                  class="quick-action-card"
+                  :class="[`quick-action-card--${action.type || 'primary'}`]"
                   @click="handleQuickAction(action)"
-                  class="quick-action-btn"
                 >
-                  <UnifiedIcon :name="convertIconName(action.lucideIcon)" :size="16" class="margin-custom" />
-                  {{ action.label }}
-                </el-button>
+                  <div class="action-icon-wrapper">
+                    <UnifiedIcon :name="convertIconName(action.lucideIcon)" :size="20" />
+                  </div>
+                  <div class="action-info">
+                    <span class="action-label">{{ action.label }}</span>
+                  </div>
+                  <div class="action-arrow">
+                    <UnifiedIcon name="arrow-right" :size="14" />
+                  </div>
+                </div>
               </div>
               <div class="quick-actions-tip">
                 <UnifiedIcon name="view" :size="14" />
@@ -789,21 +804,33 @@ const loadBusinessCenterData = async () => {
     loading.value = true
     console.log('🏢 开始加载业务中心数据...')
 
-    // 并行获取所有数据
-    const [timelineData, enrollmentProgressData] = await Promise.all([
+    // 并行获取所有数据（避免其中一个接口慢/失败导致全页“看起来像空白”）
+    const [timelineRes, enrollmentRes] = await Promise.allSettled([
       BusinessCenterService.getTimeline(),
       BusinessCenterService.getEnrollmentProgress()
     ])
 
     // 更新时间线数据
-    timelineItems.value = timelineData
-    console.log('📋 时间线数据加载完成:', timelineData.length, '个项目')
+    if (timelineRes.status === 'fulfilled') {
+      timelineItems.value = timelineRes.value
+      console.log('📋 时间线数据加载完成:', timelineRes.value.length, '个项目')
+    } else {
+      console.error('❌ 时间线数据加载失败:', timelineRes.reason)
+      timelineItems.value = []
+    }
 
     // 更新招生进度数据
-    enrollmentTarget.value = enrollmentProgressData.target
-    enrollmentCurrent.value = enrollmentProgressData.current
-    enrollmentMilestones.value = enrollmentProgressData.milestones
-    console.log('🎯 招生进度数据加载完成:', enrollmentProgressData)
+    if (enrollmentRes.status === 'fulfilled') {
+      enrollmentTarget.value = enrollmentRes.value.target
+      enrollmentCurrent.value = enrollmentRes.value.current
+      enrollmentMilestones.value = enrollmentRes.value.milestones
+      console.log('🎯 招生进度数据加载完成:', enrollmentRes.value)
+    } else {
+      console.error('❌ 招生进度数据加载失败:', enrollmentRes.reason)
+      enrollmentTarget.value = 0
+      enrollmentCurrent.value = 0
+      // 保留默认里程碑（避免 UI 断裂）
+    }
 
     // 默认选中第一个进行中的项目
     const inProgressItem = timelineItems.value.find(item => item.status === 'in-progress')
@@ -813,7 +840,11 @@ const loadBusinessCenterData = async () => {
       selectedItem.value = timelineItems.value[0]
     }
 
-    ElMessage.success('业务中心数据加载成功')
+    if (timelineRes.status === 'fulfilled' || enrollmentRes.status === 'fulfilled') {
+      ElMessage.success('业务中心数据已加载')
+    } else {
+      ElMessage.error('业务中心数据加载失败，请稍后重试')
+    }
   } catch (error) {
     console.error('❌ 加载业务中心数据失败:', error)
     ElMessage.error('加载业务中心数据失败，请稍后重试')
@@ -829,6 +860,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 // ✅ 商务中心页面样式 - 直接使用UnifiedCenterLayout的子元素
 // 避免与全局.center-container样式的冲突
 
@@ -838,7 +870,7 @@ onMounted(() => {
   flex-direction: row;
   height: 100%;
   gap: var(--radius-3xl);
-  background: var(--bg-secondary, var(--bg-tertiary));
+  background: var(--bg-page);
   padding: 0;  // ✅ 移除padding，因为UnifiedCenterLayout已经提供了padding
   overflow: visible;  // ✅ 允许内容显示，由子元素控制滚动
   position: relative;
@@ -883,166 +915,209 @@ onMounted(() => {
 
 .timeline-item {
   display: flex;
-  margin-bottom: var(--radius-3xl);
+  margin-bottom: var(--radius-2xl);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
   
   &:hover {
-    transform: translateX(var(--radius-sm));
+    .timeline-content {
+      transform: translateX(8px);
+      background: var(--bg-secondary);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .timeline-dot {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 4px var(--primary-light-bg);
+    }
   }
   
   &.active {
     .timeline-content {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%);
-      border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 var(--radius-sm) var(--radius-xl) var(--primary-light-bg);
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light-bg) 100%);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-lg), var(--glow-primary);
+      transform: translateX(8px);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--primary-color);
+        border-radius: var(--radius-full) 0 0 var(--radius-full);
+      }
     }
 
     .timeline-dot {
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-      color: var(--bg-color);
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
       transform: scale(1.2);
-      box-shadow: 0 var(--radius-sm) var(--radius-xl) var(--button-primary-dark);
+      box-shadow: 0 0 0 6px var(--primary-light-bg);
+
+      .dot-inner {
+        animation: pulse 2s infinite;
+      }
     }
   }
-  
-  &.completed .timeline-dot {
-    background: var(--el-color-success);
-    border-color: var(--el-color-success);
-    color: white;
+}
 
-    :deep(.unified-icon),
-    :deep(svg) {
-      color: white;
-    }
-  }
-
-  &.in-progress .timeline-dot {
-    background: var(--el-color-primary);
-    border-color: var(--el-color-primary);
-    color: white;
-
-    :deep(.unified-icon),
-    :deep(svg) {
-      color: white;
-    }
-  }
-
-  &.pending .timeline-dot {
-    background: var(--el-border-color);
-    border-color: var(--el-border-color-light);
-    color: var(--el-text-color-secondary);
-
-    :deep(.unified-icon),
-    :deep(svg) {
-      color: var(--el-text-color-secondary);
-    }
-  }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
 .timeline-marker {
   position: relative;
-  margin-right: var(--radius-2xl);
+  margin-right: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 32px;
+  flex-shrink: 0;
 }
 
 .timeline-dot {
-  width: var(--spacing-2xl);
-  height: var(--spacing-2xl);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
-  color: var(--el-text-color-regular);
-  transition: all 0.3s ease;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
   z-index: 2;
-  border: 3px solid var(--el-border-color-lighter);
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 
-  // 确保图标不被拉伸且颜色正确
-  :deep(.unified-icon) {
-    color: var(--el-text-color-primary);
+  .dot-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   :deep(svg) {
     width: 16px;
     height: 16px;
-    flex-shrink: 0;
-    color: currentColor;
   }
 }
 
 .timeline-line {
-  width: var(--radius-xs);
-  height: var(--spacing-3xl);
-  background: linear-gradient(to bottom, var(--el-border-color-light), transparent);
-  margin-top: var(--radius-lg);
+  position: absolute;
+  top: 32px;
+  bottom: -24px;
+  width: 2px;
+  background: var(--border-color-light);
+  z-index: 1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, var(--primary-color) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+}
+
+.timeline-item.active .timeline-line::after {
+  opacity: 0.3;
 }
 
 .timeline-content {
   flex: 1;
-  padding: var(--radius-xl) var(--radius-2xl);
-  border: var(--radius-xs) solid var(--el-border-color-lighter);
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-light);
   border-radius: var(--radius-lg);
-  background: var(--el-fill-color-lighter);
-  transition: all 0.3s ease;
-  backdrop-filter: blur(var(--el-font-size-extra-small, var(--font-size-xs)));
+  transition: all var(--transition-normal);
+  position: relative;
+  min-width: 0;
 
-  &:hover {
-    border-color: var(--el-color-primary-light-7);
-    box-shadow: var(--el-box-shadow-light);
-  }
-}
+  .timeline-header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
 
-.timeline-title {
-  font-weight: 600;
-  color: var(--el-text-color-primary);
-  margin-bottom: var(--radius-sm);
-}
+    .timeline-title {
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
 
-.timeline-description {
-  font-size: var(--text-sm);
-  color: var(--el-text-color-regular);
-  margin-bottom: var(--radius-lg);
-}
+    .timeline-status-tag {
+      font-size: var(--text-2xs);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-weight: 600;
+      text-transform: uppercase;
 
-.timeline-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: var(--radius-xl);
-}
-
-.timeline-status {
-  padding: var(--radius-xs) var(--radius-lg);
-  border-radius: var(--radius-xl);
-  font-size: var(--text-xs);
-  font-weight: 500;
-
-  &.completed {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15));
-    color: var(--color-success);
-    border: var(--radius-xs) solid var(--el-color-success-lighter);
+      &.completed {
+        background: var(--success-light-bg);
+        color: var(--success-color);
+      }
+      &.in-progress {
+        background: var(--warning-light-bg);
+        color: var(--warning-color);
+      }
+      &.pending {
+        background: var(--bg-secondary);
+        color: var(--text-secondary);
+      }
+    }
   }
 
-  &.in-progress {
-    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.15));
-    color: var(--color-accent);
-    border: var(--radius-xs) solid rgba(245, 158, 11, 0.2);
+  .timeline-description {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  &.pending {
-    background: linear-gradient(135deg, rgba(107, 114, 128, 0.15), rgba(75, 85, 99, 0.15));
-    color: var(--color-gray-500);
-    border: var(--radius-xs) solid rgba(107, 114, 128, 0.2);
-  }
-}
+  .timeline-footer-info {
+    .progress-info {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
 
-.timeline-progress {
-  color: var(--el-text-color-secondary);
-  font-weight: 500;
+      .progress-bar-mini {
+        flex: 1;
+        height: 4px;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-full);
+        overflow: hidden;
+
+        .progress-fill {
+          height: 100%;
+          background: var(--primary-color);
+          border-radius: var(--radius-full);
+          transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+      }
+
+      .progress-text {
+        font-size: var(--text-xs);
+        font-weight: 700;
+        color: var(--text-secondary);
+        min-width: 32px;
+      }
+    }
+  }
 }
 
 // 右侧内容区域 (2/3屏幕)
@@ -1883,44 +1958,136 @@ html.dark {
 
 // 快捷操作区域样式
 .quick-actions-section {
-  background: linear-gradient(135deg, var(--gradient-subtle) 0%, rgba(139, 92, 246, 0.05) 100%);
-  border: var(--radius-xs) dashed var(--button-primary-medium);
+  background: var(--bg-tertiary);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-lg) !important;
-  margin-top: var(--spacing-lg);
+  padding: var(--spacing-xl) !important;
+  margin-top: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
 
   h5 {
     display: flex;
     align-items: center;
-    color: var(--el-color-primary);
+    gap: var(--spacing-sm);
+    color: var(--text-primary);
     font-weight: 600;
-    margin-bottom: var(--radius-2xl);
+    margin-bottom: var(--spacing-xl);
+    font-size: var(--text-base);
+
+    .unified-icon {
+      color: var(--primary-color);
+    }
   }
 
   .quick-actions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(var(--container-md), 1fr));
-    gap: var(--radius-xl);
-    margin-bottom: var(--radius-xl);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 
-    .quick-action-btn {
-      width: 100%;
-      height: 4var(--radius-sm);
+    .quick-action-card {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-weight: 500;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md) var(--spacing-lg);
+      background: var(--bg-card);
       border-radius: var(--radius-lg);
-      transition: all 0.3s ease;
-      box-shadow: var(--el-box-shadow-light);
+      border: 1px solid var(--border-color-light);
+      cursor: pointer;
+      transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
 
       &:hover {
-        transform: translateY(-var(--radius-sm));
-        box-shadow: 0 var(--radius-xs) var(--radius-xl) var(--button-primary-medium);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--primary-color);
+
+        .action-icon-wrapper {
+          transform: scale(1.1) rotate(-5deg);
+        }
+
+        .action-arrow {
+          transform: translateX(4px);
+          opacity: 1;
+        }
       }
 
-      &:active {
-        transform: translateY(0);
+      .action-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--primary-light-bg);
+        color: var(--primary-color);
+        border-radius: var(--radius-md);
+        transition: all var(--transition-normal);
+        flex-shrink: 0;
+      }
+
+      .action-info {
+        flex: 1;
+        min-width: 0;
+
+        .action-label {
+          display: block;
+          font-size: var(--text-sm);
+          font-weight: 600;
+          color: var(--text-primary);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .action-arrow {
+        color: var(--text-secondary);
+        opacity: 0.5;
+        transition: all var(--transition-normal);
+        display: flex;
+        align-items: center;
+      }
+
+      /* 不同类型的卡片配色 */
+      &--success {
+        &:hover {
+          border-color: var(--success-color);
+          .action-icon-wrapper {
+            background: var(--success-light-bg);
+            color: var(--success-color);
+          }
+        }
+      }
+
+      &--warning {
+        &:hover {
+          border-color: var(--warning-color);
+          .action-icon-wrapper {
+            background: var(--warning-light-bg);
+            color: var(--warning-color);
+          }
+        }
+      }
+
+      &--danger {
+        &:hover {
+          border-color: var(--danger-color);
+          .action-icon-wrapper {
+            background: var(--danger-light-bg);
+            color: var(--danger-color);
+          }
+        }
+      }
+
+      &--info {
+        &:hover {
+          border-color: var(--text-secondary);
+          .action-icon-wrapper {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+          }
+        }
       }
     }
   }
@@ -1928,16 +2095,16 @@ html.dark {
   .quick-actions-tip {
     display: flex;
     align-items: center;
-    gap: var(--radius-md);
-    padding: var(--radius-lg) var(--radius-xl);
-    background: rgba(99, 102, 241, 0.08);
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--primary-light-bg);
     border-radius: var(--radius-md);
-    font-size: var(--radius-xl);
-    color: var(--el-text-color-secondary);
+    font-size: var(--text-xs);
+    color: var(--primary-color);
+    opacity: 0.8;
 
-    svg {
-      flex-shrink: 0;
-      color: var(--el-color-primary);
+    .unified-icon {
+      font-size: 14px;
     }
   }
 }

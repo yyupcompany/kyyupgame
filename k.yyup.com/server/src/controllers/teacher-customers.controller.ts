@@ -13,9 +13,13 @@ export class TeacherCustomersController {
    * 获取教师的客户统计信息
    */
   static async getCustomerStats(req: Request, res: Response) {
+    console.log('[getCustomerStats] ===== 控制器方法被调用 =====');
+    console.log('[getCustomerStats] req.user:', JSON.stringify(req.user));
+    console.log('[getCustomerStats] req.dataFilter:', JSON.stringify(req.dataFilter));
     try {
       const tenantDb = req.tenant?.databaseName || 'tenant_dev';
       const teacherId = req.user?.id || req.params.teacherId;
+      console.log('[getCustomerStats] teacherId:', teacherId, 'tenantDb:', tenantDb);
       
       // 查询教师分配的客户统计
       const [stats] = await sequelize.query(`

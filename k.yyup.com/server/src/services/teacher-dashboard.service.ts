@@ -97,16 +97,31 @@ export class TeacherDashboardService {
    */
   static async getClassStats(teacherId: number) {
     try {
-      // 获取教师负责的班级
-      const teacher = await Teacher.findByPk(teacherId, {
-        include: [{
-          model: Class,
-          as: 'classes'
-        }]
-      }).catch(() => null);
+      console.log(`🔍 查询教师${teacherId}的班级关联...`);
+      
+      // 获取教师负责的班级（使用raw SQL避免role字段问题）
+      const { sequelize } = require('../init');
+      const { QueryTypes } = require('sequelize');
+      
+      const classTeachers = await sequelize.query(`
+        SELECT ct.class_id, c.id, c.name, c.code, c.type, c.capacity, c.current_student_count
+        FROM class_teachers ct
+        LEFT JOIN classes c ON ct.class_id = c.id
+        WHERE ct.teacher_id = :teacherId AND ct.deleted_at IS NULL AND c.deleted_at IS NULL
+      `, {
+        replacements: { teacherId },
+        type: QueryTypes.SELECT
+      }).catch((err: any) => {
+        console.error(`❌ 查询ClassTeacher失败:`, err);
+        return [];
+      });
 
-      const classes = teacher?.classes || [];
+      console.log(`🔍 ClassTeacher记录数: ${classTeachers.length}`);
+      
+      const classes = classTeachers.filter(Boolean);
       const total = classes.length;
+      
+      console.log(`📊 教师${teacherId}的班级数量: ${total}`, classes.map((c: any) => c?.name));
 
       // 获取今日课程数量
       const today = new Date();
@@ -122,19 +137,13 @@ export class TeacherDashboardService {
         }
       }).catch(() => 0);
 
-      // 获取学生总数
+      // 获取学生总数 - 直接从班级的current_student_count累加
       let studentsCount = 0;
-      if (classes.length > 0) {
-        studentsCount = await Student.count({
-          include: [{
-            model: Class,
-            as: 'class',
-            where: {
-              id: { [Op.in]: classes.map(c => c.id) }
-            }
-          }]
-        }).catch(() => 0);
+      const classIds = classes.map((c: any) => c?.id || c?.class_id).filter(Boolean);
+      if (classIds.length > 0) {
+        studentsCount = classes.reduce((sum: number, c: any) => sum + (c.current_student_count || 0), 0);
       }
+      console.log(`📊 教师${teacherId}管理的学生数量: ${studentsCount}`);
 
       // 计算教学完成率
       const [totalSessions, completedSessions] = await Promise.all([
@@ -181,6 +190,13 @@ export class TeacherDashboardService {
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 7);
 
+      // 获取所有活动总数（包括所有状态）
+      const total = await Activity.count({
+        where: {
+          creatorId: teacherId
+        }
+      }).catch(() => 0);
+
       const [upcoming, participating, thisWeek] = await Promise.all([
         Activity.count({
           where: {
@@ -206,13 +222,14 @@ export class TeacherDashboardService {
       ]);
 
       return {
+        total: total || 0,
         upcoming: upcoming || 0,
-        participating: participating || 0,
+        participated: participating || 0,  // 前端期望 participated 字段
         thisWeek: thisWeek || 0
       };
     } catch (error) {
       console.error('获取活动统计失败:', error);
-      return { upcoming: 0, participating: 0, thisWeek: 0 };
+      return { total: 0, upcoming: 0, participated: 0, thisWeek: 0 };
     }
   }
 

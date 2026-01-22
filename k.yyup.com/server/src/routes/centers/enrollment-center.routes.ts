@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { EnrollmentCenterController } from '../controllers/enrollment-center.controller';
-import { verifyToken, checkPermission } from '../middlewares/auth.middleware';
+import { EnrollmentCenterController } from '../../controllers/enrollment-center.controller';
+import { verifyToken, checkPermission } from '../../middlewares/auth.middleware';
 
 const router = Router();
 

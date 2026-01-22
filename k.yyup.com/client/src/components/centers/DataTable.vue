@@ -436,8 +436,10 @@ defineExpose({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--text-lg);
-  border-bottom: var(--z-index-dropdown) solid var(--border-color);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 
   .toolbar-left {
     display: flex;
@@ -552,8 +554,10 @@ defineExpose({
 .table-pagination {
   display: flex;
   justify-content: flex-end;
-  padding: var(--text-lg);
-  border-top: var(--z-index-dropdown) solid var(--border-color);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-card);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   flex-shrink: 0; // 防止分页被压缩
 }
 

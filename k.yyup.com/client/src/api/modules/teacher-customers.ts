@@ -217,39 +217,34 @@ export const deleteFollowRecord = (customerId: string, recordId: string) => {
  * @returns {Promise<{ totalCustomers: number, todayFollows: number, pendingFollows: number, successRate: number }>} 跟踪统计
  */
 export const getCustomerTrackingStats = async () => {
-  try {
-    const [statsResponse, listResponse] = await Promise.all([
-      request.get(TEACHER_CUSTOMERS_API_ENDPOINTS.STATS),
-      request.get(TEACHER_CUSTOMERS_API_ENDPOINTS.LIST, { params: { pageSize: 1000 } })
-    ]);
+  const [statsResponse, listResponse] = await Promise.all([
+    request.get(TEACHER_CUSTOMERS_API_ENDPOINTS.STATS),
+    request.get(TEACHER_CUSTOMERS_API_ENDPOINTS.LIST, { params: { pageSize: 1000 } })
+  ]);
 
-    const stats = statsResponse.data;
-    const customers = listResponse.data?.list || [];
-    
-    // 计算今日跟进数量
-    const today = new Date().toDateString();
-    const todayFollows = customers.filter((c: any) => 
-      c.lastFollowDate && new Date(c.lastFollowDate).toDateString() === today
-    ).length;
-    
-    // 计算待跟进数量（状态为NEW或超过3天未跟进的FOLLOWING客户）
-    const threeDaysAgo = new Date();
-    threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
-    const pendingFollows = customers.filter((c: any) => 
-      c.status === 'NEW' || 
-      (c.status === 'FOLLOWING' && (!c.lastFollowDate || new Date(c.lastFollowDate) < threeDaysAgo))
-    ).length;
+  const stats = statsResponse.data;
+  const customers = listResponse.data?.list || [];
 
-    return {
-      data: {
-        totalCustomers: stats.totalCustomers || 0,
-        todayFollows,
-        pendingFollows,
-        successRate: stats.conversionRate || 0
-      }
-    };
-  } catch (error) {
-    console.error('获取客户跟踪统计失败:', error);
-    throw error;
-  }
+  // 计算今日跟进数量
+  const today = new Date().toDateString();
+  const todayFollows = customers.filter((c: any) =>
+    c.lastFollowDate && new Date(c.lastFollowDate).toDateString() === today
+  ).length;
+
+  // 计算待跟进数量（状态为NEW或超过3天未跟进的FOLLOWING客户）
+  const threeDaysAgo = new Date();
+  threeDaysAgo.setDate(threeDaysAgo.getDate() - 3);
+  const pendingFollows = customers.filter((c: any) =>
+    c.status === 'NEW' ||
+    (c.status === 'FOLLOWING' && (!c.lastFollowDate || new Date(c.lastFollowDate) < threeDaysAgo))
+  ).length;
+
+  return {
+    data: {
+      totalCustomers: stats.totalCustomers || 0,
+      todayFollows,
+      pendingFollows,
+      successRate: stats.conversionRate || 0
+    }
+  };
 };

@@ -10,9 +10,10 @@
 // ==================== 侧边栏基础样式 ====================
 .sidebar {
   position: fixed;
-  top: 0;
+  // ✅ 修复：侧边栏从头部下方开始，避免 header 覆盖导致首个菜单项“点不到/卡住”
+  top: var(--header-height, 64px);
   left: 0;
-  height: 100vh;
+  height: calc(100vh - var(--header-height, 64px));
   width: var(--sidebar-width, 260px);
   background: var(--sidebar-bg, var(--bg-card));
   border-right: var(--border-width-base) solid var(--sidebar-border, var(--border-color));
@@ -21,6 +22,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  // 性能优化：限制样式影响范围
+  contain: layout style;
 
   &.collapsed {
     width: var(--sidebar-width-collapsed, 80px);
@@ -191,11 +194,14 @@
   position: relative;
   overflow: hidden;
   font-size: var(--sidebar-font-sm, 16px);
+  // 性能优化：使用will-change提前通知浏览器
+  will-change: transform;
 
   &:hover {
     background: var(--menu-item-hover-bg, var(--bg-hover));
     color: var(--menu-item-hover-color, var(--primary-color));
-    transform: translateX(var(--transform-hover-small));
+    // 性能优化：使用transform替代translateX，避免重排
+    transform: translateX(4px);
   }
 
   &.active {
@@ -203,6 +209,7 @@
     color: var(--menu-item-active-color, var(--text-on-primary));
     box-shadow: var(--shadow-sm);
 
+    // 性能优化：使用::before伪元素代替border，减少重绘
     &::before {
       content: '';
       position: absolute;

@@ -4,33 +4,26 @@
     description="这里是任务管理的核心枢纽，您可以创建任务、分配工作、跟踪进度、管理待办事项。"
     :full-width="true"
   >
-    <template #header-actions>
-      <el-button type="primary" @click="handleCreate">
-        <UnifiedIcon name="plus" />
-        新建任务
-      </el-button>
-    </template>
-
     <!-- 直接使用 overview-content，不需要额外的容器 -->
     <div class="overview-content">
 
-          <!-- 统计卡片区域 -->
+          <!-- 统计卡片区域 - 使用统一网格系统 -->
           <div class="stats-section">
-        <el-row :gutter="16">
-          <el-col :xs="24" :sm="12" :md="6" :lg="6" v-for="stat in overviewStats" :key="stat.key">
-            <StatCard
-              :title="stat.title"
-              :value="stat.value"
-              :unit="stat.unit"
-              :trend="stat.trend"
-              :trend-text="stat.trendText"
-              :type="stat.type"
-              :icon-name="stat.iconName"
-              clickable
-              @click="handleStatClick(stat)"
-            />
-          </el-col>
-        </el-row>
+        <div class="stats-grid-unified">
+          <StatCard
+            v-for="stat in overviewStats"
+            :key="stat.key"
+            :title="stat.title"
+            :value="stat.value"
+            :unit="stat.unit"
+            :trend="stat.trend"
+            :trend-text="stat.trendText"
+            :type="stat.type"
+            :icon-name="stat.iconName"
+            clickable
+            @click="handleStatClick(stat)"
+          />
+        </div>
       </div>
 
       <!-- 任务列表区域 -->
@@ -45,159 +38,108 @@
           </div>
         </div>
         <div class="task-table-container">
-          <div class="table-wrapper">
-<el-table class="responsive-table"
+          <DataTable
             :data="taskList"
+            :columns="taskColumns"
             :loading="tasksLoading"
-            stripe
+            :total="pagination.total"
+            :current-page="pagination.page"
+            :page-size="pagination.pageSize"
+            :selectable="true"
+            :stripe="true"
             @selection-change="handleSelectionChange"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            @edit="handleEditTask"
+            @delete="handleDeleteTask"
           >
-            <el-table-column type="selection" width="55" />
-            <el-table-column prop="id" label="ID" width="80" />
-            <el-table-column prop="title" label="任务标题" min-width="200" show-overflow-tooltip />
-            <el-table-column prop="priority" label="优先级" width="100">
-              <template #default="{ row }">
-                <span class="status-tag status-tag--priority" :class="`status-tag--${row.priority}`">
-                  {{ getPriorityText(row.priority) }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="status" label="状态" width="100">
-              <template #default="{ row }">
-                <span class="status-tag status-tag--status" :class="`status-tag--${row.status}`">
-                  {{ getStatusText(row.status) }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="type" label="类型" width="100">
-              <template #default="{ row }">
-                <span class="status-tag status-tag--type">
-                  {{ getTypeText(row.type) }}
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="assignee" label="执行者" width="120">
-              <template #default="{ row }">
-                <span v-if="row.assignee">{{ row.assignee.username }}</span>
-                <span v-else class="text-gray-400">未分配</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="progress" label="进度" width="120">
-              <template #default="{ row }">
-                <div class="progress-wrapper">
-                  <div class="progress-bar">
-                    <div class="progress-fill" :style="{ width: (row.progress || 0) + '%' }"></div>
-                  </div>
-                  <span class="progress-text">{{ row.progress || 0 }}%</span>
-                </div>
-              </template>
-            </el-table-column>
-            <el-table-column prop="due_date" label="截止时间" width="120">
-              <template #default="{ row }">
-                <span v-if="row.due_date">
-                  {{ formatDate(row.due_date) }}
-                </span>
-                <span v-else class="text-gray-400">无</span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="created_at" label="创建时间" width="120">
-              <template #default="{ row }">
-                {{ formatDate(row.created_at) }}
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="180" fixed="right" align="center">
-              <template #default="{ row }">
-                <div class="table-actions">
-                  <el-button
-                    type="primary"
-                    size="small"
-                    link
-                    @click="handleEditTask(row)"
-                  >
-                    <UnifiedIcon name="edit" :size="16" />
-                    编辑
-                  </el-button>
-                  <el-divider direction="vertical" />
-                  <el-button
-                    type="danger"
-                    size="small"
-                    link
-                    @click="handleDeleteTask(row)"
-                  >
-                    <UnifiedIcon name="delete" :size="16" />
-                    删除
-                  </el-button>
-                </div>
-              </template>
-            </el-table-column>
-          </el-table>
-</div>
+            <!-- Custom slots for priority, status, type columns -->
+            <template #column-priority="{ row }">
+              <span class="status-tag status-tag--priority" :class="`status-tag--${row.priority}`">
+                {{ getPriorityText(row.priority) }}
+              </span>
+            </template>
 
-          <!-- 分页 -->
-          <div class="pagination-container">
-            <el-pagination
-              v-model:current-page="pagination.page"
-              v-model:page-size="pagination.pageSize"
-              :page-sizes="[10, 20, 50, 100]"
-              :total="pagination.total"
-              layout="total, sizes, prev, pager, next, jumper"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-            />
-          </div>
+            <template #column-status="{ row }">
+              <span class="status-tag status-tag--status" :class="`status-tag--${row.status}`">
+                {{ getStatusText(row.status) }}
+              </span>
+            </template>
+
+            <template #column-type="{ row }">
+              <span class="status-tag status-tag--type">
+                {{ getTypeText(row.type) }}
+              </span>
+            </template>
+
+            <template #column-assignee="{ row }">
+              <span v-if="row.assignee">{{ row.assignee.username }}</span>
+              <span v-else class="text-gray-400">未分配</span>
+            </template>
+
+            <template #column-progress="{ row }">
+              <div class="progress-wrapper">
+                <div class="progress-bar">
+                  <div class="progress-fill" :style="{ width: (row.progress || 0) + '%' }"></div>
+                </div>
+                <span class="progress-text">{{ row.progress || 0 }}%</span>
+              </div>
+            </template>
+
+            <template #column-due_date="{ row }">
+              <span v-if="row.due_date">{{ formatDate(row.due_date) }}</span>
+              <span v-else class="text-gray-400">无</span>
+            </template>
+
+            <template #column-created_at="{ row }">
+              {{ formatDate(row.created_at) }}
+            </template>
+          </DataTable>
         </div>
       </div>
 
-      <!-- 图表区域 -->
+      <!-- 图表区域 - 使用统一网格系统 -->
       <div class="charts-section">
-        <el-row :gutter="16">
-          <el-col :xs="24" :sm="24" :md="12" :lg="12">
-            <ChartContainer
-              title="任务完成趋势"
-              subtitle="最近7天任务完成情况"
-              :options="taskTrendChart"
-              :loading="chartsLoading"
-              height="300px"
-              @refresh="refreshCharts"
-            />
-          </el-col>
-          <el-col :xs="24" :sm="24" :md="12" :lg="12">
-            <ChartContainer
-              title="任务优先级分布"
-              subtitle="当前任务优先级统计"
-              :options="priorityDistributionChart"
-              :loading="chartsLoading"
-              height="300px"
-              @refresh="refreshCharts"
-            />
-          </el-col>
-        </el-row>
+        <div class="charts-grid-unified">
+          <ChartContainer
+            title="任务完成趋势"
+            subtitle="最近7天任务完成情况"
+            :options="taskTrendChart"
+            :loading="chartsLoading"
+            height="300px"
+            @refresh="refreshCharts"
+          />
+          <ChartContainer
+            title="任务优先级分布"
+            subtitle="当前任务优先级统计"
+            :options="priorityDistributionChart"
+            :loading="chartsLoading"
+            height="300px"
+            @refresh="refreshCharts"
+          />
+        </div>
       </div>
 
-      <!-- 快速操作区域 -->
+      <!-- 快速操作区域 - 使用统一网格系统 -->
       <div class="quick-actions-section">
-        <el-row :gutter="16">
-          <el-col :xs="24" :sm="12" :md="12" :lg="12">
-            <div class="primary-actions">
-              <ActionToolbar
-                :primary-actions="quickActions"
-                size="default"
-                align="left"
-                @action-click="handleQuickAction"
-              />
-            </div>
-          </el-col>
-          <el-col :xs="24" :sm="12" :md="12" :lg="12">
-            <div class="secondary-actions">
-              <ActionToolbar
-                :primary-actions="secondaryActions"
-                size="default"
-                align="right"
-                @action-click="handleQuickAction"
-              />
-            </div>
-          </el-col>
-        </el-row>
+        <div class="actions-grid-unified">
+          <div class="primary-actions">
+            <ActionToolbar
+              :primary-actions="quickActions"
+              size="default"
+              align="left"
+              @action-click="handleQuickAction"
+            />
+          </div>
+          <div class="secondary-actions">
+            <ActionToolbar
+              :primary-actions="secondaryActions"
+              size="default"
+              align="right"
+              @action-click="handleQuickAction"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </UnifiedCenterLayout>
@@ -315,6 +257,27 @@ const pagination = reactive({
 // 任务管理数据
 const tasksData = ref([])
 const tasksLoading = ref(false)
+
+// 任务列表列配置
+const taskColumns = [
+  { prop: 'id', label: 'ID', width: 80 },
+  { prop: 'title', label: '任务标题', minWidth: 200 },
+  { prop: 'priority', label: '优先级', width: 100 },
+  { prop: 'status', label: '状态', width: 100 },
+  { prop: 'type', label: '类型', width: 100 },
+  { prop: 'assignee', label: '执行者', width: 120 },
+  { prop: 'progress', label: '进度', width: 120 },
+  { prop: 'due_date', label: '截止时间', width: 120 },
+  { prop: 'created_at', label: '创建时间', width: 120 },
+  {
+    prop: 'actions',
+    label: '操作',
+    width: 180,
+    fixed: 'right',
+    align: 'center',
+    type: 'actions' as const
+  }
+]
 
 // 生命周期
 onMounted(() => {
@@ -643,7 +606,7 @@ const getTypeText = (type: string) => {
     padding: var(--spacing-lg);  // ✅ 使用设计令牌
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);  // ✅ 使用统一变量
     border-radius: var(--radius-lg);  // ✅ 使用设计令牌
-    color: white;
+    color: var(--text-on-primary);
     box-shadow: var(--shadow-md);  // ✅ 使用设计令牌
     flex-shrink: 0;  // ✅ 防止被压缩
   }
@@ -679,6 +642,38 @@ const getTypeText = (type: string) => {
   .stats-section {
     margin-bottom: var(--spacing-xl);
     flex-shrink: 0;
+
+    .stats-grid-unified {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+
+      @media (max-width: 1400px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: var(--breakpoint-md)) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+    }
+
+    :deep(.stat-card) {
+      border: none;
+      box-shadow: var(--shadow-sm);
+    }
+
+    :deep(.stat-card::before) {
+      height: 2px;
+    }
+
+    :deep(.stat-card--primary),
+    :deep(.stat-card--success),
+    :deep(.stat-card--warning),
+    :deep(.stat-card--danger),
+    :deep(.stat-card--info) {
+      border-color: var(--border-color);
+    }
   }
 
   /* 任务列表样式 */
@@ -754,7 +749,7 @@ const getTypeText = (type: string) => {
 
       // 表格整体样式
       &.el-table--striped .el-table__body tr.el-table__row--striped td {
-        background: var(--bg-secondary);
+        background: var(--bg-page);
       }
 
       // 表格行的悬停效果
@@ -792,7 +787,7 @@ const getTypeText = (type: string) => {
         }
 
         th {
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-bottom: var(--border-width-thin) solid var(--border-color);
           color: var(--text-primary);
           font-weight: var(--font-semibold);
@@ -886,7 +881,7 @@ const getTypeText = (type: string) => {
 
         // 类型标签
         &.status-tag--type {
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           color: var(--text-secondary);
           border: 1px solid var(--border-color);
         }
@@ -901,7 +896,7 @@ const getTypeText = (type: string) => {
         .progress-bar {
           flex: 1;
           height: 6px;
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-sm);
           overflow: hidden;
 
@@ -966,63 +961,38 @@ const getTypeText = (type: string) => {
         }
       }
     }
-
-    .pagination-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: var(--spacing-lg) 0;
-      gap: var(--spacing-md);
-
-      :deep(.el-pagination) {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-sm);
-
-        .el-pagination__total {
-          color: var(--text-primary);
-          font-weight: var(--font-medium);
-        }
-
-        .el-pager li {
-          background: var(--bg-card);
-          border: var(--border-width-thin) solid var(--border-color);
-          border-radius: var(--radius-sm);
-
-          &.is-active {
-            background: var(--primary-color);
-            color: var(--text-on-primary);
-            border-color: var(--primary-color);
-          }
-
-          &:hover {
-            color: var(--primary-color);
-          }
-        }
-
-        button {
-          background: var(--bg-card);
-          border: var(--border-width-thin) solid var(--border-color);
-          border-radius: var(--radius-sm);
-
-          &:hover {
-            color: var(--primary-color);
-          }
-
-          &:disabled {
-            color: var(--text-disabled);
-            background: var(--bg-disabled);
-          }
-        }
-      }
-    }
   }
 
   .charts-section {
     margin-bottom: var(--spacing-lg);
+
+    .charts-grid-unified {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-lg);
+
+      @media (max-width: 1400px) {
+        grid-template-columns: 1fr;
+      }
+
+      @media (max-width: var(--breakpoint-md)) {
+        gap: var(--spacing-md);
+      }
+    }
   }
 
   .quick-actions-section {
+    .actions-grid-unified {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--spacing-lg);
+
+      @media (max-width: var(--breakpoint-md)) {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
+    }
+
     .primary-actions,
     .secondary-actions {
       display: flex;
@@ -1032,7 +1002,7 @@ const getTypeText = (type: string) => {
   }
 }
 
-// 响应式设计
+// ✅ 响应式设计
 @media (max-width: var(--breakpoint-md)) {
   .overview-content .welcome-section {
     flex-direction: column;
@@ -1053,46 +1023,6 @@ const getTypeText = (type: string) => {
 
   .task-table-container {
     padding: var(--spacing-md);
-  }
-}
-
-// ✅ 暗黑主题样式 - 与业务中心保持一致
-.dark {
-  .task-center-timeline {
-    background: var(--bg-secondary);
-  }
-
-  .task-table-container {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    border-color: var(--border-color);
-    box-shadow: var(--shadow-md);
-  }
-
-  .section-header {
-    h3 {
-      color: var(--text-primary);
-    }
-  }
-}
-
-// ✅ html.dark 兼容性
-html.dark {
-  .task-center-timeline {
-    background: var(--bg-secondary);
-  }
-
-  .task-table-container {
-    background: var(--bg-card);
-    backdrop-filter: blur(10px);
-    border-color: var(--border-color);
-    box-shadow: var(--shadow-md);
-  }
-
-  .section-header {
-    h3 {
-      color: var(--text-primary);
-    }
   }
 }
 </style>

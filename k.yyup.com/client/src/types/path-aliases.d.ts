@@ -426,10 +426,6 @@ declare module '@/utils/validate' {
   // export * from '../utils/validate'
 }
 
-declare module '@/utils/theme' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../utils/theme'
-}
 
 declare module '@/utils/errorHandler' {
   // 移除运行时导出，避免浏览器尝试加载.ts文件
@@ -802,21 +798,8 @@ declare module '@/api/endpoints/websiteAutomation' {
 }
 
 // Services 模块
-declare module '@/services/page-awareness.service' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../services/page-awareness.service'
-}
 
 // Stores 模块
-declare module '@/stores/permissions' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../stores/permissions'
-}
-
-declare module '@/stores/user' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../stores/user'
-}
 
 declare module '@/stores/ai' {
   // 移除运行时导出，避免浏览器尝试加载.ts文件
@@ -854,16 +837,8 @@ declare module '@/api/modules/auth-permissions' {
   // export * from '../api/modules/auth-permissions'
 }
 
-declare module '@/api/ai-shortcuts' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../api/ai-shortcuts'
-}
 
 // Services
-declare module '@/services/smart-router.service' {
-  // 移除运行时导出，避免浏览器尝试加载.ts文件
-  // export * from '../services/smart-router.service'
-}
 
 // Config
 declare module '@/config/router' {

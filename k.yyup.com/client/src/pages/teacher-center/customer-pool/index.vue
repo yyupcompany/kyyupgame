@@ -1,92 +1,64 @@
 <template>
   <UnifiedCenterLayout
-    title="页面标题"
-    description="页面描述"
+    title="客户资源池"
+    description="查看所有客户资源并申请跟踪"
     icon="User"
   >
-    <div class="center-container teacher-customer-pool">
-    <!-- 页面头部 -->
-    <div class="page-header">
-      <div class="header-content">
-        <h1 class="page-title">
-          <UnifiedIcon name="default" />
-          客户资源池
-        </h1>
-        <p class="page-subtitle">查看所有客户资源并申请跟踪</p>
-      </div>
-      <div class="header-actions">
-        <el-button
-          type="primary"
-          :disabled="selectedCustomers.length === 0"
-          @click="handleBatchApply"
-        >
-          <UnifiedIcon name="default" />
-          批量申请 ({{ selectedCustomers.length }})
-        </el-button>
-        <el-button @click="loadCustomers">
-          <UnifiedIcon name="Refresh" />
-          刷新
-        </el-button>
-      </div>
-    </div>
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button
+        type="primary"
+        :disabled="selectedCustomers.length === 0"
+        @click="handleBatchApply"
+      >
+        <UnifiedIcon name="check" :size="16" />
+        批量申请 ({{ selectedCustomers.length }})
+      </el-button>
+      <el-button @click="loadCustomers">
+        <UnifiedIcon name="refresh" :size="16" />
+        刷新
+      </el-button>
+    </template>
 
-    <!-- 统计卡片 -->
-    <div class="stats-section">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-card class="stats-card">
-            <div class="stats-content">
-              <div class="stats-icon total">
-                <UnifiedIcon name="default" />
-              </div>
-              <div class="stats-info">
-                <div class="stats-number">{{ stats.total }}</div>
-                <div class="stats-label">总客户数</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stats-card">
-            <div class="stats-content">
-              <div class="stats-icon unassigned">
-                <UnifiedIcon name="default" />
-              </div>
-              <div class="stats-info">
-                <div class="stats-number">{{ stats.unassigned }}</div>
-                <div class="stats-label">未分配</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stats-card">
-            <div class="stats-content">
-              <div class="stats-icon mine">
-                <UnifiedIcon name="Check" />
-              </div>
-              <div class="stats-info">
-                <div class="stats-number">{{ stats.mine }}</div>
-                <div class="stats-label">已分配给我</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stats-card">
-            <div class="stats-content">
-              <div class="stats-icon assigned">
-                <UnifiedIcon name="default" />
-              </div>
-              <div class="stats-info">
-                <div class="stats-number">{{ stats.assigned }}</div>
-                <div class="stats-label">已分配给他人</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
+    <!-- 统计卡片 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        icon="user"
+        title="总客户数"
+        :value="stats.total"
+        subtitle="所有客户"
+        type="primary"
+        :trend="stats.total > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="user"
+        title="未分配"
+        :value="stats.unassigned"
+        subtitle="可申请的客户"
+        type="success"
+        :trend="stats.unassigned > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="check"
+        title="已分配给我"
+        :value="stats.mine"
+        subtitle="我负责的客户"
+        type="warning"
+        :trend="stats.mine > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="user"
+        title="已分配给他人"
+        :value="stats.assigned"
+        subtitle="其他教师负责"
+        type="info"
+        :trend="stats.assigned > 0 ? 'down' : 'stable'"
+        clickable
+      />
+    </template>
 
     <!-- 筛选区域 -->
     <div class="filter-section">
@@ -100,7 +72,7 @@
               <el-option label="已分配给他人" value="assigned" />
             </el-select>
           </el-form-item>
-          
+
           <el-form-item label="客户来源">
             <el-select v-model="filterForm.source" placeholder="选择来源" clearable @change="loadCustomers">
               <el-option label="全部" value="" />
@@ -120,9 +92,10 @@
               @keyup.enter="loadCustomers"
             >
               <template #append>
-                <el-button :icon="Search" @click="loadCustomers" />
-  </UnifiedCenterLayout>
-</template>
+                <el-button @click="loadCustomers">
+                  <UnifiedIcon name="search" :size="16" />
+                </el-button>
+              </template>
             </el-input>
           </el-form-item>
         </el-form>
@@ -241,7 +214,7 @@
             {{ applyCustomers[0]?.name }} ({{ applyCustomers[0]?.phone }})
           </div>
         </el-form-item>
-        
+
         <el-form-item label="申请理由">
           <el-input
             v-model="applyForm.applyReason"
@@ -261,17 +234,16 @@
         </el-button>
       </template>
     </el-dialog>
-  </div>
+  </UnifiedCenterLayout>
 </template>
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import StatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, onMounted, computed } from 'vue';
 import { ElMessage } from 'element-plus';
-import {
-  DataBoard, DocumentAdd, Refresh, User, UserFilled, Check, Connection, Search
-} from '@element-plus/icons-vue';
 import { formatDateTime } from '@/utils/date';
 import { customerApplicationApi } from '@/api/endpoints/customer-application';
 import { useUserStore } from '@/stores/user';
@@ -500,114 +472,111 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+<style lang="scss" scoped>
+@use "@/styles/design-tokens.scss" as *;
 
-.teacher-customer-pool {
-  padding: var(--spacing-lg);
+/* ==================== 筛选区域 ==================== */
+.filter-section {
+  margin-bottom: var(--spacing-xl);
 
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--spacing-xl);
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+  }
 
-    .header-content {
-      .page-title {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-        font-size: var(--text-2xl);
-        font-weight: 600;
+  :deep(.el-form-item) {
+    margin-bottom: 0;
+  }
+
+  :deep(.el-form-item__label) {
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}
+
+/* ==================== 客户列表区域 ==================== */
+.customer-list {
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+  }
+
+  .table-wrapper {
+    :deep(.el-table) {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+
+      &::before {
+        display: none;
+      }
+
+      th.el-table__cell {
+        background: var(--bg-secondary);
         color: var(--text-primary);
-        margin: 0 0 var(--spacing-xs) 0;
+        font-weight: 600;
       }
 
-      .page-subtitle {
-        color: var(--text-secondary);
-        margin: 0;
-      }
-    }
-
-    .header-actions {
-      display: flex;
-      gap: var(--spacing-md);
-    }
-  }
-
-  .stats-section {
-    margin-bottom: var(--spacing-xl);
-
-    .stats-card {
-      .stats-content {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-lg);
-
-        .stats-icon {
-          width: var(--size-icon-lg);
-          height: var(--size-icon-lg);
-          border-radius: var(--radius-lg);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: var(--text-2xl);
-
-          &.total {
-            background: #f0f9ff;
-            color: var(--primary-color);
-          }
-
-          &.unassigned {
-            background: #f0fdf4;
-            color: var(--success-color);
-          }
-
-          &.mine {
-            background: #fef3c7;
-            color: var(--warning-color);
-          }
-
-          &.assigned {
-            background: #f3f4f6;
-            color: var(--text-secondary);
-          }
-        }
-
-        .stats-info {
-          .stats-number {
-            font-size: var(--text-3xl);
-            font-weight: 600;
-            color: var(--text-primary);
-            line-height: 1;
-          }
-
-          .stats-label {
-            font-size: var(--text-base);
-            color: var(--text-secondary);
-            margin-top: var(--spacing-xs);
-          }
-        }
+      tr:hover > td.el-table__cell {
+        background: var(--bg-secondary);
       }
     }
   }
 
-  .filter-section {
-    margin-bottom: var(--text-3xl);
-  }
-
-  .customer-list {
-    .pagination-wrapper {
-      margin-top: var(--text-2xl);
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-  .apply-customers-list {
+  .pagination-wrapper {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    justify-content: flex-end;
+  }
+}
+
+/* ==================== 申请客户列表 ==================== */
+.apply-customers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+/* ==================== 对话框样式 ==================== */
+:deep(.el-dialog) {
+  border-radius: var(--radius-lg);
+
+  .el-dialog__header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .el-dialog__body {
+    padding: var(--spacing-xl);
+  }
+
+  .el-dialog__footer {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-md)) {
+  .filter-section {
+    .filter-form {
+      :deep(.el-form) {
+        flex-direction: column;
+
+        .el-form-item {
+          margin-bottom: var(--spacing-sm);
+          width: 100%;
+        }
+      }
+
+      :deep(.el-select),
+      :deep(.el-input) {
+        width: 100%;
+      }
+    }
   }
 }
 </style>

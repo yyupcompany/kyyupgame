@@ -332,16 +332,17 @@ defineExpose({
 
 .section-content {
   padding: var(--spacing-md);
-  background: var(--bg-color-secondary, #f8fafc);
+  background: #f8fafc;
 
   [data-theme='dark'] & {
-    background: var(--bg-color-secondary-dark, #0f172a);
+    background: #1e293b;
   }
 }
 
 .centers-grid {
-  display: grid;
-  gap: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm, 8px);
 }
 
 // ==================== 折叠动画 ====================

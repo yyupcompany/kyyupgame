@@ -292,7 +292,7 @@ const formatDate = (date: string) => {
   .filter-section {
     margin-bottom: var(--spacing-xl);
     padding: var(--spacing-lg);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-page);
     border-radius: var(--radius-md);
     width: 100%;
     max-width: 100%;

@@ -1,36 +1,55 @@
 /// <reference types="vite/client" />
 
+// Vue 文件类型声明
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
   const component: DefineComponent<{}, {}, any>
   export default component
 }
 
-// xlsx 库类型声明
-declare module 'xlsx' {
-  export interface WorkSheet {
-    [key: string]: any
-  }
-  export interface WorkBook {
-    SheetNames: string[]
-    Sheets: { [key: string]: WorkSheet }
-  }
-  export const utils: {
-    aoa_to_sheet(data: any[][]): WorkSheet
-    book_new(): WorkBook
-    book_append_sheet(wb: WorkBook, ws: WorkSheet, name: string): void
-  }
-  export function writeFile(wb: WorkBook, filename: string): void
+// 图片文件类型声明
+declare module '*.png' {
+  const src: string
+  export default src
 }
 
-interface ImportMeta {
-  readonly env: {
-    readonly BASE_URL: string
-    readonly VITE_API_BASE_URL?: string
-    readonly MODE: string
-    readonly DEV: boolean
-    readonly PROD: boolean
-    readonly SSR: boolean
-    [key: string]: string | boolean | undefined
-  }
-} 
+declare module '*.jpg' {
+  const src: string
+  export default src
+}
+
+declare module '*.jpeg' {
+  const src: string
+  export default src
+}
+
+declare module '*.gif' {
+  const src: string
+  export default src
+}
+
+declare module '*.svg' {
+  const src: string
+  export default src
+}
+
+declare module '*.webp' {
+  const src: string
+  export default src
+}
+
+// CSS 模块类型声明
+declare module '*.module.css' {
+  const classes: { readonly [key: string]: string }
+  export default classes
+}
+
+declare module '*.module.scss' {
+  const classes: { readonly [key: string]: string }
+  export default classes
+}
+
+declare module '*.module.sass' {
+  const classes: { readonly [key: string]: string }
+  export default classes
+}

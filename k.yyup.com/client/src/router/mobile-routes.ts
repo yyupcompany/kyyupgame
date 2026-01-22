@@ -11,6 +11,18 @@ export const mobileRoutes: Array<RouteRecordRaw> = [
     redirect: '/mobile/centers'
   },
 
+  // ===== Demo 页面 =====
+  {
+    path: '/mobile-demo',
+    name: 'MobileDemo',
+    component: () => import('../pages/mobile-demo/index.vue'),
+    meta: {
+      title: '移动端Demo',
+      requiresAuth: false,
+      hideNavigation: true
+    }
+  },
+
   // ===== 认证相关 =====
   {
     path: '/mobile/login',
@@ -93,6 +105,28 @@ export const mobileRoutes: Array<RouteRecordRaw> = [
       role: ['admin', 'principal', 'teacher', 'parent']
     }
   },
+
+  // 重定向：/mobile/business → /mobile/centers/business-center
+  {
+    path: '/mobile/business',
+    redirect: '/mobile/centers/business-center',
+    meta: {
+      title: '业务中心',
+      requiresAuth: true,
+      role: ['admin', 'principal']
+    }
+  },
+  // 重定向：/mobile/activity → /mobile/centers/activity-center
+  {
+    path: '/mobile/activity',
+    redirect: '/mobile/centers/activity-center',
+    meta: {
+      title: '活动中心',
+      requiresAuth: true,
+      role: ['admin', 'principal', 'teacher']
+    }
+  },
+
   {
     path: '/mobile/business-hub',
     name: 'MobileBusinessHub',
@@ -253,6 +287,16 @@ export const mobileRoutes: Array<RouteRecordRaw> = [
     component: () => import('../pages/mobile/document-instance/edit/index.vue'),
     meta: {
       title: '编辑文档',
+      requiresAuth: true,
+      role: ['admin', 'principal', 'teacher']
+    }
+  },
+  {
+    path: '/mobile/centers/document-template-center',
+    name: 'MobileDocumentTemplateCenter',
+    component: () => import('../pages/mobile/centers/document-template-center/index.vue'),
+    meta: {
+      title: '文档模板中心',
       requiresAuth: true,
       role: ['admin', 'principal', 'teacher']
     }
@@ -540,6 +584,17 @@ export const mobileRoutes: Array<RouteRecordRaw> = [
   },
 
   // ===== 家长端页面 =====
+  // 常用路径重定向
+  {
+    path: '/mobile/parent-center/growth',
+    redirect: '/mobile/parent-center/child-growth',
+    meta: { title: '成长记录', requiresAuth: true, role: ['parent'] }
+  },
+  {
+    path: '/mobile/parent-center/homework',
+    redirect: '/mobile/parent-center/children',
+    meta: { title: '作业', requiresAuth: true, role: ['parent'] }
+  },
   {
     path: '/mobile/parent-center',
     name: 'MobileParentCenter',
@@ -947,6 +1002,15 @@ export const mobileRoutes: Array<RouteRecordRaw> = [
       requiresAuth: true,
       role: ['teacher'],
       backPath: '/mobile/teacher-center/tasks'
+    }
+  },
+  {
+    path: '/mobile/teacher-center/performance',
+    redirect: '/mobile/teacher-center/performance-rewards',
+    meta: {
+      title: '绩效奖励',
+      requiresAuth: true,
+      role: ['teacher']
     }
   },
   {

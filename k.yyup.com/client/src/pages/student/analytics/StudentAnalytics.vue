@@ -668,7 +668,7 @@ onMounted(() => {
 }
 
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 

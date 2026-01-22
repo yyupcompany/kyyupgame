@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="任务详情"
-    :show-back="true"
-    :show-footer="false"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="任务详情" back-path="/mobile/teacher-center">
     <div v-if="loading" class="loading-container">
       <van-loading type="spinner" color="#409eff" />
       <span>加载中...</span>
@@ -107,7 +102,7 @@
         </van-cell>
       </van-cell-group>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -286,11 +281,20 @@ const editTask = () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTaskDetail()
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 .loading-container,
 .error-container,
 .empty-container {

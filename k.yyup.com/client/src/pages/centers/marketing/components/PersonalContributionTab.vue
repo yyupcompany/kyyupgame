@@ -634,7 +634,7 @@ onMounted(() => {
 
           code {
             padding: var(--spacing-xs) var(--spacing-sm);
-            background: var(--bg-color);
+            background: var(--bg-card);
             border-radius: var(--radius-sm);
             font-family: 'Courier New', monospace;
             font-weight: 600;

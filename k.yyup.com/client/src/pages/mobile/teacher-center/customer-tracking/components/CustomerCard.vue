@@ -495,7 +495,7 @@ function getFollowDays(createTime?: string) {
 
   // 孩子信息
   .child-info {
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: var(--border-radius-base);
     padding: var(--spacing-sm) var(--spacing-md);
     margin-bottom: var(--spacing-md);
@@ -600,7 +600,7 @@ function getFollowDays(createTime?: string) {
     .stat-item {
       text-align: center;
       padding: var(--spacing-sm);
-      background: var(--bg-color);
+      background: var(--bg-card);
       border-radius: var(--border-radius-base);
 
       .stat-header {

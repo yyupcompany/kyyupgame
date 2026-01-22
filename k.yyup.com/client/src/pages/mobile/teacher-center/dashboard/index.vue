@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="教师工作台"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="教师工作台" back-path="/mobile/teacher-center">
     <!-- 工作概览 -->
     <div class="overview-section">
       <div class="overview-card">
@@ -107,15 +102,15 @@
 
     <!-- 悬浮操作按钮 -->
     <van-back-top right="20" bottom="80" />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import MobilePage from '../../components/common/MobilePage.vue'
-import MobileList from '../../components/common/MobileList.vue'
+import MobileList from '@/pages/mobile/components/common/MobileList.vue'
 import { showToast } from 'vant'
+import request from '@/utils/request'
 
 interface TodoItem {
   id: string
@@ -229,19 +224,89 @@ const handleRefresh = () => {
 const loadDashboardData = async () => {
   loading.value = true
   try {
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    // 加载仪表板数据
+    console.log('🔄 开始加载教师中心数据...')
+
+    // 1. 获取统计数据 - 使用正确的后端API路径（添加/api前缀）
+    try {
+      const statsResponse = await request.get('/api/teacher-dashboard/dashboard')
+      if (statsResponse.success && statsResponse.data) {
+        dashboardStats.value.classes = statsResponse.data.classes || 0
+        dashboardStats.value.students = statsResponse.data.students || 0
+        dashboardStats.value.activities = statsResponse.data.activities || 0
+        console.log('📊 教师统计数据:', dashboardStats.value)
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取教师统计数据失败，使用默认数据:', error)
+    }
+
+    // 2. 获取今日课程 - 使用正确的后端API路径（添加/api前缀）
+    try {
+      const scheduleResponse = await request.get('/api/teacher-dashboard/today-courses')
+      if (scheduleResponse.success && scheduleResponse.data && Array.isArray(scheduleResponse.data)) {
+        weeklySchedule.value = scheduleResponse.data.slice(0, 5).map((item: any) => ({
+          time: item.time || item.courseTime || '待定',
+          class: item.className || item.class || '未分配',
+          subject: item.subject || item.courseName || '通用课程'
+        }))
+        console.log('📅 今日课程:', weeklySchedule.value.length, '门')
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取今日课程失败，使用默认数据:', error)
+    }
+
+    // 3. 获取今日任务 - 使用正确的后端API路径（添加/api前缀）
+    try {
+      const tasksResponse = await request.get('/api/teacher-dashboard/today-tasks')
+      if (tasksResponse.success && tasksResponse.data && Array.isArray(tasksResponse.data)) {
+        todoItems.value = tasksResponse.data.map((todo: any) => ({
+          id: todo.id || '',
+          title: todo.title || '未命名任务',
+          dueDate: todo.dueDate || todo.deadline || '',
+          priority: todo.priority || 'medium',
+          status: todo.statusText || mapStatus(todo.status)
+        }))
+        console.log('📝 今日任务:', todoItems.value.length, '个')
+      }
+    } catch (error) {
+      console.warn('⚠️ 获取今日任务失败，使用默认数据:', error)
+    }
+
+    console.log('✅ 教师中心数据加载完成')
+
+  } catch (error) {
+    console.error('❌ 加载数据失败:', error)
+    showToast('加载数据失败，请稍后重试')
   } finally {
     loading.value = false
   }
 }
 
+// 映射后端状态到前端显示
+const mapStatus = (status: string) => {
+  const statusMap: Record<string, string> = {
+    'pending': '待完成',
+    'in_progress': '进行中',
+    'completed': '已完成',
+    'cancelled': '已取消'
+  }
+  return statusMap[status] || '待完成'
+}
+
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadDashboardData()
 })
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 .overview-section {
   background: var(--primary-gradient);
@@ -270,7 +335,7 @@ onMounted(() => {
 }
 
 .section {
-  background-color: var(--bg-color);
+  background-color: var(--bg-card);
   margin-bottom: 12px;
 
   .section-title {

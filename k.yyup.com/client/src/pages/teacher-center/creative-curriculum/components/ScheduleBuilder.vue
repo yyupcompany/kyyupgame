@@ -143,17 +143,18 @@ async function fetchAllCurriculums() {
     loadingCurriculums.value = true
     console.log('📚 开始获取课程列表...')
 
-    const response = await request.get('/teacher-center/creative-curriculum', {
+    const response = await request.get('/api/custom-courses', {
       params: { limit: 100 }
     })
 
     console.log('📚 API响应数据:', response.data)
 
-    if (response.data.code === 200 && response.data.data?.rows) {
-      allCurriculums.value = response.data.data.rows.map((item: any) => ({
+    if (response.data?.rows || response.data?.list) {
+      const rows = response.data.rows || response.data.list || []
+      allCurriculums.value = rows.map((item: any) => ({
         id: item.id,
-        name: item.name,
-        description: item.description
+        name: item.name || item.course_name,
+        description: item.description || item.course_description
       }))
       curriculumList.value = allCurriculums.value
       console.log('✅ 课程列表加载成功，共', allCurriculums.value.length, '个课程')
@@ -248,7 +249,7 @@ onMounted(() => {
       font-size: var(--text-base);
 
       thead {
-        background: var(--bg-secondary);
+        background: var(--bg-page);
 
         th {
           padding: var(--text-sm);

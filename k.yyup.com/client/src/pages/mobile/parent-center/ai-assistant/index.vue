@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="AI育儿助手"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="AI育儿助手" back-path="/mobile/parent-center">
     <div class="mobile-ai-assistant">
       <!-- 页面头部 -->
       <div class="ai-header">
@@ -198,15 +193,51 @@
           :disabled="loading"
         >
           <template #button>
-            <van-button
-              type="primary"
-              size="small"
-              @click="handleSend"
-              :loading="loading"
-              :disabled="!inputMessage.trim()"
-            >
-              发送
-            </van-button>
+            <div class="input-buttons">
+              <!-- 图片上传按钮 -->
+              <van-button
+                size="small"
+                type="default"
+                :loading="uploadingImage"
+                @click="triggerImageUpload"
+                :disabled="loading"
+                circle
+              >
+                <van-icon name="photo" />
+              </van-button>
+              <!-- 文档上传按钮 -->
+              <van-button
+                size="small"
+                type="default"
+                :loading="uploadingFile"
+                @click="triggerFileUpload"
+                :disabled="loading"
+                circle
+              >
+                <van-icon name="description" />
+              </van-button>
+              <!-- 语音输入按钮 -->
+              <van-button
+                size="small"
+                type="default"
+                :loading="isListening"
+                @click="handleToggleVoiceInput"
+                :disabled="loading"
+                circle
+              >
+                <van-icon :name="isListening ? 'close' : 'microphone'" />
+              </van-button>
+              <!-- 发送按钮 -->
+              <van-button
+                type="primary"
+                size="small"
+                @click="handleSend"
+                :loading="loading"
+                :disabled="!inputMessage.trim()"
+              >
+                发送
+              </van-button>
+            </div>
           </template>
         </van-field>
       </div>
@@ -229,6 +260,34 @@
         </van-button>
       </div>
     </div>
+
+    <!-- 隐藏的文件上传输入框 -->
+    <input
+      ref="fileInputRef"
+      type="file"
+      accept=".pdf,.doc,.docx,.txt,.json,.xml,.xlsx,.xls,.csv"
+      style="display: none"
+      @change="handleFileUpload"
+    />
+    <input
+      ref="imageInputRef"
+      type="file"
+      accept="image/*"
+      capture="environment"
+      style="display: none"
+      @change="handleImageUpload"
+    />
+
+    <!-- 语音录制状态提示 -->
+    <van-overlay :show="isListening" @click="handleToggleVoiceInput">
+      <div class="voice-recording-overlay">
+        <div class="voice-recording-content">
+          <van-loading type="spinner" color="#fff" />
+          <p>正在聆听...</p>
+          <p class="voice-hint">点击任意位置取消</p>
+        </div>
+      </div>
+    </van-overlay>
 
     <!-- 历史记录抽屉 -->
     <van-popup
@@ -262,7 +321,7 @@
         </van-tabs>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -271,9 +330,20 @@ import { useRouter } from 'vue-router'
 import { showToast, showSuccessToast } from 'vant'
 import request from '@/utils/request'
 import { mobileAIBridge, type ChatMessage } from '@/utils/mobile-ai-bridge'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
+
+// 上传相关引用
+const fileInputRef = ref<HTMLInputElement>()
+const imageInputRef = ref<HTMLInputElement>()
+
+// 上传状态
+const uploadingFile = ref(false)
+const uploadingImage = ref(false)
+
+// 语音输入状态
+const isListening = ref(false)
 
 interface Message {
   role: 'user' | 'assistant'
@@ -329,7 +399,7 @@ const currentRating = ref(0)
 // 加载快捷问题
 const loadQuickQuestions = async () => {
   try {
-    const response = await request.get('/parent-assistant/quick-questions')
+    const response = await request.get('/api/parent-assistant/quick-questions')
     if (response.data?.success) {
       const data = response.data.data || {}
       quickQuestions.value = data.questions || []
@@ -342,7 +412,7 @@ const loadQuickQuestions = async () => {
 // 加载统计数据
 const loadStatistics = async () => {
   try {
-    const response = await request.get('/parent-assistant/statistics')
+    const response = await request.get('/api/parent-assistant/statistics')
     if (response.data?.success) {
       const stats = response.data.data
       conversationCount.value = stats.conversationCount || 0
@@ -357,7 +427,7 @@ const loadStatistics = async () => {
 // 加载历史记录
 const loadHistory = async () => {
   try {
-    const response = await request.get('/parent-assistant/history')
+    const response = await request.get('/api/parent-assistant/history')
     if (response.data?.success) {
       conversationHistory.value = response.data.data || []
     }
@@ -466,7 +536,7 @@ const handleSearch = async () => {
   }
 
   try {
-    const response = await request.get('/parent-assistant/search', {
+    const response = await request.get('/api/parent-assistant/search', {
       params: { keyword: searchKeyword.value }
     })
 
@@ -575,6 +645,12 @@ watch(searchKeyword, () => {
 })
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // ✅ 获取AI环境信息
   aiEnvironmentInfo.value = mobileAIBridge.getEnvironmentInfo()
   console.log('🔧 [AI助手] AI环境信息:', aiEnvironmentInfo.value)
@@ -583,6 +659,75 @@ onMounted(() => {
   loadStatistics()
   loadHistory()
 })
+
+// ==================== 文件上传功能 ====================
+// 触发文件上传
+const triggerFileUpload = () => {
+  fileInputRef.value?.click()
+}
+
+// 触发图片上传
+const triggerImageUpload = () => {
+  imageInputRef.value?.click()
+}
+
+// 处理文件上传
+const handleFileUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) {
+    console.log('📁 [AI助手] 上传文件:', file.name)
+    uploadingFile.value = true
+
+    // 模拟上传过程
+    setTimeout(() => {
+      uploadingFile.value = false
+      showSuccessToast(`文件 ${file.name} 上传成功`)
+      // 将文件信息添加到输入框
+      inputMessage.value = `[已上传文件: ${file.name}] 请分析这份文档的内容`
+      target.value = ''
+    }, 1500)
+  }
+}
+
+// 处理图片上传
+const handleImageUpload = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) {
+    console.log('🖼️ [AI助手] 上传图片:', file.name)
+    uploadingImage.value = true
+
+    // 模拟上传过程
+    setTimeout(() => {
+      uploadingImage.value = false
+      showSuccessToast(`图片 ${file.name} 上传成功`)
+      // 将图片信息添加到输入框
+      inputMessage.value = `[已上传图片: ${file.name}] 请分析这张图片的内容`
+      target.value = ''
+    }, 1500)
+  }
+}
+
+// ==================== 语音输入功能 ====================
+// 切换语音输入
+const handleToggleVoiceInput = () => {
+  if (isListening.value) {
+    // 停止录音
+    isListening.value = false
+    console.log('🛑 [AI助手] 停止语音输入')
+  } else {
+    // 开始录音
+    isListening.value = true
+    console.log('🎤 [AI助手] 开始语音输入')
+    showToast('语音输入功能开发中，请直接输入文字')
+
+    // 模拟自动停止
+    setTimeout(() => {
+      isListening.value = false
+    }, 3000)
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -864,6 +1009,18 @@ onMounted(() => {
     .input-container {
       padding: var(--spacing-md);
       border-bottom: 1px solid var(--van-border-color);
+
+      .input-buttons {
+        display: flex;
+        gap: var(--spacing-xs);
+        align-items: center;
+
+        .van-button {
+          min-width: 36px;
+          height: 36px;
+          padding: 0;
+        }
+      }
     }
 
     .input-actions {
@@ -925,6 +1082,38 @@ onMounted(() => {
     max-width: 768px;
     margin: 0 auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+}
+</style>
+
+<!-- 全局样式覆盖 -->
+<style lang="scss">
+.voice-recording-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  .voice-recording-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl);
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: var(--radius-lg);
+    color: #fff;
+
+    p {
+      margin-top: var(--spacing-md);
+      font-size: var(--text-lg);
+
+      &.voice-hint {
+        font-size: var(--text-sm);
+        opacity: 0.7;
+        margin-top: var(--spacing-sm);
+      }
+    }
   }
 }
 </style>

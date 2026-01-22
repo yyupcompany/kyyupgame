@@ -18,8 +18,16 @@ import type {
   VoiceSynthesisRequest,
   VoiceSynthesisResponse
 } from '@/api/modules/call-center'
-import * as callCenterAPI from '@/api/modules/call-center'
-import { createWebSocketConnection } from '@/api/modules/call-center'
+import {
+  sipAPI,
+  callAPI,
+  recordingAPI,
+  aiAPI,
+  extensionAPI,
+  contactAPI,
+  overviewAPI,
+  createWebSocketConnection
+} from '@/api/modules/call-center'
 
 export const useCallCenterStore = defineStore('callCenter', () => {
   // ========== SIP连接状态 ==========
@@ -118,9 +126,11 @@ export const useCallCenterStore = defineStore('callCenter', () => {
       sipLoading.value = true
       const configToUse = config ? { ...sipConfig.value, ...config } : sipConfig.value
 
-      const response = await callCenterAPI.sip.connect(configToUse)
-      if (response.success) {
-        sipStatus.value = response.data
+      const response = await sipAPI.connect(configToUse)
+      // response 为 never 类型，因为 API 已弃用总是 reject
+      // 保留代码结构但标记为弃用
+      if ((response as any).success) {
+        sipStatus.value = (response as any).data
         sipConfig.value = configToUse
         ElMessage.success('SIP连接成功')
 
@@ -141,7 +151,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const disconnectSIP = async () => {
     try {
-      await callCenterAPI.sip.disconnect()
+      await sipAPI.disconnect()
       sipStatus.value.connected = false
 
       // 断开WebSocket
@@ -158,8 +168,8 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const testSIPConnection = async (config: Partial<SIPConfig>) => {
     try {
-      const response = await callCenterAPI.sip.testConnection(config)
-      return response.data
+      const response = await sipAPI.testConnection(config)
+      return (response as any).data
     } catch (error) {
       console.error('❌ SIP测试失败:', error)
       return { success: false, message: '连接测试失败', latency: 0 }
@@ -168,7 +178,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const updateSIPConfig = async (config: Partial<SIPConfig>) => {
     try {
-      await callCenterAPI.sip.updateConfig(config)
+      await sipAPI.updateConfig(config)
       sipConfig.value = { ...sipConfig.value, ...config }
       ElMessage.success('SIP配置已更新')
       return true
@@ -183,9 +193,8 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   const makeCall = async (phoneNumber: string, contactName?: string, extension?: string) => {
     try {
       callLoading.value = true
-      const response = await callCenterAPI.call.makeCall({
+      const response = await callAPI.makeCall({
         phoneNumber,
-        contactName,
         extension: extension || selectedExtension.value || sipConfig.value.extension
       })
 
@@ -215,7 +224,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const answerCall = async (callId: string) => {
     try {
-      await callCenterAPI.call.answerCall(callId)
+      await callAPI.answerCall(callId)
 
       if (currentCall.value?.id === callId) {
         currentCall.value.status = 'connected'
@@ -235,7 +244,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const hangupCall = async (callId: string) => {
     try {
-      await callCenterAPI.call.hangupCall(callId)
+      await callAPI.hangupCall(callId)
 
       // 更新状态
       const index = activeCalls.value.findIndex(call => call.id === callId)
@@ -260,7 +269,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const holdCall = async (callId: string) => {
     try {
-      await callCenterAPI.call.holdCall(callId)
+      await callAPI.holdCall(callId)
 
       if (currentCall.value?.id === callId) {
         currentCall.value.status = 'held'
@@ -280,7 +289,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const unholdCall = async (callId: string) => {
     try {
-      await callCenterAPI.call.unholdCall(callId)
+      await callAPI.unholdCall(callId)
 
       if (currentCall.value?.id === callId) {
         currentCall.value.status = 'connected'
@@ -300,7 +309,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const transferCall = async (callId: string, targetExtension: string) => {
     try {
-      await callCenterAPI.call.transferCall(callId, targetExtension)
+      await callAPI.transferCall(callId, targetExtension)
 
       if (currentCall.value?.id === callId) {
         currentCall.value.status = 'transferred'
@@ -317,7 +326,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   // ========== 录音管理 ==========
   const startRecording = async (callId: string) => {
     try {
-      await callCenterAPI.call.startRecording(callId)
+      await callAPI.startRecording(callId)
 
       const call = activeCalls.value.find(c => c.id === callId)
       if (call) {
@@ -333,7 +342,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const stopRecording = async (callId: string) => {
     try {
-      await callCenterAPI.call.stopRecording(callId)
+      await callAPI.stopRecording(callId)
 
       const call = activeCalls.value.find(c => c.id === callId)
       if (call) {
@@ -350,7 +359,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   const loadRecordings = async (params: any = {}) => {
     try {
       recordingsLoading.value = true
-      const response = await callCenterAPI.recording.getRecordings(params)
+      const response = await recordingAPI.getRecordings(params)
 
       if (response.success) {
         recordings.value = response.data.list
@@ -366,7 +375,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   const analyzeCall = async (callId: string) => {
     try {
       analysisLoading.value = true
-      const response = await callCenterAPI.ai.analyzeCall(callId)
+      const response = await aiAPI.analyzeCall(callId)
 
       if (response.success) {
         callAnalysis.value = response.data
@@ -395,7 +404,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
         ...options
       }
 
-      const response = await callCenterAPI.ai.synthesizeVoice(request)
+      const response = await aiAPI.synthesizeVoice(request)
 
       if (response.success) {
         synthesizedAudio.value = response.data
@@ -432,7 +441,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const startTranscription = async (callId: string, language = 'zh-CN') => {
     try {
-      await callCenterAPI.ai.startTranscription(callId, { language })
+      await aiAPI.startTranscription(callId, { language })
       isTranscribing.value = true
       ElMessage.success('开始实时转写')
     } catch (error) {
@@ -443,7 +452,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const stopTranscription = async (callId: string) => {
     try {
-      await callCenterAPI.ai.stopTranscription(callId)
+      await aiAPI.stopTranscription(callId)
       isTranscribing.value = false
       ElMessage.success('转写已停止')
     } catch (error) {
@@ -454,7 +463,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   // ========== 数据加载 ==========
   const loadOverview = async () => {
     try {
-      const response = await callCenterAPI.overview.getOverview()
+      const response = await overviewAPI.getOverview()
 
       if (response.success) {
         const data = response.data
@@ -471,7 +480,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const loadExtensions = async () => {
     try {
-      const response = await callCenterAPI.extension.getExtensions()
+      const response = await extensionAPI.getExtensions()
 
       if (response.success) {
         extensions.value = response.data
@@ -483,7 +492,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const loadContacts = async (params: any = {}) => {
     try {
-      const response = await callCenterAPI.contact.getContacts(params)
+      const response = await contactAPI.getContacts(params)
 
       if (response.success) {
         contacts.value = response.data.list
@@ -495,7 +504,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
 
   const loadStatistics = async (period: 'today' | 'week' | 'month' = 'today') => {
     try {
-      const response = await callCenterAPI.call.getStatistics({ period })
+      const response = await callAPI.getStatistics({ period })
 
       if (response.success) {
         callStatistics.value = response.data
@@ -515,12 +524,12 @@ export const useCallCenterStore = defineStore('callCenter', () => {
     wsManager.value.connect()
 
     // 监听WebSocket事件
-    window.addEventListener('call:incoming', handleIncomingCall)
-    window.addEventListener('call:status', handleCallStatusUpdate)
-    window.addEventListener('recording:started', handleRecordingStarted)
-    window.addEventListener('recording:stopped', handleRecordingStopped)
-    window.addEventListener('transcription:update', handleTranscriptionUpdate)
-    window.addEventListener('extension:status', handleExtensionStatusUpdate)
+    window.addEventListener('call:incoming', handleIncomingCall as EventListener)
+    window.addEventListener('call:status', handleCallStatusUpdate as EventListener)
+    window.addEventListener('recording:started', handleRecordingStarted as EventListener)
+    window.addEventListener('recording:stopped', handleRecordingStopped as EventListener)
+    window.addEventListener('transcription:update', handleTranscriptionUpdate as EventListener)
+    window.addEventListener('extension:status', handleExtensionStatusUpdate as EventListener)
   }
 
   const handleIncomingCall = (event: CustomEvent) => {
@@ -540,7 +549,7 @@ export const useCallCenterStore = defineStore('callCenter', () => {
   const handleCallStatusUpdate = (event: CustomEvent) => {
     const { callId, status, duration } = event.detail
 
-    if (currentCall.value?.id === callId) {
+    if (currentCall.value && currentCall.value.id === callId) {
       currentCall.value.status = status as any
       if (duration !== undefined) {
         currentCall.value.duration = duration
@@ -626,12 +635,12 @@ export const useCallCenterStore = defineStore('callCenter', () => {
     }
 
     // 移除事件监听
-    window.removeEventListener('call:incoming', handleIncomingCall)
-    window.removeEventListener('call:status', handleCallStatusUpdate)
-    window.removeEventListener('recording:started', handleRecordingStarted)
-    window.removeEventListener('recording:stopped', handleRecordingStopped)
-    window.removeEventListener('transcription:update', handleTranscriptionUpdate)
-    window.removeEventListener('extension:status', handleExtensionStatusUpdate)
+    window.removeEventListener('call:incoming', handleIncomingCall as EventListener)
+    window.removeEventListener('call:status', handleCallStatusUpdate as EventListener)
+    window.removeEventListener('recording:started', handleRecordingStarted as EventListener)
+    window.removeEventListener('recording:stopped', handleRecordingStopped as EventListener)
+    window.removeEventListener('transcription:update', handleTranscriptionUpdate as EventListener)
+    window.removeEventListener('extension:status', handleExtensionStatusUpdate as EventListener)
   }
 
   // ========== 监听器 ==========

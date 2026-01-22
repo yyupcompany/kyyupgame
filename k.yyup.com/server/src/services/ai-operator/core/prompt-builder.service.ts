@@ -15,7 +15,8 @@ import {
   workflowGuideTemplate,
   responseFormatGuideTemplate,
   thinkingStructureTemplate,
-  completionJudgmentTemplate
+  completionJudgmentTemplate,
+  todoManagementGuideTemplate
 } from '../prompts';
 
 // 导入新的Think优化模板
@@ -98,7 +99,10 @@ export class PromptBuilderService {
     this.registerTemplate(navigationGuideTemplate);
     this.registerTemplate(workflowGuideTemplate);
     this.registerTemplate(responseFormatGuideTemplate);
-    
+
+    // 📋 注册任务管理提示词模板
+    this.registerTemplate(todoManagementGuideTemplate);
+
     // 🆕 注册思考和完成判断提示词模板
     this.registerTemplate(thinkingStructureTemplate);
     this.registerTemplate(completionJudgmentTemplate);

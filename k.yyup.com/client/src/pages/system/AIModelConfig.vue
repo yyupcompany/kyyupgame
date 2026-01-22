@@ -1485,6 +1485,9 @@ onMounted(() => {
 }
 
 .stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
   margin-bottom: var(--app-gap); /* 硬编码修复：var(--text-2xl) → var(--text-lg) */
 }
 

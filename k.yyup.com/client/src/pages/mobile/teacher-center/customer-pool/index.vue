@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="客户资源池"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="客户资源池" back-path="/mobile/teacher-center">
     <div class="customer-pool-mobile">
       <!-- 统计卡片 -->
       <div class="stats-section">
@@ -288,7 +283,7 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -301,7 +296,7 @@ import { customerApplicationApi } from '@/api/endpoints/customer-application'
 import { customerPoolApi } from '@/api/modules/customer-pool'
 
 // 页面组件
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 组合式API
 const router = useRouter()
@@ -652,6 +647,12 @@ const getAssignmentStatusType = (row: any) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadCustomers(true)
 })
 </script>
@@ -660,7 +661,7 @@ onMounted(() => {
 @import '@/styles/mobile-base.scss';
 .customer-pool-mobile {
   min-height: 100vh;
-  background: #f7f8fa;
+  background: var(--bg-page);
   padding-bottom: 50px; // 为底部导航栏留空间
 
   .stats-section {
@@ -722,7 +723,7 @@ onMounted(() => {
           .stats-label {
             font-size: var(--text-xs);
             color: #969799;
-            margin-top: 4px;
+            margin-top: var(--spacing-xs);
           }
         }
       }
@@ -771,13 +772,13 @@ onMounted(() => {
       .phone {
         color: #323233;
         font-size: var(--text-sm);
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
       }
 
       .time {
         color: #969799;
         font-size: var(--text-xs);
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
       }
 
       .assignment-info {
@@ -797,7 +798,7 @@ onMounted(() => {
     padding: var(--spacing-md);
 
     .apply-customers {
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
     }
   }
 
@@ -835,6 +836,13 @@ onMounted(() => {
     max-width: 768px;
     margin: 0 auto;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

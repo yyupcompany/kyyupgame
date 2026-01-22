@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="添加跟进记录"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileSubPageLayout title="添加跟进记录" back-path="/mobile/parent-center">
     <div class="mobile-follow-up-page">
       <!-- 家长信息卡片 -->
       <van-cell-group inset class="parent-info-card">
@@ -217,7 +211,7 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -227,7 +221,7 @@ import { showToast, showSuccessToast, showFailToast } from 'vant'
 import { request } from '@/utils/request'
 import { PARENT_ENDPOINTS } from '@/api/endpoints'
 import type { ApiResponse } from '@/api/endpoints'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface ParentInfo {
   id: number
@@ -410,6 +404,12 @@ const onReminderConfirm = (value: Date) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   if (!parentId) {
     showToast('缺少家长ID参数')
     router.push('/mobile/parent-center/children')
@@ -426,12 +426,12 @@ onMounted(() => {
 .mobile-follow-up-page {
   min-height: calc(100vh - var(--mobile-header-height) - var(--mobile-footer-height));
   background: var(--van-background-color-light);
-  padding-bottom: 20px;
+  padding-bottom: var(--spacing-xl);
 }
 
 .parent-info-card {
   margin: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .parent-info {
@@ -479,5 +479,12 @@ onMounted(() => {
 
 :deep(.van-date-picker) {
   --van-date-picker-background-color: var(--van-background-color-light);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

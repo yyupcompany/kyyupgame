@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="学生管理"
-    :show-back="true"
-  >
+  <MobileCenterLayout title="学生管理" back-path="/mobile/centers">
     <!-- 统计卡片 -->
     <div class="stats-container">
       <van-grid :column-num="2" :gutter="12">
@@ -96,20 +93,20 @@
             <template #tags>
               <van-tag
                 :type="getGenderTagType(student.gender)"
-                size="small"
+                size="medium"
               >
                 {{ student.gender === 'MALE' ? '男' : '女' }}
               </van-tag>
               <van-tag
                 :type="getStatusTagType(student.status)"
-                size="small"
+                size="medium"
               >
                 {{ getStatusText(student.status) }}
               </van-tag>
               <van-tag
                 v-if="student.className"
                 type="primary"
-                size="small"
+                size="medium"
               >
                 {{ student.className }}
               </van-tag>
@@ -135,21 +132,21 @@
             <template #footer>
               <div class="action-buttons">
                 <van-button
-                  size="small"
+                  size="medium"
                   type="primary"
                   @click.stop="editStudent(student)"
                 >
                   编辑
                 </van-button>
                 <van-button
-                  size="small"
+                  size="medium"
                   type="success"
                   @click.stop="viewGrades(student)"
                 >
                   成绩
                 </van-button>
                 <van-button
-                  size="small"
+                  size="medium"
                   type="info"
                   @click.stop="viewAttendance(student)"
                 >
@@ -192,14 +189,15 @@
       :class-list="classList"
       @confirm="handleTransferClass"
     />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import type { TagType } from 'vant'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import StudentEditDialog from './components/StudentEditDialog.vue'
 import TransferClassDialog from './components/TransferClassDialog.vue'
 import { studentApi } from '@/api/modules/student'
@@ -453,18 +451,18 @@ const formatPhone = (phone: string) => {
   return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 }
 
-const getGenderTagType = (gender: string) => {
+const getGenderTagType = (gender: string): TagType => {
   return gender === 'MALE' ? 'primary' : 'danger'
 }
 
-const getStatusTagType = (status: string) => {
-  const statusMap: Record<string, string> = {
+const getStatusTagType = (status: string): TagType => {
+  const statusMap: Record<string, TagType> = {
     ACTIVE: 'success',
-    GRADUATED: 'info',
+    GRADUATED: 'default',
     TRANSFERRED: 'warning',
     SUSPENDED: 'danger'
   }
-  return statusMap[status] || 'info'
+  return statusMap[status] || 'default'
 }
 
 const getStatusText = (status: string) => {
@@ -488,6 +486,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 
 .stats-container {

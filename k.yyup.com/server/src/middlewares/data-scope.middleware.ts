@@ -45,7 +45,12 @@ export const applyDataScope = (req: Request, res: Response, next: NextFunction):
   try {
     const user = req.user as any;
 
+    console.log('[数据范围中间件] ===== 开始处理请求 =====');
+    console.log('[数据范围中间件] 请求路径:', req.path, req.url);
+    console.log('[数据范围中间件] 请求方法:', req.method);
+
     if (!user) {
+      console.log('[数据范围中间件] 401: 用户未认证');
       res.status(401).json({
         success: false,
         message: '用户未认证',
@@ -61,7 +66,8 @@ export const applyDataScope = (req: Request, res: Response, next: NextFunction):
       username: user.username,
       role: user.role,
       dataScope,
-      primaryKindergartenId: user.primaryKindergartenId
+      primaryKindergartenId: user.primaryKindergartenId,
+      kindergartenId: user.kindergartenId
     });
 
     // 初始化数据过滤对象
@@ -79,8 +85,11 @@ export const applyDataScope = (req: Request, res: Response, next: NextFunction):
 
       case DataScope.SINGLE:
         // 分园园长/教师/家长：只能访问本园区
+        console.log('[数据范围中间件] 数据范围=SINGLE，检查园区归属...');
+        console.log('[数据范围中间件] primaryKindergartenId:', user.primaryKindergartenId, 'kindergartenId:', user.kindergartenId);
+
         if (!user.primaryKindergartenId && !user.kindergartenId) {
-          console.warn('[数据范围中间件] 用户无园区归属，拒绝访问');
+          console.warn('[数据范围中间件] 403: 用户无园区归属，拒绝访问');
           res.status(403).json({
             success: false,
             message: '您尚未分配园区，无法访问数据',
@@ -88,7 +97,7 @@ export const applyDataScope = (req: Request, res: Response, next: NextFunction):
           });
           return;
         }
-        
+
         req.dataFilter.kindergartenId = user.primaryKindergartenId || user.kindergartenId;
         console.log('[数据范围中间件] 数据范围=SINGLE，限制为园区:', req.dataFilter.kindergartenId);
         break;
@@ -109,6 +118,7 @@ export const applyDataScope = (req: Request, res: Response, next: NextFunction):
         req.dataFilter.kindergartenId = user.primaryKindergartenId || user.kindergartenId;
     }
 
+    console.log('[数据范围中间件] ===== 数据范围中间件完成，调用next() =====');
     next();
   } catch (error) {
     console.error('[数据范围中间件] 错误:', error);

@@ -8,15 +8,15 @@
     :sidebar-col-lg="6"
     :sidebar-col-xl="6"
   >
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button type="primary" @click="openCreateDialog">
+        <UnifiedIcon name="plus" :size="16" />
+        创建课程
+      </el-button>
+    </template>
+
     <div class="curriculum-management">
-      <!-- 页面头部 -->
-      <div class="page-header">
-        <h2>🎓 互动AI课程</h2>
-        <el-button type="primary" size="large" @click="openCreateDialog">
-          <UnifiedIcon name="Plus" />
-          创建课程
-        </el-button>
-      </div>
 
       <!-- 筛选器 -->
       <div class="filters">
@@ -107,22 +107,6 @@
         />
       </div>
 
-      <!-- 创建/编辑对话框 -->
-      <el-dialog
-        v-model="dialogVisible"
-        :title="dialogMode === 'create' ? '✨ 创建互动AI课程' : '📝 编辑课程'"
-        fullscreen
-        :close-on-click-modal="false"
-      >
-        <InteractiveCurriculumEditor
-          v-if="dialogVisible"
-          :mode="dialogMode"
-          :curriculum-id="currentCurriculumId"
-          @save="handleSave"
-          @cancel="dialogVisible = false"
-        />
-      </el-dialog>
-
       <!-- 预览对话框 -->
       <el-dialog
         v-model="previewDialogVisible"
@@ -132,9 +116,8 @@
         <CurriculumPreview
           v-if="previewCurriculum"
           ref="curriculumPreviewRef"
-          :html-code="previewCurriculum.htmlCode"
-          :css-code="previewCurriculum.cssCode"
-          :js-code="previewCurriculum.jsCode"
+          :curriculum-id="String(previewCurriculum.id)"
+          :curriculum-data="previewCurriculum"
         />
       </el-dialog>
     </div>
@@ -251,20 +234,16 @@
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import { ref, onMounted, computed, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import {
-  Plus, Search, View, Delete, MagicStick, DataAnalysis,
-  PieChart, Clock
-} from '@element-plus/icons-vue'
 import CurriculumPreview from './components/CurriculumPreview.vue'
-import InteractiveCurriculumEditor from './interactive-curriculum.vue'
 import { request } from '@/utils/request'
 
-// 对话框状态
-const dialogVisible = ref(false)
-const dialogMode = ref<'create' | 'edit'>('create')
-const currentCurriculumId = ref<number | null>(null)
+const router = useRouter()
+
+// 预览对话框状态
 const previewDialogVisible = ref(false)
 const previewCurriculum = ref<any>(null)
 const curriculumPreviewRef = ref<InstanceType<typeof CurriculumPreview>>()
@@ -306,11 +285,11 @@ async function fetchCurriculums() {
       params.search = filters.value.search
     }
 
-    const response = await request.get('/teacher-center/creative-curriculum', { params })
+    const response = await request.get('/api/teacher-center-creative-curriculum', params)
 
-    if (response.data.code === 200) {
-      curriculums.value = response.data.data.rows || []
-      pagination.value.total = response.data.data.total || 0
+    if (response.data) {
+      curriculums.value = response.data.rows || response.data.list || []
+      pagination.value.total = response.data.total || 0
     }
   } catch (error) {
     console.error('❌ 获取课程列表失败:', error)
@@ -321,19 +300,16 @@ async function fetchCurriculums() {
 }
 
 /**
- * 打开创建对话框
+ * 跳转到创建课程页面
  */
 function openCreateDialog() {
-  dialogMode.value = 'create'
-  currentCurriculumId.value = null
-  dialogVisible.value = true
+  router.push('/teacher-center/creative-curriculum-interactive')
 }
 
 /**
- * 处理保存
+ * 处理保存（从创建页面返回后刷新列表）
  */
 function handleSave() {
-  dialogVisible.value = false
   ElMessage.success('课程已保存')
   fetchCurriculums() // 刷新列表
 }
@@ -343,9 +319,9 @@ function handleSave() {
  */
 async function handlePreview(id: number) {
   try {
-    const response = await request.get(`/teacher-center/creative-curriculum/${id}`)
-    if (response.data.code === 200) {
-      previewCurriculum.value = response.data.data
+    const response = await request.get(`/api/teacher-center-creative-curriculum/${id}`)
+    if (response.data) {
+      previewCurriculum.value = response.data
       previewDialogVisible.value = true
     }
   } catch (error) {
@@ -377,8 +353,8 @@ async function handleDelete(id: number) {
       type: 'warning'
     })
 
-    const response = await request.delete(`/teacher-center/creative-curriculum/${id}`)
-    if (response.data.code === 200) {
+    const response = await request.delete(`/api/teacher-center-creative-curriculum/${id}`)
+    if (response.data) {
       ElMessage.success('删除成功')
       fetchCurriculums() // 刷新列表
     }
@@ -400,7 +376,8 @@ function getThumbnail(curriculum: any): string {
   if (curriculum.media?.images?.length > 0) {
     return curriculum.media.images[0].url || curriculum.media.images[0]
   }
-  return 'https://via.placeholder.com/300x200?text=课程封面'
+  // 使用内联SVG作为默认占位图（避免依赖外部服务）
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23667eea'/%3E%3Cstop offset='100%25' stop-color='%23764ba2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad)' width='300' height='200'/%3E%3Ctext fill='%23ffffff' font-family='Arial,sans-serif' font-size='16' font-weight='bold' text-anchor='middle' x='150' y='90'%3E🎓 AI互动课程%3C/text%3E%3Ctext fill='%23ffffff99' font-family='Arial,sans-serif' font-size='12' text-anchor='middle' x='150' y='115'%3E${curriculum.name || '课程封面'}%3C/text%3E%3C/svg%3E`
 }
 
 /**
@@ -485,33 +462,15 @@ onMounted(() => {
 
 .curriculum-management {
   padding: var(--text-3xl);
-  background: var(--bg-hover);
+  background: var(--bg-secondary);
   min-height: 100vh;
-
-  .page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--text-3xl);
-    padding: var(--text-2xl);
-    background: var(--bg-color);
-    border-radius: var(--border-radius-base);
-    box-shadow: var(--shadow-sm);
-
-    h2 {
-      margin: 0;
-      font-size: var(--text-3xl);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-  }
 
   .filters {
     display: flex;
     gap: var(--text-lg);
     margin-bottom: var(--text-3xl);
     padding: var(--text-lg);
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: var(--border-radius-base);
     box-shadow: var(--shadow-sm);
   }
@@ -645,7 +604,7 @@ onMounted(() => {
       .stat-item {
         text-align: center;
         padding: var(--text-sm);
-        background: var(--bg-hover);
+        background: var(--bg-tertiary);
         border-radius: var(--radius-md);
 
         .stat-value {
@@ -714,7 +673,7 @@ onMounted(() => {
           flex-shrink: 0;
           border-radius: var(--border-radius-sm);
           overflow: hidden;
-          background: var(--bg-color);
+          background: var(--bg-card);
 
           img {
             width: 100%;
@@ -750,6 +709,13 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

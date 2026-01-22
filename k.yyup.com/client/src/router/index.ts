@@ -53,7 +53,7 @@ router.beforeEach(async (to, from, next) => {
   const navigationKey = `${from.path}->${to.path}`
   const now = Date.now()
   const lastNavigationTime = navigationLock.get(navigationKey)
-  
+
   // 如果在短时间内重复相同的导航，阻止
   if (lastNavigationTime && (now - lastNavigationTime) < 500) {
     console.log('🚫 检测到重复导航（500ms内），阻止:', navigationKey)
@@ -64,81 +64,56 @@ router.beforeEach(async (to, from, next) => {
     isNavigating = true
 
     console.log('🚀 路由导航:', from.path, '->', to.path)
-    console.log('📍 目标路由信息:', {
-      path: to.path,
-      name: to.name,
-      meta: to.meta,
-      params: to.params,
-      query: to.query
-    })
 
-    // ========== 1. 设备检测（仅用于日志，不进行自动重定向）==========
-    const deviceType = getActualDeviceType()
+    // ========== 检查项3：设备检测优化 - 缓存结果 ==========
+    let deviceType = sessionStorage.getItem('device_type')
+    if (!deviceType) {
+      deviceType = getActualDeviceType()
+      sessionStorage.setItem('device_type', deviceType)
+      console.log('📱 设备类型已缓存:', deviceType)
+    }
     const isOnMobile = to.path.startsWith('/mobile')
-
-    console.log('📱 设备检测（仅供参考）:', {
-      deviceType,
-      currentPath: to.path,
-      isOnMobile,
-      note: '❌ 已禁用自动重定向 - 用户可根据链接自由访问移动端或PC端'
-    })
-
-    // ✏️ 已移除设备类型自动重定向逻辑
-    // 用户可以直接通过链接访问任意版本的页面
-    // 移动设备可以访问PC端页面，PC设备也可以访问移动端页面
 
     const userStore = useUserStore()
     const permissionsStore = usePermissionsStore()
 
-    // ========== 2. 白名单路由直接通过 ==========
-    const whiteListRoutes = ['/', '/login', '/register', '/403', '/404', '/forgot-password', '/mobile/login']
+    // ========== 检查项4：白名单路由直接通过 ==========
+    const whiteListRoutes = ['/', '/login', '/register', '/403', '/404', '/500', '/forgot-password', '/mobile/login', '/mobile-demo']
     if (whiteListRoutes.includes(to.path) || to.name === 'DeviceSelect') {
       console.log('✅ 白名单路由，直接通过:', to.path)
       return next()
     }
 
-    // 检查用户登录状态（增强调试信息）
-    console.log('🔐 检查登录状态:', {
-      isLoggedIn: userStore.isLoggedIn,
-      hasToken: !!userStore.token,
-      tokenLength: userStore.token?.length || 0,
-      hasUserInfo: !!userStore.user,
-      username: userStore.user?.username || 'undefined',
-      role: userStore.user?.role || 'undefined'
-    })
-    
+    // ========== 检查项5优化：登录检查（localStorage恢复已前置到main.ts） ==========
     if (!userStore.isLoggedIn) {
-      // 🔧 尝试从 localStorage 恢复用户信息
-      console.log('🔄 尝试从 localStorage 恢复用户状态...')
-      userStore.tryRestoreFromLocalStorage()
-      
-      // 再次检查登录状态
-      if (!userStore.isLoggedIn) {
-        console.log('🔒 用户未登录（恢复尝试后仍然无效），重定向到登录页')
-        console.log('📊 详细状态:', {
-          localStorageToken: !!localStorage.getItem('kindergarten_token'),
-          localStorageUserInfo: !!localStorage.getItem('kindergarten_user_info')
-        })
-
-        // 根据当前访问路径决定登录页类型
-        const loginPath = to.path.startsWith('/mobile') ? '/mobile/login' : '/login'
-        console.log(`🔀 重定向到登录页: ${loginPath}`)
-
-        return next({
-          path: loginPath,
-          query: { redirect: to.fullPath }
-        })
-      }
-      console.log('✅ 从 localStorage 恢复用户状态成功')
+      console.log('🔒 用户未登录，重定向到登录页')
+      const loginPath = to.path.startsWith('/mobile') ? '/mobile/login' : '/login'
+      return next({
+        path: loginPath,
+        query: { redirect: to.fullPath }
+      })
     }
 
-    // 初始化权限系统（必须先初始化，确保userRole可用）
+    // ========== 检查项6优化：权限初始化检查（初始化已前置到main.ts） ==========
+    // 如果用户已登录但权限未初始化，尝试初始化权限（而不是直接重定向到登录页）
     if (!permissionsStore.hasMenuItems) {
-      console.log('🔐 初始化权限系统...')
-      await permissionsStore.initializePermissions(userStore.user?.role || 'admin')
+      const userRole = userStore.user?.role
+      if (userRole) {
+        console.log('⏳ 权限未初始化，正在初始化权限系统...')
+        try {
+          await permissionsStore.initializePermissions(userRole)
+          console.log('✅ 权限系统初始化完成')
+        } catch (error) {
+          console.error('❌ 权限初始化失败:', error)
+          return next('/login')
+        }
+      } else {
+        console.log('⚠️ 用户角色不存在，重定向到登录页')
+        return next('/login')
+      }
     }
     
-    // 智能路由重定向（在权限系统初始化之后）
+    // ========== 检查项7优化：智能重定向（仅对特定路由执行） ==========
     const userRole = userStore.user?.role as UserRole
     if (userRole && (to.path === '/' || to.path === '/dashboard')) {
       const redirectPath = smartRedirect(to, userRole)
@@ -149,7 +124,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
 
-    // 检查路由权限
+    // ========== 检查项8：路由权限验证（必须保留） ==========
     const hasPermission = permissionsStore.canAccessMenu(to.path)
     if (!hasPermission) {
       console.log('❌ 用户无权限访问:', to.path)

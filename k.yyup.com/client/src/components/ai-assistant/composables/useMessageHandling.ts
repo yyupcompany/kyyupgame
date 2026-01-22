@@ -227,7 +227,7 @@ function createMessageHandling() {
         source: 'ai-assistant',
         pageContext: currentPageContext?.title,
         aiEnhanced: metadata?.aiEnhanced || null,
-        ...metadata
+        ...(metadata || {})
       }
 
       await request.post(AI_ENDPOINTS.CONVERSATION_MESSAGES(convId), {

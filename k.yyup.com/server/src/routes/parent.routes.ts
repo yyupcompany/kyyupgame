@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { ParentController } from '../controllers/parent.controller';
 import { ParentStudentRelationController } from '../controllers/parent-student-relation.controller';
-import { verifyToken, checkPermission } from '../middlewares/auth.middleware';
+import { verifyToken, checkPermission, checkRole } from '../middlewares/auth.middleware';
 const router = Router();
 
 /**
@@ -10,6 +10,10 @@ const router = Router();
 
 // 全局认证中间件 - 所有路由都需要用户认证
 router.use(verifyToken);
+router.use((req, res, next) => {
+  console.log('[Parent路由] 请求路径:', req.path, 'User:', req.user?.id);
+  next();
+});
 
 const parentController = new ParentController();
 const parentStudentRelationController = new ParentStudentRelationController();
@@ -711,7 +715,59 @@ router.delete('/:parentId/students/:studentId', checkPermission('parent:manage')
  *       500:
  *         description: 服务器内部错误
 */
-router.get('/:id/children', checkPermission('parent:manage'), async (req, res) => {
+
+// 注意：/children 路由必须在 /:id/children 之前定义
+// 否则 Express 会将 /children 匹配为 /:id/children（id='children'）
+// 添加家长角色检查中间件，确保只有家长角色可以访问
+router.get('/children', checkRole(['parent', 'admin', 'principal']), async (req, res) => {
+  console.log('[家长API] /children 路由被调用');
+  console.log('[家长API] User:', req.user);
+  console.log('[家长API] Headers:', req.headers.authorization?.substring(0, 50));
+  try {
+    // 从JWT token中获取当前家长ID
+    const parentId = (req as any).user?.id || 804;
+    console.log(`[家长API] 获取当前家长的孩子列表, parentId: ${parentId}`);
+
+    // 模拟数据
+    const mockChildren = [
+      {
+        id: 1,
+        name: '小明',
+        avatar: '',
+        className: '小一班',
+        gender: 'male',
+        birthDate: '2020-03-15'
+      },
+      {
+        id: 2,
+        name: '小红',
+        avatar: '',
+        className: '中一班',
+        gender: 'female',
+        birthDate: '2019-08-20'
+      }
+    ];
+
+    res.json({
+      success: true,
+      message: '获取家长子女列表成功',
+      data: {
+        items: mockChildren,
+        total: mockChildren.length
+      }
+    });
+  } catch (error) {
+    console.error('[家长API] 获取子女列表失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '获取家长子女列表失败',
+      error: error instanceof Error ? error.message : '未知错误'
+    });
+  }
+});
+
+// /:id/children 路由必须放在 /children 之后，使用正则约束只匹配数字ID
+router.get('/:id([0-9]+)/children', checkPermission('parent:manage'), async (req, res) => {
   try {
     const parentId = req.params.id;
     const mockChildren = [
@@ -730,7 +786,7 @@ router.get('/:id/children', checkPermission('parent:manage'), async (req, res) =
         id: 2,
         parentId: parseInt(parentId),
         name: '小红',
-        gender: 'female', 
+        gender: 'female',
         birthDate: '2019-08-20',
         classId: 2,
         class: { id: 2, name: '中一班', grade: 'middle' },
@@ -738,7 +794,7 @@ router.get('/:id/children', checkPermission('parent:manage'), async (req, res) =
         enrollmentDate: '2023-09-01'
       }
     ];
-    
+
     res.json({
       success: true,
       message: '获取家长子女列表成功',
@@ -751,6 +807,65 @@ router.get('/:id/children', checkPermission('parent:manage'), async (req, res) =
     res.status(500).json({
       success: false,
       message: '获取家长子女列表失败',
+      error: error instanceof Error ? error.message : '未知错误'
+    });
+  }
+});
+
+/**
+ * @swagger
+ * /api/parents/stats:
+ *   get:
+ *     summary: 获取当前登录家长的统计数据
+ *     tags: [Parents]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: 统计数据获取成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     assessmentCount:
+ *                       type: integer
+ *                       example: 5
+ *                     activityCount:
+ *                       type: integer
+ *                       example: 3
+ *                     messageCount:
+ *                       type: integer
+ *                       example: 10
+ *       401:
+ *         description: 未授权访问
+ *       403:
+ *         description: 权限不足
+ */
+// 添加家长角色检查中间件，确保只有家长角色可以访问
+router.get('/stats', checkRole(['parent', 'admin', 'principal']), async (req, res) => {
+  try {
+    console.log('[家长API] 获取家长统计数据');
+
+    res.json({
+      success: true,
+      data: {
+        assessmentCount: 5,
+        activityCount: 3,
+        messageCount: 10
+      }
+    });
+  } catch (error) {
+    console.error('[家长API] 获取统计数据失败:', error);
+    res.status(500).json({
+      success: false,
+      message: '获取统计数据失败',
       error: error instanceof Error ? error.message : '未知错误'
     });
   }

@@ -155,7 +155,7 @@ const progressColor = computed(() => {
       align-items: center;
       gap: var(--spacing-2xl);
       padding: var(--text-sm);
-      background: var(--bg-primary);
+      background: var(--bg-page);
       border-radius: var(--spacing-xs);
 
       .stage-icon {
@@ -180,7 +180,7 @@ const progressColor = computed(() => {
       align-items: flex-start;
       gap: var(--spacing-md);
       padding: var(--spacing-md);
-      background: var(--bg-primary);
+      background: var(--bg-page);
       border-radius: var(--spacing-xs);
       border-left: 4px solid var(--border-color);
       transition: all 0.3s ease;

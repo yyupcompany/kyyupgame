@@ -33,7 +33,7 @@ class KindergartenInfoService {
     // 如果缓存有效，直接返回
     if (this.cachedInfo && (now - this.cacheTime) < this.CACHE_DURATION) {
       console.log('📦 使用缓存的幼儿园基础信息')
-      return this.cachedInfo
+      return this.cachedInfo!
     }
 
     try {
@@ -45,7 +45,7 @@ class KindergartenInfoService {
         this.cachedInfo = response.data
         this.cacheTime = now
         console.log('✅ 幼儿园基础信息获取成功:', this.cachedInfo)
-        return this.cachedInfo
+        return this.cachedInfo!
       }
     } catch (error) {
       console.warn('⚠️ 获取幼儿园基础信息失败，使用默认值:', error)

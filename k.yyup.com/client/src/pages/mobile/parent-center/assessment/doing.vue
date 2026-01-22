@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="测评进行中"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="测评进行中" back-path="/mobile/parent-center">
     <div class="mobile-assessment-doing">
       <!-- 进度条 -->
       <div class="progress-section">
@@ -192,7 +187,7 @@
         </div>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -496,6 +491,12 @@ const completeAssessment = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadQuestions()
 })
 
@@ -598,7 +599,7 @@ onBeforeUnmount(() => {
             border-color: rgba(255, 255, 255, 0.6);
             font-size: var(--text-xs);
             padding: 2px 8px;
-            height: 24px;
+            height: var(--spacing-2xl);
 
             &:active {
               background: rgba(255, 255, 255, 0.1);
@@ -784,6 +785,13 @@ onBeforeUnmount(() => {
         margin: 0 auto;
       }
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

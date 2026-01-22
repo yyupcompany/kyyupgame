@@ -459,6 +459,7 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .document-editor {
   padding: var(--text-2xl);
   height: calc(100vh - var(--spacing-3xl));

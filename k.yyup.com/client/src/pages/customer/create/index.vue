@@ -180,7 +180,7 @@ onMounted(() => {
 <style scoped>
 .customer-create {
   padding: var(--text-2xl);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   min-height: calc(100vh - 60px);
 }
 

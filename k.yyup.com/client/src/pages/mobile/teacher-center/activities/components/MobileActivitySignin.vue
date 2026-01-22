@@ -244,8 +244,9 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
-import { showToast, showLoadingToast, closeToast, showConfirmDialog } from 'vant'
+import { showToast, showLoadingToast, closeToast, showConfirmDialog, showSuccessToast, showFailToast } from 'vant'
 import dayjs from 'dayjs'
+import { checkInRegistration, batchCheckIn, exportCheckinData } from '@/api/modules/activity-checkin'
 
 interface Participant {
   id: number
@@ -369,8 +370,54 @@ const handleFilterChange = (filterName: string) => {
   activeFilter.value = filterName
 }
 
-const handleScanSignin = () => {
-  showToast('扫码签到功能开发中...')
+// 扫码签到状态
+const showScanDialog = ref(false)
+const scanResult = ref('')
+
+const handleScanSignin = async () => {
+  // 显示扫码输入弹窗（移动端暂时用输入代替真实扫码）
+  try {
+    const { value } = await showConfirmDialog({
+      title: '扫码签到',
+      message: '请输入签到码或报名ID',
+      showCancelButton: true,
+      confirmButtonText: '确认签到',
+      cancelButtonText: '取消',
+      beforeClose: (action) => {
+        if (action === 'confirm') {
+          return true
+        }
+        return true
+      }
+    })
+    // 如果确认，执行签到
+    await performScanCheckin()
+  } catch {
+    // 用户取消
+  }
+}
+
+// 执行扫码签到
+const performScanCheckin = async () => {
+  // 查找第一个未签到的参与者
+  const unsignedParticipant = props.participants.find(p => !p.checkedIn)
+  if (!unsignedParticipant) {
+    showToast('所有参与者已签到')
+    return
+  }
+  
+  showLoadingToast({ message: '签到中...', forbidClick: true })
+  
+  try {
+    // 调用API进行签到
+    await checkInRegistration(unsignedParticipant.id, props.activity?.location || '现场签到')
+    closeToast()
+    showSuccessToast(`${unsignedParticipant.name} 签到成功`)
+    emit('signin', unsignedParticipant.id)
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '签到失败')
+  }
 }
 
 const handleManualSignin = () => {
@@ -378,28 +425,54 @@ const handleManualSignin = () => {
   showManualSignin.value = true
 }
 
-const confirmManualSignin = () => {
+const confirmManualSignin = async () => {
   if (!manualSigninForm.value.phone || !manualSigninForm.value.name) {
     showToast('请填写完整信息')
     return
   }
 
-  showLoadingToast({
-    message: '签到中...',
-    forbidClick: true
-  })
+  // 通过手机号查找参与者
+  const participant = props.participants.find(
+    p => p.phone === manualSigninForm.value.phone || p.name === manualSigninForm.value.name
+  )
+  
+  if (!participant) {
+    showFailToast('未找到该参与者')
+    return
+  }
 
-  // 模拟签到
-  setTimeout(() => {
-    closeToast()
-    showToast('签到成功')
+  if (participant.checkedIn) {
+    showToast('该参与者已签到')
     showManualSignin.value = false
-  }, 1000)
+    return
+  }
+
+  showLoadingToast({ message: '签到中...', forbidClick: true })
+
+  try {
+    await checkInRegistration(participant.id, props.activity?.location || '手动签到')
+    closeToast()
+    showSuccessToast(`${participant.name} 签到成功`)
+    emit('signin', participant.id)
+    showManualSignin.value = false
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '签到失败')
+  }
 }
 
-const handleSingleSignin = (participant: Participant) => {
-  emit('signin', participant.id)
-  showToast(`${participant.name} 签到成功`)
+const handleSingleSignin = async (participant: Participant) => {
+  showLoadingToast({ message: '签到中...', forbidClick: true })
+  
+  try {
+    await checkInRegistration(participant.id, props.activity?.location || '现场签到')
+    closeToast()
+    showSuccessToast(`${participant.name} 签到成功`)
+    emit('signin', participant.id)
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '签到失败')
+  }
 }
 
 const handleCancelSignin = async (participant: Participant) => {
@@ -430,32 +503,56 @@ const toggleParticipantSelection = (participantId: number) => {
   }
 }
 
-const confirmBatchSignin = () => {
+const confirmBatchSignin = async () => {
   if (selectedParticipants.value.length === 0) {
     showToast('请选择要签到的参与者')
     return
   }
 
-  showLoadingToast({
-    message: '批量签到中...',
-    forbidClick: true
-  })
+  showLoadingToast({ message: '批量签到中...', forbidClick: true })
 
-  emit('batchSignin', selectedParticipants.value)
-
-  setTimeout(() => {
+  try {
+    const result = await batchCheckIn({
+      registrationIds: selectedParticipants.value,
+      location: props.activity?.location || '批量签到'
+    })
+    
     closeToast()
-    showToast(`成功签到${selectedParticipants.value.length}人`)
+    showSuccessToast(`成功签到${result.data?.successCount || selectedParticipants.value.length}人`)
+    emit('batchSignin', selectedParticipants.value)
     showBatchSignin.value = false
     selectedParticipants.value = []
-  }, 1000)
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '批量签到失败')
+  }
 }
 
-const handleExportSignin = () => {
+const handleExportSignin = async () => {
   if (!props.activity) return
 
-  emit('exportSignin', props.activity)
-  showToast('签到表导出成功')
+  showLoadingToast({ message: '导出中...', forbidClick: true })
+  
+  try {
+    const blob = await exportCheckinData(props.activity.id)
+    closeToast()
+    
+    // 创建下载链接
+    const url = window.URL.createObjectURL(blob as unknown as Blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `签到表_${props.activity.title}_${dayjs().format('YYYYMMDD')}.xlsx`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    window.URL.revokeObjectURL(url)
+    
+    showSuccessToast('签到表导出成功')
+    emit('exportSignin', props.activity)
+  } catch (error: any) {
+    closeToast()
+    showFailToast(error?.message || '导出失败')
+  }
 }
 
 const handleClose = () => {

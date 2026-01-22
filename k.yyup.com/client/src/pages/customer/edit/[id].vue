@@ -214,7 +214,7 @@ onMounted(async () => {
 <style scoped>
 .customer-edit {
   padding: var(--text-2xl);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   min-height: calc(100vh - 60px);
 }
 

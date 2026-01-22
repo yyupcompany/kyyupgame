@@ -469,7 +469,7 @@ onMounted(() => {
 
 .mobile-frame {
   width: 100%; max-width: 375px;
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--text-3xl);
   padding: var(--text-sm);
   box-shadow: 0 var(--spacing-xs) var(--text-lg) var(--shadow-medium);

@@ -1,12 +1,9 @@
 <template>
-  <MobileMainLayout
-    title="用量中心"
-    :show-back="true"
-  >
+  <MobileCenterLayout title="用量中心" back-path="/mobile/centers">
     <template #header-extra>
       <van-button
         type="primary"
-        size="small"
+        size="medium"
         icon="replay"
         @click="handleRefresh"
         :loading="loading"
@@ -223,7 +220,7 @@
       <div class="alerts-section">
         <div class="section-header">
           <h3 class="section-title">最新告警</h3>
-          <van-button type="primary" size="small" @click="navigateToFeature('alerts')">
+          <van-button type="primary" size="medium" @click="navigateToFeature('alerts')">
             查看全部
             <van-icon name="arrow" />
           </van-button>
@@ -245,14 +242,14 @@
               <div class="alert-actions">
                 <van-button
                   type="primary"
-                  size="mini"
+                  size="medium"
                   @click.stop="handleAlertAction(alert, 'handle')"
                 >
                   处理
                 </van-button>
                 <van-button
                   type="default"
-                  size="mini"
+                  size="medium"
                   @click.stop="handleAlertAction(alert, 'dismiss')"
                 >
                   忽略
@@ -298,7 +295,7 @@
       <div class="alert-dialog">
         <div class="dialog-header">
           <h3>处理告警</h3>
-          <van-button type="primary" size="small" @click="alertDialogVisible = false">
+          <van-button type="primary" size="medium" @click="alertDialogVisible = false">
             关闭
           </van-button>
         </div>
@@ -348,14 +345,14 @@
       @confirm="onMethodConfirm"
       @cancel="showMethodPicker = false"
     />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showLoadingToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { getUsageOverview, type UsageOverview } from '@/api/endpoints/usage-center'
 
 const router = useRouter()
@@ -711,6 +708,12 @@ function handleRefresh() {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loading.value = true
 
   // 模拟初始数据加载
@@ -732,6 +735,8 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+@import '@/styles/mixins/responsive-mobile.scss';
 @import '@/styles/mobile-base.scss';
 .mobile-usage-center {
   padding: var(--van-padding-sm);
@@ -877,7 +882,7 @@ onMounted(() => {
 
           .stat-card--primary & { background: linear-gradient(135deg, #1989fa 0%, #40a9ff 100%); }
           .stat-card--success & { background: linear-gradient(135deg, #07c160 0%, #38d9a9 100%); }
-          .stat-card--info & { background: linear-gradient(135deg, #909399 0%, #b1b3b8 100%); }
+          .stat-card--info & { background: linear-gradient(135deg, var(--info-color) 0%, #b1b3b8 100%); }
           .stat-card--warning & { background: linear-gradient(135deg, #ff976a 0%, #ffb347 100%); }
         }
 

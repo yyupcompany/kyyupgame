@@ -281,7 +281,7 @@ import {
 
 // 3. 公共工具函数导入
 import { request } from '../../utils/request'
-import { ROLE_ENDPOINTS } from '@/api/endpoints'
+import { SYSTEM_ENDPOINTS } from '@/api/endpoints'
 
 // 4. 路由实例
 const route = useRoute()
@@ -388,7 +388,7 @@ const fetchRoleList = async (): Promise<void> => {
   status: searchForm.value.status || undefined
     }
     
-    const res = await (request as any).get(ROLE_ENDPOINTS.BASE, params)
+    const res = await (request as any).get(SYSTEM_ENDPOINTS.ROLES, params)
     
     if (res.success) {
       roleList.value = (res.data as any)?.items || (res.data as any) || []
@@ -406,7 +406,7 @@ const fetchRoleList = async (): Promise<void> => {
 
 const createRole = async (roleData: Role): Promise<boolean> => {
   try {
-    const res = await request.post(ROLE_ENDPOINTS.BASE, roleData)
+    const res = await request.post(SYSTEM_ENDPOINTS.ROLES, roleData)
     
     if (res.success) {
       ElMessage.success('创建角色成功')
@@ -424,7 +424,7 @@ const createRole = async (roleData: Role): Promise<boolean> => {
 
 const updateRole = async (id: number, roleData: Role): Promise<boolean> => {
   try {
-    const res = await request.put(ROLE_ENDPOINTS.UPDATE(id), roleData)
+    const res = await request.put(`${SYSTEM_ENDPOINTS.ROLES}/${id}`, roleData)
     
     if (res.success) {
       ElMessage.success('更新角色成功')
@@ -442,7 +442,7 @@ const updateRole = async (id: number, roleData: Role): Promise<boolean> => {
 
 const deleteRoleById = async (id: number): Promise<boolean> => {
   try {
-    const res = await request.del(ROLE_ENDPOINTS.DELETE(id))
+    const res = await request.del(`${SYSTEM_ENDPOINTS.ROLES}/${id}`)
     
     if (res.success) {
       ElMessage.success('删除角色成功')

@@ -3,13 +3,6 @@
     title="财务中心"
     description="清晰展示财务管理的完整流程，方便园长一目了然地掌握财务状况"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleQuickPayment">
-        <UnifiedIcon name="Plus" />
-        快速收费
-      </el-button>
-    </template>
-
     <div class="center-container finance-center-timeline">
 
     <!-- 标签页内容 -->
@@ -896,28 +889,29 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .finance-center-timeline {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-2xl);
-  background: var(--bg-secondary);
+  padding: var(--spacing-lg);
+  background: var(--bg-page);
 }
 
 /* .page-header 样式已移至全局 center-common.scss 中统一管理 */
 
 .main-content {
   flex: 1;
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: var(--spacing-2xl);
-  box-shadow: var(--shadow-md);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 /* 统计卡片区域 */
 .finance-stats {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
   width: 100% !important;
   max-width: none !important;
 
@@ -925,7 +919,7 @@ onMounted(() => {
   .stats-grid-unified {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-lg);
+    gap: var(--spacing-md);
     width: 100% !important;
     max-width: none !important;
 
@@ -946,7 +940,7 @@ onMounted(() => {
 
   .stat-card {
     background: var(--bg-card);
-    border: var(--border-width-base) solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     position: relative;
@@ -1079,8 +1073,8 @@ onMounted(() => {
   .quick-actions-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md);
+    margin-bottom: 0;
 
     // 响应式网格
     @media (max-width: var(--breakpoint-xl)) {

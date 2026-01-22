@@ -1,11 +1,14 @@
 import { Request, Response } from 'express'
 import { QueryTypes, Op } from 'sequelize'
+import { sequelize } from '../init'
 import { Teacher } from '../models/teacher.model'
 import { ClassTeacher } from '../models/class-teacher.model'
 import { Class } from '../models/class.model'
 import { Student } from '../models/student.model'
 import { Parent } from '../models/parent.model'
 import { User } from '../models/user.model'
+import { Group } from '../models/group.model'
+import { Kindergarten } from '../models/kindergarten.model'
 
 // 控制器
 export const personnelCenterController = {
@@ -754,27 +757,817 @@ export const personnelCenterController = {
     }
   },
 
-  // 创建教师
-  createTeacher: async (req: Request, res: Response) => {
+  // ========================================
+  // 创建集团（ADMIN专用）
+  // ========================================
+  createGroup: async (req: Request, res: Response) => {
+    const transaction = await sequelize.transaction();
     try {
-      const teacherData = req.body
-      const newTeacher = {
-        id: `teacher_${Date.now()}`,
-        ...teacherData,
-        hireDate: new Date().toISOString()
+      const user = req.user as any;
+
+      // ========================================
+      // 🔒 等保三级：只有ADMIN角色可以创建集团
+      // ========================================
+      if (user.role !== 'admin' && user.role !== 'super_admin') {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] 非ADMIN角色尝试创建集团', {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+          ip: req.ip
+        });
+        return res.status(403).json({
+          success: false,
+          message: '只有ADMIN角色可以创建集团',
+          error: 'INSUFFICIENT_PERMISSIONS'
+        });
       }
+
+      const {
+        name,              // 集团名称
+        code,              // 集团编码
+        type = 1,          // 集团类型（默认教育集团）
+        legalPerson,       // 法人代表
+        phone,             // 联系电话
+        email,             // 联系邮箱
+        address,           // 总部地址
+        description,       // 集团简介
+        brandName,         // 品牌名称
+      } = req.body;
+
+      if (!name || !code) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '缺少必要字段：name, code'
+        });
+      }
+
+      // 检查集团编码是否已存在
+      const [existingGroup] = await sequelize.query(`
+        SELECT id FROM groups WHERE code = :code LIMIT 1
+      `, {
+        replacements: { code },
+        type: QueryTypes.SELECT,
+        transaction
+      });
+
+      if (existingGroup) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '集团编码已存在',
+          error: 'DUPLICATE_GROUP_CODE'
+        });
+      }
+
+      // 创建集团
+      const [groupResult] = await sequelize.query(`
+        INSERT INTO groups (
+          name, code, type, legal_person, phone, email, address,
+          description, brand_name,
+          kindergarten_count, total_students, total_teachers, total_classes, total_capacity,
+          status, creator_id, created_at, updated_at
+        ) VALUES (
+          :name, :code, :type, :legalPerson, :phone, :email, :address,
+          :description, :brandName,
+          0, 0, 0, 0, 0,
+          1, :creatorId, NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          name,
+          code: code.toUpperCase(),
+          type,
+          legalPerson: legalPerson || null,
+          phone: phone || null,
+          email: email || null,
+          address: address || null,
+          description: description || null,
+          brandName: brandName || null,
+          creatorId: user.id
+        },
+        transaction
+      });
+
+      const groupId = (groupResult as any)?.insertId || (groupResult as any);
+
+      await transaction.commit();
+
+      // ========================================
+      // 🔒 等保三级：记录审计日志
+      // ========================================
+      console.log('[等保三级-审计日志] 集团创建成功', {
+        operatorUserId: user.id,
+        operatorUsername: user.username,
+        operatorRole: user.role,
+        action: 'CREATE_GROUP',
+        resourceType: 'group',
+        resourceId: groupId,
+        targetGroup: {
+          groupId,
+          name,
+          code: code.toUpperCase(),
+          createdAt: new Date().toISOString()
+        },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
 
       res.json({
         success: true,
-        data: newTeacher,
-        message: '创建教师成功'
-      })
+        data: {
+          id: groupId,
+          name,
+          code: code.toUpperCase(),
+          type,
+          message: '集团创建成功，请继续创建园所'
+        },
+        message: '创建集团成功'
+      });
     } catch (error) {
+      await transaction.rollback();
+      console.error('[等保三级-创建集团] 创建集团失败:', error);
+      res.status(500).json({
+        success: false,
+        message: '创建集团失败',
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  },
+
+  // ========================================
+  // 创建园所（ADMIN专用）
+  // ========================================
+  createKindergarten: async (req: Request, res: Response) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const user = req.user as any;
+
+      // ========================================
+      // 🔒 等保三级：只有ADMIN角色可以创建园所
+      // ========================================
+      if (user.role !== 'admin' && user.role !== 'super_admin') {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] 非ADMIN角色尝试创建园所', {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+          ip: req.ip
+        });
+        return res.status(403).json({
+          success: false,
+          message: '只有ADMIN角色可以创建园所',
+          error: 'INSUFFICIENT_PERMISSIONS'
+        });
+      }
+
+      const {
+        name,              // 园所名称
+        groupId,           // 所属集团ID（可选）
+        type = 2,          // 园所类型（默认民办）
+        level = 2,         // 园所等级（默认二级）
+        address,           // 园所地址
+        phone,             // 联系电话
+        email,             // 联系邮箱
+        principal,         // 园长姓名（如果有）
+        establishedDate,   // 成立日期
+        area = 0,          // 占地面积
+        buildingArea = 0,  // 建筑面积
+      } = req.body;
+
+      if (!name) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '缺少必要字段：name'
+        });
+      }
+
+      // 如果指定了集团，验证集团是否存在
+      if (groupId) {
+        const [group] = await sequelize.query(`
+          SELECT id, name FROM groups WHERE id = :groupId AND deleted_at IS NULL LIMIT 1
+        `, {
+          replacements: { groupId },
+          type: QueryTypes.SELECT,
+          transaction
+        });
+
+        if (!group) {
+          await transaction.rollback();
+          return res.status(400).json({
+            success: false,
+            message: '指定的集团不存在',
+            error: 'GROUP_NOT_FOUND'
+          });
+        }
+      }
+
+      // 生成园所编码
+      const [countResult] = await sequelize.query(`
+        SELECT COUNT(*) as count FROM kindergartens WHERE deleted_at IS NULL
+      `, {
+        type: QueryTypes.SELECT,
+        transaction
+      });
+      const count = (countResult as any)?.count || 0;
+      const code = `K${String(count + 1).padStart(6, '0')}`;
+
+      // 创建园所
+      const [kindergartenResult] = await sequelize.query(`
+        INSERT INTO kindergartens (
+          name, code, type, level, address, phone, email, principal,
+          established_date, area, building_area,
+          class_count, teacher_count, student_count,
+          group_id, is_group_headquarters, is_primary_branch,
+          status, creator_id, created_at, updated_at
+        ) VALUES (
+          :name, :code, :type, :level, :address, :phone, :email, :principal,
+          :establishedDate, :area, :buildingArea,
+          0, 0, 0,
+          :groupId, 0, :isPrimaryBranch,
+          1, :creatorId, NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          name,
+          code,
+          type,
+          level,
+          address: address || '待完善',
+          phone: phone || '',
+          email: email || '',
+          principal: principal || '待分配',
+          establishedDate: establishedDate || new Date(),
+          area,
+          buildingArea,
+          groupId: groupId || null,
+          isPrimaryBranch: groupId ? 0 : 1,  // 如果没有集团，则作为主园区
+          creatorId: user.id
+        },
+        transaction
+      });
+
+      const kindergartenId = (kindergartenResult as any)?.insertId || (kindergartenResult as any);
+
+      await transaction.commit();
+
+      // ========================================
+      // 🔒 等保三级：记录审计日志
+      // ========================================
+      console.log('[等保三级-审计日志] 园所创建成功', {
+        operatorUserId: user.id,
+        operatorUsername: user.username,
+        operatorRole: user.role,
+        action: 'CREATE_KINDERGARTEN',
+        resourceType: 'kindergarten',
+        resourceId: kindergartenId,
+        targetKindergarten: {
+          kindergartenId,
+          name,
+          code,
+          groupId,
+          createdAt: new Date().toISOString()
+        },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
+
+      res.json({
+        success: true,
+        data: {
+          id: kindergartenId,
+          name,
+          code,
+          groupId,
+          message: '园所创建成功，请继续创建园长'
+        },
+        message: '创建园所成功'
+      });
+    } catch (error) {
+      await transaction.rollback();
+      console.error('[等保三级-创建园所] 创建园所失败:', error);
+      res.status(500).json({
+        success: false,
+        message: '创建园所失败',
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  },
+
+  // ========================================
+  // 创建园长（ADMIN专用）
+  // ========================================
+  createPrincipal: async (req: Request, res: Response) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const user = req.user as any;
+
+      // ========================================
+      // 🔒 等保三级：只有ADMIN角色可以创建园长
+      // ========================================
+      if (user.role !== 'admin' && user.role !== 'super_admin') {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] 非ADMIN角色尝试创建园长', {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+          ip: req.ip
+        });
+        return res.status(403).json({
+          success: false,
+          message: '只有ADMIN角色可以创建园长账号',
+          error: 'INSUFFICIENT_PERMISSIONS'
+        });
+      }
+
+      // 验证必填字段
+      const {
+        realName,          // 园长姓名
+        phone,             // 手机号
+        email,             // 邮箱（可选）
+        kindergartenId,    // 所属园所（必填）
+        initialPassword    // 初始密码（可选）
+      } = req.body;
+
+      if (!realName || !phone || !kindergartenId) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '缺少必要字段：realName, phone, kindergartenId'
+        });
+      }
+
+      // 验证手机号格式
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '手机号格式不正确'
+        });
+      }
+
+      // 验证园所是否存在
+      const [kinder] = await sequelize.query(`
+        SELECT id, name, status FROM kindergartens
+        WHERE id = :kindergartenId AND deleted_at IS NULL
+      `, {
+        replacements: { kindergartenId },
+        type: QueryTypes.SELECT,
+        transaction
+      });
+
+      if (!kinder || Array.isArray(kinder) && kinder.length === 0) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '指定的园所不存在'
+        });
+      }
+
+      // 检查园所状态
+      if ((kinder as any).status !== 'active' && (kinder as any).status !== 1) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '该园所状态异常，无法创建园长账号'
+        });
+      }
+
+      // ========================================
+      // 🔒 等保三级：验证ADMIN是否有权限管理该园所
+      // ========================================
+
+      // 查询园所的集团信息
+      const [kinderDetail] = await sequelize.query(`
+        SELECT id, name, group_id, is_group_headquarters
+        FROM kindergartens
+        WHERE id = :kindergartenId AND deleted_at IS NULL
+      `, {
+        replacements: { kindergartenId },
+        type: QueryTypes.SELECT,
+        transaction
+      });
+
+      if (kinderDetail && (kinderDetail as any).group_id) {
+        // 园所属于某个集团，验证集团是否存在
+        const [group] = await sequelize.query(`
+          SELECT id, name FROM groups WHERE id = :groupId AND deleted_at IS NULL LIMIT 1
+        `, {
+          replacements: { groupId: (kinderDetail as any).group_id },
+          type: QueryTypes.SELECT,
+          transaction
+        });
+
+        if (!group) {
+          await transaction.rollback();
+          console.warn('[等保三级-权限验证] 园所属集团不存在', {
+            kindergartenId,
+            groupId: (kinderDetail as any).group_id
+          });
+          return res.status(400).json({
+            success: false,
+            message: '园所属的集团不存在，请先检查集团配置',
+            error: 'GROUP_NOT_FOUND'
+          });
+        }
+
+        console.log('[等保三级-权限验证] 园所属于集团', {
+          kindergartenId,
+          kindergartenName: (kinderDetail as any).name,
+          groupId: (kinderDetail as any).group_id,
+          groupName: (group as any).name
+        });
+      }
+
+      const registerPassword = initialPassword || `${phone.slice(-6)}Pr`;
+
+      // ========================================
+      // 🔒 等保三级：密码必须加密存储
+      // ========================================
+      const bcrypt = require('bcrypt');
+      const hashedPassword = await bcrypt.hash(registerPassword, 10);
+
+      // 1. 创建User记录
+      const [userResult] = await sequelize.query(`
+        INSERT INTO users (
+          username, email, phone, password, real_name,
+          role, status, primary_kindergarten_id, data_scope,
+          created_at, updated_at
+        ) VALUES (
+          :username, :email, :phone, :password, :realName,
+          'principal', 'active', :kindergartenId, 'single',
+          NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          username: phone,
+          email: email || `${phone}@kindergarten.com`,
+          phone,
+          password: hashedPassword,  // ✅ 使用加密后的密码
+          realName,
+          kindergartenId
+        },
+        transaction
+      });
+
+      const principalUserId = (userResult as any)?.insertId || (userResult as any);
+
+      // 2. 创建Teacher记录（园长也是一种教师）
+      const [teacherResult] = await sequelize.query(`
+        INSERT INTO teachers (
+          user_id, kindergarten_id, name, phone, email,
+          position, status, created_at, updated_at
+        ) VALUES (
+          :userId, :kindergartenId, :name, :phone, :email,
+          10, 1, NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          userId: principalUserId,
+          kindergartenId,
+          name: realName,
+          phone,
+          email: email || `${phone}@kindergarten.com`
+        },
+        transaction
+      });
+
+      const principalId = (teacherResult as any)?.insertId || (teacherResult as any);
+
+      // 3. 分配principal角色
+      const [roleRows] = await sequelize.query(`
+        SELECT id FROM roles WHERE code = 'principal' LIMIT 1
+      `, { transaction });
+
+      if (roleRows && Array.isArray(roleRows) && roleRows.length > 0) {
+        const roleId = (roleRows[0] as any).id;
+
+        await sequelize.query(`
+          INSERT INTO user_roles (user_id, role_id, created_at, updated_at)
+          VALUES (:userId, :roleId, NOW(), NOW())
+        `, {
+          replacements: {
+            userId: principalUserId,
+            roleId
+          },
+          transaction
+        });
+      }
+
+      await transaction.commit();
+
+      // ========================================
+      // 🔒 等保三级：记录审计日志
+      // ========================================
+      console.log('[等保三级-审计日志] 园长账号创建成功', {
+        operatorUserId: user.id,
+        operatorUsername: user.username,
+        operatorRole: user.role,
+        action: 'CREATE_PRINCIPAL',
+        resourceType: 'principal',
+        resourceId: principalUserId,
+        targetPrincipal: {
+          userId: principalUserId,
+          teacherId: principalId,
+          realName,
+          phone,
+          kindergartenId,
+          createdAt: new Date().toISOString()
+        },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
+
+      res.json({
+        success: true,
+        data: {
+          id: principalId,
+          userId: principalUserId,
+          name: realName,
+          phone,
+          email: email || `${phone}@kindergarten.com`,
+          kindergartenId,
+          kindergartenName: (kinder as any).name,
+          role: 'principal',
+          username: phone,
+          initialPassword: registerPassword  // 返回初始密码供管理员记录
+        },
+        message: '创建园长成功'
+      });
+    } catch (error) {
+      await transaction.rollback();
+      console.error('[等保三级-创建园长] 创建园长失败:', error);
+      res.status(500).json({
+        success: false,
+        message: '创建园长失败',
+        error: error instanceof Error ? error.message : String(error)
+      });
+    }
+  },
+
+  // 创建教师
+  createTeacher: async (req: Request, res: Response) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const user = req.user as any;
+
+      // ========================================
+      // 🔒 等保三级：权限层级验证
+      // ========================================
+
+      // ❌ 拒绝ADMIN角色直接创建教师 - 必须先创建园长账号
+      if (user.role === 'admin' || user.role === 'super_admin') {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] ADMIN角色尝试绕过层级直接创建教师', {
+          userId: user.id,
+          username: user.username,
+          role: user.role,
+          ip: req.ip,
+          userAgent: req.headers['user-agent']
+        });
+        return res.status(403).json({
+          success: false,
+          message: 'ADMIN角色不能直接创建教师账号',
+          error: 'FORBIDDEN_OPERATION',
+          hint: '请按照层级关系操作：1. 先创建园长账号 2. 由园长创建教师账号',
+          alternative: '使用"园长管理"功能创建园长账号，再由园长创建教师账号'
+        });
+      }
+
+      // ✅ 只允许园长角色创建教师
+      if (user.role !== 'principal' && user.role !== 'branch_principal') {
+        await transaction.rollback();
+        return res.status(403).json({
+          success: false,
+          message: '只有园长角色可以创建教师账号',
+          error: 'INSUFFICIENT_PERMISSIONS'
+        });
+      }
+
+      // ✅ 验证园长账号必须有园区归属
+      const principalKindergartenId = user.primaryKindergartenId || user.kindergartenId;
+      if (!principalKindergartenId) {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] 园长账号未分配园区', {
+          userId: user.id,
+          username: user.username,
+          role: user.role
+        });
+        return res.status(403).json({
+          success: false,
+          message: '园长账号尚未分配园区，无法创建教师',
+          error: 'NO_KINDERGARTEN_ASSIGNED',
+          hint: '请联系系统管理员为您的账号分配园区'
+        });
+      }
+
+      // 验证必填字段
+      const {
+        realName,          // 教师姓名
+        phone,             // 手机号
+        email,             // 邮箱（可选）
+        kindergartenId,    // 所属园所
+        teacherTitle,      // 职称（可选）
+        teachingSubjects,  // 任教科目（可选）
+        initialPassword    // 初始密码（可选）
+      } = req.body;
+
+      if (!realName || !phone) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '缺少必要字段：realName, phone'
+        });
+      }
+
+      // 验证手机号格式
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '手机号格式不正确'
+        });
+      }
+
+      // 确定园所ID：园长只能在自己的园区创建教师
+      const targetKindergartenId = kindergartenId || principalKindergartenId;
+
+      // ✅ 验证园长不能跨园区创建教师
+      if (targetKindergartenId !== principalKindergartenId) {
+        await transaction.rollback();
+        console.warn('[等保三级-权限验证] 园长尝试跨园区创建教师', {
+          principalUserId: user.id,
+          principalKindergartenId,
+          targetKindergartenId
+        });
+        return res.status(403).json({
+          success: false,
+          message: '园长只能在自己的园区创建教师账号',
+          error: 'CROSS_KINDERGARTEN_FORBIDDEN',
+          hint: `您只能在园区 ${principalKindergartenId} 中创建教师`
+        });
+      }
+
+      // 验证园所是否存在
+      const [kinder] = await sequelize.query(`
+        SELECT id, name FROM kindergartens
+        WHERE id = :kindergartenId AND deleted_at IS NULL
+      `, {
+        replacements: { kindergartenId: targetKindergartenId },
+        type: QueryTypes.SELECT,
+        transaction
+      });
+
+      if (!kinder || Array.isArray(kinder) && kinder.length === 0) {
+        await transaction.rollback();
+        return res.status(400).json({
+          success: false,
+          message: '指定的园所不存在'
+        });
+      }
+
+      const registerPassword = initialPassword || `${phone.slice(-6)}Tc`;
+
+      // ========================================
+      // 🔒 等保三级：密码必须加密存储
+      // ========================================
+      const bcrypt = require('bcrypt');
+      const hashedPassword = await bcrypt.hash(registerPassword, 10);
+
+      // 1. 创建User记录
+      const [userResult] = await sequelize.query(`
+        INSERT INTO users (
+          username, email, phone, password, real_name,
+          role, status, primary_kindergarten_id, data_scope,
+          created_at, updated_at
+        ) VALUES (
+          :username, :email, :phone, :password, :realName,
+          'teacher', 'active', :kindergartenId, 'single',
+          NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          username: phone,
+          email: email || `${phone}@kindergarten.com`,
+          phone,
+          password: hashedPassword,  // ✅ 使用加密后的密码
+          realName,
+          kindergartenId: targetKindergartenId
+        },
+        transaction
+      });
+
+      const teacherUserId = (userResult as any)?.insertId || (userResult as any);
+
+      // 2. 创建Teacher记录
+      const [teacherResult] = await sequelize.query(`
+        INSERT INTO teachers (
+          user_id, kindergarten_id, name, phone, email,
+          title, subjects, status,
+          created_at, updated_at
+        ) VALUES (
+          :userId, :kindergartenId, :name, :phone, :email,
+          :title, :subjects, 1,
+          NOW(), NOW()
+        )
+      `, {
+        replacements: {
+          userId: teacherUserId,
+          kindergartenId: targetKindergartenId,
+          name: realName,
+          phone,
+          email: email || `${phone}@kindergarten.com`,
+          title: teacherTitle || '',
+          subjects: teachingSubjects ? JSON.stringify(teachingSubjects) : '[]'
+        },
+        transaction
+      });
+
+      const teacherId = (teacherResult as any)?.insertId || (teacherResult as any);
+
+      // 3. 分配teacher角色
+      const [roleRows] = await sequelize.query(`
+        SELECT id FROM roles WHERE code = 'teacher' LIMIT 1
+      `, { transaction });
+
+      if (roleRows && Array.isArray(roleRows) && roleRows.length > 0) {
+        const roleId = (roleRows[0] as any).id;
+
+        await sequelize.query(`
+          INSERT INTO user_roles (user_id, role_id, created_at, updated_at)
+          VALUES (:userId, :roleId, NOW(), NOW())
+        `, {
+          replacements: {
+            userId: teacherUserId,
+            roleId
+          },
+          transaction
+        });
+      }
+
+      await transaction.commit();
+
+      // ========================================
+      // 🔒 等保三级：记录审计日志
+      // ========================================
+      console.log('[等保三级-审计日志] 教师账号创建成功', {
+        operatorUserId: user.id,
+        operatorUsername: user.username,
+        operatorRole: user.role,
+        operatorKindergartenId: principalKindergartenId,
+        action: 'CREATE_TEACHER',
+        resourceType: 'teacher',
+        resourceId: teacherUserId,
+        targetTeacher: {
+          userId: teacherUserId,
+          teacherId: teacherId,
+          realName,
+          phone,
+          kindergartenId: targetKindergartenId,
+          createdAt: new Date().toISOString()
+        },
+        ipAddress: req.ip,
+        userAgent: req.headers['user-agent']
+      });
+
+      // TODO: 存储到数据库审计日志表
+      // await AuditLog.create({
+      //   operator_user_id: user.id,
+      //   action: 'CREATE_TEACHER',
+      //   resource_type: 'teacher',
+      //   resource_id: teacherUserId,
+      //   details: JSON.stringify({
+      //     realName,
+      //     phone,
+      //     kindergartenId: targetKindergartenId
+      //   }),
+      //   ip_address: req.ip,
+      //   user_agent: req.headers['user-agent']
+      // });
+
+      res.json({
+        success: true,
+        data: {
+          id: teacherId,
+          userId: teacherUserId,
+          name: realName,
+          phone,
+          email: email || `${phone}@kindergarten.com`,
+          kindergartenId: targetKindergartenId,
+          kindergartenName: (kinder as any).name
+        },
+        message: '创建教师成功'
+      });
+    } catch (error) {
+      await transaction.rollback();
+      console.error('创建教师失败:', error);
       res.status(500).json({
         success: false,
         message: '创建教师失败',
         error: error instanceof Error ? error.message : String(error)
-      })
+      });
     }
   },
 
@@ -1353,7 +2146,63 @@ export const personnelCenterController = {
   assignTeacherToClass: async (req: Request, res: Response) => {
     try {
       const { teacherId } = req.params
-      const { classId } = req.body
+      const { classId, role = 1 } = req.body
+
+      // 检查教师是否存在
+      const teacher = await Teacher.findByPk(teacherId)
+      if (!teacher) {
+        return res.status(404).json({
+          success: false,
+          message: '教师不存在'
+        })
+      }
+
+      // 检查班级是否存在
+      const classInfo = await Class.findByPk(classId)
+      if (!classInfo) {
+        return res.status(404).json({
+          success: false,
+          message: '班级不存在'
+        })
+      }
+
+      // 检查是否已存在关联 - 使用raw SQL
+      const [existingRelations] = await sequelize.query(`
+        SELECT id FROM class_teachers 
+        WHERE teacher_id = :teacherId AND class_id = :classId AND deleted_at IS NULL
+        LIMIT 1
+      `, {
+        replacements: { teacherId: Number(teacherId), classId: Number(classId) },
+        type: QueryTypes.SELECT
+      }) as any
+
+      if (existingRelations) {
+        // 更新现有关联 - 使用raw SQL避免字段名问题
+        await sequelize.query(`
+          UPDATE class_teachers 
+          SET status = 1, updated_at = NOW()
+          WHERE teacher_id = :teacherId AND class_id = :classId
+        `, {
+          replacements: { teacherId: Number(teacherId), classId: Number(classId) },
+          type: QueryTypes.UPDATE
+        })
+      } else {
+        // 创建新关联 - 使用raw SQL避免字段名问题
+        const userId = (req as any).user?.id || null
+        await sequelize.query(`
+          INSERT INTO class_teachers (teacher_id, class_id, status, start_date, creator_id, updater_id, created_at, updated_at)
+          VALUES (:teacherId, :classId, 1, NOW(), :userId, :userId, NOW(), NOW())
+        `, {
+          replacements: { 
+            teacherId: Number(teacherId), 
+            classId: Number(classId),
+            userId
+          },
+          type: QueryTypes.INSERT
+        })
+      }
+
+      console.log(`✅ 教师${teacherId}已分配到班级${classId}`)
 
       res.json({
         success: true,
@@ -1361,6 +2210,7 @@ export const personnelCenterController = {
         message: '教师分配班级成功'
       })
     } catch (error) {
+      console.error('❌ 教师分配班级失败:', error)
       res.status(500).json({
         success: false,
         message: '教师分配班级失败',

@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="课程预览"
-    :show-back="true"
-    :custom-header="true"
-  >
+  <MobileSubPageLayout title="课程预览" back-path="/mobile/teacher-center">
     <template #header>
       <div class="preview-header">
         <div class="header-left">
@@ -395,14 +391,14 @@
         </div>
       </div>
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast, showImagePreview } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -509,7 +505,7 @@ const sampleCSS = `.spring-course {
 
 .seed, .stem, .flower {
   font-size: var(--text-5xl);
-  margin: 10px;
+  margin: var(--spacing-md);
   cursor: pointer;
   transition: all 0.3s;
 }`
@@ -656,6 +652,12 @@ const getDomainLabel = (domain: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // 加载课程数据
   console.log('加载课程数据:', courseData.id)
 })
@@ -696,15 +698,15 @@ onMounted(() => {
 
 .course-info-card {
   background: white;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .course-thumbnail {
     position: relative;
 
     .course-badge {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
     }
   }
 
@@ -715,26 +717,26 @@ onMounted(() => {
       font-size: var(--text-xl);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 8px;
+      margin-bottom: var(--spacing-sm);
     }
 
     .course-desc {
       font-size: var(--text-sm);
       color: var(--van-text-color-2);
       line-height: 1.5;
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
     }
 
     .course-meta {
       display: flex;
       flex-wrap: wrap;
       gap: var(--spacing-md);
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
 
       .meta-item {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: var(--spacing-sm);
         font-size: var(--text-sm);
         color: var(--van-text-color-3);
       }
@@ -743,14 +745,14 @@ onMounted(() => {
     .course-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: var(--spacing-sm);
     }
   }
 }
 
 .preview-modes {
   background: white;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   :deep(.van-tabs__wrap) {
     background: white;
@@ -764,9 +766,9 @@ onMounted(() => {
 .interactive-preview {
   .preview-frame {
     border: 1px solid #ebedf0;
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     min-height: 300px;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
     background: white;
 
     .course-preview-content {
@@ -782,7 +784,7 @@ onMounted(() => {
       color: var(--van-text-color-3);
 
       .van-icon {
-        margin-bottom: 12px;
+        margin-bottom: var(--spacing-md);
       }
 
       p {
@@ -806,9 +808,9 @@ onMounted(() => {
 .code-preview {
   .code-editor {
     background: #f8f9fa;
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     padding: var(--spacing-md);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
     min-height: 300px;
     overflow: auto;
 
@@ -834,13 +836,13 @@ onMounted(() => {
 
 .resources-preview {
   .resource-section {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
 
     h4 {
       font-size: var(--text-base);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
     }
 
     .image-grid {
@@ -850,7 +852,7 @@ onMounted(() => {
 
       .image-item {
         aspect-ratio: 1;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
         overflow: hidden;
         cursor: pointer;
       }
@@ -862,15 +864,15 @@ onMounted(() => {
         gap: var(--spacing-md);
         padding: var(--spacing-md);
         background: #f8f9fa;
-        border-radius: 8px;
-        margin-bottom: 8px;
+        border-radius: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
         cursor: pointer;
 
         .video-thumbnail {
           position: relative;
           width: 120px;
           flex-shrink: 0;
-          border-radius: 8px;
+          border-radius: var(--spacing-sm);
           overflow: hidden;
 
           .play-overlay {
@@ -898,7 +900,7 @@ onMounted(() => {
             font-size: var(--text-sm);
             font-weight: 500;
             color: var(--van-text-color);
-            margin-bottom: 4px;
+            margin-bottom: var(--spacing-xs);
           }
 
           .video-duration {
@@ -916,8 +918,8 @@ onMounted(() => {
         align-items: center;
         padding: var(--spacing-md);
         background: #f8f9fa;
-        border-radius: 8px;
-        margin-bottom: 8px;
+        border-radius: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
 
         .audio-info {
           display: flex;
@@ -940,20 +942,20 @@ onMounted(() => {
 
 .guide-preview {
   .guide-section {
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
 
     h4 {
       font-size: var(--text-base);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
     }
 
     .objective-list {
-      padding-left: 20px;
+      padding-left: var(--spacing-xl);
 
       li {
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
         line-height: 1.5;
         color: var(--van-text-color-2);
       }
@@ -963,14 +965,14 @@ onMounted(() => {
       .flow-step {
         display: flex;
         gap: var(--spacing-md);
-        margin-bottom: 16px;
+        margin-bottom: var(--spacing-lg);
         padding: var(--spacing-md);
         background: #f8f9fa;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
 
         .step-number {
-          width: 24px;
-          height: 24px;
+          width: var(--spacing-2xl);
+          height: var(--spacing-2xl);
           background: var(--van-primary-color);
           color: white;
           border-radius: 50%;
@@ -989,14 +991,14 @@ onMounted(() => {
             font-size: var(--text-sm);
             font-weight: 600;
             color: var(--van-text-color);
-            margin-bottom: 4px;
+            margin-bottom: var(--spacing-xs);
           }
 
           p {
             font-size: var(--text-sm);
             color: var(--van-text-color-2);
             line-height: 1.4;
-            margin-bottom: 4px;
+            margin-bottom: var(--spacing-xs);
           }
 
           .step-duration {
@@ -1042,7 +1044,7 @@ onMounted(() => {
     height: 48px;
     font-size: var(--text-base);
     font-weight: 600;
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
   }
 }
 
@@ -1052,7 +1054,7 @@ onMounted(() => {
 
   .video-close,
   .audio-close {
-    margin-top: 12px;
+    margin-top: var(--spacing-md);
     text-align: center;
   }
 
@@ -1060,13 +1062,20 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     h3 {
       margin: 0;
       font-size: var(--text-base);
       font-weight: 600;
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

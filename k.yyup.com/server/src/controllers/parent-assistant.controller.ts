@@ -45,3 +45,59 @@ export const getQuickQuestions = async (req: Request, res: Response): Promise<vo
   }
 };
 
+/**
+ * 获取家长助手统计数据
+ */
+export const getStatistics = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+
+    // 模拟统计数据
+    const stats = {
+      conversationCount: 0,
+      resolvedCount: 0,
+      satisfactionScore: 0
+    };
+
+    ApiResponse.success(res, stats, '获取统计数据成功');
+  } catch (error: any) {
+    ApiResponse.handleError(res, error);
+  }
+};
+
+/**
+ * 获取对话历史记录
+ */
+export const getHistory = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.user?.id;
+
+    // 模拟历史记录
+    const history = [];
+
+    ApiResponse.success(res, history, '获取历史记录成功');
+  } catch (error: any) {
+    ApiResponse.handleError(res, error);
+  }
+};
+
+/**
+ * 搜索对话历史
+ */
+export const searchHistory = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { keyword } = req.query;
+
+    if (!keyword) {
+      throw ApiError.badRequest('搜索关键词不能为空');
+    }
+
+    // 模拟搜索结果
+    const results = [];
+
+    ApiResponse.success(res, results, '搜索成功');
+  } catch (error: any) {
+    ApiResponse.handleError(res, error);
+  }
+};
+

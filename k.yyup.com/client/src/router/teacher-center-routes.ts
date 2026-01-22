@@ -152,11 +152,11 @@ const teacherCenterRoutes: RouteRecordRaw[] = [
         ]
       },
       
-      // 教学中心
+      // 教学中心（新增课程管理功能）
       {
         path: 'teaching',
         name: 'TeacherTeaching',
-        component: () => import('@/pages/teacher-center/teaching/index.vue'),
+        component: () => import('@/pages/teacher-center/teaching/TeacherCoursesPage.vue'),
         meta: {
           title: '教学中心',
           requiresAuth: true,

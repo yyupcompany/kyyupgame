@@ -27,6 +27,14 @@ export class DirectResponseService {
   }
 
   /**
+   * 兼容旧接口：处理直接聊天请求
+   */
+  async processDirectChat(userRequest: { query?: string; context?: any }): Promise<any> {
+    const query = userRequest?.query || '';
+    return this.generateResponse(query, userRequest?.context);
+  }
+
+  /**
    * 检查是否可以使用直接响应
    */
   async canUseDirectResponse(query: string): Promise<boolean> {

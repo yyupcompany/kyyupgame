@@ -47,56 +47,69 @@ const handleClick = () => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+
 .action-card {
   display: flex;
   align-items: center;
-  padding: var(--text-lg);
-  background: var(--bg-color);
-  border: var(--border-width) solid var(--border-color);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-fast) ease;
+  padding: var(--spacing-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 
   &--clickable {
     cursor: pointer;
 
     &:hover {
       border-color: var(--primary-color);
-      box-shadow: var(--shadow-md);
-      transform: translateY(var(--z-index-below));
+      box-shadow: var(--shadow-lg), var(--glow-primary);
+      transform: translateY(-4px);
+
+      .action-card__icon {
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      .action-card__arrow {
+        transform: translateX(4px);
+        opacity: 1;
+      }
     }
   }
   
   &--primary {
     .action-card__icon {
-      background: var(--primary-bg);
+      background: var(--primary-light-bg);
       color: var(--primary-color);
     }
   }
 
   &--success {
     .action-card__icon {
-      background: var(--success-bg);
+      background: var(--success-light-bg);
       color: var(--success-color);
     }
   }
 
   &--warning {
     .action-card__icon {
-      background: var(--warning-bg);
+      background: var(--warning-light-bg);
       color: var(--warning-color);
     }
   }
 
   &--info {
     .action-card__icon {
-      background: var(--info-bg);
-      color: var(--info-color);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
     }
   }
 
   &--danger {
     .action-card__icon {
-      background: var(--danger-bg);
+      background: var(--danger-light-bg);
       color: var(--danger-color);
     }
   }
@@ -106,10 +119,13 @@ const handleClick = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--icon-size); height: var(--icon-size);
-  border-radius: var(--radius-sm);
-  margin-right: var(--text-sm);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  margin-right: var(--spacing-lg);
   flex-shrink: 0;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
 }
 
 .action-card__content {
@@ -120,7 +136,7 @@ const handleClick = () => {
 .action-card__title {
   margin: 0 0 var(--spacing-xs) 0;
   font-size: var(--text-base);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   line-height: 1.4;
 }
@@ -130,27 +146,30 @@ const handleClick = () => {
   font-size: var(--text-sm);
   color: var(--text-secondary);
   line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .action-card__arrow {
-  margin-left: var(--spacing-sm);
-  color: var(--text-muted);
+  margin-left: var(--spacing-md);
+  color: var(--text-secondary);
+  opacity: 0.5;
   flex-shrink: 0;
-  transition: transform var(--transition-fast) ease;
-  
-  .action-card--clickable:hover & {
-    transform: translateX(var(--transform-drop));
-  }
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
 }
 
 // 响应式设计
 @media (max-width: var(--breakpoint-md)) {
   .action-card {
-    padding: var(--text-sm);
+    padding: var(--spacing-md);
     
     .action-card__icon {
-      width: var(--icon-size); height: var(--icon-size);
-      margin-right: var(--spacing-2xl);
+      width: 40px;
+      height: 40px;
+      margin-right: var(--spacing-md);
     }
     
     .action-card__title {

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout 
-    title="客户池中心" 
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="客户池中心" back-path="/mobile/centers">
     <div class="page">
       <van-grid :column-num="2" :border="false">
         <van-grid-item><div class="stat-value">{{ stats.totalCustomers }}</div><div class="stat-label">总客户</div></van-grid-item>
@@ -19,12 +14,12 @@
         <van-tab title="未分配" name="unassigned" />
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { showLoadingToast, closeToast, showToast } from 'vant'
 import { request } from '@/utils/request'
 import { CUSTOMER_ENDPOINTS } from '@/api/endpoints'
@@ -60,6 +55,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 
 .page { 

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import { ApiResponse } from '../utils/apiResponse';
 import { ApiError } from '../utils/apiError';
-import { GrowthRecord, GrowthRecordType, MeasurementType } from '../models/growth-record.model';
+import { GrowthRecord, GrowthRecordType, MeasurementType, calculateBMI, calculatePercentile, getDevelopmentAdvice } from '../models/growth-record.model';
 import { Student } from '../models/student.model';
-import { calculateBMI, calculatePercentile, getDevelopmentAdvice } from '../models/growth-record.model';
 import { Op } from 'sequelize';
 import { sequelize } from '../init';
 
@@ -32,17 +31,30 @@ export const getGrowthRecords = async (req: Request, res: Response): Promise<voi
       if (endDate) where.measurementDate[Op.lte] = endDate;
     }
 
+    // 先获取成长记录（不使用include避免关联加载顺序问题）
     const records = await GrowthRecord.findAll({
       where,
-      include: [
-        { model: Student, as: 'student', attributes: ['id', 'name', 'gender', 'birthDate'] }
-      ],
       order: [['measurementDate', 'DESC']],
       limit: parseInt(limit as string) || 50,
       offset: parseInt(offset as string) || 0
     });
 
-    ApiResponse.success(res, records, '获取成长记录成功');
+    // 获取相关学生信息
+    const studentIds = [...new Set(records.map(r => r.studentId))];
+    const students = studentIds.length > 0 ? await Student.findAll({
+      where: { id: studentIds },
+      attributes: ['id', 'name', 'gender', 'birthDate']
+    }) : [];
+    const studentMap = new Map(students.map(s => [s.id, s]));
+
+    // 组合结果
+    const result = records.map(r => {
+      const record = r.toJSON();
+      record.student = studentMap.get(r.studentId) || null;
+      return record;
+    });
+
+    ApiResponse.success(res, result, '获取成长记录成功');
   } catch (error: any) {
     ApiResponse.handleError(res, error);
   }
@@ -55,17 +67,23 @@ export const getGrowthRecord = async (req: Request, res: Response): Promise<void
   try {
     const { id } = req.params;
 
-    const record = await GrowthRecord.findByPk(id, {
-      include: [
-        { model: Student, as: 'student', attributes: ['id', 'name', 'gender', 'birthDate'] }
-      ]
-    });
+    const record = await GrowthRecord.findByPk(id);
 
     if (!record) {
       throw new ApiError(404, '成长记录不存在');
     }
 
-    ApiResponse.success(res, record, '获取成长记录成功');
+    // 获取关联的学生信息（避免使用include）
+    const student = await Student.findByPk(record.studentId, {
+      attributes: ['id', 'name', 'gender', 'birthDate']
+    });
+
+    const result = {
+      ...record.toJSON(),
+      student: student || null
+    };
+
+    ApiResponse.success(res, result, '获取成长记录成功');
   } catch (error: any) {
     ApiResponse.handleError(res, error);
   }
@@ -195,6 +213,7 @@ export const deleteGrowthRecord = async (req: Request, res: Response): Promise<v
 export const getGrowthChart = async (req: Request, res: Response): Promise<void> => {
   try {
     const { studentId, type = GrowthRecordType.HEIGHT_WEIGHT } = req.query;
+    const recordType = String(type) as GrowthRecordType;
 
     if (!studentId) {
       throw new ApiError(400, '学生ID不能为空');
@@ -204,7 +223,7 @@ export const getGrowthChart = async (req: Request, res: Response): Promise<void>
     const records = await GrowthRecord.findAll({
       where: {
         studentId: parseInt(studentId as string),
-        type
+        type: recordType
       },
       order: [['measurementDate', 'ASC']],
       attributes: ['id', 'measurementDate', 'height', 'weight', 'ageInMonths', 'heightPercentile', 'weightPercentile', 'bmi']

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="考勤管理"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="考勤管理" back-path="/mobile/teacher-center">
     <div class="mobile-teacher-attendance">
       <!-- Tab标签页 -->
       <van-tabs v-model:active="activeTab" @change="handleTabChange" sticky>
@@ -29,7 +24,7 @@
         </van-tab>
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -37,7 +32,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 导入Tab组件
 import TeacherCheckInTab from './components/TeacherCheckInTab.vue'

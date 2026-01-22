@@ -530,7 +530,7 @@ const playVoice = (type: string) => {
 
 .princess-memory-game {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-hover) 50%, var(--bg-secondary) 100%);
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-hover) 50%, var(--bg-page) 100%);
   padding: var(--spacing-2xl);
   position: relative;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
@@ -540,7 +540,7 @@ const playVoice = (type: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-md);
@@ -584,7 +584,7 @@ const playVoice = (type: string) => {
 .game-container {
   max-width: var(--container-xl);
   margin: 0 auto;
-  background: var(--bg-color);
+  background: var(--bg-card);
   padding: var(--spacing-xl);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
@@ -672,7 +672,7 @@ const playVoice = (type: string) => {
 
   .card-back {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-    border: var(--border-width-thick) solid var(--bg-color);
+    border: var(--border-width-thick) solid var(--bg-card);
 
     .back-pattern {
       position: relative;
@@ -693,7 +693,7 @@ const playVoice = (type: string) => {
   }
 
   .card-front {
-    background: linear-gradient(135deg, var(--bg-color), var(--bg-hover));
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-hover));
     border: var(--border-width-thick) solid var(--primary-color);
     transform: rotateY(180deg);
 

@@ -52,7 +52,7 @@ export default defineComponent({
     const availableThemes = computed(() => [
       {
         value: 'default' as ThemeType,
-        label: '默认主题',
+        label: '明亮主题',
         icon: 'sun',
         description: '清新明亮的默认样式'
       },
@@ -61,48 +61,6 @@ export default defineComponent({
         label: '暗黑主题',
         icon: 'moon',
         description: '护眼的深色主题'
-      },
-      {
-        value: 'custom' as ThemeType,
-        label: '自定义主题',
-        icon: 'Setting',
-        description: '个性化自定义样式'
-      },
-      {
-        value: 'glassmorphism' as ThemeType,
-        label: '玻璃态主题',
-        icon: 'Picture',
-        description: '现代玻璃态效果'
-      },
-      {
-        value: 'cyberpunk' as ThemeType,
-        label: '赛博朋克',
-        icon: 'Picture',
-        description: '未来科技风格'
-      },
-      {
-        value: 'nature' as ThemeType,
-        label: '自然森林',
-        icon: 'Picture',
-        description: '清新自然风格'
-      },
-      {
-        value: 'ocean' as ThemeType,
-        label: '深海海洋',
-        icon: 'Picture',
-        description: '深邃海洋风格'
-      },
-      {
-        value: 'sunset' as ThemeType,
-        label: '夕阳余晖',
-        icon: 'Picture',
-        description: '温暖夕阳风格'
-      },
-      {
-        value: 'midnight' as ThemeType,
-        label: '午夜星空',
-        icon: 'Picture',
-        description: '神秘星空风格'
       }
     ])
     
@@ -110,14 +68,7 @@ export default defineComponent({
     const getThemeIcon = (theme: ThemeType) => {
       const themeMap = {
         default: 'Sunny',
-        dark: 'Moon',
-        custom: 'Setting',
-        glassmorphism: 'Picture',
-        cyberpunk: 'Picture',
-        nature: 'Picture',
-        ocean: 'Picture',
-        sunset: 'Picture',
-        midnight: 'Picture'
+        dark: 'Moon'
       }
       return themeMap[theme] || 'Sunny'
     }
@@ -187,12 +138,13 @@ export default defineComponent({
 
 /* ===== 主题下拉菜单样式 ===== */
 :deep(.theme-dropdown) {
-  min-max-width: 200px; width: 100%;
+  min-width: 200px; width: 100%;
   padding: var(--spacing-sm);
-  background: var(--bg-elevated);
-  border: var(--border-width) solid var(--border-primary);
-  border-radius: var(--text-sm);
-  box-shadow: 0 var(--spacing-sm) var(--text-3xl) var(--shadow-medium);
+  background: var(--el-bg-color-overlay, #ffffff) !important;
+  border: 1px solid var(--el-border-color-light, var(--border-color)) !important;
+  border-radius: var(--radius-lg, 8px);
+  box-shadow: var(--el-box-shadow-light, var(--shadow-lg));
+  z-index: 3001;
 }
 
 :deep(.theme-option) {
@@ -202,18 +154,18 @@ export default defineComponent({
   transition: all var(--transition-normal) ease;
   
   &:hover {
-    background-color: var(--bg-tertiary);
+    background-color: var(--el-fill-color-light, #f5f7fa);
     transform: translateX(var(--spacing-xs));
   }
   
   &.is-active {
-    background-color: var(--primary-color);
-    color: var(--text-on-primary);
+    background-color: var(--el-color-primary-light-9, var(--primary-color));
+    color: var(--el-color-primary, var(--primary-color));
     
     .theme-option-content {
-      .theme-icon,
       .theme-label {
-        color: var(--text-on-primary);
+        font-weight: 600;
+        color: var(--el-color-primary, var(--primary-color));
       }
     }
   }
@@ -222,29 +174,21 @@ export default defineComponent({
 .theme-option-content {
   display: flex;
   align-items: center;
-  gap: var(--text-sm);
-  padding: var(--text-sm) var(--text-lg);
+  gap: var(--spacing-sm);
+  padding: 8px 16px;
   width: 100%;
-  
-  .theme-icon {
-    font-size: var(--text-xl);
-    color: var(--text-secondary);
-    transition: color 0.3s ease;
-  }
   
   .theme-label {
     flex: 1;
     font-size: var(--text-base);
-    font-weight: 500;
-    color: var(--text-primary);
-    transition: color 0.3s ease;
+    color: var(--el-text-color-primary, var(--text-primary));
   }
   
   .theme-preview {
-    width: var(--spacing-xl);
-    height: var(--spacing-xl);
-    border-radius: var(--radius-full);
-    border: 2px solid var(--border-secondary);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--el-border-color-lighter);
     transition: all var(--transition-normal) ease;
     
     &.preview-default {
@@ -339,7 +283,7 @@ export default defineComponent({
 }
 
 /* ===== 暗黑主题特殊样式 ===== */
-[data-theme="dark"] {
+:global(html[data-theme="dark"]) {
   .theme-switcher {
     .theme-toggle-btn {
       background-color: var(--gray-800);
@@ -353,28 +297,16 @@ export default defineComponent({
       }
     }
   }
-  
-  :deep(.theme-dropdown) {
-    background: var(--gray-800);
-    border-color: var(--gray-600);
-    box-shadow: 0 var(--spacing-sm) var(--text-3xl) var(--shadow-heavy);
-  }
-  
-  :deep(.theme-option) {
-    &:hover {
-      background-color: var(--gray-700);
-    }
-  }
-  
-  .theme-option-content {
-    .theme-icon {
-      color: var(--gray-400);
-    }
-    
-    .theme-label {
-      color: var(--gray-200);
-    }
-  }
+}
+
+/* 下拉菜单样式不需要放在 html[data-theme="dark"] 下，因为它就在 body 下且使用了设计令牌 */
+:deep(.theme-dropdown) {
+  min-width: 200px; width: 100%;
+  padding: var(--spacing-sm);
+  background: var(--bg-elevated, var(--bg-card));
+  border: var(--border-width) solid var(--border-primary);
+  border-radius: var(--text-sm);
+  box-shadow: 0 var(--spacing-sm) var(--text-3xl) var(--shadow-heavy);
 }
 
 /* ===== 可访问性增强 / Accessibility ===== */

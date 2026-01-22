@@ -523,7 +523,7 @@ const playVoice = (type: string) => {
 
 .space-treasure-game {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-page) 50%, var(--bg-tertiary) 100%);
   padding: var(--spacing-lg);
   position: relative;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
@@ -624,7 +624,7 @@ const playVoice = (type: string) => {
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-2xl);
   overflow: hidden;
-  background: var(--bg-primary);
+  background: var(--bg-page);
   box-shadow: 0 var(--spacing-sm) var(--spacing-3xl) var(--color-primary-500),
               inset 0 0 var(--spacing-5xl) var(--color-primary-500);
   margin-bottom: var(--spacing-xl);

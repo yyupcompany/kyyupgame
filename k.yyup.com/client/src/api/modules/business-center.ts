@@ -199,7 +199,8 @@ export class BusinessCenterService {
    */
   static async getTimeline(): Promise<TimelineItem[]> {
     try {
-      const response = await request.get(BUSINESS_CENTER_ENDPOINTS.TIMELINE)
+      // 业务中心聚合数据可能较慢：单独放宽超时，避免误判为“端点不对齐”
+      const response = await request.get(BUSINESS_CENTER_ENDPOINTS.TIMELINE, { timeout: 30000 })
       return response.data.timelineItems
     } catch (error) {
       console.error('获取业务流程时间线数据失败:', error)
@@ -212,7 +213,8 @@ export class BusinessCenterService {
    */
   static async getEnrollmentProgress(): Promise<EnrollmentProgress> {
     try {
-      const response = await request.get(BUSINESS_CENTER_ENDPOINTS.ENROLLMENT_PROGRESS)
+      // 业务中心聚合数据可能较慢：单独放宽超时，避免误判为“端点不对齐”
+      const response = await request.get(BUSINESS_CENTER_ENDPOINTS.ENROLLMENT_PROGRESS, { timeout: 30000 })
       return response.data
     } catch (error) {
       console.error('获取招生进度数据失败:', error)

@@ -16,7 +16,7 @@ import type {
  */
 interface User {
   id: string | number;
-  username: string;
+  username?: string;
   email?: string;
   realName?: string;
   phone?: string;
@@ -27,7 +27,7 @@ interface User {
     code: string;
   }>;
   permissions?: string[];
-  status?: number;
+  status?: number | string;
 }
 
 /**
@@ -36,7 +36,7 @@ interface User {
 interface Tenant {
   tenantCode: string;
   tenantName: string;
-  domain: string;
+  domain?: string;
   hasAccount: boolean;
   role?: string;
   lastLoginAt?: string;
@@ -156,10 +156,11 @@ export const useAuthStore = defineStore('auth', {
 
           // 处理租户信息
           if (tenantInfo) {
+            const tenantDomain = (tenantInfo as { domain?: string }).domain;
             this.currentTenant = {
               tenantCode: tenantInfo.tenantCode,
               tenantName: tenantInfo.tenantName,
-              domain: tenantInfo.domain,
+              domain: tenantDomain,
               hasAccount: true,
               status: 'active',
               loginCount: 1
@@ -190,7 +191,8 @@ export const useAuthStore = defineStore('auth', {
           }
 
           // 成功提示
-          const welcomeMessage = response.message || `欢迎，${user.username}！`;
+          const displayName = user.username || user.realName || user.phone || '用户';
+          const welcomeMessage = response.message || `欢迎，${displayName}！`;
           ElMessage.success(welcomeMessage);
 
           return response;

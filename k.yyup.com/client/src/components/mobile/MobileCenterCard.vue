@@ -227,16 +227,16 @@ onMounted(() => {
 .mobile-center-card {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: var(--center-card-bg);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--center-card-border);
-  box-shadow: var(--center-card-shadow);
+  gap: var(--spacing-md, 16px);
+  padding: var(--spacing-md, 16px);
+  background: #ffffff;
+  border-radius: var(--radius-lg, 12px);
+  border: 1px solid #e4e7ed;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: all var(--center-card-transition) var(--transition-timing-ease);
+  transition: all 200ms ease;
 
   // 入场动画
   animation: fadeInUp 300ms ease-out backwards;
@@ -309,16 +309,16 @@ onMounted(() => {
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-md, 8px);
   flex-shrink: 0;
-  transition: all var(--center-card-transition) var(--transition-timing-ease);
+  transition: all 200ms ease;
+  // 使用点缀色作为背景
+  background-color: color-mix(in srgb, var(--center-accent-color, #5b8def) 15%, transparent);
 
-  // 图标背景渐变
-  background: linear-gradient(
-    135deg,
-    var(--center-accent-color) 0%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
+  // 确保图标可见
+  svg, .unified-icon {
+    color: var(--center-accent-color, #5b8def) !important;
+  }
 }
 
 // ==================== 中心信息 ====================
@@ -334,7 +334,7 @@ onMounted(() => {
 .center-name {
   font-size: var(--text-base, 16px);
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--text-primary, #2c3e50);
   line-height: 1.3;
   margin: 0;
   overflow: hidden;
@@ -344,7 +344,7 @@ onMounted(() => {
 
 .center-description {
   font-size: var(--text-sm, 14px);
-  color: var(--text-secondary);
+  color: var(--text-secondary, #8492a6);
   line-height: 1.4;
   margin: 0;
   overflow: hidden;
@@ -441,8 +441,8 @@ onMounted(() => {
 
 [data-theme='dark'] {
   .mobile-center-card {
-    background: var(--bg-card-dark, #1a1625);
-    border: 1px solid var(--border-color-dark, #2a2635);
+    background: #1e293b;
+    border: 1px solid #334155;
 
     &:hover {
       border-color: var(--center-accent-color);
@@ -451,11 +451,11 @@ onMounted(() => {
   }
 
   .center-name {
-    color: var(--text-primary-dark, #f8fafc);
+    color: #f1f5f9;
   }
 
   .center-description {
-    color: var(--text-secondary-dark, #94a3b8);
+    color: #94a3b8;
   }
 
   .ripple-effect {

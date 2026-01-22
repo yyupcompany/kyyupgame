@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="数据分析中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileCenterLayout title="数据分析中心" back-path="/mobile/centers">
     <template #header-extra>
       <van-icon name="replay" size="18" @click="refreshData" :loading="loading" />
     </template>
@@ -239,14 +234,14 @@
         </div>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { centersAPI } from '@/api/modules/centers'
 
 const router = useRouter()
@@ -428,6 +423,12 @@ const formatNumber = (num: number): string => {
 
 // 页面挂载时加载数据
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadData()
 })
 </script>

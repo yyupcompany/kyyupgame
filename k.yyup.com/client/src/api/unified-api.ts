@@ -5,7 +5,7 @@
  * 包含统一的错误处理、请求拦截、响应格式化等功能
  */
 
-import { request } from '@/utils/request'
+import request from '@/utils/request'
 import { ElMessage } from 'element-plus'
 
 // 统一的API响应接口
@@ -50,7 +50,7 @@ export class UnifiedApiClient {
    */
   async get<T>(url: string, params?: any): Promise<UnifiedApiResponse<T>> {
     try {
-      const response = await request({
+      const response = await request.request({
         method: 'GET',
         url: `${this.baseURL}${url}`,
         params
@@ -66,7 +66,7 @@ export class UnifiedApiClient {
    */
   async post<T>(url: string, data?: any): Promise<UnifiedApiResponse<T>> {
     try {
-      const response = await request({
+      const response = await request.request({
         method: 'POST',
         url: `${this.baseURL}${url}`,
         data
@@ -82,7 +82,7 @@ export class UnifiedApiClient {
    */
   async put<T>(url: string, data?: any): Promise<UnifiedApiResponse<T>> {
     try {
-      const response = await request({
+      const response = await request.request({
         method: 'PUT',
         url: `${this.baseURL}${url}`,
         data
@@ -98,7 +98,7 @@ export class UnifiedApiClient {
    */
   async delete<T>(url: string): Promise<UnifiedApiResponse<T>> {
     try {
-      const response = await request({
+      const response = await request.request({
         method: 'DELETE',
         url: `${this.baseURL}${url}`
       })
@@ -122,7 +122,7 @@ export class UnifiedApiClient {
         })
       }
 
-      const response = await request({
+      const response = await request.request({
         method: 'POST',
         url: `${this.baseURL}${url}`,
         data: formData,
@@ -153,7 +153,7 @@ export class UnifiedApiClient {
    * 统一的错误处理
    */
   private handleError(error: any, defaultMessage: string): UnifiedApiResponse {
-    frontendLogger.error('API请求错误:', error)
+    console.error('API请求错误:', error)
 
     const message = error?.response?.data?.message ||
                    error?.message ||

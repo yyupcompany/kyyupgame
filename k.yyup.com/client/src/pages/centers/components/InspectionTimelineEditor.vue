@@ -939,7 +939,7 @@ const handleClose = () => {
         position: relative;
 
         &.current-month {
-          background: var(--bg-color);
+          background: var(--bg-card);
         }
 
         &:not(.current-month) {

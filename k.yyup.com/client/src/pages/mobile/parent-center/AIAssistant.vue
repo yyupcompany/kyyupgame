@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="AI智能助手"
-    :show-back="true"
-    :show-footer="false"
-    content-padding="0"
-  >
+  <MobileSubPageLayout title="AI智能助手" back-path="/mobile/parent-center">
     <div class="mobile-ai-assistant">
       <!-- AI助手特性介绍 -->
       <div class="ai-features">
@@ -238,7 +233,7 @@
         />
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -529,6 +524,12 @@ const onStyleConfirm = (value: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   const context = createLogContext('onMounted')
   CallingLogger.logInfo(context, '移动端AI助手页面挂载完成')
 

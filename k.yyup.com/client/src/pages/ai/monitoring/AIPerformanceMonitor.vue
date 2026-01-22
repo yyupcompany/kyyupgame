@@ -554,7 +554,7 @@ onUnmounted(() => {
 
 .ai-performance-monitor {
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   min-height: 100vh;
 
   .monitor-header {
@@ -730,7 +730,7 @@ onUnmounted(() => {
             justify-content: space-between;
             align-items: center;
             padding: var(--spacing-xs);
-            background: var(--bg-color);
+            background: var(--bg-card);
             border-radius: var(--border-radius-sm);
 
             .metric-label {
@@ -751,7 +751,7 @@ onUnmounted(() => {
 
         .model-chart {
           min-height: 60px; height: auto;
-          background: var(--bg-color);
+          background: var(--bg-card);
           border-radius: var(--border-radius-sm);
           display: flex;
           align-items: center;

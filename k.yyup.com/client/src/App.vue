@@ -37,17 +37,17 @@ html, body, #app {
 
 /* 主题背景色设置 */
 html, body {
-  background-color: var(--el-bg-color-page);
+  background-color: var(--bg-color-page, var(--el-bg-color-page, #f7f8fa));
 }
 
 #app {
-  background-color: var(--el-bg-color-page);
+  background-color: var(--bg-color-page, var(--el-bg-color-page, #f7f8fa));
 }
 
 .app-root {
   height: 100%;
   width: 100%;
-  background-color: var(--el-bg-color-page);
+  background-color: var(--bg-color-page, var(--el-bg-color-page, #f7f8fa));
 }
 
 /* 登录页：禁用全局背景，交给自定义容器渲染 */

@@ -1,32 +1,5 @@
 <template>
   <div class="page-container parent-center-container">
-    <!-- 欢迎信息区域 -->
-    <div class="welcome-section">
-      <app-card>
-        <app-card-content>
-          <div class="welcome-content">
-            <div class="welcome-avatar">
-              <el-avatar :size="80" :src="parentAvatar">
-                <template #error>
-                  <UnifiedIcon name="User" size="40" />
-                </template>
-              </el-avatar>
-            </div>
-            <div class="welcome-info">
-              <h1 class="welcome-title">欢迎回来，{{ parentName }}</h1>
-              <p class="welcome-subtitle">孩子的成长，我们一起守护</p>
-            </div>
-            <div class="welcome-actions">
-              <el-button type="primary" @click="goToProfile">
-                <UnifiedIcon name="Setting" />
-                个人设置
-              </el-button>
-            </div>
-          </div>
-        </app-card-content>
-      </app-card>
-    </div>
-
     <!-- 统计概览 -->
     <div class="stats-section">
       <app-card>
@@ -323,11 +296,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import {
-  User, Document, Calendar, Bell, DataBoard, Setting, Plus,
-  ArrowRight, Edit, Like, ChatLineRound, Star, Bulb, Clock
-} from '@element-plus/icons-vue'
-import UnifiedIcon from '@/components/common/UnifiedIcon.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import { useUserStore } from '@/stores/user'
 
 interface Child {

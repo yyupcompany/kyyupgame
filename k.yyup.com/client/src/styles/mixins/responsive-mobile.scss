@@ -1,0 +1,583 @@
+/**
+ * 移动端响应式样式 Mixin
+ *
+ * 为移动端页面提供统一的响应式设计支持
+ * 参考设计令牌: client/src/config/design-tokens.ts
+ *
+ * 使用方法:
+ * @import '@/styles/mixins/responsive-mobile.scss';
+ *
+ * .my-component {
+ *   @include mobile-layout;
+ *   @include mobile-card;
+ *   @include mobile-button;
+ * }
+ */
+
+// ==================== 断点定义 ====================
+// 基于设计令牌的响应式断点
+$mobile-xs: 320px;   // 小屏手机 (iPhone SE, iPhone 5/5s)
+$mobile-sm: 375px;   // 标准手机 (iPhone 6/7/8, iPhone X)
+$mobile-md: 414px;   // 大屏手机 (iPhone 6/7/8 Plus, iPhone 14 Pro Max)
+$mobile-lg: 768px;   // 平板 (iPad, iPad Mini)
+$mobile-xl: 1024px;  // 大平板 (iPad Pro)
+
+// ==================== 媒体查询 Mixins ====================
+
+// 小屏手机 (默认移动优先)
+@mixin mobile-xs {
+  @media (min-width: $mobile-xs) {
+    @content;
+  }
+}
+
+// 标准手机及以上
+@mixin mobile-sm {
+  @media (min-width: $mobile-sm) {
+    @content;
+  }
+}
+
+// 大屏手机及以上
+@mixin mobile-md {
+  @media (min-width: $mobile-md) {
+    @content;
+  }
+}
+
+// 平板及以上
+@mixin mobile-lg {
+  @media (min-width: $mobile-lg) {
+    @content;
+  }
+}
+
+// 大平板及以上
+@mixin mobile-xl {
+  @media (min-width: $mobile-xl) {
+    @content;
+  }
+}
+
+// 仅移动设备 (排除平板)
+@mixin mobile-only {
+  @media (max-width: $mobile-lg - 1px) {
+    @content;
+  }
+}
+
+// 仅平板设备
+@mixin tablet-only {
+  @media (min-width: $mobile-lg) and (max-width: $mobile-xl - 1px) {
+    @content;
+  }
+}
+
+// 横屏模式
+@mixin landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+// 竖屏模式
+@mixin portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+// ==================== 布局 Mixins ====================
+
+// 移动端基础布局
+@mixin mobile-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+
+  // 平板设备上增加内边距
+  @include mobile-lg {
+    padding: 0 20px;
+  }
+}
+
+// 响应式容器
+@mixin mobile-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 12px;
+
+  @include mobile-sm {
+    padding: 0 16px;
+  }
+
+  @include mobile-md {
+    padding: 0 20px;
+  }
+
+  @include mobile-lg {
+    max-width: 768px;
+    padding: 0 24px;
+  }
+}
+
+// 响应式网格布局
+@mixin mobile-grid($columns: 2, $gap: 12px) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+
+  @include mobile-xs {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @include mobile-sm {
+    grid-template-columns: repeat($columns, 1fr);
+  }
+
+  @include mobile-md {
+    grid-template-columns: repeat($columns + 1, 1fr);
+  }
+
+  @include mobile-lg {
+    grid-template-columns: repeat($columns + 2, 1fr);
+    gap: $gap * 1.5;
+  }
+}
+
+// ==================== 组件 Mixins ====================
+
+// 移动端卡片
+@mixin mobile-card {
+  background: var(--van-background-2, #fff);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+  @include mobile-sm {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  @include mobile-lg {
+    padding: 24px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+  }
+}
+
+// 移动端按钮
+@mixin mobile-button {
+  width: 100%;
+  height: 48px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  @include mobile-sm {
+    height: 52px;
+    font-size: 17px;
+  }
+
+  @include mobile-lg {
+    height: 56px;
+    font-size: 18px;
+    border-radius: 28px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// 移动端列表项
+@mixin mobile-list-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--van-background-2, #fff);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+
+  @include mobile-sm {
+    padding: 16px 20px;
+    margin-bottom: 10px;
+  }
+
+  @include mobile-lg {
+    padding: 18px 24px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+  }
+
+  &:active {
+    background: var(--van-gray-1, #f7f8fa);
+    transform: scale(0.99);
+  }
+}
+
+// 移动端标题
+@mixin mobile-title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 12px;
+
+  @include mobile-sm {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  @include mobile-md {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  @include mobile-lg {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+}
+
+// 移动端文本
+@mixin mobile-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--van-text-color, #323233);
+
+  @include mobile-sm {
+    font-size: 15px;
+  }
+
+  @include mobile-md {
+    font-size: 16px;
+  }
+
+  @include mobile-lg {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+}
+
+// 移动端图标
+@mixin mobile-icon {
+  font-size: 20px;
+
+  @include mobile-sm {
+    font-size: 22px;
+  }
+
+  @include mobile-md {
+    font-size: 24px;
+  }
+
+  @include mobile-lg {
+    font-size: 26px;
+  }
+}
+
+// ==================== 间距 Mixins ====================
+
+// 响应式内边距
+@mixin mobile-padding($top: 12px, $right: null, $bottom: null, $left: null) {
+  $padding-mobile: $top;
+  $padding-tablet: if($right == null, $top, $top $right);
+  $padding-desktop: if($bottom == null, $padding-tablet, $top $right $bottom);
+  $padding-all: if($left == null, $padding-desktop, $top $right $bottom $left);
+
+  padding: $padding-all;
+
+  @include mobile-sm {
+    padding: if($right == null, $top * 1.25, $padding-all);
+  }
+
+  @include mobile-md {
+    padding: if($right == null, $top * 1.5, $padding-all);
+  }
+
+  @include mobile-lg {
+    padding: if($right == null, $top * 1.75, $padding-all);
+  }
+}
+
+// 响应式外边距
+@mixin mobile-margin($top: 12px, $right: null, $bottom: null, $left: null) {
+  $margin-mobile: $top;
+  $margin-tablet: if($right == null, $top, $top $right);
+  $margin-desktop: if($bottom == null, $margin-tablet, $top $right $bottom);
+  $margin-all: if($left == null, $margin-desktop, $top $right $bottom $left);
+
+  margin: $margin-all;
+
+  @include mobile-sm {
+    margin: if($right == null, $top * 1.25, $margin-all);
+  }
+
+  @include mobile-md {
+    margin: if($right == null, $top * 1.5, $margin-all);
+  }
+
+  @include mobile-lg {
+    margin: if($right == null, $top * 1.75, $margin-all);
+  }
+}
+
+// ==================== Flexbox Mixins ====================
+
+// 响应式 Flex 容器
+@mixin mobile-flex($direction: column, $justify: flex-start, $align: stretch, $gap: 12px) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+
+  @include mobile-sm {
+    gap: $gap * 1.25;
+  }
+
+  @include mobile-md {
+    gap: $gap * 1.5;
+  }
+
+  @include mobile-lg {
+    gap: $gap * 1.75;
+  }
+}
+
+// ==================== 实用工具 Mixins ====================
+
+// 隐藏在移动设备上
+@mixin hide-on-mobile {
+  display: none;
+
+  @include mobile-lg {
+    display: block;
+  }
+}
+
+// 仅在移动设备上显示
+@mixin show-on-mobile {
+  display: block;
+
+  @include mobile-lg {
+    display: none;
+  }
+}
+
+// 响应式字体大小
+@mixin responsive-font($min: 14px, $max: 18px) {
+  font-size: $min;
+
+  @include mobile-sm {
+    font-size: $min + (($max - $min) * 0.25);
+  }
+
+  @include mobile-md {
+    font-size: $min + (($max - $min) * 0.5);
+  }
+
+  @include mobile-lg {
+    font-size: $min + (($max - $min) * 0.75);
+  }
+
+  @include mobile-xl {
+    font-size: $max;
+  }
+}
+
+// 响应式圆角
+@mixin responsive-radius($mobile: 12px, $tablet: 16px, $desktop: 20px) {
+  border-radius: $mobile;
+
+  @include mobile-lg {
+    border-radius: $tablet;
+  }
+
+  @include mobile-xl {
+    border-radius: $desktop;
+  }
+}
+
+// 响应式阴影
+@mixin responsive-shadow($opacity: 0.1) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, $opacity);
+
+  @include mobile-lg {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, $opacity);
+  }
+
+  @include mobile-xl {
+    box-shadow: 0 6px 24px rgba(0, 0, 0, $opacity);
+  }
+}
+
+// ==================== 特殊场景 Mixins ====================
+
+// 固定底部按钮栏
+@mixin fixed-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--van-background-2, #fff);
+  border-top: 1px solid var(--van-gray-2, #ebedf0);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+
+  @include mobile-sm {
+    padding: 16px 20px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  @include mobile-lg {
+    padding: 20px 24px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+// 全屏模态框
+@mixin fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--van-background-2, #fff);
+  z-index: 9999;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include mobile-lg {
+    max-width: 768px;
+    max-height: 90vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// 下拉刷新区域
+@mixin pull-refresh-area {
+  min-height: 100vh;
+  padding-bottom: 80px;
+
+  @include mobile-sm {
+    padding-bottom: 90px;
+  }
+
+  @include mobile-lg {
+    padding-bottom: 100px;
+  }
+}
+
+// ==================== 主题适配 Mixins ====================
+
+// 暗色主题适配
+@mixin dark-theme {
+  .theme-dark & {
+    @content;
+  }
+}
+
+// 亮色主题适配
+@mixin light-theme {
+  .theme-light & {
+    @content;
+  }
+}
+
+// 自定义主题适配
+@mixin theme-aware($key, $color) {
+  @each $theme-name, $theme-color in $color {
+    .theme-#{$theme-name} & {
+      #{$key}: $theme-color;
+    }
+  }
+}
+
+// ==================== 动画 Mixins ====================
+
+// 移动端过渡动画
+@mixin mobile-transition($property: all, $duration: 0.3s, $easing: ease) {
+  transition: $property $duration $easing;
+
+  @include mobile-lg {
+    transition-duration: $duration * 0.8;
+  }
+}
+
+// 点击反馈动画
+@mixin tap-feedback {
+  transition: transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+// 加载动画
+@mixin loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--van-gray-3, #dcdee0);
+  border-top-color: var(--primary-color, #409eff);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+
+  @include mobile-sm {
+    width: 24px;
+    height: 24px;
+  }
+
+  @include mobile-md {
+    width: 28px;
+    height: 28px;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+// ==================== 文本处理 Mixins ====================
+
+// 文本截断
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 多行文本截断
+@mixin text-ellipsis-multiline($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 响应式多行文本截断
+@mixin responsive-text-ellipsis($lines-mobile: 2, $lines-tablet: 3, $lines-desktop: 4) {
+  @include text-ellipsis-multiline($lines-mobile);
+
+  @include mobile-lg {
+    -webkit-line-clamp: $lines-tablet;
+  }
+
+  @include mobile-xl {
+    -webkit-line-clamp: $lines-desktop;
+  }
+}

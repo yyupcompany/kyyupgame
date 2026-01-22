@@ -1,0 +1,103 @@
+/**
+ * 统一卡片网格布局（轻量版）
+ * 用于修复各中心页面的 stats/charts/actions 网格排版
+ */
+
+@use '../design-tokens.scss' as *;
+
+/* 统计卡片网格 - 默认 4 列 */
+.stats-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+
+  @media (max-width: var(--breakpoint-xl)) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: var(--breakpoint-lg)) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+/* 图表卡片网格 - 默认 2 列 */
+.charts-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+
+  @media (max-width: var(--breakpoint-lg)) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: var(--breakpoint-md)) {
+    gap: var(--spacing-md);
+  }
+}
+
+/* 操作/快捷入口网格 */
+.actions-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+
+  @media (max-width: var(--breakpoint-md)) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+}
+
+/* 中心概览网格 */
+.center-overview-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+
+  @media (max-width: 1399px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (max-width: 1099px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 799px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 499px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 仪表板网格 */
+.dashboard-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+
+  @media (max-width: 1199px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 899px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 599px) {
+    grid-template-columns: 1fr;
+  }
+}
+

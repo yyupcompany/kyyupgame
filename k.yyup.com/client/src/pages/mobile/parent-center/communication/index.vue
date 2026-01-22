@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="家园沟通"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="家园沟通" back-path="/mobile/parent-center">
     <div class="communication-page">
       <!-- 搜索栏 -->
       <van-search
@@ -90,12 +85,12 @@
 
       <van-back-top right="20" bottom="80" />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast, showLoadingToast, closeToast } from 'vant'
 import { request } from '@/utils/request'
 import { NOTIFICATION_ENDPOINTS } from '@/api/endpoints'
@@ -264,6 +259,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
 @import '@/styles/mobile-base.scss';
 
 .communication-page {

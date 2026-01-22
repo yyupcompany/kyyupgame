@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="孩子管理"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="孩子管理" back-path="/mobile/parent-center">
     <!-- 搜索和筛选区域 -->
     <div class="search-filter-section">
       <van-search
@@ -332,7 +327,7 @@
       icon="plus"
       @click="handleAddChild"
     />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -343,7 +338,7 @@ import { showToast, showLoadingToast, closeToast } from 'vant'
 import { STUDENT_ENDPOINTS, PARENT_ENDPOINTS } from '@/api/endpoints'
 import { request } from '@/utils/request'
 import type { ApiResponse } from '@/api/endpoints'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface Parent {
   id: number
@@ -400,29 +395,8 @@ const currentChild = ref<Child | null>(null)
 const showEvaluationDetail = ref(false)
 const currentEvaluation = ref<Evaluation | null>(null)
 
-// 孩子数据
-const children = ref<Child[]>([
-  {
-    id: 1,
-    name: '李小红',
-    gender: '女',
-    age: 5,
-    birthday: '2018-07-20',
-    className: '大班-星星',
-    enrollmentDate: '2020-09-01',
-    avatar: '',
-    parents: [
-      { id: 3, name: '李明', relation: '父亲', phone: '13765432198' },
-      { id: 4, name: '赵芳', relation: '母亲', phone: '13876543210' }
-    ],
-    healthRecords: [
-      { id: 3, date: '2023-05-15', type: '体检', description: '身高115cm，体重22kg，视力正常', recorder: '王医生' }
-    ],
-    evaluations: [
-      { id: 3, date: '2023-05-20', title: '五月月度评价', teacher: '王老师', content: '小红表现出色，尤其在艺术创作方面有很强的天赋。能自主完成手工制作，并乐于展示自己的作品。建议家长提供更多绘画材料，支持其创作兴趣。' }
-    ]
-  }
-])
+// 孩子数据 - 初始化为空数组，从API加载
+const children = ref<Child[]>([])
 
 // 默认头像
 const defaultAvatar = '/src/assets/logo.png'
@@ -433,15 +407,15 @@ const filteredChildren = computed(() => {
 
   // 按班级筛选
   if (childStatus.value) {
-    result = result.filter(child => child.className.includes(childStatus.value))
+    result = result.filter(child => (child.className || '').includes(childStatus.value))
   }
 
   // 按搜索文本筛选
   if (searchText.value) {
     const searchLower = searchText.value.toLowerCase()
     result = result.filter(child =>
-      child.name.toLowerCase().includes(searchLower) ||
-      child.className.toLowerCase().includes(searchLower)
+      (child.name || '').toLowerCase().includes(searchLower) ||
+      (child.className || '').toLowerCase().includes(searchLower)
     )
   }
 
@@ -460,7 +434,8 @@ const showCardView = computed(() => {
 })
 
 // 获取班级对应的类型
-const getClassType = (className: string): "primary" | "success" | "warning" | "danger" => {
+const getClassType = (className: string | null | undefined): "primary" | "success" | "warning" | "danger" => {
+  if (!className) return 'primary'
   if (className.includes('小班')) {
     return 'primary'
   } else if (className.includes('中班')) {
@@ -468,7 +443,7 @@ const getClassType = (className: string): "primary" | "success" | "warning" | "d
   } else if (className.includes('大班')) {
     return 'warning'
   }
-  return 'default'
+  return 'primary'
 }
 
 // 获取健康记录类型对应的类型
@@ -516,11 +491,13 @@ const onLoad = () => {
 
 // 编辑孩子信息
 const handleEditChild = (child: Child) => {
+  showToast('正在跳转到编辑页面...')
   router.push(`/mobile/parent-center/children/edit/${child.id}`)
 }
 
 // 添加孩子
 const handleAddChild = () => {
+  showToast('正在跳转到添加孩子页面...')
   router.push('/mobile/parent-center/children/add')
 }
 
@@ -540,7 +517,12 @@ const handleViewParent = (parent: Parent) => {
 // 查看孩子详情
 const handleViewChild = async (child: Child) => {
   try {
-    showLoadingToast('加载中...')
+    console.log('[孩子管理] 查看孩子详情:', child.name)
+    showLoadingToast({
+      message: '加载中...',
+      forbidClick: true,
+      duration: 0
+    })
 
     const response: ApiResponse = await request.get(STUDENT_ENDPOINTS.GET_BY_ID(child.id))
 
@@ -557,14 +539,15 @@ const handleViewChild = async (child: Child) => {
 
       currentChild.value = response.data
       showChildDetail.value = true
+      closeToast()
     } else {
+      closeToast()
       showToast(response.message || '获取孩子详情失败')
     }
   } catch (error) {
     console.error('获取孩子详情失败:', error)
-    showToast('获取孩子详情失败')
-  } finally {
     closeToast()
+    showToast('获取孩子详情失败')
   }
 }
 
@@ -640,6 +623,12 @@ const fetchData = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   fetchData()
 })
 </script>

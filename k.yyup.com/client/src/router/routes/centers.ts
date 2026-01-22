@@ -35,8 +35,9 @@ const InspectionCenter = () => import('@/pages/centers/InspectionCenter.vue')
 const BusinessCenter = () => import('@/pages/centers/BusinessCenter.vue')
 const FinanceCenter = () => import('@/pages/centers/FinanceCenter.vue')
 const CallCenter = () => import('@/pages/centers/CallCenter.vue')
+// 保留旧的教学中心作为备份
 const TeachingCenter = () => import('@/pages/centers/TeachingCenter.vue')
-const MediaCenter = () => import('@/pages/centers/MediaCenter.vue')
+const MediaCenter = () => import('@/pages/centers/PhotoAlbumCenter.vue')
 const AttendanceCenter = () => import('@/pages/centers/AttendanceCenter.vue')
 const AssessmentCenter = () => import('@/pages/centers/AssessmentCenter.vue')
 const DocumentCollaboration = () => import('@/pages/centers/DocumentCollaboration.vue')
@@ -46,6 +47,9 @@ const DocumentTemplateCenter = () => import('@/pages/centers/DocumentTemplateCen
 const DocumentInstanceList = () => import('@/pages/centers/DocumentInstanceList.vue')
 const DocumentStatistics = () => import('@/pages/centers/DocumentStatistics.vue')
 const UsageCenter = () => import('@/pages/centers/UsageCenter.vue')
+const GrowthRecordsCenter = () => import('@/pages/centers/GrowthRecordsCenter.vue')
+const CommunicationCenter = () => import('@/pages/parent-center/communication/smart-hub.vue')
+const ScriptCenter = () => import('@/pages/centers/ScriptCenter.vue')
 
 export const centersRoutes: RouteRecordRaw[] = [
   // 🔧 修复：所有中心页面路由都应该嵌套在 MainLayout 中
@@ -247,11 +251,11 @@ export const centersRoutes: RouteRecordRaw[] = [
         }
       },
 
-      // 中心化页面 - 教学中心
+      // 中心化页面 - 教学中心（目前使用旧的TeachingCenter，新的AdminTeachingCenter待修复）
       {
         path: 'teaching',
         name: 'TeachingCenter',
-        component: TeachingCenter,
+        component: () => import('@/pages/centers/TeachingCenter.vue'),
         meta: {
           title: '教学中心',
           requiresAuth: true,
@@ -436,6 +440,51 @@ export const centersRoutes: RouteRecordRaw[] = [
           priority: 'medium',
           icon: 'TrendCharts',
           description: '系统用量统计、资源监控、使用分析'
+        }
+      },
+
+      // 中心化页面 - 成长档案中心
+      {
+        path: 'growth-records',
+        name: 'GrowthRecordsCenter',
+        component: GrowthRecordsCenter,
+        meta: {
+          title: '成长档案中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'TrendCharts',
+          description: '学生身高、体重、体能等成长数据管理，包含成长曲线、评估报告、同龄对比等功能'
+        }
+      },
+
+      // 中心化页面 - 沟通中心
+      {
+        path: 'communication',
+        name: 'CommunicationCenter',
+        component: CommunicationCenter,
+        meta: {
+          title: '沟通中心',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'high',
+          icon: 'ChatDotRound',
+          description: 'AI驱动的家长沟通平台，包含智能内容生成、回复建议、沟通分析等功能'
+        }
+      },
+
+      // 中心化页面 - 话术管理
+      {
+        path: 'script',
+        name: 'ScriptCenter',
+        component: ScriptCenter,
+        meta: {
+          title: '话术管理',
+          requiresAuth: true,
+          hideInMenu: false,
+          priority: 'medium',
+          icon: 'ChatDotRound',
+          description: '统一的话术管理平台，包含招生话术、电话话术、接待话术、跟进话术等功能'
         }
       },
 

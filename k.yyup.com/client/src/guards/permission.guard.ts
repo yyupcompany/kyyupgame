@@ -69,7 +69,7 @@ export function filterMenus(menus: any[], userRole: string) {
  */
 export function checkPermission(permission: string): boolean {
   const userStore = useUserStore()
-  const userRole = userStore.user?.role
+  const userRole = userStore.user?.role || 'user'
   return hasPermission(userRole, permission)
 }
 

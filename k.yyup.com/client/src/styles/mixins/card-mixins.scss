@@ -198,6 +198,7 @@
 
 @mixin card-type-primary {
   @include enhanced-card;
+  border: none;
   @include card-gradient-border(var(--card-gradient-primary));
   
   &:hover {
@@ -207,6 +208,7 @@
 
 @mixin card-type-success {
   @include enhanced-card;
+  border: none;
   @include card-gradient-border(var(--card-gradient-success));
   
   &:hover {
@@ -216,6 +218,7 @@
 
 @mixin card-type-warning {
   @include enhanced-card;
+  border: none;
   @include card-gradient-border(var(--card-gradient-warning));
   
   &:hover {
@@ -225,6 +228,7 @@
 
 @mixin card-type-danger {
   @include enhanced-card;
+  border: none;
   @include card-gradient-border(var(--card-gradient-danger));
   
   &:hover {
@@ -234,6 +238,7 @@
 
 @mixin card-type-info {
   @include enhanced-card;
+  border: none;
   @include card-gradient-border(var(--card-gradient-info));
   
   &:hover {

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="家长工作台"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="家长工作台" back-path="/mobile/parent-center">
     <!-- 统计卡片 -->
     <div class="stats-section">
       <div class="stats-grid">
@@ -171,20 +166,19 @@
     </div>
 
     <!-- 加载状态 -->
-    <van-loading v-if="loading" type="spinner" color="#1989fa" vertical>
+    <van-loading v-if="loading" type="spinner" color="var(--primary-color)" vertical>
       加载中...
     </van-loading>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { showToast } from 'vant'
-import parentApi from '@/api/modules/parent'
-import { ApiResponse } from '@/utils/request'
+import { request } from '@/utils/request'
 
 interface Child {
   id: string | number
@@ -256,31 +250,61 @@ const loadDashboardData = async () => {
 // 加载孩子数据
 const loadChildrenData = async () => {
   try {
-    // TODO: 根据当前家长ID获取孩子列表
-    // const response = await parentApi.getParentChildren(currentUser.id)
+    const parentId = userStore.userInfo?.id
+    if (!parentId) {
+      console.warn('无法获取家长ID')
+      children.value = []
+      childrenCount.value = 0
+      return
+    }
 
-    // 临时模拟数据
-    const mockChildren: Child[] = [
-      {
-        id: 1,
-        name: '张小明',
-        className: '大班一班',
-        avatar: 'https://via.placeholder.com/60',
-        age: 6,
-        status: '在园'
-      },
-      {
-        id: 2,
-        name: '张小红',
-        className: '中班二班',
-        avatar: 'https://via.placeholder.com/60',
-        age: 5,
-        status: '在园'
+    const response = await request.get('/api/students', {
+      params: {
+        parentId: parentId,
+        page: 1,
+        pageSize: 10
       }
-    ]
+    })
 
-    children.value = mockChildren
-    childrenCount.value = mockChildren.length
+    if (response.success && response.data) {
+      const data = response.data
+      let studentList: Child[] = []
+      
+      if (Array.isArray(data)) {
+        studentList = data.map((s: any) => ({
+          id: s.id,
+          name: s.name,
+          className: s.className || s.class?.name || '未分班',
+          avatar: s.avatar || '',
+          age: s.age || calculateAge(s.birthday),
+          status: s.status || '在园'
+        }))
+      } else if (data.rows && Array.isArray(data.rows)) {
+        studentList = data.rows.map((s: any) => ({
+          id: s.id,
+          name: s.name,
+          className: s.className || s.class?.name || '未分班',
+          avatar: s.avatar || '',
+          age: s.age || calculateAge(s.birthday),
+          status: s.status || '在园'
+        }))
+      } else if (data.items && Array.isArray(data.items)) {
+        studentList = data.items.map((s: any) => ({
+          id: s.id,
+          name: s.name,
+          className: s.className || s.class?.name || '未分班',
+          avatar: s.avatar || '',
+          age: s.age || calculateAge(s.birthday),
+          status: s.status || '在园'
+        }))
+      }
+      
+      children.value = studentList
+      childrenCount.value = studentList.length
+    } else {
+      children.value = []
+      childrenCount.value = 0
+    }
   } catch (error) {
     console.error('加载孩子数据失败:', error)
     children.value = []
@@ -288,20 +312,48 @@ const loadChildrenData = async () => {
   }
 }
 
+// 计算年龄
+const calculateAge = (birthday: string | null | undefined): number => {
+  if (!birthday) return 0
+  const birthDate = new Date(birthday)
+  const today = new Date()
+  let age = today.getFullYear() - birthDate.getFullYear()
+  const monthDiff = today.getMonth() - birthDate.getMonth()
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--
+  }
+  return age > 0 ? age : 0
+}
+
 // 加载活动数据
 const loadActivitiesData = async () => {
   try {
-    // TODO: 调用活动API获取最近活动
-    // const response = await activityApi.getRecentActivities()
+    const response = await request.get('/api/activities', {
+      params: {
+        page: 1,
+        pageSize: 5,
+        status: 'upcoming'
+      }
+    })
 
-    // 临时模拟数据
-    const mockActivities: Activity[] = [
-      { id: 1, title: '秋游活动', time: '2024-11-05 09:00', type: 'outdoor' },
-      { id: 2, title: '亲子运动会', time: '2024-11-10 14:00', type: 'sports' }
-    ]
-
-    recentActivities.value = mockActivities
-    activityCount.value = mockActivities.length
+    if (response.success && response.data) {
+      const data = response.data
+      let activityList: Activity[] = []
+      
+      const activities = Array.isArray(data) ? data : (data.rows || data.items || [])
+      activityList = activities.slice(0, 5).map((a: any) => ({
+        id: a.id,
+        title: a.title || a.name,
+        time: formatActivityTime(a.startTime || a.start_time),
+        type: a.type || 'general'
+      }))
+      
+      recentActivities.value = activityList
+      activityCount.value = activityList.length
+    } else {
+      recentActivities.value = []
+      activityCount.value = 0
+    }
   } catch (error) {
     console.error('加载活动数据失败:', error)
     recentActivities.value = []
@@ -309,20 +361,47 @@ const loadActivitiesData = async () => {
   }
 }
 
+// 格式化活动时间
+const formatActivityTime = (dateStr: string | null | undefined): string => {
+  if (!dateStr) return '待定'
+  try {
+    const date = new Date(dateStr)
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+  } catch {
+    return dateStr
+  }
+}
+
 // 加载通知数据
 const loadNotificationsData = async () => {
   try {
-    // TODO: 调用通知API获取最新通知
-    // const response = await notificationApi.getRecentNotifications()
+    const response = await request.get('/api/notifications', {
+      params: {
+        page: 1,
+        pageSize: 5,
+        unreadOnly: false
+      }
+    })
 
-    // 临时模拟数据
-    const mockNotifications: Notification[] = [
-      { id: 1, title: '明天停课通知', time: '2024-10-30 10:00', type: 'system', isRead: false },
-      { id: 2, title: '家长会通知', time: '2024-10-28 15:30', type: 'meeting', isRead: false }
-    ]
-
-    recentNotifications.value = mockNotifications
-    messageCount.value = mockNotifications.filter(n => !n.isRead).length
+    if (response.success && response.data) {
+      const data = response.data
+      let notificationList: Notification[] = []
+      
+      const notifications = Array.isArray(data) ? data : (data.rows || data.items || [])
+      notificationList = notifications.slice(0, 5).map((n: any) => ({
+        id: n.id,
+        title: n.title,
+        time: formatActivityTime(n.createdAt || n.created_at),
+        type: n.type || 'system',
+        isRead: n.isRead || n.is_read || false
+      }))
+      
+      recentNotifications.value = notificationList
+      messageCount.value = notificationList.filter(n => !n.isRead).length
+    } else {
+      recentNotifications.value = []
+      messageCount.value = 0
+    }
   } catch (error) {
     console.error('加载通知数据失败:', error)
     recentNotifications.value = []
@@ -333,13 +412,25 @@ const loadNotificationsData = async () => {
 // 加载统计数据
 const loadStatsData = async () => {
   try {
-    // TODO: 调用统计API获取测评记录数等统计数据
-    // const response = await statisticsApi.getParentStats()
+    const parentId = userStore.userInfo?.id
+    if (!parentId) {
+      assessmentCount.value = 0
+      return
+    }
 
-    // 临时模拟数据
-    assessmentCount.value = 5
+    // 尝试获取测评记录数
+    const response = await request.get('/api/assessments/parent-stats', {
+      params: { parentId }
+    })
+    
+    if (response.success && response.data) {
+      assessmentCount.value = response.data.totalCount || response.data.count || 0
+    } else {
+      assessmentCount.value = 0
+    }
   } catch (error) {
     console.error('加载统计数据失败:', error)
+    // 统计API可能不存在，设为0而不是显示错误
     assessmentCount.value = 0
   }
 }
@@ -383,6 +474,12 @@ const handleRefresh = async () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadDashboardData()
 })
 </script>
@@ -393,7 +490,7 @@ onMounted(() => {
 // 统计卡片区域
 .stats-section {
   background: var(--card-bg);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .stats-grid {
     display: grid;
@@ -404,8 +501,8 @@ onMounted(() => {
     .stat-card {
       position: relative;
       padding: var(--spacing-lg) 16px;
-      border-radius: 12px;
-      background: #f8f9fa;
+      border-radius: var(--spacing-md);
+      background: var(--bg-page);
       display: flex;
       align-items: center;
       gap: var(--spacing-md);
@@ -417,7 +514,7 @@ onMounted(() => {
       }
 
       &.stat-primary {
-        background: linear-gradient(135deg, #409eff 0%, #66b3ff 100%);
+        background: var(--gradient-primary);
         color: white;
         .stat-icon {
           background: rgba(255, 255, 255, 0.2);
@@ -425,7 +522,7 @@ onMounted(() => {
       }
 
       &.stat-success {
-        background: linear-gradient(135deg, #67c23a 0%, #85ce61 100%);
+        background: var(--gradient-success);
         color: white;
         .stat-icon {
           background: rgba(255, 255, 255, 0.2);
@@ -433,7 +530,7 @@ onMounted(() => {
       }
 
       &.stat-warning {
-        background: linear-gradient(135deg, #e6a23c 0%, #ebb563 100%);
+        background: linear-gradient(135deg, var(--warning-color) 0%, var(--warning-hover) 100%);
         color: white;
         .stat-icon {
           background: rgba(255, 255, 255, 0.2);
@@ -441,7 +538,7 @@ onMounted(() => {
       }
 
       &.stat-danger {
-        background: linear-gradient(135deg, #f56c6c 0%, #f78989 100%);
+        background: linear-gradient(135deg, var(--danger-color) 0%, var(--danger-hover) 100%);
         color: white;
         .stat-icon {
           background: rgba(255, 255, 255, 0.2);
@@ -451,7 +548,7 @@ onMounted(() => {
       .stat-icon {
         width: 48px;
         height: 48px;
-        border-radius: 12px;
+        border-radius: var(--spacing-md);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -463,7 +560,7 @@ onMounted(() => {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        gap: var(--spacing-xs);
 
         .stat-value {
           font-size: var(--text-2xl);
@@ -489,8 +586,8 @@ onMounted(() => {
 // 内容区域
 .content-section {
   background: var(--card-bg);
-  margin-bottom: 12px;
-  border-radius: 12px;
+  margin-bottom: var(--spacing-md);
+  border-radius: var(--spacing-md);
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 
@@ -499,7 +596,7 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-md) 16px 12px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--border-light);
 
     .section-title {
       display: flex;
@@ -507,7 +604,7 @@ onMounted(() => {
       gap: var(--spacing-sm);
       font-size: var(--text-base);
       font-weight: 600;
-      color: #333;
+      color: var(--text-primary);
 
       .title-icon {
         font-size: var(--text-lg);
@@ -524,7 +621,7 @@ onMounted(() => {
       justify-content: space-between;
       align-items: center;
       padding: 14px 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--border-light);
       transition: background-color 0.2s ease;
       cursor: pointer;
 
@@ -533,10 +630,10 @@ onMounted(() => {
       }
 
       &:active {
-        background-color: #f8f9fa;
+        background-color: var(--bg-page);
         margin: 0 -16px;
         padding: 14px 16px;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
       }
 
       .activity-content {
@@ -546,8 +643,8 @@ onMounted(() => {
         .activity-title {
           font-size: var(--text-base);
           font-weight: 500;
-          color: #333;
-          margin-bottom: 4px;
+          color: var(--text-primary);
+          margin-bottom: var(--spacing-xs);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -555,7 +652,7 @@ onMounted(() => {
 
         .activity-time {
           font-size: var(--text-sm);
-          color: #999;
+          color: var(--text-tertiary);
           line-height: 1.4;
         }
       }
@@ -566,7 +663,7 @@ onMounted(() => {
         opacity: 0;
         transition: opacity 0.2s ease, color 0.2s ease;
         flex-shrink: 0;
-        margin-left: 12px;
+        margin-left: var(--spacing-md);
       }
 
       &:active .item-arrow {
@@ -585,7 +682,7 @@ onMounted(() => {
       justify-content: space-between;
       align-items: center;
       padding: 14px 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--border-light);
       transition: background-color 0.2s ease;
       cursor: pointer;
 
@@ -594,10 +691,10 @@ onMounted(() => {
       }
 
       &:active {
-        background-color: #f8f9fa;
+        background-color: var(--bg-page);
         margin: 0 -16px;
         padding: 14px 16px;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
       }
 
       .notification-content {
@@ -607,8 +704,8 @@ onMounted(() => {
         .notification-title {
           font-size: var(--text-base);
           font-weight: 500;
-          color: #333;
-          margin-bottom: 4px;
+          color: var(--text-primary);
+          margin-bottom: var(--spacing-xs);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -616,7 +713,7 @@ onMounted(() => {
 
         .notification-time {
           font-size: var(--text-sm);
-          color: #999;
+          color: var(--text-tertiary);
           line-height: 1.4;
         }
       }
@@ -627,7 +724,7 @@ onMounted(() => {
         opacity: 0;
         transition: opacity 0.2s ease, color 0.2s ease;
         flex-shrink: 0;
-        margin-left: 12px;
+        margin-left: var(--spacing-md);
       }
 
       &:active .item-arrow {
@@ -648,9 +745,9 @@ onMounted(() => {
       display: flex;
       align-items: center;
       padding: var(--spacing-md);
-      background: #f8f9fa;
-      border-radius: 12px;
-      border: 1px solid #f0f0f0;
+      background: var(--bg-page);
+      border-radius: var(--spacing-md);
+      border: 1px solid var(--border-light);
       transition: all 0.3s ease;
       cursor: pointer;
 
@@ -662,12 +759,12 @@ onMounted(() => {
       }
 
       .child-avatar-wrapper {
-        margin-right: 12px;
+        margin-right: var(--spacing-md);
         position: relative;
 
         .child-avatar {
-          border: 2px solid #409eff;
-          background: #f0f8ff;
+          border: 2px solid var(--primary-color);
+          background: var(--primary-light);
 
           .avatar-placeholder {
             width: 100%;
@@ -693,7 +790,7 @@ onMounted(() => {
         .child-name {
           font-size: var(--text-base);
           font-weight: 600;
-          color: #333;
+          color: var(--text-primary);
         }
 
         .child-class {
@@ -703,10 +800,10 @@ onMounted(() => {
       }
 
       .child-actions {
-        margin-left: 12px;
+        margin-left: var(--spacing-md);
 
         :deep(.van-button) {
-          border-radius: 20px;
+          border-radius: var(--spacing-xl);
           padding: 0 16px;
         }
       }
@@ -769,11 +866,11 @@ onMounted(() => {
 // 暗黑模式适配
 @media (prefers-color-scheme: dark) {
   .content-section {
-    background: #1a1a1a;
-    border-color: #333;
+    background: var(--bg-card);
+    border-color: var(--text-primary);
 
     .section-header {
-      border-color: #333;
+      border-color: var(--text-primary);
 
       .section-title {
         color: #fff;
@@ -782,10 +879,10 @@ onMounted(() => {
 
     .activity-item,
     .notification-item {
-      border-color: #333;
+      border-color: var(--text-primary);
 
-      &:active {
-        background-color: #2a2a2a;
+      & {
+        background-color: var(--bg-page);
       }
 
       .activity-title,
@@ -800,11 +897,11 @@ onMounted(() => {
     }
 
     .child-card {
-      background: #2a2a2a;
-      border-color: #333;
+      background: var(--bg-page);
+      border-color: var(--text-primary);
 
       &:active {
-        background: #333;
+        background: var(--text-primary);
       }
 
       .child-name {
@@ -820,8 +917,8 @@ onMounted(() => {
   .stats-section {
     .stat-card {
       &:not(.stat-primary):not(.stat-success):not(.stat-warning):not(.stat-danger) {
-        background: #2a2a2a;
-        border-color: #333;
+        background: var(--bg-page);
+        border-color: var(--text-primary);
       }
     }
   }

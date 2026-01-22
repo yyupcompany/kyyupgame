@@ -1,0 +1,108 @@
+### New console messages
+- [LOG] 🎯 路由导航完成: / -> /login @ http://localhost:5173/src/router/index.ts?v=20241225-fix:117
+- [LOG] 🎨 检测到当前主题: light @ http://localhost:5173/src/components/animations/EntranceAnimations.vue:28
+- [LOG] 🔧 登录页面初始化 @ http://localhost:5173/src/pages/Login/index.vue:455
+- [LOG] 环境信息: {mode: development, dev: true, redirectUrl: undefined} @ http://localhost:5173/src/pages...
+- [LOG] 🔍 检查统一认证回调... @ http://localhost:5173/src/pages/Login/index.vue:484
+- [LOG] 🏠 Demo系统环境，使用本地认证，不重定向到统一认证中心 @ http://localhost:5173/src/pages/Login/index.vue:521
+
+### Page state
+- Page URL: http://localhost:5173/login
+- Page Title: 幼儿园招生管理系统
+- Page Snapshot:
+```yaml
+- generic [ref=e5]:
+  - generic [ref=e16]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - img "婴婴向上智能招生系统" [ref=e22] [cursor=pointer]
+        - heading "智慧幼儿园 管理系统" [level=1] [ref=e23]:
+          - generic [ref=e24]: 智慧幼儿园
+          - generic [ref=e25]: 管理系统
+        - paragraph [ref=e26]: 让教育更智能 · 让成长更美好
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - img [ref=e30]
+          - generic [ref=e34]:
+            - heading "智慧管理" [level=3] [ref=e35]
+            - paragraph [ref=e36]: 一站式数字化解决方案，提升园区运营效率
+        - generic [ref=e37]:
+          - img [ref=e39]
+          - generic [ref=e42]:
+            - heading "实时同步" [level=3] [ref=e43]
+            - paragraph [ref=e44]: 家园互通，让家长随时了解孩子的成长动态
+        - generic [ref=e45]:
+          - img [ref=e47]
+          - generic [ref=e49]:
+            - heading "创新教学" [level=3] [ref=e50]
+            - paragraph [ref=e51]: AI赋能教育，开启个性化学习新体验
+      - generic [ref=e52]:
+        - generic [ref=e53]:
+          - generic [ref=e54]: 5000+
+          - generic [ref=e55]: 合作园所
+        - generic [ref=e56]:
+          - generic [ref=e57]: 50万+
+          - generic [ref=e58]: 服务家庭
+        - generic [ref=e59]:
+          - generic [ref=e60]: 99.9%
+          - generic [ref=e61]: 系统稳定性
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - img [ref=e66]
+        - heading "欢迎登录" [level=2] [ref=e69]
+        - paragraph [ref=e70]: 开启智慧教育新体验
+      - generic [ref=e72]:
+        - button "用户名登录" [ref=e73] [cursor=pointer]:
+          - img [ref=e75]
+          - generic [ref=e78]: 用户名登录
+        - button "手机号登录" [ref=e79] [cursor=pointer]:
+          - img [ref=e81]
+          - generic [ref=e83]: 手机号登录
+      - generic [ref=e85]:
+        - generic [ref=e87]:
+          - generic:
+            - img
+          - textbox "请输入用户名" [ref=e88]
+        - generic [ref=e90]:
+          - generic:
+            - img
+          - textbox "请输入密码" [ref=e91]
+        - button "立即登录" [ref=e92] [cursor=pointer]:
+          - generic [ref=e93]: 立即登录
+          - img [ref=e95]
+      - generic [ref=e97]:
+        - generic [ref=e98]: 快速体验
+        - generic [ref=e99]:
+          - img [ref=e101]
+          - generic [ref=e103]: 选择角色，一键体验系统功能
+        - generic [ref=e104]:
+          - button "系统管理员 全局管理" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]:
+              - img [ref=e108]
+              - generic [ref=e111]:
+                - generic [ref=e112]: 系统管理员
+                - generic [ref=e113]: 全局管理
+          - button "园长 园区管理" [ref=e114] [cursor=pointer]:
+            - generic [ref=e115]:
+              - img [ref=e117]
+              - generic [ref=e121]:
+                - generic [ref=e122]: 园长
+                - generic [ref=e123]: 园区管理
+          - button "教师 教学管理" [ref=e124] [cursor=pointer]:
+            - generic [ref=e125]:
+              - img [ref=e127]
+              - generic [ref=e130]:
+                - generic [ref=e131]: 教师
+                - generic [ref=e132]: 教学管理
+          - button "家长 家园互动" [ref=e133] [cursor=pointer]:
+            - generic [ref=e134]:
+              - img [ref=e136]
+              - generic [ref=e141]:
+                - generic [ref=e142]: 家长
+                - generic [ref=e143]: 家园互动
+  - generic [ref=e144]:
+    - paragraph [ref=e145]: © 2024 智慧幼儿园管理系统 · 让教育更智能
+    - paragraph [ref=e146]:
+      - link "婴婴向上（北京）教育科技公司提供技术支持" [ref=e147] [cursor=pointer]:
+        - /url: http://localhost:5173
+```

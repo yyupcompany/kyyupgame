@@ -4,13 +4,6 @@
     description="清晰展示系统管理的完整流程，方便园长一目了然地掌握系统状态"
     :icon="Monitor"
   >
-    <!-- 头部操作按钮 -->
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleSystemCheck">
-        系统检查
-      </el-button>
-    </template>
-
     <!-- 统计卡片 -->
     <template #stats>
       <el-col :xs="12" :sm="12" :md="6" :lg="6">
@@ -317,54 +310,33 @@
           <p>查看系统操作审计记录、用户行为追踪、数据变更日志</p>
         </div>
 
-        <!-- 审计日志统计 -->
+        <!-- 审计日志统计 - 使用统一网格系统 -->
         <div class="audit-stats">
-          <el-row :gutter="20">
-            <el-col :span="6">
-              <div class="stat-card">
-                <div class="stat-icon">
-                  <UnifiedIcon name="default" />
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value">{{ auditStats.totalLogs }}</div>
-                  <div class="stat-label">总审计记录</div>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="stat-card">
-                <div class="stat-icon success">
-                  <UnifiedIcon name="default" />
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value">{{ auditStats.successLogs }}</div>
-                  <div class="stat-label">成功操作</div>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="stat-card">
-                <div class="stat-icon warning">
-                  <UnifiedIcon name="default" />
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value">{{ auditStats.failureLogs }}</div>
-                  <div class="stat-label">失败操作</div>
-                </div>
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="stat-card">
-                <div class="stat-icon info">
-                  <UnifiedIcon name="default" />
-                </div>
-                <div class="stat-content">
-                  <div class="stat-value">{{ auditStats.todayLogs }}</div>
-                  <div class="stat-label">今日记录</div>
-                </div>
-              </div>
-            </el-col>
-          </el-row>
+          <div class="stats-grid-unified">
+            <CentersStatCard
+              title="总审计记录"
+              :value="auditStats.totalLogs"
+              iconName="document"
+            />
+            <CentersStatCard
+              title="成功操作"
+              :value="auditStats.successLogs"
+              type="success"
+              iconName="check"
+            />
+            <CentersStatCard
+              title="失败操作"
+              :value="auditStats.failureLogs"
+              type="danger"
+              iconName="close"
+            />
+            <CentersStatCard
+              title="今日记录"
+              :value="auditStats.todayLogs"
+              type="info"
+              iconName="calendar"
+            />
+          </div>
         </div>
 
         <!-- 审计日志查询 -->
@@ -974,12 +946,13 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .system-center-timeline {
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: var(--text-3xl);
-  background: var(--bg-secondary, var(--bg-container));
+  background: var(--bg-page);
 }
 
 /* .page-header 样式已移至全局 center-common.scss 中统一管理 */
@@ -999,7 +972,7 @@ onMounted(() => {
 
 .main-content {
   flex: 1;
-  background: var(--bg-color, var(--bg-white));
+  background: var(--bg-card);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-sm);
@@ -1018,7 +991,7 @@ onMounted(() => {
 .stat-item {
   text-align: center;
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 }
@@ -1081,7 +1054,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
   cursor: pointer;
@@ -1139,7 +1112,7 @@ onMounted(() => {
 
 .status-item {
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 }
@@ -1228,7 +1201,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   padding: var(--spacing-md);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 }
@@ -1326,7 +1299,7 @@ onMounted(() => {
 .stat-item {
   text-align: center;
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 
@@ -1355,7 +1328,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 
@@ -1379,7 +1352,7 @@ onMounted(() => {
 
 .monitor-item {
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
   text-align: center;
@@ -1426,7 +1399,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 
@@ -1456,7 +1429,7 @@ onMounted(() => {
 .log-item {
   text-align: center;
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 
@@ -1489,7 +1462,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-md) var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 
@@ -1725,7 +1698,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     padding: var(--spacing-lg);
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: var(--radius-sm);
     border: var(--border-width-base) solid var(--border-color);
     transition: all 0.3s ease;
@@ -1785,7 +1758,7 @@ onMounted(() => {
 .audit-search {
   margin-bottom: var(--spacing-lg);
   padding: var(--spacing-lg);
-  background: var(--bg-color);
+  background: var(--bg-card);
   border-radius: var(--radius-sm);
   border: var(--border-width-base) solid var(--border-color);
 

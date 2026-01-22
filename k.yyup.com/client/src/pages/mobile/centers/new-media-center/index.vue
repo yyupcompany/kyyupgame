@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="新媒体中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="0"
-  >
+  <MobileCenterLayout title="新媒体中心" back-path="/mobile/centers">
     <div class="mobile-new-media-center">
       <!-- 标签页导航 -->
       <van-tabs
@@ -37,7 +32,7 @@
                 <div class="card-icon">📝</div>
                 <h3>文案创作</h3>
                 <p>AI智能生成营销文案</p>
-                <van-tag type="primary" size="small">7大平台</van-tag>
+                <van-tag type="primary" size="medium">7大平台</van-tag>
               </div>
 
               <div
@@ -47,7 +42,7 @@
                 <div class="card-icon">🖼️</div>
                 <h3>图文创作</h3>
                 <p>生成图文并茂的推广内容</p>
-                <van-tag type="success" size="small">6大平台</van-tag>
+                <van-tag type="success" size="medium">6大平台</van-tag>
               </div>
 
               <div
@@ -57,7 +52,7 @@
                 <div class="card-icon">🎬</div>
                 <h3>视频创作</h3>
                 <p>AI生成视频脚本和内容</p>
-                <van-tag type="warning" size="small">7大平台</van-tag>
+                <van-tag type="warning" size="medium">7大平台</van-tag>
               </div>
 
               <div
@@ -67,7 +62,7 @@
                 <div class="card-icon">🔊</div>
                 <h3>文字转语音</h3>
                 <p>多种音色AI语音合成</p>
-                <van-tag type="default" size="small">TTS</van-tag>
+                <van-tag type="default" size="medium">TTS</van-tag>
               </div>
             </div>
           </div>
@@ -102,12 +97,12 @@
         </van-tab>
       </van-tabs>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import MobileCopywritingCreator from './components/MobileCopywritingCreator.vue'
 import MobileArticleCreator from './components/MobileArticleCreator.vue'
 import MobileVideoCreator from './components/MobileVideoCreator.vue'

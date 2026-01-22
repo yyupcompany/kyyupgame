@@ -80,20 +80,29 @@ export function generateRandomNumber(min: number, max: number): number {
 }
 
 // 密钥生成和管理
-export async function generateKey(algorithm: any = { name: 'AES-GCM', length: 256 }): Promise<CryptoKey> {
+export async function generateKey(algorithm: any = { name: 'AES-GCM', length: 256 }): Promise<CryptoKey | CryptoKeyPair> {
   return await crypto.subtle.generateKey(algorithm, true, ['encrypt', 'decrypt'])
 }
 
-export async function exportKey(format: KeyFormat, key: CryptoKey): Promise<ArrayBuffer> {
-  return await crypto.subtle.exportKey(format, key)
+export async function exportKey(format: 'jwk', key: CryptoKey | CryptoKeyPair): Promise<JsonWebKey>
+export async function exportKey(format: 'raw' | 'pkcs8' | 'spki', key: CryptoKey | CryptoKeyPair): Promise<ArrayBuffer>
+export async function exportKey(format: KeyFormat, key: CryptoKey | CryptoKeyPair): Promise<ArrayBuffer | JsonWebKey> {
+  const targetKey = 'publicKey' in key ? key.publicKey : key
+  if (format === 'jwk') {
+    return await crypto.subtle.exportKey('jwk', targetKey)
+  }
+  return await crypto.subtle.exportKey(format as 'raw' | 'pkcs8' | 'spki', targetKey)
 }
 
 export async function importKey(
   format: KeyFormat,
-  keyData: ArrayBuffer,
+  keyData: ArrayBuffer | JsonWebKey,
   algorithm: any = { name: 'AES-GCM' }
 ): Promise<CryptoKey> {
-  return await crypto.subtle.importKey(format, keyData, algorithm, true, ['encrypt', 'decrypt'])
+  if (format === 'jwk') {
+    return await crypto.subtle.importKey(format, keyData as JsonWebKey, algorithm, true, ['encrypt', 'decrypt'])
+  }
+  return await crypto.subtle.importKey(format, keyData as ArrayBuffer, algorithm, true, ['encrypt', 'decrypt'])
 }
 
 // 加密和解密

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
-import { setTheme, getThemeName, isDarkMode, type ThemeType } from '@/utils/theme'
+import { setTheme, getThemeName, isDarkMode, type ThemeType, currentTheme as themeRef } from '@/utils/theme'
 
 export interface ThemeConfig {
   name: string
@@ -14,7 +14,7 @@ export interface ThemeConfig {
   }
 }
 
-export const themeConfigs: Record<ThemeType, ThemeConfig> = {
+export const themeConfigs: Record<string, ThemeConfig> = {
   default: {
     name: 'default',
     displayName: '明亮主题',
@@ -148,9 +148,9 @@ export const useThemeStore = defineStore('theme', () => {
     changeTheme(newTheme)
   }
 
-  // 获取当前主题是否为暗黑模式（包括glass-dark）
+  // 获取当前主题是否为暗黑模式
   const isDark = computed(() => {
-    return currentTheme.value === 'dark' || currentTheme.value === 'glass-dark'
+    return currentTheme.value === 'dark'
   })
 
   // 获取主题变量

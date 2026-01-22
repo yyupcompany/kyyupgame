@@ -1027,5 +1027,23 @@ router.post('/start-permission-watcher', function(req: Request, res: Response) {
   }
 });
 
+// =============================================
+// SOP模板管理路由
+// =============================================
+import adminSOPTemplateController from '../controllers/admin/sop-template.controller';
+
+// 模板CRUD
+router.post('/sop-templates', adminSOPTemplateController.createTemplate);
+router.get('/sop-templates', adminSOPTemplateController.getTemplates);
+router.get('/sop-templates/:id', adminSOPTemplateController.getTemplateById);
+router.put('/sop-templates/:id', adminSOPTemplateController.updateTemplate);
+router.delete('/sop-templates/:id', adminSOPTemplateController.deleteTemplate);
+router.post('/sop-templates/:id/duplicate', adminSOPTemplateController.duplicateTemplate);
+
+// 节点管理
+router.post('/sop-templates/:id/nodes', adminSOPTemplateController.addNode);
+router.put('/sop-templates/:id/nodes/:nodeId', adminSOPTemplateController.updateNode);
+router.delete('/sop-templates/:id/nodes/:nodeId', adminSOPTemplateController.deleteNode);
+
 // 导出路由
 export default router; 

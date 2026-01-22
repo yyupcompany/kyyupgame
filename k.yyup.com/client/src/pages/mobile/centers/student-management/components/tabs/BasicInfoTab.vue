@@ -11,7 +11,7 @@
       <van-cell title="班级" :value="student.className || '未分班'" />
       <van-cell title="状态">
         <template #value>
-          <van-tag :type="getStatusTagType(student.status)" size="small">
+          <van-tag :type="getStatusTagType(student.status)" size="medium">
             {{ getStatusText(student.status) }}
           </van-tag>
         </template>
@@ -49,13 +49,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { TagType } from 'vant'
 import type { Student } from '@/api/modules/student'
 
 interface Props {
   student: Student
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 // 计算属性
 const enrollmentDays = computed(() => {
@@ -105,14 +106,14 @@ const calculateAge = (birthDate: string) => {
   return age
 }
 
-const getStatusTagType = (status: string) => {
-  const statusMap: Record<string, string> = {
+const getStatusTagType = (status: string): TagType => {
+  const statusMap: Record<string, TagType> = {
     ACTIVE: 'success',
-    GRADUATED: 'info',
+    GRADUATED: 'default',
     TRANSFERRED: 'warning',
     SUSPENDED: 'danger'
   }
-  return statusMap[status] || 'info'
+  return statusMap[status] || 'default'
 }
 
 const getStatusText = (status: string) => {

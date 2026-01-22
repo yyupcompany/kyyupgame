@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="编辑孩子信息"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="编辑孩子信息" back-path="/mobile/parent-center">
     <div class="edit-child-container" v-loading="loading">
       <!-- 头像上传 -->
       <div class="avatar-section">
@@ -245,7 +240,7 @@
       @confirm="onEnrollmentDateConfirm"
       @cancel="showEnrollmentDatePicker = false"
     />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -256,7 +251,7 @@ import { showToast, showLoadingToast, closeToast } from 'vant'
 import { STUDENT_ENDPOINTS } from '@/api/endpoints'
 import { request } from '@/utils/request'
 import type { ApiResponse } from '@/api/endpoints'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface ChildFormData {
   id?: number
@@ -518,6 +513,12 @@ const handleCancel = () => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   const childId = route.params.id as string
   if (childId && childId !== 'add') {
     fetchChildDetail(parseInt(childId))
@@ -542,7 +543,7 @@ onMounted(() => {
   align-items: center;
   padding: var(--spacing-lg) 16px;
   background: var(--card-bg);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .avatar-upload {
     position: relative;
@@ -561,7 +562,7 @@ onMounted(() => {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #409eff 0%, #67c23a 100%);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--success-color) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -594,7 +595,7 @@ onMounted(() => {
 
 // 表单样式
 .van-cell-group {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 // 操作按钮
@@ -602,12 +603,12 @@ onMounted(() => {
   display: flex;
   gap: var(--spacing-md);
   padding: 0 16px;
-  margin-top: 20px;
+  margin-top: var(--spacing-xl);
 
   .van-button {
     flex: 1;
     height: 44px;
-    border-radius: 22px;
+    border-radius: var(--spacing-2xl);
     font-weight: 600;
   }
 }

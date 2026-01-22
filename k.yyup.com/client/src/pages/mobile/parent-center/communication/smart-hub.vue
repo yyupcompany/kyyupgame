@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="智能沟通中心"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="智能沟通中心" back-path="/mobile/parent-center">
     <!-- 页面内容 -->
     <div class="mobile-communication-hub">
       <!-- 沟通概览仪表板 -->
@@ -267,7 +262,7 @@
         AI正在分析数据...
       </van-loading>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
@@ -642,6 +637,12 @@ const getPriorityText = (priority: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // 初始化页面数据
 })
 </script>
@@ -660,19 +661,19 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-lg);
 
   h3 {
     font-size: var(--text-lg);
     font-weight: 600;
-    color: #323233;
+    color: var(--text-primary);
     margin: 0;
   }
 }
 
 // 仪表板样式
 .dashboard-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .dashboard-cards {
@@ -684,33 +685,33 @@ onMounted(() => {
 .dashboard-card {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
 
   &.engagement .card-icon {
-    background: linear-gradient(135deg, #1989fa, #40a9ff);
+    background: var(--gradient-primary);
   }
 
   &.response .card-icon {
-    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    background: linear-gradient(135deg, var(--danger-color), var(--danger-hover));
   }
 
   &.satisfaction .card-icon {
-    background: linear-gradient(135deg, #ffc107, #ffcd38);
+    background: linear-gradient(135deg, var(--warning-color), var(--warning-hover));
   }
 
   &.automation .card-icon {
-    background: linear-gradient(135deg, #07c160, #38d9a9);
+    background: var(--gradient-success);
   }
 }
 
 .card-icon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: var(--spacing-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -729,31 +730,31 @@ onMounted(() => {
 .metric-value {
   font-size: var(--text-2xl);
   font-weight: 700;
-  color: #323233;
+  color: var(--text-primary);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: var(--spacing-xs);
 }
 
 .metric-label {
   font-size: var(--text-xs);
   font-weight: 600;
-  color: #969799;
-  margin-bottom: 4px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-xs);
 }
 
 .metric-trend {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  font-size: 11px;
-  color: #969799;
+  font-size: var(--spacing-md);
+  color: var(--text-tertiary);
 
   &.trend-up {
-    color: #07c160;
+    color: var(--success-color);
   }
 
   &.trend-down {
-    color: #ee0a24;
+    color: var(--danger-color);
   }
 
   .van-icon {
@@ -762,17 +763,17 @@ onMounted(() => {
 }
 
 .metric-desc {
-  font-size: 11px;
-  color: #969799;
+  font-size: var(--spacing-md);
+  color: var(--text-tertiary);
 }
 
 // 内容生成区域
 .content-generation-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .content-type-selector {
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .content-list {
@@ -784,7 +785,7 @@ onMounted(() => {
 .content-item {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -798,13 +799,13 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .content-title {
   font-size: var(--text-base);
   font-weight: 600;
-  color: #323233;
+  color: var(--text-primary);
   margin: 0 0 6px 0;
 }
 
@@ -815,21 +816,21 @@ onMounted(() => {
 
   .relevance-score {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 }
 
 .arrow-icon {
-  color: #c8c9cc;
+  color: var(--border-dark);
   font-size: var(--text-base);
 }
 
 .content-preview {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   p {
     font-size: var(--text-sm);
-    color: #646566;
+    color: var(--text-secondary);
     margin: 0;
     line-height: 1.4;
   }
@@ -848,39 +849,39 @@ onMounted(() => {
 
   .target-label {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 }
 
 .engagement-info {
   flex: 1;
-  margin-left: 16px;
+  margin-left: var(--spacing-lg);
 
   .engagement-label {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: var(--spacing-xs);
   }
 }
 
 // 智能回复区域
 .smart-reply-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .message-input-area {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
-  margin-bottom: 16px;
+  margin-bottom: var(--spacing-lg);
 }
 
 .input-actions {
   display: flex;
   gap: var(--spacing-sm);
-  margin-top: 12px;
+  margin-top: var(--spacing-md);
   justify-content: flex-end;
 }
 
@@ -888,7 +889,7 @@ onMounted(() => {
   h4 {
     font-size: var(--text-base);
     font-weight: 600;
-    color: #323233;
+    color: var(--text-primary);
     margin: 0 0 12px 0;
   }
 }
@@ -902,7 +903,7 @@ onMounted(() => {
 .suggestion-item {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
 }
 
@@ -910,13 +911,13 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 .suggestion-type {
   font-size: var(--text-xs);
   font-weight: 600;
-  color: #1989fa;
+  color: var(--primary-color);
 }
 
 .suggestion-confidence {
@@ -926,16 +927,16 @@ onMounted(() => {
 
   .confidence-label {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 }
 
 .suggestion-content {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   p {
     font-size: var(--text-sm);
-    color: #646566;
+    color: var(--text-secondary);
     margin: 0;
     line-height: 1.4;
   }
@@ -948,7 +949,7 @@ onMounted(() => {
 
 // 话题分析区域
 .topic-analysis-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .topic-list {
@@ -960,7 +961,7 @@ onMounted(() => {
 .topic-item {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
 }
 
@@ -968,17 +969,17 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .topic-name {
     font-size: var(--text-sm);
     font-weight: 600;
-    color: #323233;
+    color: var(--text-primary);
   }
 
   .topic-frequency {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 }
 
@@ -989,13 +990,13 @@ onMounted(() => {
 
   .sentiment-label {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 }
 
 // 改进建议区域
 .improvements-section {
-  margin-bottom: 24px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .improvements-list {
@@ -1007,7 +1008,7 @@ onMounted(() => {
 .improvement-item {
   background: var(--card-bg);
   padding: var(--spacing-md);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   box-shadow: 0 2px 12px rgba(100, 101, 102, 0.08);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1021,19 +1022,19 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-sm);
 }
 
 .improvement-title {
   font-size: var(--text-base);
   font-weight: 600;
-  color: #323233;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .improvement-description {
   font-size: var(--text-sm);
-  color: #646566;
+  color: var(--text-secondary);
   margin: 0 0 12px 0;
   line-height: 1.4;
 }
@@ -1042,17 +1043,17 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 
   .impact-label {
     font-size: var(--text-xs);
-    color: #969799;
+    color: var(--text-tertiary);
   }
 
   .impact-value {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: #1989fa;
+    color: var(--primary-color);
   }
 }
 
@@ -1069,7 +1070,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   padding: 40px;
-  color: #1989fa;
+  color: var(--primary-color);
   font-size: var(--text-sm);
 }
 
@@ -1099,6 +1100,13 @@ onMounted(() => {
   .engagement-info {
     margin-left: 0;
     width: 100%;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

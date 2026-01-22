@@ -368,6 +368,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .template-detail {
   padding: var(--spacing-xl);
 

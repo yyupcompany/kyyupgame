@@ -12,25 +12,51 @@
           name="arrow-left"
           size="20"
           class="back-icon"
+          :style="{ color: isDarkTheme ? '#f1f5f9' : 'inherit' }"
           @click="handleBack"
         />
-        <div v-else class="logo-text">{{ title }}</div>
+        <div v-else class="logo-text" :style="{ color: isDarkTheme ? '#f1f5f9' : 'var(--primary-color)' }">{{ title }}</div>
       </div>
 
       <!-- 中间：标题（仅在有返回按钮时显示） -->
       <div v-if="showBack" class="header-center">
-        <div class="header-title">{{ title }}</div>
-        <div v-if="subtitle" class="header-subtitle">{{ subtitle }}</div>
+        <div class="header-title" :style="{ color: isDarkTheme ? '#f1f5f9' : 'var(--text-primary)' }">{{ title }}</div>
+        <div v-if="subtitle" class="header-subtitle" :style="{ color: isDarkTheme ? '#94a3b8' : 'var(--text-secondary)' }">{{ subtitle }}</div>
       </div>
 
       <!-- 右侧：操作按钮 -->
       <div class="header-right">
+        <!-- 主题切换按钮 -->
+        <div 
+          class="theme-toggle-btn" 
+          @click="handleThemeToggle" 
+          title="切换主题"
+          :style="{ 
+            background: isDarkTheme ? '#334155' : 'var(--bg-secondary)',
+            borderColor: isDarkTheme ? '#475569' : 'var(--border-color-light)'
+          }"
+        >
+          <van-icon 
+            v-if="isDarkTheme" 
+            name="sun-o" 
+            size="18"
+            :style="{ color: '#fbbf24' }"
+          />
+          <van-icon 
+            v-else 
+            name="star-o" 
+            size="18"
+            :style="{ color: 'var(--text-primary)' }"
+          />
+        </div>
+
         <!-- 搜索按钮（可选） -->
         <van-icon
           v-if="showSearch"
           name="search"
           size="20"
           class="action-icon"
+          :style="{ color: isDarkTheme ? '#94a3b8' : 'var(--text-primary)' }"
           @click="handleSearch"
         />
 
@@ -41,7 +67,12 @@
 
         <!-- 通知按钮 -->
         <div class="notification-wrapper" @click="handleNotificationClick">
-          <van-icon name="bell-o" size="20" class="action-icon" />
+          <van-icon 
+            name="bell-o" 
+            size="20" 
+            class="action-icon"
+            :style="{ color: isDarkTheme ? '#94a3b8' : 'var(--text-primary)' }"
+          />
           <van-badge
             v-if="notificationCount > 0"
             :content="notificationCount"
@@ -65,9 +96,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { toggleTheme, getCurrentTheme, type ThemeType } from '@/utils/theme'
 
 interface Props {
   title?: string
@@ -113,6 +145,37 @@ const emit = defineEmits<{
 const router = useRouter()
 const userStore = useUserStore()
 
+// 主题状态
+const isDarkTheme = ref(false)
+
+// 检测当前主题
+const detectTheme = () => {
+  const htmlTheme = document.documentElement.getAttribute('data-theme')
+  isDarkTheme.value = htmlTheme === 'dark'
+}
+
+// 初始化主题状态
+onMounted(() => {
+  detectTheme()
+  // 监听主题变化
+  const observer = new MutationObserver(() => {
+    detectTheme()
+  })
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
+})
+
+// 切换主题
+const handleThemeToggle = () => {
+  toggleTheme()
+  // 延迟检测以确保主题已应用
+  setTimeout(() => {
+    detectTheme()
+  }, 100)
+}
+
 // 样式类
 const headerClasses = computed(() => ({
   'gradient': props.gradient,
@@ -122,8 +185,15 @@ const headerClasses = computed(() => ({
 // 动态样式
 const headerStyle = computed(() => {
   const style: Record<string, string> = {}
+  // 如果没有自定义背景色，则根据主题设置
   if (props.backgroundColor) {
     style.backgroundColor = props.backgroundColor
+  } else if (!props.transparent && !props.gradient) {
+    style.backgroundColor = isDarkTheme.value ? '#1e293b' : '#ffffff'
+  }
+  // 暗黑主题下的边框颜色
+  if (isDarkTheme.value && !props.transparent && !props.gradient) {
+    style.borderBottomColor = '#334155'
   }
   if (props.textColor) {
     style.color = props.textColor
@@ -168,12 +238,12 @@ const handleAvatarClick = () => {
   top: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-index-header);
-  background: var(--bg-color);
+  z-index: 1000; /* 确保头部在最上层 */
+  background: var(--bg-color, #ffffff);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--border-color-light);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-duration-base) var(--transition-timing-ease);
+  border-bottom: 1px solid var(--border-color-light, #e4e7ed);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 
   // 状态栏占位
   .status-bar-spacer {
@@ -183,7 +253,7 @@ const handleAvatarClick = () => {
 
   // 导航栏内容
   .header-content {
-    height: var(--header-height);
+    height: var(--header-height, 64px);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -257,6 +327,36 @@ const handleAvatarClick = () => {
     gap: var(--app-gap);
     min-width: auto;
     justify-content: flex-end;
+
+    // 主题切换按钮
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      cursor: pointer;
+      transition: all var(--transition-duration-fast) var(--transition-timing-ease);
+      border: 1px solid var(--border-color-light);
+
+      .van-icon {
+        color: var(--text-primary);
+        transition: all var(--transition-duration-fast) var(--transition-timing-ease);
+      }
+
+      &:active {
+        transform: scale(0.9);
+        background: var(--bg-tertiary);
+      }
+
+      &:hover {
+        .van-icon {
+          color: var(--primary-color);
+        }
+      }
+    }
 
     .ai-button {
       display: flex;

@@ -663,7 +663,7 @@ onMounted(() => {
 
 /* Element Plus 组件样式覆盖 */
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 
@@ -672,7 +672,7 @@ onMounted(() => {
 }
 
 :deep(.el-table th) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -681,7 +681,7 @@ onMounted(() => {
 }
 
 :deep(.el-progress-bar__outer) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-tag) {

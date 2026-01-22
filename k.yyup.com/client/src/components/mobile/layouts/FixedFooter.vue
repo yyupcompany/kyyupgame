@@ -1,5 +1,11 @@
 <template>
-  <div class="fixed-footer">
+  <div 
+    class="fixed-footer"
+    :style="{
+      background: isDarkTheme ? '#1e293b' : '#ffffff',
+      borderTopColor: isDarkTheme ? '#334155' : 'var(--border-color-light)'
+    }"
+  >
     <!-- 底部安全区域占位 -->
     <div class="bottom-safe-area-spacer"></div>
 
@@ -8,7 +14,8 @@
       v-model="internalActiveTab"
       :safe-area-inset-bottom="false"
       :fixed="false"
-      class="custom-tabbar"
+      :class="['custom-tabbar', isDarkTheme ? 'dark-tabbar' : '']"
+      :style="{ background: isDarkTheme ? '#1e293b' : '#ffffff' }"
       @change="handleTabChange"
     >
       <van-tabbar-item
@@ -31,7 +38,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted } from 'vue'
+
+// 主题状态
+const isDarkTheme = ref(false)
+
+// 检测当前主题
+const detectTheme = () => {
+  const htmlTheme = document.documentElement.getAttribute('data-theme')
+  isDarkTheme.value = htmlTheme === 'dark'
+}
+
+// 初始化主题状态
+onMounted(() => {
+  detectTheme()
+  // 监听主题变化
+  const observer = new MutationObserver(() => {
+    detectTheme()
+  })
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
+})
 
 export interface FooterTab {
   name: string
@@ -98,11 +127,11 @@ const handleTabChange = (tabName: string) => {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: var(--z-index-footer);
-  background: var(--bg-color);
-  border-top: 1px solid var(--border-color-light);
+  z-index: 999; /* 确保底部在上层 */
+  background: var(--bg-color, #ffffff);
+  border-top: 1px solid var(--border-color-light, #e4e7ed);
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-duration-base) var(--transition-timing-ease);
+  transition: all 0.3s ease;
 
   .bottom-safe-area-spacer {
     height: env(safe-area-inset-bottom);
@@ -110,9 +139,23 @@ const handleTabChange = (tabName: string) => {
   }
 
   .custom-tabbar {
-    height: var(--tabbar-height);
-    background: var(--bg-color);
+    height: var(--tabbar-height, 56px);
+    background: var(--bg-color, #ffffff);
     backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+
+    // 暗黑主题
+    &.dark-tabbar {
+      background: #1e293b !important;
+
+      :deep(.van-tabbar-item) {
+        color: #94a3b8 !important;
+      }
+
+      :deep(.van-tabbar-item--active) {
+        color: var(--primary-color) !important;
+      }
+    }
 
     :deep(.van-tabbar-item) {
       color: var(--text-secondary);

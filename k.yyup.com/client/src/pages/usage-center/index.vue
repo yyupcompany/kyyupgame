@@ -760,7 +760,7 @@ onMounted(() => {
 @use '@/styles/design-tokens.scss' as *;
 
 .usage-center-timeline {
-  background: var(--bg-secondary, var(--bg-container));  // ✅ 与考勤中心一致
+  background: var(--bg-page);  // ✅ 与考勤中心一致
   padding: var(--text-2xl);
 }
 

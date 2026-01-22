@@ -4,11 +4,16 @@
  */
 
 import { request } from '@/utils/request';
+import type { A2UIComponentNode } from '@/types/a2ui-protocol';
 
 export interface GenerateCurriculumRequest {
   prompt: string;
   domain: string;
   ageGroup?: string;
+  // 🎨 媒体生成选项
+  enableImage?: boolean;    // 是否生成图片
+  enableVoice?: boolean;    // 是否启用语音
+  enableSoundEffect?: boolean;  // 是否启用音效
 }
 
 export interface GenerateCurriculumResponse {
@@ -79,6 +84,9 @@ class InteractiveCurriculumAPI {
         '/interactive-curriculum/generate',
         params
       );
+      if (!response.data) {
+        throw new Error('生成课程响应数据为空');
+      }
       return response.data;
     } catch (error) {
       console.error('❌ 生成课程失败:', error);
@@ -200,6 +208,9 @@ class InteractiveCurriculumAPI {
       const response = await request.get<ProgressResponse>(
         `/interactive-curriculum/progress/${taskId}`
       );
+      if (!response.data) {
+        throw new Error('查询进度响应数据为空');
+      }
       return response.data;
     } catch (error) {
       console.error('❌ 查询进度失败:', error);
@@ -217,6 +228,9 @@ class InteractiveCurriculumAPI {
       const response = await request.get<{ success: boolean; data: CurriculumDetail }>(
         `/interactive-curriculum/${id}`
       );
+      if (!response.data) {
+        throw new Error('获取课程详情响应数据为空');
+      }
       return response.data;
     } catch (error) {
       console.error('❌ 获取课程详情失败:', error);
@@ -239,6 +253,9 @@ class InteractiveCurriculumAPI {
         `/interactive-curriculum/${id}/save`,
         data
       );
+      if (!response.data) {
+        throw new Error('保存课程响应数据为空');
+      }
       return response.data;
     } catch (error) {
       console.error('❌ 保存课程失败:', error);
@@ -256,6 +273,9 @@ class InteractiveCurriculumAPI {
       const response = await request.get<{ success: boolean; data: { thinkingProcess: string } }>(
         `/interactive-curriculum/thinking/${taskId}`
       );
+      if (!response.data) {
+        throw new Error('获取思考过程响应数据为空');
+      }
       return response.data;
     } catch (error) {
       console.error('❌ 获取 Think 思考过程失败:', error);
@@ -299,6 +319,151 @@ class InteractiveCurriculumAPI {
         onError(error);
       }
     }
+  }
+
+  /**
+   * 🧱 A2UI流式生成互动课程（搭积木模式）
+   * 实时分段发送A2UI组件，前端可增量渲染
+   * @param params 生成参数
+   * @param callbacks 回调函数
+   * @returns AbortController 用于取消请求
+   */
+  generateA2UIStream(
+    params: GenerateCurriculumRequest,
+    callbacks: {
+      onConnected?: (taskId: string) => void;
+      onComponent?: (msg: {
+        action: 'append' | 'update' | 'replace';
+        targetId?: string;
+        component: A2UIComponentNode;
+      }) => void;
+      onThinking?: (content: string) => void;
+      onProgress?: (message: string) => void;
+      onImageReady?: (imageId: string, imageUrl: string) => void;
+      onComplete?: (message: string) => void;
+      onFinished?: (curriculumId: number, plan: any) => void;
+      onError?: (error: string) => void;
+    }
+  ): AbortController {
+    const token = localStorage.getItem('token');
+    const url = `/api/interactive-curriculum/generate-a2ui-stream`;
+    const abortController = new AbortController();
+
+    console.log('🧱 [A2UI搭积木] 开始请求:', url);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(params),
+      signal: abortController.signal
+    }).then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error('无法获取响应流');
+      }
+
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      function readStream(): Promise<void> {
+        return reader!.read().then(({ done, value }) => {
+          if (done) {
+            console.log('🧱 [A2UI搭积木] 流结束');
+            return;
+          }
+
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.trim() || !line.startsWith('data: ')) continue;
+
+            try {
+              const data = JSON.parse(line.substring(6));
+
+              switch (data.type) {
+                case 'connected':
+                  console.log('🧱 [A2UI搭积木] 已连接，taskId:', data.taskId);
+                  callbacks.onConnected?.(data.taskId);
+                  break;
+
+                case 'component':
+                  console.log(`🧱 [A2UI搭积木] 收到组件: action=${data.action}, id=${data.component?.id}`);
+                  if (data.component) {
+                    callbacks.onComponent?.({
+                      action: data.action,
+                      targetId: data.targetId,
+                      component: data.component
+                    });
+                  }
+                  break;
+
+                case 'thinking':
+                  callbacks.onThinking?.(data.content);
+                  break;
+
+                case 'progress':
+                  console.log('📊 [A2UI搭积木] 进度:', data.message);
+                  callbacks.onProgress?.(data.message);
+                  break;
+
+                case 'image_ready':
+                  console.log('🖼️ [A2UI搭积木] 图片就绪:', data.imageId);
+                  callbacks.onImageReady?.(data.imageId, data.imageUrl);
+                  break;
+
+                case 'complete':
+                  console.log('✅ [A2UI搭积木] 生成完成');
+                  callbacks.onComplete?.(data.message);
+                  break;
+
+                case 'finished':
+                  console.log('🎉 [A2UI搭积木] 课程生成完成，ID:', data.curriculumId);
+                  try {
+                    callbacks.onFinished?.(data.curriculumId, data.plan);
+                  } catch (e) {
+                    const error = e as Error;
+                    console.error('❌ [A2UI搭积木] onFinished回调执行失败:', error);
+                    callbacks.onError?.(error.message || 'Unknown error');
+                  }
+                  break;
+
+                case 'error':
+                  console.error('❌ [A2UI搭积木] 错误:', data.message);
+                  callbacks.onError?.(data.message);
+                  break;
+              }
+            } catch (e) {
+              console.error('❌ [A2UI搭积木] 解析数据失败:', e);
+            }
+          }
+
+          return readStream();
+        });
+      }
+
+      readStream().catch(error => {
+        if (error.name !== 'AbortError') {
+          console.error('❌ [A2UI搭积木] 读取流失败:', error);
+          callbacks.onError?.(error.message);
+        }
+      });
+    }).catch(error => {
+      if (error.name !== 'AbortError') {
+        console.error('❌ [A2UI搭积木] 请求失败:', error);
+        callbacks.onError?.(error.message);
+      }
+    });
+
+    return abortController;
   }
 
   /**

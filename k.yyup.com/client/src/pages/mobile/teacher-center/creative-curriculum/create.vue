@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="AI 创建课程"
-    :show-back="true"
-  >
+  <MobileSubPageLayout title="AI 创建课程" back-path="/mobile/teacher-center">
     <div class="ai-create-container">
       <!-- 欢迎引导 -->
       <div v-if="currentStep === 0" class="welcome-section">
@@ -357,14 +354,14 @@
         @cancel="showDurationPicker = false"
       />
     </van-popup>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 const router = useRouter()
 
@@ -666,6 +663,12 @@ const editCourse = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   // 可以在这里加载一些初始化数据
 })
 </script>
@@ -686,14 +689,14 @@ onMounted(() => {
 
     .welcome-icon {
       font-size: 64px;
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
     }
 
     h2 {
       font-size: var(--text-2xl);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 12px;
+      margin-bottom: var(--spacing-md);
     }
 
     p {
@@ -710,15 +713,15 @@ onMounted(() => {
     .step-item {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
       padding: var(--spacing-md);
       background: white;
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
       .step-number {
-        width: 24px;
-        height: 24px;
+        width: var(--spacing-2xl);
+        height: var(--spacing-2xl);
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         border-radius: 50%;
@@ -727,7 +730,7 @@ onMounted(() => {
         justify-content: center;
         font-size: var(--text-xs);
         font-weight: 600;
-        margin-right: 12px;
+        margin-right: var(--spacing-md);
         flex-shrink: 0;
       }
 
@@ -759,7 +762,7 @@ onMounted(() => {
       font-size: var(--text-base);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
     }
 
     .example-list {
@@ -767,15 +770,15 @@ onMounted(() => {
         display: flex;
         align-items: center;
         padding: var(--spacing-md);
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
         background: white;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         cursor: pointer;
 
         .example-icon {
           font-size: var(--text-2xl);
-          margin-right: 12px;
+          margin-right: var(--spacing-md);
         }
 
         .example-info {
@@ -785,7 +788,7 @@ onMounted(() => {
             font-size: var(--text-sm);
             font-weight: 600;
             color: var(--van-text-color);
-            margin-bottom: 2px;
+            margin-bottom: var(--spacing-xs);
           }
 
           .example-desc {
@@ -804,7 +807,7 @@ onMounted(() => {
     font-weight: 600;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
   }
 }
 
@@ -812,13 +815,13 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding-top: 12px;
+  padding-top: var(--spacing-md);
 
   .step-header {
     background: white;
     padding: var(--spacing-md);
-    margin-bottom: 12px;
-    border-radius: 8px;
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--spacing-sm);
   }
 
   .form-content {
@@ -829,16 +832,16 @@ onMounted(() => {
     .ai-assistant {
       padding: var(--spacing-md);
       background: #f8f9fa;
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
 
       .messages {
         max-height: 200px;
         overflow-y: auto;
-        margin-bottom: 12px;
+        margin-bottom: var(--spacing-md);
 
         .message {
           display: flex;
-          margin-bottom: 12px;
+          margin-bottom: var(--spacing-md);
 
           &.user {
             flex-direction: row-reverse;
@@ -866,15 +869,15 @@ onMounted(() => {
             .message-text {
               background: white;
               padding: var(--spacing-sm) 12px;
-              border-radius: 12px;
+              border-radius: var(--spacing-md);
               font-size: var(--text-sm);
               line-height: 1.4;
             }
 
             .message-time {
-              font-size: 11px;
+              font-size: var(--spacing-md);
               color: var(--van-text-color-3);
-              margin-top: 4px;
+              margin-top: var(--spacing-xs);
               text-align: right;
             }
           }
@@ -928,7 +931,7 @@ onMounted(() => {
         font-size: var(--text-xl);
         font-weight: 600;
         color: var(--van-text-color);
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
       }
 
       p {
@@ -948,10 +951,10 @@ onMounted(() => {
       .generation-step {
         display: flex;
         align-items: flex-start;
-        margin-bottom: 16px;
+        margin-bottom: var(--spacing-lg);
         padding: var(--spacing-md);
         background: white;
-        border-radius: 8px;
+        border-radius: var(--spacing-sm);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
         &.active {
@@ -959,8 +962,8 @@ onMounted(() => {
         }
 
         .step-icon {
-          margin-right: 12px;
-          margin-top: 2px;
+          margin-right: var(--spacing-md);
+          margin-top: var(--spacing-xs);
         }
 
         .step-info {
@@ -970,7 +973,7 @@ onMounted(() => {
             font-size: var(--text-sm);
             font-weight: 600;
             color: var(--van-text-color);
-            margin-bottom: 2px;
+            margin-bottom: var(--spacing-xs);
           }
 
           .step-desc {
@@ -985,18 +988,18 @@ onMounted(() => {
     .ai-thinking {
       background: #f8f9fa;
       padding: var(--spacing-md);
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
       margin-bottom: 32px;
       text-align: left;
 
       .thinking-header {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: var(--spacing-sm);
         font-size: var(--text-xs);
         font-weight: 600;
         color: var(--van-primary-color);
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
       }
 
       .thinking-content {
@@ -1021,37 +1024,37 @@ onMounted(() => {
     text-align: center;
 
     .success-icon {
-      margin-bottom: 16px;
+      margin-bottom: var(--spacing-lg);
     }
 
     h3 {
       font-size: var(--text-xl);
       font-weight: 600;
       color: var(--van-text-color);
-      margin-bottom: 8px;
+      margin-bottom: var(--spacing-sm);
     }
 
     p {
       font-size: var(--text-sm);
       color: var(--van-text-color-2);
-      margin-bottom: 24px;
+      margin-bottom: var(--spacing-2xl);
     }
   }
 
   .preview-card {
     display: flex;
     background: white;
-    border-radius: 8px;
+    border-radius: var(--spacing-sm);
     padding: var(--spacing-md);
-    margin-bottom: 24px;
+    margin-bottom: var(--spacing-2xl);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     .preview-thumbnail {
       width: 80px;
       height: 80px;
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
       overflow: hidden;
-      margin-right: 12px;
+      margin-right: var(--spacing-md);
       flex-shrink: 0;
     }
 
@@ -1079,7 +1082,7 @@ onMounted(() => {
 
       .preview-tags {
         display: flex;
-        gap: 6px;
+        gap: var(--spacing-sm);
       }
     }
   }
@@ -1093,18 +1096,25 @@ onMounted(() => {
       height: 48px;
       font-size: var(--text-base);
       font-weight: 600;
-      border-radius: 12px;
+      border-radius: var(--spacing-md);
     }
   }
 }
 
 :deep(.van-cell-group) {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
 }
 
 :deep(.van-steps) {
   .van-step__title {
     font-size: var(--text-xs);
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

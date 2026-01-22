@@ -112,7 +112,9 @@ import { Router, Request, Response } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { verifyToken } from '../middlewares/auth.middleware';
 import { interactiveCurriculumService } from '../services/curriculum/interactive-curriculum.service';
+import { a2uiCurriculumStreamService, SSEComponentMessage } from '../services/curriculum/a2ui-curriculum-stream.service';
 import { CreativeCurriculum } from '../models/creative-curriculum.model';
+import { unifiedAIBridge } from '../services/unified-ai-bridge.service';
 
 const router = Router();
 
@@ -181,9 +183,65 @@ const router = Router();
  *   }
  * }
 */
+
+/**
+ * 🧪 AI Bridge 连接测试端点
+ * 用于验证AI服务是否正常工作
+ */
+router.get('/test-ai-bridge', async (req: Request, res: Response) => {
+  try {
+    console.log('🧪 [AI测试] 开始测试AI Bridge连接...');
+    
+    const startTime = Date.now();
+    
+    // 发送一个简单的测试请求
+    const response = await unifiedAIBridge.chat({
+      model: 'doubao-seed-1-6-thinking-250615',
+      messages: [
+        { role: 'system', content: '你是一个测试助手。' },
+        { role: 'user', content: '请用一句话回答：1+1等于几？' }
+      ],
+      temperature: 0.1,
+      max_tokens: 50
+    });
+    
+    const duration = Date.now() - startTime;
+    
+    console.log(`✅ [AI测试] AI Bridge 响应成功，耗时: ${duration}ms`);
+    console.log(`✅ [AI测试] 响应内容:`, (response as any)?.choices?.[0]?.message?.content?.substring(0, 100));
+    
+    res.json({
+      success: true,
+      message: 'AI Bridge 连接正常',
+      data: {
+        duration: `${duration}ms`,
+        response: (response as any)?.choices?.[0]?.message?.content || '无响应内容',
+        model: (response as any)?.model || 'unknown'
+      }
+    });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('❌ [AI测试] AI Bridge 连接失败:', errorMessage);
+    
+    res.status(500).json({
+      success: false,
+      message: 'AI Bridge 连接失败',
+      error: errorMessage
+    });
+  }
+});
+
 router.post('/generate', async (req: Request, res: Response) => {
   try {
-    const { prompt, domain, ageGroup } = req.body;
+    const { 
+      prompt, 
+      domain, 
+      ageGroup,
+      // 🎨 媒体生成选项
+      enableImage = true,
+      enableVoice = true,
+      enableSoundEffect = true
+    } = req.body;
     const userId = (req as any).user?.id;
 
     if (!prompt || !domain) {
@@ -203,6 +261,7 @@ router.post('/generate', async (req: Request, res: Response) => {
     // 生成任务ID
     const taskId = uuidv4();
     console.log(`🚀 [互动课程] 开始生成课程，taskId: ${taskId}`);
+    console.log(`🎨 [互动课程] 媒体选项: 图片=${enableImage}, 语音=${enableVoice}, 音效=${enableSoundEffect}`);
 
     // 异步执行生成任务，不阻塞响应
     (async () => {
@@ -481,7 +540,15 @@ router.get('/thinking/:taskId', async (req: Request, res: Response) => {
 */
 router.post('/generate-stream', async (req: Request, res: Response) => {
   try {
-    const { prompt, domain, ageGroup } = req.body;
+    const { 
+      prompt, 
+      domain, 
+      ageGroup,
+      // 🎨 媒体生成选项
+      enableImage = true,
+      enableVoice = true,
+      enableSoundEffect = true
+    } = req.body;
     const userId = (req as any).user?.id;
 
     if (!prompt || !domain) {
@@ -501,6 +568,7 @@ router.post('/generate-stream', async (req: Request, res: Response) => {
     // 生成任务ID
     const taskId = uuidv4();
     console.log(`🚀 [互动课程-流式] 开始生成课程，taskId: ${taskId}`);
+    console.log(`🎨 [互动课程-流式] 媒体选项: 图片=${enableImage}, 语音=${enableVoice}, 音效=${enableSoundEffect}`);
 
     // 设置 SSE 响应头
     res.writeHead(200, {
@@ -615,6 +683,336 @@ router.post('/generate-stream', async (req: Request, res: Response) => {
       res.status(500).json({
         success: false,
         message: '流式处理失败'
+      });
+    } else {
+      res.end();
+    }
+  }
+});
+
+/**
+ * POST /api/interactive-curriculum/generate-a2ui-stream
+ * A2UI流式生成互动课程（搭积木模式）
+ * 实时分段发送A2UI组件，前端可增量渲染
+ * 
+ * 支持的媒体选项：
+ * - enableImage: 是否生成图片（默认true）
+ * - enableVoice: 是否启用语音（默认true）
+ * - enableSoundEffect: 是否启用音效（默认true）
+ */
+router.post('/generate-a2ui-stream', async (req: Request, res: Response) => {
+  try {
+    const { 
+      prompt, 
+      domain, 
+      ageGroup,
+      // 🎨 媒体生成选项
+      enableImage = true,
+      enableVoice = true,
+      enableSoundEffect = true
+    } = req.body;
+    const userId = (req as any).user?.id;
+
+    if (!prompt || !domain) {
+      return res.status(400).json({
+        success: false,
+        message: '缺少必要参数: prompt 或 domain'
+      });
+    }
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: '用户未认证'
+      });
+    }
+
+    // 生成任务ID
+    const taskId = uuidv4();
+    console.log(`🧱 [A2UI搭积木] 开始流式生成，taskId: ${taskId}`);
+    console.log(`🎨 [A2UI搭积木] 媒体选项: 图片=${enableImage}, 语音=${enableVoice}, 音效=${enableSoundEffect}`);
+
+    // 设置 SSE 响应头
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Cache-Control, Authorization'
+    });
+
+    // 发送连接确认
+    res.write(`data: ${JSON.stringify({
+      type: 'connected',
+      taskId,
+      mode: 'a2ui-stream',
+      timestamp: new Date().toISOString(),
+      message: '🧱 已建立A2UI流式连接，开始搭建课程...'
+    })}\n\n`);
+
+    // SSE组件发送函数
+    const sendComponent = (msg: SSEComponentMessage) => {
+      res.write(`data: ${JSON.stringify({
+        ...msg,
+        timestamp: new Date().toISOString()
+      })}\n\n`);
+    };
+
+    // 🎨 判断是否是demo模式（根据租户信息）
+    const tenant = (req as any).tenant;
+    const ossNamespace = tenant?.ossNamespace || tenant?.code || 'demo';
+    const isDemo = ossNamespace === 'demo' || tenant?.code === 'k_tenant' || tenant?.code === 'dev';
+    console.log(`🎨 [A2UI路由] 租户模式判断: ossNamespace=${ossNamespace}, isDemo=${isDemo}`);
+
+    // 异步执行A2UI流式生成
+    (async () => {
+      try {
+        const result = await a2uiCurriculumStreamService.generateCurriculumStream(
+          prompt,
+          domain,
+          ageGroup || '4-5岁',
+          taskId,
+          sendComponent,
+          // 🎨 传递媒体选项（包含isDemo标识）
+          {
+            enableImage,
+            enableVoice,
+            enableSoundEffect,
+            isDemo  // demo模式使用本地AIBridge，租户模式使用统一认证
+          }
+        );
+
+        console.log('📦 [A2UI调试] generateCurriculumStream返回结果类型:', typeof result);
+        console.log('📦 [A2UI调试] result?.plan 存在:', !!result?.plan);
+        console.log('📦 [A2UI调试] result?.images 存在:', !!result?.images);
+        console.log('📦 [A2UI调试] result?.plan?.activities 存在:', !!result?.plan?.activities);
+        
+        if (!result) {
+          throw new Error('generateCurriculumStream 返回了 undefined');
+        }
+        
+        // 🔧 安全解构 - 更全面的空值处理
+        console.log('🔍 [调试] 步骤 1: 安全解构');
+        const plan = (result.plan || {}) as any;
+        const images = Array.isArray(result.images) ? result.images : [];
+
+        // 🔧 修复：确保 plan 对象的数组字段有效，防止 undefined.length 错误
+        if (!Array.isArray(plan.activities)) {
+          console.warn('⚠️ [A2UI路由] plan.activities 不是数组，设置为空数组');
+          plan.activities = [];
+        }
+        if (!Array.isArray(plan.objectives)) {
+          console.warn('⚠️ [A2UI路由] plan.objectives 不是数组，设置为空数组');
+          plan.objectives = [];
+        }
+        if (!Array.isArray(plan.images)) {
+          console.warn('⚠️ [A2UI路由] plan.images 不是数组，设置为空数组');
+          plan.images = [];
+        }
+
+        // 保存到数据库 - 确保所有字段有值
+        console.log('🔍 [调试] 步骤 2: 处理 plan 对象');
+        try {
+          console.log('🔍 [A2UI调试] plan对象:', JSON.stringify(plan || {}, null, 2).substring(0, 1000));
+        } catch (jsonError) {
+          console.log('🔍 [A2UI调试] plan对象无法序列化:', jsonError);
+        }
+        console.log('🔍 [A2UI调试] plan?.activities类型:', typeof plan?.activities, 'isArray:', Array.isArray(plan?.activities));
+        console.log('🔍 [A2UI调试] plan?.objectives类型:', typeof plan?.objectives, 'isArray:', Array.isArray(plan?.objectives));
+        
+        // 🔧 安全提取字段，防止 undefined.length 错误
+        console.log('🔍 [调试] 步骤 3: 安全提取字段');
+        const planActivities = Array.isArray(plan?.activities) ? plan.activities : [];
+        const planObjectives = Array.isArray(plan?.objectives) ? plan.objectives : [];
+        const planImages = Array.isArray(plan?.images) ? plan.images : [];
+        
+        console.log('🔍 [调试] 步骤 4: 构建 safePlan');
+        const safePlan = {
+          title: plan?.title || '未命名课程',
+          description: plan?.description || '',
+          domain: plan?.domain || domain,
+          ageGroup: plan?.ageGroup || ageGroup || '4-5岁',
+          objectives: planObjectives,
+          activities: planActivities,
+          style: plan?.style || '',
+          colorScheme: plan?.colorScheme || '',
+          duration: plan?.duration || 15
+        };
+        
+        console.log('🔍 [调试] 步骤 5: 计算 count');
+        console.log('🔍 [A2UI调试] safePlan.activities类型:', typeof safePlan.activities, 'isArray:', Array.isArray(safePlan.activities), 'length:', safePlan.activities.length);
+        console.log('🔍 [A2UI调试] safePlan.objectives类型:', typeof safePlan.objectives, 'isArray:', Array.isArray(safePlan.objectives), 'length:', safePlan.objectives.length);
+        
+        const activitiesCount = safePlan.activities.length;
+        const objectivesCount = safePlan.objectives.length;
+        const imagesCount = images.length;
+        
+        console.log('📝 [A2UI保存] 准备保存课程，safePlan:', JSON.stringify({
+          title: safePlan.title,
+          description: safePlan.description,
+          domain: safePlan.domain,
+          activities: activitiesCount,
+          objectives: objectivesCount,
+          images: imagesCount
+        }));
+        
+        // 🔧 将中文领域名称映射为英文enum值
+        const domainMap: Record<string, string> = {
+          '科学领域': 'science',
+          '健康领域': 'health',
+          '语言领域': 'language',
+          '社会领域': 'social',
+          '艺术领域': 'art',
+          'science': 'science',
+          'health': 'health',
+          'language': 'language',
+          'social': 'social',
+          'art': 'art'
+        };
+        const mappedDomain = domainMap[safePlan.domain] || 'science';
+        
+        console.log('📝 [A2UI保存] 使用 mappedDomain:', mappedDomain);
+        
+        // 🖼️ 将AI生成的图片转存到租户OSS
+        const { aiImageStorageService } = await import('../services/ai-image-storage.service');
+        const ossNamespace = aiImageStorageService.getOssNamespaceFromRequest(req);
+        
+        let storedImages: any[] = [];
+        let thumbnailUrl: string | null = null;
+        
+        if (images && images.length > 0) {
+          console.log(`🖼️ [A2UI保存] 开始转存 ${images.length} 张图片到 OSS (命名空间: ${ossNamespace})`);
+          
+          sendComponent({
+            type: 'progress',
+            message: '📤 正在将图片保存到云存储...'
+          });
+          
+          const storageResult = await aiImageStorageService.storeCurriculumImages(
+            images.map((img: any) => ({
+              id: img.id || `img_${Math.random().toString(36).substring(7)}`,
+              url: img.url,
+              description: img.description,
+              order: img.order
+            })),
+            ossNamespace
+          );
+          
+          storedImages = storageResult.storedImages;
+          thumbnailUrl = storageResult.thumbnailUrl || null;
+          
+          console.log(`✅ [A2UI保存] 图片转存完成, 缩略图: ${thumbnailUrl ? '已设置' : '未设置'}`);
+          
+          sendComponent({
+            type: 'progress',
+            message: `✅ ${storedImages.length} 张图片已保存到云存储`
+          });
+        }
+        
+        // 🔧 将数据转换为纯 JSON，避免 Sequelize 处理特殊对象时出错
+        const cleanImages = Array.isArray(storedImages) && storedImages.length > 0 
+          ? JSON.parse(JSON.stringify(storedImages)) 
+          : (Array.isArray(images) ? JSON.parse(JSON.stringify(images)) : []);
+        const cleanActivities = Array.isArray(safePlan.activities) ? JSON.parse(JSON.stringify(safePlan.activities)) : [];
+        const cleanObjectives = Array.isArray(safePlan.objectives) ? JSON.parse(JSON.stringify(safePlan.objectives)) : [];
+        
+        // 🔧 修复：确保所有必需字段都有有效值，防止 Sequelize 模型初始化错误
+        const courseName = safePlan.title || '未命名课程';
+        const courseDescription = safePlan.description || '';
+        const courseAgeGroup = safePlan.ageGroup || ageGroup || '4-5岁';
+        const courseStyle = safePlan.style || '';
+        const courseColorScheme = safePlan.colorScheme || '';
+        
+        console.log('📝 [A2UI保存] 课程名称:', courseName, ', 活动数:', cleanActivities.length, ', 目标数:', cleanObjectives.length);
+        
+        // 构建课程数据
+        const createData = {
+          creatorId: userId,
+          kindergartenId: (req as any).user?.kindergartenId || null,
+          name: String(courseName),
+          description: String(courseDescription),
+          domain: mappedDomain,
+          ageGroup: String(courseAgeGroup),
+          htmlCode: '',
+          cssCode: '',
+          jsCode: '',
+          status: 'draft',
+          curriculumType: 'a2ui',
+          viewCount: 0,
+          useCount: 0,
+          isPublic: false,
+          schedule: null,
+          tags: null,
+          thumbnail: thumbnailUrl,  // 使用转存后的缩略图URL
+          remark: null,
+          media: JSON.parse(JSON.stringify({
+            images: cleanImages,  // 使用转存后的图片URL
+            video: null
+          })),
+          metadata: JSON.parse(JSON.stringify({
+            generatedAt: new Date().toISOString(),
+            mode: 'a2ui-stream',
+            models: {
+              text: 'doubao-seed-1-6-thinking-250615',
+              image: 'doubao-seedream-4-5-251128'
+            },
+            status: 'completed',
+            progress: 100
+          })),
+          courseAnalysis: JSON.parse(JSON.stringify({
+            title: courseName,
+            objectives: cleanObjectives,
+            style: courseStyle,
+            colorScheme: courseColorScheme,
+            activities: cleanActivities
+          }))
+        };
+        
+        // 使用 Repository 保存课程
+        const { createCurriculumWithRawSQL } = await import('../repositories/creative-curriculum.repository');
+        const finalCurriculumId = await createCurriculumWithRawSQL(createData);
+
+        // 发送最终完成信号 - 不再依赖findByPk
+        res.write(`data: ${JSON.stringify({
+          type: 'finished',
+          curriculumId: finalCurriculumId,
+          plan: plan,
+          message: '🎉 课程生成完成！',
+          timestamp: new Date().toISOString()
+        })}\n\n`);
+
+        console.log(`✅ [A2UI搭积木] 课程生成完成，ID: ${finalCurriculumId}`);
+        res.end();
+
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorStack = error instanceof Error && error.stack ? error.stack : '';
+        console.error(`❌ [A2UI搭积木] 生成失败:`, errorMessage);
+        console.error(`❌ [A2UI搭积木] 错误堆栈:`, errorStack);
+        console.error(`❌ [A2UI搭积木] 完整错误对象:`, error);
+
+        res.write(`data: ${JSON.stringify({
+          type: 'error',
+          message: `[A2UI路由Catch] 生成失败: ${errorMessage}`,
+          stack: errorStack ? errorStack.substring(0, 500) : '',
+          timestamp: new Date().toISOString()
+        })}\n\n`);
+
+        res.end();
+      }
+    })();
+
+    // 处理客户端断开连接
+    req.on('close', () => {
+      console.log(`🔌 [A2UI搭积木] 客户端断开：taskId=${taskId}`);
+    });
+
+  } catch (error) {
+    console.error('❌ [A2UI搭积木] 处理失败:', error);
+    if (!res.headersSent) {
+      res.status(500).json({
+        success: false,
+        message: 'A2UI流式处理失败'
       });
     } else {
       res.end();
@@ -741,7 +1139,9 @@ router.get('/:id', async (req: Request, res: Response) => {
     const { id } = req.params;
     const userId = (req as any).user?.id;
 
-    const curriculum = await CreativeCurriculum.findByPk(id);
+    // 使用 Repository 获取课程
+    const { findCurriculumById, incrementViewCount } = await import('../repositories/creative-curriculum.repository');
+    const curriculum = await findCurriculumById(Number(id));
     if (!curriculum) {
       return res.status(404).json({
         success: false,
@@ -758,7 +1158,7 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 
     // 增加浏览次数
-    await curriculum.increment('viewCount');
+    await incrementViewCount(Number(id));
 
     res.json({
       success: true,
@@ -783,7 +1183,9 @@ router.post('/:id/save', async (req: Request, res: Response) => {
     const userId = (req as any).user?.id;
     const { name, description, domain, ageGroup, htmlCode, cssCode, jsCode, status, isPublic } = req.body;
 
-    const curriculum = await CreativeCurriculum.findByPk(id);
+    // 使用 Repository 获取和更新课程
+    const { findCurriculumById, updateCurriculumById } = await import('../repositories/creative-curriculum.repository');
+    const curriculum = await findCurriculumById(Number(id));
     if (!curriculum) {
       return res.status(404).json({
         success: false,
@@ -800,7 +1202,7 @@ router.post('/:id/save', async (req: Request, res: Response) => {
     }
 
     // 更新课程
-    await curriculum.update({
+    await updateCurriculumById(Number(id), {
       name,
       description,
       domain,
@@ -810,12 +1212,15 @@ router.post('/:id/save', async (req: Request, res: Response) => {
       jsCode,
       status,
       isPublic
-    });
+    } as any);
+
+    // 获取更新后的课程
+    const updatedCurriculum = await findCurriculumById(Number(id));
 
     res.json({
       success: true,
       message: '课程已保存',
-      data: curriculum
+      data: updatedCurriculum
     });
   } catch (error) {
     console.error('❌ [互动课程] 保存课程失败:', error);

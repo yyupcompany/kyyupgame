@@ -112,5 +112,18 @@ export const baseRoutes: RouteRecordRaw[] = [
       priority: 'low',
       hideInMenu: true
     }
+  },
+
+  // 500服务器错误页面
+  {
+    path: '/500',
+    name: 'ServerError',
+    component: () => import('@/pages/500.vue'),
+    meta: {
+      title: '服务器错误',
+      requiresAuth: false,
+      hideInMenu: true,
+      priority: 'low'
+    }
   }
 ]

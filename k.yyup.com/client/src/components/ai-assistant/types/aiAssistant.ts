@@ -124,7 +124,7 @@ export interface ExtendedChatMessage {
   toolCalls?: FunctionCallState[] | null  // 🎯 兼容字段：同时支持 toolCalls 和 functionCalls
 
   // 🎯 新增：消息类型字段
-  type?: 'thinking' | 'tool_intent' | 'tool_call' | 'tool_call_start' | 'tool_narration' | 'answer' | 'search'
+  type?: 'thinking' | 'tool_intent' | 'tool_call' | 'tool_call_start' | 'tool_narration' | 'tool_progress' | 'answer' | 'search'
 
   // 🎯 新增：工具调用相关字段
   toolName?: string
@@ -135,6 +135,8 @@ export interface ExtendedChatMessage {
   duration?: number
   description?: string  // 兼容字段：工具描述
   intent?: string       // 兼容字段：工具意图
+  progressMessage?: string  // 🆕 进度消息文本
+  progressPercent?: number  // 🆕 进度百分比
 
   // 🎯 新增：思考过程相关字段
   fullContent?: string      // 完整思考内容（用于循环显示）

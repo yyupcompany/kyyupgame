@@ -1484,7 +1484,7 @@ onUnmounted(() => {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-md);
 }
 
@@ -1694,7 +1694,7 @@ onUnmounted(() => {
       justify-content: space-between;
       align-items: center;
       padding: var(--spacing-md);
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-page);
       border-radius: var(--radius-md);
 
       .effect-metric {
@@ -1718,7 +1718,7 @@ onUnmounted(() => {
       align-items: center;
       gap: var(--spacing-md);
       padding: var(--spacing-md);
-      background-color: var(--bg-secondary);
+      background-color: var(--bg-page);
       border-radius: var(--radius-md);
       margin-bottom: var(--spacing-sm);
 
@@ -1731,12 +1731,12 @@ onUnmounted(() => {
 
 /* Element Plus 组件样式覆盖 */
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 
 :deep(.el-progress-bar__outer) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
 }
 
 :deep(.el-tag) {

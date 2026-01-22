@@ -126,6 +126,29 @@ export const aiRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        // 添加 /models 作为 /model 的别名（复数形式，更符合RESTful习惯）
+        path: 'models',
+        name: 'AIModelManagementAlias',
+        redirect: { name: 'AIModelManagement' },
+        meta: {
+          title: 'AI模型管理',
+          requiresAuth: true,
+          permission: 'AI_MODEL_CONFIG_MANAGE',
+          priority: 'low'
+        }
+      },
+      {
+        path: 'analytics',
+        name: 'AIAnalytics',
+        component: () => import('@/pages/ai/analytics/index.vue'),
+        meta: {
+          title: 'AI数据分析',
+          requiresAuth: true,
+          permission: 'AI_ANALYTICS_VIEW',
+          priority: 'medium'
+        }
+      },
+      {
         path: 'model-management',
         name: 'AIModelManagementPage',
         component: () => import('@/pages/ai/ModelManagementPage.vue'),

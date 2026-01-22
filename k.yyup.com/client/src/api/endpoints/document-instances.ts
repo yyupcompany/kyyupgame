@@ -82,7 +82,7 @@ export interface BatchDeleteResult {
  * 获取文档实例列表
  */
 export function getInstances(params?: DocumentInstanceListParams) {
-  return request.get<DocumentInstanceListResponse>('/api/document-instances', params);
+  return request.get<DocumentInstanceListResponse>('/api/document-instances', { params });
 }
 
 /**

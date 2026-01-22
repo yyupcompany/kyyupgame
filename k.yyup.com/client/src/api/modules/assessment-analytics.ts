@@ -73,7 +73,7 @@ export function getAssessmentOverview() {
  * 获取测评记录列表
  */
 export function getAssessmentRecords(params: RecordFilters) {
-  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.RECORDS, params);
+  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.RECORDS, { params });
 }
 
 /**
@@ -87,7 +87,7 @@ export function getAssessmentRecordDetail(id: number) {
  * 获取测评报告列表
  */
 export function getAssessmentReports(params: { page: number; pageSize: number }) {
-  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.REPORTS, params);
+  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.REPORTS, { params });
 }
 
 /**
@@ -106,8 +106,11 @@ export function exportAssessmentData(data: {
  * 获取趋势数据
  */
 export function getAssessmentTrends(params: TrendQuery) {
-  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.TRENDS, params);
+  return request.get(ASSESSMENT_ANALYTICS_ENDPOINTS.TRENDS, { params });
 }
+
+
+
 
 
 

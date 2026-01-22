@@ -38,6 +38,8 @@ import { AIUserRelation } from './ai-user-relation.model';
 import { AIUserPermission } from './ai-user-permission.model';
 import AIQueryHistory from './AIQueryHistory';
 import { ParentFollowup } from './parent-followup.model';
+// 教师奖励模型
+import { TeacherReward, initTeacherRewardModel, TeacherRewardStatus, TeacherRewardType } from './teacher-reward.model';
 import { ChannelTracking } from './channel-tracking.model';
 import { ConversionTracking } from './conversion-tracking.model';
 import { EnrollmentTask } from './enrollment-task.model';
@@ -54,6 +56,13 @@ import { ExternalDisplayRecord, initExternalDisplayRecordModel } from './externa
 import { ChampionshipRecord, initChampionshipRecordModel } from './championship-record.model';
 import { TeacherClassCourse, initTeacherClassCourseModel } from './teacher-class-course.model';
 import { TeacherCourseRecord, initTeacherCourseRecordModel } from './teacher-course-record.model';
+// 自定义课程模型
+import { CustomCourse, initCustomCourseModel } from './custom-course.model';
+import { CreativeCurriculum } from './creative-curriculum.model';
+import { CourseContent, initCourseContentModel } from './course-content.model';
+import { CourseSchedule, initCourseScheduleModel } from './course-schedule.model';
+import { CourseInteractiveLink, initCourseInteractiveLinkModel } from './course-interactive-link.model';
+import { CourseAssignment, initCourseAssignmentModel } from './course-assignment.model';
 // 客户跟进增强版模型
 import { CustomerFollowStage } from './customer-follow-stage.model';
 import { CustomerFollowRecordEnhanced } from './customer-follow-record-enhanced.model';
@@ -108,7 +117,13 @@ import { AssessmentQuestion } from './assessment-question.model';
 import { PhysicalTrainingItem } from './physical-training-item.model';
 import { AssessmentRecord } from './assessment-record.model';
 // 成长记录模型
-import { GrowthRecord, GrowthRecordType, MeasurementType, initGrowthRecord, initGrowthRecordAssociations } from './growth-record.model';
+import { GrowthRecord, GrowthRecordType, MeasurementType, initGrowthRecord, initGrowthRecordAssociations, calculateBMI, calculatePercentile, getDevelopmentAdvice } from './growth-record.model';
+// 家长沟通模型
+import { ParentCommunication, initParentCommunication, initParentCommunicationAssociations } from './parent-communication.model';
+// 预警中心模型
+import { Alert, initAlert, initAlertAssociations } from './alert.model';
+import { AlertRule, initAlertRule } from './alert-rule.model';
+import ScriptTemplate from './script-template.model';
 
 // 导出所有模型
 export {
@@ -120,10 +135,13 @@ export {
   AIMessage, AIConversation, AIFeedback, /* AIModelUsage, AIModelConfig, AIModelBilling, */ AIBillingRecord, AIUserRelation, AIUserPermission, AIQueryHistory, ParentFollowup,
   ChannelTracking, ConversionTracking, EnrollmentTask, PerformanceRule, Approval, ApprovalType, ApprovalStatus, ApprovalUrgency,
   PageGuide, PageGuideSection, PosterCategory,
+  ScriptTemplate,
   // 教学中心模型
   BrainScienceCourse, CoursePlan, CourseProgress, TeachingMediaRecord,
   OutdoorTrainingRecord, ExternalDisplayRecord, ChampionshipRecord,
   TeacherClassCourse, TeacherCourseRecord,
+  // 自定义课程模型
+  CustomCourse, CreativeCurriculum, CourseContent, CourseSchedule, CourseInteractiveLink, CourseAssignment,
   // 客户申请模型
   CustomerApplication, CustomerApplicationStatus,
   // 任务附件模型
@@ -142,7 +160,11 @@ export {
   // 测评系统模型
   AssessmentConfig, AssessmentQuestion, PhysicalTrainingItem, AssessmentRecord,
   // 成长记录模型
-  GrowthRecord, GrowthRecordType, MeasurementType,
+  GrowthRecord, GrowthRecordType, MeasurementType, calculateBMI, calculatePercentile, getDevelopmentAdvice,
+  // 家长沟通模型
+  ParentCommunication,
+  // 预警中心模型
+  Alert, AlertRule,
   // 机构现状模型
   OrganizationStatus,
   // 字段模板模型
@@ -150,7 +172,9 @@ export {
   // 营销活动模型
   GroupBuy, GroupBuyMember, CollectActivity, CollectRecord, TieredReward, TieredRewardRecord,
   // 订单和支付模型
-  Order
+  Order,
+  // 教师奖励模型
+  TeacherReward, TeacherRewardStatus, TeacherRewardType
   // AIQueryLog, AIQueryTemplate, AIQueryCache, AIQueryFeedback
 };
 
@@ -205,7 +229,18 @@ export const initModels = (sequelize: Sequelize): void => {
   Task.initModel(sequelize);
   Schedule.initModel(sequelize);
   Notification.initModel(sequelize);
+  ScriptTemplate.initModel(sequelize);
   initPerformanceRule(sequelize);
+
+  // 教师奖励模型
+  console.log('🎁 初始化教师奖励模型...');
+  try {
+    initTeacherRewardModel(sequelize);
+    console.log('✅ 教师奖励模型初始化成功');
+  } catch (error) {
+    console.error('❌ 教师奖励模型初始化失败:', error);
+    throw error;
+  }
 
   // 任务附件模型
   console.log('📎 初始化任务附件模型...');
@@ -241,6 +276,21 @@ export const initModels = (sequelize: Sequelize): void => {
     console.log('✅ 教学中心模型初始化成功');
   } catch (error) {
     console.error('❌ 教学中心模型初始化失败:', error);
+    throw error;
+  }
+
+  // 自定义课程模型
+  console.log('📚 初始化自定义课程模型...');
+  try {
+    initCustomCourseModel(sequelize);
+    CreativeCurriculum.initModel(sequelize);
+    initCourseContentModel(sequelize);
+    initCourseScheduleModel(sequelize);
+    initCourseInteractiveLinkModel(sequelize);
+    initCourseAssignmentModel(sequelize);
+    console.log('✅ 自定义课程模型初始化成功');
+  } catch (error) {
+    console.error('❌ 自定义课程模型初始化失败:', error);
     throw error;
   }
 
@@ -322,6 +372,27 @@ export const initModels = (sequelize: Sequelize): void => {
     console.log('✅ 成长记录模型初始化成功');
   } catch (error) {
     console.error('❌ 成长记录模型初始化失败:', error);
+    throw error;
+  }
+
+  // 家长沟通模型
+  console.log('💬 初始化家长沟通模型...');
+  try {
+    initParentCommunication(sequelize);
+    console.log('✅ 家长沟通模型初始化成功');
+  } catch (error) {
+    console.error('❌ 家长沟通模型初始化失败:', error);
+    throw error;
+  }
+
+  // 预警中心模型
+  console.log('🔔 初始化预警中心模型...');
+  try {
+    initAlert(sequelize);
+    initAlertRule(sequelize);
+    console.log('✅ 预警中心模型初始化成功');
+  } catch (error) {
+    console.error('❌ 预警中心模型初始化失败:', error);
     throw error;
   }
 
@@ -525,6 +596,20 @@ function setupAssociations(): void {
   CoursePlan.associate();
   TeacherClassCourse.associate();
   TeacherCourseRecord.associate();
+
+  // 自定义课程模型关联
+  // CustomCourse -> User (creator)
+  User.hasMany(CustomCourse, {
+    foreignKey: 'created_by',
+    as: 'createdCourses'
+  });
+
+  CourseAssignment.associate({
+    CustomCourse,
+    User,
+    Class,
+    TeacherCourseRecord
+  });
 
   // 媒体中心模型关联
   console.log('📱 设置媒体中心模型关联...');
@@ -872,22 +957,9 @@ function setupAssociations(): void {
       foreignKey: 'configId',
       as: 'config'
     });
-    AssessmentConfig.hasMany(AssessmentRecord, {
-      foreignKey: 'configId',
-      as: 'records'
-    });
 
-    // AssessmentRecord -> User (teacher)
-    AssessmentRecord.belongsTo(User, {
-      foreignKey: 'teacherId',
-      as: 'teacher'
-    });
-    User.hasMany(AssessmentRecord, {
-      foreignKey: 'teacherId',
-      as: 'teacherAssessmentRecords'
-    });
-
-    console.log('✅ 测评系统模型关联设置成功');
+    // 成长记录关联设置完成
+    console.log('✅ 成长记录关联设置成功');
   } catch (error) {
     console.error('❌ 测评系统模型关联设置失败:', error);
     throw error;
@@ -896,10 +968,33 @@ function setupAssociations(): void {
   // 成长记录模型关联
   console.log('📈 设置成长记录模型关联...');
   try {
-    initGrowthRecordAssociations();
+    // 直接设置关联（因为模型已在文件加载时初始化）
+    GrowthRecord.belongsTo(Student, { foreignKey: 'studentId', as: 'student' });
+    Student.hasMany(GrowthRecord, { foreignKey: 'studentId', as: 'growthRecords' });
+    GrowthRecord.belongsTo(User, { foreignKey: 'observerId', as: 'observer' });
     console.log('✅ 成长记录模型关联设置成功');
   } catch (error) {
     console.error('❌ 成长记录模型关联设置失败:', error);
+    throw error;
+  }
+
+  // 家长沟通模型关联
+  console.log('💬 设置家长沟通模型关联...');
+  try {
+    initParentCommunicationAssociations();
+    console.log('✅ 家长沟通模型关联设置成功');
+  } catch (error) {
+    console.error('❌ 家长沟通模型关联设置失败:', error);
+    throw error;
+  }
+
+  // 预警中心模型关联
+  console.log('🔔 设置预警中心模型关联...');
+  try {
+    initAlertAssociations();
+    console.log('✅ 预警中心模型关联设置成功');
+  } catch (error) {
+    console.error('❌ 预警中心模型关联设置失败:', error);
     throw error;
   }
 

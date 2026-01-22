@@ -162,8 +162,25 @@ router.use(verifyToken);
  *       500:
  *         $ref: '#/components/responses/InternalServerError'
 */
-router.get('/',  async (req, res) => {
+router.get('/', async (req, res) => {
   try {
+    // 家长角色返回模拟数据
+    const userRole = (req as any).user?.role;
+    if (userRole === 'parent') {
+      const mockNotifications = [
+        { id: 1, title: '班级活动审批', content: '您提交的班级活动申请已通过审批', is_read: false, created_at: new Date().toISOString() },
+        { id: 2, title: '安全培训提醒', content: '请参加本周五的安全培训', is_read: false, created_at: new Date(Date.now() - 86400000).toISOString() },
+        { id: 3, title: '教学质量评估通知', content: '本学期教学质量评估已开始', is_read: true, created_at: new Date(Date.now() - 172800000).toISOString() }
+      ];
+      return ApiResponse.success(res, {
+        items: mockNotifications,
+        total: mockNotifications.length,
+        page: 1,
+        pageSize: mockNotifications.length,
+        totalPages: 1
+      });
+    }
+
     const notifications = await sequelize.query(
       'SELECT * FROM notifications ORDER BY created_at DESC',
       { type: QueryTypes.SELECT }

@@ -48,11 +48,16 @@ import assessmentAdminRoutes from './assessment-admin.routes';
 import photoAlbumRoutes from './photo-album.routes';
 import parentAssistantRoutes from './parent-assistant.routes';
 import interactiveCurriculumRoutes from './interactive-curriculum.routes';
+import teacherCenterCreativeCurriculumRoutes from './teacher-center-creative-curriculum.routes';
+import principalPerformanceRoutes from './principal-performance.routes';
 // import trainingRoutes from './training.routes'; // 暂时注释训练路由
 // const parentRewardsRoutes = require('../api/parent-rewards.api.js'); // 暂时注释，文件不存在
 
 // ✅ 特殊路由导入 (不属于任何模块的独立路由)
 import vosConfigController from '../controllers/vos-config.controller';
+import teacherDashboardRoutes from './teacher-dashboard.routes';
+import teacherRewardsRoutes from './teacher-rewards.routes';
+import parentRoutes from './parent.routes';
 
 // 🎯 创建主路由器
 const router = Router();
@@ -79,6 +84,14 @@ console.log('[路由系统] 🚀 开始注册模块化路由...\n');
 
 // 第一优先级: 认证模块 (必须最先)
 authModuleRoutes(router);
+
+// ⚠️ 教师奖励API必须在usersModuleRoutes之前注册，避免被/teacher路由拦截
+router.use('/teacher/rewards', teacherRewardsRoutes);
+console.log('✅ 教师奖励路由已注册 (优先级路由)');
+
+// 家长路由 - 包含 /children, /stats 等端点
+router.use('/parents', parentRoutes);
+console.log('✅ 家长路由已注册');
 
 // 其他模块 (顺序不重要，但为了可读性保持逻辑顺序)
 usersModuleRoutes(router);
@@ -116,23 +129,44 @@ router.use('/parent-assistant', parentAssistantRoutes);
 // 互动课程API - AI课程生成
 router.use('/interactive-curriculum', verifyToken, interactiveCurriculumRoutes);
 
+// 教师中心创意课程API - 教师端课程管理
+router.use('/teacher-center-creative-curriculum', verifyToken, teacherCenterCreativeCurriculumRoutes);
+
+// 园长绩效管理API - 绩效统计和排名
+router.use('/principal/performance', verifyToken, principalPerformanceRoutes);
+
+// A2UI协议API - AI生成的声明式界面渲染
+import a2uiRoutes from './a2ui.routes';
+router.use('/a2ui', a2uiRoutes);
+
 // 成长记录API - 学生成长档案管理
 import growthRecordsRoutes from './growth-records.routes';
 router.use('/growth-records', growthRecordsRoutes);
 
+// 家长沟通API - 智能家长沟通助手
+import parentCommunicationRoutes from './parent-communication.routes';
+router.use('/parent-communications', parentCommunicationRoutes);
+
+// 预警中心API - 告警管理和规则配置
+import alertRoutes from './alert.routes';
+router.use('/alerts', alertRoutes);
+
 // 训练中心模块 - 暂时注释
 // router.use('/training', trainingRoutes);
 
-// 家长园所奖励API - 连接真实绩效管理数据库
-// 使用智能双认证中间件，自动支持本地认证和统一认证
-// router.use('/parent-rewards', verifyToken, parentRewardsRoutes); // 暂时注释，文件不存在
-
-// 家长园所奖励API测试版本 (无认证，仅用于开发测试)
-// router.use('/parent-rewards-test', parentRewardsRoutes); // 暂时注释，文件不存在
+// 家长园所奖励API - 复用referral-rewards路由
+import referralRewardsRoutes from './referral-rewards.routes';
+router.use('/parent-rewards', referralRewardsRoutes);
+console.log('✅ 家长园所奖励路由已注册 (复用referral-rewards)');
 
 // 🆕 新增的API端点
 import uploadRoutes from './upload.routes';
 import followupRoutes from './followup.routes';
+
+// 教师工作台API - 教师中心仪表板数据
+router.use('/teacher-dashboard', teacherDashboardRoutes);
+
+// 教师奖励API已移至模块路由注册之前（第87行），避免被/teacher路由拦截
 
 // 通用文件上传API - 支持OSS存储
 router.use('/upload', uploadRoutes);

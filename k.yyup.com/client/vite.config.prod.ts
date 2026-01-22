@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import legacy from '@vitejs/plugin-legacy'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -21,6 +22,10 @@ export default defineConfig({
       }
     }),
     vueJsx(),
+    // ✅ 生产环境旧浏览器兼容：输出 nomodule 降级包，避免部分内置浏览器“白屏/一直加载”
+    legacy({
+      targets: ['defaults', 'not IE 11']
+    }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
       imports: ['vue', 'vue-router', 'pinia'],

@@ -1,81 +1,79 @@
 <template>
-  <div class="kindergarten-rewards">
-    <!-- 页面头部 -->
-    <div class="page-header">
-      <div class="header-content">
-        <div class="title-section">
-            <h1 class="page-title">
-            <UnifiedIcon name="el-icon class="title-icon"" size="var(--icon-md)" />
-            绩效奖励
-          </h1>
-          <p class="page-subtitle">查看和管理我的绩效奖励</p>
-        </div>
-        <div class="header-actions">
-          <el-button type="primary" @click="refreshRewards">
-            <UnifiedIcon name="el-icon" size="var(--icon-md)" />
-            刷新奖励
-          </el-button>
-        </div>
-      </div>
-    </div>
+  <UnifiedCenterLayout
+    title="绩效奖励"
+    description="查看和管理我的绩效奖励记录"
+    icon="Star"
+  >
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-select
+        v-model="filterStatus"
+        placeholder="筛选状态"
+        style="width: 120px; margin-right: var(--spacing-md);"
+        @change="filterRewards"
+      >
+        <el-option label="全部" value=""></el-option>
+        <el-option label="可用" value="available"></el-option>
+        <el-option label="已使用" value="used"></el-option>
+        <el-option label="已过期" value="expired"></el-option>
+      </el-select>
+      <el-select
+        v-model="filterType"
+        placeholder="筛选类型"
+        style="width: 140px;"
+        @change="filterRewards"
+      >
+        <el-option label="全部类型" value=""></el-option>
+        <el-option label="现金" value="cash"></el-option>
+        <el-option label="代金券" value="voucher"></el-option>
+        <el-option label="礼品" value="gift"></el-option>
+        <el-option label="积分" value="points"></el-option>
+      </el-select>
+      <el-button type="primary" @click="refreshRewards">
+        <UnifiedIcon name="refresh" :size="16" />
+        刷新
+      </el-button>
+    </template>
 
-    <!-- 奖励统计卡片 -->
-    <div class="rewards-stats">
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <el-card class="stat-card available">
-            <div class="stat-content">
-              <div class="stat-icon">
-                <UnifiedIcon name="el-icon" size="var(--icon-md)" />
-              </div>
-              <div class="stat-info">
-                <div class="stat-value">{{ stats.availableRewards }}</div>
-                <div class="stat-label">可用奖励</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stat-card used">
-            <div class="stat-content">
-              <div class="stat-icon">
-                <UnifiedIcon name="el-icon" size="var(--icon-md)" />
-              </div>
-              <div class="stat-info">
-                <div class="stat-value">{{ stats.usedRewards }}</div>
-                <div class="stat-label">已使用</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stat-card expired">
-            <div class="stat-content">
-              <div class="stat-icon">
-                <UnifiedIcon name="el-icon" size="var(--icon-md)" />
-              </div>
-              <div class="stat-info">
-                <div class="stat-value">{{ stats.expiredRewards }}</div>
-                <div class="stat-label">已过期</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-        <el-col :span="6">
-          <el-card class="stat-card total">
-            <div class="stat-content">
-              <div class="stat-icon">
-                <UnifiedIcon name="el-icon" size="var(--icon-md)" />
-              </div>
-              <div class="stat-info">
-                <div class="stat-value">{{ stats.totalRewards }}</div>
-                <div class="stat-label">累计奖励</div>
-              </div>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
+    <!-- 统计卡片 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        icon="success"
+        title="可用奖励"
+        :value="stats.availableRewards"
+        subtitle="未使用的奖励"
+        type="success"
+        :trend="stats.availableRewards > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="check"
+        title="已使用"
+        :value="stats.usedRewards"
+        subtitle="已使用奖励"
+        type="primary"
+        :trend="stats.usedRewards > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="alert"
+        title="已过期"
+        :value="stats.expiredRewards"
+        subtitle="过期奖励"
+        type="danger"
+        :trend="stats.expiredRewards > 0 ? 'down' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="star"
+        title="累计奖励"
+        :value="stats.totalRewards"
+        subtitle="累计获得奖励"
+        type="warning"
+        :trend="stats.totalRewards > 0 ? 'up' : 'stable'"
+        clickable
+      />
+    </template>
 
     <!-- 奖励列表 -->
     <div class="rewards-content">
@@ -83,31 +81,6 @@
         <template #header>
           <div class="card-header">
             <span>我的奖励</span>
-            <div class="header-controls">
-              <el-select
-                v-model="filterStatus"
-                placeholder="筛选状态"
-                style="width: 120px; margin-right: 10px;"
-                @change="filterRewards"
-              >
-                <el-option label="全部" value=""></el-option>
-                <el-option label="可用" value="available"></el-option>
-                <el-option label="已使用" value="used"></el-option>
-                <el-option label="已过期" value="expired"></el-option>
-              </el-select>
-              <el-select
-                v-model="filterType"
-                placeholder="筛选类型"
-                style="width: 140px;"
-                @change="filterRewards"
-              >
-                <el-option label="全部类型" value=""></el-option>
-                <el-option label="现金" value="cash"></el-option>
-                <el-option label="代金券" value="voucher"></el-option>
-                <el-option label="礼品" value="gift"></el-option>
-                <el-option label="积分" value="points"></el-option>
-              </el-select>
-            </div>
           </div>
         </template>
 
@@ -127,9 +100,9 @@
             >
               <div class="reward-header">
                 <div class="reward-type-icon">
-                  <UnifiedIcon name="el-icon v-if="reward.type === 'voucher'"" size="var(--icon-md)" />
-                  <UnifiedIcon name="el-icon v-else-if="reward.type === 'gift'"" size="var(--icon-md)" />
-                  <UnifiedIcon name="el-icon v-else" size="var(--icon-md)" />
+                  <UnifiedIcon v-if="reward.type === 'voucher'" name="ticket" :size="24" />
+                  <UnifiedIcon v-else-if="reward.type === 'gift'" name="gift" :size="24" />
+                  <UnifiedIcon v-else name="star" :size="24" />
                 </div>
                 <div class="reward-info">
                   <h3 class="reward-title">{{ reward.title }}</h3>
@@ -168,12 +141,12 @@
                   <span class="label">来源：</span>
                   <span class="value">{{ reward.source }}</span>
                 </div>
-                
-                <!-- 🆕 分享带来的线索跟单进度 -->
+
+                <!-- 分享带来的线索跟单进度 -->
                 <div v-if="reward.shareInfo && reward.shareInfo.leads && reward.shareInfo.leads.length > 0" class="detail-row sop-progress-section">
                   <div class="sop-progress-container">
                     <div class="sop-header">
-                      <UnifiedIcon name="el-icon" size="var(--icon-md)" />
+                      <UnifiedIcon name="share" :size="16" />
                       <span class="sop-title">分享带来的客户（{{ reward.shareInfo.leads.length }}个）</span>
                     </div>
                     <div class="sop-leads-list">
@@ -187,10 +160,10 @@
                         </div>
                         <div class="lead-sop" v-if="lead.sopProgress">
                           <div class="sop-stage">
-                            <UnifiedIcon name="el-icon" size="var(--icon-md)" />
+                            <UnifiedIcon name="trend" :size="14" />
                             <span class="stage-name">{{ lead.sopProgress.currentStage }}</span>
-                            <el-progress 
-                              :percentage="lead.sopProgress.progress" 
+                            <el-progress
+                              :percentage="lead.sopProgress.progress"
                               :stroke-width="6"
                               :show-text="false"
                               class="stage-progress"
@@ -245,9 +218,9 @@
       <div v-if="selectedReward" class="reward-detail">
         <div class="detail-header">
           <div class="detail-icon">
-            <UnifiedIcon name="el-icon v-if="selected-reward.type === 'voucher'"" size="var(--icon-md)" />
-            <UnifiedIcon name="el-icon v-else-if="selected-reward.type === 'gift'"" size="var(--icon-md)" />
-            <UnifiedIcon name="el-icon v-else" size="var(--icon-md)" />
+            <UnifiedIcon v-if="selectedReward.type === 'voucher'" name="ticket" :size="32" />
+            <UnifiedIcon v-else-if="selectedReward.type === 'gift'" name="gift" :size="32" />
+            <UnifiedIcon v-else name="star" :size="32" />
           </div>
           <div class="detail-title-section">
             <h3>{{ selectedReward.title }}</h3>
@@ -321,7 +294,6 @@
             title="确认使用"
             type="warning"
             :closable="false"
-            style="margin-bottom: 20px;"
           >
             确认要使用这个代金券吗？使用后将从可用奖励中移除。
           </el-alert>
@@ -341,96 +313,19 @@
         </span>
       </template>
     </el-dialog>
-  </div>
+  </UnifiedCenterLayout>
 </template>
 
-<scriptscription: '可用于下次亲子活动报名',
-        type: 'voucher',
-        value: 50,
-        currency: 'CNY',
-        status: 'available',
-        expiryDate: '2025-12-31',
-        createdAt: '2025-11-01',
-        source: '宝宝表现优秀奖励',
-        usageInstructions: '在活动报名时选择使用代金券支付即可享受优惠'
-      },
-      {
-        id: 2,
-        title: '图书礼券',
-        description: '精选绘本一本',
-        type: 'gift',
-        status: 'available',
-        expiryDate: '2025-11-30',
-        createdAt: '2025-10-28',
-        source: '阅读活动积极参与'
-      },
-      {
-        id: 3,
-        title: '小星星积分',
-        description: '表现优秀获得的小星星',
-        type: 'points',
-        value: 10,
-        status: 'available',
-        createdAt: '2025-10-25',
-        source: '课堂表现奖励'
-      },
-      {
-        id: 4,
-        title: '体验课代金券',
-        description: '免费体验课程一次',
-        type: 'voucher',
-        value: 100,
-        currency: 'CNY',
-        status: 'used',
-        usedAt: '2025-10-20',
-        createdAt: '2025-10-01',
-        source: '新生入学礼包'
-      },
-      {
-        id: 5,
-        title: '过期代金券',
-        description: '已过期的代金券',
-        type: 'voucher',
-        value: 30,
-        currency: 'CNY',
-        status: 'expired',
-        expiryDate: '2025-10-31',
-        createdAt: '2025-09-15',
-        source: '活动参与奖励'
-      }
-    ]
-
-    rewards.value = mockRewards
-    updateStats()
-
-    ElMessage.warning('API服务暂不可用，显示模拟数据')
-  } finally {
-    loading.value = false
-  }
-}
-
-const updateStats = () =>>
+<script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import {
-  Gift,
-  Refresh,
-  Money,
-  Check,
-  Clock,
-  Trophy,
-  Document,
-  Star,
-  UserFilled,
-  CircleCheck
-} from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import StatCard from '@/components/centers/StatCard.vue'
 import TeacherRewardsService, {
   type TeacherReward,
   type TeacherRewardStats
 } from '@/api/modules/teacher-rewards'
-
-const router = useRouter()
 
 // 响应式数据
 const loading = ref(false)
@@ -466,14 +361,13 @@ const filteredRewards = computed(() => {
     filtered = filtered.filter(reward => reward.type === filterType.value)
   }
 
-  return filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  return filtered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 })
 
 // 方法
 const refreshRewards = async () => {
   loading.value = true
   try {
-    // 调用真实API获取奖励数据和统计信息
     const { rewards: rewardsData, stats: statsData } = await TeacherRewardsService.refreshRewardsData({
       status: filterStatus.value || undefined,
       type: filterType.value || undefined,
@@ -489,7 +383,7 @@ const refreshRewards = async () => {
     console.error('刷新奖励失败:', error)
 
     // 如果API调用失败，使用模拟数据作为备用
-    const mockRewards: KindergartenReward[] = [
+    const mockRewards = [
       {
         id: 1,
         title: '亲子活动代金券',
@@ -569,7 +463,7 @@ const filterRewards = () => {
   // 筛选逻辑在计算属性中处理
 }
 
-const getRewardStatusClass = (reward) => {
+const getRewardStatusClass = (reward: any) => {
   return {
     'status-available': reward.status === 'available',
     'status-used': reward.status === 'used',
@@ -577,7 +471,7 @@ const getRewardStatusClass = (reward) => {
   }
 }
 
-const getStatusTagType = (status) => {
+const getStatusTagType = (status: string) => {
   switch (status) {
     case 'available': return 'success'
     case 'used': return 'info'
@@ -586,7 +480,7 @@ const getStatusTagType = (status) => {
   }
 }
 
-const getStatusText = (status) => {
+const getStatusText = (status: string) => {
   switch (status) {
     case 'available': return '可用'
     case 'used': return '已使用'
@@ -595,7 +489,7 @@ const getStatusText = (status) => {
   }
 }
 
-const getTypeText = (type) => {
+const getTypeText = (type: string) => {
   switch (type) {
     case 'cash': return '现金'
     case 'voucher': return '代金券'
@@ -605,7 +499,7 @@ const getTypeText = (type) => {
   }
 }
 
-const formatRewardValue = (reward) => {
+const formatRewardValue = (reward: any) => {
   if (reward.type === 'voucher' && reward.currency) {
     return `¥${reward.value}`
   } else if (reward.type === 'points') {
@@ -614,17 +508,16 @@ const formatRewardValue = (reward) => {
   return reward.value || ''
 }
 
-const formatDate = (dateString) => {
+const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('zh-CN')
 }
 
-const isExpired = (expiryDate) => {
+const isExpired = (expiryDate: string) => {
   return new Date(expiryDate) < new Date()
 }
 
-// 🆕 获取线索状态类型（用于标签颜色）
-const getLeadStatusType = (status) => {
-  const typeMap = {
+const getLeadStatusType = (status: string) => {
+  const typeMap: Record<string, string> = {
     'pending': 'info',
     'assigned': 'warning',
     'following': 'primary',
@@ -634,7 +527,7 @@ const getLeadStatusType = (status) => {
   return typeMap[status] || 'info'
 }
 
-const viewRewardDetail = (reward) => {
+const viewRewardDetail = (reward: TeacherReward) => {
   selectedReward.value = reward
   detailDialogVisible.value = true
 }
@@ -644,7 +537,7 @@ const handleDetailClose = () => {
   selectedReward.value = null
 }
 
-const useReward = (reward) => {
+const useReward = (reward: TeacherReward) => {
   selectedVoucher.value = reward
   useVoucherDialogVisible.value = true
 }
@@ -654,14 +547,12 @@ const confirmUseVoucher = async () => {
 
   useVoucherLoading.value = true
   try {
-    // 调用真实API使用代金券
-    const result = await KindergartenRewardsService.useVoucher(selectedVoucher.value.id, {
+    const result = await TeacherRewardsService.useVoucher(selectedVoucher.value.id, {
       useLocation: '家长端园所奖励页面',
       notes: '用户主动使用代金券'
     })
 
     if (result.success) {
-      // 更新奖励状态
       const rewardIndex = rewards.value.findIndex(r => r.id === selectedVoucher.value!.id)
       if (rewardIndex !== -1) {
         rewards.value[rewardIndex].status = 'used'
@@ -696,127 +587,29 @@ const confirmUseVoucher = async () => {
   }
 }
 
-// 生命周期
 onMounted(() => {
   refreshRewards()
 })
 </script>
 
-<style>
-.kindergarten-rewards {
-  padding: var(--spacing-lg);
-  max-width: 1200px;
-  margin: 0 auto;
-}
+<style lang="scss" scoped>
+@use "@/styles/design-tokens.scss" as *;
 
-.page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 30px;
-  border-radius: 15px;
-  margin-bottom: var(--spacing-2xl);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title-section .page-title {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  font-size: var(--icon-2xl);
-  font-weight: bold;
-  margin: 0 0 8px 0;
-}
-
-.title-icon {
-  font-size: var(--icon-3xl);
-}
-
-.page-subtitle {
-  margin: 0;
-  font-size: var(--icon-md);
-  opacity: 0.9;
-}
-
-.rewards-stats {
-  margin-bottom: var(--spacing-2xl);
-}
-
-.stat-card {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.stat-card.available {
-  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
-  color: white;
-}
-
-.stat-card.used {
-  background: linear-gradient(135deg, #1890ff 0%, #40a9ff 100%);
-  color: white;
-}
-
-.stat-card.expired {
-  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
-  color: white;
-}
-
-.stat-card.total {
-  background: linear-gradient(135deg, #722ed1 0%, #9254de 100%);
-  color: white;
-}
-
-.stat-content {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg);
-}
-
-.stat-icon {
-  font-size: var(--text-3xl);
-  opacity: 0.9;
-}
-
-.stat-value {
-  font-size: var(--icon-3xl);
-  font-weight: bold;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: var(--icon-sm);
-  opacity: 0.9;
-  margin-top: 4px;
-}
-
+// ==================== 奖励内容区域 ====================
 .rewards-content {
-  margin-bottom: var(--spacing-2xl);
-}
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+  }
 
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  font-size: var(--text-lg);
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: var(--text-lg);
+  }
 }
 
 .rewards-list {
@@ -830,198 +623,204 @@ onMounted(() => {
 }
 
 .reward-item {
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: var(--spacing-lg);
-  background: white;
-  transition: all 0.3s ease;
+  background: var(--bg-card);
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  &.status-available {
+    border-left: 4px solid var(--success-color);
+  }
+
+  &.status-used {
+    border-left: 4px solid var(--primary-color);
+    opacity: 0.8;
+  }
+
+  &.status-expired {
+    border-left: 4px solid var(--danger-color);
+    opacity: 0.7;
+  }
+
+  .reward-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .reward-type-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    background: var(--primary-light);
+    color: var(--primary-color);
+  }
+
+  .reward-info {
+    flex: 1;
+  }
+
+  .reward-title {
+    margin: 0 0 var(--spacing-xs) 0;
+    font-size: var(--text-base);
+    font-weight: bold;
+    color: var(--text-primary);
+  }
+
+  .reward-description {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .reward-status {
+    flex-shrink: 0;
+  }
+
+  .reward-details {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--text-sm);
+
+    .label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .value {
+      color: var(--text-primary);
+
+      &.highlight {
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: var(--text-base);
+      }
+    }
+  }
+
+  .text-danger {
+    color: var(--danger-color) !important;
+  }
+
+  .reward-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+  }
 }
 
-.reward-item:hover {
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-.reward-item.status-available {
-  border-left: 4px solid #52c41a;
-}
-
-.reward-item.status-used {
-  border-left: 4px solid #1890ff;
-  opacity: 0.8;
-}
-
-.reward-item.status-expired {
-  border-left: 4px solid #ff4d4f;
-  opacity: 0.7;
-}
-
-.reward-header {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.reward-type-icon {
-  font-size: var(--icon-xl);
-  color: #1890ff;
-  background: #e6f7ff;
-  padding: var(--spacing-sm);
-  border-radius: 8px;
-  flex-shrink: 0;
-}
-
-.reward-info {
-  flex: 1;
-}
-
-.reward-title {
-  margin: 0 0 5px 0;
-  font-size: var(--icon-md);
-  font-weight: bold;
-  color: #262626;
-}
-
-.reward-description {
-  margin: 0;
-  font-size: var(--icon-sm);
-  color: #666;
-  line-height: 1.4;
-}
-
-.reward-status {
-  flex-shrink: 0;
-}
-
-.reward-details {
-  margin-bottom: var(--spacing-md);
-}
-
-.detail-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  font-size: var(--icon-sm);
-}
-
-.detail-row .label {
-  color: #666;
-  font-weight: 500;
-}
-
-.detail-row .value {
-  color: #262626;
-}
-
-.detail-row .value.highlight {
-  color: #1890ff;
-  font-weight: bold;
-  font-size: var(--icon-md);
-}
-
-.text-danger {
-  color: #ff4d4f !important;
-}
-
-.reward-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-}
-
+// ==================== 奖励详情对话框 ====================
 .reward-detail {
   padding: var(--spacing-lg) 0;
+
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .detail-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--primary-light);
+    color: var(--primary-color);
+  }
+
+  .detail-title-section h3 {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--text-lg);
+    font-weight: bold;
+  }
+
+  .detail-content {
+    .detail-item {
+      display: flex;
+      margin-bottom: var(--spacing-md);
+      align-items: flex-start;
+
+      .item-label {
+        width: 80px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        flex-shrink: 0;
+      }
+
+      .item-value {
+        flex: 1;
+        color: var(--text-primary);
+        word-break: break-word;
+
+        &.highlight {
+          color: var(--primary-color);
+          font-weight: bold;
+          font-size: var(--text-base);
+        }
+      }
+
+      .instruction-text {
+        background: var(--success-light);
+        border: 1px solid var(--success-color);
+        border-radius: var(--radius-sm);
+        padding: var(--spacing-sm);
+        color: var(--success-color);
+        line-height: 1.5;
+      }
+    }
+  }
 }
 
-.detail-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.detail-icon {
-  font-size: var(--text-3xl);
-  color: #1890ff;
-  background: #e6f7ff;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.detail-title-section h3 {
-  margin: 0 0 8px 0;
-  font-size: var(--text-lg);
-  font-weight: bold;
-}
-
-.detail-content {
-  space-y: 15px;
-}
-
-.detail-item {
-  display: flex;
-  margin-bottom: var(--spacing-md);
-  align-items: flex-start;
-}
-
-.item-label {
-  width: 80px;
-  font-weight: 500;
-  color: #666;
-  flex-shrink: 0;
-}
-
-.item-value {
-  flex: 1;
-  color: #262626;
-  word-break: break-word;
-}
-
-.item-value.highlight {
-  color: #1890ff;
-  font-weight: bold;
-  font-size: var(--icon-md);
-}
-
-.instruction-text {
-  background: #f6ffed;
-  border: 1px solid #b7eb8f;
-  border-radius: 6px;
-  padding: var(--spacing-sm);
-  margin-top: 5px;
-  color: #389e0d;
-  line-height: 1.5;
-}
-
+// ==================== 使用代金券对话框 ====================
 .voucher-use {
   text-align: center;
-}
 
-.voucher-info h4 {
-  margin: 0 0 10px 0;
-  font-size: var(--icon-md);
-  color: #262626;
-}
+  .voucher-info h4 {
+    margin: 0 0 var(--spacing-md) 0;
+    font-size: var(--text-lg);
+    color: var(--text-primary);
+  }
 
-.voucher-value {
-  margin: 5px 0;
-  font-size: var(--text-lg);
-  font-weight: bold;
-  color: #1890ff;
-}
+  .voucher-value {
+    margin: var(--spacing-sm) 0;
+    font-size: var(--text-lg);
+    font-weight: bold;
+    color: var(--primary-color);
+  }
 
-.voucher-expiry {
-  margin: 5px 0;
-  color: #666;
-  font-size: var(--icon-sm);
-}
+  .voucher-expiry {
+    margin: var(--spacing-sm) 0;
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
 
-.use-confirmation {
-  margin-top: 20px;
+  .use-confirmation {
+    margin-top: var(--spacing-xl);
+  }
 }
 
 .empty-state {
@@ -1031,12 +830,12 @@ onMounted(() => {
   min-height: 300px;
 }
 
-/* 🆕 SOP跟单进度样式 */
+// ==================== SOP跟单进度样式 ====================
 .sop-progress-section {
   display: block;
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px dashed #e8e8e8;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px dashed var(--border-color);
 }
 
 .sop-progress-container {
@@ -1046,118 +845,94 @@ onMounted(() => {
 .sop-header {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: 12px;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
   font-weight: 600;
-  color: #409eff;
+  color: var(--primary-color);
 }
 
 .sop-title {
-  font-size: var(--icon-sm);
+  font-size: var(--text-sm);
 }
 
 .sop-leads-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--spacing-sm);
 }
 
 .lead-item {
-  background: #f5f7fa;
-  border: 1px solid #e4e7ed;
-  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
   padding: var(--spacing-sm);
-  transition: all 0.3s ease;
+  transition: all var(--transition-base);
+
+  &:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .lead-info {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .lead-name {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+  }
+
+  .lead-phone {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
+
+  .lead-teacher {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+
+  .lead-sop {
+    margin-top: var(--spacing-sm);
+  }
+
+  .sop-stage {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stage-name {
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--primary-color);
+    min-width: 80px;
+  }
+
+  .stage-progress {
+    flex: 1;
+  }
+
+  .sop-probability {
+    font-size: var(--text-xs);
+    color: var(--success-color);
+    font-weight: 600;
+  }
+
+  .lead-status {
+    margin-top: var(--spacing-sm);
+    text-align: right;
+  }
 }
 
-.lead-item:hover {
-  border-color: #409eff;
-  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.1);
-}
-
-.lead-info {
-  margin-bottom: 8px;
-}
-
-.lead-name {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: 4px;
-  font-weight: 500;
-}
-
-.lead-phone {
-  color: #666;
-  font-size: var(--text-sm);
-}
-
-.lead-teacher {
-  font-size: var(--icon-xs);
-  color: #909399;
-}
-
-.lead-sop {
-  margin-top: 8px;
-}
-
-.sop-stage {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  margin-bottom: 6px;
-}
-
-.stage-name {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: #409eff;
-  min-width: 80px;
-}
-
-.stage-progress {
-  flex: 1;
-}
-
-.sop-probability {
-  font-size: var(--icon-xs);
-  color: #67c23a;
-  font-weight: 600;
-}
-
-.lead-status {
-  margin-top: 8px;
-  text-align: right;
-}
-
+// ==================== 响应式设计 ====================
 @media (max-width: var(--breakpoint-md)) {
-  .kindergarten-rewards {
-    padding: 15px;
-  }
-
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-md);
-  }
-
-  .rewards-stats .el-col {
-    margin-bottom: var(--spacing-md);
-  }
-
   .rewards-grid {
     grid-template-columns: 1fr;
-  }
-
-  .card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .header-controls {
-    width: 100%;
-    justify-content: space-between;
   }
 }
 </style>

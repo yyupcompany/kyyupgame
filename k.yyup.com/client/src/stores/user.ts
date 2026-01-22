@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', {
         try {
           userInfo = JSON.parse(savedUserInfo)
           permissions = userInfo?.permissions || []
-          console.log('✅ [前端Store] 从localStorage恢复用户信息:', userInfo.username)
+          console.log('✅ [前端Store] 从localStorage恢复用户信息:', userInfo?.username || 'unknown')
         } catch (error) {
           console.error('恢复用户信息失败:', error)
         }

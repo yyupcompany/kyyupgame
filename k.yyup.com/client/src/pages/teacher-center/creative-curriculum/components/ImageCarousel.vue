@@ -104,7 +104,7 @@ function nextImage() {
 
   .carousel-main {
     position: relative;
-    background: var(--bg-primary);
+    background: var(--bg-page);
     border-radius: var(--spacing-sm);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
     aspect-ratio: 16 / 9;

@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    :title="pageTitle"
-    :show-back="true"
-    @back="handleBack"
-  >
+  <MobileCenterLayout title="pageTitle" back-path="/mobile/centers">
     <div class="mobile-document-collaboration">
       <!-- 文档列表（当没有ID时显示） -->
       <div v-if="!hasDocumentId" class="document-list-container">
@@ -16,7 +12,7 @@
           @clear="handleClearSearch"
         >
           <template #action>
-            <van-button size="small" type="primary" @click="showFilterPopup = true">
+            <van-button size="medium" type="primary" @click="showFilterPopup = true">
               筛选
             </van-button>
           </template>
@@ -38,7 +34,7 @@
             >
               <div class="document-header">
                 <div class="document-title">{{ instance.title || '未命名文档' }}</div>
-                <van-tag :type="getStatusType(instance.status)" size="small">
+                <van-tag :type="getStatusType(instance.status)" size="medium">
                   {{ getStatusLabel(instance.status) }}
                 </van-tag>
               </div>
@@ -116,7 +112,7 @@
                 <van-icon :name="item.icon" size="16" />
               </template>
               <template #right-icon v-if="item.tag">
-                <van-tag :type="item.tagType" size="small">{{ item.tag }}</van-tag>
+                <van-tag :type="item.tagType" size="medium">{{ item.tag }}</van-tag>
               </template>
             </van-cell>
           </van-cell-group>
@@ -310,7 +306,7 @@
                   <van-step v-for="version in versions" :key="version.id">
                     <div class="version-header">
                       <div class="version-title">版本 {{ version.version }}</div>
-                      <van-tag :type="getStatusType(version.status)" size="small">
+                      <van-tag :type="getStatusType(version.status)" size="medium">
                         {{ getStatusLabel(version.status) }}
                       </van-tag>
                     </div>
@@ -333,11 +329,11 @@
                       </div>
                     </div>
                     <div class="version-actions">
-                      <van-button size="small" @click="handleViewVersion(version)">
+                      <van-button size="medium" @click="handleViewVersion(version)">
                         <van-icon name="eye-o" size="14" />
                         查看
                       </van-button>
-                      <van-button size="small" @click="handleRestoreVersion(version)">
+                      <van-button size="medium" @click="handleRestoreVersion(version)">
                         <van-icon name="replay" size="14" />
                         恢复
                       </van-button>
@@ -415,11 +411,11 @@
         </van-form>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import {
@@ -1067,6 +1063,12 @@ watch(() => route.query.id, () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   if (hasDocumentId.value) {
     loadUsers()
     loadDocument()
@@ -1079,6 +1081,7 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 .mobile-document-collaboration {
   min-height: 100vh;

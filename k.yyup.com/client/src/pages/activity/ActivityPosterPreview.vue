@@ -391,7 +391,7 @@ const onQRScaleChange = (scale: number) => {
             transition: all 0.3s;
 
             &:hover {
-              background: var(--bg-secondary);
+              background: var(--bg-page);
             }
 
             &.active {

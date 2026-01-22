@@ -699,19 +699,26 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+/* 使用设计令牌，不引入外部SCSS */
 
-.loading-container,
-.empty-container {
-  padding: var(--spacing-3xl);
-  text-align: center;
+/* ==================== 页面容器 ==================== */
+.page-container {
+  padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 }
 
+/* ==================== 应用卡片 ==================== */
 .app-card {
   background-color: var(--bg-card);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-sm);
   padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
 }
 
 .app-card-header {
@@ -719,11 +726,14 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color-lighter);
 }
 
 .app-card-title {
   font-size: var(--text-lg);
-  font-weight: var(--font-semibold);
+  font-weight: 600;
+  color: var(--el-text-color-primary);
 }
 
 .card-actions {
@@ -731,55 +741,259 @@ export default defineComponent({
   gap: var(--spacing-sm);
 }
 
+/* ==================== 加载和空状态 ==================== */
+.loading-container,
+.empty-container {
+  padding: var(--spacing-3xl);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+/* ==================== 孩子成长内容 ==================== */
 .child-growth-content {
   margin-top: var(--spacing-xl);
 }
 
+/* ==================== 孩子信息区域 ==================== */
 .child-info-section {
   margin-bottom: var(--spacing-2xl);
+
+  :deep(.el-descriptions) {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+
+    .el-descriptions__header {
+      background: var(--el-fill-color-light);
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .el-descriptions-item__label {
+      width: 100px;
+      background: var(--el-fill-color-light);
+      font-weight: 500;
+    }
+
+    .el-descriptions-item__content {
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+  }
 }
 
+/* ==================== 成长图表区域 ==================== */
 .growth-chart-section {
   margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-lg);
+  background: var(--el-fill-color-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-lighter);
 }
 
-.milestones-section {
-  margin-bottom: var(--spacing-2xl);
-}
-
-.assessment-section {
-  margin-bottom: var(--spacing-2xl);
-}
-
+/* ==================== 章节标题 ==================== */
 .section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+
+  h3 {
+    margin: 0;
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: var(--spacing-xs);
+      height: var(--spacing-lg);
+      background: var(--el-color-primary);
+      border-radius: var(--spacing-xs);
+      margin-right: var(--spacing-sm);
+      vertical-align: middle;
+    }
+  }
 }
 
-.section-title h3 {
-  margin: 0;
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
-}
-
+/* ==================== 图表容器 ==================== */
 .chart-container {
-  height: var(--spacing-4xl);
+  height: 350px;
   width: 100%;
+  margin-top: var(--spacing-lg);
+}
+
+/* ==================== 里程碑区域 ==================== */
+.milestones-section {
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-lg);
+  background: var(--el-fill-color-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-lighter);
 }
 
 .milestone-images {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .milestone-image {
-  width: var(--size-avatar-md);
-  height: var(--size-avatar-md);
+  width: 80px;
+  height: 80px;
   border-radius: var(--radius-md);
   object-fit: cover;
+  cursor: pointer;
+  transition: all var(--transition-base);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+:deep(.el-timeline) {
+  padding-left: var(--spacing-md);
+
+  .el-timeline-item {
+    padding-bottom: var(--spacing-lg);
+
+    .el-timeline-item__node {
+      background: var(--el-color-primary);
+    }
+
+    .el-timeline-item__content {
+      h4 {
+        margin: 0 0 var(--spacing-xs) 0;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--el-text-color-primary);
+      }
+
+      p {
+        margin: 0 0 var(--spacing-sm) 0;
+        font-size: var(--text-sm);
+        color: var(--el-text-color-secondary);
+        line-height: var(--leading-normal);
+      }
+    }
+
+    .el-timeline-item__timestamp {
+      font-size: var(--text-xs);
+      color: var(--el-text-color-secondary);
+    }
+  }
+}
+
+/* ==================== 评估记录区域 ==================== */
+.assessment-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.table-wrapper {
+  border: 1px solid var(--border-color-lighter);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+:deep(.el-table) {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  &::before {
+    display: none;
+  }
+
+  .el-table__header-wrapper th {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+    font-weight: 600;
+  }
+
+  .el-table__row {
+    transition: all var(--transition-base);
+
+    &:hover {
+      background: var(--el-fill-color-light) !important;
+    }
+  }
+}
+
+/* ==================== 对话框样式 ==================== */
+:deep(.el-dialog) {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-width: 600px;
+}
+
+:deep(.el-dialog__header) {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color-lighter);
+  background: var(--el-fill-color-light);
+}
+
+:deep(.el-dialog__body) {
+  padding: var(--spacing-lg);
+}
+
+:deep(.el-dialog__footer) {
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-top: 1px solid var(--border-color-lighter);
+  background: var(--el-fill-color-light);
+}
+
+/* ==================== 表单样式 ==================== */
+:deep(.el-form-item) {
+  margin-bottom: var(--spacing-md);
+
+  .el-form-item__label {
+    font-weight: 500;
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-md)) {
+  .page-container {
+    padding: var(--spacing-md);
+  }
+
+  .app-card {
+    padding: var(--spacing-md);
+  }
+
+  .app-card-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .milestones-section,
+  .growth-chart-section {
+    padding: var(--spacing-md);
+  }
+
+  .milestone-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .section-title {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style> 

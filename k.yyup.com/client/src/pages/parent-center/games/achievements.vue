@@ -188,52 +188,81 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 游戏成就页面 ==================== */
 .game-achievements {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
+  max-width: var(--breakpoint-2xl);
+  margin: 0 auto;
 
   .page-header {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color-lighter);
 
     h1 {
-      font-size: var(--text-2xl);
+      font-size: var(--text-xl);
       font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: var(--spacing-sm);
+      color: var(--el-text-color-primary);
+      margin-bottom: var(--spacing-xs);
+
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 3px;
+        height: 16px;
+        background: linear-gradient(180deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+        border-radius: 2px;
+        margin-right: var(--spacing-sm);
+        vertical-align: middle;
+      }
     }
 
     p {
-      font-size: var(--text-base);
-      color: var(--info-color);
+      font-size: var(--text-sm);
+      color: var(--el-text-color-secondary);
+      margin: 0;
+      padding-left: var(--spacing-md);
     }
   }
 
   .achievement-summary {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
 
     .summary-card {
       display: flex;
       align-items: center;
-      padding: var(--spacing-2xl);
+      padding: var(--spacing-lg);
       background: var(--bg-card);
-      border-radius: var(--radius-md);
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color-lighter);
+      transition: all var(--transition-base);
 
-      .card-icon {
-        margin-right: var(--spacing-2xl);
+      &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
+
+      :deep(.el-icon) {
+        font-size: var(--text-2xl);
+        color: var(--el-color-primary);
+        margin-right: var(--spacing-md);
       }
 
       .card-content {
         .card-value {
-          font-size: var(--text-2xl);
+          font-size: var(--text-xl);
           font-weight: 600;
-          color: var(--text-primary);
+          color: var(--el-text-color-primary);
           line-height: 1;
-          margin-bottom: var(--spacing-sm);
+          margin-bottom: var(--spacing-xs);
         }
 
         .card-label {
-          font-size: var(--text-base);
-          color: var(--info-color);
+          font-size: var(--text-sm);
+          color: var(--el-text-color-secondary);
         }
       }
     }
@@ -241,13 +270,33 @@ onMounted(() => {
 
   .achievements-list {
     background: var(--bg-card);
-    padding: var(--spacing-2xl);
-    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color-lighter);
+
+    :deep(.el-tabs) {
+      .el-tabs__header {
+        margin-bottom: var(--spacing-lg);
+      }
+
+      .el-tabs__item {
+        font-size: var(--text-base);
+      }
+    }
 
     .achievement-card {
-      margin-bottom: var(--spacing-2xl);
+      margin-bottom: var(--spacing-lg);
       text-align: center;
       position: relative;
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+      border: 1px solid var(--border-color-lighter);
+
+      &:hover {
+        box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
+      }
 
       &.locked {
         opacity: 0.6;
@@ -256,60 +305,101 @@ onMounted(() => {
 
       .achievement-icon {
         position: relative;
-        display: inline-block;
-        margin-bottom: var(--spacing-xl);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        margin-bottom: var(--spacing-md);
+        background: linear-gradient(135deg, var(--el-color-warning-light-3) 0%, var(--el-color-warning-light-7) 100%);
+        border-radius: var(--radius-full);
+        font-size: var(--text-2xl);
+
+        :deep(.el-icon) {
+          color: var(--el-color-warning);
+        }
 
         .lock-overlay {
           position: absolute;
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          background: var(--shadow-medium);
+          background: rgba(0, 0, 0, 0.5);
           border-radius: var(--radius-full);
-          width: auto;
-          min-height: 60px; height: auto;
+          width: 100%;
+          height: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--text-on-primary);
+          color: white;
         }
       }
 
       .achievement-info {
+        padding: 0 var(--spacing-md) var(--spacing-md);
+
         .achievement-name {
-          font-size: var(--text-lg);
+          font-size: var(--text-base);
           font-weight: 600;
-          color: var(--text-primary);
-          margin-bottom: var(--spacing-sm);
+          color: var(--el-text-color-primary);
+          margin-bottom: var(--spacing-xs);
         }
 
         .achievement-desc {
-          font-size: var(--text-base);
-          color: var(--text-regular);
-          margin-bottom: var(--spacing-xl);
-          min-height: var(--spacing-3xl);
+          font-size: var(--text-sm);
+          color: var(--el-text-color-secondary);
+          margin-bottom: var(--spacing-md);
+          min-height: 40px;
+          line-height: var(--leading-normal);
         }
 
         .achievement-progress {
-          margin-bottom: var(--spacing-xl);
+          margin-bottom: var(--spacing-md);
+
+          :deep(.el-progress) {
+            .el-progress__text {
+              font-size: var(--text-xs) !important;
+              min-width: 30px;
+            }
+          }
 
           .progress-text {
-            font-size: var(--text-sm);
-            color: var(--info-color);
-            margin-top: var(--spacing-lg);
+            font-size: var(--text-xs);
+            color: var(--el-text-color-secondary);
+            margin-top: var(--spacing-xs);
           }
         }
 
         .unlock-info {
           display: flex;
-          justify-content: space-between;
+          justify-content: center;
           align-items: center;
+          gap: var(--spacing-sm);
 
           .unlock-time {
-            font-size: var(--text-sm);
-            color: var(--info-color);
+            font-size: var(--text-xs);
+            color: var(--el-text-color-secondary);
           }
         }
+      }
+    }
+  }
+
+  /* ==================== 响应式设计 ==================== */
+  @media (max-width: var(--breakpoint-md)) {
+    padding: var(--spacing-md);
+
+    .achievement-summary {
+      .el-col {
+        margin-bottom: var(--spacing-md);
+      }
+    }
+
+    .achievements-list .achievement-card {
+      .achievement-icon {
+        width: 56px;
+        height: 56px;
+        font-size: var(--text-xl);
       }
     }
   }

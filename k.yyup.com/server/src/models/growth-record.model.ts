@@ -7,8 +7,7 @@ import {
   CreationOptional,
   ForeignKey,
 } from 'sequelize';
-import { Student } from './student.model';
-import { User } from './user.model';
+import { sequelize } from '../init';
 
 /**
  * 成长记录类型
@@ -41,7 +40,7 @@ export class GrowthRecord extends Model<
   InferCreationAttributes<GrowthRecord>
 > {
   declare id: CreationOptional<number>;
-  declare studentId: ForeignKey<Student['id']>;
+  declare studentId: number;
   declare type: GrowthRecordType;
 
   // 身高体重数据
@@ -65,7 +64,7 @@ export class GrowthRecord extends Model<
   declare measurementDate: Date;       // 测量日期
   declare measurementType: MeasurementType;
   declare ageInMonths: number;         // 月龄
-  declare observerId: ForeignKey<User['id']> | null;  // 记录人
+  declare observerId: number | null;  // 记录人
   declare remark: string | null;       // 备注
 
   // 标准化百分位 (用于同龄对比)
@@ -183,149 +182,170 @@ export const getDevelopmentAdvice = (score: number): { level: string; advice: st
   return { level: '需关注', advice: '建议咨询专业医生或教育专家，进行全面评估。' };
 };
 
-export const initGrowthRecord = (sequelize: Sequelize) => {
-  GrowthRecord.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        comment: '成长记录ID - 主键',
-      },
-      studentId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        comment: '学生ID - 外键',
-      },
-      type: {
-        type: DataTypes.ENUM(...Object.values(GrowthRecordType)),
-        allowNull: false,
-        defaultValue: GrowthRecordType.HEIGHT_WEIGHT,
-        comment: '成长记录类型',
-      },
-      // 身高体重数据
-      height: {
-        type: DataTypes.DECIMAL(5, 1),
-        allowNull: true,
-        comment: '身高 (cm)',
-      },
-      weight: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: '体重 (kg)',
-      },
-      headCircumference: {
-        type: DataTypes.DECIMAL(5, 1),
-        allowNull: true,
-        comment: '头围 (cm)',
-      },
-      // 体能数据
-      running50m: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: '50米跑 (秒)',
-      },
-      standingJump: {
-        type: DataTypes.DECIMAL(5, 1),
-        allowNull: true,
-        comment: '立定跳远 (cm)',
-      },
-      ballThrow: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: '掷球 (m)',
-      },
-      sitAndReach: {
-        type: DataTypes.DECIMAL(5, 1),
-        allowNull: true,
-        comment: '坐位体前屈 (cm)',
-      },
-      // 发展评估分数
-      cognitiveScore: {
-        type: DataTypes.TINYINT,
-        allowNull: true,
-        validate: { min: 0, max: 100 },
-        comment: '认知发展评分 (0-100)',
-      },
-      socialScore: {
-        type: DataTypes.TINYINT,
-        allowNull: true,
-        validate: { min: 0, max: 100 },
-        comment: '社会情感评分 (0-100)',
-      },
-      languageScore: {
-        type: DataTypes.TINYINT,
-        allowNull: true,
-        validate: { min: 0, max: 100 },
-        comment: '语言发展评分 (0-100)',
-      },
-      motorScore: {
-        type: DataTypes.TINYINT,
-        allowNull: true,
-        validate: { min: 0, max: 100 },
-        comment: '动作发展评分 (0-100)',
-      },
-      // 元数据
-      measurementDate: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
-        comment: '测量日期',
-      },
-      measurementType: {
-        type: DataTypes.ENUM(...Object.values(MeasurementType)),
-        allowNull: false,
-        defaultValue: MeasurementType.MANUAL,
-        comment: '测量方式',
-      },
-      ageInMonths: {
-        type: DataTypes.SMALLINT,
-        allowNull: false,
-        comment: '测量时的月龄',
-      },
-      observerId: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        comment: '记录人ID',
-      },
-      remark: {
-        type: DataTypes.STRING(500),
-        allowNull: true,
-        comment: '备注',
-      },
-      // 标准化百分位
-      heightPercentile: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: '身高百分位 (3-97)',
-      },
-      weightPercentile: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: '体重百分位 (3-97)',
-      },
-      bmi: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-        comment: 'BMI指数',
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
+// 直接初始化模型（像referralreward.model.ts一样）
+GrowthRecord.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      comment: '成长记录ID - 主键',
     },
-    {
-      sequelize,
-      tableName: 'growth_records',
-      timestamps: true,
-      underscored: true,
-      comment: '儿童成长记录表 - 身高体重、体能测试、发展评估等',
-    }
-  );
+    studentId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'student_id',
+      comment: '学生ID - 外键',
+    },
+    type: {
+      type: DataTypes.ENUM(...Object.values(GrowthRecordType)),
+      allowNull: false,
+      defaultValue: GrowthRecordType.HEIGHT_WEIGHT,
+      comment: '成长记录类型',
+    },
+    // 身高体重数据
+    height: {
+      type: DataTypes.DECIMAL(5, 1),
+      allowNull: true,
+      comment: '身高 (cm)',
+    },
+    weight: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      comment: '体重 (kg)',
+    },
+    headCircumference: {
+      type: DataTypes.DECIMAL(5, 1),
+      allowNull: true,
+      field: 'head_circumference',
+      comment: '头围 (cm)',
+    },
+    // 体能数据
+    running50m: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      comment: '50米跑 (秒)',
+    },
+    standingJump: {
+      type: DataTypes.DECIMAL(5, 1),
+      allowNull: true,
+      field: 'standing_jump',
+      comment: '立定跳远 (cm)',
+    },
+    ballThrow: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      field: 'ball_throw',
+      comment: '掷球 (m)',
+    },
+    sitAndReach: {
+      type: DataTypes.DECIMAL(5, 1),
+      allowNull: true,
+      field: 'sit_and_reach',
+      comment: '坐位体前屈 (cm)',
+    },
+    // 发展评估分数
+    cognitiveScore: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      field: 'cognitive_score',
+      validate: { min: 0, max: 100 },
+      comment: '认知发展评分 (0-100)',
+    },
+    socialScore: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      field: 'social_score',
+      validate: { min: 0, max: 100 },
+      comment: '社会情感评分 (0-100)',
+    },
+    languageScore: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      field: 'language_score',
+      validate: { min: 0, max: 100 },
+      comment: '语言发展评分 (0-100)',
+    },
+    motorScore: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      field: 'motor_score',
+      validate: { min: 0, max: 100 },
+      comment: '动作发展评分 (0-100)',
+    },
+    // 元数据
+    measurementDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      field: 'measurement_date',
+      comment: '测量日期',
+    },
+    measurementType: {
+      type: DataTypes.ENUM(...Object.values(MeasurementType)),
+      allowNull: false,
+      field: 'measurement_type',
+      defaultValue: MeasurementType.MANUAL,
+      comment: '测量方式',
+    },
+    ageInMonths: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+      field: 'age_in_months',
+      comment: '测量时的月龄',
+    },
+    observerId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      field: 'observer_id',
+      comment: '记录人ID',
+    },
+    remark: {
+      type: DataTypes.STRING(500),
+      allowNull: true,
+      comment: '备注',
+    },
+    // 标准化百分位
+    heightPercentile: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      field: 'height_percentile',
+      comment: '身高百分位 (3-97)',
+    },
+    weightPercentile: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      field: 'weight_percentile',
+      comment: '体重百分位 (3-97)',
+    },
+    bmi: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: true,
+      comment: 'BMI指数',
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'created_at',
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'updated_at',
+    },
+  },
+  {
+    sequelize,
+    tableName: 'growth_records',
+    modelName: 'GrowthRecord',
+    timestamps: true,
+    underscored: true,
+    comment: '儿童成长记录表 - 身高体重、体能测试、发展评估等',
+  }
+);
 
+// 保留initGrowthRecord函数以兼容现有代码（但实际上模型已经初始化）
+export const initGrowthRecord = (seq: Sequelize) => {
+  // 模型已在文件加载时初始化，此函数仅为兼容性保留
   return GrowthRecord;
 };
 
@@ -333,22 +353,7 @@ export const initGrowthRecord = (sequelize: Sequelize) => {
  * 设置成长记录模型的关联
  */
 export const initGrowthRecordAssociations = () => {
-  // GrowthRecord -> Student
-  GrowthRecord.belongsTo(Student, {
-    foreignKey: 'studentId',
-    as: 'student',
-  });
-
-  Student.hasMany(GrowthRecord, {
-    foreignKey: 'studentId',
-    as: 'growthRecords',
-  });
-
-  // GrowthRecord -> User (observer)
-  GrowthRecord.belongsTo(User, {
-    foreignKey: 'observerId',
-    as: 'observer',
-  });
+  // 关联将在models/index.ts中统一设置，避免循环依赖
 };
 
 // 为了兼容旧代码，添加默认导出

@@ -37,7 +37,40 @@ export function useAIQuery() {
   // 响应式状态
   const naturalLanguageQuery = ref('')
   const generatedSQL = ref('')
-  const queryResults = ref(null)
+  interface AIQueryMetadata {
+    rowCount?: number
+    executionTime?: number
+    cacheHit?: boolean
+    generatedSQL?: string
+    usedModel?: any
+    queryAnalysis?: any
+    requiredTables?: any
+    columns?: any[]
+  }
+
+  interface AIQueryResultBase {
+    success: boolean
+    type: 'data_query' | 'ai_response'
+    sessionId?: string
+  }
+
+  interface AIQueryDataResult extends AIQueryResultBase {
+    type: 'data_query'
+    data: any[]
+    metadata: AIQueryMetadata
+    visualization?: any
+    queryLogId?: any
+  }
+
+  interface AIQueryAIResult extends AIQueryResultBase {
+    type: 'ai_response'
+    response: any
+    isDataQuery: boolean
+  }
+
+  type AIQueryResult = AIQueryDataResult | AIQueryAIResult
+
+  const queryResults = ref<AIQueryResult | null>(null)
   const processing = ref(false)
   const querying = ref(false)
   const currentStep = ref(0)
@@ -45,8 +78,8 @@ export function useAIQuery() {
   const processingProgress = ref(0)
   const processingTime = ref(0)
   const currentSessionId = ref('')
-  const queryHistory = ref([])
-  const queryStatistics = ref(null)
+  const queryHistory = ref<any[]>([])
+  const queryStatistics = ref<Record<string, any> | null>(null)
 
   // 🔧 已移除WebSocket进度监听 - 使用模拟进度
   // 保持兼容性的空状态
@@ -56,7 +89,12 @@ export function useAIQuery() {
   // 计算属性
   const hasResults = computed(() => !!queryResults.value)
   const isSuccessful = computed(() => queryResults.value?.success)
-  const resultCount = computed(() => queryResults.value?.metadata?.rowCount || 0)
+  const resultCount = computed(() => {
+    if (queryResults.value?.type === 'data_query') {
+      return queryResults.value.metadata?.rowCount || 0
+    }
+    return 0
+  })
   const hasRealTimeProgress = computed(() => false) // 始终使用模拟进度
 
   // 优化后的8步执行流程配置

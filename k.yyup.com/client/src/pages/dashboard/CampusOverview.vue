@@ -407,7 +407,7 @@ onMounted(() => {
 /* 使用全局CSS变量，确保主题切换兼容性 */
 .page-container {
   padding: var(--app-gap);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   min-height: calc(100vh - var(--header-height, 60px));
 }
 

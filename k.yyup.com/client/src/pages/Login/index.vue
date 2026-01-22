@@ -1040,10 +1040,11 @@ const quickLogin = async (role: string) => {
 
     console.log(`🔐 调用真实登录API: ${username}`)
 
-    // 设置表单值
+    // 🔧 修复：确保使用用户名登录模式
+    loginMode.value = 0
     loginForm.value.username = username
     loginForm.value.password = password
-    
+
     // 调用登录处理函数
     await handleLogin()
   } catch (error: any) {

@@ -334,21 +334,7 @@ const activityTypeColumns = [
   { text: '其他', value: 7 }
 ]
 
-// 监听活动数据变化
-watch(() => props.activity, (activity) => {
-  if (activity) {
-    formData.value = { ...activity }
-    if (activity.coverImage) {
-      coverImages.value = [{
-        url: activity.coverImage,
-        name: '封面图片'
-      }]
-    }
-  } else {
-    resetForm()
-  }
-}, { immediate: true })
-
+// 重置表单（必须在watch之前定义）
 const resetForm = () => {
   formData.value = {
     title: '',
@@ -369,6 +355,21 @@ const resetForm = () => {
   }
   coverImages.value = []
 }
+
+// 监听活动数据变化
+watch(() => props.activity, (activity) => {
+  if (activity) {
+    formData.value = { ...activity }
+    if (activity.coverImage) {
+      coverImages.value = [{
+        url: activity.coverImage,
+        name: '封面图片'
+      }]
+    }
+  } else {
+    resetForm()
+  }
+}, { immediate: true })
 
 const handleClose = () => {
   visible.value = false

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="活动列表"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="活动列表" back-path="/mobile/parent-center">
     <div class="parent-activities">
       <!-- 页面标题 -->
       <div class="page-header">
@@ -179,14 +174,14 @@
 
     <!-- 悬浮返回顶部按钮 -->
     <van-back-top right="20" bottom="80" />
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { getActivityList } from '@/api/modules/activity'
 import type { Activity, ActivityQueryParams } from '@/api/modules/activity'
 
@@ -456,6 +451,12 @@ const activityTime = computed(() => {
 })
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadActivities(true)
 })
 </script>

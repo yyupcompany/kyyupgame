@@ -373,7 +373,7 @@ onMounted(() => {
   .filter-section {
     margin-bottom: var(--text-2xl);
     padding: var(--text-xl);
-    background: var(--bg-color);
+    background: var(--bg-card);
     border-radius: var(--text-sm);
     border: 1px solid var(--border-light);
 

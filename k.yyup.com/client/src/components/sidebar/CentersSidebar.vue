@@ -18,7 +18,7 @@
           href="javascript:void(0)"
           class="nav-item center-item"
           :class="{ 'active': route.path === managementConsole.route }"
-          @click.prevent="router.push(managementConsole.route)"
+          @click.prevent="navigateToRoute(managementConsole.route)"
         >
           <UnifiedIcon
             :name="managementConsole.icon"
@@ -76,7 +76,7 @@
               href="javascript:void(0)"
               class="nav-item center-item sub-item"
               :class="{ 'active': route.path === item.route }"
-              @click.prevent="router.push(item.route)"
+              @click.prevent="navigateToRoute(item.route)"
             >
               <UnifiedIcon
                 :name="item.icon"
@@ -95,9 +95,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import { useMenuStore, type MenuCategory } from '@/stores/menu-flat'
 
 // Props
 interface Props {
@@ -113,6 +114,43 @@ const props = withDefaults(defineProps<Props>(), {
 // 路由
 const router = useRouter()
 const route = useRoute()
+
+// 性能优化：使用菜单扁平化Store
+const menuStore = useMenuStore()
+
+// 性能优化：路由跳转防抖状态
+const navigationLock = ref(false)
+const lastClickTime = ref(0)
+const DEBOUNCE_TIME = 300 // 300ms防抖
+
+// 防抖路由跳转函数
+const navigateToRoute = (targetRoute: string) => {
+  const now = Date.now()
+  
+  // 防抖检查：如果在300ms内重复点击同一路由，忽略
+  if (navigationLock.value || (now - lastClickTime.value) < DEBOUNCE_TIME) {
+    console.log('🚫 防抖：跳过重复导航', targetRoute)
+    return
+  }
+  
+  // 如果已经在目标路由，不重复跳转
+  if (route.path === targetRoute) {
+    console.log('✅ 已在当前路由', targetRoute)
+    return
+  }
+  
+  // 设置导航锁
+  navigationLock.value = true
+  lastClickTime.value = now
+  
+  // 执行路由跳转
+  router.push(targetRoute).finally(() => {
+    // 300ms后释放锁
+    setTimeout(() => {
+      navigationLock.value = false
+    }, DEBOUNCE_TIME)
+  })
+}
 
 // 分类展开状态
 const expandedCategories = ref<string[]>(['business-management', 'marketing-management'])
@@ -145,7 +183,7 @@ const managementConsole = {
 }
 
 // 侧边栏一级分类与二级页面配置
-const sidebarCategories = [
+const sidebarCategories: MenuCategory[] = [
   // 业务管理
   {
     id: 'business-management',
@@ -225,6 +263,12 @@ const sidebarCategories = [
         title: '新媒体中心',
         route: '/principal/media-center',
         icon: 'video-camera'
+      },
+      {
+        id: 'principal-poster-generator',
+        title: '海报生成器',
+        route: '/principal/poster-generator',
+        icon: 'image'
       }
     ]
   },
@@ -257,6 +301,12 @@ const sidebarCategories = [
         title: '考勤中心',
         route: '/centers/attendance',
         icon: 'clock'
+      },
+      {
+        id: 'principal-parent-permission',
+        title: '家长权限管理',
+        route: '/principal/parent-permission-management',
+        icon: 'lock'
       }
     ]
   },
@@ -321,6 +371,12 @@ const sidebarCategories = [
     ]
   }
 ]
+
+// 性能优化：组件挂载时初始化菜单扁平化
+onMounted(() => {
+  menuStore.initAdminMenus(sidebarCategories)
+  console.log('📊 菜单性能统计:', menuStore.getStats())
+})
 </script>
 <style scoped>
 .sidebar-category {
@@ -336,11 +392,15 @@ const sidebarCategories = [
   font-weight: 600;
   color: #303133;
   transition: all 0.3s ease;
+  /* 性能优化：使用will-change提前通知浏览器 */
+  will-change: transform;
 }
 
 .category-title:hover {
   background-color: #f5f7fa;
   border-radius: 4px;
+  /* 性能优化：使用transform替代padding，避免重排 */
+  transform: translateX(2px);
 }
 
 .category-icon {
@@ -361,6 +421,8 @@ const sidebarCategories = [
 
 .category-items {
   margin-left: 20px;
+  /* 性能优化：使用opacity + transform实现展开动画 */
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .sub-item {

@@ -1,0 +1,52 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--headless",
+        "--allow-unrestricted-file-access",
+        "--shared-browser-context",
+        "--save-trace",
+        "--output-dir",
+        "./.playwright-mcp/output"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "./node_modules/.playwright"
+      }
+    },
+    "playwright-headed": {
+      "command": "npx", 
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--allow-unrestricted-file-access",
+        "--shared-browser-context",
+        "--save-trace",
+        "--save-video=1280x720",
+        "--output-dir",
+        "./.playwright-mcp/output"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "./node_modules/.playwright"
+      }
+    },
+    "playwright-debug": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--console-level",
+        "debug",
+        "--save-trace", 
+        "--save-video=1280x720",
+        "--output-dir",
+        "./.playwright-mcp/output"
+      ],
+      "env": {
+        "PLAYWRIGHT_BROWSERS_PATH": "./node_modules/.playwright"
+      }
+    }
+  }
+}

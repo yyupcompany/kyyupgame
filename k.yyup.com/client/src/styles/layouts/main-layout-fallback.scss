@@ -1,0 +1,135 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-layout-area {
+  display: flex;
+  min-height: calc(100vh - var(--header-height, 64px));
+  height: calc(100vh - var(--header-height, 64px));
+  margin-top: var(--header-height, 64px);
+  background: var(--bg-color-page, #f7f9fc);
+}
+
+.sidebar-slot {
+  width: var(--sidebar-width, 280px);
+  flex-shrink: 0;
+  background: var(--sidebar-bg, #f5f7fb);
+  border-right: 1px solid var(--border-color, #e5e7eb);
+  padding: 8px 0;
+  min-height: calc(100vh - var(--header-height, 64px));
+}
+
+.sidebar {
+  position: fixed;
+  top: var(--header-height, 64px);
+  left: 0;
+  height: calc(100vh - var(--header-height, 64px));
+  width: var(--sidebar-width, 260px);
+  background: var(--sidebar-bg, #f7f9fc);
+  border-right: 1px solid var(--border-color, #e5e7eb);
+  padding: 12px 10px;
+  overflow-y: auto;
+  z-index: var(--z-sidebar, 1020);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px;
+  border-radius: 12px;
+  color: var(--text-primary, #303133);
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  background: linear-gradient(90deg, rgba(99, 102, 241, 0.12), rgba(99, 102, 241, 0.06));
+  transform: translateX(2px);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+}
+
+.nav-item.active .nav-text,
+.nav-item.active .nav-icon {
+  color: #fff !important;
+}
+
+.nav-icon {
+  color: var(--text-secondary, #606266);
+  font-size: 18px;
+}
+
+.nav-text {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sidebar-category {
+  margin: 4px 0;
+}
+
+.category-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--text-primary, #303133);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-title:hover {
+  background: #eef2ff;
+}
+
+.category-items {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.content-slot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--bg-color, #ffffff);
+}
+
+/* 头部兜底样式，保证 Logo 与顶部工具条正常呈现 */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height, 64px);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--bg-card, #ffffff);
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  z-index: var(--z-header, 1030);
+}
+
+

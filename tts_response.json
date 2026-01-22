@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "TTS API修复成功",
+  "details": {
+    "api_endpoint": "/api/ai/tts/generate",
+    "http_status": 200,
+    "audio_file": "tts_final_test.mp3",
+    "file_size": 55680,
+    "format": "MP3 (valid, starts with 0xFF sync bytes)",
+    "duration_estimate": "2.78 seconds"
+  },
+  "fix_summary": {
+    "problem": "TTS API返回Buffer JSON序列化数据而不是二进制音频",
+    "root_cause": "统一AI Bridge的本地环境路由使用AI Bridge的textToSpeech方法，该方法是为OpenAI端点设计的，不适合火山引擎TTS",
+    "solution": [
+      "修改 unified-ai-bridge.service.ts：本地环境的TTS请求直接使用volcengineTTSService",
+      "修改 text-to-speech.controller.ts：使用res.end()替代res.send()确保二进制数据不被序列化"
+    ],
+    "files_modified": [
+      "server/src/services/unified-ai-bridge.service.ts",
+      "server/src/controllers/text-to-speech.controller.ts"
+    ]
+  },
+  "test_command": "curl -X POST http://localhost:3000/api/ai/tts/generate -H \"Authorization: Bearer <token>\" -H 'Content-Type: application/json' --data-raw '{\"text\":\"欢迎使用幼儿园管理系统\",\"voice\":\"zh_female_cancan_mars_bigtts\",\"speed\":1.0,\"format\":\"mp3\"}' --output output.mp3"
+}

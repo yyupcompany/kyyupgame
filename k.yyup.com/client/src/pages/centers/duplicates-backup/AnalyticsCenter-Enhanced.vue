@@ -1788,7 +1788,7 @@ onMounted(() => {
         .summary-preview {
           margin-top: var(--spacing-8xl);
           padding: var(--text-2xl);
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-lg);
 
           h5 {
@@ -1833,7 +1833,7 @@ onMounted(() => {
 
         .analysis-preview {
           height: var(--analysis-preview-height);
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           display: flex;
           align-items: center;
           justify-content: center;

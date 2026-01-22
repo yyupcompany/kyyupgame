@@ -14,8 +14,14 @@ import teacherCheckinRoutes from '../teacher-checkin.routes';
 import teacherAttendanceRoutes from '../teacher-attendance.routes';
 import teacherCenterCreativeCurriculumRoutes from '../teacher-center-creative-curriculum.routes';
 import teacherSopRoutes from '../teacher-sop.routes';
+// 🆕 SOP模板系统路由
+import teacherSopTemplatesRoutes from '../teacher-sop-templates.routes';
 // interactive-curriculum routes 已移至 routes/index.ts 并添加了认证中间件
 import teacherCoursesRoutes from '../teacher-courses.routes';
+// 🆕 自定义课程管理路由
+import customCoursesRoutes from '../custom-courses.routes';
+// 🆕 课程告警路由
+import courseAlertRoutes from '../course-alert.routes';
 
 /**
  * 教学模块路由配置
@@ -41,11 +47,20 @@ const teachingModuleRoutes = (router: Router) => {
 
   // 🔹 标准操作流程
   router.use('/teacher-sop', teacherSopRoutes);
+  
+  // 🔹 SOP模板系统（新）
+  router.use('/teacher/sop', teacherSopTemplatesRoutes);
 
   // 🔹 教师课程管理 (新增)
   router.use('/teacher/courses', teacherCoursesRoutes);
 
-  console.log('✅ 教学模块路由已注册 (9+ 个路由)');
+  // 🔹 自定义课程管理（园长创建、教师查看）
+  router.use('/custom-courses', customCoursesRoutes);
+
+  // 🔹 课程告警管理
+  router.use('/course-alerts', courseAlertRoutes);
+
+  console.log('✅ 教学模块路由已注册 (11+ 个路由)');
 };
 
 export default teachingModuleRoutes;

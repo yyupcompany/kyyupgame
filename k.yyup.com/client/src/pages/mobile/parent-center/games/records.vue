@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="游戏记录"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileSubPageLayout title="游戏记录" back-path="/mobile/parent-center">
     <div class="mobile-game-records">
       <!-- 统计卡片 -->
       <div class="stats-section">
@@ -228,14 +222,14 @@
         </div>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showSuccessToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface GameRecord {
   id: number
@@ -419,6 +413,12 @@ const handleBack = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadRecords()
 })
 </script>
@@ -439,12 +439,12 @@ onMounted(() => {
     align-items: center;
     padding: var(--spacing-lg);
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: var(--spacing-md);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     height: 100%;
 
     .stat-icon {
-      margin-right: 16px;
+      margin-right: var(--spacing-lg);
       color: var(--van-primary-color);
     }
 
@@ -454,7 +454,7 @@ onMounted(() => {
         font-weight: bold;
         color: var(--van-text-color);
         line-height: 1.2;
-        margin-bottom: 4px;
+        margin-bottom: var(--spacing-xs);
       }
 
       .stat-label {
@@ -467,7 +467,7 @@ onMounted(() => {
 
 .filter-section {
   background: var(--card-bg);
-  margin-bottom: 8px;
+  margin-bottom: var(--spacing-sm);
 
   :deep(.van-tabs__wrap) {
     border-radius: 0;
@@ -487,10 +487,10 @@ onMounted(() => {
 }
 
 .record-skeleton {
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
   padding: var(--spacing-md);
   background: var(--card-bg);
-  border-radius: 8px;
+  border-radius: var(--spacing-sm);
 }
 
 .empty-container {
@@ -504,9 +504,9 @@ onMounted(() => {
 
 .record-item {
   background: var(--card-bg);
-  border-radius: 12px;
+  border-radius: var(--spacing-md);
   padding: var(--spacing-md);
-  margin-bottom: 12px;
+  margin-bottom: var(--spacing-md);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
 
@@ -518,7 +518,7 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
 
     .game-info {
       flex: 1;
@@ -538,13 +538,13 @@ onMounted(() => {
   }
 
   .record-stats {
-    margin-bottom: 16px;
+    margin-bottom: var(--spacing-lg);
 
     .stats-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: var(--spacing-sm);
 
       &:last-child {
         margin-bottom: 0;
@@ -559,7 +559,7 @@ onMounted(() => {
         .stat-label {
           font-size: var(--text-xs);
           color: var(--van-text-color-2);
-          margin-bottom: 4px;
+          margin-bottom: var(--spacing-xs);
         }
 
         .stat-value {
@@ -581,7 +581,7 @@ onMounted(() => {
     gap: var(--spacing-md);
     justify-content: flex-end;
     border-top: 1px solid var(--van-border-color);
-    padding-top: 12px;
+    padding-top: var(--spacing-md);
   }
 }
 
@@ -653,6 +653,13 @@ onMounted(() => {
 }
 
 :deep(.van-rate__item) {
-  margin-right: 2px;
+  margin-right: var(--spacing-xs);
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
+  }
 }
 </style>

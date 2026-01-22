@@ -489,6 +489,7 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 .document-statistics {
   padding: var(--spacing-2xl);
 

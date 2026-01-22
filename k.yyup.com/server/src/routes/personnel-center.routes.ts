@@ -1577,6 +1577,197 @@ router.get('/teachers', personnelCenterController.getTeachers)
 router.post('/teachers', personnelCenterController.createTeacher)
 
 /**
+ * @swagger
+ * /api/personnel-center/principals:
+ *   post:
+ *     tags: [人事中心]
+ *     summary: 创建园长账号（ADMIN专用）
+ *     description: 只有ADMIN角色可以创建园长账号，创建后园长可以管理自己的园区并创建教师
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - realName
+ *               - phone
+ *               - kindergartenId
+ *             properties:
+ *               realName:
+ *                 type: string
+ *                 description: 园长姓名
+ *                 example: 张园长
+ *               phone:
+ *                 type: string
+ *                 description: 手机号（将作为用户名）
+ *                 example: "13800138000"
+ *               email:
+ *                 type: string
+ *                 description: 邮箱（可选）
+ *                 example: "principal@kindergarten.com"
+ *               kindergartenId:
+ *                 type: integer
+ *                 description: 所属园所ID
+ *                 example: 1
+ *               initialPassword:
+ *                 type: string
+ *                 description: 初始密码（可选，默认为手机号后6位+Pr）
+ *     responses:
+ *       200:
+ *         description: 创建成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                 message:
+ *                   type: string
+ *       400:
+ *         description: 请求参数错误
+ *       401:
+ *         description: 未授权访问
+ *       403:
+ *         description: 权限不足（非ADMIN角色）
+ *       500:
+ *         description: 服务器内部错误
+*/
+router.post('/principals', personnelCenterController.createPrincipal)
+
+/**
+ * @swagger
+ * /api/personnel-center/groups:
+ *   post:
+ *     tags: [人事中心]
+ *     summary: 创建集团（ADMIN专用）
+ *     description: 只有ADMIN角色可以创建集团，创建后可以为集团添加园所
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *               - code
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: 集团名称
+ *                 example: 阳光教育集团
+ *               code:
+ *                 type: string
+ *                 description: 集团编码
+ *                 example: YGJY
+ *               type:
+ *                 type: integer
+ *                 description: 集团类型（1-教育集团 2-连锁品牌 3-投资集团）
+ *                 example: 1
+ *               legalPerson:
+ *                 type: string
+ *                 description: 法人代表
+ *               phone:
+ *                 type: string
+ *                 description: 联系电话
+ *               email:
+ *                 type: string
+ *                 description: 联系邮箱
+ *               address:
+ *                 type: string
+ *                 description: 总部地址
+ *               description:
+ *                 type: string
+ *                 description: 集团简介
+ *               brandName:
+ *                 type: string
+ *                 description: 品牌名称
+ *     responses:
+ *       200:
+ *         description: 创建成功
+ *       400:
+ *         description: 请求参数错误
+ *       401:
+ *         description: 未授权访问
+ *       403:
+ *         description: 权限不足（非ADMIN角色）
+ *       500:
+ *         description: 服务器内部错误
+*/
+router.post('/groups', personnelCenterController.createGroup)
+
+/**
+ * @swagger
+ * /api/personnel-center/kindergartens:
+ *   post:
+ *     tags: [人事中心]
+ *     summary: 创建园所（ADMIN专用）
+ *     description: 只有ADMIN角色可以创建园所，需要先有集团或作为独立园所
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - name
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: 园所名称
+ *                 example: 阳光幼儿园
+ *               groupId:
+ *                 type: integer
+ *                 description: 所属集团ID（可选，如果不填则作为独立园所）
+ *               type:
+ *                 type: integer
+ *                 description: 园所类型（1-公办 2-民办 3-普惠）
+ *                 example: 2
+ *               level:
+ *                 type: integer
+ *                 description: 园所等级（1-一级 2-二级 3-三级）
+ *                 example: 2
+ *               address:
+ *                 type: string
+ *                 description: 园所地址
+ *               phone:
+ *                 type: string
+ *                 description: 联系电话
+ *               email:
+ *                 type: string
+ *                 description: 联系邮箱
+ *               principal:
+ *                 type: string
+ *                 description: 园长姓名
+ *               establishedDate:
+ *                 type: string
+ *                 format: date
+ *                 description: 成立日期
+ *     responses:
+ *       200:
+ *         description: 创建成功
+ *       400:
+ *         description: 请求参数错误
+ *       401:
+ *         description: 未授权访问
+ *       403:
+ *         description: 权限不足（非ADMIN角色）
+ *       500:
+ *         description: 服务器内部错误
+*/
+router.post('/kindergartens', personnelCenterController.createKindergarten)
+
+/**
 * @swagger
  * /api/personnel-center/teachers/{id}:
  *   get:

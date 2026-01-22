@@ -304,8 +304,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
-import { Position, ChatLineRound, TrendCharts, Reading, Calendar, Heart, Smile, Paperclip, Delete, Setting, User } from '@element-plus/icons-vue'
-import UnifiedIcon from '@/components/common/UnifiedIcon.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
 import { useUserStore } from '@/stores/user'
 import { CallingLogger, type LogContext } from '@/utils/CallingLogger'
 

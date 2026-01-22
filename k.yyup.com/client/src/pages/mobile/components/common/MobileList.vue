@@ -1,7 +1,7 @@
 <template>
-  <div class="mobile-list">
+  <div class="mobile-list" :style="{ background: isDarkTheme ? '#0f172a' : '#f7f8fa' }">
     <!-- 下拉刷新 -->
-    <van-pull-refresh v-model="refreshing" @refresh="handleRefresh">
+    <van-pull-refresh v-model="refreshing" @refresh="handleRefresh" :style="{ background: isDarkTheme ? '#0f172a' : '#f7f8fa' }">
       <!-- 长列表 -->
       <van-list
         v-model:loading="loading"
@@ -44,7 +44,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
+
+// 主题检测
+const isDarkTheme = ref(false)
+const detectTheme = () => {
+  isDarkTheme.value = document.documentElement.getAttribute('data-theme') === 'dark'
+}
+
+let observer: MutationObserver | null = null
+
+onMounted(() => {
+  detectTheme()
+  observer = new MutationObserver(detectTheme)
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  })
+})
+
+onUnmounted(() => {
+  observer?.disconnect()
+})
 
 interface Props {
   items?: any[]
@@ -116,12 +137,17 @@ const handleItemClick = (item: any, index: number) => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/mobile-base.scss';
-
 .mobile-list {
+  background: #f7f8fa;
+  min-height: 100%;
+  
   .list-header,
   .list-footer {
-    padding: var(--spacing-md);
+    padding: 16px;
+  }
+  
+  .list-items {
+    background: #f7f8fa;
   }
 
   .list-item {
@@ -130,13 +156,35 @@ const handleItemClick = (item: any, index: number) => {
       transition: background-color 0.3s;
 
       &:active {
-        background-color: var(--bg-color-page);
+        background-color: #e4e7ed;
       }
     }
   }
 
   .list-empty {
     padding: 60px 0;
+    background: #f7f8fa;
+  }
+}
+
+// 暗黑模式适配
+:global([data-theme="dark"]) {
+  .mobile-list {
+    background: #0f172a !important;
+    
+    .list-items {
+      background: #0f172a !important;
+    }
+    
+    .list-item {
+      &.clickable:active {
+        background-color: #334155 !important;
+      }
+    }
+    
+    .list-empty {
+      background: #0f172a !important;
+    }
   }
 }
 </style>

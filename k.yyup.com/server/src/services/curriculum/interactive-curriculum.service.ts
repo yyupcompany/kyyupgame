@@ -361,7 +361,7 @@ class InteractiveCurriculumService {
         max_tokens: 4000
       });
 
-      const content = response.choices?.[0]?.message?.content || '';
+      const content = response.data?.content || response.data?.message || '';
       console.log('📝 [代码生成] AI响应内容长度:', content.length);
 
       // 尝试提取JSON（可能包含在Markdown代码块中）
@@ -479,7 +479,8 @@ class InteractiveCurriculumService {
         model: this.VIDEO_MODEL,
         prompt: prompt,
         duration: 30,
-        size: '1280x720'
+        action: 'generate',
+        quality: 'high'
       });
 
       await this.updateProgress(taskId, 90, '视频生成完成');

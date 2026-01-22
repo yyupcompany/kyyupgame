@@ -8,7 +8,7 @@ const KNOWN_ICON_NAMES = new Set([
   'lightning', 'principal', 'dashboard', 'enrollment', 'activity', 'marketing', 'ai-center', 'system',
   'personnel', 'students', 'teachers', 'classes', 'grades', 'notifications', 'schedule', 'reports',
   'finance', 'settings', 'monitor', 'statistics', 'messages', 'media', 'task', 'script', 'search',
-  'health', 'growth', 'security', 'profile', 'performance', 'customers', 'ai-brain', 'design',
+  'health', 'growth', 'gift', 'security', 'profile', 'performance', 'customers', 'ai-brain', 'design',
   'activities', 'analytics', 'ai-robot', 'chevron-down', 'chevron-up', 'chevron-right', 'chevron-left',
   'check', 'close', 'warning', 'info', 'service', 'target', 'setting', 'user', 'user-filled',
   'calendar', 'school', 'promotion', 'cpu', 'list', 'money', 'user-plus', 'arrow-right', 'user-group',
@@ -17,7 +17,9 @@ const KNOWN_ICON_NAMES = new Set([
   'document-new', 'location', 'bell', 'setting-new', 'chat-square', 'dashboard-new', 'home', 'menu',
   'grid', 'folder', 'tag', 'bookmark', 'download', 'upload', 'star', 'heart', 'share', 'lock', 'unlock',
   // CentersSidebar 新增图标
-  'briefcase', 'phone', 'book-open'
+  'briefcase', 'phone', 'book-open',
+  // 新增通用图标
+  'eye', 'play', 'trend', 'success', 'alert', 'ticket'
 ])
 
 // 常见第三方命名到统一图标名称的映射

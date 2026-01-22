@@ -102,35 +102,35 @@ export const statisticsApi = {
    * 获取仪表盘统计
    */
   getDashboardStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<DashboardStatistics>> {
-    return get('/statistics/dashboard', params ? { params } : undefined);
+    return get('/api/statistics/dashboard', params ? { params } : undefined);
   },
 
   /**
    * 获取招生统计
    */
   getEnrollmentStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<EnrollmentStatistics>> {
-    return get('/statistics/enrollment', params ? { params } : undefined);
+    return get('/api/statistics/enrollment', params ? { params } : undefined);
   },
 
   /**
    * 获取学生统计
    */
   getStudentStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<StudentStatistics>> {
-    return get('/statistics/students', params ? { params } : undefined);
+    return get('/api/statistics/students', params ? { params } : undefined);
   },
 
   /**
    * 获取收入统计
    */
   getTeacherStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<TeacherStatistics>> {
-    return get('/statistics/teachers', params ? { params } : undefined);
+    return get('/api/statistics/teachers', params ? { params } : undefined);
   },
 
   /**
    * 获取活动统计
    */
   getActivityStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<ActivityStatistics>> {
-    return get('/statistics/activities', params ? { params } : undefined);
+    return get('/api/statistics/activities', params ? { params } : undefined);
   },
 
   /**
@@ -141,14 +141,14 @@ export const statisticsApi = {
     format: 'pdf' | 'excel';
     params: StatisticsQueryParams;
   }): Promise<ApiResponse<{ downloadUrl: string }>> {
-    return post('/statistics/reports', data);
+    return post('/api/statistics/reports', data);
   },
 
   /**
    * 获取收入统计
    */
   getRevenueStatistics(params?: StatisticsQueryParams): Promise<ApiResponse<RevenueStatistics>> {
-    return get('/statistics/revenue', params ? { params } : undefined);
+    return get('/api/statistics/revenue', params ? { params } : undefined);
   },
 
   /**
@@ -160,7 +160,7 @@ export const statisticsApi = {
     todayRevenue: number;
     systemLoad: number;
   }>> {
-    return get('/statistics/realtime');
+    return get('/api/statistics/realtime');
   }
 };
 

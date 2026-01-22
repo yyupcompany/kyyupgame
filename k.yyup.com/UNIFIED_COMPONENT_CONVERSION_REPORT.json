@@ -1,0 +1,452 @@
+{
+  "timestamp": "2026-01-09T17:22:30.102Z",
+  "summary": {
+    "totalFiles": 57,
+    "totalConverted": 0,
+    "totalSkipped": 55,
+    "totalFailed": 2,
+    "successRate": "0.00"
+  },
+  "batches": {
+    "batchA": {
+      "total": 9,
+      "converted": 0,
+      "skipped": 9,
+      "failed": 0,
+      "details": [
+        {
+          "filePath": "client/src/pages/parent-center/profile/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/children/Growth.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/children/FollowUp.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/assessment/Report.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/ai-assistant/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/activities/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/games/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/photo-album/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/parent-center/communication/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        }
+      ]
+    },
+    "batchB": {
+      "total": 13,
+      "converted": 0,
+      "skipped": 12,
+      "failed": 1,
+      "details": [
+        {
+          "filePath": "client/src/pages/teacher-center/dashboard/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/attendance/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/tasks/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/activities/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/customer-pool/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/customer-tracking/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/enrollment/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/teaching/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/notifications/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/performance-rewards/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/student-assessment/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/creative-curriculum/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/teacher-center/interactive-curriculum.vue",
+          "result": {
+            "success": false,
+            "reason": "文件不存在"
+          }
+        }
+      ]
+    },
+    "batchC": {
+      "total": 17,
+      "converted": 0,
+      "skipped": 17,
+      "failed": 0,
+      "details": [
+        {
+          "filePath": "client/src/pages/mobile/parent-center/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/activities/detail.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/activities/registration.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/children/add.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/children/edit.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/children/followup.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/children/growth.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/assessment/doing.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/assessment/growth-trajectory.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/assessment/report.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/games/achievements.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/games/records.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/communication/smart-hub.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/notifications/detail.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/profile/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/promotion-center/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/parent-center/share-stats/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        }
+      ]
+    },
+    "batchD": {
+      "total": 13,
+      "converted": 0,
+      "skipped": 13,
+      "failed": 0,
+      "details": [
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/tasks/create.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/tasks/detail.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/tasks/edit.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/activities/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/customer-pool/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/customer-tracking/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/enrollment/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/teaching/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/notifications/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/performance-rewards/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/appointment-management/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/creative-curriculum/create.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/teacher-center/creative-curriculum/preview.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        }
+      ]
+    },
+    "batchE": {
+      "total": 5,
+      "converted": 0,
+      "skipped": 4,
+      "failed": 1,
+      "details": [
+        {
+          "filePath": "client/src/pages/mobile/finance/types/index.vue",
+          "result": {
+            "success": false,
+            "reason": "文件不存在"
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/quick-actions/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/more/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/global-search/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        },
+        {
+          "filePath": "client/src/pages/mobile/login/index.vue",
+          "result": {
+            "success": true,
+            "noChanges": true
+          }
+        }
+      ]
+    }
+  },
+  "issues": []
+}

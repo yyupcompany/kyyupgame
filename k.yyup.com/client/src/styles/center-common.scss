@@ -51,6 +51,56 @@
     }
   }
 
+  // 🎯 标签页统一样式
+  :deep(.el-tabs) {
+    --el-tabs-header-height: 48px;
+    
+    .el-tabs__header {
+      margin-bottom: var(--spacing-xl);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .el-tabs__nav-wrap::after {
+      display: none;
+    }
+
+    .el-tabs__item {
+      padding: 0 var(--spacing-2xl) !important; /* ✨ 核心修复：增加水平内边距，防止文字溢出 */
+      height: 40px;
+      line-height: 40px;
+      font-size: var(--text-base);
+      font-weight: var(--font-bold);
+      color: var(--text-secondary);
+      border-radius: var(--radius-lg);
+      margin: 4px 6px;
+      transition: all var(--transition-normal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+
+      &:hover {
+        color: var(--primary-color);
+        background: var(--primary-light-bg);
+      }
+
+      &.is-active {
+        color: white !important;
+        background: var(--primary-color) !important;
+        box-shadow: 0 4px 12px var(--glow-primary);
+        border-color: var(--primary-color);
+      }
+    }
+
+    .el-tabs__active-bar {
+      display: none;
+    }
+  }
+
   @media (max-width: var(--breakpoint-md)) {
     padding: var(--spacing-lg);
   }
@@ -270,7 +320,8 @@
   }
 }
 
-.stat-card {
+// 排除彩色类型卡片，保留其原生渐变背景和无边框样式
+.stat-card:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info) {
   background: white;
   border-radius: 12px;
   padding: var(--spacing-lg);
@@ -377,22 +428,22 @@
 /* ===== 暗黑模式适配 ===== */
 [data-theme="dark"] {
   .center-container {
-    background: #111827;
+    background: var(--bg-secondary);
   }
   
   .center-card,
   .stat-card {
-    background: #1f2937;
-    border-color: #374151;
+    background: var(--bg-card);
+    border-color: var(--border-color);
   }
   
   .card-title,
   .stat-value {
-    color: #f9fafb;
+    color: var(--text-primary);
   }
   
   .stat-label {
-    color: #d1d5db;
+    color: var(--text-secondary);
   }
 }
 

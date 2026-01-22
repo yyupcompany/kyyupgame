@@ -198,6 +198,13 @@ import { initCoursePlanModel } from './models/course-plan.model';
 import { initBrainScienceCourseModel } from './models/brain-science-course.model';
 import { initCourseProgressModel } from './models/course-progress.model';
 import TeachingMediaRecord, { initTeachingMediaRecordModel } from './models/teaching-media-record.model';
+// 自定义课程模型
+import { CustomCourse, initCustomCourseModel } from './models/custom-course.model';
+import { CreativeCurriculum } from './models/creative-curriculum.model';
+import { CourseContent, initCourseContentModel } from './models/course-content.model';
+import { CourseSchedule, initCourseScheduleModel } from './models/course-schedule.model';
+import { CourseInteractiveLink, initCourseInteractiveLinkModel } from './models/course-interactive-link.model';
+import { CourseAssignment, initCourseAssignmentModel } from './models/course-assignment.model';
 
 // 考勤中心模型
 import { Attendance, initAttendanceModel } from './models/attendance.model';
@@ -221,6 +228,12 @@ import { AssessmentConfig } from './models/assessment-config.model';
 import { AssessmentQuestion } from './models/assessment-question.model';
 import { PhysicalTrainingItem } from './models/physical-training-item.model';
 import { AssessmentRecord } from './models/assessment-record.model';
+
+// SOP模板系统模型
+import { SOPTemplate } from './models/sop-template.model';
+import { SOPTemplateNode } from './models/sop-template-node.model';
+import { SOPInstance } from './models/sop-instance.model';
+import { SOPNodeProgress } from './models/sop-node-progress.model';
 
 // 初始化核心模型
 console.log('初始化 User 模型...');
@@ -390,6 +403,23 @@ console.log('初始化 MessageTemplate 模型...');
 initMessageTemplate(sequelize);
 
 console.log('=== 第四批扩展模型初始化完成 ===');
+
+// 添加SOP模板系统模型
+console.log('=== 开始初始化SOP模板系统模型 ===');
+
+console.log('初始化 SOPTemplate 模型...');
+SOPTemplate.initModel(sequelize);
+
+console.log('初始化 SOPTemplateNode 模型...');
+SOPTemplateNode.initModel(sequelize);
+
+console.log('初始化 SOPInstance 模型...');
+SOPInstance.initModel(sequelize);
+
+console.log('初始化 SOPNodeProgress 模型...');
+SOPNodeProgress.initModel(sequelize);
+
+console.log('=== SOP模板系统模型初始化完成 ===');
 
 // 添加第五批模型
 console.log('=== 开始初始化第五批扩展模型 ===');
@@ -565,6 +595,24 @@ initTeachingMediaRecordModel(sequelize);
 
 console.log('  - 初始化 OutdoorTrainingRecord 模型...');
 initOutdoorTrainingRecordModel(sequelize);
+
+console.log('  - 初始化 CustomCourse 模型...');
+initCustomCourseModel(sequelize);
+
+console.log('  - 初始化 CreativeCurriculum 模型...');
+CreativeCurriculum.initModel(sequelize);
+
+console.log('  - 初始化 CourseContent 模型...');
+initCourseContentModel(sequelize);
+
+console.log('  - 初始化 CourseSchedule 模型...');
+initCourseScheduleModel(sequelize);
+
+console.log('  - 初始化 CourseInteractiveLink 模型...');
+initCourseInteractiveLinkModel(sequelize);
+
+console.log('  - 初始化 CourseAssignment 模型...');
+initCourseAssignmentModel(sequelize);
 
 console.log('✅ 教学中心模型初始化完成');
 console.log('=== 教学中心模型初始化完成 ===');
@@ -1021,6 +1069,16 @@ if (OutdoorTrainingRecord && typeof OutdoorTrainingRecord.associate === 'functio
   OutdoorTrainingRecord.associate();
 }
 
+// CourseAssignment 关联
+if (CourseAssignment && typeof CourseAssignment.associate === 'function') {
+  CourseAssignment.associate({
+    CustomCourse,
+    User,
+    Class,
+    TeacherCourseRecord: undefined // TeacherCourseRecord 可能未在 init.ts 中初始化
+  });
+}
+
 console.log('✅ 教学中心模型关联设置完成');
 
 // 训练中心模型关联设置
@@ -1110,6 +1168,40 @@ User.hasMany(AssessmentRecord, {
 });
 
 console.log('✅ 测评系统模型关联设置完成');
+
+// SOP模板系统模型关联设置
+console.log('=== 设置SOP模板系统模型关联 ===');
+
+// 调用模型的associate方法
+if (SOPTemplate && typeof SOPTemplate.associate === 'function') {
+  SOPTemplate.associate({
+    SOPTemplateNode,
+    SOPInstance,
+    User
+  });
+}
+
+if (SOPTemplateNode && typeof SOPTemplateNode.associate === 'function') {
+  SOPTemplateNode.associate({
+    SOPTemplate
+  });
+}
+
+if (SOPInstance && typeof SOPInstance.associate === 'function') {
+  SOPInstance.associate({
+    SOPTemplate,
+    SOPNodeProgress,
+    User
+  });
+}
+
+if (SOPNodeProgress && typeof SOPNodeProgress.associate === 'function') {
+  SOPNodeProgress.associate({
+    SOPInstance
+  });
+}
+
+console.log('✅ SOP模板系统模型关联设置完成');
 
 console.log('=== 模型关联设置完成 ===');
 

@@ -107,7 +107,7 @@ export const getExpertAnalysis = (message: any): string => {
   }
 
   // 方法3: 如果没有特定标记，返回主要内容
-  const lines = content.split('\n').filter(line => line.trim())
+  const lines = content.split('\n').filter((line: string) => line.trim())
   if (lines.length > 0) {
     // 跳过标题行，返回主要内容
     const mainContent = lines.slice(1).join('\n').trim()

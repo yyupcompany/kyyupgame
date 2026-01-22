@@ -350,7 +350,7 @@ export class TaskController {
       } = req.query;
 
       // 管理员查看所有任务统计，其他用户只看分配给自己的任务
-      const userRole = req.user?.role;
+      const userRole = (req.user as any)?.role;
       let userId: number | undefined;
 
       if (user_id) {

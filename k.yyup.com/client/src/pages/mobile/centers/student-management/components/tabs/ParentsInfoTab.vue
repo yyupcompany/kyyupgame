@@ -23,7 +23,7 @@
 
         <template #desc>
           <div class="parent-relation">
-            <van-tag type="primary" size="small">
+            <van-tag type="primary" size="medium">
               {{ getRelationshipText(student.guardian.relationship) }}
             </van-tag>
             <span class="occupation">{{ student.guardian.occupation || '未知职业' }}</span>
@@ -37,7 +37,7 @@
               <span>{{ student.guardian.phone || '未填写' }}</span>
               <van-button
                 v-if="student.guardian.phone"
-                size="mini"
+                size="medium"
                 type="primary"
                 @click="makePhoneCall"
               >
@@ -53,8 +53,8 @@
 
         <template #footer>
           <div class="action-buttons">
-            <van-button size="small" @click="sendMessage">发送消息</van-button>
-            <van-button size="small" type="primary" @click="viewContactHistory">
+            <van-button size="medium" @click="sendMessage">发送消息</van-button>
+            <van-button size="medium" type="primary" @click="viewContactHistory">
               联系记录
             </van-button>
           </div>

@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="相册中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="相册中心" back-path="/mobile/parent-center">
     <div class="mobile-photo-album">
       <!-- 页面头部 -->
       <div class="page-header">
@@ -321,14 +316,14 @@
         title="选择相册"
       />
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { photoAlbumAPI } from '@/api/modules/photo-album'
 
 // 视图模式
@@ -364,8 +359,8 @@ const uploadForm = ref({
   fileList: [] as any[]
 })
 
-// 日期选择器值
-const shootDateValue = ref(new Date())
+// 日期选择器值 - Vant DatePicker 需要 [year, month, day] 格式
+const shootDateValue = ref([2026, 0, 22]) // 默认为今天
 const albumPickerValue = ref('')
 
 // 计算属性
@@ -627,6 +622,12 @@ watch(viewMode, async (newMode) => {
 
 // 初始化
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadAlbums()
   loadStats()
 })
@@ -846,7 +847,7 @@ onMounted(() => {
         align-items: center;
         padding: var(--spacing-lg);
         border-left: 4px solid;
-        background: var(--bg-secondary);
+        background: var(--bg-page);
 
         .timeline-title {
           font-size: var(--font-size-lg);
@@ -869,7 +870,7 @@ onMounted(() => {
             aspect-ratio: 1;
             border-radius: var(--border-radius-md);
             overflow: hidden;
-            background: var(--bg-secondary);
+            background: var(--bg-page);
 
             :deep(.van-image) {
               border-radius: var(--van-radius-md);

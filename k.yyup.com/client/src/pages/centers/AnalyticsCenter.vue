@@ -2,26 +2,12 @@
   <UnifiedCenterLayout
     title="数据分析中心"
     description="这里是数据分析和报表的中心枢纽，提供全面的业务数据分析、趋势预测和智能洞察"
+    :full-width="true"
   >
-    <template #header-actions>
-      <el-button type="primary" size="large" @click="handleRefresh" :loading="loading">
-        <UnifiedIcon name="Refresh" />
-        刷新数据
-      </el-button>
-    </template>
-
     <div class="center-container analytics-center-timeline">
 
     <!-- 主要内容区域 -->
     <div class="main-content">
-        <!-- 欢迎词 -->
-        <div class="welcome-section">
-          <div class="welcome-content">
-            <h2>欢迎来到数据分析中心</h2>
-            <p>探索数据洞察，驱动智能决策</p>
-          </div>
-        </div>
-
         <!-- 统计卡片区域 -->
         <div class="stats-section">
           <div class="stats-grid-unified" v-loading="loading" element-loading-text="加载统计数据中...">
@@ -269,8 +255,8 @@ const navigateToFeature = (feature: string) => {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-xl);
-  background: var(--el-fill-color-lighter);
+  padding: var(--spacing-lg) var(--spacing-xl); /* ✨ 优化：增加边距，使页面更透气 */
+  background: var(--bg-page);
 }
 
 /* .page-header 样式已移至全局 center-common.scss 中统一管理 */
@@ -278,6 +264,12 @@ const navigateToFeature = (feature: string) => {
 .main-content {
   flex: 1;
   overflow-y: auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-normal);
 }
 
 /* 欢迎词样式 */
@@ -554,6 +546,75 @@ const navigateToFeature = (feature: string) => {
             color: var(--el-text-color-secondary);
           }
         }
+      }
+    }
+  }
+}
+
+.actions-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+
+  .module-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border-color-light);
+    cursor: pointer;
+    transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background: var(--bg-card);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-lg), var(--glow-primary);
+      transform: translateY(-4px) scale(1.02);
+
+      .module-icon {
+        background: var(--primary-color);
+        color: white;
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      h4 {
+        color: var(--primary-color);
+      }
+    }
+
+    .module-icon {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: var(--primary-color);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-normal);
+    }
+
+    .module-content {
+      flex: 1;
+
+      h4 {
+        margin: 0 0 var(--spacing-xs) 0;
+        font-size: var(--text-lg);
+        font-weight: var(--font-bold);
+        color: var(--text-primary);
+        transition: color var(--transition-normal);
+      }
+
+      p {
+        margin: 0;
+        font-size: var(--text-sm);
+        color: var(--text-secondary);
+        line-height: 1.6;
       }
     }
   }

@@ -132,7 +132,7 @@ export class IPRateLimiter {
 
     const limiter = this.limiters.get(key)!;
     try {
-      await limiter.consume(points);
+      await limiter.consume(key, points);
       return true;
     } catch {
       return false;
@@ -148,7 +148,8 @@ export class IPRateLimiter {
     }
 
     const limiter = this.limiters.get(key)!;
-    return limiter.getRemainingPoints();
+    const result = await (limiter as any).get(key);
+    return result?.remainingPoints ?? this.options.points;
   }
 
   /**
@@ -213,7 +214,7 @@ export function createDynamicRateLimiter() {
       message: '请求过于频繁，请稍后再试'
     });
 
-    return limiter(req, res, next);
+    return (limiter as any)(req, res, next);
   };
 }
 

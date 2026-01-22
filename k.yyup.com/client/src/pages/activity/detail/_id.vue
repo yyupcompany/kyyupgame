@@ -324,7 +324,7 @@ export default defineComponent({
   line-height: 1.6;
   color: var(--text-secondary);
   padding: var(--spacing-sm);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-sm);
 }
 
@@ -348,7 +348,7 @@ export default defineComponent({
   align-items: center;
   height: 100%;
   color: var(--text-muted);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-md);
 
   .el-icon {

@@ -1,0 +1,726 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-01-17T00:00:00.000Z",
+  "roles": [
+    {
+      "id": "admin",
+      "name": "管理员端",
+      "agent": "AdminAgent",
+      "baseRoute": "/centers",
+      "mobileBaseRoute": "/mobile/centers",
+      "sidebar": "CentersSidebar",
+      "categories": [
+        {
+          "id": "business-management",
+          "name": "业务管理",
+          "icon": "briefcase",
+          "items": [
+            {
+              "id": "centers-business",
+              "name": "业务中心",
+              "route": "/centers/business",
+              "filePath": "/client/src/pages/centers/BusinessCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-activity",
+              "name": "活动中心",
+              "route": "/centers/activity",
+              "filePath": "/client/src/pages/centers/ActivityCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-enrollment",
+              "name": "招生中心",
+              "route": "/centers/enrollment",
+              "filePath": "/client/src/pages/centers/EnrollmentCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-customer",
+              "name": "客户池中心",
+              "route": "/centers/customer-pool",
+              "filePath": "/client/src/pages/centers/CustomerPoolCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-task",
+              "name": "任务中心",
+              "route": "/centers/task",
+              "filePath": "/client/src/pages/centers/TaskCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-document",
+              "name": "文档中心",
+              "route": "/centers/document-center",
+              "filePath": "/client/src/pages/centers/DocumentCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-finance",
+              "name": "财务中心",
+              "route": "/centers/finance",
+              "filePath": "/client/src/pages/centers/FinanceCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "marketing-management",
+          "name": "营销管理",
+          "icon": "marketing",
+          "items": [
+            {
+              "id": "centers-marketing",
+              "name": "营销中心",
+              "route": "/centers/marketing",
+              "filePath": "/client/src/pages/centers/MarketingCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-call",
+              "name": "呼叫中心",
+              "route": "/centers/call",
+              "filePath": "/client/src/pages/centers/CallCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-photo-album",
+              "name": "相册中心",
+              "route": "/centers/media",
+              "filePath": "/client/src/pages/centers/MediaCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-new-media",
+              "name": "新媒体中心",
+              "route": "/principal/media-center",
+              "filePath": "/client/src/pages/principal/media-center/VideoCreatorTimeline.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "personnel-teaching-management",
+          "name": "人事与教学管理",
+          "icon": "user-group",
+          "items": [
+            {
+              "id": "centers-personnel",
+              "name": "人员中心",
+              "route": "/centers/personnel",
+              "filePath": "/client/src/pages/centers/PersonnelCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-teaching",
+              "name": "教学中心",
+              "route": "/centers/teaching",
+              "filePath": "/client/src/pages/centers/TeachingCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-assessment",
+              "name": "测评中心",
+              "route": "/centers/assessment",
+              "filePath": "/client/src/pages/centers/AssessmentCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-attendance",
+              "name": "考勤中心",
+              "route": "/centers/attendance",
+              "filePath": "/client/src/pages/centers/AttendanceCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "data-analytics-management",
+          "name": "数据与分析管理",
+          "icon": "analytics",
+          "items": [
+            {
+              "id": "centers-analytics",
+              "name": "数据分析中心",
+              "route": "/centers/analytics",
+              "filePath": "/client/src/pages/centers/AnalyticsCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            },
+            {
+              "id": "centers-usage",
+              "name": "用量中心",
+              "route": "/centers/usage",
+              "filePath": "/client/src/pages/centers/UsageCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "governance-group-management",
+          "name": "治理与集团管理",
+          "icon": "home",
+          "items": [
+            {
+              "id": "centers-group",
+              "name": "集团中心",
+              "route": "/group",
+              "filePath": "/client/src/pages/group/group-list.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-inspection",
+              "name": "督查中心",
+              "route": "/centers/inspection",
+              "filePath": "/client/src/pages/centers/InspectionCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "system-ai-management",
+          "name": "系统与AI管理",
+          "icon": "settings",
+          "items": [
+            {
+              "id": "centers-system",
+              "name": "系统中心",
+              "route": "/centers/system",
+              "filePath": "/client/src/pages/centers/SystemCenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "centers-ai",
+              "name": "AI中心",
+              "route": "/centers/ai",
+              "filePath": "/client/src/pages/centers/AICenter.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "principal",
+      "name": "园长端",
+      "agent": "PrincipalAgent",
+      "baseRoute": "/principal",
+      "mobileBaseRoute": "/mobile/centers/principal-center",
+      "sidebar": "MainLayout",
+      "categories": [
+        {
+          "id": "principal-dashboard",
+          "name": "园长工作台",
+          "icon": "dashboard",
+          "items": [
+            {
+              "id": "principal-dashboard",
+              "name": "园长仪表板",
+              "route": "/principal/Dashboard",
+              "filePath": "/client/src/pages/principal/Dashboard.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "principal-management",
+          "name": "园长管理",
+          "icon": "user-check",
+          "items": [
+            {
+              "id": "principal-customer-pool",
+              "name": "客户池",
+              "route": "/principal/CustomerPool",
+              "filePath": "/client/src/pages/principal/CustomerPool.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            },
+            {
+              "id": "principal-permission",
+              "name": "家长权限管理",
+              "route": "/principal/ParentPermissionManagement",
+              "filePath": "/client/src/pages/principal/ParentPermissionManagement.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            },
+            {
+              "id": "principal-performance",
+              "name": "绩效管理",
+              "route": "/principal/Performance",
+              "filePath": "/client/src/pages/principal/Performance.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            },
+            {
+              "id": "principal-poster",
+              "name": "海报生成器",
+              "route": "/principal/PosterGenerator",
+              "filePath": "/client/src/pages/principal/PosterGenerator.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            },
+            {
+              "id": "principal-poster-templates",
+              "name": "海报模板",
+              "route": "/principal/PosterTemplates",
+              "filePath": "/client/src/pages/principal/PosterTemplates.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            },
+            {
+              "id": "principal-decision",
+              "name": "智能决策",
+              "route": "/principal/decision-support/intelligent-dashboard",
+              "filePath": "/client/src/pages/principal/decision-support/intelligent-dashboard.vue",
+              "platforms": ["pc"],
+              "hasCrud": false
+            },
+            {
+              "id": "principal-video",
+              "name": "视频时间轴",
+              "route": "/principal/media-center/VideoCreatorTimeline",
+              "filePath": "/client/src/pages/principal/media-center/VideoCreatorTimeline.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teacher",
+      "name": "老师端",
+      "agent": "TeacherAgent",
+      "baseRoute": "/teacher-center",
+      "mobileBaseRoute": "/mobile/teacher-center",
+      "sidebar": "TeacherCenterSidebar",
+      "categories": [
+        {
+          "id": "teacher-workbench",
+          "name": "教师工作台",
+          "icon": "dashboard",
+          "items": [
+            {
+              "id": "teacher-dashboard",
+              "name": "教师工作台",
+              "route": "/teacher-center/dashboard",
+              "filePath": "/client/src/pages/teacher-center/dashboard/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "teacher-activities",
+          "name": "活动管理",
+          "icon": "calendar",
+          "items": [
+            {
+              "id": "teacher-activities",
+              "name": "活动管理",
+              "route": "/teacher-center/activities",
+              "filePath": "/client/src/pages/teacher-center/activities/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-appointment",
+          "name": "预约管理",
+          "icon": "clock",
+          "items": [
+            {
+              "id": "teacher-appointment",
+              "name": "预约管理",
+              "route": "/teacher-center/appointment-management",
+              "filePath": "/client/src/pages/teacher-center/appointment-management/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-attendance",
+          "name": "考勤管理",
+          "icon": "check",
+          "items": [
+            {
+              "id": "teacher-attendance",
+              "name": "考勤管理",
+              "route": "/teacher-center/attendance",
+              "filePath": "/client/src/pages/teacher-center/attendance/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-class-contacts",
+          "name": "班级通讯录",
+          "icon": "user-group",
+          "items": [
+            {
+              "id": "teacher-class-contacts",
+              "name": "班级通讯录",
+              "route": "/teacher-center/class-contacts",
+              "filePath": "/client/src/pages/teacher-center/class-contacts/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-curriculum",
+          "name": "创意课程",
+          "icon": "book-open",
+          "items": [
+            {
+              "id": "teacher-curriculum",
+              "name": "创意课程",
+              "route": "/teacher-center/creative-curriculum",
+              "filePath": "/client/src/pages/teacher-center/creative-curriculum/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-customer",
+          "name": "客户管理",
+          "icon": "user-check",
+          "items": [
+            {
+              "id": "teacher-customer-pool",
+              "name": "客户池",
+              "route": "/teacher-center/customer-pool",
+              "filePath": "/client/src/pages/teacher-center/customer-pool/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "teacher-customer-tracking",
+              "name": "客户跟踪",
+              "route": "/teacher-center/customer-tracking",
+              "filePath": "/client/src/pages/teacher-center/customer-tracking/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-enrollment",
+          "name": "招生管理",
+          "icon": "school",
+          "items": [
+            {
+              "id": "teacher-enrollment",
+              "name": "招生管理",
+              "route": "/teacher-center/enrollment",
+              "filePath": "/client/src/pages/teacher-center/enrollment/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-notifications",
+          "name": "通知管理",
+          "icon": "bell",
+          "items": [
+            {
+              "id": "teacher-notifications",
+              "name": "通知管理",
+              "route": "/teacher-center/notifications",
+              "filePath": "/client/src/pages/teacher-center/notifications/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-rewards",
+          "name": "绩效奖励",
+          "icon": "star",
+          "items": [
+            {
+              "id": "teacher-rewards",
+              "name": "绩效奖励",
+              "route": "/teacher-center/performance-rewards",
+              "filePath": "/client/src/pages/teacher-center/performance-rewards/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-tasks",
+          "name": "任务管理",
+          "icon": "task",
+          "items": [
+            {
+              "id": "teacher-tasks",
+              "name": "任务管理",
+              "route": "/teacher-center/tasks",
+              "filePath": "/client/src/pages/teacher-center/tasks/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-teaching",
+          "name": "教学管理",
+          "icon": "book",
+          "items": [
+            {
+              "id": "teacher-teaching",
+              "name": "教学管理",
+              "route": "/teacher-center/teaching",
+              "filePath": "/client/src/pages/teacher-center/teaching/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "teacher-assessment",
+          "name": "学生评估",
+          "icon": "chart",
+          "items": [
+            {
+              "id": "teacher-assessment",
+              "name": "学生评估",
+              "route": "/teacher-center/student-assessment",
+              "filePath": "/client/src/pages/teacher-center/student-assessment/index.vue",
+              "platforms": ["pc"],
+              "hasCrud": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parent",
+      "name": "家长端",
+      "agent": "ParentAgent",
+      "baseRoute": "/parent-center",
+      "mobileBaseRoute": "/mobile/parent-center",
+      "sidebar": "ParentCenterSidebar",
+      "categories": [
+        {
+          "id": "parent-home",
+          "name": "我的首页",
+          "icon": "home",
+          "items": [
+            {
+              "id": "parent-dashboard",
+              "name": "我的首页",
+              "route": "/parent-center/dashboard",
+              "filePath": "/client/src/pages/parent-center/dashboard/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-children",
+          "name": "孩子管理",
+          "icon": "child",
+          "items": [
+            {
+              "id": "parent-children",
+              "name": "我的孩子",
+              "route": "/parent-center/children",
+              "filePath": "/client/src/pages/parent-center/children/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            },
+            {
+              "id": "parent-child-growth",
+              "name": "成长报告",
+              "route": "/parent-center/child-growth",
+              "filePath": "/client/src/pages/parent-center/child-growth/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-assessment",
+          "name": "测评中心",
+          "icon": "chart",
+          "items": [
+            {
+              "id": "parent-assessment",
+              "name": "测评中心",
+              "route": "/parent-center/assessment",
+              "filePath": "/client/src/pages/parent-center/assessment/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-games",
+          "name": "游戏大厅",
+          "icon": "gamepad",
+          "items": [
+            {
+              "id": "parent-games",
+              "name": "游戏大厅",
+              "route": "/parent-center/games",
+              "filePath": "/client/src/pages/parent-center/games/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            },
+            {
+              "id": "parent-games-achievements",
+              "name": "游戏成就",
+              "route": "/parent-center/games/achievements",
+              "filePath": "/client/src/pages/parent-center/games/achievements.vue",
+              "platforms": ["pc"],
+              "hasCrud": false
+            },
+            {
+              "id": "parent-games-records",
+              "name": "游戏记录",
+              "route": "/parent-center/games/records",
+              "filePath": "/client/src/pages/parent-center/games/records.vue",
+              "platforms": ["pc"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-activities",
+          "name": "活动中心",
+          "icon": "calendar",
+          "items": [
+            {
+              "id": "parent-activities",
+              "name": "活动中心",
+              "route": "/parent-center/activities",
+              "filePath": "/client/src/pages/parent-center/activities/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-ai",
+          "name": "AI助手",
+          "icon": "ai",
+          "items": [
+            {
+              "id": "parent-ai-assistant",
+              "name": "AI育儿助手",
+              "route": "/parent-center/ai-assistant",
+              "filePath": "/client/src/pages/parent-center/ai-assistant/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-communication",
+          "name": "家校沟通",
+          "icon": "chat",
+          "items": [
+            {
+              "id": "parent-communication",
+              "name": "家校沟通",
+              "route": "/parent-center/communication",
+              "filePath": "/client/src/pages/parent-center/communication/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "parent-photo-album",
+          "name": "相册中心",
+          "icon": "image",
+          "items": [
+            {
+              "id": "parent-photo-album",
+              "name": "相册中心",
+              "route": "/parent-center/photo-album",
+              "filePath": "/client/src/pages/parent-center/photo-album/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-rewards",
+          "name": "园所奖励",
+          "icon": "gift",
+          "items": [
+            {
+              "id": "parent-rewards",
+              "name": "园所奖励",
+              "route": "/parent-center/kindergarten-rewards",
+              "filePath": "/client/src/pages/parent-center/kindergarten-rewards.vue",
+              "platforms": ["pc"],
+              "hasCrud": false
+            }
+          ]
+        },
+        {
+          "id": "parent-notifications",
+          "name": "通知消息",
+          "icon": "bell",
+          "items": [
+            {
+              "id": "parent-notifications",
+              "name": "通知消息",
+              "route": "/parent-center/notifications",
+              "filePath": "/client/src/pages/parent-center/notifications/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        },
+        {
+          "id": "parent-profile",
+          "name": "个人中心",
+          "icon": "user",
+          "items": [
+            {
+              "id": "parent-profile",
+              "name": "个人中心",
+              "route": "/parent-center/profile",
+              "filePath": "/client/src/pages/parent-center/profile/index.vue",
+              "platforms": ["pc", "mobile"],
+              "hasCrud": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

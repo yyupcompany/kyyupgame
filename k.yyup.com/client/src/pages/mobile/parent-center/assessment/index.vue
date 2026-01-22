@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="测评中心"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="测评中心" back-path="/mobile/parent-center">
     <div class="mobile-assessment-page">
       <!-- Hero区域 -->
       <div class="hero-section">
@@ -204,14 +199,14 @@
         </van-button>
       </van-empty>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast, Dialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { assessmentApi, type AssessmentRecord } from '@/api/assessment'
 
 // 路由
@@ -253,6 +248,8 @@ const startAssessment = async () => {
   try {
     startingAssessment.value = true
 
+    console.log('[评估系统] 开始测评按钮被点击')
+
     // 检查是否有进行中的测评
     const inProgressRecord = assessmentRecords.value.find(record => record.status === 'in_progress')
     if (inProgressRecord) {
@@ -264,19 +261,27 @@ const startAssessment = async () => {
       }).catch(() => false)
 
       if (confirmContinue) {
+        showToast('继续进行中的测评...')
         router.push(`/mobile/parent-center/assessment/progress/${inProgressRecord.id}`)
         return
       }
     }
 
-    // 跳转到开始测评页面
-    router.push('/mobile/parent-center/assessment/start')
+    // 显示提示信息
+    showToast('正在进入测评页面...')
+
+    // 延迟跳转，确保Toast显示
+    setTimeout(() => {
+      router.push('/mobile/parent-center/assessment/start')
+    }, 300)
 
   } catch (error) {
     console.error('开始测评失败:', error)
     Toast.fail('操作失败，请重试')
   } finally {
-    startingAssessment.value = false
+    setTimeout(() => {
+      startingAssessment.value = false
+    }, 500)
   }
 }
 
@@ -403,6 +408,12 @@ const getStatusText = (status: string) => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadAssessmentRecords()
 })
 </script>

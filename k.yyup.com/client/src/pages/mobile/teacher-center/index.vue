@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="教师工作台"
-    :show-back="false"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="教师工作台" back-path="/mobile/teacher-center">
     <!-- 欢迎信息和快速操作 -->
     <div class="welcome-section">
       <div class="welcome-header">
@@ -284,14 +279,14 @@
         </div>
       </van-card>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import {
   getDashboardStatistics,
   getTodayTasks,
@@ -611,6 +606,12 @@ const formatTime = (timestamp: number) => {
 }
 
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   console.log('教师工作台已挂载')
   loadAllData()
 })
@@ -864,7 +865,7 @@ onMounted(() => {
     align-items: flex-start;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--bg-color);
+    background-color: var(--bg-card);
     border: 1px solid var(--border-color-light);
     border-radius: var(--radius-md);
     transition: all 0.3s ease;
@@ -951,7 +952,7 @@ onMounted(() => {
     display: flex;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--bg-color);
+    background-color: var(--bg-card);
     border: 1px solid var(--border-color-light);
     border-radius: var(--radius-md);
     transition: all 0.3s ease;
@@ -1012,7 +1013,7 @@ onMounted(() => {
     align-items: flex-start;
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background-color: var(--bg-color);
+    background-color: var(--bg-card);
     border: 1px solid var(--border-color-light);
     border-radius: var(--radius-md);
     transition: all 0.3s ease;

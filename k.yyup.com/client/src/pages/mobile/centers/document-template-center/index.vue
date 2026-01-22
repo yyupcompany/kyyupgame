@@ -1,9 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="文档模板"
-    :show-back="true"
-    @back="goBack"
-  >
+  <MobileCenterLayout title="文档模板" back-path="/mobile/centers">
     <div class="mobile-document-template-center">
       <!-- 搜索栏 -->
       <div class="search-section">
@@ -47,11 +43,11 @@
               class="template-card"
             >
               <template #tags>
-                <van-tag :type="getPriorityTagType(template.priority)" size="small">
+                <van-tag :type="getPriorityTagType(template.priority)" size="medium">
                   {{ getPriorityLabel(template.priority) }}
                 </van-tag>
-                <van-tag type="primary" size="small">{{ template.code }}</van-tag>
-                <van-tag type="success" size="small">{{ getCategoryName(template.category) }}</van-tag>
+                <van-tag type="primary" size="medium">{{ template.code }}</van-tag>
+                <van-tag type="success" size="medium">{{ getCategoryName(template.category) }}</van-tag>
               </template>
               <template #thumb>
                 <van-icon name="description" size="40" color="#1989fa" />
@@ -70,7 +66,7 @@
                 <div class="template-actions">
                   <van-button
                     type="primary"
-                    size="small"
+                    size="medium"
                     @click.stop="handleUseTemplate(template)"
                   >
                     使用模板
@@ -89,14 +85,14 @@
         </van-pull-refresh>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import { getTemplates, type Template } from '@/api/endpoints/document-templates'
 
 const router = useRouter()
@@ -231,11 +227,19 @@ const loadTemplates = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadTemplates()
 })
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+@import '@/styles/mixins/responsive-mobile.scss';
 @import '@/styles/mobile-base.scss';
 .mobile-document-template-center {
   background: var(--van-background-color-light);

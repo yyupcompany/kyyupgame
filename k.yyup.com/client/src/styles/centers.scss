@@ -49,7 +49,8 @@
         gap: var(--spacing-lg);
         margin-bottom: 24px;
         
-        .stat-card {
+        // 排除彩色类型卡片
+        .stat-card:not(.stat-card--primary):not(.stat-card--success):not(.stat-card--warning):not(.stat-card--danger):not(.stat-card--info) {
           background: #fff;
           border-radius: 8px;
           padding: var(--spacing-lg);

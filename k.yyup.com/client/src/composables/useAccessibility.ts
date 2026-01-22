@@ -197,10 +197,10 @@ export function useAccessibility(initialConfig: Partial<AccessibilityConfig> = {
 
       if (message.delay && message.delay > 0) {
         setTimeout(() => {
-          speechSynthesis.speak(utterance)
+          speechSynthesis?.speak(utterance)
         }, message.delay)
       } else {
-        speechSynthesis.speak(utterance)
+        speechSynthesis?.speak(utterance)
       }
     } catch (error) {
       CallingLogger.logError(logContext, 'Speech synthesis error', error as Error, { messageText: message.text })

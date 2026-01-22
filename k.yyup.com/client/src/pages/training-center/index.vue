@@ -304,7 +304,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .training-center {
   padding: var(--spacing-lg);
-  background-color: var(--bg-color);
+  background-color: var(--bg-card);
   min-height: 100vh;
 
   .page-header {

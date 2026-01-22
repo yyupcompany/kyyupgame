@@ -1,4 +1,4 @@
-import { aiService } from '@/utils/request'
+import { aiService as aiRequest } from '@/utils/request'
 
 /**
  * AI助手相关服务
@@ -18,7 +18,7 @@ export interface AIFeedbackData {
  */
 export const submitFeedback = async (data: AIFeedbackData) => {
   try {
-    const response = await aiService.post('/ai/feedback/submit', data)
+    const response = await aiRequest.post('/ai/feedback/submit', data)
     return response.data
   } catch (error) {
     console.error('提交AI反馈失败:', error)
@@ -33,7 +33,7 @@ export const submitFeedback = async (data: AIFeedbackData) => {
  */
 export const getMessageFeedback = async (messageId: string, conversationId: string) => {
   try {
-    const response = await aiService.get('/ai/feedback/message', {
+    const response = await aiRequest.get('/ai/feedback/message', {
       params: { messageId, conversationId }
     })
     return response.data
@@ -49,7 +49,7 @@ export const getMessageFeedback = async (messageId: string, conversationId: stri
  */
 export const getConversationFeedbackStats = async (conversationId: string) => {
   try {
-    const response = await aiService.get('/ai/feedback/conversation', {
+    const response = await aiRequest.get('/ai/feedback/conversation', {
       params: { conversationId }
     })
     return response.data
@@ -62,7 +62,7 @@ export const getConversationFeedbackStats = async (conversationId: string) => {
 /**
  * AI服务导出
  */
-export const aiService = {
+export const aiFeedbackService = {
   submitFeedback,
   getMessageFeedback,
   getConversationFeedbackStats

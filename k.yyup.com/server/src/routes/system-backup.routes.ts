@@ -1262,6 +1262,66 @@ router.put('/auto-settings', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/system-backup/schedule:
+ *   get:
+ *     summary: 获取备份调度配置
+ *     description: 获取当前系统备份的调度配置信息（Cron表达式）
+ *     tags:
+ *       - 系统备份
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: 获取成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     schedule:
+ *                       type: string
+ *                       description: Cron表达式
+ *                       example: "0 2 * * *"
+ *                     enabled:
+ *                       type: boolean
+ *                       description: 是否启用自动备份
+ *                       example: true
+ *                     description:
+ *                       type: string
+ *                       description: 调度描述
+ *                       example: "每天凌晨2点执行备份"
+ *                 message:
+ *                   type: string
+ *                   example: "获取备份调度配置成功"
+ *       401:
+ *         description: 未授权
+ *       500:
+ *         description: 服务器内部错误
+ */
+router.get('/schedule', async (req, res) => {
+  try {
+    // 返回默认的备份调度配置
+    const scheduleConfig = {
+      schedule: '0 2 * * *', // 默认：每天凌晨2点
+      enabled: true,
+      description: '每天凌晨2点执行数据库自动备份',
+      timezone: 'Asia/Shanghai'
+    };
+
+    return ApiResponse.success(res, scheduleConfig, '获取备份调度配置成功');
+  } catch (error) {
+    return ApiResponse.handleError(res, error, '获取备份调度配置失败');
+  }
+});
+
 // 辅助函数：格式化文件大小
 function formatFileSize(bytes: number): string {
   if (bytes === 0) return '0 B';

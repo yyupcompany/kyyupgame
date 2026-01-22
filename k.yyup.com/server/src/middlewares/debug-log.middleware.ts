@@ -70,7 +70,9 @@ export const apiDebugLogger: RequestHandler = (req: Request, res: Response, next
         id: reqWithUser.user.id,
         username: reqWithUser.user.username,
         role: reqWithUser.user.role,
-        kindergartenId: reqWithUser.user.kindergartenId
+        kindergartenId: reqWithUser.user.kindergartenId,
+        primaryKindergartenId: reqWithUser.user.primaryKindergartenId,
+        dataScope: reqWithUser.user.dataScope
       }));
     } else {
       console.log('[API调试] req.user: 未设置');

@@ -2,7 +2,7 @@
   <el-card class="activity-stat-card" shadow="hover">
     <div class="card-content">
       <div class="card-icon" :style="{ backgroundColor: color + '20', color: color }">
-        <UnifiedIcon name="default" />
+        <UnifiedIcon :name="icon" />
       </div>
       <div class="card-info">
         <div class="card-value">{{ value }}</div>

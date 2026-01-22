@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="快捷操作"
-    :show-back="true"
-    :show-footer="false"
-    @back="handleGoBack"
-  >
+  <MobileSubPageLayout title="快捷操作" back-path="/mobile/centers">
     <div class="mobile-quick-actions">
       <!-- 搜索快捷操作 -->
       <div class="search-section">
@@ -104,14 +99,14 @@
         </van-notice-bar>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 路由
 const router = useRouter()
@@ -320,7 +315,7 @@ const categories = [
     id: 'data',
     name: '数据报表',
     icon: 'chart-trending-o',
-    color: '#909399'
+    color: 'var(--info-color)'
   },
   {
     id: 'system',
@@ -354,7 +349,7 @@ const filteredCategories = computed(() => {
 })
 
 // 初始化
-onMounted(() => {
+onMounted(async () => {
   loadRecentActions()
   loadPinnedActions()
 })
@@ -594,7 +589,7 @@ const handleGoBack = () => {
           justify-content: center;
           width: 44px;
           height: 44px;
-          background: var(--bg-secondary);
+          background: var(--bg-page);
           border-radius: var(--radius-lg);
           color: var(--mobile-text-primary);
 
@@ -603,9 +598,9 @@ const handleGoBack = () => {
             top: -4px;
             right: -4px;
             color: var(--warning-color);
-            background: var(--bg-color);
+            background: var(--bg-card);
             border-radius: var(--radius-full);
-            padding: 2px;
+            padding: var(--spacing-xs);
           }
         }
 
@@ -656,6 +651,13 @@ const handleGoBack = () => {
       grid-template-columns: repeat(6, 1fr);
       gap: var(--spacing-lg);
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

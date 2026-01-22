@@ -166,6 +166,18 @@ router.use(verifyToken); // 已注释：全局认证中间件已移除，每个�
 router.post('/', textToSpeechController.generateSpeech);
 
 /**
+ * @swagger
+ * /api/ai/text-to-speech/generate:
+ *   post:
+ *     summary: 文字转语音（别名路由）
+ *     description: 将文字内容转换为语音（与 / 相同）
+ *     tags: [AI - 文字转语音]
+ *     security:
+ *       - bearerAuth: []
+ */
+router.post('/generate', textToSpeechController.generateSpeech);
+
+/**
 * @swagger
  * /api/ai/text-to-speech/voices:
  *   get:

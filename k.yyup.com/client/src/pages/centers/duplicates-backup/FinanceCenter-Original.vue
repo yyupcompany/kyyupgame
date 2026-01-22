@@ -462,7 +462,7 @@ onMounted(() => {
 
 .finance-center {
   padding: var(--spacing-3xl);
-  background: var(--bg-color, var(--bg-card));
+  background: var(--bg-card));
   min-height: calc(100vh - var(--header-height));
 }
 

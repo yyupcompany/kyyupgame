@@ -185,26 +185,3 @@ export interface NavigationTheme {
   activeColor?: string     // 激活状态颜色
   borderRadius?: string    // 圆角大小
 }
-
-// ==================== 导出所有类型 ====================
-
-export type {
-  BottomTab,
-  DrawerMenuItem,
-  DrawerCategory,
-  DrawerMenu,
-  MobileNavigationConfig,
-  UserRole,
-  RoleConfigMap,
-  DrawerState,
-  MobileNavigationState,
-  GetNavConfigOptions,
-  ActiveTabMatch,
-  TabChangeEvent,
-  MenuItemClickEvent,
-  DrawerStateChangeEvent,
-  ConfigValidationError,
-  ConfigValidationResult,
-  NavigationStats,
-  NavigationTheme
-}

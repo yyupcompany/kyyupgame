@@ -10,7 +10,7 @@ import { TodoStatus } from '../../../../models/todo.model';
 const getTodoListTool: ToolDefinition = {
   name: 'get_todo_list',
   description: '获取用户的待办任务列表。可以按状态、优先级过滤。',
-  category: TOOL_CATEGORIES.WORKFLOW,
+  category: TOOL_CATEGORIES.QUERY,
   parameters: {
     type: 'object',
     properties: {

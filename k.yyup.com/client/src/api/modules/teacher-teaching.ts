@@ -132,7 +132,7 @@ export const teacherTeachingApi = {
 
   // 删除教学记录
   deleteTeachingRecord: async (id: number): Promise<void> => {
-    await request.delete(`/teacher-dashboard/teaching/records/${id}`)
+    await request.delete(`/api/teacher-dashboard/teaching/records/${id}`)
   },
 
   // 更新教学进度（解包）
@@ -151,8 +151,7 @@ export const teacherTeachingApi = {
   }> => {
     const res = await request.post<any>(
       '/teacher-dashboard/teaching/media',
-      formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      formData
     )
     return res.data || res
   },

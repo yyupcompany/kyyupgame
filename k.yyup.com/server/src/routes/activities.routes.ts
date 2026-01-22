@@ -472,8 +472,16 @@ router.get('/statistics', checkPermission('activity:view'), activityController.g
  *             schema:
  *               $ref: '#/components/schemas/Error'
 */
-// 获取活动列表
-router.get('/', checkPermission('activity:view'), activityController.getList);
+// 获取活动列表 - 家长也可以查看活动
+router.get('/', (req, res, next) => {
+  const userRole = (req as any).user?.role;
+  if (userRole === 'parent') {
+    // 家长角色直接放行，由控制器返回数据
+    return activityController.getList(req, res, next);
+  }
+  // 其他角色需要权限检查
+  return checkPermission('activity:view')(req, res, next);
+}, activityController.getList);
 
 /**
 * @swagger

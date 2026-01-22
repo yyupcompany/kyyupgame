@@ -4,16 +4,7 @@
     <div class="document-header">
       <div class="header-content">
         <div class="header-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 8V40H40V8H8ZM36 36H12V12H36V36Z" fill="url(#gradient)" opacity="0.2"/>
-            <path d="M16 16H32V20H16V16ZM16 24H28V28H16V24ZM16 32H24V36H16V32Z" fill="url(#gradient)"/>
-            <defs>
-              <linearGradient id="gradient" x1="0" y1="0" x2="48" y2="48">
-                <stop offset="0%" stop-color="#6366F1"/>
-                <stop offset="100%" stop-color="#8B5CF6"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <UnifiedIcon name="document" :size="48" />
         </div>
         <div class="header-text">
           <h1>文档管理中心</h1>
@@ -65,69 +56,43 @@
 
           <!-- 模板表格 - Glassmorphism 容器 -->
           <div class="table-container glass-card">
-            <el-table
-              v-loading="templatesLoading"
+            <DataTable
               :data="templates"
-              class="document-table"
-              stripe
-              :row-style="{ height: '52px' }"
-              :cell-style="{ fontSize: '14px', padding: '12px 16px' }"
-              :header-cell-style="{
-                fontSize: '14px',
-                fontWeight: '600',
-                padding: '14px 16px',
-                background: 'rgba(99, 102, 241, 0.05)',
-                color: '#1a1a2e'
-              }"
-            >
-              <el-table-column prop="id" label="ID" width="70" align="center" />
-              <el-table-column prop="name" label="模板名称" min-width="200" />
-              <el-table-column prop="code" label="模板代码" width="100" align="center" />
-              <el-table-column prop="category" label="分类" width="100" align="center">
-                <template #default="{ row }">
-                  <el-tag size="small" :type="getCategoryTagType(row.category)">
-                    {{ getCategoryLabel(row.category) }}
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column prop="useCount" label="使用次数" width="100" align="center" />
-              <el-table-column prop="version" label="版本" width="80" align="center" />
-              <el-table-column label="操作" width="170" fixed="right" align="center">
-                <template #default="{ row }">
-                  <el-button
-                    link
-                    type="primary"
-                    size="small"
-                    @click="createInstanceFromTemplate(row)"
-                    class="action-link"
-                  >
-                    创建实例
-                  </el-button>
-                  <el-button
-                    link
-                    type="success"
-                    size="small"
-                    @click="viewTemplate(row)"
-                    class="action-link"
-                  >
-                    查看
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-
-          <!-- 模板分页 -->
-          <div class="pagination glass-card">
-            <el-pagination
-              v-model:current-page="templatePage"
-              v-model:page-size="templatePageSize"
-              :page-sizes="[10, 20, 50, 100]"
+              :columns="templateColumns"
+              :loading="templatesLoading"
               :total="templateTotal"
-              layout="total, sizes, prev, pager, next, jumper"
-              @current-page-change="loadTemplates"
-              @page-size-change="loadTemplates(1)"
-            />
+              :pagination-enabled="true"
+              v-model:page="templatePage"
+              v-model:page-size="templatePageSize"
+              @page-change="loadTemplates"
+              @page-size-change="(size) => loadTemplates(1)"
+            >
+              <template #column-category="{ row }">
+                <el-tag size="small" :type="getCategoryTagType(row.category)">
+                  {{ getCategoryLabel(row.category) }}
+                </el-tag>
+              </template>
+              <template #column-actions="{ row }">
+                <el-button
+                  link
+                  type="primary"
+                  size="small"
+                  @click="createInstanceFromTemplate(row)"
+                  class="action-link"
+                >
+                  创建实例
+                </el-button>
+                <el-button
+                  link
+                  type="success"
+                  size="small"
+                  @click="viewTemplate(row)"
+                  class="action-link"
+                >
+                  查看
+                </el-button>
+              </template>
+            </DataTable>
           </div>
         </div>
       </el-tab-pane>
@@ -174,81 +139,54 @@
 
           <!-- 实例表格 -->
           <div class="table-container glass-card">
-            <el-table
-              v-loading="instancesLoading"
+            <DataTable
               :data="instances"
-              class="document-table"
-              stripe
-              :row-style="{ height: '48px' }"
-              :cell-style="{ fontSize: 'var(--text-sm)', padding: 'var(--spacing-sm) var(--spacing-md)' }"
-              :header-cell-style="{
-                fontSize: 'var(--text-base)',
-                fontWeight: '600',
-                padding: 'var(--spacing-md)',
-                background: 'rgba(99, 102, 241, 0.05)',
-                color: '#1a1a2e'
-              }"
+              :columns="instanceColumns"
+              :loading="instancesLoading"
+              :total="instanceTotal"
+              :pagination-enabled="true"
+              v-model:page="instancePage"
+              v-model:page-size="instancePageSize"
+              @page-change="loadInstances"
+              @page-size-change="(size) => loadInstances(1)"
               @row-click="editInstance"
             >
-              <el-table-column prop="id" label="ID" width="60" align="center" />
-              <el-table-column prop="title" label="文档标题" min-width="180" show-overflow-tooltip />
-              <el-table-column prop="status" label="状态" width="90" align="center">
-                <template #default="{ row }">
-                  <el-tag :type="getStatusType(row.status)" size="small">
-                    {{ getStatusLabel(row.status) }}
-                  </el-tag>
-                </template>
-              </el-table-column>
-              <el-table-column prop="completionRate" label="完成度" width="130" align="center">
-                <template #default="{ row }">
-                  <el-progress
-                    :percentage="parseFloat(row.completionRate) || 0"
-                    :color="getProgressColor(parseFloat(row.completionRate))"
-                    :stroke-width="6"
-                  />
-                </template>
-              </el-table-column>
-              <el-table-column prop="updatedAt" label="更新时间" width="150" align="center">
-                <template #default="{ row }">
-                  {{ formatDate(row.updatedAt) }}
-                </template>
-              </el-table-column>
-              <el-table-column label="操作" width="140" fixed="right" align="center">
-                <template #default="{ row }">
-                  <el-button
-                    link
-                    type="primary"
-                    size="small"
-                    @click.stop="editInstance(row)"
-                    class="action-link"
-                  >
-                    编辑
-                  </el-button>
-                  <el-button
-                    link
-                    type="danger"
-                    size="small"
-                    @click.stop="deleteInstance(row)"
-                    class="action-link"
-                  >
-                    删除
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-          </div>
-
-          <!-- 实例分页 -->
-          <div class="pagination glass-card">
-            <el-pagination
-              v-model:current-page="instancePage"
-              v-model:page-size="instancePageSize"
-              :page-sizes="[10, 20, 50, 100]"
-              :total="instanceTotal"
-              layout="total, sizes, prev, pager, next, jumper"
-              @current-page-change="loadInstances"
-              @page-size-change="loadInstances(1)"
-            />
+              <template #column-status="{ row }">
+                <el-tag :type="getStatusType(row.status)" size="small">
+                  {{ getStatusLabel(row.status) }}
+                </el-tag>
+              </template>
+              <template #column-completionRate="{ row }">
+                <el-progress
+                  :percentage="parseFloat(row.completionRate) || 0"
+                  :color="getProgressColor(parseFloat(row.completionRate))"
+                  :stroke-width="6"
+                />
+              </template>
+              <template #column-updatedAt="{ row }">
+                {{ formatDate(row.updatedAt) }}
+              </template>
+              <template #column-actions="{ row }">
+                <el-button
+                  link
+                  type="primary"
+                  size="small"
+                  @click.stop="editInstance(row)"
+                  class="action-link"
+                >
+                  编辑
+                </el-button>
+                <el-button
+                  link
+                  type="danger"
+                  size="small"
+                  @click.stop="deleteInstance(row)"
+                  class="action-link"
+                >
+                  删除
+                </el-button>
+              </template>
+            </DataTable>
           </div>
         </div>
       </el-tab-pane>
@@ -384,6 +322,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import DataTable from '@/components/centers/DataTable.vue'
 import { get, post, del } from '@/utils/request'
 
 // 标签页
@@ -421,6 +360,98 @@ const newInstanceForm = ref({
 // 统计数据
 const completedInstances = ref(0)
 const completionRate = ref(0)
+
+// DataTable column configurations
+const templateColumns = ref([
+  {
+    prop: 'id',
+    label: 'ID',
+    width: 100,
+    align: 'center'
+  },
+  {
+    prop: 'name',
+    label: '模板名称',
+    minWidth: 200
+  },
+  {
+    prop: 'code',
+    label: '模板代码',
+    width: 120,
+    align: 'center'
+  },
+  {
+    prop: 'category',
+    label: '分类',
+    width: 100,
+    align: 'center',
+    slot: 'category'
+  },
+  {
+    prop: 'useCount',
+    label: '使用次数',
+    width: 100,
+    align: 'center'
+  },
+  {
+    prop: 'version',
+    label: '版本',
+    width: 80,
+    align: 'center'
+  },
+  {
+    prop: 'actions',
+    label: '操作',
+    width: 170,
+    fixed: 'right',
+    align: 'center',
+    slot: 'actions'
+  }
+])
+
+const instanceColumns = ref([
+  {
+    prop: 'id',
+    label: 'ID',
+    width: 100,
+    align: 'center'
+  },
+  {
+    prop: 'title',
+    label: '文档标题',
+    minWidth: 180,
+    showOverflowTooltip: true
+  },
+  {
+    prop: 'status',
+    label: '状态',
+    width: 90,
+    align: 'center',
+    slot: 'status'
+  },
+  {
+    prop: 'completionRate',
+    label: '完成度',
+    width: 130,
+    align: 'center',
+    slot: 'completionRate'
+  },
+  {
+    prop: 'updatedAt',
+    label: '更新时间',
+    width: 150,
+    align: 'center',
+    slot: 'updatedAt'
+  },
+  {
+    prop: 'actions',
+    label: '操作',
+    width: 140,
+    fixed: 'right',
+    align: 'center',
+    slot: 'actions'
+  }
+])
 
 // 加载模板列表
 const loadTemplates = async (page: number = 1) => {
@@ -628,12 +659,13 @@ const getStatusType = (status: string) => {
   return typeMap[status] || 'info'
 }
 
-// 获取进度条颜色
+// 获取进度条颜色 - 使用 CSS 变量
 const getProgressColor = (percentage: number) => {
-  if (percentage >= 100) return '#10B981'
-  if (percentage >= 75) return '#F59E0B'
-  if (percentage >= 50) return '#3B82F6'
-  return '#EF4444'
+  // 使用设计系统中定义的语义化颜色值
+  if (percentage >= 100) return 'var(--success-color, #52c41a)'
+  if (percentage >= 75) return 'var(--warning-color, #e6a23c)'
+  if (percentage >= 50) return 'var(--primary-color, #409eff)'
+  return 'var(--danger-color, #f56c6c)'
 }
 
 // 格式化日期
@@ -651,31 +683,31 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
+
 .document-center {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow: auto;
-  background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
-  padding: 24px;
-  gap: 24px;
+  background: linear-gradient(135deg, var(--bg-page) 0%, var(--bg-page) 100%);
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
 
 // ==================== Glassmorphism 卡片效果 ====================
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg, rgba(255, 255, 255, 0.85));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02),
-              0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.5));
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
 
   &:hover {
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.04),
-                0 2px 6px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
     transform: translateY(-1px);
   }
 }
@@ -687,8 +719,8 @@ onMounted(() => {
   .header-content {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 32px;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-3xl);
 
     .header-icon {
       flex-shrink: 0;
@@ -697,25 +729,26 @@ onMounted(() => {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-      border-radius: 16px;
+      background: var(--primary-light-bg, rgba(var(--primary-color-rgb, 64, 158, 255), 0.1));
+      border-radius: var(--radius-lg);
+      color: var(--primary-color);
     }
 
     .header-text {
       flex: 1;
 
       h1 {
-        margin: 0 0 8px 0;
-        font-size: 28px;
+        margin: 0 0 var(--spacing-sm) 0;
+        font-size: var(--text-3xl);
         font-weight: 700;
-        color: #1a1a2e;
+        color: var(--text-primary);
         letter-spacing: -0.02em;
       }
 
       p {
         margin: 0;
-        color: #64748B;
-        font-size: 15px;
+        color: var(--text-secondary);
+        font-size: var(--text-sm);
         line-height: 1.5;
       }
     }
@@ -730,11 +763,11 @@ onMounted(() => {
 
   :deep(.el-tabs__header) {
     margin: 0;
-    background: rgba(255, 255, 255, 0.6);
+    background: var(--glass-bg, rgba(255, 255, 255, 0.6));
     backdrop-filter: blur(8px);
-    border-radius: 12px;
-    padding: 8px 16px 0;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm) var(--spacing-md) 0;
+    border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.5));
   }
 
   :deep(.el-tabs__nav-wrap::after) {
@@ -742,26 +775,26 @@ onMounted(() => {
   }
 
   :deep(.el-tabs__item) {
-    font-size: 15px;
+    font-size: var(--text-sm);
     font-weight: 500;
-    color: #64748B;
-    padding: 0 24px;
+    color: var(--text-secondary);
+    padding: 0 var(--spacing-xl);
     height: 44px;
     line-height: 44px;
     transition: all 0.2s ease;
 
     &:hover {
-      color: #6366F1;
+      color: var(--primary-color);
     }
 
     &.is-active {
-      color: #6366F1;
+      color: var(--primary-color);
       font-weight: 600;
     }
   }
 
   :deep(.el-tabs__active-bar) {
-    background: linear-gradient(90deg, #6366F1 0%, #8B5CF6 100%);
+    background: var(--primary-color);
     height: 3px;
     border-radius: 2px;
   }
@@ -774,17 +807,17 @@ onMounted(() => {
 }
 
 .tab-content {
-  padding: 24px;
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-lg);
 }
 
 // ==================== 工具栏 ====================
 .toolbar {
   display: flex;
-  gap: 16px;
-  padding: 20px;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
   flex-wrap: wrap;
 
   .search-box {
@@ -793,19 +826,19 @@ onMounted(() => {
 
     :deep(.el-input) {
       .el-input__wrapper {
-        border-radius: 12px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        border: 1px solid rgba(226, 232, 240, 0.8);
-        padding: 10px 16px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        padding: 10px var(--spacing-md);
         transition: all 0.2s ease;
 
         &:hover {
-          border-color: #CBD5E1;
+          border-color: var(--border-color-hover);
         }
 
         &.is-focus {
-          border-color: #6366F1;
-          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 3px var(--primary-light-bg, rgba(var(--primary-color-rgb, 64, 158, 255), 0.1));
         }
       }
     }
@@ -813,28 +846,28 @@ onMounted(() => {
 
   .actions {
     display: flex;
-    gap: 12px;
+    gap: var(--spacing-md);
     align-items: center;
 
     .filter-select {
       width: 150px;
 
       :deep(.el-input__wrapper) {
-        border-radius: 12px;
+        border-radius: var(--radius-lg);
       }
     }
 
     .action-btn {
-      border-radius: 12px;
-      padding: 10px 20px;
+      border-radius: var(--radius-lg);
+      padding: 10px var(--spacing-lg);
       font-weight: 500;
-      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+      background: var(--primary-color);
       border: none;
       transition: all 0.2s ease;
 
       &:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        box-shadow: var(--shadow-md);
       }
     }
   }
@@ -847,33 +880,33 @@ onMounted(() => {
 
   :deep(.el-table) {
     border: none;
-    border-radius: 12px;
+    border-radius: var(--radius-xl);
     overflow: hidden;
 
     .el-table__header-wrapper {
-      border-radius: 12px 12px 0 0;
+      border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     }
 
     .el-table__body-wrapper {
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 var(--radius-xl) var(--radius-xl);
     }
 
     tr {
       transition: all 0.2s ease;
 
       &:hover {
-        background: rgba(99, 102, 241, 0.03) !important;
+        background: var(--primary-light-bg, rgba(var(--primary-color-rgb, 64, 158, 255), 0.03)) !important;
       }
     }
 
     td {
-      border-color: rgba(226, 232, 240, 0.6);
+      border-color: var(--border-color-light);
     }
   }
 
   :deep(.el-table--striped) {
     .el-table__body tr.el-table__row--striped td {
-      background: rgba(99, 102, 241, 0.02);
+      background: var(--bg-page);
     }
   }
 
@@ -891,23 +924,23 @@ onMounted(() => {
 .pagination {
   display: flex;
   justify-content: center;
-  padding: 16px 20px;
+  padding: var(--spacing-lg) var(--spacing-xl);
 
   :deep(.el-pagination) {
     .btn-prev,
     .btn-next,
     .el-pager li {
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       font-weight: 500;
       transition: all 0.2s ease;
 
       &:hover {
-        background: rgba(99, 102, 241, 0.1);
-        color: #6366F1;
+        background: var(--primary-light-bg, rgba(var(--primary-color-rgb, 64, 158, 255), 0.1));
+        color: var(--primary-color);
       }
 
       &.is-active {
-        background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+        background: var(--primary-color);
         color: white;
       }
     }
@@ -916,13 +949,13 @@ onMounted(() => {
 
 // ==================== 统计分析 ====================
 .statistics-content {
-  padding: 24px;
+  padding: var(--spacing-xl);
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  gap: var(--spacing-lg);
 
   @media (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
@@ -931,31 +964,31 @@ onMounted(() => {
 
 .stat-card {
   position: relative;
-  padding: 24px;
-  border-radius: 20px;
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 
   &:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
   }
 
   &.gradient-primary {
-    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    background: var(--gradient-primary, linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark, #3a7bd5) 100%));
   }
 
   &.gradient-success {
-    background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+    background: var(--gradient-success, linear-gradient(135deg, var(--success-color) 0%, #95de64 100%));
   }
 
   &.gradient-warning {
-    background: linear-gradient(135deg, #F59E0B 0%, #FBBF24 100%);
+    background: var(--gradient-warning, linear-gradient(135deg, var(--warning-color) 0%, #ffd666 100%));
   }
 
   &.gradient-info {
-    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+    background: var(--gradient-info, linear-gradient(135deg, var(--info-color, #909399) 0%, #b0b8c4 100%));
   }
 
   .stat-icon {

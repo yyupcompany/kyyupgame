@@ -9,27 +9,17 @@
     :visible="props.visible"
     @close="emit('update:visible', false)"
     @toggle-fullscreen="handleToggleFullscreen"
+    @quick-action="handleQuickAction"
   >
     <template #chat-container>
       <ChatContainer
         :messages="state.messages"
-        :current-ai-response="state.currentAIResponse"
-        :is-thinking="state.isThinking"
-        :thinking-subtitle="state.thinkingSubtitle"
-        :show-thinking-subtitle="state.showThinkingSubtitle"
-        :tool-calls="state.toolCalls"
-        :input-message="state.inputMessage"
         :sending="state.sending"
-        :web-search="state.webSearch"
+        :is-thinking="state.isThinking"
         :message-font-size="state.messageFontSize"
-        :is-registered="state.isRegistered"
-        :uploading-file="state.uploadingFile"
-        :uploading-image="state.uploadingImage"
-        :has-last-message="state.messages.length > 0"
-        simple-mode
-        @update:input-message="handleUpdateInput"
         @send="handleSendMessage"
-        @stop-sending="handleStopSending"
+        @stop="handleStopSending"
+        @update:input-message="handleUpdateInput"
       />
     </template>
   </SidebarLayout>
@@ -86,6 +76,14 @@ watch(() => props.visible, (newVal) => {
 const handleToggleFullscreen = () => {
   // 切换到 AI 全屏助手路由
   router.push('/aiassistant')
+}
+
+// 处理快捷导航点击
+const handleQuickAction = (text: string) => {
+  console.log('🎯 [AIAssistantSidebar] 快捷导航点击:', text)
+  // 直接将文本设置为输入内容并发送
+  state.inputMessage = text
+  handleSendMessage()
 }
 
 const handleUpdateInput = (value: string) => {

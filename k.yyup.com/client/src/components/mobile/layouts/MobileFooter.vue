@@ -20,6 +20,7 @@
         :icon="tab.icon"
         :badge="tab.badge"
         :dot="tab.dot"
+        @click="(event) => handleTabClick(tab, event)"
       >
         <template #icon>
           <div class="tab-icon">
@@ -143,8 +144,32 @@ const handleTabChange = (tabName: string) => {
 
     // 如果有路径，进行导航
     if (selectedTab.path && route.path !== selectedTab.path) {
-      router.push(selectedTab.path)
+      console.log('🔀 导航到:', selectedTab.path)
+      router.push(selectedTab.path).catch(err => {
+        console.error('❌ 导航失败:', err)
+      })
     }
+  }
+}
+
+// 处理 Tab 点击事件
+const handleTabClick = (tab: FooterTab, event: Event) => {
+  event.preventDefault()
+
+  if (tab.disabled) {
+    return
+  }
+
+  internalActiveTab.value = tab.name
+  emit('tab-change', tab.name)
+  emit('tab-click', tab, event)
+
+  // 如果有路径，进行导航
+  if (tab.path && route.path !== tab.path) {
+    console.log('🔀 导航到:', tab.path)
+    router.push(tab.path).catch(err => {
+      console.error('❌ 导航失败:', err)
+    })
   }
 }
 

@@ -19,15 +19,15 @@ import type {
 
 export const useSmartParentCommunication = () => {
   // 响应式状态
-  const communicationData = ref([])
+  const communicationData = ref<any[]>([])
   const loading = ref(false)
-  const error = ref(null)
+  const error = ref<string | null>(null)
 
   // 当前分析数据
-  const currentAnalysis = ref(null)
-  const personalizedContents = ref([])
-  const autoResponses = ref([])
-  const communicationHistory = ref([])
+  const currentAnalysis = ref<CommunicationAnalysis | null>(null)
+  const personalizedContents = ref<PersonalizedContent[]>([])
+  const autoResponses = ref<AutoResponse[]>([])
+  const communicationHistory = ref<CommunicationRecord[]>([])
 
   // 计算属性
   const overallEngagementScore = computed(() => {
@@ -327,7 +327,7 @@ export const useSmartParentCommunication = () => {
   // 更新沟通历史
   const updateCommunicationHistory = async () => {
     try {
-      const response = await get<ApiResponse<CommunicationRecord[]>>(
+      const response = await get<CommunicationRecord[]>(
         `${AI_ENDPOINTS.COMMUNICATION_ANALYSIS}/history?limit=100&includeMetadata=true`
       )
 

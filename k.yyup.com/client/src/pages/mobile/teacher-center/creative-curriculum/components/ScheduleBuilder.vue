@@ -578,15 +578,16 @@ function emitUpdate() {
 // 获取课程列表
 async function fetchAllCurriculums() {
   try {
-    const response = await request.get('/teacher-center/creative-curriculum', {
+    const response = await request.get('/api/custom-courses', {
       params: { limit: 100 }
     })
 
-    if (response.data.code === 200 && response.data.data?.rows) {
-      curriculumList.value = response.data.data.rows.map((item: any) => ({
+    if (response.data?.rows || response.data?.list) {
+      const rows = response.data.rows || response.data.list || []
+      curriculumList.value = rows.map((item: any) => ({
         id: item.id,
-        name: item.name,
-        description: item.description
+        name: item.name || item.course_name,
+        description: item.description || item.course_description
       }))
     }
   } catch (error) {

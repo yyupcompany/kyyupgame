@@ -18,7 +18,7 @@ const statusMap: Record<string, TodoStatus> = {
 const updateTodoTaskTool: ToolDefinition = {
   name: 'update_todo_task',
   description: '更新TodoList中的任务状态。可以标记任务为进行中、已完成或取消。',
-  category: TOOL_CATEGORIES.WORKFLOW,
+  category: TOOL_CATEGORIES.ACTION,
   parameters: {
     type: 'object',
     properties: {

@@ -1,80 +1,62 @@
 <template>
   <UnifiedCenterLayout
-    title="页面标题"
-    description="页面描述"
-    icon="User"
+    title="任务中心"
+    description="管理您的日常任务，提高工作效率"
+    icon="Document"
   >
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button type="primary" @click="handleCreateTask">
+        <UnifiedIcon name="plus" :size="16" />
+        新建任务
+      </el-button>
+      <el-button @click="refreshTasks">
+        <UnifiedIcon name="refresh" :size="16" />
+        刷新
+      </el-button>
+    </template>
+
+    <!-- 统计卡片 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        icon="document"
+        title="全部任务"
+        :value="taskStats.total"
+        subtitle="总任务数"
+        type="primary"
+        :trend="taskStats.total > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="check"
+        title="已完成"
+        :value="taskStats.completed"
+        subtitle="完成数量"
+        type="success"
+        :trend="taskStats.completed > 0 ? 'up' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="clock"
+        title="进行中"
+        :value="taskStats.pending"
+        subtitle="待处理任务"
+        type="warning"
+        :trend="taskStats.pending > 0 ? 'down' : 'stable'"
+        clickable
+      />
+      <StatCard
+        icon="warning"
+        title="已逾期"
+        :value="taskStats.overdue"
+        subtitle="逾期任务"
+        type="danger"
+        :trend="taskStats.overdue > 0 ? 'down' : 'stable'"
+        clickable
+      />
+    </template>
+
     <div class="center-container teacher-tasks">
-    <!-- 页面头部 -->
-    <div class="page-header">
-      <div class="header-content">
-        <div class="header-left">
-          <h1>
-            <UnifiedIcon name="default" />
-            任务中心
-          </h1>
-          <p>管理您的日常任务，提高工作效率</p>
-        </div>
-        <div class="header-actions">
-          <el-button type="primary" @click="handleCreateTask">
-            <UnifiedIcon name="Plus" />
-            新建任务
-          </el-button>
-          <el-button @click="refreshTasks">
-            <UnifiedIcon name="Refresh" />
-            刷新
-          </el-button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 团队协作概览 -->
-    <div class="team-collaboration">
-      <el-card>
-        <template #header>
-          <div class="card-header">
-            <span class="card-title">
-              <UnifiedIcon name="default" />
-              团队协作概览
-            </span>
-            <el-tag type="primary" size="small">{{ teamOverview.totalMembers }}位成员</el-tag>
-          </div>
-        </template>
-
-        <div class="team-grid">
-          <el-row :gutter="20">
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="team-item">
-                <div class="team-value">{{ teamOverview.sharedTasks }}</div>
-                <div class="team-label">共享任务</div>
-                <div class="team-trend info">需要协作完成</div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="team-item">
-                <div class="team-value">{{ teamOverview.pendingApprovals }}</div>
-                <div class="team-label">待我审批</div>
-                <div class="team-trend warning">需要处理</div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="team-item">
-                <div class="team-value">{{ teamOverview.urgentDeadlines }}</div>
-                <div class="team-label">紧急截止</div>
-                <div class="team-trend danger">需要关注</div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="team-item">
-                <div class="team-value">#{{ teamOverview.myRanking }}</div>
-                <div class="team-label">我的排名</div>
-                <div class="team-trend success">本月完成度</div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </el-card>
-    </div>
 
     <!-- 统计与进度综合区域 -->
     <div class="stats-progress-section">
@@ -531,26 +513,14 @@
 
 <script setup lang="ts">
 import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import StatCard from '@/components/centers/StatCard.vue'
 
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { teacherTasksApi, type Task, type TaskStats } from '@/api/modules/teacher-tasks'
-import {
-  List,
-  Plus,
-  Refresh,
-  Search,
-  Check,
-  Clock,
-  Warning,
-  DataAnalysis,
-  TrendCharts,
-  Calendar,
-  User
-} from '@element-plus/icons-vue'
 
 // 导入组件
-import TaskStatCard from './components/TaskStatCard.vue'
 import TaskDetail from './components/TaskDetail.vue'
 
 // 响应式数据
@@ -732,6 +702,11 @@ const handleResetFilter = () => {
   loadTasks()
 }
 
+const handleSearch = () => {
+  pagination.page = 1
+  loadTasks()
+}
+
 const handleCurrentChange = (page: number) => {
   pagination.page = page
   loadTasks()
@@ -909,10 +884,13 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-@use '@/styles/index.scss' as *;
+@use "@/styles/design-tokens.scss" as *;
 
+/* ==================== 老师任务中心页面 ==================== */
+
+/* ==================== 页面容器 ==================== */
 .teacher-tasks {
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
   background-color: var(--el-bg-color-page);
   min-height: 100vh;
   width: 100%;
@@ -920,247 +898,33 @@ onMounted(() => {
   flex: 1 1 auto;
 }
 
-.team-collaboration {
-  margin-bottom: var(--spacing-2xl);
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .card-title {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      font-size: var(--text-base);
-      font-weight: 600;
-      color: var(--el-text-color-primary);
-    }
-  }
-
-  .team-item {
-    text-align: center;
-    padding: var(--spacing-lg) var(--spacing-sm);
-
-    .team-value {
-      font-size: var(--text-2xl);
-      font-weight: bold;
-      color: var(--primary-color);
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .team-label {
-      font-size: var(--text-sm);
-      color: var(--text-secondary);
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .team-trend {
-      font-size: var(--text-xs);
-      padding: var(--spacing-2xs) var(--spacing-xs);
-      border-radius: var(--radius-md);
-
-      &.success {
-        color: var(--success-color);
-        background-color: var(--success-light-bg);
-      }
-
-      &.warning {
-        color: var(--warning-color);
-        background-color: var(--warning-light-bg);
-      }
-
-      &.danger {
-        color: var(--danger-color);
-        background-color: rgba(245, 108, 108, 0.1);
-      }
-
-      &.info {
-        color: var(--info-color);
-        background-color: var(--info-light-bg);
-      }
-
-      &.primary {
-        color: var(--primary-color);
-        background-color: var(--primary-light-bg);
-      }
-    }
-  }
-}
-
-.tasks-header {
+/* ==================== 统计与进度综合区域 ==================== */
+.stats-progress-section {
   margin-bottom: var(--spacing-xl);
 
-  .header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    .page-title {
-      h1 {
-        font-size: var(--text-2xl);
-        font-weight: 600;
-        color: var(--el-text-color-primary);
-        margin: 0 0 var(--spacing-xs) 0;
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-      }
-
-      p {
-        color: var(--el-text-color-secondary);
-        margin: 0;
-        font-size: var(--text-sm);
-      }
-    }
-
-    .header-actions {
-      display: flex;
-      gap: var(--spacing-md);
-    }
-  }
-}
-
-.stats-cards {
-  margin-bottom: var(--spacing-xl);
-}
-
-.completion-chart {
-  margin-bottom: var(--spacing-xl);
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .card-title {
-      font-weight: 600;
-    }
-
-    .completion-rate {
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--primary-color);
-    }
+  .el-row {
+    margin: 0;
   }
 
-  .chart-container {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2xl);
-
-    .chart-details {
-      flex: 1;
-
-      .detail-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: var(--spacing-md);
-
-        .label {
-          color: var(--text-secondary);
-        }
-
-        .value {
-          font-weight: 600;
-          color: var(--text-primary);
-        }
-      }
-    }
-  }
-}
-
-.filter-section {
-  margin-bottom: var(--spacing-xl);
-}
-
-.tasks-list {
-  width: 100%;
-  max-width: 100%;
-  flex: 1 1 auto;
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .card-title {
-      font-weight: 600;
-    }
-
-    .list-actions {
-      display: flex;
-      gap: var(--spacing-md);
-    }
-  }
-
-  .task-info {
-    .task-title {
-      font-weight: 500;
-      margin-bottom: var(--spacing-xs);
-
-      &.completed {
-        text-decoration: line-through;
-        opacity: 0.6;
-      }
-    }
-
-    .task-description {
-      font-size: var(--text-sm);
-      color: var(--text-secondary);
-    }
-  }
-
-  .due-date {
-    &.overdue {
-      color: var(--el-color-danger);
-      font-weight: 500;
-    }
-  }
-
-  .progress-text {
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-    margin-left: var(--spacing-md);
-  }
-
-  .pagination {
-    margin-top: var(--spacing-xl);
-    display: flex;
-    justify-content: center;
-  }
-}
-
-// 响应式设计
-@media (max-width: var(--breakpoint-md)) {
-  .teacher-tasks {
+  .el-col {
     padding: var(--spacing-md);
   }
 
-  .tasks-header .header-content {
-    flex-direction: column;
-    gap: var(--spacing-md);
-    align-items: flex-start;
-  }
-
-  .completion-chart .chart-container {
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
-
-  .stats-cards {
-    :deep(.el-col) {
-      margin-bottom: var(--spacing-md);
-    }
-  }
-}
-
-// 新增样式：统计与进度综合区域
-.stats-progress-section {
-  margin-bottom: var(--spacing-2xl);
-
-  .stats-card, .progress-card {
+  .stats-card,
+  .progress-card {
     height: 100%;
+
+    :deep(.el-card) {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color-lighter);
+      background: var(--bg-card);
+      height: 100%;
+      transition: all var(--transition-base);
+
+      &:hover {
+        box-shadow: var(--shadow-md);
+      }
+    }
 
     .card-header {
       display: flex;
@@ -1170,16 +934,16 @@ onMounted(() => {
       .card-title {
         display: flex;
         align-items: center;
-        gap: var(--spacing-xs);
-        font-size: var(--text-base);
+        gap: var(--spacing-sm);
         font-weight: 600;
-        color: var(--text-primary);
+        font-size: var(--text-base);
+        color: var(--el-text-color-primary);
       }
 
       .progress-percentage {
         font-size: var(--text-2xl);
         font-weight: 700;
-        margin-left: var(--spacing-lg);
+        color: var(--el-color-success);
       }
     }
   }
@@ -1195,42 +959,42 @@ onMounted(() => {
       padding: var(--spacing-lg);
       background: var(--bg-card);
       border-radius: var(--radius-md);
-      border: var(--border-width-base) solid var(--border-color);
+      border: 1px solid var(--border-color-lighter);
       transition: all var(--transition-base);
 
       &:hover {
-        transform: translateY(var(--transform-hover-lift));
-        box-shadow: var(--shadow-md);
-        border-color: var(--primary-color);
+        box-shadow: var(--shadow-sm);
+        border-color: var(--el-color-primary-light-3);
       }
 
       .stat-icon {
-        width: var(--size-icon-lg);
-        height: var(--size-icon-lg);
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
         border-radius: var(--radius-md);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: var(--spacing-lg);
         font-size: var(--text-xl);
+        margin-right: var(--spacing-md);
 
         &.total {
-          background: var(--primary-light-bg);
+          background: var(--el-color-primary-light-9);
           color: var(--el-color-primary);
         }
 
         &.completed {
-          background: var(--success-light-bg);
+          background: var(--el-color-success-light-9);
           color: var(--el-color-success);
         }
 
         &.pending {
-          background: var(--warning-light-bg);
+          background: var(--el-color-warning-light-9);
           color: var(--el-color-warning);
         }
 
         &.overdue {
-          background: rgba(245, 108, 108, 0.1);
+          background: var(--el-color-danger-light-9);
           color: var(--el-color-danger);
         }
       }
@@ -1239,16 +1003,16 @@ onMounted(() => {
         flex: 1;
 
         .stat-value {
-          font-size: var(--text-2xl);
+          font-size: var(--text-xl);
           font-weight: 700;
-          color: var(--text-primary);
+          color: var(--el-text-color-primary);
           line-height: 1;
           margin-bottom: var(--spacing-xs);
         }
 
         .stat-label {
           font-size: var(--text-sm);
-          color: var(--text-secondary);
+          color: var(--el-text-color-secondary);
           font-weight: 500;
         }
       }
@@ -1257,7 +1021,7 @@ onMounted(() => {
 
   .progress-content-enhanced {
     .progress-main {
-      margin-bottom: var(--spacing-xl);
+      margin-bottom: var(--spacing-lg);
 
       .main-progress-bar {
         :deep(.el-progress-bar__outer) {
@@ -1274,27 +1038,28 @@ onMounted(() => {
 
     .progress-stats-enhanced {
       display: flex;
-      gap: var(--spacing-xl);
+      gap: var(--spacing-lg);
 
       .progress-item-enhanced {
         display: flex;
         align-items: center;
         flex: 1;
-        padding: var(--spacing-lg);
+        padding: var(--spacing-md);
         background: var(--bg-card);
         border-radius: var(--radius-md);
-        border: var(--border-width-base) solid var(--border-color);
+        border: 1px solid var(--border-color-lighter);
 
         .progress-icon {
-          width: var(--size-icon-md);
-          height: var(--size-icon-md);
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
           border-radius: var(--radius-md);
-          background: var(--primary-light-bg);
+          background: var(--el-color-primary-light-9);
           color: var(--el-color-primary);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-right: var(--spacing-lg);
+          margin-right: var(--spacing-md);
           font-size: var(--text-lg);
         }
 
@@ -1304,18 +1069,352 @@ onMounted(() => {
           .progress-label {
             display: block;
             font-size: var(--text-sm);
-            color: var(--text-secondary);
+            color: var(--el-text-color-secondary);
             margin-bottom: var(--spacing-xs);
           }
 
           .progress-number {
-            font-size: var(--text-xl);
+            font-size: var(--text-lg);
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--el-text-color-primary);
           }
         }
       }
     }
+  }
+}
+
+/* ==================== 筛选区域 ==================== */
+.filter-section {
+  margin-bottom: var(--spacing-xl);
+
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color-lighter);
+    background: var(--bg-card);
+  }
+
+  :deep(.el-form-item) {
+    margin-bottom: 0;
+  }
+
+  :deep(.el-form-item__label) {
+    font-weight: 500;
+    color: var(--el-text-color-primary);
+  }
+}
+
+/* ==================== 任务列表区域 ==================== */
+.main-content {
+  margin-bottom: var(--spacing-xl);
+
+  .table-section {
+    :deep(.el-card) {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color-lighter);
+      background: var(--bg-card);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .card-title {
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        font-weight: 600;
+        font-size: var(--text-base);
+        color: var(--el-text-color-primary);
+      }
+
+      .card-actions {
+        display: flex;
+        gap: var(--spacing-sm);
+      }
+    }
+  }
+}
+
+.table-container {
+  .table-wrapper {
+    :deep(.el-table) {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+
+      &::before {
+        display: none;
+      }
+
+      th.el-table__cell {
+        background: var(--el-fill-color-light);
+        color: var(--el-text-color-primary);
+        font-weight: 600;
+      }
+
+      tr:hover > td.el-table__cell {
+        background: var(--el-fill-color-light);
+      }
+    }
+  }
+}
+
+.task-info {
+  .task-title {
+    font-weight: 500;
+    margin-bottom: var(--spacing-xs);
+    color: var(--el-text-color-primary);
+
+    &.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  }
+
+  .task-description {
+    font-size: var(--text-sm);
+    color: var(--el-text-color-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+  }
+}
+
+.due-date {
+  font-size: var(--text-sm);
+  color: var(--el-text-color-primary);
+
+  &.overdue {
+    color: var(--el-color-danger);
+    font-weight: 500;
+  }
+}
+
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  .progress-text {
+    font-size: var(--text-sm);
+    color: var(--el-text-color-secondary);
+    white-space: nowrap;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color-lighter);
+
+  .pagination-info {
+    font-size: var(--text-sm);
+    color: var(--el-text-color-secondary);
+  }
+
+  :deep(.el-pagination) {
+    justify-content: flex-end;
+  }
+}
+
+/* ==================== 完成率环形图 ==================== */
+.completion-chart {
+  margin-bottom: var(--spacing-xl);
+
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color-lighter);
+    background: var(--bg-card);
+    transition: all var(--transition-base);
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-title {
+      font-weight: 600;
+      font-size: var(--text-base);
+      color: var(--el-text-color-primary);
+    }
+
+    .completion-rate {
+      font-size: var(--text-lg);
+      font-weight: 600;
+      color: var(--el-color-success);
+    }
+  }
+
+  .chart-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+
+    .chart-details {
+      flex: 1;
+
+      .detail-item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--spacing-sm) 0;
+        border-bottom: 1px solid var(--border-color-lighter);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .label {
+          color: var(--el-text-color-secondary);
+          font-size: var(--text-sm);
+        }
+
+        .value {
+          font-weight: 600;
+          color: var(--el-text-color-primary);
+          font-size: var(--text-base);
+        }
+      }
+    }
+  }
+}
+
+/* ==================== 任务列表样式 ==================== */
+.tasks-list {
+  width: 100%;
+  max-width: 100%;
+  flex: 1 1 auto;
+
+  :deep(.el-card) {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color-lighter);
+    background: var(--bg-card);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .card-title {
+      font-weight: 600;
+      font-size: var(--text-base);
+      color: var(--el-text-color-primary);
+    }
+
+    .list-actions {
+      display: flex;
+      gap: var(--spacing-sm);
+    }
+  }
+
+  .pagination {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    justify-content: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color-lighter);
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-md)) {
+  .teacher-tasks {
+    padding: var(--spacing-md);
+  }
+
+  .page-header {
+    .header-content {
+      flex-direction: column;
+      gap: var(--spacing-md);
+      align-items: flex-start;
+
+      .header-left {
+        h1 {
+          font-size: var(--text-lg);
+
+          &::before {
+            width: var(--spacing-xs);
+            height: var(--spacing-lg);
+          }
+        }
+
+        p {
+          padding-left: var(--spacing-md);
+        }
+      }
+
+      .header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+
+        .el-button {
+          flex: 1;
+          min-width: 80px;
+        }
+      }
+    }
+  }
+
+  .filter-section {
+    :deep(.el-form) {
+      flex-direction: column;
+
+      .el-form-item {
+        margin-bottom: var(--spacing-sm);
+      }
+    }
+  }
+
+  .stats-progress-section {
+    .progress-content-enhanced {
+      .progress-stats-enhanced {
+        flex-direction: column;
+        gap: var(--spacing-md);
+      }
+    }
+  }
+
+  .completion-chart {
+    .chart-container {
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: var(--spacing-md);
+
+    .pagination-info {
+      align-self: flex-start;
+    }
+
+    :deep(.el-pagination) {
+      justify-content: center;
+    }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

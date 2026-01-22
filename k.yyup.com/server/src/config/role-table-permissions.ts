@@ -283,6 +283,31 @@ export const ROLE_TABLE_PERMISSIONS: Record<string, RolePermissions> = {
         requiredConditions: [
           'activity_evaluations.teacher_id = {current_teacher_id}'
         ]
+      },
+      // 教师课程相关表权限（新增）
+      {
+        tableName: 'custom_courses',
+        description: '自定义课程表（仅限自己幼儿园的课程）',
+        allowedFields: ['id', 'title', 'description', 'course_type', 'duration', 'kindergarten_id', 'teacher_id', 'status', 'created_at'],
+        requiredConditions: [
+          'custom_courses.kindergarten_id = (SELECT kindergarten_id FROM teachers WHERE id = {current_teacher_id})'
+        ]
+      },
+      {
+        tableName: 'course_assignments',
+        description: '课程分配表（仅限分配给自己的课程）',
+        allowedFields: ['id', 'course_id', 'class_id', 'teacher_id', 'schedule_time', 'status', 'created_at'],
+        requiredConditions: [
+          'course_assignments.teacher_id = {current_teacher_id}'
+        ]
+      },
+      {
+        tableName: 'course_contents',
+        description: '课程内容表（仅限自己创建的课程内容）',
+        allowedFields: ['id', 'course_id', 'title', 'content_type', 'content', 'order_num', 'created_at'],
+        requiredConditions: [
+          'course_contents.course_id IN (SELECT id FROM custom_courses WHERE teacher_id = {current_teacher_id})'
+        ]
       }
     ],
     forbiddenTables: [
@@ -421,18 +446,19 @@ export function validateSQLPermissions(role: string, sql: string): {
   
   // 提取SQL中的表名
   const tablePattern = /FROM\s+(\w+)|JOIN\s+(\w+)/gi;
-  const matches = sql.matchAll(tablePattern);
-  const tables = new Set<string>();
+  const tables: string[] = [];
+  let match: RegExpExecArray | null;
   
-  for (const match of matches) {
+  while ((match = tablePattern.exec(sql)) !== null) {
     const tableName = match[1] || match[2];
-    if (tableName) {
-      tables.add(tableName.toLowerCase());
+    if (tableName && !tables.includes(tableName.toLowerCase())) {
+      tables.push(tableName.toLowerCase());
     }
   }
   
   // 检查每个表的权限
-  for (const tableName of tables) {
+  for (let i = 0; i < tables.length; i++) {
+    const tableName = tables[i];
     if (!checkTablePermission(role, tableName)) {
       errors.push(`角色 ${role} 无权访问表 ${tableName}`);
     }

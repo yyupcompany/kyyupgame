@@ -1,332 +1,257 @@
 <!--
-  聊天容器组件
-  从 AIAssistant.vue 第66-186行模板提取
+  简洁聊天容器组件
+  参考豆包/Gemini风格：简洁布局，无复杂组件
 -->
 
 <template>
   <div class="chat-container">
-    <!-- 聊天消息区域 -->
-    <div class="chat-messages" ref="chatMessagesRef">
-      <!-- 欢迎消息 -->
-      <WelcomeMessage 
-        v-if="messages.length === 0"
-        @suggestion="handleSuggestion"
-      />
-
-      <!-- 聊天消息列表 -->
+    <!-- 消息区域 -->
+    <div class="chat-messages">
       <MessageList
         :messages="messages"
         :message-font-size="messageFontSize"
-        :current-ai-response="currentAIResponse"
-        :context-optimization="contextOptimization"
-        :is-loading="isLoading"
+        :is-thinking="isThinking"
         :is-fullscreen-mode="isFullscreenMode"
-        @toggle-thinking="toggleThinking"
-        @toggle-context-optimization="toggleContextOptimization"
+        @copy="handleCopy"
+        @regenerate="handleRegenerate"
       />
     </div>
 
-    <!-- 聊天输入区域 -->
-    <div class="chat-input-area">
-      <!-- 思考字幕（在输入框上方） -->
-      <ThinkingSubtitle
-        :thinking-content="thinkingSubtitle"
-        :visible="showThinkingSubtitle"
-      />
-
-      <InputArea
-        :inputMessage="inputMessage"
-        :webSearch="webSearch"
-        :fontSize="messageFontSize"
-        :sending="sending"
-        :isRegistered="isRegistered"
-        :isListening="isListening"
-        :isSpeaking="isSpeaking"
-        :speechStatus="speechStatus"
-        :hasLastMessage="hasLastMessage"
-        :uploadingFile="uploadingFile"
-        :uploadingImage="uploadingImage"
-        :simpleMode="simpleMode"
-        @update:inputMessage="$emit('update:inputMessage', $event)"
-        @update:webSearch="$emit('update:webSearch', $event)"
-        @update:fontSize="$emit('update:fontSize', $event)"
-        @send="handleSendMessage"
-        @cancel-send="handleCancelSend"
-        @stop-sending="handleStopSending"
-        @toggle-voice-input="handleToggleVoiceInput"
-        @toggle-voice-output="handleToggleVoiceOutput"
-        @show-quick-query="handleShowQuickQuery"
-        @upload-file="handleUploadFile"
-        @upload-image="handleUploadImage"
-      />
+    <!-- 输入区域 -->
+    <div class="chat-input-wrapper">
+      <div class="input-container">
+        <textarea
+          v-model="inputValue"
+          class="chat-input"
+          :placeholder="placeholder"
+          :disabled="sending"
+          rows="1"
+          @keydown.enter.exact.prevent="handleSend"
+          @input="autoResize"
+        />
+        <button
+          class="send-btn"
+          :class="{ sending }"
+          :disabled="!canSend || sending"
+          @click="handleSend"
+        >
+          <svg v-if="!sending" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <svg v-else class="stop-icon" viewBox="0 0 24 24" fill="none">
+            <rect x="6" y="6" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+      <p class="input-hint">按 Enter 发送，Shift+Enter 换行</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import WelcomeMessage from './WelcomeMessage.vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import MessageList from './MessageList.vue'
-import InputArea from '../input/InputArea.vue'
-import ThinkingSubtitle from '../ai-response/ThinkingSubtitle.vue'
-import type { ExtendedChatMessage, CurrentAIResponseState } from '../types/aiAssistant'
+import type { ExtendedChatMessage } from '../types/aiAssistant'
 
-// ==================== Props ====================
 interface Props {
-  // 消息数据
   messages: ExtendedChatMessage[]
-  currentAIResponse?: CurrentAIResponseState  // 改为可选，避免Vue警告
-  contextOptimization?: any
-
-  // 输入状态
-  inputMessage: string
-  webSearch: boolean
-  messageFontSize: number
-  sending: boolean
-
-  // 用户状态
-  isRegistered: boolean
-
-  // 语音状态（可选，侧边栏模式不需要）
-  isListening?: boolean
-  isSpeaking?: boolean
-  speechStatus?: string
-
-  // 其他状态
-  hasLastMessage: boolean
-  isLoading?: boolean  // 🆕 加载状态
-  isFullscreenMode?: boolean  // 🆕 是否为全屏模式
-  simpleMode?: boolean  // 🆕 简化模式(侧边栏)
-
-  // 文件上传状态
-  uploadingFile?: boolean
-  uploadingImage?: boolean
-
-  // 思考字幕
-  thinkingSubtitle?: string
-  showThinkingSubtitle?: boolean
+  sending?: boolean
+  isThinking?: boolean
+  messageFontSize?: number
+  isFullscreenMode?: boolean
+  placeholder?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  currentAIResponse: () => ({
-    visible: false,
-    thinking: {
-      visible: false,
-      collapsed: false,
-      content: ''
-    },
-    functionCalls: [],
-    answer: {
-      visible: false,
-      content: '',
-      streaming: false,
-      hasComponent: false,
-      componentData: null
-    }
-  })
+  sending: false,
+  isThinking: false,
+  messageFontSize: 14,
+  isFullscreenMode: false,
+  placeholder: '输入消息...'
 })
 
-// ==================== Emits ====================
-interface Emits {
-  // 输入事件
+const emit = defineEmits<{
+  'send': [content: string]
+  'stop': []
   'update:inputMessage': [value: string]
-  'update:webSearch': [value: boolean]
-  'update:fontSize': [value: number]
+}>()
 
-  // 消息事件
-  'send': []
-  'cancel-send': []
-  'stop-sending': [] // 🆕 停止发送事件
-  'suggestion': [text: string]
+const inputValue = ref('')
 
-  // 语音事件
-  'toggle-voice-input': []
-  'toggle-voice-output': []
+const canSend = computed(() => {
+  return inputValue.value.trim().length > 0
+})
 
-  // UI事件
-  'show-quick-query': []
-  'toggle-thinking': []
-  'toggle-context-optimization': []
-
-  // 文件上传事件
-  'upload-file': [file: File]
-  'upload-image': [image: File]
+function autoResize(e: Event) {
+  const target = e.target as HTMLTextAreaElement
+  target.style.height = 'auto'
+  target.style.height = Math.min(target.scrollHeight, 150) + 'px'
 }
 
-const emit = defineEmits<Emits>()
+function handleSend() {
+  if (!canSend.value || props.sending) return
 
-// ==================== 模板引用 ====================
-const chatMessagesRef = ref<HTMLElement>()
+  const content = inputValue.value.trim()
+  inputValue.value = ''
 
-// ==================== 事件处理 ====================
-const handleSendMessage = () => {
-  console.log('🟢 [ChatContainer] 收到 send 事件，转发给父组件')
-  emit('send')
+  // 重置输入框高度
+  nextTick(() => {
+    const input = document.querySelector('.chat-input') as HTMLTextAreaElement
+    if (input) {
+      input.style.height = 'auto'
+    }
+  })
+
+  emit('send', content)
 }
 
-const handleCancelSend = () => {
-  console.log('🟡 [ChatContainer] 收到 cancel-send 事件')
-  emit('cancel-send')
+function handleStop() {
+  emit('stop')
 }
 
-const handleStopSending = () => {
-  console.log('🔴 [ChatContainer] 收到 stop-sending 事件')
-  emit('stop-sending')
-}
-const handleSuggestion = (text: string) => {
-  console.log('🔍 [ChatContainer] 收到建议文本，转发给父组件:', text)
-  emit('suggestion', text)
-}
-const handleToggleVoiceInput = () => emit('toggle-voice-input')
-const handleToggleVoiceOutput = () => emit('toggle-voice-output')
-const handleShowQuickQuery = () => emit('show-quick-query')
-const toggleThinking = () => emit('toggle-thinking')
-const toggleContextOptimization = () => emit('toggle-context-optimization')
-const handleUploadFile = (file: File) => emit('upload-file', file)
-const handleUploadImage = (image: File) => emit('upload-image', image)
-
-// ==================== 滚动控制 ====================
-const scrollToBottom = () => {
-  if (chatMessagesRef.value) {
-    // 🔧 修复：滚动条焦点要比文字稍微靠下一点，给文字区域留一点空间
-    const scrollOffset = 30; // 底部留白30px，给文字区域留出空间
-    chatMessagesRef.value.scrollTop = chatMessagesRef.value.scrollHeight + scrollOffset
-  }
+function handleCopy(content: string) {
+  console.log('Copy:', content)
 }
 
-// ==================== 暴露给父组件 ====================
-defineExpose({
-  scrollToBottom,
-  chatMessagesRef
+function handleRegenerate() {
+  console.log('Regenerate')
+}
+
+// 监听输入变化
+watch(inputValue, (newVal) => {
+  emit('update:inputMessage', newVal)
 })
 </script>
 
 <style scoped lang="scss">
-// design-tokens 已通过 vite.config 全局注入
-
 .chat-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
   height: 100%;
-  min-height: 0;
+  background: var(--el-bg-color);
 }
 
-// 聊天消息区域
 .chat-messages {
   flex: 1;
-  overflow-y: auto;
-  padding: var(--spacing-md); // ✨ 优化：从24px降至16px
-  padding-bottom: 60px; // ✨ 优化：减小底部空间
-  scroll-behavior: smooth;
-  background: var(--bg-primary);
+  overflow: hidden;
+}
 
-  /* 布局容器：消息内部自己控制左右对齐（flex-start允许元素自定义宽度） */
+.chat-input-wrapper {
+  padding: 16px 24px;
+  background: var(--el-bg-color);
+  border-top: 1px solid var(--el-border-color-lighter);
+}
+
+.input-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 24px;
+  transition: border-color 0.2s;
 
-  transition: all var(--transition-base);
-}
-
-// 自定义滚动条样式
-.chat-messages::-webkit-scrollbar {
-  width: auto;
-}
-
-.chat-messages::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-full);
-}
-
-.chat-messages::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: var(--radius-full);
-  transition: background var(--transition-fast);
-
-  &:hover {
-    background: var(--text-placeholder);
+  &:focus-within {
+    border-color: var(--el-color-primary);
   }
 }
 
-// 聊天输入区域
-.chat-input-area {
-  position: relative; // 为思考字幕提供定位参考
+.chat-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  font-size: 15px;
+  line-height: 1.5;
+  max-height: 150px;
+  min-height: 24px;
+  padding: 0;
+  color: var(--el-text-color-primary);
+
+  &::placeholder {
+    color: var(--el-text-color-placeholder);
+  }
+}
+
+.send-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--el-color-primary);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
   flex-shrink: 0;
-  padding: var(--spacing-sm) var(--spacing-md); // ✨ 优化：减小内边距
-  background: var(--bg-card);
-  border-top: var(--border-width-base) solid var(--border-color);
-  backdrop-filter: var(--backdrop-blur);
 
-  /* 添加微妙的阴影，提升视觉层次 */
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* 响应式设计 */
-@media (max-width: var(--breakpoint-lg)) {
-  .chat-messages {
-    padding: var(--spacing-lg);
-    padding-bottom: 60px;
+  svg {
+    width: 18px;
+    height: 18px;
   }
 
-  .chat-input-area {
-    padding: var(--spacing-md) var(--spacing-lg);
-  }
-}
-
-@media (max-width: var(--breakpoint-md)) {
-  .chat-messages {
-    padding: var(--spacing-md);
-    padding-bottom: 50px;
+  &:hover:not(:disabled) {
+    background: var(--el-color-primary-light-3);
+    transform: scale(1.05);
   }
 
-  .chat-input-area {
-    padding: var(--spacing-sm) var(--spacing-md);
+  &:disabled {
+    background: var(--el-border-color);
+    cursor: not-allowed;
+  }
+
+  &.sending {
+    background: var(--el-color-warning);
   }
 }
 
-/* 暗色主题适配 */
-[data-theme="dark"] .chat-container {
-  .chat-messages {
-    background: var(--bg-primary-dark);
+.stop-icon {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.input-hint {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--el-text-color-placeholder);
+  text-align: center;
+}
+
+// 响应式
+@media (max-width: 640px) {
+  .chat-input-wrapper {
+    padding: 12px 16px;
   }
 
-  .chat-input-area {
-    background: var(--bg-card-dark);
-    border-top-color: var(--border-color-dark);
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  .input-container {
+    padding: 10px 14px;
+    border-radius: 20px;
   }
 
-  .chat-messages::-webkit-scrollbar-track {
-    background: var(--bg-secondary-dark);
+  .chat-input {
+    font-size: 14px;
   }
 
-  .chat-messages::-webkit-scrollbar-thumb {
-    background: var(--border-color-dark);
+  .send-btn {
+    width: 32px;
+    height: 32px;
 
-    &:hover {
-      background: var(--text-disabled-dark);
+    svg {
+      width: 16px;
+      height: 16px;
     }
   }
-}
 
-/* 高对比度模式支持 */
-@media (prefers-contrast: high) {
-  .chat-input-area {
-    border-top-width: auto;
-    border-top-color: var(--text-primary);
-  }
-}
-
-/* 减少动画支持 */
-@media (prefers-reduced-motion: reduce) {
-  .chat-messages {
-    scroll-behavior: auto;
-    transition: none;
-  }
-
-  .chat-messages::-webkit-scrollbar-thumb {
-    transition: none;
+  .input-hint {
+    display: none;
   }
 }
 </style>

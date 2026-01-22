@@ -113,13 +113,16 @@ export default defineConfig({
   // Web服务器配置（可选）
   webServer: [
     {
-      command: 'npm run dev',
+      // ✅ 使用更稳定的前端启动命令，避免 kill-ports 造成额外噪音
+      command: 'npm run dev:fast:simple',
       port: 5173,
       reuseExistingServer: !process.env.CI,
       timeout: 120000
     },
     {
-      command: 'cd ../server && npm run dev',
+      // ✅ 关键修复：不用 dev（带 inspect）也不用 dev:fast（会触发 TS 类型编译失败）
+      // 直接用 ts-node transpile-only 启动，既稳定又不会占用调试端口
+      command: 'cd ../server && PORT=3000 NODE_ENV=development node -r ts-node/register/transpile-only src/app.ts',
       port: 3000,
       reuseExistingServer: !process.env.CI,
       timeout: 120000

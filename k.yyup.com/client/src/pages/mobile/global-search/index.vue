@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="全局搜索"
-    :show-back="true"
-    :show-footer="false"
-    @back="handleGoBack"
-  >
+  <MobileSubPageLayout title="全局搜索" back-path="/mobile/centers">
     <div class="mobile-global-search">
       <!-- 搜索框 -->
       <div class="search-section">
@@ -119,14 +114,14 @@
         <van-loading size="24px">搜索中...</van-loading>
       </div>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 // 路由
 const router = useRouter()
@@ -184,6 +179,12 @@ const allFunctions = [
 
 // 初始化
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   loadSearchHistory()
 })
 
@@ -415,7 +416,7 @@ const handleGoBack = () => {
               color: var(--primary-color);
               background: var(--primary-light-bg);
               padding: 0 2px;
-              border-radius: 2px;
+              border-radius: var(--spacing-xs);
             }
           }
 
@@ -428,7 +429,7 @@ const handleGoBack = () => {
               color: var(--primary-color);
               background: var(--primary-light-bg);
               padding: 0 2px;
-              border-radius: 2px;
+              border-radius: var(--spacing-xs);
             }
           }
 
@@ -472,6 +473,13 @@ const handleGoBack = () => {
     .popular-functions .popular-grid {
       grid-template-columns: repeat(6, 1fr);
     }
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

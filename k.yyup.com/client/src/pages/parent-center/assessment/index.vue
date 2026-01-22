@@ -79,21 +79,26 @@ const startAssessment = () => {
 </script>
 
 <style scoped lang="scss">
+/* 使用设计令牌 */
+
+/* ==================== 测评首页容器 ==================== */
 .assessment-index-page {
   min-height: 100vh;
-  background: var(--bg-hover);
+  background: var(--el-fill-color-light);
 
   .container {
-    max-width: 1200px;
+    max-width: var(--breakpoint-xl);
     margin: 0 auto;
     padding: 0 var(--spacing-xl);
   }
 
+  /* ==================== 英雄区域 ==================== */
   .hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-    color: var(--text-on-primary);
+    background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+    color: white;
     padding: var(--spacing-3xl) var(--spacing-lg);
     text-align: center;
+    border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
 
     h1 {
       font-size: var(--text-2xl);
@@ -105,25 +110,52 @@ const startAssessment = () => {
       font-size: var(--text-lg);
       margin-bottom: var(--spacing-2xl);
       opacity: 0.9;
+      line-height: var(--leading-relaxed);
+    }
+
+    :deep(.el-button--primary) {
+      --el-button-bg-color: white;
+      --el-button-border-color: white;
+      --el-button-text-color: var(--el-color-primary);
+      --el-button-hover-bg-color: var(--el-fill-color);
+      --el-button-hover-border-color: white;
+      font-weight: 600;
+      padding: var(--spacing-md) var(--spacing-2xl);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
     }
   }
 
+  /* ==================== 特色功能区域 ==================== */
   .features-section {
     padding: var(--spacing-3xl) 0;
 
     h2 {
       text-align: center;
-      font-size: var(--text-2xl);
+      font-size: var(--text-xl);
       margin-bottom: var(--spacing-2xl);
-      color: var(--text-primary);
+      color: var(--el-text-color-primary);
       font-weight: 600;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--el-color-primary);
+        margin: var(--spacing-sm) auto 0;
+        border-radius: 2px;
+      }
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-xl);
-      padding: 0 var(--spacing-lg);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--spacing-lg);
+      padding: 0 var(--spacing-md);
 
       @media (max-width: var(--breakpoint-md)) {
         grid-template-columns: 1fr;
@@ -135,73 +167,72 @@ const startAssessment = () => {
         border-radius: var(--radius-lg);
         text-align: center;
         box-shadow: var(--shadow-sm);
-        transition: all 0.3s ease;
-        min-height: 220px;
+        transition: all var(--transition-base);
+        min-height: 200px;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
+        border: 1px solid var(--border-color-lighter);
 
         &:hover {
           transform: translateY(-4px);
           box-shadow: var(--shadow-lg);
+          border-color: var(--el-color-primary-light-3);
         }
 
         .feature-icon {
-          font-size: var(--text-4xl);
-          margin-bottom: var(--spacing-lg);
+          font-size: var(--text-3xl);
+          margin-bottom: var(--spacing-md);
           line-height: 1;
-          flex-shrink: 0;
         }
 
         h3 {
-          margin-bottom: var(--spacing-md);
-          color: var(--text-primary);
-          font-size: var(--text-lg);
+          margin-bottom: var(--spacing-sm);
+          color: var(--el-text-color-primary);
+          font-size: var(--text-base);
           font-weight: 600;
-          width: 100%;
-          word-wrap: break-word;
-          word-break: keep-word;
-          overflow-wrap: break-word;
         }
 
         p {
-          color: var(--text-secondary);
-          line-height: 1.6;
+          color: var(--el-text-color-secondary);
+          line-height: var(--leading-normal);
           font-size: var(--text-sm);
-          width: 100%;
-          max-width: 100%;
-          word-wrap: break-word;
-          word-break: keep-word;
-          overflow-wrap: break-word;
-          white-space: normal;
-          text-align: center;
-          overflow: hidden;
+          margin: 0;
         }
       }
     }
   }
 
+  /* ==================== 测评流程区域 ==================== */
   .process-section {
     padding: var(--spacing-3xl) 0;
     background: var(--bg-card);
+    border-top: 1px solid var(--border-color-lighter);
 
     h2 {
       text-align: center;
-      font-size: var(--text-2xl);
+      font-size: var(--text-xl);
       margin-bottom: var(--spacing-2xl);
-      color: var(--text-primary);
+      color: var(--el-text-color-primary);
       font-weight: 600;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--el-color-primary);
+        margin: var(--spacing-sm) auto 0;
+        border-radius: 2px;
+      }
     }
 
     .process-steps {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: var(--spacing-2xl);
-      padding: 0 var(--spacing-lg);
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--spacing-lg);
+      padding: 0 var(--spacing-md);
 
       @media (max-width: var(--breakpoint-md)) {
         grid-template-columns: 1fr;
@@ -210,47 +241,62 @@ const startAssessment = () => {
       .step {
         text-align: center;
         padding: var(--spacing-lg);
-        width: 100%;
-        max-width: 100%;
-        overflow: hidden;
 
         .step-number {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-          color: var(--text-on-primary);
+          width: 56px;
+          height: 56px;
+          border-radius: var(--radius-full);
+          background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary-light-3) 100%);
+          color: white;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto var(--spacing-lg);
-          font-size: var(--text-xl);
+          margin: 0 auto var(--spacing-md);
+          font-size: var(--text-lg);
           font-weight: 600;
           box-shadow: var(--shadow-md);
           flex-shrink: 0;
         }
 
         h3 {
-          margin-bottom: var(--spacing-sm);
-          color: var(--text-primary);
-          font-size: var(--text-lg);
+          margin-bottom: var(--spacing-xs);
+          color: var(--el-text-color-primary);
+          font-size: var(--text-base);
           font-weight: 600;
-          width: 100%;
-          word-wrap: break-word;
-          word-break: keep-word;
-          overflow-wrap: break-word;
         }
 
         p {
-          color: var(--text-secondary);
+          color: var(--el-text-color-secondary);
           font-size: var(--text-sm);
-          line-height: 1.5;
-          width: 100%;
-          word-wrap: break-word;
-          word-break: keep-word;
-          overflow-wrap: break-word;
-          white-space: normal;
+          line-height: var(--leading-normal);
+          margin: 0;
         }
+      }
+    }
+  }
+
+  /* ==================== 响应式设计 ==================== */
+  @media (max-width: var(--breakpoint-md)) {
+    .hero-section {
+      padding: var(--spacing-2xl) var(--spacing-md);
+
+      h1 {
+        font-size: var(--text-xl);
+      }
+
+      .subtitle {
+        font-size: var(--text-base);
+        margin-bottom: var(--spacing-lg);
+      }
+    }
+
+    .features-section,
+    .process-section {
+      padding: var(--spacing-2xl) 0;
+
+      h2 {
+        font-size: var(--text-lg);
+        margin-bottom: var(--spacing-lg);
       }
     }
   }

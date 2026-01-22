@@ -171,14 +171,6 @@ const toggleThinkingExpanded = () => {
   width: 0 !important; // 默认宽度为0（隐藏）- 使用!important确保优先级
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); // 宽度动画
 
-  // 🎨 暗黑主题适配
-  :deep(.theme-dark) &,
-  .theme-dark &,
-  :root.theme-dark & {
-    background: var(--text-primary-light) !important;
-    border-left-color: var(--text-regular-light) !important;
-  }
-
   // 隐藏状态时完全不显示，包括边框
   &:not(.visible) {
     border-left: none;
@@ -194,13 +186,6 @@ const toggleThinkingExpanded = () => {
     pointer-events: auto; // 🔧 启用鼠标事件
     overflow-y: auto; // 🔧 展开时允许垂直滚动
     overflow-x: hidden; // 🔧 展开时隐藏水平溢出
-
-    // 🎨 暗黑主题展开状态
-    :deep(.theme-dark) &,
-    .theme-dark &,
-    :root.theme-dark & {
-      border-left-color: var(--text-regular-light) !important;
-    }
   }
 
   // 暗色主题下的样式
@@ -419,6 +404,17 @@ const toggleThinkingExpanded = () => {
         color: var(--text-tertiary);
       }
     }
+  }
+}
+
+// 🎨 暗黑主题适配（全局主题选择器）
+:global(.theme-dark) .right-sidebar,
+:global(:root.theme-dark) .right-sidebar {
+  background: var(--text-primary-light) !important;
+  border-left-color: var(--text-regular-light) !important;
+
+  &.visible {
+    border-left-color: var(--text-regular-light) !important;
   }
 }
 

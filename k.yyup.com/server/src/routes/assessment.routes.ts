@@ -476,8 +476,11 @@
 */
 
 import { Router } from 'express';
+import { Request, Response } from 'express';
 import * as assessmentController from '../controllers/assessment.controller';
 import { checkParentStudentAccess, checkAcademicPermission, verifyToken } from '../middlewares/auth.middleware';
+import { ApiResponse } from '../utils/apiResponse';
+import { sequelize } from '../init';
 
 const router = Router();
 
@@ -1356,6 +1359,147 @@ router.get('/my-records',  assessmentController.getMyRecords);
  *         $ref: '#/components/responses/ServerError'
 */
 router.get('/growth-trajectory', assessmentController.getGrowthTrajectory);
+
+/**
+* @swagger
+ * /api/assessments/parent-stats:
+ *   get:
+ *     summary: 获取家长端统计数据
+ *     description: 获取家长在移动端看到的统计数据，包括孩子数量、测评完成情况等
+ *     tags: [评估功能]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: 获取统计数据成功
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     totalChildren:
+ *                       type: integer
+ *                       description: 孩子总数
+ *                       example: 2
+ *                     completedAssessments:
+ *                       type: integer
+ *                       description: 已完成测评数
+ *                       example: 5
+ *                     pendingAssessments:
+ *                       type: integer
+ *                       description: 待完成测评数
+ *                       example: 1
+ *                     averageScore:
+ *                       type: number
+ *                       description: 平均分数
+ *                       example: 85.5
+ *                     recentActivity:
+ *                       type: object
+ *                       description: 最近活动
+ *                       properties:
+ *                         lastAssessmentDate:
+ *                           type: string
+ *                           format: date-time
+ *                           example: "2024-01-15T10:30:00.000Z"
+ *                         lastAssessmentScore:
+ *                           type: number
+ *                           example: 88
+ *                 message:
+ *                   type: string
+ *                   example: "获取统计数据成功"
+ *       401:
+ *         description: 未授权访问
+ *       403:
+ *         description: 权限不足
+ *       500:
+ *         description: 服务器内部错误
+ */
+router.get('/parent-stats', verifyToken, async (req: Request, res: Response) => {
+  try {
+    const user = req.user as any;
+
+    // 只有家长角色可以访问此端点
+    if (user.role !== 'parent') {
+      return ApiResponse.error(res, '此端点仅限家长访问', 'FORBIDDEN', 403);
+    }
+
+    const tenantDatabaseName = (req as any).tenant?.databaseName || 'kindergarten';
+    const sequelizeInstance = (req as any).tenantDb || sequelize;
+
+    // 查询家长关联的孩子数量
+    const [childrenCountResult] = await sequelizeInstance.query(`
+      SELECT COUNT(DISTINCT psr.student_id) as total_children
+      FROM ${tenantDatabaseName}.parent_student_relations psr
+      WHERE psr.parent_id = ? AND psr.status = 'active'
+    `, {
+      replacements: [user.id]
+    });
+
+    const totalChildren = (childrenCountResult as any[])[0]?.total_children || 0;
+
+    // 查询已完成的测评数量
+    const [completedAssessmentsResult] = await sequelizeInstance.query(`
+      SELECT COUNT(*) as completed_count
+      FROM ${tenantDatabaseName}.assessment_records ar
+      INNER JOIN ${tenantDatabaseName}.parent_student_relations psr ON ar.child_id = psr.student_id
+      WHERE psr.parent_id = ? AND psr.status = 'active' AND ar.status = 'completed'
+    `, {
+      replacements: [user.id]
+    });
+
+    const completedAssessments = (completedAssessmentsResult as any[])[0]?.completed_count || 0;
+
+    // 查询最近的测评记录
+    const [recentAssessmentResult] = await sequelizeInstance.query(`
+      SELECT ar.completed_at, ar.total_score
+      FROM ${tenantDatabaseName}.assessment_records ar
+      INNER JOIN ${tenantDatabaseName}.parent_student_relations psr ON ar.child_id = psr.student_id
+      WHERE psr.parent_id = ? AND psr.status = 'active' AND ar.status = 'completed'
+      ORDER BY ar.completed_at DESC
+      LIMIT 1
+    `, {
+      replacements: [user.id]
+    });
+
+    const recentActivity = recentAssessmentResult && (recentAssessmentResult as any[]).length > 0
+      ? {
+          lastAssessmentDate: (recentAssessmentResult as any[])[0].completed_at,
+          lastAssessmentScore: (recentAssessmentResult as any[])[0].total_score
+        }
+      : null;
+
+    // 计算平均分
+    const [averageScoreResult] = await sequelizeInstance.query(`
+      SELECT AVG(ar.total_score) as avg_score
+      FROM ${tenantDatabaseName}.assessment_records ar
+      INNER JOIN ${tenantDatabaseName}.parent_student_relations psr ON ar.child_id = psr.student_id
+      WHERE psr.parent_id = ? AND psr.status = 'active' AND ar.status = 'completed'
+    `, {
+      replacements: [user.id]
+    });
+
+    const averageScore = (averageScoreResult as any[])[0]?.avg_score || 0;
+
+    const stats = {
+      totalChildren,
+      completedAssessments,
+      pendingAssessments: Math.max(0, totalChildren - completedAssessments), // 简化计算
+      averageScore: parseFloat(averageScore.toFixed(2)),
+      recentActivity
+    };
+
+    return ApiResponse.success(res, stats, '获取统计数据成功');
+  } catch (error) {
+    console.error('[ASSESSMENT]: 获取家长统计数据失败:', error);
+    return ApiResponse.error(res, '获取家长统计数据失败', 'INTERNAL_ERROR', 500);
+  }
+});
 
 export default router;
 

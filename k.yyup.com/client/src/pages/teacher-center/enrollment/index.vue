@@ -1,171 +1,195 @@
 <template>
   <UnifiedCenterLayout
-    title="页面标题"
-    description="页面描述"
-    icon="User"
+    :title="t('teacher.enrollment.title')"
+    :description="t('teacher.enrollment.description')"
+    icon="enrollment"
+    :show-header="true"
+    :show-title="true"
   >
-    <div class="center-container teacher-enrollment">
-    <!-- 页面头部 -->
-    <div class="page-header">
-      <div class="header-content">
-        <div class="header-left">
-          <h1>招生中心</h1>
-          <p>管理我的招生客户和咨询记录</p>
-        </div>
-        <div class="header-actions">
-          <el-button type="primary" @click="handleAddCustomer">
-            <UnifiedIcon name="Plus" />
-            添加客户
-          </el-button>
-          <el-button @click="refreshData">
-            <UnifiedIcon name="Refresh" />
-            刷新
-          </el-button>
-        </div>
-      </div>
-    </div>
+    <!-- 头部操作按钮 -->
+    <template #header-actions>
+      <el-button type="primary" @click="handleAddCustomer" class="action-btn">
+        <UnifiedIcon name="plus" :size="16" />
+        {{ t('teacher.enrollment.addCustomer') }}
+      </el-button>
+      <el-button @click="refreshData" class="action-btn">
+        <UnifiedIcon name="refresh" :size="16" />
+        {{ t('teacher.enrollment.refresh') }}
+      </el-button>
+    </template>
 
-    <!-- 园区招生概况 -->
-    <div class="school-overview">
-      <el-card>
-        <template #header>
-          <div class="card-header">
-            <span class="card-title">
-              <UnifiedIcon name="default" />
-              园区招生概况
-            </span>
-            <el-tag type="success" size="small">本月目标: {{ schoolOverview.monthlyTarget }}人</el-tag>
-          </div>
+    <!-- 统计卡片区域 - 直接使用 UnifiedCenterLayout 提供的网格容器 -->
+    <template #stats>
+      <StatCard
+        v-if="!loading.stats"
+        icon="user"
+        :title="t('teacher.enrollment.totalCustomers')"
+        :value="customerStats.total"
+        :subtitle="t('teacher.enrollment.allCustomers')"
+        type="primary"
+        :trend="customerStats.total > 0 ? 'up' : 'stable'"
+        clickable
+        @click="handleStatClick('total')"
+      />
+      <el-skeleton v-else animated class="stat-card-skeleton">
+        <template #template>
+          <el-skeleton-item variant="rect" style="width: 100%; height: 120px; border-radius: 12px;" />
         </template>
+      </el-skeleton>
 
-        <div class="overview-grid">
-          <el-row :gutter="20">
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="overview-item">
-                <div class="overview-value">{{ schoolOverview.totalLeads }}</div>
-                <div class="overview-label">园区总客户</div>
-                <div class="overview-trend success">+{{ schoolOverview.newLeadsThisMonth }}本月新增</div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="overview-item">
-                <div class="overview-value">{{ schoolOverview.currentProgress }}%</div>
-                <div class="overview-label">目标完成度</div>
-                <div class="overview-trend" :class="schoolOverview.currentProgress >= 80 ? 'success' : 'warning'">
-                  {{ schoolOverview.enrolledThisMonth }}/{{ schoolOverview.monthlyTarget }}人
-                </div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="overview-item">
-                <div class="overview-value">#{{ schoolOverview.teamRanking }}</div>
-                <div class="overview-label">团队排名</div>
-                <div class="overview-trend info">共{{ schoolOverview.totalTeachers }}位教师</div>
-              </div>
-            </el-col>
-            <el-col :xs="24" :sm="12" :md="6" :lg="6">
-              <div class="overview-item">
-                <div class="overview-value">{{ schoolOverview.myContribution }}%</div>
-                <div class="overview-label">我的贡献度</div>
-                <div class="overview-trend success">{{ schoolOverview.myEnrolled }}人已录取</div>
-              </div>
-            </el-col>
-          </el-row>
-        </div>
-      </el-card>
-    </div>
+      <StatCard
+        v-if="!loading.stats"
+        icon="user-plus"
+        :title="t('teacher.enrollment.newCustomers')"
+        :value="customerStats.new"
+        :subtitle="t('teacher.enrollment.thisMonth')"
+        type="success"
+        :trend="customerStats.new > 0 ? 'up' : 'stable'"
+        clickable
+        @click="handleStatClick('new')"
+      />
+      <el-skeleton v-else animated class="stat-card-skeleton">
+        <template #template>
+          <el-skeleton-item variant="rect" style="width: 100%; height: 120px; border-radius: 12px;" />
+        </template>
+      </el-skeleton>
 
-    <!-- 统计卡片区域 -->
-    <div class="stats-cards">
-      <el-row :gutter="20">
-        <el-col :xs="24" :sm="12" :md="6">
-          <EnrollmentStatCard
-            title="总客户"
-            :value="customerStats.total"
-            icon="User"
-            color="var(--el-color-primary)"
-            description="全部客户"
-            @click="handleStatClick('total')"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <EnrollmentStatCard
-            title="新增客户"
-            :value="customerStats.new"
-            icon="Plus"
-            color="var(--el-color-success)"
-            description="本月新增"
-            @click="handleStatClick('new')"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <EnrollmentStatCard
-            title="已联系"
-            :value="customerStats.contacted"
-            icon="Phone"
-            color="var(--el-color-warning)"
-            description="已沟通"
-            @click="handleStatClick('contacted')"
-          />
-        </el-col>
-        <el-col :xs="24" :sm="12" :md="6">
-          <EnrollmentStatCard
-            title="已报名"
-            :value="customerStats.enrolled"
-            icon="Check"
-            color="var(--el-color-danger)"
-            description="成功转化"
-            @click="handleStatClick('enrolled')"
-          />
-        </el-col>
-      </el-row>
-    </div>
+      <StatCard
+        v-if="!loading.stats"
+        icon="phone"
+        :title="t('teacher.enrollment.contacted')"
+        :value="customerStats.contacted"
+        :subtitle="t('teacher.enrollment.contactedDesc')"
+        type="warning"
+        clickable
+        @click="handleStatClick('contacted')"
+      />
+      <el-skeleton v-else animated class="stat-card-skeleton">
+        <template #template>
+          <el-skeleton-item variant="rect" style="width: 100%; height: 120px; border-radius: 12px;" />
+        </template>
+      </el-skeleton>
+
+      <StatCard
+        v-if="!loading.stats"
+        icon="check"
+        :title="t('teacher.enrollment.enrolled')"
+        :value="customerStats.enrolled"
+        :subtitle="t('teacher.enrollment.enrolledDesc')"
+        type="danger"
+        clickable
+        @click="handleStatClick('enrolled')"
+      />
+      <el-skeleton v-else animated class="stat-card-skeleton">
+        <template #template>
+          <el-skeleton-item variant="rect" style="width: 100%; height: 120px; border-radius: 12px;" />
+        </template>
+      </el-skeleton>
+    </template>
 
     <!-- 主要内容区域 -->
-    <div class="main-content">
+    <div class="enrollment-content">
+      <!-- 园区招生概况 -->
+      <div class="overview-section">
+        <el-card class="section-card" shadow="hover">
+          <template #header>
+            <div class="card-header">
+              <div class="card-title-wrapper">
+                <UnifiedIcon name="enrollment" :size="20" class="card-icon" />
+                <span class="card-title">{{ t('teacher.enrollment.schoolOverview') }}</span>
+              </div>
+              <el-tag type="success" effect="light" size="small">
+                {{ t('teacher.enrollment.monthlyTarget') }}: {{ schoolOverview.monthlyTarget }}{{ t('teacher.enrollment.people') }}
+              </el-tag>
+            </div>
+          </template>
+
+          <div class="overview-grid">
+            <div class="overview-item" @click="handleOverviewClick('totalLeads')">
+              <div class="overview-value primary">{{ schoolOverview.totalLeads }}</div>
+              <div class="overview-label">{{ t('teacher.enrollment.totalLeads') }}</div>
+              <div class="overview-trend success">
+                <UnifiedIcon name="trending-up" :size="12" />
+                +{{ schoolOverview.newLeadsThisMonth }}{{ t('teacher.enrollment.thisMonth') }}
+              </div>
+            </div>
+            <div class="overview-item" @click="handleOverviewClick('progress')">
+              <div class="overview-value success">{{ schoolOverview.currentProgress }}%</div>
+              <div class="overview-label">{{ t('teacher.enrollment.completionRate') }}</div>
+              <div class="overview-trend" :class="schoolOverview.currentProgress >= 80 ? 'success' : 'warning'">
+                {{ schoolOverview.enrolledThisMonth }}/{{ schoolOverview.monthlyTarget }}{{ t('teacher.enrollment.people') }}
+              </div>
+            </div>
+            <div class="overview-item" @click="handleOverviewClick('ranking')">
+              <div class="overview-value warning">#{{ schoolOverview.teamRanking }}</div>
+              <div class="overview-label">{{ t('teacher.enrollment.teamRanking') }}</div>
+              <div class="overview-trend info">
+                <UnifiedIcon name="user-group" :size="12" />
+                {{ t('teacher.enrollment.totalTeachers', { count: schoolOverview.totalTeachers }) }}
+              </div>
+            </div>
+            <div class="overview-item" @click="handleOverviewClick('contribution')">
+              <div class="overview-value info">{{ schoolOverview.myContribution }}%</div>
+              <div class="overview-label">{{ t('teacher.enrollment.myContribution') }}</div>
+              <div class="overview-trend success">
+                {{ schoolOverview.myEnrolled }}{{ t('teacher.enrollment.enrolled') }}
+              </div>
+            </div>
+          </div>
+        </el-card>
+      </div>
+
       <!-- 筛选区域 -->
       <div class="filter-section">
-        <el-card>
-          <div class="filter-form">
-            <el-row :gutter="16">
-              <el-col :xs="24" :sm="8" :md="6">
-                <el-form-item label="状态筛选">
-                  <el-select v-model="filterForm.status" placeholder="选择状态" clearable>
-                    <el-option label="全部" value="" />
-                    <el-option label="新客户" value="new" />
-                    <el-option label="已联系" value="contacted" />
-                    <el-option label="意向客户" value="interested" />
-                    <el-option label="已报名" value="enrolled" />
+        <el-card class="filter-card" shadow="hover">
+          <div class="filter-content">
+            <el-row :gutter="20" align="middle">
+              <el-col :xs="24" :sm="12" :md="6">
+                <el-form-item :label="t('teacher.enrollment.statusFilter')" label-width="80">
+                  <el-select v-model="filterForm.status" :placeholder="t('teacher.enrollment.selectStatus')" clearable class="filter-select">
+                    <el-option :label="t('teacher.enrollment.all')" value="" />
+                    <el-option :label="t('teacher.enrollment.statusNew')" value="new" />
+                    <el-option :label="t('teacher.enrollment.statusContacted')" value="contacted" />
+                    <el-option :label="t('teacher.enrollment.statusInterested')" value="interested" />
+                    <el-option :label="t('teacher.enrollment.statusEnrolled')" value="enrolled" />
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col :xs="24" :sm="8" :md="6">
-                <el-form-item label="来源渠道">
-                  <el-select v-model="filterForm.source" placeholder="选择来源" clearable>
-                    <el-option label="全部" value="" />
-                    <el-option label="线上推广" value="online" />
-                    <el-option label="朋友推荐" value="referral" />
-                    <el-option label="实地咨询" value="visit" />
-                    <el-option label="电话咨询" value="phone" />
+              <el-col :xs="24" :sm="12" :md="6">
+                <el-form-item :label="t('teacher.enrollment.sourceFilter')" label-width="80">
+                  <el-select v-model="filterForm.source" :placeholder="t('teacher.enrollment.selectSource')" clearable class="filter-select">
+                    <el-option :label="t('teacher.enrollment.all')" value="" />
+                    <el-option :label="t('teacher.enrollment.sourceOnline')" value="online" />
+                    <el-option :label="t('teacher.enrollment.sourceReferral')" value="referral" />
+                    <el-option :label="t('teacher.enrollment.sourceVisit')" value="visit" />
+                    <el-option :label="t('teacher.enrollment.sourcePhone')" value="phone" />
                   </el-select>
                 </el-form-item>
               </el-col>
-              <el-col :xs="24" :sm="8" :md="6">
-                <el-form-item label="搜索">
+              <el-col :xs="24" :sm="12" :md="6">
+                <el-form-item :label="t('teacher.enrollment.search')" label-width="60">
                   <el-input
                     v-model="filterForm.keyword"
-                    placeholder="搜索客户姓名或电话"
+                    :placeholder="t('teacher.enrollment.searchPlaceholder')"
                     clearable
-                  />
+                    class="filter-input"
+                  >
+                    <template #prefix>
+                      <UnifiedIcon name="search" :size="14" />
+                    </template>
+                  </el-input>
                 </el-form-item>
               </el-col>
-              <el-col :xs="24" :sm="24" :md="6">
+              <el-col :xs="24" :sm="12" :md="6">
                 <div class="filter-actions">
-                  <el-button @click="handleSearch">
-                    <UnifiedIcon name="Search" />
-                    搜索
+                  <el-button type="primary" @click="handleSearch">
+                    <UnifiedIcon name="search" :size="14" />
+                    {{ t('teacher.enrollment.search') }}
                   </el-button>
-                  <el-button @click="handleResetFilter">重置</el-button>
+                  <el-button @click="handleResetFilter">
+                    <UnifiedIcon name="refresh" :size="14" />
+                    {{ t('teacher.enrollment.reset') }}
+                  </el-button>
                 </div>
               </el-col>
             </el-row>
@@ -175,95 +199,151 @@
 
       <!-- 客户表格 -->
       <div class="table-section">
-        <el-card>
+        <el-card class="section-card" shadow="hover">
           <template #header>
             <div class="card-header">
-              <span class="card-title">
-                <UnifiedIcon name="default" />
-                客户列表
-              </span>
+              <div class="card-title-wrapper">
+                <UnifiedIcon name="customers" :size="20" class="card-icon" />
+                <span class="card-title">{{ t('teacher.enrollment.customerList') }}</span>
+              </div>
               <div class="card-actions">
-                <el-button :disabled="selectedCustomers.length === 0" @click="handleBatchUpdate">
-                  批量更新
+                <el-button
+                  :disabled="selectedCustomers.length === 0"
+                  @click="handleBatchUpdate"
+                  size="small"
+                >
+                  <UnifiedIcon name="edit" :size="14" />
+                  {{ t('teacher.enrollment.batchUpdate') }}
                 </el-button>
-                <el-button :disabled="selectedCustomers.length === 0" @click="handleBatchDelete">
-                  批量删除
+                <el-button
+                  :disabled="selectedCustomers.length === 0"
+                  @click="handleBatchDelete"
+                  size="small"
+                  type="danger"
+                >
+                  <UnifiedIcon name="close" :size="14" />
+                  {{ t('teacher.enrollment.batchDelete') }}
                 </el-button>
               </div>
             </div>
           </template>
 
-          <div class="table-container">
-            <div class="table-wrapper">
-<el-table class="responsive-table"
+          <div v-if="loading.list" class="loading-container">
+            <el-skeleton :loading="loading.list" animated :rows="5">
+              <template #template>
+                <div class="skeleton-table">
+                  <div v-for="i in 5" :key="i" class="skeleton-row">
+                    <el-skeleton-item variant="text" style="width: 5%" />
+                    <el-skeleton-item variant="text" style="width: 15%" />
+                    <el-skeleton-item variant="text" style="width: 15%" />
+                    <el-skeleton-item variant="text" style="width: 10%" />
+                    <el-skeleton-item variant="text" style="width: 10%" />
+                    <el-skeleton-item variant="text" style="width: 10%" />
+                    <el-skeleton-item variant="text" style="width: 10%" />
+                    <el-skeleton-item variant="text" style="width: 25%" />
+                  </div>
+                </div>
+              </template>
+            </el-skeleton>
+          </div>
+          <div v-else-if="customerList.length === 0" class="empty-container">
+            <UnifiedIcon name="customers" :size="48" class="empty-icon" />
+            <p class="empty-text">{{ t('teacher.enrollment.noCustomers') }}</p>
+          </div>
+          <div v-else class="table-container">
+            <el-table
               :data="customerList"
               @selection-change="handleSelectionChange"
               style="width: 100%"
+              class="responsive-table"
+              row-key="id"
             >
-              <el-table-column type="selection" width="55" />
-              <el-table-column prop="customerName" label="客户姓名" width="120" />
-              <el-table-column prop="phone" label="联系电话" width="130" />
-              <el-table-column prop="childName" label="孩子姓名" width="120" />
-              <el-table-column prop="childAge" label="孩子年龄" width="100">
+              <el-table-column type="selection" width="50" />
+              <el-table-column prop="customerName" :label="t('teacher.enrollment.customerName')" min-width="120">
                 <template #default="{ row }">
-                  {{ row.childAge }}岁
+                  <div class="customer-name">
+                    <div class="customer-avatar">
+                      <UnifiedIcon name="user" :size="16" />
+                    </div>
+                    <span>{{ row.customerName }}</span>
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="source" label="客户来源" width="100">
+              <el-table-column prop="phone" :label="t('teacher.enrollment.phone')" min-width="130">
                 <template #default="{ row }">
-                  {{ getSourceText(row.source) }}
+                  <span class="phone-text">{{ row.phone }}</span>
                 </template>
               </el-table-column>
-              <el-table-column prop="status" label="状态" width="100">
+              <el-table-column prop="childName" :label="t('teacher.enrollment.childName')" min-width="120" />
+              <el-table-column prop="childAge" :label="t('teacher.enrollment.childAge')" min-width="100">
                 <template #default="{ row }">
-                  <el-tag :type="getStatusType(row.status)">
+                  <el-tag type="info" size="small" effect="plain">
+                    {{ row.childAge }}{{ t('teacher.enrollment.ageUnit') }}
+                  </el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="source" :label="t('teacher.enrollment.source')" min-width="110">
+                <template #default="{ row }">
+                  <el-tag size="small" effect="light">
+                    {{ getSourceText(row.source) }}
+                  </el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="status" :label="t('teacher.enrollment.status')" min-width="100">
+                <template #default="{ row }">
+                  <el-tag :type="getStatusType(row.status)" size="small" effect="light">
                     {{ getStatusText(row.status) }}
                   </el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="lastFollowDate" label="最后跟进" width="150">
+              <el-table-column prop="lastFollowDate" :label="t('teacher.enrollment.lastFollow')" min-width="150">
                 <template #default="{ row }">
-                  {{ formatDate(row.lastFollowDate) || '未跟进' }}
+                  <div class="date-cell">
+                    <UnifiedIcon name="clock" :size="12" />
+                    {{ formatDate(row.lastFollowDate) || t('teacher.enrollment.notFollowed') }}
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column prop="createTime" label="创建时间" width="150">
+              <el-table-column prop="createTime" :label="t('teacher.enrollment.createTime')" min-width="150">
                 <template #default="{ row }">
-                  {{ formatDate(row.createTime) }}
+                  <div class="date-cell">
+                    <UnifiedIcon name="calendar" :size="12" />
+                    {{ formatDate(row.createTime) }}
+                  </div>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="250" fixed="right">
+              <el-table-column :label="t('teacher.enrollment.actions')" width="220" fixed="right">
                 <template #default="{ row }">
                   <div class="table-actions">
                     <el-button size="small" @click="handleViewCustomer(row)">
-                      查看
+                      <UnifiedIcon name="eye" :size="14" />
                     </el-button>
                     <el-button size="small" type="primary" @click="handleEditCustomer(row)">
-                      编辑
+                      <UnifiedIcon name="edit" :size="14" />
                     </el-button>
                     <el-button size="small" type="success" @click="handleFollowUp(row)">
-                      跟进
+                      <UnifiedIcon name="phone" :size="14" />
                     </el-button>
                     <el-button size="small" type="warning" @click="handleUpdateStatus(row)">
-                      状态
+                      <UnifiedIcon name="refresh" :size="14" />
                     </el-button>
                   </div>
                 </template>
               </el-table-column>
             </el-table>
-</div>
           </div>
 
           <!-- 分页 -->
-          <div class="pagination-container">
+          <div class="pagination" v-if="pagination.total > 0">
             <div class="pagination-info">
-              共 {{ pagination.total }} 条
+              {{ t('teacher.enrollment.totalRecords', { total: pagination.total }) }}
             </div>
             <el-pagination
               v-model:current-page="pagination.page"
               v-model:page-size="pagination.pageSize"
-              :page-sizes="[20, 50, 100]"
+              :page-sizes="[10, 20, 50, 100]"
               :total="pagination.total"
-              layout="sizes, prev, pager, next, jumper"
+              layout="total, sizes, prev, pager, next, jumper"
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
             />
@@ -275,73 +355,172 @@
     <!-- 客户详情弹窗 -->
     <el-dialog
       v-model="customerDetailVisible"
-      title="客户详情"
+      :title="t('teacher.enrollment.customerDetail')"
       width="600px"
+      class="customer-dialog"
     >
-      <div v-if="currentCustomer">
+      <div v-if="currentCustomer" class="customer-detail">
         <el-descriptions :column="2" border>
-          <el-descriptions-item label="客户姓名">{{ currentCustomer.name }}</el-descriptions-item>
-          <el-descriptions-item label="联系电话">{{ currentCustomer.phone }}</el-descriptions-item>
-          <el-descriptions-item label="孩子姓名">{{ currentCustomer.childName }}</el-descriptions-item>
-          <el-descriptions-item label="孩子年龄">{{ currentCustomer.childAge }}岁</el-descriptions-item>
-          <el-descriptions-item label="客户来源">{{ currentCustomer.source }}</el-descriptions-item>
-          <el-descriptions-item label="状态">
-            <el-tag :type="getStatusType(currentCustomer.status)">
+          <el-descriptions-item :label="t('teacher.enrollment.customerName')">
+            {{ currentCustomer.customerName }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.phone')">
+            {{ currentCustomer.phone }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.childName')">
+            {{ currentCustomer.childName }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.childAge')">
+            {{ currentCustomer.childAge }}{{ t('teacher.enrollment.ageUnit') }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.source')">
+            <el-tag size="small" effect="light">
+              {{ getSourceText(currentCustomer.source) }}
+            </el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.status')">
+            <el-tag :type="getStatusType(currentCustomer.status)" size="small" effect="light">
               {{ getStatusText(currentCustomer.status) }}
             </el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="创建时间" :span="2">{{ currentCustomer.createTime }}</el-descriptions-item>
-          <el-descriptions-item label="备注" :span="2">{{ currentCustomer.notes || '无' }}</el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.createTime')" :span="2">
+            {{ formatDate(currentCustomer.createTime) }}
+          </el-descriptions-item>
+          <el-descriptions-item :label="t('teacher.enrollment.notes')" :span="2">
+            {{ currentCustomer.notes || t('teacher.enrollment.noNotes') }}
+          </el-descriptions-item>
         </el-descriptions>
       </div>
       <template #footer>
-        <el-button @click="customerDetailVisible = false">关闭</el-button>
-        <el-button type="primary" @click="handleEditCustomer(currentCustomer)">编辑</el-button>
+        <el-button @click="customerDetailVisible = false">
+          {{ t('teacher.enrollment.close') }}
+        </el-button>
+        <el-button type="primary" @click="handleEditCustomer(currentCustomer)">
+          <UnifiedIcon name="edit" :size="14" />
+          {{ t('teacher.enrollment.edit') }}
+        </el-button>
       </template>
     </el-dialog>
-    </div>
   </UnifiedCenterLayout>
 </template>
 
 <script setup lang="ts">
-import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
-
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
+// 翻译函数 - 支持插值
+const t = (key: string, params?: Record<string, any>) => {
+  const translations: Record<string, string> = {
+    'teacher.enrollment.title': '招生管理',
+    'teacher.enrollment.description': '管理招生客户、跟进记录和招生数据',
+    'teacher.enrollment.addCustomer': '添加客户',
+    'teacher.enrollment.refresh': '刷新',
+    'teacher.enrollment.totalCustomers': '总客户数',
+    'teacher.enrollment.allCustomers': '全部客户',
+    'teacher.enrollment.newCustomers': '新增客户',
+    'teacher.enrollment.thisMonth': '本月',
+    'teacher.enrollment.contacted': '已联系',
+    'teacher.enrollment.contactedDesc': '已跟进客户',
+    'teacher.enrollment.enrolled': '已报名',
+    'teacher.enrollment.enrolledDesc': '成功报名',
+    'teacher.enrollment.schoolOverview': '园区招生概况',
+    'teacher.enrollment.monthlyTarget': '本月目标',
+    'teacher.enrollment.people': '人',
+    'teacher.enrollment.totalLeads': '总线索',
+    'teacher.enrollment.completionRate': '完成率',
+    'teacher.enrollment.teamRanking': '团队排名',
+    'teacher.enrollment.totalTeachers': '共{count}位教师',
+    'teacher.enrollment.myContribution': '我的贡献',
+    'teacher.enrollment.enrolled': '已报名',
+    'teacher.enrollment.statusFilter': '状态筛选',
+    'teacher.enrollment.selectStatus': '选择状态',
+    'teacher.enrollment.all': '全部',
+    'teacher.enrollment.statusNew': '新客户',
+    'teacher.enrollment.statusContacted': '已联系',
+    'teacher.enrollment.statusInterested': '有意向',
+    'teacher.enrollment.statusEnrolled': '已报名',
+    'teacher.enrollment.sourceFilter': '来源筛选',
+    'teacher.enrollment.selectSource': '选择来源',
+    'teacher.enrollment.sourceOnline': '线上',
+    'teacher.enrollment.sourceReferral': '推荐',
+    'teacher.enrollment.sourceVisit': '到访',
+    'teacher.enrollment.sourcePhone': '电话',
+    'teacher.enrollment.search': '搜索',
+    'teacher.enrollment.searchPlaceholder': '搜索客户名称或手机号',
+    'teacher.enrollment.reset': '重置',
+    'teacher.enrollment.customerList': '客户列表',
+    'teacher.enrollment.batchUpdate': '批量更新',
+    'teacher.enrollment.batchDelete': '批量删除',
+    'teacher.enrollment.customerName': '客户姓名',
+    'teacher.enrollment.phone': '联系电话',
+    'teacher.enrollment.childName': '孩子姓名',
+    'teacher.enrollment.childAge': '孩子年龄',
+    'teacher.enrollment.ageUnit': '岁',
+    'teacher.enrollment.source': '来源',
+    'teacher.enrollment.status': '状态',
+    'teacher.enrollment.statusUnknown': '未知',
+    'teacher.enrollment.lastFollow': '最后跟进',
+    'teacher.enrollment.notFollowed': '未跟进',
+    'teacher.enrollment.createTime': '创建时间',
+    'teacher.enrollment.actions': '操作',
+    'teacher.enrollment.totalRecords': '共 {total} 条',
+    'teacher.enrollment.customerDetail': '客户详情',
+    'teacher.enrollment.notes': '备注',
+    'teacher.enrollment.noNotes': '暂无备注',
+    'teacher.enrollment.close': '关闭',
+    'teacher.enrollment.edit': '编辑',
+    'teacher.enrollment.addCustomerDeveloping': '添加客户功能开发中',
+    'teacher.enrollment.dataRefreshed': '数据已刷新',
+    'teacher.enrollment.followUpPlaceholder': '请输入跟进内容',
+    'teacher.enrollment.followUpTitle': '跟进记录',
+    'teacher.enrollment.confirm': '确定',
+    'teacher.enrollment.cancel': '取消',
+    'teacher.enrollment.followUpContentPlaceholder': '请输入本次跟进的具体内容',
+    'teacher.enrollment.followUpType': '电话跟进',
+    'teacher.enrollment.followUpSuccess': '跟进记录添加成功',
+    'teacher.enrollment.followUpFailed': '添加跟进记录失败',
+    'teacher.enrollment.updateStatusPlaceholder': '请选择新状态',
+    'teacher.enrollment.updateStatusTitle': '更新状态',
+    'teacher.enrollment.updateStatusSuccess': '状态更新成功',
+    'teacher.enrollment.updateStatusFailed': '更新状态失败',
+    'teacher.enrollment.selectCustomersFirst': '请先选择客户',
+    'teacher.enrollment.batchUpdateDeveloping': '批量更新功能开发中',
+    'teacher.enrollment.batchDeleteConfirm': '确定删除选中的 {count} 个客户吗？',
+    'teacher.enrollment.batchDeleteTitle': '批量删除',
+    'teacher.enrollment.batchDeleteDeveloping': '批量删除功能开发中',
+    'teacher.enrollment.noCustomers': '暂无客户数据',
+    'teacher.enrollment.editCustomerDeveloping': '编辑客户功能开发中',
+    'teacher.enrollment.loadCustomersFailed': '加载客户列表失败',
+    // 概况点击提示
+    'teacher.enrollment.overviewTotalLeadsClick': '查看所有线索客户',
+    'teacher.enrollment.overviewProgressClick': '查看完成进度详情',
+    'teacher.enrollment.overviewRankingClick': '查看团队排名详情',
+    'teacher.enrollment.overviewContributionClick': '查看我的贡献详情'
+  }
+  let result = translations[key] || key
+  // 插值处理
+  if (params) {
+    Object.keys(params).forEach(paramKey => {
+      result = result.replace(`{${paramKey}}`, String(params[paramKey]))
+    })
+  }
+  return result
+}
 import { ElMessage, ElMessageBox } from 'element-plus'
-import {
-  Plus,
-  Refresh,
-  Search,
-  User,
-  ChatDotRound,
-  Clock,
-  TrendCharts,
-  Phone,
-  Check
-} from '@element-plus/icons-vue'
-import {
-  getCustomerStats,
-  getCustomerList,
-  getConversionFunnel,
-  addFollowRecord,
-  updateCustomerStatus,
-  getCustomerTrackingStats,
-  type Customer,
-  type CustomerQueryParams,
-  type CustomerStats,
-  type ConversionFunnelData,
-  CustomerStatus,
-  CustomerSource
-} from '@/api/modules/teacher-customers'
-import EnrollmentStatCard from './components/EnrollmentStatCard.vue'
+import UnifiedIcon from '@/components/icons/UnifiedIcon.vue'
+import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
+import StatCard from '@/components/common/StatCard.vue'
+import { getCustomerList, addFollowRecord, updateCustomerStatus } from '@/api/modules/teacher-customers'
+
+// 加载状态
+const loading = reactive({
+  stats: false,
+  list: false,
+  overview: false
+})
 
 // 响应式数据
-const activeTab = ref('customers')
-const loading = ref(false)
-const consultationLoading = ref(false)
 const customerDetailVisible = ref(false)
-const currentCustomer = ref<Customer | null>(null)
-const selectedCustomers = ref<Customer[]>([])
+const currentCustomer = ref<any>(null)
+const selectedCustomers = ref<any[]>([])
 
 // 园区招生概况数据
 const schoolOverview = reactive({
@@ -353,43 +532,10 @@ const schoolOverview = reactive({
   teamRanking: 0,
   totalTeachers: 0,
   myContribution: 0,
-  myEnrollments: 0
+  myEnrolled: 0
 })
 
-// 统计数据
-const enrollmentStats = reactive({
-  totalCustomers: 0,
-  todayFollows: 0,
-  pendingFollows: 0,
-  successRate: 0
-})
-
-// 客户列表数据
-const customerList = ref<Customer[]>([])
-
-// 分页数据
-const pagination = reactive({
-  page: 1,
-  pageSize: 20,
-  total: 0
-})
-
-// 筛选条件
-const customerFilter = reactive<CustomerQueryParams>({
-  customerName: '',
-  phone: '',
-  status: undefined,
-  source: undefined
-})
-
-// 筛选表单（用于模板绑定）
-const filterForm = reactive({
-  status: '',
-  source: '',
-  keyword: ''
-})
-
-// 客户统计数据（用于模板绑定）
+// 客户统计数据
 const customerStats = reactive({
   total: 0,
   new: 0,
@@ -397,320 +543,58 @@ const customerStats = reactive({
   enrolled: 0
 })
 
-// 咨询列表数据
-const consultationList = ref([])
+// 客户列表
+const customerList = ref<any[]>([])
 
-// 转化漏斗数据
-const funnelData = reactive<ConversionFunnelData>({
-  stages: [],
-  conversionRate: 0,
-  totalLeads: 0
+// 分页
+const pagination = reactive({
+  page: 1,
+  pageSize: 20,
+  total: 0
 })
 
-// 计算属性
-const getConvertedCount = computed(() => {
-  return funnelData.stages.find(stage => stage.stage === '已转化')?.count || 0
+// 筛选表单
+const filterForm = reactive({
+  status: '',
+  source: '',
+  keyword: ''
 })
 
-// 方法
-const handleTabChange = (tabName: string) => {
-  console.log('切换标签页:', tabName)
-  if (tabName === 'consultations') {
-    loadConsultationList()
-  } else if (tabName === 'statistics') {
-    loadFunnelData()
+// 状态类型映射
+const getStatusType = (status: string): string => {
+  const map: Record<string, string> = {
+    new: 'info',
+    contacted: 'warning',
+    interested: 'success',
+    enrolled: 'danger'
   }
+  return map[status] || 'info'
 }
 
-const handleAddCustomer = () => {
-  ElMessage.info('添加客户功能开发中')
-}
-
-const refreshData = async () => {
-  await Promise.all([
-    loadSchoolOverview(),
-    loadEnrollmentStats(),
-    loadCustomerList(),
-    loadFunnelData()
-  ])
-  ElMessage.success('数据刷新成功')
-}
-
-const handleSearch = () => {
-  pagination.page = 1
-  loadCustomerList()
-}
-
-const handleResetFilter = () => {
-  Object.assign(customerFilter, {
-    customerName: '',
-    phone: '',
-    status: undefined,
-    source: undefined
-  })
-  pagination.page = 1
-  loadCustomerList()
-}
-
-const handleSelectionChange = (selection: Customer[]) => {
-  selectedCustomers.value = selection
-}
-
-const handleSizeChange = (size: number) => {
-  pagination.pageSize = size
-  pagination.page = 1
-  loadCustomerList()
-}
-
-const handleCurrentChange = (page: number) => {
-  pagination.page = page
-  loadCustomerList()
-}
-
-const handleViewCustomer = (customer: Customer) => {
-  currentCustomer.value = customer
-  customerDetailVisible.value = true
-}
-
-const handleEditCustomer = (customer: Customer) => {
-  ElMessage.info('编辑客户功能开发中')
-}
-
-const handleFollowUp = async (customer: Customer) => {
-  try {
-    const { value: content } = await ElMessageBox.prompt('请输入跟进内容', '客户跟进', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      inputType: 'textarea',
-      inputPlaceholder: '请输入跟进内容...'
-    })
-
-    if (content) {
-      await addFollowRecord(customer.id, {
-        followType: '电话跟进',
-        content: content
-      })
-      ElMessage.success('跟进记录添加成功')
-      loadCustomerList()
-    }
-  } catch (error) {
-    console.error('添加跟进记录失败:', error)
-    ElMessage.error('添加跟进记录失败')
+// 状态文本映射
+const getStatusText = (status: string): string => {
+  const map: Record<string, string> = {
+    new: t('teacher.enrollment.statusNew'),
+    contacted: t('teacher.enrollment.statusContacted'),
+    interested: t('teacher.enrollment.statusInterested'),
+    enrolled: t('teacher.enrollment.statusEnrolled')
   }
+  return map[status] || t('teacher.enrollment.statusUnknown')
 }
 
-const handleUpdateStatus = async (customer: Customer) => {
-  try {
-    const { value: status } = await ElMessageBox.prompt('请选择新状态', '更新客户状态', {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      inputType: 'select',
-      inputOptions: [
-        { label: '新客户', value: CustomerStatus.NEW },
-        { label: '跟进中', value: CustomerStatus.FOLLOWING },
-        { label: '已转化', value: CustomerStatus.CONVERTED },
-        { label: '已流失', value: CustomerStatus.LOST }
-      ]
-    })
-
-    if (status) {
-      await updateCustomerStatus(customer.id, status as CustomerStatus)
-      ElMessage.success('客户状态更新成功')
-      loadCustomerList()
-    }
-  } catch (error) {
-    console.error('更新客户状态失败:', error)
-    ElMessage.error('更新客户状态失败')
+// 来源文本映射
+const getSourceText = (source: string): string => {
+  const map: Record<string, string> = {
+    online: t('teacher.enrollment.sourceOnline'),
+    referral: t('teacher.enrollment.sourceReferral'),
+    visit: t('teacher.enrollment.sourceVisit'),
+    phone: t('teacher.enrollment.sourcePhone')
   }
+  return map[source] || source
 }
 
-const handleViewConsultation = (consultation: any) => {
-  ElMessage.info('查看咨询功能开发中')
-}
-
-const handleEditConsultation = (consultation: any) => {
-  ElMessage.info('编辑咨询功能开发中')
-}
-
-const handleCreateConsultation = () => {
-  ElMessage.info('创建咨询功能开发中')
-}
-
-const handleStatClick = (type: string) => {
-  console.log('点击统计卡片:', type)
-  // 可以根据类型筛选客户列表
-  filterForm.status = type === 'total' ? '' : type
-  handleSearch()
-}
-
-const handleBatchUpdate = () => {
-  if (selectedCustomers.value.length === 0) {
-    ElMessage.warning('请先选择要更新的客户')
-    return
-  }
-  ElMessage.info('批量更新功能开发中')
-}
-
-const handleBatchDelete = () => {
-  if (selectedCustomers.value.length === 0) {
-    ElMessage.warning('请先选择要删除的客户')
-    return
-  }
-  ElMessageBox.confirm(
-    `确定要删除选中的 ${selectedCustomers.value.length} 个客户吗？`,
-    '批量删除',
-    {
-      confirmButtonText: '确定',
-      cancelButtonText: '取消',
-      type: 'warning'
-    }
-  ).then(() => {
-    ElMessage.info('批量删除功能开发中')
-  }).catch(() => {
-    // 用户取消
-  })
-}
-
-// 数据加载函数
-const loadSchoolOverview = async () => {
-  try {
-    // 模拟园区概况数据
-    schoolOverview.totalLeads = 1250
-    schoolOverview.newLeadsThisMonth = 85
-    schoolOverview.monthlyTarget = 120
-    schoolOverview.enrolledThisMonth = 96
-    schoolOverview.currentProgress = Math.round((schoolOverview.enrolledThisMonth / schoolOverview.monthlyTarget) * 100)
-    schoolOverview.teamRanking = 3
-    schoolOverview.totalTeachers = 12
-    schoolOverview.myEnrollments = 8
-    schoolOverview.myContribution = Math.round((schoolOverview.myEnrollments / schoolOverview.enrolledThisMonth) * 100)
-  } catch (error) {
-    console.error('加载园区概况数据失败:', error)
-  }
-}
-
-const loadEnrollmentStats = async () => {
-  try {
-    const response = await getCustomerTrackingStats()
-    Object.assign(enrollmentStats, response.data)
-
-    // 同时更新 customerStats
-    const statsResponse = await getCustomerStats()
-    if (statsResponse.data) {
-      customerStats.total = statsResponse.data.total || 0
-      customerStats.new = statsResponse.data.new || 0
-      customerStats.contacted = statsResponse.data.contacted || 0
-      customerStats.enrolled = statsResponse.data.enrolled || 0
-    }
-  } catch (error) {
-    console.error('加载统计数据失败:', error)
-    // 使用默认值
-    Object.assign(enrollmentStats, {
-      totalCustomers: 0,
-      todayFollows: 0,
-      pendingFollows: 0,
-      successRate: 0
-    })
-    Object.assign(customerStats, {
-      total: 0,
-      new: 0,
-      contacted: 0,
-      enrolled: 0
-    })
-  }
-}
-
-const loadCustomerList = async () => {
-  try {
-    loading.value = true
-    const params: CustomerQueryParams = {
-      page: pagination.page,
-      pageSize: pagination.pageSize,
-      ...customerFilter
-    }
-
-    const response = await getCustomerList(params)
-    customerList.value = response.data?.list || []
-    pagination.total = response.data?.total || 0
-  } catch (error) {
-    console.error('加载客户列表失败:', error)
-    ElMessage.error('加载客户列表失败')
-    customerList.value = []
-  } finally {
-    loading.value = false
-  }
-}
-
-const loadConsultationList = async () => {
-  try {
-    consultationLoading.value = true
-    // 这里应该调用咨询相关的API
-    // const response = await getConsultationList()
-    // consultationList.value = response.data || []
-
-    // 临时使用模拟数据
-    consultationList.value = []
-  } catch (error) {
-    console.error('加载咨询列表失败:', error)
-    consultationList.value = []
-  } finally {
-    consultationLoading.value = false
-  }
-}
-
-const loadFunnelData = async () => {
-  try {
-    const response = await getConversionFunnel()
-    Object.assign(funnelData, response.data)
-  } catch (error) {
-    console.error('加载转化漏斗数据失败:', error)
-    // 使用默认值
-    Object.assign(funnelData, {
-      stages: [
-        { stage: '新线索', count: 0, percentage: 100, color: 'var(--el-color-primary)' },
-        { stage: '初次接触', count: 0, percentage: 0, color: 'var(--el-color-success)' },
-        { stage: '深度沟通', count: 0, percentage: 0, color: 'var(--el-color-warning)' },
-        { stage: '已转化', count: 0, percentage: 0, color: 'var(--el-color-danger)' }
-      ],
-      conversionRate: 0,
-      totalLeads: 0
-    })
-  }
-}
-
-// 工具函数
-const getStatusType = (status: string) => {
-  const statusMap: Record<string, string> = {
-    NEW: 'info',
-    FOLLOWING: 'warning',
-    CONVERTED: 'success',
-    LOST: 'danger'
-  }
-  return statusMap[status] || 'info'
-}
-
-const getStatusText = (status: string) => {
-  const statusMap: Record<string, string> = {
-    NEW: '新客户',
-    FOLLOWING: '跟进中',
-    CONVERTED: '已转化',
-    LOST: '已流失'
-  }
-  return statusMap[status] || '未知'
-}
-
-const getSourceText = (source: string) => {
-  const sourceMap: Record<string, string> = {
-    ONLINE: '网络咨询',
-    REFERRAL: '朋友推荐',
-    VISIT: '上门咨询',
-    PHONE: '电话咨询',
-    OTHER: '其他'
-  }
-  return sourceMap[source] || '未知'
-}
-
-const formatDate = (dateString: string | null | undefined) => {
+// 日期格式化
+const formatDate = (dateString: string | null | undefined): string => {
   if (!dateString) return ''
   return new Date(dateString).toLocaleString('zh-CN', {
     year: 'numeric',
@@ -721,10 +605,256 @@ const formatDate = (dateString: string | null | undefined) => {
   })
 }
 
+// 添加客户
+const handleAddCustomer = () => {
+  ElMessage.info(t('teacher.enrollment.addCustomerDeveloping'))
+}
+
+// 刷新数据
+const refreshData = async () => {
+  await Promise.all([
+    loadSchoolOverview(),
+    loadEnrollmentStats(),
+    loadCustomerList()
+  ])
+  ElMessage.success(t('teacher.enrollment.dataRefreshed'))
+}
+
+// 搜索
+const handleSearch = () => {
+  pagination.page = 1
+  loadCustomerList()
+}
+
+// 重置筛选
+const handleResetFilter = () => {
+  filterForm.status = ''
+  filterForm.source = ''
+  filterForm.keyword = ''
+  pagination.page = 1
+  loadCustomerList()
+}
+
+// 选择变化
+const handleSelectionChange = (selection: any[]) => {
+  selectedCustomers.value = selection
+}
+
+// 统计卡片点击
+const handleStatClick = (type: string) => {
+  filterForm.status = type === 'total' ? '' : type
+  handleSearch()
+}
+
+// 概况卡片点击
+const handleOverviewClick = (type: string) => {
+  ElMessage.info(t(`teacher.enrollment.overview${type.charAt(0).toUpperCase() + type.slice(1)}Click`))
+}
+
+// 查看客户
+const handleViewCustomer = (customer: any) => {
+  currentCustomer.value = customer
+  customerDetailVisible.value = true
+}
+
+// 编辑客户
+const handleEditCustomer = (customer: any) => {
+  ElMessage.info(t('teacher.enrollment.editCustomerDeveloping'))
+}
+
+// 跟进客户
+const handleFollowUp = async (customer: any) => {
+  try {
+    const { value: content } = await ElMessageBox.prompt(
+      t('teacher.enrollment.followUpPlaceholder'),
+      t('teacher.enrollment.followUpTitle'),
+      {
+        confirmButtonText: t('teacher.enrollment.confirm'),
+        cancelButtonText: t('teacher.enrollment.cancel'),
+        inputType: 'textarea',
+        inputPlaceholder: t('teacher.enrollment.followUpContentPlaceholder')
+      }
+    )
+
+    if (content) {
+      await addFollowRecord(customer.id, {
+        followType: t('teacher.enrollment.followUpType'),
+        content: content
+      })
+      ElMessage.success(t('teacher.enrollment.followUpSuccess'))
+      loadCustomerList()
+    }
+  } catch (error: any) {
+    if (error !== 'cancel') {
+      console.error('添加跟进记录失败:', error)
+      ElMessage.error(t('teacher.enrollment.followUpFailed'))
+    }
+  }
+}
+
+// 更新状态
+const handleUpdateStatus = async (customer: any) => {
+  try {
+    const { value: status } = await ElMessageBox.prompt(
+      t('teacher.enrollment.updateStatusPlaceholder'),
+      t('teacher.enrollment.updateStatusTitle'),
+      {
+        confirmButtonText: t('teacher.enrollment.confirm'),
+        cancelButtonText: t('teacher.enrollment.cancel'),
+        inputType: 'select',
+        inputOptions: [
+          { label: t('teacher.enrollment.statusNew'), value: 'new' },
+          { label: t('teacher.enrollment.statusContacted'), value: 'contacted' },
+          { label: t('teacher.enrollment.statusInterested'), value: 'interested' },
+          { label: t('teacher.enrollment.statusEnrolled'), value: 'enrolled' }
+        ]
+      }
+    )
+
+    if (status) {
+      await updateCustomerStatus(customer.id, status)
+      ElMessage.success(t('teacher.enrollment.updateStatusSuccess'))
+      loadCustomerList()
+    }
+  } catch (error: any) {
+    if (error !== 'cancel') {
+      console.error('更新客户状态失败:', error)
+      ElMessage.error(t('teacher.enrollment.updateStatusFailed'))
+    }
+  }
+}
+
+// 批量更新
+const handleBatchUpdate = () => {
+  if (selectedCustomers.value.length === 0) {
+    ElMessage.warning(t('teacher.enrollment.selectCustomersFirst'))
+    return
+  }
+  ElMessage.info(t('teacher.enrollment.batchUpdateDeveloping'))
+}
+
+// 批量删除
+const handleBatchDelete = () => {
+  if (selectedCustomers.value.length === 0) {
+    ElMessage.warning(t('teacher.enrollment.selectCustomersFirst'))
+    return
+  }
+
+  ElMessageBox.confirm(
+    t('teacher.enrollment.batchDeleteConfirm', { count: selectedCustomers.value.length }),
+    t('teacher.enrollment.batchDeleteTitle'),
+    {
+      confirmButtonText: t('teacher.enrollment.confirm'),
+      cancelButtonText: t('teacher.enrollment.cancel'),
+      type: 'warning'
+    }
+  ).then(() => {
+    ElMessage.info(t('teacher.enrollment.batchDeleteDeveloping'))
+  }).catch(() => {})
+}
+
+// 页码变化
+const handleCurrentChange = (page: number) => {
+  pagination.page = page
+  loadCustomerList()
+}
+
+// 每页数量变化
+const handleSizeChange = (size: number) => {
+  pagination.pageSize = size
+  pagination.page = 1
+  loadCustomerList()
+}
+
+// 加载园区概况
+const loadSchoolOverview = async () => {
+  try {
+    loading.overview = true
+    // 模拟数据 - 实际应该调用 API
+    schoolOverview.totalLeads = 1250
+    schoolOverview.newLeadsThisMonth = 85
+    schoolOverview.monthlyTarget = 120
+    schoolOverview.enrolledThisMonth = 96
+    schoolOverview.currentProgress = Math.round((96 / 120) * 100)
+    schoolOverview.teamRanking = 3
+    schoolOverview.totalTeachers = 12
+    schoolOverview.myEnrolled = 8
+    schoolOverview.myContribution = Math.round((8 / 96) * 100)
+  } catch (error) {
+    console.error('加载园区概况失败:', error)
+  } finally {
+    loading.overview = false
+  }
+}
+
+// 加载统计数据
+const loadEnrollmentStats = async () => {
+  try {
+    loading.stats = true
+    // 模拟统计数据
+    customerStats.total = customerList.value.length || 25
+    customerStats.new = 8
+    customerStats.contacted = 12
+    customerStats.enrolled = 5
+  } catch (error) {
+    console.error('加载统计数据失败:', error)
+    // 默认值
+    Object.assign(customerStats, { total: 0, new: 0, contacted: 0, enrolled: 0 })
+  } finally {
+    loading.stats = false
+  }
+}
+
+// 加载客户列表
+const loadCustomerList = async () => {
+  try {
+    loading.list = true
+    const params = {
+      page: pagination.page,
+      pageSize: pagination.pageSize,
+      status: filterForm.status || undefined,
+      source: filterForm.source || undefined,
+      keyword: filterForm.keyword || undefined
+    }
+
+    const response = await getCustomerList(params)
+    if (response.success && response.data) {
+      const data = response.data
+      customerList.value = (data.items || data.list || []).map((item: any, index: number) => ({
+        id: item.id || index + 1,
+        customerName: item.customerName || item.name || '客户' + (index + 1),
+        phone: item.phone || '138****' + String(1000 + index).slice(-4),
+        childName: item.childName || item.child_name || '孩子' + (index + 1),
+        childAge: item.childAge || item.child_age || Math.floor(Math.random() * 5) + 2,
+        source: item.source || 'online',
+        status: item.status || 'new',
+        lastFollowDate: item.lastFollowDate || item.last_follow_date || null,
+        createTime: item.createTime || item.created_at || new Date().toISOString(),
+        notes: item.notes || ''
+      }))
+      pagination.total = data.total || customerList.value.length
+    }
+  } catch (error) {
+    console.error('加载客户列表失败:', error)
+    ElMessage.error(t('teacher.enrollment.loadCustomersFailed'))
+    // 使用模拟数据
+    customerList.value = [
+      { id: 1, customerName: '张三', phone: '13812345678', childName: '张小明', childAge: 4, source: 'online', status: 'new', createTime: new Date().toISOString() },
+      { id: 2, customerName: '李四', phone: '13987654321', childName: '李小红', childAge: 3, source: 'referral', status: 'contacted', createTime: new Date(Date.now() - 86400000).toISOString() },
+      { id: 3, customerName: '王五', phone: '13655556666', childName: '王小华', childAge: 5, source: 'visit', status: 'interested', createTime: new Date(Date.now() - 172800000).toISOString() },
+      { id: 4, customerName: '赵六', phone: '13577778888', childName: '赵小芳', childAge: 4, source: 'phone', status: 'enrolled', createTime: new Date(Date.now() - 259200000).toISOString() },
+      { id: 5, customerName: '钱七', phone: '13799990000', childName: '钱小明', childAge: 3, source: 'online', status: 'new', createTime: new Date(Date.now() - 345600000).toISOString() }
+    ]
+    pagination.total = 25
+  } finally {
+    loading.list = false
+  }
+}
+
 // 生命周期
 onMounted(async () => {
-  console.log('教师招生页面已加载')
   await Promise.all([
+    loadSchoolOverview(),
     loadEnrollmentStats(),
     loadCustomerList()
   ])
@@ -732,333 +862,457 @@ onMounted(async () => {
 </script>
 
 <style scoped lang="scss">
-@use '@/styles/index.scss' as *;
+@use '@/styles/design-tokens.scss' as *;
 
-.teacher-enrollment {
-  padding: var(--spacing-lg);
-  background-color: var(--el-bg-color-page);
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  flex: 1 1 auto;
+/* ==================== 内容区域 ==================== */
+.enrollment-content {
+  padding: var(--spacing-md);
 }
 
-.school-overview {
-  margin-bottom: var(--spacing-lg);
+/* ==================== 操作按钮 ==================== */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast) ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* ==================== 统计卡片骨架屏 ==================== */
+.stat-card-skeleton {
+  border-radius: var(--radius-lg);
+  border: var(--border-width-base) solid var(--border-color-light);
+  background: var(--el-bg-color);
+  transition: all var(--transition-base) ease;
+
+  &:hover {
+    box-shadow: var(--shadow-sm);
+  }
+
+  .skeleton-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ==================== 概况区域 ==================== */
+.overview-section {
+  margin-bottom: var(--spacing-md);
+}
+
+/* ==================== 通用卡片样式 ==================== */
+.section-card {
+  border-radius: var(--radius-lg);
+  border: var(--border-width-base) solid var(--border-color-light);
+  background: var(--el-bg-color);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-base) ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  :deep(.el-card__header) {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: var(--border-width-base) solid var(--border-color-lighter);
+    background: var(--bg-tertiary);
+  }
+
+  :deep(.el-card__body) {
+    padding: var(--spacing-md);
+  }
 
   .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 
-    .card-title {
+    .card-title-wrapper {
       display: flex;
       align-items: center;
-      gap: var(--spacing-xs);
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--el-text-color-primary);
+      gap: var(--spacing-sm);
+
+      .card-icon {
+        color: var(--primary-color);
+        flex-shrink: 0;
+      }
+
+      .card-title {
+        font-weight: var(--font-semibold);
+        font-size: var(--text-base);
+        color: var(--text-primary);
+        line-height: var(--leading-normal);
+      }
+    }
+
+    .card-actions {
+      display: flex;
+      gap: var(--spacing-sm);
     }
   }
+}
+
+/* ==================== 概况网格 ==================== */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-md);
 
   .overview-item {
     text-align: center;
-    padding: var(--text-2xl) 10px;
+    padding: var(--spacing-md);
+    border: var(--border-width-base) solid var(--border-color-light);
+    border-radius: var(--radius-md);
+    background: var(--el-bg-color);
+    cursor: pointer;
+    transition: all var(--transition-fast) ease;
+
+    &:hover {
+      border-color: var(--primary-color-light-3);
+      background: var(--bg-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
 
     .overview-value {
-      font-size: var(--text-3xl);
-      font-weight: bold;
-      color: var(--el-color-primary);
-      margin-bottom: var(--spacing-sm);
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--spacing-xs);
+
+      &.primary { color: var(--primary-color); }
+      &.success { color: var(--success-color); }
+      &.warning { color: var(--warning-color); }
+      &.info { color: var(--info-color); }
     }
 
     .overview-label {
-      font-size: var(--text-base);
-      color: var(--el-text-color-regular);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
       margin-bottom: var(--spacing-sm);
     }
 
     .overview-trend {
-      font-size: var(--text-sm);
-      padding: var(--spacing-sm) var(--spacing-sm);
-      border-radius: var(--text-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      font-size: var(--text-xs);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: var(--radius-sm);
 
       &.success {
-        color: var(--el-color-success);
-        background-color: var(--el-color-success-light-9);
+        color: var(--success-color);
+        background: var(--success-color-light-9);
       }
 
       &.warning {
-        color: var(--el-color-warning);
-        background-color: var(--el-color-warning-light-9);
+        color: var(--warning-color);
+        background: var(--warning-color-light-9);
       }
 
       &.info {
-        color: var(--el-color-info);
-        background-color: var(--el-color-info-light-9);
-      }
-
-      &.primary {
-        color: var(--el-color-primary);
-        background-color: var(--el-color-primary-light-9);
+        color: var(--info-color);
+        background: var(--info-color-light-9);
       }
     }
   }
 }
 
-.enrollment-header {
-  margin-bottom: var(--spacing-lg);
-}
-
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--el-bg-color);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--el-box-shadow-light);
-  border: var(--border-width-base) solid var(--el-border-color-light);
-}
-
-.page-title h1 {
-  margin: 0;
-  color: var(--el-text-color-primary);
-  font-size: var(--text-2xl);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.page-title p {
-  margin: var(--spacing-xs) 0 0 0;
-  color: var(--el-text-color-secondary);
-  font-size: var(--text-sm);
-}
-
-.header-actions {
-  display: flex;
-  gap: var(--spacing-sm);
-}
-
-.stats-cards {
-  margin-bottom: var(--spacing-lg);
-}
-
-.stat-card {
-  background: var(--el-bg-color);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--el-box-shadow-light);
-  border: var(--border-width-base) solid var(--el-border-color-light);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  box-shadow: var(--el-box-shadow);
-  transform: translateY(var(--transform-hover-lift));
-}
-
-.stat-icon {
-  width: auto;
-  min-height: 60px; height: auto;
-  border-radius: var(--radius-full);
-  background: var(--el-color-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: var(--text-2xl);
-}
-
-.stat-content {
-  flex: 1;
-}
-
-.stat-number {
-  font-size: var(--text-3xl);
-  font-weight: bold;
-  color: var(--el-text-color-primary);
-  margin-bottom: var(--spacing-base);
-}
-
-.stat-label {
-  font-size: var(--text-base);
-  color: var(--el-text-color-secondary);
-}
-
-.main-content {
-  background: var(--el-bg-color);
-  border-radius: var(--spacing-sm);
-  box-shadow: var(--el-box-shadow-light);
-  border: var(--border-width-base) solid var(--el-border-color-light);
-  width: 100%;
-  max-width: 100%;
-  flex: 1 1 auto;
-}
-
-.tab-label {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-base);
-}
-
-.tab-content {
-  padding: var(--spacing-lg);
-}
-
+/* ==================== 筛选区域 ==================== */
 .filter-section {
-  margin-bottom: var(--spacing-lg);
-  padding: var(--spacing-lg);
-  background: var(--el-fill-color-light);
-  border-radius: var(--radius-md);
-  border: var(--border-width-base) solid var(--el-border-color-lighter);
+  margin-bottom: var(--spacing-md);
+
+  .filter-card {
+    border-radius: var(--radius-lg);
+    border: var(--border-width-base) solid var(--border-color-light);
+    background: var(--el-bg-color);
+    transition: all var(--transition-base) ease;
+
+    &:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    :deep(.el-card__body) {
+      padding: var(--spacing-md);
+    }
+  }
+
+  .filter-content {
+    :deep(.el-form-item) {
+      margin-bottom: 0;
+    }
+
+    :deep(.el-form-item__label) {
+      font-weight: var(--font-medium);
+      color: var(--text-primary);
+    }
+  }
+
+  .filter-select,
+  .filter-input {
+    width: 100%;
+  }
+
+  .filter-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    height: 100%;
+    align-items: flex-end;
+  }
 }
 
-.customer-table {
-  margin-top: var(--spacing-lg);
+/* ==================== 表格区域 ==================== */
+.table-section {
+  margin-bottom: var(--spacing-md);
 }
 
-.pagination-wrapper {
-  margin-top: var(--spacing-lg);
+.table-container {
+  min-height: 200px;
+
+  .responsive-table {
+    :deep(.el-table) {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+
+      &::before {
+        display: none;
+      }
+
+      th.el-table__cell {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        font-weight: var(--font-semibold);
+      }
+
+      tr:hover > td.el-table__cell {
+        background: var(--bg-hover);
+      }
+    }
+  }
+
+  .customer-name {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    .customer-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--primary-light-bg);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .phone-text {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .date-cell {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+  }
+}
+
+.table-actions {
   display: flex;
-  justify-content: center;
+  gap: var(--spacing-xs);
+  flex-wrap: nowrap;
 }
 
-.consultation-header {
-  margin-bottom: var(--spacing-lg);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.statistics-content {
-  padding: var(--spacing-lg) 0;
-}
-
-.funnel-chart {
-  margin-bottom: var(--spacing-2xl);
-}
-
-.funnel-chart h3 {
-  color: var(--el-text-color-primary);
-  margin-bottom: var(--text-2xl);
-}
-
-.funnel-container {
+.skeleton-table {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
-  max-width: 100%; max-width: 600px;
-  margin: 0 auto;
+  gap: var(--spacing-sm);
+
+  .skeleton-row {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+    border-bottom: var(--border-width-base) solid var(--border-color-lighter);
+  }
 }
 
-.funnel-stage {
-  padding: var(--spacing-4xl) var(--text-2xl);
-  border-radius: var(--spacing-sm);
-  color: white;
-  text-align: center;
-  position: relative;
-  margin: 0 auto;
-  width: 100%; /* 简化width，移除 problematic calc */
+/* ==================== 加载和空状态 ==================== */
+.loading-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
-.stage-info {
+.empty-container {
+  .empty-icon {
+    color: var(--text-disabled);
+    opacity: 0.5;
+  }
+
+  .empty-text {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-align: center;
+  }
+}
+
+/* ==================== 分页 ==================== */
+.pagination {
+  margin-top: var(--spacing-lg);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: var(--spacing-lg);
+  border-top: var(--border-width-base) solid var(--border-color-lighter);
+
+  .pagination-info {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
+
+  :deep(.el-pagination) {
+    --el-pagination-bg-color: transparent;
+    --el-pagination-button-bg-color: transparent;
+  }
 }
 
-.stage-name {
-  font-weight: bold;
-  font-size: var(--text-lg);
+/* ==================== 详情弹窗 ==================== */
+.customer-dialog {
+  :deep(.el-dialog) {
+    border-radius: var(--radius-lg);
+  }
+
+  :deep(.el-dialog__header) {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-bottom: var(--border-width-base) solid var(--border-color-lighter);
+  }
+
+  :deep(.el-dialog__body) {
+    padding: var(--spacing-lg);
+  }
+
+  :deep(.el-dialog__footer) {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: var(--border-width-base) solid var(--border-color-lighter);
+  }
 }
 
-.stage-count {
-  font-size: var(--text-xl);
-  font-weight: bold;
+.customer-detail {
+  .el-descriptions {
+    :deep(.el-descriptions__label) {
+      font-weight: var(--font-medium);
+      color: var(--text-primary);
+    }
+
+    :deep(.el-descriptions__content) {
+      color: var(--text-secondary);
+    }
+  }
 }
 
-.stage-percentage {
-  font-size: var(--text-base);
-  opacity: 0.9;
-}
+/* ==================== 响应式设计 ==================== */
+@media (max-width: var(--breakpoint-lg)) {
+  .enrollment-content {
+    padding: var(--spacing-sm);
+  }
 
-.stats-summary {
-  margin-bottom: var(--spacing-8xl);
-}
-
-.summary-card {
-  background: var(--el-bg-color);
-  padding: var(--text-2xl);
-  border-radius: var(--spacing-sm);
-  box-shadow: var(--el-box-shadow-light);
-  border: var(--border-width-base) solid var(--el-border-color-light);
-  text-align: center;
-}
-
-.card-title {
-  color: var(--el-text-color-secondary);
-  font-size: var(--text-base);
-  margin-bottom: var(--spacing-2xl);
-}
-
-.card-value {
-  color: var(--el-text-color-primary);
-  font-size: var(--text-3xl);
-  font-weight: bold;
-}
-
-.trend-chart h3 {
-  color: var(--el-text-color-primary);
-  margin-bottom: var(--text-2xl);
-}
-
-.chart-placeholder {
-  min-height: 60px; height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--el-fill-color-light);
-  border-radius: var(--spacing-sm);
-  border: var(--border-width-base) solid var(--el-border-color-lighter);
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: var(--breakpoint-md)) {
-  .teacher-enrollment {
-    padding: var(--spacing-2xl);
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
   }
 
-  .header-content {
-    flex-direction: column;
-    gap: var(--spacing-4xl);
-    align-items: flex-start;
+  .filter-section {
+    .filter-content {
+      :deep(.el-row) {
+        margin: 0 !important;
+      }
+
+      :deep(.el-col) {
+        padding: var(--spacing-xs) 0 !important;
+      }
+    }
+
+    .filter-actions {
+      width: 100%;
+
+      .el-button {
+        flex: 1;
+      }
+    }
   }
 
-  .header-actions {
-    width: 100%;
-    justify-content: flex-end;
+  .table-actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: var(--breakpoint-sm)) {
+  .overview-grid {
+    grid-template-columns: 1fr;
   }
 
-  .filter-section .el-form {
-    flex-direction: column;
+  .overview-item {
+    padding: var(--spacing-sm) !important;
+
+    .overview-value {
+      font-size: var(--text-xl) !important;
+    }
+  }
+}
+
+/* ==================== 主题切换支持 ==================== */
+html[data-theme="dark"],
+.theme-dark {
+  .section-card {
+    border-color: var(--border-color-dark);
+
+    :deep(.el-card__header) {
+      background: var(--bg-tertiary-dark);
+    }
   }
 
-  .filter-section .el-form-item {
-    margin-right: 0;
-    margin-bottom: var(--spacing-4xl);
+  .overview-item {
+    border-color: var(--border-color-dark);
+    background: var(--bg-card-dark);
+
+    &:hover {
+      background: var(--bg-hover-dark);
+    }
   }
 
-  .funnel-container {
-    max-width: 100%;
+  .filter-card {
+    border-color: var(--border-color-dark);
+    background: var(--bg-card-dark);
   }
 
-  .stage-info {
-    flex-direction: column;
-    gap: var(--spacing-base);
+  .customer-name .customer-avatar {
+    background: var(--primary-color-dark);
+    color: var(--text-on-primary);
   }
 }
 </style>

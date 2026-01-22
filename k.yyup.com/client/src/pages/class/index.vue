@@ -1156,6 +1156,9 @@ const handleAddClass = () => {
 }
 
 .stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--app-gap);
   margin-bottom: var(--app-gap); /* 硬编码修复：使用统一间距变量 */
 }
 

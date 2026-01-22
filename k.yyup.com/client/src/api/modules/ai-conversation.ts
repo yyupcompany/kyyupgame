@@ -1,4 +1,4 @@
-import { request } from '@/utils/request'
+import { request, type ApiResponse } from '@/utils/request'
 import { API_PREFIX } from '../endpoints/base'
 
 // API端点常量
@@ -20,20 +20,6 @@ export const AI_CONVERSATION_ENDPOINTS = {
   BULK_DELETE: `${API_PREFIX}/ai-conversations/bulk-delete`,
   MERGE: `${API_PREFIX}/ai-conversations/merge`,
 } as const
-
-// API响应接口
-export interface ApiResponse<T = any> {
-  success: boolean
-  data?: T
-  message?: string
-  error?: string
-  meta?: {
-    page: number
-    pageSize: number
-    totalItems: number
-    totalPages: number
-  }
-}
 
 // 会话相关接口
 export interface Conversation {
@@ -214,11 +200,11 @@ export class AIConversationService {
    * 导出会话
    */
   static async exportConversation(conversationId: string, format: 'json' | 'csv' | 'pdf' = 'json'): Promise<Blob> {
-    const response = await request.get(AI_CONVERSATION_ENDPOINTS.EXPORT(conversationId), {
+    const response: any = await request.get(AI_CONVERSATION_ENDPOINTS.EXPORT(conversationId), {
       params: { format },
       responseType: 'blob'
     })
-    return response
+    return response.data || response
   }
 
   /**
@@ -227,11 +213,7 @@ export class AIConversationService {
   static async importConversation(file: File): Promise<ApiResponse<Conversation>> {
     const formData = new FormData()
     formData.append('file', file)
-    return request.post(AI_CONVERSATION_ENDPOINTS.IMPORT, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+    return request.post(AI_CONVERSATION_ENDPOINTS.IMPORT, formData)
   }
 
   /**

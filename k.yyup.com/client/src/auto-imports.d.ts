@@ -7,7 +7,6 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
-  const ElMessage: typeof import('element-plus/es')['ElMessage']
   const ElMessageBox: typeof import('element-plus/es')['ElMessageBox']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const closeToast: typeof import('vant/es')['closeToast']
@@ -63,6 +62,7 @@ declare global {
   const shallowRef: typeof import('vue')['shallowRef']
   const showFailToast: typeof import('vant/es')['showFailToast']
   const showLoadingToast: typeof import('vant/es')['showLoadingToast']
+  const showToast: typeof import('vant/es')['showToast']
   const storeToRefs: typeof import('pinia')['storeToRefs']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']

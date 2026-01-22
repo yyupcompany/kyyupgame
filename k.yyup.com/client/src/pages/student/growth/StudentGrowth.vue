@@ -436,7 +436,7 @@ onMounted(() => {
   align-items: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-lg);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   border-radius: var(--radius-md);
   border: var(--border-width-base) solid var(--border-color);
   transition: all var(--transition-fast);
@@ -782,7 +782,7 @@ onMounted(() => {
 }
 
 :deep(.el-card__header) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-bottom-color: var(--border-color);
 }
 

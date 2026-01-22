@@ -110,9 +110,10 @@
 
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { verifyToken } from '../middlewares/auth.middleware';
+import { verifyToken, checkParentStudentAccess, checkParentKindergartenAccess } from '../middlewares/auth.middleware';
 import { Student } from '../models/student.model';
 import { ApiResponse } from '../utils/apiResponse';
+import { sequelize } from '../init';
 
 const router = express.Router();
 
@@ -133,7 +134,7 @@ router.use(verifyToken); // 已注释：全局认证中间件已移除，每个�
 */
 router.get('/', async (req: Request, res: Response) => {
   try {
-    // 🔧 添加分页支持
+    const user = req.user as any;
     const page = parseInt(req.query.page as string) || 1;
     const pageSize = parseInt(req.query.pageSize as string) || 10;
     const offset = (page - 1) * pageSize;
@@ -144,6 +145,34 @@ router.get('/', async (req: Request, res: Response) => {
     // 支持status过滤
     if (req.query.status) {
       where.status = req.query.status;
+    }
+
+    // 🔧 家长角色：只能看到自己孩子的学生信息
+    if (user.role === 'parent') {
+      const tenantDatabaseName = (req as any).tenant?.databaseName || 'kindergarten';
+      const sequelizeInstance = (req as any).tenantDb || sequelize;
+
+      // 查询家长关联的学生ID列表
+      const [studentRelations] = await sequelizeInstance.query(`
+        SELECT student_id
+        FROM ${tenantDatabaseName}.parent_student_relations
+        WHERE parent_id = ? AND status = 'active'
+      `, {
+        replacements: [user.id]
+      });
+
+      if (!studentRelations || (studentRelations as any[]).length === 0) {
+        // 家长没有关联的孩子，返回空列表
+        return ApiResponse.success(res, {
+          items: [],
+          total: 0,
+          page: page,
+          pageSize: pageSize
+        }, '获取students列表成功');
+      }
+
+      const studentIds = (studentRelations as any[]).map(r => r.student_id);
+      where.id = studentIds; // 只查询关联的学生
     }
 
     // 🔧 执行分页查询
@@ -275,15 +304,15 @@ router.get('/count', async (req: Request, res: Response) => {
  *       200:
  *         description: 获取成功
 */
-router.get('/:id', async (req: Request, res: Response) => {
+router.get('/:id', checkParentStudentAccess('id', false), async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const item = await Student.findByPk(id);
-    
+
     if (!item) {
       return ApiResponse.notFound(res, 'students不存在');
     }
-    
+
     return ApiResponse.success(res, item, '获取students详情成功');
   } catch (error) {
     console.error('[STUDENT]: 获取students详情失败:', error);

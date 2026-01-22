@@ -265,7 +265,37 @@ const selectVoice = (voice: any) => {
 }
 
 const previewVoice = () => {
-  showToast('试听功能开发中')
+  // 使用浏览器SpeechSynthesis API进行试听
+  if (!inputText.value) {
+    showToast('请先输入文本内容')
+    return
+  }
+  
+  if ('speechSynthesis' in window) {
+    // 停止之前的播放
+    window.speechSynthesis.cancel()
+    
+    const utterance = new SpeechSynthesisUtterance(inputText.value.substring(0, 100))
+    utterance.lang = 'zh-CN'
+    utterance.rate = speed.value / 100 // 调整语速
+    utterance.pitch = 1.0
+    
+    utterance.onstart = () => {
+      showToast('正在试听...')
+    }
+    
+    utterance.onend = () => {
+      showSuccessToast('试听结束')
+    }
+    
+    utterance.onerror = () => {
+      showToast('试听失败')
+    }
+    
+    window.speechSynthesis.speak(utterance)
+  } else {
+    showToast('您的浏览器不支持语音合成')
+  }
 }
 
 const generateAudio = async () => {

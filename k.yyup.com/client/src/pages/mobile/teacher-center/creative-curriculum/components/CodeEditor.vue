@@ -694,7 +694,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: var(--bg-color);
+  background: var(--bg-card);
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
@@ -735,7 +735,7 @@ onMounted(() => {
         position: relative;
 
         &:hover {
-          background: var(--bg-color);
+          background: var(--bg-card);
           color: var(--text-primary);
         }
 

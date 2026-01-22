@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="推荐奖励"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-  >
+  <MobileSubPageLayout title="推荐奖励" back-path="/mobile/parent-center">
     <div class="mobile-rewards-page">
       <!-- 奖励统计卡片 -->
       <div class="rewards-stats">
@@ -286,13 +281,13 @@
         </div>
       </van-popup>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { showToast, showSuccessToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 
 interface Reward {
   id: number
@@ -510,6 +505,12 @@ const onLoad = () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   updateCountdown()
 })
 </script>

@@ -1059,31 +1059,31 @@ export default defineComponent({
       progress: 0
     })
 
-    // 海报模板数据
+    // 海报模板数据（使用在线占位图服务避免404错误）
     const posterTemplates = ref([
       {
         id: 1,
         name: '清新自然',
         category: '教育活动',
-        preview: '/poster-templates/template1.jpg'
+        preview: 'https://placehold.co/600x400/e8f5e8/ffffff/666666?text=清新自然'
       },
       {
         id: 2,
         name: '活力运动',
         category: '体育活动',
-        preview: '/poster-templates/template2.jpg'
+        preview: 'https://placehold.co/600x400/fceeb3/ffffff/666666?text=活力运动'
       },
       {
         id: 3,
         name: '艺术创意',
         category: '艺术活动',
-        preview: '/poster-templates/template3.jpg'
+        preview: 'https://placehold.co/600x400/f39c12/ffffff/666666?text=艺术创意'
       },
       {
         id: 4,
         name: '节日庆典',
         category: '节日活动',
-        preview: '/poster-templates/template4.jpg'
+        preview: 'https://placehold.co/600x400/e91e63/ffffff/666666?text=节日庆典'
       }
     ])
     
@@ -2309,7 +2309,7 @@ export default defineComponent({
   position: relative;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap; text-overflow: ellipsis; white-space: nowrap;
   transition: all var(--transition-fast);
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
 }
 
 .avatar-uploader:hover {
@@ -2325,7 +2325,7 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
 }
@@ -2354,7 +2354,7 @@ export default defineComponent({
 .activity-form :deep(.el-input__inner),
 .activity-form :deep(.el-textarea__inner),
 .activity-form :deep(.el-select__wrapper) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   border-color: var(--border-color);
   color: var(--text-primary);
   border-radius: var(--radius-md);
@@ -2387,11 +2387,11 @@ export default defineComponent({
 /* Date picker styles */
 .activity-form :deep(.el-date-editor) {
   width: 100%;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
 }
 
 .activity-form :deep(.el-date-editor .el-input__inner) {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   color: var(--text-primary);
 }
 
@@ -2488,7 +2488,7 @@ export default defineComponent({
 }
 
 .activity-form :deep(.el-upload-dragger) {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-page);
   border-color: var(--border-color);
   transition: all var(--transition-fast);
 }
@@ -2511,7 +2511,7 @@ export default defineComponent({
 
 /* Textarea count styles */
 .activity-form :deep(.el-textarea__inner) + .el-input__count {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-page);
   border-radius: var(--radius-sm);
   padding: 0 var(--spacing-xs);
 }

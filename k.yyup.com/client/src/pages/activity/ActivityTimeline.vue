@@ -614,7 +614,7 @@ onMounted(() => {
   .stage-details {
     margin: var(--text-lg) 0;
     padding: var(--text-lg);
-    background: var(--bg-secondary);
+    background: var(--bg-page);
     border-radius: var(--spacing-sm);
 
     .poster-thumbnail {

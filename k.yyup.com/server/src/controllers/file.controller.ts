@@ -427,27 +427,34 @@ export class FileController {
       }
 
       // 检查文件是否存在于磁盘
-      if (file.storage_type === 'local') {
-        const fullPath = path.resolve(file.file_path);
-        
+      if (file.storageType === 'local') {
+        const fullPath = path.resolve(file.filePath);
+
         if (!fs.existsSync(fullPath)) {
           ApiResponse.error(res, '文件已损坏或不存在', 'FILE_NOT_FOUND', 404);
           return;
         }
 
-        // 设置响应头
-        res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(file.original_name)}"`);
-        res.setHeader('Content-Type', file.file_type);
-        res.setHeader('Content-Length', file.file_size);
-
-        // 发送文件
-        res.sendFile(fullPath);
+        // 使用 res.download() 确保正确的下载行为
+        // res.download() 会自动设置正确的 Content-Type 和 Content-Disposition
+        res.download(fullPath, file.originalName, (err) => {
+          if (err) {
+            console.error('文件下载失败:', err);
+            // 只有在响应尚未发送时才发送错误
+            if (!res.headersSent) {
+              ApiResponse.error(res, '文件下载失败', 'DOWNLOAD_ERROR', 500);
+            }
+          }
+        });
       } else {
         // 对于其他存储类型，重定向到访问URL
-        res.redirect(file.access_url);
+        res.redirect(file.accessUrl);
       }
     } catch (error) {
-      ApiResponse.handleError(res, error, '文件下载失败');
+      // 只有在响应尚未发送时才发送错误
+      if (!res.headersSent) {
+        ApiResponse.handleError(res, error, '文件下载失败');
+      }
     }
   }
 

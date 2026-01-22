@@ -62,7 +62,7 @@ interface Props {
   multiple?: boolean
   actions?: FabAction[]
   axisLock?: 'x' | 'y' | 'xy' | false
-  magnetic?: boolean
+  magnetic?: 'x' | 'y' | undefined
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -70,7 +70,7 @@ const props = withDefaults(defineProps<Props>(), {
   multiple: false,
   actions: () => [],
   axisLock: false,
-  magnetic: true
+  magnetic: undefined
 })
 
 interface Emits {

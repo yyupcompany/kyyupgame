@@ -182,11 +182,7 @@ export const teachingCenterApi = {
    * 上传媒体文件
    */
   uploadMediaFile(formData: FormData): Promise<ApiResponse<any>> {
-    return request.post('/api/teaching-center/media/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+    return request.post('/api/teaching-center/media/upload', formData)
   },
 
   /**
@@ -228,11 +224,7 @@ export const teachingCenterApi = {
       formData.append('description', data.description)
     }
 
-    return request.post('/api/teaching-center/media/batch-upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
+    return request.post('/api/teaching-center/media/batch-upload', formData)
   },
 
   // ==================== 脑科学课程相关 ====================
@@ -319,39 +311,42 @@ export const teachingCenterApi = {
   /**
    * 导出课程进度报告
    */
-  exportCourseProgressReport(params: {
+  async exportCourseProgressReport(params: {
     class_id?: number
     semester?: string
     format?: 'excel' | 'pdf'
   }): Promise<Blob> {
-    return request.get('/api/teaching-center/export/course-progress', {
+    const response: any = await request.get('/api/teaching-center/export/course-progress', {
       params,
       responseType: 'blob'
     })
+    return response.data || response
   },
 
   /**
    * 导出户外训练报告
    */
-  exportOutdoorTrainingReport(params: {
+  async exportOutdoorTrainingReport(params: {
     class_id?: number
     training_type?: string
     format?: 'excel' | 'pdf'
   }): Promise<Blob> {
-    return request.get('/api/teaching-center/export/outdoor-training', {
+    const response: any = await request.get('/api/teaching-center/export/outdoor-training', {
       params,
       responseType: 'blob'
     })
+    return response.data || response
   },
 
   /**
    * 导出锦标赛报告
    */
-  exportChampionshipReport(championshipId: number, format: 'excel' | 'pdf' = 'excel'): Promise<Blob> {
-    return request.get(`/api/teaching-center/export/championship/${championshipId}`, {
+  async exportChampionshipReport(championshipId: number, format: 'excel' | 'pdf' = 'excel'): Promise<Blob> {
+    const response: any = await request.get(`/api/teaching-center/export/championship/${championshipId}`, {
       params: { format },
       responseType: 'blob'
     })
+    return response.data || response
   }
 }
 

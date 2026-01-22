@@ -342,7 +342,7 @@ const formatDate = (date: Date) => {
 <style scoped>
 .student-detail {
   padding: var(--text-2xl);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   min-height: 100vh;
 }
 

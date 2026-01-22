@@ -144,7 +144,8 @@ import UnifiedCenterLayout from '@/components/layout/UnifiedCenterLayout.vue'
 
 import { ref, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { createTask, updateTask, getTaskById } from '@/services/task'
+import { ElMessage } from 'element-plus'
+import { createTask, updateTask, getTask } from '@/api/task-center'
 
 // 路由
 const router = useRouter()
@@ -181,21 +182,22 @@ onMounted(async () => {
 const loadTaskData = async (taskId: string) => {
   try {
     loading.value = true
-    const task = await getTaskById(taskId)
+    const response = await getTask(Number(taskId))
+    const task = response?.data?.data || response?.data || {}
     
     formData.value = {
-      id: task.id,
-      title: task.title,
+      id: task.id ?? null,
+      title: task.title || '',
       description: task.description || '',
-      priority: task.priority,
-      status: task.status,
-      assignedTo: task.assignedTo || null,
-      dueDate: task.dueDate || null,
+      priority: task.priority || 'medium',
+      status: task.status || 'pending',
+      assignedTo: task.assignedTo ?? null,
+      dueDate: task.dueDate ?? null,
       tags: Array.isArray(task.tags) ? task.tags.join(', ') : (task.tags || '')
     }
   } catch (error) {
     console.error('加载任务数据失败:', error)
-    alert('加载任务数据失败')
+    ElMessage.error('加载任务数据失败')
   } finally {
     loading.value = false
   }
@@ -206,15 +208,15 @@ const handleSave = async () => {
   try {
     // 表单验证
     if (!formData.value.title.trim()) {
-      alert('请输入任务标题')
+      ElMessage.warning('请输入任务标题')
       return
     }
     if (!formData.value.priority) {
-      alert('请选择优先级')
+      ElMessage.warning('请选择优先级')
       return
     }
     if (!formData.value.status) {
-      alert('请选择状态')
+      ElMessage.warning('请选择状态')
       return
     }
 
@@ -223,25 +225,33 @@ const handleSave = async () => {
 
     // 处理数据格式
     const submitData = {
-      ...formData.value,
-      assignedTo: formData.value.assignedTo || null,
-      tags: formData.value.tags ? formData.value.tags.split(',').map((tag: string) => tag.trim()) : []
+      title: formData.value.title,
+      description: formData.value.description || undefined,
+      priority: formData.value.priority,
+      status: formData.value.status || undefined,
+      assignedTo: formData.value.assignedTo || undefined,
+      dueDate: formData.value.dueDate || undefined,
+      tags: formData.value.tags
+        ? formData.value.tags
+            .split(',')
+            .map((tag: string) => tag.trim())
+            .filter(Boolean)
+        : []
     }
 
-    if (mode.value === 'edit' && submitData.id) {
-      await updateTask(submitData.id, submitData)
-      alert('任务更新成功')
+    if (mode.value === 'edit' && formData.value.id) {
+      await updateTask(Number(formData.value.id), submitData)
+      ElMessage.success('任务更新成功')
     } else {
-      delete submitData.id // 新建时移除id字段
       await createTask(submitData)
-      alert('任务创建成功')
+      ElMessage.success('任务创建成功')
     }
 
     // 返回任务中心
     handleGoBack()
   } catch (error) {
     console.error('保存任务失败:', error)
-    alert('保存任务失败')
+    ElMessage.error('保存任务失败')
   } finally {
     loading.value = false
   }

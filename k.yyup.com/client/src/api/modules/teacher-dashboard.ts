@@ -94,13 +94,13 @@ export interface ClockRecord {
 
 // API 端点
 const TEACHER_DASHBOARD_ENDPOINTS = {
-  DASHBOARD: '/teacher-dashboard/dashboard',
-  STATISTICS: '/teacher-dashboard/statistics',
-  TODAY_TASKS: '/teacher-dashboard/today-tasks',
-  TODAY_COURSES: '/teacher-dashboard/today-courses',
-  RECENT_NOTIFICATIONS: '/teacher-dashboard/recent-notifications',
-  UPDATE_TASK_STATUS: '/teacher-dashboard/tasks',
-  CLOCK_IN: '/teacher-dashboard/clock-in'
+  DASHBOARD: '/api/teacher-dashboard/dashboard',
+  STATISTICS: '/api/teacher-dashboard/statistics',
+  TODAY_TASKS: '/api/teacher-dashboard/today-tasks',
+  TODAY_COURSES: '/api/teacher-dashboard/today-courses',
+  RECENT_NOTIFICATIONS: '/api/teacher-dashboard/recent-notifications',
+  UPDATE_TASK_STATUS: '/api/teacher-dashboard/tasks',
+  CLOCK_IN: '/api/teacher-dashboard/clock-in'
 }
 
 /**
@@ -133,7 +133,7 @@ export const getTodaySchedule = () => {
  * 获取教师活动统计数据
  */
 export const getTeacherActivityStatistics = () => {
-  return get<ActivityStatisticsData>('/teacher-dashboard/activity-statistics')
+  return get<ActivityStatisticsData>('/api/teacher-dashboard/activity-statistics')
 }
 
 /**

@@ -292,7 +292,11 @@ export class DoubaoRealtimeVoiceService extends EventEmitter {
       });
 
       // 2. 话术模板匹配（话术中心已删除，暂时使用默认回复）
-      // const matchResult = await scriptTemplateMatcherService.matchTemplate(userText);
+      const matchResult = {
+        score: 0.8,
+        templateId: 'default_response',
+        matchedKeywords: []
+      };
 
       let replyText: string;
       // 话术中心已删除，使用简单回复逻辑
@@ -341,8 +345,8 @@ export class DoubaoRealtimeVoiceService extends EventEmitter {
         callId: session.callId,
         text: replyText,
         audioData: vosPcmaData,  // 已转换为PCMA 8kHz
-        confidence: matchResult.score / 10, // 将分数转换为0-1的置信度
-        templateId
+        confidence: matchResult.score / 10, // 将分数转换为0-1的置信度,
+        templateId: matchResult.templateId
       };
 
       console.log(`📡 [TTS→RTP] 发出ai-response事件: callId=${session.callId}, audioSize=${vosPcmaData.length} (PCMA 8kHz)`);

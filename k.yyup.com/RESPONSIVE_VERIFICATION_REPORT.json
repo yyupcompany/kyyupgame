@@ -1,0 +1,468 @@
+{
+  "timestamp": "2026-01-20T17:25:21.676Z",
+  "stats": {
+    "pass": 3,
+    "partial": 39,
+    "fail": 0,
+    "missing": 0,
+    "total": 42
+  },
+  "results": [
+    {
+      "file": "client/src/pages/mobile/centers/Placeholder.vue",
+      "status": "pass",
+      "hasImport": true,
+      "hasMediaQuery": true,
+      "hasMixin": true,
+      "isScss": true,
+      "issues": []
+    },
+    {
+      "file": "client/src/pages/mobile/centers/activity-center/index.vue",
+      "status": "pass",
+      "hasImport": true,
+      "hasMediaQuery": true,
+      "hasMixin": true,
+      "isScss": true,
+      "issues": []
+    },
+    {
+      "file": "client/src/pages/mobile/centers/ai-billing-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/ai-center/index.vue",
+      "status": "pass",
+      "hasImport": true,
+      "hasMediaQuery": true,
+      "hasMixin": true,
+      "isScss": true,
+      "issues": []
+    },
+    {
+      "file": "client/src/pages/mobile/centers/analytics-hub/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/assessment-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/business-hub/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/customer-pool-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/document-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/document-editor/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/document-template-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/document-template-center/use.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/enrollment-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/group-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/inspection-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/marketing-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/media-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/my-task-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/notification-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/permission-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/personnel-center/teacher-detail.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/photo-album-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/principal-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/schedule-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/settings-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/student-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/student-management/detail.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/student-management/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/system-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/system-log-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/teacher-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/teaching-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/usage-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/centers/user-center/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/class-contacts/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/creative-curriculum/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/dashboard/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/performance-rewards/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/teacher-center/task-detail/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/children/add.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    },
+    {
+      "file": "client/src/pages/mobile/parent-center/communication/index.vue",
+      "status": "partial",
+      "hasImport": true,
+      "hasMediaQuery": false,
+      "hasMixin": false,
+      "isScss": true,
+      "issues": [
+        "未使用响应式Mixin或媒体查询"
+      ]
+    }
+  ]
+}

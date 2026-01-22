@@ -5,10 +5,10 @@
 
 // 系统管理相关API
 export const SYSTEM_ENDPOINTS = {
-  // 角色管理
-  ROLES: '/api/roles',
-  ROLE_OPTIONS: '/api/roles/options',
-  ROLE_PERMISSIONS: '/api/roles/:id/permissions',
+  // 角色管理 (注意: 后端路由注册在 /api/system/roles)
+  ROLES: '/api/system/roles',
+  ROLE_OPTIONS: '/api/system/roles/options',
+  ROLE_PERMISSIONS: '/api/system/roles/:id/permissions',
 
   // 用户管理
   USERS: '/api/users',
@@ -89,8 +89,9 @@ export const CLASS_ENDPOINTS = {
   CLASS_ENROLLMENT: '/api/classes/:id/enrollment'
 }
 
-// 活动管理相关API
-export const ACTIVITY_ENDPOINTS = {
+// 活动管理相关API (旧版本，用于向后兼容)
+// 注意：推荐使用 activity.ts 中的 ACTIVITY_ENDPOINTS
+export const ACTIVITY_ENDPOINTS_LEGACY = {
   // 活动基础信息
   ACTIVITIES: '/api/activities',
   ACTIVITY_DETAIL: '/api/activities/:id',
@@ -318,7 +319,7 @@ export default {
   TEACHER_ENDPOINTS,
   PARENT_ENDPOINTS,
   CLASS_ENDPOINTS,
-  ACTIVITY_ENDPOINTS,
+  ACTIVITY_ENDPOINTS: ACTIVITY_ENDPOINTS_LEGACY, // 重定向到旧版本，保持兼容性
   MARKETING_ENDPOINTS,
   PERFORMANCE_ENDPOINTS,
   AI_ENDPOINTS,

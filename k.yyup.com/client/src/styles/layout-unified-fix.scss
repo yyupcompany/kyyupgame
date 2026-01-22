@@ -15,9 +15,10 @@
 // ==================== 侧边栏修复 ====================
 .sidebar {
   position: fixed;
-  top: 0;
+  // ✅ 修复：避免被固定头部覆盖导致“顶部菜单点不到”
+  top: var(--header-height, 64px);
   left: 0;
-  height: 100vh;
+  height: calc(100vh - var(--header-height, 64px));
   width: var(--sidebar-width, 240px);
   background: var(--sidebar-bg, #ffffff);
   border-right: 1px solid var(--border-color, #e5e7eb);

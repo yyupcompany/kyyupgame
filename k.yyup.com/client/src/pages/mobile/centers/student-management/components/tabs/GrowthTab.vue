@@ -30,7 +30,7 @@
               <div class="record-age">{{ getAgeText(record.age) }}</div>
             </div>
             <div class="record-category">
-              <van-tag :type="getCategoryTagType(record.category)" size="small">
+              <van-tag :type="getCategoryTagType(record.category)" size="medium">
                 {{ getCategoryText(record.category) }}
               </van-tag>
             </div>
@@ -88,7 +88,7 @@
                 v-for="tag in record.tags"
                 :key="tag"
                 type="primary"
-                size="small"
+                size="medium"
                 plain
               >
                 {{ tag }}
@@ -104,7 +104,7 @@
             </div>
             <div class="record-actions">
               <van-button
-                size="mini"
+                size="medium"
                 plain
                 type="primary"
                 @click="likeRecord(record)"
@@ -113,7 +113,7 @@
                 {{ record.likes || 0 }}
               </van-button>
               <van-button
-                size="mini"
+                size="medium"
                 plain
                 type="info"
                 @click="shareRecord(record)"
@@ -157,7 +157,7 @@
           style="width: 100%; max-height: 400px;"
         />
         <div class="video-close">
-          <van-button size="small" @click="showVideoPlayer = false">
+          <van-button size="medium" @click="showVideoPlayer = false">
             关闭
           </van-button>
         </div>
@@ -174,7 +174,7 @@
       <div class="add-record-dialog">
         <div class="dialog-header">
           <h3>添加成长记录</h3>
-          <van-button size="small" @click="showAddDialog = false">
+          <van-button size="medium" @click="showAddDialog = false">
             取消
           </van-button>
         </div>
@@ -251,7 +251,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
-import { showToast, showConfirmDialog } from 'vant'
+import { showToast, showConfirmDialog, showSuccessToast } from 'vant'
+import type { TagType } from 'vant'
 
 interface Props {
   studentId: string
@@ -368,12 +369,12 @@ const getCategoryText = (category: string) => {
   return option?.text || category
 }
 
-const getCategoryTagType = (category: string) => {
-  const typeMap: Record<string, string> = {
+const getCategoryTagType = (category: string): TagType => {
+  const typeMap: Record<string, TagType> = {
     study: 'primary',
     social: 'success',
     emotional: 'warning',
-    physical: 'info',
+    physical: 'default',
     art: 'danger'
   }
   return typeMap[category] || 'default'
@@ -427,8 +428,39 @@ const likeRecord = (record: any) => {
   showToast('点赞成功')
 }
 
-const shareRecord = (record: any) => {
-  showToast('分享功能开发中')
+const shareRecord = async (record: any) => {
+  const shareUrl = `${window.location.origin}/growth/${record.id}`
+  const shareText = `查看学生成长记录：${record.title}`
+  
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: record.title,
+        text: shareText,
+        url: shareUrl
+      })
+      showSuccessToast('分享成功')
+    } catch (error) {
+      await copyToClipboard(shareUrl)
+    }
+  } else {
+    await copyToClipboard(shareUrl)
+  }
+}
+
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    showSuccessToast('链接已复制')
+  } catch {
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    document.body.appendChild(textarea)
+    textarea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textarea)
+    showSuccessToast('链接已复制')
+  }
 }
 
 const addGrowthRecord = () => {

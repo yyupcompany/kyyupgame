@@ -148,11 +148,42 @@ onUnmounted(() => {
 .markdown-message {
   font-size: inherit; /* 继承父组件的字体大小，允许动态调整 */
   line-height: 1.6;
-  color: var(--color-gray-700);
+  color: var(--text-primary);
   word-wrap: break-word;
   position: relative;
   display: inline-block;
   width: 100%;
+}
+
+// 暗色主题
+:global([data-theme="dark"]) .markdown-message,
+:global(.theme-dark) .markdown-message {
+  color: var(--text-primary);
+
+  :deep(code) {
+    background: var(--bg-tertiary);
+    color: var(--primary-light);
+  }
+
+  :deep(pre) {
+    background: var(--bg-secondary);
+    border-color: var(--border-color);
+
+    code {
+      color: var(--text-primary);
+    }
+  }
+
+  :deep(th) {
+    background: var(--bg-secondary);
+  }
+
+  :deep(strong) {
+    color: var(--primary-light);
+  }
+}
+
+.markdown-message {
 
   // 打字机光标
   .typing-cursor {
@@ -214,27 +245,28 @@ onUnmounted(() => {
   }
 
   :deep(code) {
-    background: var(--bg-card);
-    padding: var(--spacing-sm) 6px;
-    border-radius: var(--spacing-xs);
-    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
-    font-size: inherit; // 侧边栏模式：统一字号
-    color: var(--danger-color);
+    background: var(--bg-secondary);
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family-mono);
+    font-size: inherit;
+    color: var(--primary-color);
   }
 
   :deep(pre) {
-    background: var(--text-primary);
-    padding: var(--spacing-sm);
-    border-radius: var(--spacing-sm);
+    background: var(--bg-tertiary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color-light);
     overflow-x: auto;
     margin: var(--spacing-sm) 0;
 
     code {
       background: transparent;
       padding: 0;
-      color: var(--bg-primary);
-      font-size: inherit; // 侧边栏模式：统一字号
-      line-height: 1.5;
+      color: var(--text-primary);
+      font-size: 0.9em;
+      line-height: 1.6;
     }
   }
 
@@ -280,59 +312,17 @@ onUnmounted(() => {
 
   :deep(hr) {
     border: none;
-    border-top: var(--z-index-dropdown) solid var(--border-color);
+    border-top: 1px solid var(--border-color);
     margin: var(--text-lg) 0;
   }
 
   :deep(strong) {
     font-weight: 600;
-    color: var(--color-gray-900);
+    color: var(--text-primary);
   }
 
   :deep(em) {
     font-style: italic;
-  }
-}
-
-// 暗色主题
-.theme-dark .markdown-message {
-  color: var(--border-color);
-
-  :deep(h1), :deep(h2) {
-    border-bottom-color: var(--color-gray-700);
-  }
-
-  :deep(code) {
-    background: var(--color-gray-700);
-    color: var(--status-error);
-  }
-
-  :deep(pre) {
-    background: var(--color-gray-900);
-
-    code {
-      color: var(--bg-primary);
-    }
-  }
-
-  :deep(blockquote) {
-    color: var(--text-tertiary);
-  }
-
-  :deep(th), :deep(td) {
-    border-color: var(--color-gray-700);
-  }
-
-  :deep(th) {
-    background: var(--text-primary);
-  }
-
-  :deep(hr) {
-    border-top-color: var(--color-gray-700);
-  }
-
-  :deep(strong) {
-    color: var(--bg-primary);
   }
 }
 </style>

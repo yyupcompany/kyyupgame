@@ -102,7 +102,7 @@ export class CallingLogger {
   private static outputToConsole(formattedMessage: string, level: string) {
     try {
       if (LOG_CONFIG.ENABLE_CALLING_LOG_COLORS) {
-        const style = LOG_COLORS[level] || LOG_COLORS.RESET;
+        const style = LOG_COLORS[level as keyof typeof LOG_COLORS] || LOG_COLORS.RESET;
         console.log(`%c${formattedMessage}`, style);
       } else {
         console.log(formattedMessage);

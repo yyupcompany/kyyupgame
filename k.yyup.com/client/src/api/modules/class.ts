@@ -31,6 +31,14 @@ interface ApiResponseType<T = any> {
   [key: string]: any;
 }
 
+interface PaginatedData<T> {
+  items: T[];
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
 /**
  * 班级数据接口
  */
@@ -74,12 +82,12 @@ export interface ClassStudentBrief {
  * @param params 查询参数
  * @returns 班级列表和总数
  */
-export function getClassList(params?: ClassQueryParams): Promise<ApiResponseType<ClassInfo>> {
+export function getClassList(params?: ClassQueryParams): Promise<ApiResponseType<PaginatedData<ClassInfo>>> {
   return request({
     url: CLASS_ENDPOINTS.BASE,
     method: 'get',
     params
-  }).then(response => {
+  }).then((response: ApiResponseType<PaginatedData<ClassInfo>>) => {
     // 使用数据转换层处理响应
     return transformListResponse(response, transformClassData);
   });

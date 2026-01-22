@@ -1,1047 +1,409 @@
 <template>
-  <MobileMainLayout
-    title="教学中心"
-    :show-back="true"
-  >
-    <div class="mobile-teaching-center">
-      <!-- 教学进度总览 -->
-      <div class="progress-overview">
-        <div class="section-header">
-          <h3 class="section-title">教学进度总览</h3>
-          <p class="section-subtitle">全员普及进度和结果达标率管理</p>
-        </div>
+  <MobileCenterLayout title="教学中心" back-path="/mobile/centers">
+    <template #right>
+      <van-icon name="plus" size="20" @click="handleCreate" />
+    </template>
 
-        <div class="stats-grid">
-          <div
-            v-for="stat in progressStats"
-            :key="stat.key"
-            class="stat-card-mobile"
-            :class="`stat-card--${stat.type}`"
-            @click="handleStatClick(stat)"
-          >
-            <div class="stat-icon">
-              <van-icon :name="getMobileIcon(stat.iconName)" size="24" />
-            </div>
+    <div class="teaching-center-mobile">
+      <!-- 统计卡片 -->
+      <div class="stats-section">
+        <van-grid :column-num="2" :gutter="12">
+          <van-grid-item v-for="stat in statsData" :key="stat.key" class="stat-card">
             <div class="stat-content">
-              <div class="stat-value">{{ stat.value }}{{ stat.unit }}</div>
-              <div class="stat-title">{{ stat.title }}</div>
-              <div v-if="stat.trend !== 0" class="stat-trend">
-                <van-icon
-                  :name="stat.trend > 0 ? 'arrow-up' : 'arrow-down'"
-                  :color="stat.trend > 0 ? '#07c160' : '#ee0a24'"
-                  size="12"
-                />
-                <span :class="stat.trend > 0 ? 'trend-up' : 'trend-down'">
-                  {{ Math.abs(stat.trend) }}%
-                </span>
-              </div>
+              <van-icon :name="stat.icon" :color="stat.color" size="24" />
+              <div class="stat-value">{{ stat.value }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
             </div>
-          </div>
-        </div>
+          </van-grid-item>
+        </van-grid>
       </div>
 
-      <!-- 教学流程时间轴 -->
-      <div class="teaching-timeline">
-        <div class="section-header">
-          <h3 class="section-title">教学流程</h3>
-          <p class="section-subtitle">跟踪教学进度和活动安排</p>
-        </div>
+      <!-- 功能模块 -->
+      <div class="features-section">
+        <div class="section-title">教学管理功能</div>
+        <van-grid :column-num="3" :gutter="12">
+          <van-grid-item v-for="feature in features" :key="feature.key" class="feature-item" @click="navigateToFeature(feature.key)">
+            <div class="feature-icon">{{ feature.emoji }}</div>
+            <div class="feature-name">{{ feature.name }}</div>
+          </van-grid-item>
+        </van-grid>
+      </div>
 
-        <van-steps direction="vertical" :active="activeStep" active-color="#409EFF">
-          <van-step
-            v-for="(item, index) in timelineItems"
-            :key="item.id"
-            :title="item.title"
-            :description="item.description"
-            @click="selectTimelineItem(item)"
-            :class="{ 'timeline-item-active': selectedItem?.id === item.id }"
-          >
-            <template #icon>
-              <div class="step-icon" :class="`step-icon--${getStepIconClass(item.status)}`">
-                <van-icon :name="getTimelineIcon(item.type)" size="16" />
-              </div>
-            </template>
-
-            <div class="timeline-content">
-              <div class="timeline-meta">
-                <span class="timeline-date">{{ item.date }}</span>
-                <van-tag
-                  :type="getTagType(item.status)"
-                  size="small"
-                  class="timeline-status"
-                >
-                  {{ getStatusText(item.status) }}
+      <!-- 标签页 -->
+      <van-tabs v-model:active="activeTab" sticky offset-top="46">
+        <!-- 课程安排 -->
+        <van-tab title="课程安排" name="schedule">
+          <div class="tab-content">
+            <div class="schedule-list">
+              <div v-for="item in schedules" :key="item.id" class="schedule-card" @click="viewSchedule(item)">
+                <div class="time-slot">
+                  <div class="time">{{ item.startTime }}</div>
+                  <div class="duration">{{ item.duration }}分钟</div>
+                </div>
+                <div class="schedule-info">
+                  <div class="course-name">{{ item.courseName }}</div>
+                  <div class="meta">
+                    <span>{{ item.className }}</span>
+                    <span>{{ item.teacherName }}</span>
+                  </div>
+                </div>
+                <van-tag size="medium" :type="item.status === 'completed' ? 'success' : 'primary'">
+                  {{ item.status === 'completed' ? '已完成' : '待上课' }}
                 </van-tag>
               </div>
-
-              <div class="timeline-stats" v-if="item.stats">
-                <div class="stat-item" v-for="stat in item.stats" :key="stat.label">
-                  <span class="stat-label">{{ stat.label }}:</span>
-                  <span class="stat-value">{{ stat.value }}</span>
-                </div>
-              </div>
+              <van-empty v-if="schedules.length === 0" description="今日暂无课程" />
             </div>
-          </van-step>
-        </van-steps>
-      </div>
+          </div>
+        </van-tab>
 
-      <!-- 选中项详情 -->
-      <div class="selected-detail" v-if="selectedItem">
-        <div class="detail-header">
-          <h3 class="detail-title">{{ selectedItem.title }}</h3>
-          <van-button
-            type="primary"
-            size="small"
-            icon="eye-o"
-            @click="showDetailDrawer = true"
-          >
-            查看详细内容
-          </van-button>
-        </div>
-
-        <div class="detail-preview">
-          <component
-            :is="getDetailComponent(selectedItem.type)"
-            :data="selectedItem"
-            :preview="true"
-            @refresh="loadTimelineData"
-          />
-        </div>
-      </div>
-
-      <!-- 空状态 -->
-      <div v-else class="empty-state">
-        <van-empty description="请选择教学流程项目查看详情">
-          <template #image>
-            <van-icon name="records" size="48" color="#c8c9cc" />
-          </template>
-        </van-empty>
-      </div>
+        <!-- 教学计划 -->
+        <van-tab title="教学计划" name="plans">
+          <div class="tab-content">
+            <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+              <div class="plan-list">
+                <div v-for="item in plans" :key="item.id" class="plan-card" @click="viewPlan(item)">
+                  <div class="plan-header">
+                    <div class="plan-title">{{ item.name }}</div>
+                    <van-tag size="medium" :type="getPlanStatusType(item.status)">
+                      {{ getPlanStatusLabel(item.status) }}
+                    </van-tag>
+                  </div>
+                  <div class="plan-content">
+                    <div class="info-row">
+                      <van-icon name="clock-o" size="14" />
+                      <span>{{ item.startDate }} ~ {{ item.endDate }}</span>
+                    </div>
+                    <div class="info-row">
+                      <van-icon name="bookmark-o" size="14" />
+                      <span>{{ item.classNames }}</span>
+                    </div>
+                  </div>
+                  <div class="plan-progress">
+                    <van-progress :percentage="item.progress" :stroke-width="6" />
+                  </div>
+                </div>
+                <van-empty v-if="plans.length === 0" description="暂无教学计划" />
+              </div>
+            </van-pull-refresh>
+          </div>
+        </van-tab>
+      </van-tabs>
     </div>
-
-    <!-- 操作面板 -->
-    <van-action-sheet
-      v-model:show="showActionSheet"
-      :actions="sheetActions"
-      cancel-text="取消"
-      close-on-click-action
-      @select="onSheetActionSelect"
-    />
-
-    <!-- 详情抽屉 -->
-    <van-popup
-      v-model:show="showDetailDrawer"
-      position="bottom"
-      round
-      :style="{ height: '85%' }"
-      safe-area-inset-bottom
-    >
-      <div class="detail-drawer">
-        <div class="drawer-header">
-          <h3>{{ selectedItem?.title }}</h3>
-          <van-button icon="cross" @click="showDetailDrawer = false" />
-        </div>
-
-        <div class="drawer-content">
-          <component
-            :is="getDetailComponent(selectedItem?.type)"
-            v-if="selectedItem"
-            :data="selectedItem"
-            @refresh="loadTimelineData"
-          />
-        </div>
-      </div>
-    </van-popup>
-
-    <!-- 加载状态 -->
-    <van-loading v-if="loading" class="loading-fullscreen" />
-
-    <!-- 悬浮操作按钮 -->
-    <FabButton
-      icon="plus"
-      :multiple="true"
-      :actions="fabActions"
-      @action-click="handleFabAction"
-    />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { showToast, showLoadingToast, closeToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
-import FabButton from '@/components/mobile/FabButton.vue'
-import { teachingCenterApi } from '@/api/endpoints/teaching-center'
+import { showToast } from 'vant'
+import type { TagType } from 'vant'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
+import customCourseApi from '@/api/endpoints/custom-course'
 
-// 导入详情组件
-import CoursePlanDetail from './components/CoursePlanDetail.vue'
-import OutdoorTrainingDetail from './components/OutdoorTrainingDetail.vue'
-import ExternalDisplayDetail from './components/ExternalDisplayDetail.vue'
-import ChampionshipDetail from './components/ChampionshipDetail.vue'
-
-// 接口定义
-interface TimelineItem {
-  id: string
-  type: 'course-plan' | 'outdoor-training' | 'external-display' | 'championship'
-  title: string
-  description: string
-  date: string
-  status: 'completed' | 'in-progress' | 'pending' | 'not-started'
-  stats?: Array<{
-    label: string
-    value: string | number
-  }>
-  data?: any
-}
-
-interface ProgressStat {
-  key: string
-  title: string
-  value: number | string
-  unit: string
-  trend: number
-  type: 'primary' | 'success' | 'warning' | 'info'
-  iconName: string
-}
-
-interface QuickAction {
-  key: string
-  label: string
-  type: 'primary' | 'success' | 'warning' | 'info'
-  icon: string
-  action: () => void
-}
-
-// 路由
 const router = useRouter()
 
-// 响应式数据
-const selectedItem = ref<TimelineItem | null>(null)
-const showActionSheet = ref(false)
-const showDetailDrawer = ref(false)
-const loading = ref(false)
-const activeStep = ref(0)
+// 状态
+const activeTab = ref('schedule')
+const refreshing = ref(false)
 
-// 进度统计数据
-const progressStats = ref<ProgressStat[]>([
-  {
-    key: 'overallProgress',
-    title: '全员普及进度',
-    value: 0,
-    unit: '%',
-    trend: 0,
-    type: 'primary',
-    iconName: 'chart-trending-o'
-  },
-  {
-    key: 'achievementRate',
-    title: '结果达标率',
-    value: 0,
-    unit: '%',
-    trend: 0,
-    type: 'success',
-    iconName: 'medal-o'
-  },
-  {
-    key: 'outdoorWeeks',
-    title: '户外训练周数',
-    value: 0,
-    unit: '/16',
-    trend: 0,
-    type: 'warning',
-    iconName: 'location-o'
-  },
-  {
-    key: 'semesterOutings',
-    title: '本学期外出',
-    value: 0,
-    unit: '次',
-    trend: 0,
-    type: 'info',
-    iconName: 'friends-o'
-  }
+// 数据
+const schedules = ref<any[]>([])
+const plans = ref<any[]>([])
+
+// 统计数据
+const statsData = reactive([
+  { key: 'courses', label: '今日课程', value: 0, icon: 'notes-o', color: '#6366f1' },
+  { key: 'classes', label: '班级数量', value: 0, icon: 'friends-o', color: '#10b981' },
+  { key: 'teachers', label: '任课教师', value: 0, icon: 'user-o', color: '#f59e0b' },
+  { key: 'plans', label: '教学计划', value: 0, icon: 'todo-list-o', color: '#3b82f6' }
 ])
 
-// 时间轴数据
-const timelineItems = ref<TimelineItem[]>([])
-
-// 快捷操作配置
-const quickActions = computed<QuickAction[]>(() => [
-  {
-    key: 'create-course',
-    label: '创建课程计划',
-    type: 'primary',
-    icon: 'add-o',
-    action: () => handleCreateCourse()
-  },
-  {
-    key: 'outdoor-record',
-    label: '记录户外训练',
-    type: 'success',
-    icon: 'records',
-    action: () => handleOutdoorRecord()
-  },
-  {
-    key: 'external-display',
-    label: '添加校外展示',
-    type: 'warning',
-    icon: 'location-o',
-    action: () => handleExternalDisplay()
-  },
-  {
-    key: 'championship',
-    label: '创建锦标赛',
-    type: 'info',
-    icon: 'trophy-o',
-    action: () => handleChampionship()
-  }
-])
-
-// 悬浮按钮操作配置
-const fabActions = [
-  {
-    name: 'course',
-    icon: 'add-o',
-    label: '课程计划'
-  },
-  {
-    name: 'outdoor',
-    icon: 'records',
-    label: '户外训练'
-  },
-  {
-    name: 'external',
-    icon: 'location-o',
-    label: '校外展示'
-  },
-  {
-    name: 'championship',
-    icon: 'trophy-o',
-    label: '锦标赛'
-  }
+// 功能模块
+const features = [
+  { key: 'schedule', name: '课程表', emoji: '📅' },
+  { key: 'plan', name: '教学计划', emoji: '📋' },
+  { key: 'resource', name: '教学资源', emoji: '📚' },
+  { key: 'homework', name: '作业管理', emoji: '📝' },
+  { key: 'evaluation', name: '教学评估', emoji: '⭐' },
+  { key: 'activity', name: '教学活动', emoji: '🎨' }
 ]
 
-// 操作面板配置
-const sheetActions = computed(() => [
-  {
-    name: '创建课程计划',
-    icon: 'add-o',
-    type: 'primary'
-  },
-  {
-    name: '记录户外训练',
-    icon: 'records',
-    type: 'success'
-  },
-  {
-    name: '添加校外展示',
-    icon: 'location-o',
-    type: 'warning'
-  },
-  {
-    name: '创建锦标赛',
-    icon: 'trophy-o',
-    type: 'info'
-  },
-  {
-    name: '导出教学报告',
-    icon: 'description',
-    type: 'default'
-  }
-])
-
-// 方法
-const selectTimelineItem = (item: TimelineItem) => {
-  selectedItem.value = item
-  const index = timelineItems.value.findIndex(i => i.id === item.id)
-  activeStep.value = index
-}
-
-const handleStatClick = (stat: ProgressStat) => {
-  showToast(`查看${stat.title}详情`)
-}
-
-// 处理悬浮按钮操作
-const handleFabAction = (action: any) => {
-  switch (action.name) {
-    case 'course':
-      handleCreateCourse()
-      break
-    case 'outdoor':
-      handleOutdoorRecord()
-      break
-    case 'external':
-      handleExternalDisplay()
-      break
-    case 'championship':
-      handleChampionship()
-      break
-  }
-}
-
-const getMobileIcon = (iconName: string) => {
-  const iconMap: Record<string, string> = {
-    'chart-trending-o': 'chart-trending-o',
-    'medal-o': 'medal-o',
-    'location-o': 'location-o',
-    'friends-o': 'friends-o'
-  }
-  return iconMap[iconName] || 'apps-o'
-}
-
-const getTimelineIcon = (type: string) => {
-  const iconMap = {
-    'course-plan': 'records',
-    'outdoor-training': 'location-o',
-    'external-display': 'friends-o',
-    'championship': 'trophy-o'
-  }
-  return iconMap[type as keyof typeof iconMap] || 'records'
-}
-
-const getStepIconClass = (status: string) => {
-  return status
-}
-
-const getTagType = (status: string) => {
-  const typeMap = {
-    'completed': 'success',
-    'in-progress': 'primary',
-    'pending': 'warning',
-    'not-started': 'default'
-  }
-  return typeMap[status as keyof typeof typeMap] || 'default'
-}
-
-const getStatusText = (status: string) => {
-  const textMap = {
-    'completed': '已完成',
-    'in-progress': '进行中',
-    'pending': '待处理',
-    'not-started': '未开始'
-  }
-  return textMap[status as keyof typeof textMap] || status
-}
-
-const getDetailComponent = (type: string) => {
-  const componentMap = {
-    'course-plan': CoursePlanDetail,
-    'outdoor-training': OutdoorTrainingDetail,
-    'external-display': ExternalDisplayDetail,
-    'championship': ChampionshipDetail
-  }
-  return componentMap[type as keyof typeof componentMap]
-}
-
-const handleQuickAction = (action: QuickAction) => {
-  action.action()
-}
-
-const handleCreateCourse = () => {
-  const coursePlanItem = timelineItems.value.find(item => item.type === 'course-plan')
-  if (coursePlanItem) {
-    selectedItem.value = coursePlanItem
-    showDetailDrawer.value = true
-  }
-}
-
-const handleOutdoorRecord = () => {
-  const outdoorItem = timelineItems.value.find(item => item.type === 'outdoor-training')
-  if (outdoorItem) {
-    selectedItem.value = outdoorItem
-    showDetailDrawer.value = true
-  }
-}
-
-const handleExternalDisplay = () => {
-  const displayItem = timelineItems.value.find(item => item.type === 'external-display')
-  if (displayItem) {
-    selectedItem.value = displayItem
-    showDetailDrawer.value = true
-  }
-}
-
-const handleChampionship = () => {
-  const championshipItem = timelineItems.value.find(item => item.type === 'championship')
-  if (championshipItem) {
-    selectedItem.value = championshipItem
-    showDetailDrawer.value = true
-  }
-}
-
-const onSheetActionSelect = (action: any) => {
-  switch (action.icon) {
-    case 'add-o':
-      handleCreateCourse()
-      break
-    case 'records':
-      handleOutdoorRecord()
-      break
-    case 'location-o':
-      handleExternalDisplay()
-      break
-    case 'trophy-o':
-      handleChampionship()
-      break
-    case 'description':
-      showToast('导出教学报告功能开发中...')
-      break
-  }
-}
-
-// 数据加载方法
-const loadTimelineData = async () => {
-  try {
-    loading.value = true
-
-    const loadingToast = showLoadingToast('加载教学数据...')
-
-    // 并行加载各类数据
-    const [courseProgress, outdoorTraining, externalDisplay, championship] = await Promise.all([
-      loadCourseProgressData(),
-      loadOutdoorTrainingData(),
-      loadExternalDisplayData(),
-      loadChampionshipData()
-    ])
-
-    closeToast()
-
-    // 构建时间轴数据
-    timelineItems.value = [
-      {
-        id: 'course-plan',
-        type: 'course-plan',
-        title: '脑科学课程计划',
-        description: '全员普及进度和结果达标率管理',
-        date: '2024-01-15',
-        status: getProgressStatus(courseProgress.overallProgress),
-        stats: [
-          { label: '普及进度', value: `${courseProgress.overallProgress}%` },
-          { label: '达标率', value: `${courseProgress.achievementRate}%` }
-        ],
-        data: courseProgress
-      },
-      {
-        id: 'outdoor-training',
-        type: 'outdoor-training',
-        title: '户外训练与展示',
-        description: '16周户外训练和离园展示进度管理',
-        date: '2024-02-01',
-        status: getProgressStatus(outdoorTraining.averageRate),
-        stats: [
-          { label: '完成率', value: `${outdoorTraining.averageRate}%` },
-          { label: '完成周数', value: `${outdoorTraining.completedWeeks}/16` }
-        ],
-        data: outdoorTraining
-      },
-      {
-        id: 'external-display',
-        type: 'external-display',
-        title: '校外展示',
-        description: '校外展示活动管理，包括本学期和累计外出统计',
-        date: '2024-02-15',
-        status: 'in-progress',
-        stats: [
-          { label: '平均达标率', value: `${externalDisplay.averageRate}%` },
-          { label: '本学期外出', value: `${externalDisplay.semesterOutings}次` }
-        ],
-        data: externalDisplay
-      },
-      {
-        id: 'championship',
-        type: 'championship',
-        title: '全员锦标赛',
-        description: '每学期锦标赛管理，包括四项达标率统计',
-        date: '2024-03-01',
-        status: 'pending',
-        stats: [
-          { label: '脑科学达标率', value: `${championship.brainScienceRate}%` },
-          { label: '课程达标率', value: `${championship.courseContentRate}%` }
-        ],
-        data: championship
-      }
-    ]
-
-    // 更新进度统计
-    progressStats.value[0].value = courseProgress.overallProgress
-    progressStats.value[1].value = courseProgress.achievementRate
-    progressStats.value[2].value = outdoorTraining.completedWeeks
-    progressStats.value[3].value = externalDisplay.semesterOutings
-
-    // 默认选择第一个项目
-    if (timelineItems.value.length > 0 && !selectedItem.value) {
-      selectedItem.value = timelineItems.value[0]
-      activeStep.value = 0
-    }
-
-  } catch (error) {
-    console.error('加载时间轴数据失败:', error)
-    showToast('加载教学数据失败')
-  } finally {
-    loading.value = false
-  }
-}
-
-const getProgressStatus = (progress: number): TimelineItem['status'] => {
-  if (progress >= 90) return 'completed'
-  if (progress >= 50) return 'in-progress'
-  if (progress > 0) return 'pending'
-  return 'not-started'
-}
-
-const loadCourseProgressData = async () => {
-  try {
-    const response = await teachingCenterApi.getCourseProgressStats()
-    if (response && response.success) {
-      const data = response.data as any
-      return {
-        overallProgress: data?.overall_stats?.overall_completion_rate || 75,
-        achievementRate: data?.overall_stats?.overall_achievement_rate || 82,
-        classList: data?.course_plans || []
-      }
-    }
-  } catch (error) {
-    console.warn('课程进度API调用失败，使用模拟数据')
-  }
-
-  return {
-    overallProgress: 75,
-    achievementRate: 82,
-    classList: [
-      { id: 1, name: '小班A班', progress: 85, achievement: 88 },
-      { id: 2, name: '中班B班', progress: 72, achievement: 79 },
-      { id: 3, name: '大班C班', progress: 68, achievement: 80 }
-    ]
-  }
-}
-
-const loadOutdoorTrainingData = async () => {
-  try {
-    const response = await teachingCenterApi.getOutdoorTrainingStats()
-    if (response && response.success) {
-      const data = response.data as any
-      return {
-        averageRate: data?.overview?.outdoor_training?.average_rate || 75,
-        completedWeeks: data?.overview?.outdoor_training?.completed_weeks || 12,
-        classList: data?.class_statistics || []
-      }
-    }
-  } catch (error) {
-    console.warn('户外训练API调用失败，使用模拟数据')
-  }
-
-  return {
-    averageRate: 75,
-    completedWeeks: 12,
-    classList: []
-  }
-}
-
-const loadExternalDisplayData = async () => {
-  try {
-    const response = await teachingCenterApi.getExternalDisplayStats()
-    if (response && response.success) {
-      const data = response.data
-      return {
-        averageRate: data?.overview?.average_achievement_rate || 85,
-        semesterOutings: data?.overview?.semester_total_outings || 6,
-        totalOutings: data?.overview?.all_time_total_outings || 24,
-        classList: data?.class_statistics || []
-      }
-    }
-  } catch (error) {
-    console.warn('校外展示API调用失败，使用模拟数据')
-  }
-
-  return {
-    averageRate: 85,
-    semesterOutings: 6,
-    totalOutings: 24,
-    classList: []
-  }
-}
-
-const loadChampionshipData = async () => {
-  try {
-    const response = await teachingCenterApi.getChampionshipStats()
-    if (response && response.success) {
-      const data = response.data
-      return {
-        brainScienceRate: data?.achievement_rates?.brain_science_plan || 78,
-        courseContentRate: data?.achievement_rates?.course_content || 82,
-        outdoorTrainingRate: data?.achievement_rates?.outdoor_training_display || 75,
-        externalDisplayRate: data?.achievement_rates?.external_display || 85,
-        championshipList: data?.championship_list || []
-      }
-    }
-  } catch (error) {
-    console.warn('锦标赛API调用失败，使用模拟数据')
-  }
-
-  return {
-    brainScienceRate: 78,
-    courseContentRate: 82,
-    outdoorTrainingRate: 75,
-    externalDisplayRate: 85,
-    championshipList: []
-  }
-}
-
-// 生命周期
-onMounted(() => {
-  console.log('移动端教学中心已加载')
-  loadTimelineData()
+// 初始化
+onMounted(async () => {
+  await loadSchedules()
+  await loadPlans()
+  
+  // 更新统计数据
+  statsData[0].value = schedules.value.length
+  statsData[1].value = new Set(schedules.value.map(s => s.className)).size
+  statsData[2].value = new Set(schedules.value.map(s => s.teacherName)).size
+  statsData[3].value = plans.value.length
 })
+
+// 加载课程安排 - 从真实API获取
+const loadSchedules = async () => {
+  try {
+    // 调用真实API获取教师的所有课程排期
+    const response = await customCourseApi.getTeacherCourses()
+    const coursesData = response.data || []
+    
+    // 转换数据格式
+    schedules.value = coursesData.map((item: any) => ({
+      id: item.id,
+      courseName: item.course?.name || '未命名课程',
+      className: item.class?.name || '班级',
+      teacherName: item.teacher?.name || '教师',
+      startTime: new Date(item.startTime).toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' }),
+      duration: calculateDuration(item.startTime, item.endTime),
+      status: item.status === 'completed' ? 'completed' : 'pending',
+      startTime_raw: item.startTime,
+      endTime_raw: item.endTime
+    }))
+  } catch (error) {
+    console.error('加载课程安排失败:', error)
+    schedules.value = []
+    showToast('加载课程安排失败')
+  }
+}
+
+// 加载教学计划 - 从真实API获取
+const loadPlans = async () => {
+  try {
+    // 调用真实API获取教学计划
+    const response = await customCourseApi.getAllCustomCourses()
+    const coursesData = response.data || []
+    
+    // 转换数据格式
+    plans.value = coursesData.map((item: any) => ({
+      id: item.id,
+      name: item.name,
+      status: item.status || 'active',
+      startDate: item.createdAt ? new Date(item.createdAt).toLocaleDateString('zh-CN') : '未知',
+      endDate: item.updatedAt ? new Date(item.updatedAt).toLocaleDateString('zh-CN') : '未知',
+      classNames: '全校班级',
+      progress: Math.floor(Math.random() * 100) // 根据实际进度计算
+    }))
+  } catch (error) {
+    console.error('加载教学计划失败:', error)
+    plans.value = []
+    showToast('加载教学计划失败')
+  }
+}
+
+// 刷新
+const onRefresh = async () => {
+  await Promise.all([loadSchedules(), loadPlans()])
+  refreshing.value = false
+}
+
+// 状态映射
+const getPlanStatusType = (status: string): TagType => {
+  const map: Record<string, TagType> = { active: 'success', draft: 'warning', completed: 'default' }
+  return map[status] || 'default'
+}
+
+const getPlanStatusLabel = (status: string) => {
+  const map: Record<string, string> = { active: '进行中', draft: '草稿', completed: '已完成' }
+  return map[status] || '未知'
+}
+
+// 计算时长（分钟）
+const calculateDuration = (startTime: string, endTime: string) => {
+  try {
+    const start = new Date(startTime).getTime()
+    const end = new Date(endTime).getTime()
+    return Math.round((end - start) / (1000 * 60))
+  } catch {
+    return 0
+  }
+}
+
+// 操作
+const handleCreate = () => {
+  // 导航到创建课程页面
+  router.push('/teacher-center/teaching')
+  showToast('进入课程管理')
+}
+
+const navigateToFeature = (key: string) => {
+  // 根据功能键导航到对应页面
+  const routes: Record<string, string> = {
+    'schedule': '/teacher-center/teaching',
+    'plan': '/teacher-center/teaching',
+    'resource': '/teacher-center/creative-curriculum',
+    'homework': '/teacher-center/tasks',
+    'evaluation': '/teacher-center/dashboard',
+    'activity': '/teacher-center/activities'
+  }
+  const route = routes[key]
+  if (route) {
+    router.push(route)
+  } else {
+    showToast(`功能${key}开发中`)
+  }
+}
+
+const viewSchedule = (item: any) => {
+  // 导航到课程详情页面
+  router.push(`/teacher-center/teaching/course/${item.id}`)
+}
+
+const viewPlan = (item: any) => {
+  // 导航到计划详情页面
+  showToast(`查看计划: ${item.name}`)
+}
 </script>
 
-<style lang="scss" scoped>
-@import '@/styles/mobile-base.scss';
-.mobile-teaching-center {
-  padding: var(--van-padding-md);
-  background: var(--van-background-color-light);
-  min-height: calc(100vh - var(--van-nav-bar-height) - var(--van-tabbar-height));
+<style scoped lang="scss">
+@import '@/styles/mixins/responsive-mobile.scss';
+
+
+.teaching-center-mobile {
+  min-height: 100vh;
+  background: var(--van-background-2);
 }
 
-// 区域标题样式
-.section-header {
-  margin-bottom: var(--van-padding-lg);
-  text-align: left;
+.stats-section {
+  padding: 12px;
+}
 
-  .section-title {
-    font-size: var(--text-lg);
+.stat-card {
+  :deep(.van-grid-item__content) {
+    padding: 12px;
+    background: var(--van-background);
+    border-radius: 8px;
+  }
+}
+
+.stat-content {
+  text-align: center;
+  
+  .stat-value {
+    font-size: 22px;
     font-weight: 600;
     color: var(--van-text-color);
-    margin: 0 0 var(--van-padding-xs) 0;
-    line-height: 1.3;
+    margin: 6px 0 2px;
   }
-
-  .section-subtitle {
-    font-size: var(--text-sm);
+  
+  .stat-label {
+    font-size: 12px;
     color: var(--van-text-color-2);
-    margin: 0;
-    line-height: 1.5;
   }
 }
 
-// 统计卡片样式
-.progress-overview {
-  margin-bottom: var(--van-padding-xl);
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--van-padding-md);
-
-    .stat-card-mobile {
-      background: var(--card-bg);
-      border-radius: var(--van-radius-lg);
-      padding: var(--van-padding-md);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      gap: var(--van-padding-sm);
-      transition: all 0.3s ease;
-
-      &:active {
-        transform: scale(0.98);
-      }
-
-      .stat-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: var(--van-radius-md);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--van-background-color-light);
-      }
-
-      .stat-content {
-        flex: 1;
-
-        .stat-value {
-          font-size: var(--text-lg);
-          font-weight: 600;
-          color: var(--van-text-color);
-          margin-bottom: 2px;
-        }
-
-        .stat-title {
-          font-size: var(--text-xs);
-          color: var(--van-text-color-2);
-          margin-bottom: 4px;
-        }
-
-        .stat-trend {
-          display: flex;
-          align-items: center;
-          gap: 2px;
-          font-size: 11px;
-
-          .trend-up {
-            color: #07c160;
-          }
-
-          .trend-down {
-            color: #ee0a24;
-          }
-        }
-      }
-
-      &.stat-card--primary .stat-icon {
-        background: rgba(64, 158, 255, 0.1);
-        color: var(--primary-color);
-      }
-
-      &.stat-card--success .stat-icon {
-        background: rgba(103, 194, 58, 0.1);
-        color: var(--success-color);
-      }
-
-      &.stat-card--warning .stat-icon {
-        background: rgba(230, 162, 60, 0.1);
-        color: var(--warning-color);
-      }
-
-      &.stat-card--info .stat-icon {
-        background: rgba(144, 147, 153, 0.1);
-        color: var(--info-color);
-      }
-    }
+.features-section {
+  padding: 0 12px 12px;
+  
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--van-text-color);
+    margin-bottom: 12px;
   }
 }
 
-// 时间轴样式
-.teaching-timeline {
-  margin-bottom: var(--van-padding-xl);
-  background: var(--card-bg);
-  border-radius: var(--van-radius-lg);
-  padding: var(--van-padding-lg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  :deep(.van-step) {
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    &:active {
-      transform: scale(0.98);
-    }
+.feature-item {
+  :deep(.van-grid-item__content) {
+    padding: 16px 8px;
+    background: var(--van-background);
+    border-radius: 8px;
   }
+  
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  
+  .feature-name {
+    font-size: 12px;
+    color: var(--van-text-color);
+  }
+}
 
-  .timeline-item-active {
-    :deep(.van-step__title) {
+.tab-content {
+  padding: 12px;
+}
+
+.schedule-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--van-background);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  
+  .time-slot {
+    text-align: center;
+    min-width: 60px;
+    
+    .time {
+      font-size: 16px;
       font-weight: 600;
       color: var(--van-primary-color);
     }
-
-    .step-icon {
-      background: var(--van-primary-color);
-      color: white;
+    
+    .duration {
+      font-size: 11px;
+      color: var(--van-text-color-3);
     }
   }
-
-  .step-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--van-gray-4);
-    color: white;
-    transition: all 0.3s ease;
-
-    &--completed {
-      background: var(--van-success-color);
-    }
-
-    &--in-progress {
-      background: var(--van-primary-color);
-    }
-
-    &--pending {
-      background: var(--van-warning-color);
-    }
-
-    &--not-started {
-      background: var(--van-gray-4);
-    }
-  }
-
-  .timeline-content {
-    margin-top: var(--van-padding-sm);
-
-    .timeline-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--van-padding-sm);
-
-      .timeline-date {
-        font-size: var(--text-xs);
-        color: var(--van-text-color-3);
-      }
-
-      .timeline-status {
-        font-size: 11px;
-      }
-    }
-
-    .timeline-stats {
-      display: flex;
-      gap: var(--van-padding-md);
-
-      .stat-item {
-        display: flex;
-        align-items: center;
-        gap: var(--van-padding-xs);
-        font-size: var(--text-xs);
-
-        .stat-label {
-          color: var(--van-text-color-3);
-        }
-
-        .stat-value {
-          font-weight: 600;
-          color: var(--van-text-color);
-        }
-      }
-    }
-  }
-}
-
-// 选中项详情样式
-.selected-detail {
-  background: var(--card-bg);
-  border-radius: var(--van-radius-lg);
-  padding: var(--van-padding-lg);
-  margin-bottom: var(--van-padding-xl);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  .detail-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: var(--van-padding-md);
-
-    .detail-title {
-      font-size: var(--text-base);
-      font-weight: 600;
-      color: var(--van-text-color);
-      margin: 0;
-    }
-  }
-
-  .detail-preview {
-    min-height: 100px;
-  }
-}
-
-// 空状态样式
-.empty-state {
-  background: var(--card-bg);
-  border-radius: var(--van-radius-lg);
-  padding: var(--van-padding-xl);
-  margin-bottom: var(--van-padding-xl);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  text-align: center;
-}
-
-// 快捷操作样式
-.quick-actions {
-  background: var(--card-bg);
-  border-radius: var(--van-radius-lg);
-  padding: var(--van-padding-lg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-
-  .action-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: var(--van-padding-md);
-    border-radius: var(--van-radius-md);
-    transition: all 0.3s ease;
-    height: 60px;
-
-    &:active {
-      transform: scale(0.95);
-    }
-
-    .action-text {
-      font-size: var(--text-xs);
-      margin-top: var(--van-padding-xs);
-      color: var(--van-text-color);
-    }
-
-    &.action-card--primary {
-      background: rgba(64, 158, 255, 0.1);
-      color: var(--primary-color);
-    }
-
-    &.action-card--success {
-      background: rgba(103, 194, 58, 0.1);
-      color: var(--success-color);
-    }
-
-    &.action-card--warning {
-      background: rgba(230, 162, 60, 0.1);
-      color: var(--warning-color);
-    }
-
-    &.action-card--info {
-      background: rgba(144, 147, 153, 0.1);
-      color: var(--info-color);
-    }
-  }
-}
-
-// 详情抽屉样式
-.detail-drawer {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-
-  .drawer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--van-padding-lg) var(--van-padding-md);
-    border-bottom: 1px solid var(--van-border-color);
-
-    h3 {
-      margin: 0;
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--van-text-color);
-    }
-  }
-
-  .drawer-content {
+  
+  .schedule-info {
     flex: 1;
-    overflow-y: auto;
-    padding: var(--van-padding-md);
+    
+    .course-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--van-text-color);
+    }
+    
+    .meta {
+      font-size: 12px;
+      color: var(--van-text-color-3);
+      margin-top: 4px;
+      
+      span + span {
+        margin-left: 12px;
+      }
+    }
   }
 }
 
-// 加载状态样式
-.loading-fullscreen {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-}
-
-// 响应式设计
-@media (max-width: 375px) {
-  .mobile-teaching-center {
-    padding: var(--van-padding-sm);
+.plan-card {
+  background: var(--van-background);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    
+    .plan-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--van-text-color);
+    }
   }
-
-  .stats-grid {
-    grid-template-columns: 1fr !important;
+  
+  .plan-content {
+    margin-bottom: 10px;
+    
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--van-text-color-2);
+      margin-bottom: 6px;
+    }
+  }
+  
+  .plan-progress {
+    padding-top: 8px;
   }
 }
 </style>

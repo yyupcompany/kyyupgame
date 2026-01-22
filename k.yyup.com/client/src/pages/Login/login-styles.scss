@@ -351,11 +351,11 @@
   overflow: hidden;
   position: relative;
 
-  @media (max-width: var(--breakpoint-lg)) {
+  @media (max-width: 1024px) {
     max-width: 900px;
   }
 
-  @media (max-width: var(--breakpoint-md)) {
+  @media (max-width: 768px) {
     grid-template-columns: 1fr;
     max-width: 100%;
     margin: var(--spacing-lg);
@@ -410,7 +410,7 @@
     animation: float 8s ease-in-out infinite reverse;
   }
 
-  @media (max-width: var(--breakpoint-md)) {
+  @media (max-width: 768px) {
     padding: 40px 30px;
     min-height: 200px;
   }
@@ -531,7 +531,7 @@
   }
 }
 
-@media (max-width: var(--breakpoint-lg)) {
+@media (max-width: 1024px) {
   .auth-panel { grid-template-columns: 1fr; }
   .auth-panel .login-section { border-left: 0; border-top: 1px solid rgba(0, 0, 0, 0.06); }
   .page-footer { margin-top: 1rem; }
@@ -1280,7 +1280,7 @@
 }
 
 /* 响应式设计 - 改进版 */
-@media (max-width: var(--breakpoint-lg)) {
+@media (max-width: 1024px) {
   .auth-panel {
     grid-template-columns: 1fr !important;
     max-width: 100% !important;
@@ -1341,7 +1341,7 @@
   }
 }
 
-@media (max-width: var(--breakpoint-md)) {
+@media (max-width: 768px) {
   .modern-login-page {
     min-height: 100vh !important;
   }
@@ -1401,7 +1401,7 @@
 }
 
 /* 超小屏幕优化 */
-@media (max-width: var(--breakpoint-xs)) {
+@media (max-width: 480px) {
   .logo-icon {
     width: 4rem !important;
     height: 4rem !important;

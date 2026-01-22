@@ -1,8 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="任务中心"
-    :show-back="false"
-  >
+  <MobileCenterLayout title="任务中心" back-path="/mobile/centers">
     <div class="mobile-task-center">
       <!-- 任务统计概览 -->
       <div class="stats-section">
@@ -78,11 +75,11 @@
                   <van-dropdown-menu>
                     <van-dropdown-item>
                       <div class="task-dropdown">
-                        <van-button size="small" type="primary" @click.stop="handleEditTask(task)">
+                        <van-button size="medium" type="primary" @click.stop="handleEditTask(task)">
                           <van-icon name="edit" />
                           编辑
                         </van-button>
-                        <van-button size="small" type="danger" @click.stop="handleDeleteTask(task)">
+                        <van-button size="medium" type="danger" @click.stop="handleDeleteTask(task)">
                           <van-icon name="delete" />
                           删除
                         </van-button>
@@ -96,17 +93,17 @@
                 <div class="task-tags">
                   <van-tag
                     :type="getPriorityType(task.priority)"
-                    size="small"
+                    size="medium"
                   >
                     {{ getPriorityText(task.priority) }}
                   </van-tag>
                   <van-tag
                     :type="getStatusType(task.status)"
-                    size="small"
+                    size="medium"
                   >
                     {{ getStatusText(task.status) }}
                   </van-tag>
-                  <van-tag size="small" plain>
+                  <van-tag size="medium" plain>
                     {{ getTypeText(task.type) }}
                   </van-tag>
                 </div>
@@ -273,14 +270,14 @@
       icon="plus"
       @click="handleCreateTask"
     />
-  </MobileMainLayout>
+  </MobileCenterLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileCenterLayout from '@/components/mobile/layouts/MobileCenterLayout.vue'
 import FabButton from '@/components/mobile/FabButton.vue'
 import {
   getTasks,
@@ -375,7 +372,7 @@ const taskForm = reactive<CreateTaskData>({
 })
 
 // 生命周期
-onMounted(() => {
+onMounted(async () => {
   initializeData()
 })
 
@@ -691,6 +688,7 @@ const formatDate = (date: string) => {
 </script>
 
 <style scoped lang="scss">
+@use '@/styles/design-tokens.scss' as *;
 @import '@/styles/mobile-base.scss';
 .mobile-task-center {
   padding: var(--spacing-md);
@@ -725,7 +723,7 @@ const formatDate = (date: string) => {
         &.primary { background: linear-gradient(135deg, #409EFF, #66b1ff); }
         &.success { background: linear-gradient(135deg, #67C23A, #85ce61); }
         &.warning { background: linear-gradient(135deg, #E6A23C, #ebb563); }
-        &.info { background: linear-gradient(135deg, #909399, #a6a9ad); }
+        &.info { background: linear-gradient(135deg, var(--info-color), #a6a9ad); }
       }
 
       .stat-info {

@@ -6,71 +6,29 @@
 
 <template>
   <div class="search-animation">
-    <!-- 搜索开始阶段 -->
-    <div v-if="status === 'start'" class="search-start">
-      <div class="search-header">
-        <div class="search-icon-wrapper">
-          <UnifiedIcon name="search" :size="16" />
-        </div>
-        <div class="search-text">
-          <p class="title">🔍 正在搜索网络信息</p>
-          <p class="subtitle">{{ message }}</p>
-        </div>
-      </div>
-      <div class="search-dots">
+    <!-- 搜索开始阶段 - 简化版 -->
+    <div v-if="status === 'start'" class="search-start-simple">
+      <div class="search-dots-inline">
         <span class="dot"></span>
         <span class="dot"></span>
         <span class="dot"></span>
       </div>
+      <span class="search-label">搜索中</span>
     </div>
 
-    <!-- 搜索进度阶段 -->
-    <div v-else-if="status === 'progress'" class="search-progress">
-      <div class="progress-header">
-        <div class="progress-icon">
-          <UnifiedIcon name="search" :size="16" />
-        </div>
-        <div class="progress-info">
-          <p class="progress-title">搜索进行中</p>
-          <p class="progress-message">{{ message }}</p>
-        </div>
+    <!-- 搜索进度阶段 - 简化版 -->
+    <div v-else-if="status === 'progress'" class="search-progress-simple">
+      <div class="progress-bar-simple">
+        <div class="progress-fill-simple" :style="{ width: percentage + '%' }"></div>
       </div>
-
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress-fill" :style="{ width: percentage + '%' }"></div>
-        </div>
-        <span class="progress-percentage">{{ percentage }}%</span>
-      </div>
-
-      <div class="search-keywords">
-        <span class="keyword-label">搜索关键词：</span>
-        <span class="keyword-text">{{ query }}</span>
-      </div>
+      <span class="progress-text-simple">搜索中 {{ percentage }}%</span>
     </div>
 
-    <!-- 搜索完成阶段 -->
-    <div v-else-if="status === 'complete'" class="search-complete">
-      <div class="complete-header">
-        <div class="complete-icon">
-          <UnifiedIcon name="Check" />
-        </div>
-        <div class="complete-info">
-          <p class="complete-title">搜索完成</p>
-          <p class="complete-message">{{ message }}</p>
-        </div>
-      </div>
-
-      <!-- 搜索结果摘要 - 可点击展开 -->
-      <div v-if="resultCount" class="result-summary" @click="toggleExpand">
-        <div class="summary-content">
-          <UnifiedIcon :name="isExpanded ? 'angle-down' : 'angle-right'" :size="14" class="expand-icon" />
-          <span class="summary-text">
-            已搜索到 <strong class="result-count">{{ resultCount }}</strong> 条相关信息
-          </span>
-          <span v-if="query" class="search-query-tag">"{{ query }}"</span>
-        </div>
-        <span class="expand-hint">{{ isExpanded ? '点击收起' : '点击查看详情' }}</span>
+    <!-- 搜索完成阶段 - 简化版 -->
+    <div v-else-if="status === 'complete'" class="search-complete-simple">
+      <div class="complete-summary" @click="toggleExpand">
+        <span class="expand-icon-simple">{{ isExpanded ? '▼' : '▶' }}</span>
+        <span class="complete-text">搜索完成 ({{ resultCount || 0 }}条)</span>
       </div>
 
       <!-- 搜索结果详情 - 可折叠 -->
@@ -559,3 +517,109 @@ const handleResultClick = (result: { title: string; snippet: string; url?: strin
 }
 </style>
 
+
+
+
+// ==================== 简化版样式 ====================
+.search-start-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.search-dots-inline {
+  display: flex;
+  gap: 4px;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    animation: bounce-simple 1.4s infinite;
+
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+
+.search-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.search-progress-simple {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.progress-bar-simple {
+  flex: 1;
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill-simple {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  transition: width 0.3s ease;
+  border-radius: var(--radius-full);
+}
+
+.progress-text-simple {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.search-complete-simple {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.complete-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.expand-icon-simple {
+  font-size: 10px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.complete-text {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+@keyframes bounce-simple {
+  0%, 80%, 100% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}

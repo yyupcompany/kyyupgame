@@ -1,10 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="文档详情"
-    :show-nav-bar="true"
-    :show-back="true"
-    :show-tab-bar="false"
-  >
+  <MobileSubPageLayout title="文档详情" back-path="/mobile/centers">
     <div class="mobile-document-instance-detail">
       <van-loading v-if="loading" type="spinner" color="#1989fa" vertical>
         加载中...
@@ -130,14 +125,14 @@
         </van-button>
       </van-empty>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showToast, showConfirmDialog } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import {
   getInstanceById,
   deleteInstance,

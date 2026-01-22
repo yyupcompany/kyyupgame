@@ -93,8 +93,9 @@ async function checkDatabase(db: Sequelize): Promise<CheckResult> {
     const responseTime = performance.now() - startTime;
 
     // 检查连接池状态
-    const poolSize = db.connectionManager.pool?.config?.max || 0;
-    const availableConnections = db.connectionManager.pool?.availableConnectionsCount || 0;
+    const connectionManager = db.connectionManager as any;
+    const poolSize = connectionManager?.pool?.config?.max || 0;
+    const availableConnections = connectionManager?.pool?.availableConnectionsCount || 0;
 
     if (responseTime > 1000) {
       return {

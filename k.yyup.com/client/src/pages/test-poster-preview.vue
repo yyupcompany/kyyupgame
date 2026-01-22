@@ -181,7 +181,7 @@ onMounted(() => {
       gap: var(--text-2xl);
       margin-bottom: var(--spacing-8xl);
       padding: var(--text-2xl);
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: var(--spacing-sm);
     }
 

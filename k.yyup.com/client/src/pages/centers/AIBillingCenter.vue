@@ -3,20 +3,6 @@
     title="AI用量与计费中心"
     description="监控AI服务使用情况，查看详细计费账单，支持月度、季度、年度统计分析"
   >
-    <template #header-actions>
-      <!-- 周期选择器 -->
-      <el-segmented v-model="selectedPeriod" :options="periodOptions" size="large" />
-      
-      <el-button type="primary" size="large" @click="handleRefresh" :loading="loading">
-        <UnifiedIcon name="Refresh" />
-        刷新数据
-      </el-button>
-      <el-button type="success" size="large" @click="handleExportBill">
-        <UnifiedIcon name="Download" />
-        导出账单
-      </el-button>
-    </template>
-
     <div class="center-container billing-center">
       <!-- 统计卡片区域 -->
       <div class="stats-section">
@@ -738,7 +724,7 @@ onMounted(() => {
       align-items: center;
       gap: var(--spacing-4xl);
       padding: var(--spacing-4xl);
-      background: var(--bg-secondary);
+      background: var(--bg-page);
       border-radius: var(--spacing-lg);
       border-left: 4px solid var(--color-primary);
       transition: all 0.3s;

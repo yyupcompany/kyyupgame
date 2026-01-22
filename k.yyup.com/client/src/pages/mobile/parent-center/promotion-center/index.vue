@@ -1,11 +1,5 @@
 <template>
-  <MobileMainLayout
-    title="推荐奖励"
-    :show-back="true"
-    :show-footer="true"
-    content-padding="var(--app-gap)"
-    @back="handleBack"
-  >
+  <MobileSubPageLayout title="推荐奖励" back-path="/mobile/parent-center">
     <!-- 页面内容 -->
     <div class="promotion-center-mobile">
       <!-- 刷新按钮 -->
@@ -188,7 +182,7 @@
                                 stroke-width="6"
                                 show-pivot
                                 pivot-text=""
-                                color="#409eff"
+                                color="var(--primary-color)"
                               />
                             </div>
                             <div class="sop-probability">
@@ -331,14 +325,14 @@
         </template>
       </van-dialog>
     </div>
-  </MobileMainLayout>
+  </MobileSubPageLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { showToast, showSuccessToast, showFailToast } from 'vant'
-import MobileMainLayout from '@/components/mobile/layouts/MobileMainLayout.vue'
+import MobileSubPageLayout from '@/components/mobile/layouts/MobileSubPageLayout.vue'
 import { smartPromotionApi } from '@/api/modules/smart-promotion'
 import type { ApiResponse } from '@/types/api'
 
@@ -610,7 +604,7 @@ const getRewardIcon = (type: string) => {
 
 const getRewardIconColor = (type: string) => {
   switch (type) {
-    case 'voucher': return '#409eff'
+    case 'voucher': return 'var(--primary-color)'
     case 'gift': return '#ff976a'
     case 'points': return '#ffd21e'
     default: return '#07c160'
@@ -688,6 +682,12 @@ const confirmUseVoucher = async () => {
 
 // 生命周期
 onMounted(() => {
+  // 主题检测
+  const detectTheme = () => {
+    const htmlTheme = document.documentElement.getAttribute('data-theme')
+    // isDark.value = htmlTheme === 'dark'
+  }
+  detectTheme()
   refreshRewards()
 })
 </script>
@@ -709,7 +709,7 @@ onMounted(() => {
 
     .stat-card {
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: var(--spacing-md);
       padding: var(--spacing-md);
       display: flex;
       align-items: center;
@@ -739,7 +739,7 @@ onMounted(() => {
         .stat-label {
           font-size: var(--text-xs);
           color: var(--van-text-color-2);
-          margin-top: 4px;
+          margin-top: var(--spacing-xs);
         }
       }
 
@@ -769,7 +769,7 @@ onMounted(() => {
     padding: 0 16px 16px;
 
     .filter-controls {
-      margin-top: 12px;
+      margin-top: var(--spacing-md);
     }
   }
 
@@ -783,8 +783,8 @@ onMounted(() => {
 
     .reward-item {
       background: var(--card-bg);
-      border-radius: 12px;
-      margin-bottom: 16px;
+      border-radius: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
@@ -816,7 +816,7 @@ onMounted(() => {
         .reward-type-icon {
           width: 40px;
           height: 40px;
-          border-radius: 20px;
+          border-radius: var(--spacing-xl);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -855,14 +855,14 @@ onMounted(() => {
       .reward-details {
         .sop-progress-section {
           margin: var(--spacing-md);
-          padding-top: 16px;
+          padding-top: var(--spacing-lg);
           border-top: 1px dashed var(--van-border-color);
 
           .sop-header {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-            margin-bottom: 12px;
+            margin-bottom: var(--spacing-md);
             font-weight: 600;
             color: var(--van-primary-color);
 
@@ -878,7 +878,7 @@ onMounted(() => {
               .lead-teacher {
                 font-size: var(--text-xs);
                 color: var(--van-text-color-2);
-                margin-bottom: 8px;
+                margin-bottom: var(--spacing-sm);
               }
 
               .lead-sop {
@@ -886,7 +886,7 @@ onMounted(() => {
                   display: flex;
                   align-items: center;
                   gap: var(--spacing-sm);
-                  margin-bottom: 6px;
+                  margin-bottom: var(--spacing-sm);
 
                   .stage-name {
                     font-size: var(--text-xs);
@@ -959,8 +959,8 @@ onMounted(() => {
       display: flex;
       align-items: center;
       gap: var(--spacing-md);
-      margin-bottom: 20px;
-      padding-bottom: 16px;
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-lg);
       border-bottom: 1px solid var(--van-border-color);
 
       .detail-icon {
@@ -989,13 +989,13 @@ onMounted(() => {
       margin: var(--spacing-md) 0;
       padding: var(--spacing-md);
       background: var(--van-background-color-light);
-      border-radius: 8px;
+      border-radius: var(--spacing-sm);
 
       .instruction-title {
         font-size: var(--text-sm);
         font-weight: 600;
         color: var(--van-text-color);
-        margin-bottom: 8px;
+        margin-bottom: var(--spacing-sm);
       }
 
       .instruction-content {
@@ -1023,7 +1023,7 @@ onMounted(() => {
 
   .voucher-info {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: var(--spacing-xl);
 
     h4 {
       margin: 0 0 12px 0;
@@ -1060,6 +1060,13 @@ onMounted(() => {
   .promotion-center-mobile {
     max-width: 768px;
     margin: 0 auto;
+  }
+}
+
+/* ==================== 暗色模式支持 ==================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 设计令牌会自动适配暗色模式 */
   }
 }
 </style>

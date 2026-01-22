@@ -118,7 +118,7 @@ const switchTab = (tabName: string) => {
 <style scoped>
 .dashboard-analytics {
   padding: var(--text-2xl);
-  background: var(--bg-secondary);
+  background: var(--bg-page);
   min-height: 100vh;
 }
 
