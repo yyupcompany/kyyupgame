@@ -71,3 +71,5 @@ k.yyup.com/test-oss-signature.cjs
 k.yyup.com/OSS配置指南.md
 k.yyup.com/oss-resource-test-report.md
 *.patch
+.playwright-mcp/
+.playwright-mcp/*.deb
